@@ -1,0 +1,1 @@
+轻量级container，用于中间件等非spring项目
