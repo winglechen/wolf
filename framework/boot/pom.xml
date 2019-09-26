@@ -22,6 +22,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+
+        <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
+        <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
+
         <lombok.version>1.16.18</lombok.version>
         <fastjson.version>1.2.40</fastjson.version>
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
@@ -44,6 +48,19 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>common</artifactId>
+                <version>${wolf-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>framework</artifactId>
+                <version>${wolf-framework.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
