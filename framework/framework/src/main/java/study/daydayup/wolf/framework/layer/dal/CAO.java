@@ -6,5 +6,5 @@ package study.daydayup.wolf.framework.layer.dal;
  * @author Wingle
  * @since 2018/12/26 11:39 PM
  **/
-public class CAO {
+public interface CAO {
 }

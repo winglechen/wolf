@@ -13,4 +13,12 @@
     <artifactId>account-api</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>study.daydayup.wolf.boot</groupId>
+            <artifactId>wolf-boot-starter</artifactId>
+        </dependency>
+
+    </dependencies>
+
 </project>
