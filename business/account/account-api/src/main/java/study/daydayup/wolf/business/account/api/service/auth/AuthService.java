@@ -9,5 +9,6 @@ import study.daydayup.wolf.business.account.api.entity.license.License;
  * @since 2019/9/27 5:37 PM
  **/
 public interface AuthService {
-    public License login();
+    License login();
+    boolean logout();
 }
