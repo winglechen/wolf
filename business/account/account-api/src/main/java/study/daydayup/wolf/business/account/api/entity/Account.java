@@ -8,4 +8,5 @@ package study.daydayup.wolf.business.account.api.entity;
  **/
 
 public class Account {
+
 }
