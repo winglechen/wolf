@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.account.api.service;
 
-import study.daydayup.wolf.business.account.api.entity.Orgnization;
+import study.daydayup.wolf.business.account.api.model.Orgnization;
 
 /**
  * study.daydayup.wolf.business.account.api.service

@@ -61,7 +61,7 @@
                 <groupId>study.daydayup.wolf.boot</groupId>
                 <artifactId>wolf-boot-starter</artifactId>
                 <version>${wolf-boot.version}</version>
-                <type>pom</type>
+                <!--type>pom</type-->
                 <!--scope>import</scope-->
             </dependency>
 
