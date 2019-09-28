@@ -10,4 +10,7 @@ import lombok.Data;
  **/
 @Data
 public class Orgnization {
+    private long orgId;
+    private int orgType;
+    private String orgName;
 }

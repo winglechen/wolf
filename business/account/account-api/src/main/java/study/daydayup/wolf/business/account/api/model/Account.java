@@ -10,5 +10,10 @@ import lombok.Data;
  **/
 @Data
 public class Account {
+    private long accountId;
+    private String account;
+    private String name;
+    private String avatar;
+    private int gender;
 
 }
