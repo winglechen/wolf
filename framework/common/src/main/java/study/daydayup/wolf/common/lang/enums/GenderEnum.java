@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.exception.EnumNotFoundException;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum GenderEnum {
+public enum GenderEnum implements CodeBaseEnum{
     UNKNOWN(0, "未知"),
     MALE(1, "男"),
     FEMALE(2, "女")
@@ -24,7 +24,7 @@ public enum GenderEnum {
         this.desc = desc;
     }
 
-    public static GenderEnum valueOf(int code) {
+    public static GenderEnum codeOf(int code) {
         for(GenderEnum genderEnum : GenderEnum.values()) {
              if (code == genderEnum.getCode()) {
                  return genderEnum;
