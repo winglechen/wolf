@@ -9,5 +9,4 @@ import study.daydayup.wolf.business.account.api.dto.AlipayAuthDTO;
  * @since 2019/9/27 5:17 PM
  **/
 public interface AlipayService extends AuthService {
-    AlipayAuthDTO loginAndReturnAuthData();
 }

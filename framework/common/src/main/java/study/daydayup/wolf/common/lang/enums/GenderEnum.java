@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.exception.EnumNotFoundException;
  **/
 @Getter
 public enum GenderEnum {
-    UNKNOWN(3, "未知"),
+    UNKNOWN(0, "未知"),
     MALE(1, "男"),
     FEMALE(2, "女")
     ;
