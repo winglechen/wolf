@@ -1,4 +1,6 @@
-package study.daydayup.wolf.common.lang.exception;
+package study.daydayup.wolf.common.lang.exception.enums;
+
+import study.daydayup.wolf.common.lang.exception.SystemException;
 
 /**
  * study.daydayup.wolf.common.lang.exception

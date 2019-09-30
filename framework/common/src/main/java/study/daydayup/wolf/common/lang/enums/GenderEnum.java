@@ -1,7 +1,7 @@
 package study.daydayup.wolf.common.lang.enums;
 
 import lombok.Getter;
-import study.daydayup.wolf.common.lang.exception.EnumNotFoundException;
+import study.daydayup.wolf.common.lang.exception.enums.EnumNotFoundException;
 
 /**
  * study.daydayup.wolf.common.lang.enums
@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.exception.EnumNotFoundException;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum GenderEnum implements CodeBaseEnum{
+public enum GenderEnum implements CodeBasedEnum {
     UNKNOWN(0, "未知"),
     MALE(1, "男"),
     FEMALE(2, "女")
@@ -22,15 +22,5 @@ public enum GenderEnum implements CodeBaseEnum{
     GenderEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
-    }
-
-    public static GenderEnum codeOf(int code) {
-        for(GenderEnum genderEnum : GenderEnum.values()) {
-             if (code == genderEnum.getCode()) {
-                 return genderEnum;
-             }
-        }
-
-        throw new EnumNotFoundException("The code: " + code + " is not supported by GenderEnum" );
     }
 }
