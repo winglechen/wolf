@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.util;
 
 import org.junit.Test;
 import study.daydayup.wolf.common.lang.enums.GenderEnum;
+import study.daydayup.wolf.common.lang.exception.enums.EnumCodeNotSupportException;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,6 +20,11 @@ public class EnumUtilTest {
         GenderEnum unknown = EnumUtil.codeOf(1, GenderEnum.class);
 
         assertTrue("EnumUtil.codeOf() get code fail", male.equals(unknown));
+    }
 
+
+    @Test(expected = EnumCodeNotSupportException.class)
+    public void test_code_of_throws_exception_work() {
+        GenderEnum unknow = EnumUtil.codeOf(11, GenderEnum.class);
     }
 }
