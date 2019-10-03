@@ -1,7 +1,7 @@
 package study.daydayup.wolf.common.util;
 
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
-import study.daydayup.wolf.common.lang.exception.enums.EnumCodeNotSupportException;
+import study.daydayup.wolf.common.lang.exception.enums.UnsupportedEnumCodeException;
 
 /**
  * study.daydayup.wolf.common.util
@@ -17,6 +17,6 @@ public class EnumUtil {
             }
         }
 
-        throw new EnumCodeNotSupportException("code: " + code + "is not supported");
+        throw new UnsupportedEnumCodeException("code: " + code + "is not supported");
     }
 }

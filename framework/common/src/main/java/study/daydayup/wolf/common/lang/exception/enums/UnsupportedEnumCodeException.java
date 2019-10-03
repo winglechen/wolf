@@ -8,12 +8,12 @@ import study.daydayup.wolf.common.lang.exception.SystemException;
  * @author Wingle
  * @since 2019/9/29 11:26 PM
  **/
-public class EnumCodeNotSupportException extends SystemException {
-    public EnumCodeNotSupportException(String message) {
+public class UnsupportedEnumCodeException extends SystemException {
+    public UnsupportedEnumCodeException(String message) {
         super(message);
     }
 
-    public EnumCodeNotSupportException(int code, String message) {
+    public UnsupportedEnumCodeException(int code, String message) {
         super(code, message);
     }
 }
