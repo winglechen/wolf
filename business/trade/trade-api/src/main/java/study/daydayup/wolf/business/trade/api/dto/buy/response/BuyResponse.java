@@ -7,4 +7,6 @@ package study.daydayup.wolf.business.trade.api.dto.buy.response;
  * @since 2019/10/5 11:27 AM
  **/
 public class BuyResponse {
+    private String orderNo;
+    private long totalAmount;
 }
