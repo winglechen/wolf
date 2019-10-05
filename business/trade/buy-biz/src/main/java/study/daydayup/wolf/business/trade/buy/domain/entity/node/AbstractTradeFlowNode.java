@@ -10,9 +10,4 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.context.TradeFlowCon
  **/
 public abstract class AbstractTradeFlowNode implements TradeFlowNode {
     protected TradeFlowContext context;
-
-    @Override
-    public void setTradeFlowContext(TradeFlowContext context) {
-        this.context = context;
-    }
 }

@@ -33,7 +33,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         BuyResponse response = new BuyResponse();
 
         for(TradeFlowNode node : nodeList) {
-            node.run();
+            node.run(request, response, context);
         }
 
         return response;
