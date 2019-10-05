@@ -6,5 +6,5 @@ package study.daydayup.wolf.business.trade.buy.domain.entity.node;
  * @author Wingle
  * @since 2019/10/5 11:01 AM
  **/
-public class StockOperationNode implements TradeFlowNode {
+public class StockOperationNode extends AbstractTradeFlowNode implements TradeFlowNode {
 }
