@@ -8,9 +8,9 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.context.TradeFlowCon
  * study.daydayup.wolf.business.trade.buy.domain.entity.node
  *
  * @author Wingle
- * @since 2019/10/5 11:01 AM
+ * @since 2019/10/5 12:10 PM
  **/
-public class StockOperationNode extends AbstractTradeFlowNode implements TradeFlowNode {
+public class ContractCreateNode extends AbstractTradeFlowNode implements TradeFlowNode {
     @Override
     public void run(BuyRequest request, BuyResponse response, TradeFlowContext context) {
 
