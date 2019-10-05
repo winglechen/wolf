@@ -9,5 +9,8 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.node.TradeFlowNode;
  * @since 2019/10/5 11:11 AM
  **/
 public class SecKillFlow extends AbstractTradeFlow implements TradeFlow {
+    @Override
+    public void buildFlow() {
 
+    }
 }

@@ -7,4 +7,8 @@ package study.daydayup.wolf.business.trade.buy.domain.entity.flow;
  * @since 2019/10/5 10:57 AM
  **/
 public class PeerpayFlow extends AbstractTradeFlow implements TradeFlow {
+    @Override
+    public void buildFlow() {
+
+    }
 }
