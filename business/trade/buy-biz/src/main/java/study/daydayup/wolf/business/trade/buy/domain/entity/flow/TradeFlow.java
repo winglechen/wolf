@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.domain.entity.flow;
 
+import study.daydayup.wolf.business.trade.buy.domain.entity.node.TradeFlowNode;
+
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow
  *
@@ -7,4 +9,5 @@ package study.daydayup.wolf.business.trade.buy.domain.entity.flow;
  * @since 2019/10/5 10:54 AM
  **/
 public interface TradeFlow {
+    void addNode(TradeFlowNode node);
 }
