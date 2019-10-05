@@ -10,4 +10,5 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.node.TradeFlowNode;
  **/
 public interface TradeFlow {
     void addNode(TradeFlowNode node);
+    void init();
 }
