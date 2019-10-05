@@ -12,5 +12,12 @@
     <groupId>study.daydayup.wolf.business.trade</groupId>
     <artifactId>buy-biz</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>trade-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
