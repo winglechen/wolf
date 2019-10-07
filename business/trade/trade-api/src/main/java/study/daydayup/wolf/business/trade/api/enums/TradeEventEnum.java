@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/4 9:11 PM
  **/
 @Getter
-public enum  TradeEventTypeEnum implements CodeBasedEnum {
+public enum TradeEventEnum implements CodeBasedEnum {
     PAY(10, "支付事件"),
     SEND(20, "发货事件"),
     EXPIRED(30, "过期事件"),
@@ -22,7 +22,7 @@ public enum  TradeEventTypeEnum implements CodeBasedEnum {
     private int code;
     private String desc;
 
-    TradeEventTypeEnum(int code, String desc) {
+    TradeEventEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

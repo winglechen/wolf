@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum TradeFlowEnum implements CodeBasedEnum {
+public enum TradeTypeEnum implements CodeBasedEnum {
     BASIC_BUY(100, "默认交易流程"),
     GIFT(200, "送礼交易流程"),
     SECKILL(300, "秒杀交易流程"),
@@ -19,7 +19,7 @@ public enum TradeFlowEnum implements CodeBasedEnum {
 
     private int code;
     private String desc;
-    TradeFlowEnum(int code, String desc) {
+    TradeTypeEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
