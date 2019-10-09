@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.api.Model;
  * @author Wingle
  * @since 2019/10/9 11:40 上午
  **/
-public class TradeState extends Model {
+public class OrderState extends Model {
 }

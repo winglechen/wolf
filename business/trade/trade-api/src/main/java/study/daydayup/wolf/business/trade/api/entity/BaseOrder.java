@@ -6,5 +6,5 @@ package study.daydayup.wolf.business.trade.api.entity;
  * @author Wingle
  * @since 2019/10/4 12:04 AM
  **/
-public class BaseOrder extends TradeState {
+public class BaseOrder extends OrderState {
 }
