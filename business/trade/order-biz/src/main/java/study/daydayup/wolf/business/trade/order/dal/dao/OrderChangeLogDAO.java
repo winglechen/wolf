@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.order.dal.cao;
+package study.daydayup.wolf.business.trade.order.dal.dao;
 
 /**
  * study.daydayup.wolf.business.trade.order.dal.cao
