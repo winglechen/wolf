@@ -17,7 +17,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.PrepareResponse;
  **/
 public class GiftFlow extends AbstractTradeFlow implements TradeFlow {
     @Override
-    public void buildFlow() {
+    public void buildConfirmFlow() {
 
     }
 

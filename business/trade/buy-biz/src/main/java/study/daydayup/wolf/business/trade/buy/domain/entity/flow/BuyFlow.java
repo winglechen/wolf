@@ -21,7 +21,7 @@ import study.daydayup.wolf.common.util.EnumUtil;
  **/
 public class BuyFlow extends AbstractTradeFlow implements TradeFlow {
     @Override
-    public void buildFlow() {
+    public void buildConfirmFlow() {
         addNode(new ShopStatusCheckNode());
         addNode(new GoodsStatusCheckNode());
         addNode(new StockOperationNode());

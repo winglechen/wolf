@@ -33,6 +33,7 @@ public class TradeFlowDomainService implements BuyService {
     public ConfirmResponse confirm(ConfirmRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = TradeFlowFactory.create(tradeType);
+        tradeFlow.buildConfirmFlow();
 
         return tradeFlow.confirm(request);
     }

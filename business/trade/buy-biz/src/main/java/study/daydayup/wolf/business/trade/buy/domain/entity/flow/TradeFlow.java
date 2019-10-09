@@ -14,5 +14,5 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.node.TradeFlowNode;
 public interface TradeFlow extends BuyService {
     void init();
     void addNode(TradeFlowNode node);
-    void buildFlow();
+    void buildConfirmFlow();
 }

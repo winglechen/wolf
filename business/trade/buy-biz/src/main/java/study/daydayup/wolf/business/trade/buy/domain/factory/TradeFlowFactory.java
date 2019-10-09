@@ -50,6 +50,5 @@ public class TradeFlowFactory {
 
     private static void initTradeFlow(TradeFlow tradeFlow) {
         tradeFlow.init();
-        tradeFlow.buildFlow();
     }
 }
