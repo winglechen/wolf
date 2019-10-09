@@ -1,10 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.domain.factory;
 
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.domain.entity.flow.BasicBuyFlow;
-import study.daydayup.wolf.business.trade.buy.domain.entity.flow.GiftFlow;
-import study.daydayup.wolf.business.trade.buy.domain.entity.flow.PeerpayFlow;
-import study.daydayup.wolf.business.trade.buy.domain.entity.flow.TradeFlow;
+import study.daydayup.wolf.business.trade.buy.domain.entity.flow.*;
 import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeFlow;
 
 /**
@@ -15,25 +12,44 @@ import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeFlow;
  **/
 public class TradeFlowFactory {
     public static TradeFlow create() {
-        return create(TradeTypeEnum.BASIC_BUY);
+        return create(TradeTypeEnum.NORMAL);
     }
 
     public static TradeFlow create(TradeTypeEnum tradeTypeEnum) {
+        TradeFlow tradeFlow = createByTradeType(tradeTypeEnum);
+        initTradeFlow(tradeFlow);
+
+        return tradeFlow;
+    }
+
+    private static TradeFlow createByTradeType(TradeTypeEnum tradeTypeEnum) {
         TradeFlow tradeFlow;
         switch (tradeTypeEnum) {
-            case BASIC_BUY:
-                tradeFlow = new BasicBuyFlow();
-                break;
+            case NORMAL:
+                return new BuyFlow();
             case GIFT:
-                tradeFlow = new GiftFlow();
-                break;
+                return new GiftFlow();
+            case GIFT_RECEIVE:
+                return new GiftReceiveFlow();
             case PEERPAY:
-                tradeFlow = new PeerpayFlow();
-                break;
+                return new PeerpayFlow();
+            case PEERPAY_PAY:
+                return new PeerpayPayFlow();
+            case SECKILL:
+                return new SecKillFlow();
+            case GROUP_BUY:
+                return new GroupBuyFlow();
+            case GROUP_PARTICPATE:
+                return new GroupParticipateFlow();
+            case FENXIAO:
+                return new FenXiaoFlow();
             default:
                 throw new UnsupportedTradeFlow("No such tradeFlow: " + tradeTypeEnum);
         }
+    }
 
-        return tradeFlow;
+    private static void initTradeFlow(TradeFlow tradeFlow) {
+        tradeFlow.init();
+        tradeFlow.buildFlow();
     }
 }

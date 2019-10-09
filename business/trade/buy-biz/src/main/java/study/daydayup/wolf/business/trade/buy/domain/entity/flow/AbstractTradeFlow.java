@@ -28,8 +28,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         nodeList.add(node);
     }
 
-    @Override
-    public ConfirmResponse handle(ConfirmRequest request) {
+    public ConfirmResponse confirm(ConfirmRequest request) {
         ConfirmResponse response = new ConfirmResponse();
 
         for(TradeFlowNode node : nodeList) {
@@ -38,4 +37,6 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
         return response;
     }
+
+
 }

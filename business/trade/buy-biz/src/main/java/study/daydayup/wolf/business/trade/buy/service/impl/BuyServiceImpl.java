@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PrepareResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
+import study.daydayup.wolf.business.trade.buy.domain.service.TradeFlowDomainService;
 
 /**
  * study.daydayup.wolf.business.trade.buy.service.impl
@@ -19,29 +20,21 @@ import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 public class BuyServiceImpl implements BuyService {
     @Override
     public PrepareResponse prepare(PrepareRequest request) {
-        PrepareResponse response = new PrepareResponse();
-
-        return response;
+        return new TradeFlowDomainService().prepare(request);
     }
 
     @Override
     public ConfirmResponse confirm(ConfirmRequest request) {
-        ConfirmResponse response = new ConfirmResponse();
-
-        return response;
+        return new TradeFlowDomainService().confirm(request);
     }
 
     @Override
     public PayResponse pay(PayRequest request) {
-        PayResponse response = new PayResponse();
-
-        return response;
+        return new TradeFlowDomainService().pay(request);
     }
 
     @Override
     public PayNotifyResponse payNotify(PayNotifyRequest request) {
-        PayNotifyResponse response = new PayNotifyResponse();
-
-        return response;
+        return new TradeFlowDomainService().payNotify(request);
     }
 }

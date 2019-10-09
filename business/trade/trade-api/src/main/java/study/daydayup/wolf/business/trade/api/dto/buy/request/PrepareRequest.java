@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.request;
 
+import lombok.Data;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeGoodsDTO;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeMessageDTO;
 import study.daydayup.wolf.business.trade.api.entity.buy.Buyer;
@@ -12,6 +13,7 @@ import study.daydayup.wolf.business.trade.api.vo.SelfFetchAddress;
  * @author Wingle
  * @since 2019/10/9 1:43 下午
  **/
+@Data
 public class PrepareRequest {
     /**
      * @see study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum
