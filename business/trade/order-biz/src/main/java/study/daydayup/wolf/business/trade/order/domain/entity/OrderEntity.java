@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.order.domain.entity;
 
-import study.daydayup.wolf.business.trade.api.model.Order;
+import study.daydayup.wolf.business.trade.api.entity.Order;
 
 /**
  * study.daydayup.wolf.business.trade.order.domain.entity

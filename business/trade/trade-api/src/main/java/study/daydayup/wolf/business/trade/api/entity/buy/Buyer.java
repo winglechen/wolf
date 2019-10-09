@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.model.buy;
+package study.daydayup.wolf.business.trade.api.entity.buy;
 
 /**
  * study.daydayup.wolf.business.trade.api.model.buy

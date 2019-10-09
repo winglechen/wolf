@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.model;
+package study.daydayup.wolf.business.trade.api.entity;
 
 import study.daydayup.wolf.framework.layer.api.Model;
 

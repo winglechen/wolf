@@ -11,10 +11,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum TradeTypeEnum implements CodeBasedEnum {
-    BASIC_BUY(100, "默认交易流程"),
-    GIFT(200, "送礼交易流程"),
-    SECKILL(300, "秒杀交易流程"),
-    PEERPAY(1000, "代付流程")
+    GIFT_CREATE(20, "送礼"),
+    GIFT_RECEIVE(21, "收礼"),
+    PEERPAY_CREATE(40, "代付"),
+    PEERPAY_PAY(41, "代付支付"),
+    GROUP_BUY(50, "团购"),
+    GROUP_PARTICPATE(51, "团购参与"),
+    FENXIAO(60, "分销"),
+    NORMAL(10, "普通")
     ;
 
     private int code;

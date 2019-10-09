@@ -1,8 +1,8 @@
 package study.daydayup.wolf.business.trade.buy.domain.entity.node;
 
 
-import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.BuyResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.buy.domain.entity.context.TradeFlowContext;
 
 /**
@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.trade.buy.domain.entity.context.TradeFlowCon
  **/
 public class ShopStatusCheckNode extends AbstractTradeFlowNode implements TradeFlowNode {
     @Override
-    public void run(BuyRequest request, BuyResponse response, TradeFlowContext context) {
+    public void run(ConfirmRequest request, ConfirmResponse response, TradeFlowContext context) {
 
     }
 }
