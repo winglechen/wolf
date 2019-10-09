@@ -4,8 +4,8 @@ import lombok.Data;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeMessageDTO;
 import study.daydayup.wolf.business.trade.api.model.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeGoodsDTO;
-import study.daydayup.wolf.business.trade.api.model.OrderAddress;
-import study.daydayup.wolf.business.trade.api.model.SelfFetchAddress;
+import study.daydayup.wolf.business.trade.api.vo.OrderAddress;
+import study.daydayup.wolf.business.trade.api.vo.SelfFetchAddress;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
