@@ -39,7 +39,7 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public PayNotifyResponse payNofity(PayNotifyRequest request) {
+    public PayNotifyResponse payNotify(PayNotifyRequest request) {
         PayNotifyResponse response = new PayNotifyResponse();
 
         return response;
