@@ -1,9 +1,11 @@
 package study.daydayup.wolf.business.trade.buy.service.impl;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PrepareRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PrepareResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
@@ -32,6 +34,13 @@ public class BuyServiceImpl implements BuyService {
     @Override
     public PayResponse pay(PayRequest request) {
         PayResponse response = new PayResponse();
+
+        return response;
+    }
+
+    @Override
+    public PayNotifyResponse payNofity(PayNotifyRequest request) {
+        PayNotifyResponse response = new PayNotifyResponse();
 
         return response;
     }
