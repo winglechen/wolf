@@ -22,11 +22,11 @@ import study.daydayup.wolf.common.util.EnumUtil;
  **/
 public class TradeFlowDomainService implements BuyService {
     @Override
-    public PrepareResponse prepare(PrepareRequest request) {
+    public PrepareResponse preview(PrepareRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = TradeFlowFactory.create(tradeType);
 
-        return tradeFlow.prepare(request);
+        return tradeFlow.preview(request);
     }
 
     @Override

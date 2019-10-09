@@ -19,8 +19,8 @@ import study.daydayup.wolf.business.trade.buy.domain.service.TradeFlowDomainServ
  **/
 public class BuyServiceImpl implements BuyService {
     @Override
-    public PrepareResponse prepare(PrepareRequest request) {
-        return new TradeFlowDomainService().prepare(request);
+    public PrepareResponse preview(PrepareRequest request) {
+        return new TradeFlowDomainService().preview(request);
     }
 
     @Override

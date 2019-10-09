@@ -16,7 +16,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.PrepareResponse;
  * @since 2019/10/5 2:28 PM
  **/
 public interface BuyService {
-    PrepareResponse prepare(PrepareRequest request);
+    PrepareResponse preview(PrepareRequest request);
     ConfirmResponse confirm(ConfirmRequest request);
     PayResponse pay(PayRequest request);
     PayNotifyResponse payNotify(PayNotifyRequest request);

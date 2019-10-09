@@ -47,7 +47,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
 
     @Override
-    public PrepareResponse prepare(PrepareRequest request) {
+    public PrepareResponse preview(PrepareRequest request) {
         return null;
     }
 
