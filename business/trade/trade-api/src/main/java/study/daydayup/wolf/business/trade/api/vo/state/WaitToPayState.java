@@ -1,10 +1,14 @@
 package study.daydayup.wolf.business.trade.api.vo.state;
 
+import lombok.Data;
+
 /**
  * study.daydayup.wolf.business.trade.api.vo.state
  *
  * @author Wingle
  * @since 2019/10/5 11:23 PM
  **/
-public class WaitToPayState extends TradeState {
+@Data
+public class WaitToPayState extends AbstractTradeState implements TradeState {
+    private String name = "待支付";
 }
