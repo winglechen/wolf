@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.api.model;
 
-import study.daydayup.wolf.framework.layer.api.Model;
+import study.daydayup.wolf.framework.layer.api.Entity;
 
 /**
  * study.daydayup.wolf.business.goods.api.model
@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.api.Model;
  * @author Wingle
  * @since 2019/10/3 11:00 PM
  **/
-public class BaseGoods extends Model {
+public class BaseGoods extends Entity {
 }

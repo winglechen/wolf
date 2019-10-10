@@ -8,5 +8,5 @@ import study.daydayup.wolf.business.goods.api.model.Goods;
  * @author Wingle
  * @since 2019/10/3 11:14 PM
  **/
-public class GoodsModel extends Goods {
+public class GoodsEntity extends Goods {
 }
