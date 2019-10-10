@@ -38,4 +38,6 @@ public abstract class AbstractTradeState {
      */
     protected int AfterSaleState;
     protected Date afterSaleAt;
+
+    protected Date createAt;
 }

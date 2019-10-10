@@ -25,4 +25,6 @@ public interface TradeState {
 
     int getAfterSaleState();
     Date getAfterSaleAt();
+
+    Date getCreatedAt();
 }

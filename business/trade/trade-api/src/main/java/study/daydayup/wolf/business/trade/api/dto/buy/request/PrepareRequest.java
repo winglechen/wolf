@@ -4,7 +4,7 @@ import lombok.Data;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeGoodsDTO;
 import study.daydayup.wolf.business.trade.api.dto.buy.TradeMessageDTO;
 import study.daydayup.wolf.business.trade.api.entity.buy.Buyer;
-import study.daydayup.wolf.business.trade.api.vo.OrderAddress;
+import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
 import study.daydayup.wolf.business.trade.api.vo.SelfFetchAddress;
 
 /**
@@ -21,7 +21,7 @@ public class PrepareRequest {
     private int tradeType;
     private Buyer buyer;
     private TradeGoodsDTO[] goodsList;
-    private OrderAddress orderAddress;
+    private TradeAddress orderAddress;
     private SelfFetchAddress selfFetchAddress;
     private TradeMessageDTO tradeMessageDTO;
 }
