@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMessage;
+import study.daydayup.wolf.business.trade.api.vo.SelfFetchAddress;
 import study.daydayup.wolf.business.trade.api.vo.SellerMemo;
 import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
 
@@ -13,10 +14,14 @@ import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
  **/
 @Data
 public class Order extends BaseOrder {
-    private TradeAddress address;
     private int deliveryMethod;
     private int postagePaymentMethod;
 
+    private TradeAddress address;
+    private SelfFetchAddress selfFetchAddress;
+
     private BuyerMessage buyerMessage;
     private SellerMemo sellerMemo;
+
+    private OrderLine[] orderLines;
 }
