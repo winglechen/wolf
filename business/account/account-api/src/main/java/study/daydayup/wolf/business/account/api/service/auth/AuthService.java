@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.account.api.service.auth;
 
-import study.daydayup.wolf.business.account.api.model.license.License;
+import study.daydayup.wolf.business.account.api.entity.license.License;
 
 /**
  * study.daydayup.wolf.business.account.api.service.auth

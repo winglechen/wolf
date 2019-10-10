@@ -6,7 +6,7 @@ import study.daydayup.wolf.framework.layer.api.Entity;
 import java.util.Date;
 
 /**
- * study.daydayup.wolf.business.trade.api.model.buy
+ * study.daydayup.wolf.business.trade.api.entity.buy
  *
  * @author Wingle
  * @since 2019/10/9 11:40 上午
