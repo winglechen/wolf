@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.vo.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Entity;
 
 import java.util.Date;
@@ -18,9 +19,5 @@ public class OrderState extends Entity {
      */
     private int tradeType;
     private String orderNo;
-
-    private Date createdAt;
-    private Date paidAt;
-    private Date deliveredAt;
-
+    private TradeState state;
 }
