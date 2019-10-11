@@ -7,6 +7,6 @@
 * 帐户统一（用户、商家、管理员、机器人）
 
 # 项目大图
-![架构](../docs/img/wolf_big_picture.png)
+![架构](https://github.com/wolforest/wolf/blob/master/docs/img/wolf_big_picture.png?raw=true)
 
 
