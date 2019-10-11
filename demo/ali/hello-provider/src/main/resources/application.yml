@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: hello-provider
+  profiles:
+    active: dev
+dubbo:
+  scan:
+    base-packages: study.daydayup.wolf.demo.ali
+  protocols:
+    dubbo:
+      name: dubbo
+      port: -1
+  registry:
+    address: spring-cloud://localhost
+  application:
+    qos-enable: false
+
