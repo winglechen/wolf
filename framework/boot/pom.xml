@@ -47,6 +47,8 @@
         <druid.version>1.1.10</druid.version>
         <mysql.version>5.1.47</mysql.version>
 
+        <velocity.version>2.1</velocity.version>
+
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <spring-cloud.alibaba.version>2.1.0.RELEASE</spring-cloud.alibaba.version>
 
@@ -112,6 +114,18 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
 
             <dependency>
