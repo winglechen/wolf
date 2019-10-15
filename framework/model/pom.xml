@@ -10,7 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>model-parent</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>model</module>
+    </modules>
 
     <dependencies>
         <dependency>
