@@ -1,0 +1,11 @@
+model: hello
+table:
+  charaset: utf8mb4
+
+columns:
+  - id AutoIncrementID
+  - name UserName
+  - gender Gender
+  - isDeleted Bool
+  - version Version
+  - createAt Date
