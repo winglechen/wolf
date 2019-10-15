@@ -41,7 +41,8 @@ public class RMB extends Money {
         RMBEnum targetUnit = RMBEnum.SI;
         return convert(targetUnit);
     }
-    
+
+    //TODO add unitTest
     private long convert(RMBEnum targetUnit) {
         if(this.unit.equals(targetUnit)) {
             return this.value;
