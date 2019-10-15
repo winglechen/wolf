@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.string;
+package study.daydayup.wolf.model.type.string.location;
 
 import study.daydayup.wolf.model.contract.DataType;
 
@@ -8,5 +8,5 @@ import study.daydayup.wolf.model.contract.DataType;
  * @author Wingle
  * @since 2019/10/15 12:30 下午
  **/
-public class Ip implements DataType {
+public class IPV6 implements DataType {
 }

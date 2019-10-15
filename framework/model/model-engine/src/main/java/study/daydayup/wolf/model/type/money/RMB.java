@@ -1,9 +1,9 @@
-package study.daydayup.wolf.model.type.number.money;
+package study.daydayup.wolf.model.type.money;
 
 import study.daydayup.wolf.common.lang.enums.RMBEnum;
 
 /**
- * study.daydayup.wolf.model.type.number.money
+ * study.daydayup.wolf.model.type.money
  *
  * @author Wingle
  * @since 2019/10/15 12:48 下午
