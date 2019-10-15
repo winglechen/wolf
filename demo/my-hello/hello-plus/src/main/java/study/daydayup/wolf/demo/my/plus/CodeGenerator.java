@@ -81,9 +81,21 @@ public class CodeGenerator {
         gc.setSwagger2(true);
         gc.setIdType(IdType.AUTO);//主键ID类型
         gc.setDateType(DateType.ONLY_DATE);//设置时间类型为Date
+
+        gc.setEntityName("%sDO");
+        gc.setMapperName("%sDAO");
+        gc.setServiceName("%sService");
+        gc.setServiceImplName("%sServiceImpl");
+        gc.setXmlName("%sAutoMapper");
+        gc.setControllerName("%sController");
+
+
         mpg.setGlobalConfig(gc);
+
         PackageConfig pc = new PackageConfig();// 包配置
         pc.setParent(package_name);
+        pc.setEntity("dal.dataobject");
+        pc.setMapper("dal.dao");
         mpg.setPackageInfo(pc);
     }
 
