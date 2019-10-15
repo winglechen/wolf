@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.number;
+package study.daydayup.wolf.model.type;
 
 /**
  * study.daydayup.wolf.model.type.number

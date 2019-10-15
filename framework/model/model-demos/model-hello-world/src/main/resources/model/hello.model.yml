@@ -1,10 +1,17 @@
-model: hello
+model: user
 table:
+  id: id
+  idType: autoIncrement
+  bizId:
   charaset: utf8mb4
+
 
 columns:
   - id AutoIncrementID
-  - name UserName
+  - userId uuid
+  - name UserName len(1~10)
+  - password varchar len(8~20) notNull default()
+  - age int len(~4) range(1~150) default() comment()
   - gender Gender
   - isDeleted Bool
   - version Version
