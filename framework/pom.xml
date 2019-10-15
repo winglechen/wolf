@@ -14,6 +14,7 @@
         <module>boot</module>
         <module>common</module>
         <module>framework</module>
+        <module>model</module>
     </modules>
 
     <properties>
