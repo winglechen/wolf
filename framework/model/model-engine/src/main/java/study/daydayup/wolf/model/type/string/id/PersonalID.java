@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.person;
+package study.daydayup.wolf.model.type.string.id;
 
 import study.daydayup.wolf.model.contract.DataType;
 
@@ -8,5 +8,5 @@ import study.daydayup.wolf.model.contract.DataType;
  * @author Wingle
  * @since 2019/10/15 1:19 下午
  **/
-public class ID implements DataType {
+public class PersonalID implements DataType {
 }

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.person;
+package study.daydayup.wolf.model.type.string.account;
 
 import study.daydayup.wolf.model.contract.DataType;
 

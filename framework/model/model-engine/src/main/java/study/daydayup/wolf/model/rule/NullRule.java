@@ -11,4 +11,5 @@ import study.daydayup.wolf.model.contract.Rule;
 public class NullRule implements Rule {
     private boolean mustNull;
     private boolean notNull;
+    private boolean allowNull;
 }
