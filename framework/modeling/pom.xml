@@ -13,7 +13,7 @@
     <artifactId>model-parent</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>model-engine</module>
+        <module>model</module>
         <module>model-generator</module>
         <module>model-demos</module>
     </modules>
