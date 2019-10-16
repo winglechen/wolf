@@ -49,6 +49,7 @@
 
         <velocity.version>2.1</velocity.version>
         <hibernate-validator.version>6.0.17.Final</hibernate-validator.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
 
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <spring-cloud.alibaba.version>2.1.0.RELEASE</spring-cloud.alibaba.version>
@@ -171,6 +172,12 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>io.springfox</groupId>
