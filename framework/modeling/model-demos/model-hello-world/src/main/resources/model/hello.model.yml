@@ -7,8 +7,8 @@ table:
 
 
 columns:
-  - id AutoIncrementID
-  - userId uuid
+  - id AutoIncrementInt
+  - userId Long
   - name UserName len(1~10)
   - password varchar len(8~20) notNull default()
   - age int len(~4) range(1~150) default() comment()

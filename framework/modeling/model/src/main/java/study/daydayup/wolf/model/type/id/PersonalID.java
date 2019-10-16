@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.string.id;
+package study.daydayup.wolf.model.type.id;
 
 import study.daydayup.wolf.model.contract.DataType;
 

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.string.location;
+package study.daydayup.wolf.model.type.contact.location;
 
 import study.daydayup.wolf.model.contract.DataType;
 
