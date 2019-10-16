@@ -9,10 +9,10 @@ table:
 columns:
   - id AutoIncrementInt
   - userId UnsignedLong "用户ID"
-  - name Name ""
-  - password varchar len(8~20) notNull default()
+  - name Name "用户名"
+  - password  Password "密码"
   - age int len(~4) range(1~150) default() comment()
-  - gender Gender
+  - gender GenderEnum
   - isDeleted Bool
   - version Version
   - createAt Date
