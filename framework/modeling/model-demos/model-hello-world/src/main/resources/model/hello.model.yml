@@ -8,8 +8,8 @@ table:
 
 columns:
   - id AutoIncrementInt
-  - userId Long
-  - name UserName len(1~10)
+  - userId UnsignedLong "用户ID"
+  - name Name ""
   - password varchar len(8~20) notNull default()
   - age int len(~4) range(1~150) default() comment()
   - gender Gender
