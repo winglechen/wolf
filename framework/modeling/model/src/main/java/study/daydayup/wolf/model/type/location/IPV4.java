@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.contact.location;
+package study.daydayup.wolf.model.type.location;
 
 /**
  * study.daydayup.wolf.model.type.contact.location

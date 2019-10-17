@@ -8,5 +8,5 @@ import study.daydayup.wolf.model.contract.DataType;
  * @author Wingle
  * @since 2019/10/15 4:39 下午
  **/
-public class Regex implements DataType {
+public class Pattern implements DataType {
 }

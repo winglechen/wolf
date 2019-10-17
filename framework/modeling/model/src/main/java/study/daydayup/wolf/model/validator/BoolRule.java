@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.rule;
+package study.daydayup.wolf.model.validator;
 
 /**
  * study.daydayup.wolf.model.rule

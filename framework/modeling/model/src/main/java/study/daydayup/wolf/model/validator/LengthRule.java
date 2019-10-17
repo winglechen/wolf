@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.rule;
+package study.daydayup.wolf.model.validator;
 
 import study.daydayup.wolf.model.contract.Rule;
 
