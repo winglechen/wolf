@@ -1,0 +1,30 @@
+model: goods
+columns:
+  - id AutoIncUInt primaryKey "ID"
+  - goodsId ULong bisnessKey "商品ID"
+  - orgnazitionId ULong foreignKey(orginazition) "组织"
+  - categoryId UInt foreignKey(category) "类目"
+  - name Name(50) "商品名"
+  - goodsType GoodsTypeEnum "商品类型"
+  - soldState SoldStateEnum "售卖状态"
+  - stockType StockTypeEnum "库存类型"
+  - price RMB "价格"
+  - feature String(100) "商品特性"
+  - vsPrice String(100) "对比价格"
+  - mainPic URL "商品首图"
+  - mainVideo URL "商品首视频"
+  - tags Tags "商品标签"
+  - code String(20) "商品码"
+  - pics String(1000) "商品图"
+  - skuInfo Text "SKU信息"
+  - detail Text "商品介绍"
+  - isDeleted Bool
+  - version Version
+  - createdAt Date
+  - updatedAt Date
+  - creator ULong
+  - lasteEditor ULong
+tables:
+  goods: [id, goodsId, orgnzationId, categoryId, name, goodsType, soldState, stockType, feature, vsPrice,
+          mainPic, mainVideo, tags, code, isDeleted, createAt, updatedAt, creator, lasterEditor ]
+  goods_detail: [goodsId, orgnazitionId, pics, skuInfo, detail]

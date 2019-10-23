@@ -1,0 +1,57 @@
+model: goods
+config:
+  charset: utf8mb4
+
+relations:
+  foreign:
+    orgnazitionId:
+      model: orgnazition
+      key: orgnazitionId
+      rel: N:1
+    categoryId:
+      model: category
+      key: categoryId
+      rel: N:1
+
+indexes:
+  main:
+    keys:
+      primaryKey: id
+      bisnessKey: goodsId
+    udxs:
+
+    idxs:
+
+    fdxs:
+
+  detail:
+
+columns:
+  base:
+    - goodsId
+    - orgnazitionId
+    - categoryId
+    - goodsType
+    - name
+    - mainPic
+    - tags
+    - soldState
+    - price
+    - stockType
+  main:
+    - id
+    - feature
+    - vsPrice
+    - mainVideo
+    - code
+    - isDeleted
+    - version
+    - createdAt
+    - updatedAt
+    - lasteEditor
+  detail:
+    = goodsId
+    - orgnazitionId
+    - pics
+    - skuInfo
+    - detail
