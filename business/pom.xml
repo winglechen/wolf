@@ -12,7 +12,6 @@
 
     <modules>
         <module>account</module>
-        <module>device</module>
         <module>goods</module>
         <module>misc</module>
         <module>orgnization</module>
