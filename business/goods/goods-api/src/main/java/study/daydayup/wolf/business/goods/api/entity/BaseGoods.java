@@ -10,6 +10,8 @@ import study.daydayup.wolf.model.type.string.Name;
 import study.daydayup.wolf.model.type.string.Tags;
 import study.daydayup.wolf.model.type.string.URI;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * study.daydayup.wolf.business.goods.api.entity
  *
@@ -18,23 +20,32 @@ import study.daydayup.wolf.model.type.string.URI;
  **/
 @Data
 public class BaseGoods extends Entity {
-    @BusinessKey
+    @BusinessKey @NotNull
     private long goodsId;
-    @ForeignKey
+    @ForeignKey @NotNull
     private long orgId;
-    @ForeignKey
+    @ForeignKey @NotNull
     private long categoryId;
 
+    @NotNull
     private Name name;
+    @NotNull
     private Money price;
 
+    @NotNull
     private String feature;
+    @NotNull
     private String vsPrice;
+    @NotNull
     private String code;
+    @NotNull
     private URI mainPic;
+    @NotNull
     private URI mainVideo;
+    @NotNull
     private Tags tags;
 
+    @NotNull
     private DataVersion version;
 
     /**
