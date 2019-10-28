@@ -32,6 +32,7 @@
 
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
+        <wolf-model.version>1.0.0-SNAPSHOT</wolf-model.version>
 
         <lombok.version>1.16.18</lombok.version>
         <fastjson.version>1.2.61</fastjson.version>
@@ -84,6 +85,11 @@
                 <groupId>study.daydayup.wolf</groupId>
                 <artifactId>framework</artifactId>
                 <version>${wolf-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>model</artifactId>
+                <version>${wolf-model.version}</version>
             </dependency>
 
 
