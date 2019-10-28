@@ -1,6 +1,5 @@
 model: goods
 columns:
-  - id AutoIncUInt primaryKey "ID"
   - goodsId ULong bisnessKey "商品ID"
   - orgnazitionId ULong foreignKey(orginazition) "组织"
   - categoryId UInt foreignKey(category) "类目"
@@ -18,6 +17,8 @@ columns:
   - pics String(1000) "商品图"
   - skuInfo Text "SKU信息"
   - detail Text "商品介绍"
+
+  - id AutoIncUInt primaryKey "ID"
   - isDeleted Bool
   - version Version
   - createdAt Date

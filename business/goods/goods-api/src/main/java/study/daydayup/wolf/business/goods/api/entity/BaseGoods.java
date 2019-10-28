@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Entity;
+import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.key.BusinessKey;
 import study.daydayup.wolf.model.annotation.key.ForeignKey;
 import study.daydayup.wolf.model.type.money.Money;
@@ -27,13 +28,14 @@ public class BaseGoods extends Entity {
     private Name name;
     private Money price;
 
-    private Name feature;
+    private String feature;
     private String vsPrice;
+    private String code;
     private URI mainPic;
     private URI mainVideo;
     private Tags tags;
-    private String code;
-    private int version;
+
+    private DataVersion version;
 
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum
