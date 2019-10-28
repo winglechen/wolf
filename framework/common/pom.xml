@@ -13,6 +13,7 @@
         <groupId>study.daydayup.wolf</groupId>
         <artifactId>boot</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath />
     </parent>
 
     <properties>
