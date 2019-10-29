@@ -15,5 +15,4 @@ public class Goods extends BaseGoods {
     private String skuInfo;
     private String detail;
     private Sku[] skuList;
-    private GoodsStatistics statistics;
 }

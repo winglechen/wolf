@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.annotation.key;
+package study.daydayup.wolf.model.annotation.column;
 
 /**
  * study.daydayup.wolf.model.annotation.key
