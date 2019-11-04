@@ -1,0 +1,36 @@
+boundedContext: wolf
+model: goods
+entities:
+  BaseGoods: [goodsId, orgId, categoryId, positionId, name, price, soldState, stockType, goodsType,
+              feature, vsPrice, mainPic, mainVideo, tags, version]
+  Goods: [skuInfo, pics, detail]
+vos:
+  SkuV   : [skuValue, skuValueId,ChargeUnit]
+  SkuInfo: [skuKey, skuKeyId, Array<SkuV> ]
+dos:
+  Goods: [goodsId, orgId, categoryId, positionId, name, price, soldState, stockType, goodsType,
+          feature, vsPrice, mainPic, mainVideo, tags, version.expand]
+  GoodsDetail: [id, goodsId, orgId, pics, skuInfo.toJson, detail]
+schema:
+  - goodsId AutoIncULong BusinessKey primaryKey "商品ID"
+  - orgId ULong ForeignKey(wolf.orgnaztion) "组织ID"
+  - categoryId ULong foreignKey(catgory) "类目ID"
+  - positionId ULong foreignKey(category) "点位ID"
+  - name Name(100) "商品名"
+  - price Money "商品价格"
+  - soldState Enum() "售卖状态"
+  - stockType Enum() "库存类型"
+  - goodsType Enum() "商品类型"
+  - feature String(100) "商品特征"
+  - vsPrice String(30) "划线价"
+  - mainPic URI "商品主图"
+  - maniVideo URI "商品主视频"
+  - tags Tags "商品标签"
+  - skuKey String(100) "sku品类"
+  - skuKeyId ULong "sku品类ID"
+  - skuValue String(100) "sku值"
+  - pics String(1000) "国片"
+  - detail Text "商品详情"
+  - skuInfo VO(SkuInfo) "skuInfo"
+  - id AutoIncUInt PrimaryKey "AID"
+  - version DataVersion(UseLessKey)

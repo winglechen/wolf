@@ -1,0 +1,13 @@
+boundedContext: wolf
+model: sku
+entities:
+
+vos:
+
+dos:
+
+schema:
+  - skuId ULong PrimaryKey BusinessKey "skuID"
+  - goodsId ULong AggragationKey(goods) "商品ID"
+  - skuKey String(50)
+  - chargeUnit UInt foreignKey
