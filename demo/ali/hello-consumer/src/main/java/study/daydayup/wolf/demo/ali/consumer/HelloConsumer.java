@@ -35,4 +35,18 @@ public class HelloConsumer {
 
         return  "generic result: " + (String) result;
     }
+
+    @RequestMapping("/exception")
+    public String exceptionShow() {
+         try {
+             helloService.sayException("wingle");
+         } catch (Exception e) {
+             System.out.println(e.getClass());
+             System.out.println(e.getMessage());
+
+             return "class:" + e.getClass() + "\n Message:" + e.getMessage() + "\n";
+         }
+
+         return "no exception";
+    }
 }

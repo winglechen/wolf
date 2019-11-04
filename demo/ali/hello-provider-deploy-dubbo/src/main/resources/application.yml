@@ -12,4 +12,6 @@ dubbo:
     address: spring-cloud://localhost
   application:
     qos-enable: false
+  provider:
+    filter: -exception
 

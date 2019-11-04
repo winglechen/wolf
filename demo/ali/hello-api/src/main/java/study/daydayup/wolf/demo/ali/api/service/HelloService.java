@@ -9,4 +9,6 @@ package study.daydayup.wolf.demo.ali.api.service;
 
 public interface HelloService {
     String sayHello(String name);
+
+    String sayException(String name);
 }

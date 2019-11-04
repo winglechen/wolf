@@ -1,5 +1,6 @@
 package study.daydayup.wolf.demo.ali.provider;
 
+import study.daydayup.wolf.demo.ali.api.exception.HelloBizException;
 import study.daydayup.wolf.demo.ali.api.service.HelloService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -11,7 +12,13 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  **/
 @RpcService(protocol = "dubbo")
 public class HelloServiceImpl implements HelloService {
+    @Override
     public String sayHello(String name) {
         return "Hello " + name + " from dubbo service: " + this.toString();
+    }
+
+    @Override
+    public String sayException(String name) {
+        throw new HelloBizException("Exception from the provider");
     }
 }
