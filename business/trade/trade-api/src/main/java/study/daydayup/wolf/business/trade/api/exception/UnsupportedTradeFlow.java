@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.exception;
 
-import study.daydayup.wolf.framework.exception.BusinessException;
+import study.daydayup.wolf.common.lang.exception.BusinessException;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.exception
