@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.ali.provider;
 
-import org.apache.dubbo.config.annotation.Service;
 import study.daydayup.wolf.demo.ali.api.service.HelloService;
+import study.daydayup.wolf.framework.layer.rpc.RpcService;
 
 /**
  * study.daydayup.wolf.demo.ali.provider
@@ -9,7 +9,7 @@ import study.daydayup.wolf.demo.ali.api.service.HelloService;
  * @author Wingle
  * @since 2019/10/11 9:59 上午
  **/
-@Service(protocol = "dubbo")
+@RpcService(protocol = "dubbo")
 public class HelloServiceImpl implements HelloService {
     public String sayHello(String name) {
         return "Hello " + name + " from dubbo service: " + this.toString();
