@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.ali.provider;
 
 import study.daydayup.wolf.demo.ali.api.service.HelloService;
-import study.daydayup.wolf.framework.layer.rpc.RpcService;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 /**
  * study.daydayup.wolf.demo.ali.provider
