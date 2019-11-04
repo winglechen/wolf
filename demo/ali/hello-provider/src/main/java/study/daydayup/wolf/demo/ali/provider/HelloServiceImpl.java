@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.ali.provider.service.impl;
+package study.daydayup.wolf.demo.ali.provider;
 
 import org.apache.dubbo.config.annotation.Service;
 import study.daydayup.wolf.demo.ali.api.service.HelloService;

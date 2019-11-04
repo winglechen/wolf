@@ -1,8 +1,6 @@
 spring:
   application:
     name: hello-provider
-  profiles:
-    active: dev
 dubbo:
   scan:
     base-packages: study.daydayup.wolf.demo.ali
