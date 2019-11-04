@@ -1,0 +1,9 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        register-enabled: false
+        server-addr: 127.0.0.1:8848
