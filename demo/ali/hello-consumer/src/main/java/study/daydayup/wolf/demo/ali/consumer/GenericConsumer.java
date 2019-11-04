@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GenericConsumer {
 
-    @RequestMapping("/generic")
+    @RequestMapping("/gen")
     public Object hello() {
         return "Hello";
     }
