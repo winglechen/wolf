@@ -1,6 +1,5 @@
 package study.daydayup.wolf.demo.ali.provider;
 
-import study.daydayup.wolf.demo.ali.api.exception.HelloBizException;
 import study.daydayup.wolf.demo.ali.api.service.HelloService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 

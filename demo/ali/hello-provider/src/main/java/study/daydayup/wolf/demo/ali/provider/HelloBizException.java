@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.ali.api.exception;
+package study.daydayup.wolf.demo.ali.provider;
 
 import study.daydayup.wolf.common.lang.exception.BusinessException;
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 public class SystemException extends BaseException {
 
     public SystemException(String message) {
-        super(message);
+        super(500, message);
     }
 
     public SystemException(long code, String message) {

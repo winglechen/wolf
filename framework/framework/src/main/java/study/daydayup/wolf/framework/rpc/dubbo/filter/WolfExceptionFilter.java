@@ -25,6 +25,7 @@ import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.rpc.*;
 import org.apache.dubbo.rpc.service.GenericService;
 import study.daydayup.wolf.common.lang.exception.BusinessException;
+import study.daydayup.wolf.framework.rpc.exception.WolfRpcException;
 
 import java.lang.reflect.Method;
 
@@ -80,7 +81,10 @@ public class WolfExceptionFilter extends ListenableFilter {
 
                     // add BusinessException support
                     if(exception instanceof BusinessException) {
-                        return;
+                        WolfRpcException e = new WolfRpcException(exception.getMessage());
+                        e.wrap( (BusinessException)exception );
+                        appResponse.setException(e);
+                        return ;
                     }
 
                     // for the exception not found in method's signature, print ERROR message in server's log.
