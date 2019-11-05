@@ -9,6 +9,7 @@ dubbo:
   application:
     qos-enable: false
 
+
 server:
   port: 8081
 

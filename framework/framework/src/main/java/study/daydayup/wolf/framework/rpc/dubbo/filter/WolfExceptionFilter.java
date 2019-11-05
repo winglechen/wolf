@@ -25,6 +25,7 @@ import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.rpc.*;
 import org.apache.dubbo.rpc.service.GenericService;
 import study.daydayup.wolf.common.lang.exception.BusinessException;
+import study.daydayup.wolf.framework.rpc.exception.WolfExceptionCodec;
 import study.daydayup.wolf.framework.rpc.exception.WolfRpcException;
 
 import java.lang.reflect.Method;
@@ -58,6 +59,7 @@ public class WolfExceptionFilter extends ListenableFilter {
 
         @Override
         public void onResponse(Result appResponse, Invoker<?> invoker, Invocation invocation) {
+            System.out.println("Wolf Exception filter loaded");
             if (appResponse.hasException() && GenericService.class != invoker.getInterface()) {
                 try {
                     Throwable exception = appResponse.getException();
@@ -81,9 +83,11 @@ public class WolfExceptionFilter extends ListenableFilter {
 
                     // add BusinessException support
                     if(exception instanceof BusinessException) {
-                        WolfRpcException e = new WolfRpcException(exception.getMessage());
-                        e.wrap( (BusinessException)exception );
-                        appResponse.setException(e);
+                        System.out.println("format businessException:" + exception);
+
+                        appResponse.setValue(null);
+                        appResponse.setException(null);
+                        appResponse.addAttachments(WolfExceptionCodec.encode((BusinessException) exception));
                         return ;
                     }
 

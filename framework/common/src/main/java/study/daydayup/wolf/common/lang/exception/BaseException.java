@@ -11,7 +11,7 @@ import java.util.Map;
 @Getter
 public abstract class BaseException extends RuntimeException {
     protected long code;
-    protected Map<String, Object> data = new HashMap<>();
+    protected Map<String, String> data = new HashMap<>();
 
     public BaseException(String message) {
         this(100, message);
@@ -22,15 +22,15 @@ public abstract class BaseException extends RuntimeException {
         this.code = code;
     }
 
-    public void setData(Map<String, Object> data) {
+    public void setData(Map<String, String> data) {
         this.data = data;
     }
 
-    public void setDataRow(String key, Object value) {
+    public void setDataRow(String key, String value) {
         this.data.put(key, value);
     }
 
-    public void addData(Map<String, Object> map) {
+    public void addData(Map<String, String> map) {
         this.data.putAll(map);
     }
 }
