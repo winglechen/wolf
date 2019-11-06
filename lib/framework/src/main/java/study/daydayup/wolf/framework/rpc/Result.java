@@ -18,6 +18,8 @@ public final class Result<T> implements Serializable {
     private String message;
     private T data;
 
+    private String exception;
+
     Result() {
         this(0, "", null);
     }
@@ -34,9 +36,8 @@ public final class Result<T> implements Serializable {
         this.code = code;
         this.message = message;
         this.data = data;
+        this.exception = null;
     }
-
-
 
     public boolean isSuccess() {
         return 0 == code;
