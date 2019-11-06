@@ -22,6 +22,10 @@ public abstract class BaseException extends RuntimeException {
         this.code = code;
     }
 
+    public void setCode(long code) {
+        this.code = code;
+    }
+
     public void setData(Map<String, String> data) {
         this.data = data;
     }
