@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.goods.api.service;
 
 import study.daydayup.wolf.business.goods.api.entity.BaseGoods;
 
+import java.util.List;
+
 /**
  * study.daydayup.wolf.business.goods.api.service
  *
@@ -10,5 +12,5 @@ import study.daydayup.wolf.business.goods.api.entity.BaseGoods;
  **/
 public interface GoodsService {
     BaseGoods findBaseGoodsById();
-    BaseGoods[] findBaseGoodsByOrgId();
+    List<BaseGoods> findBaseGoodsByOrgId();
 }
