@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.rpc;
 
+import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 import study.daydayup.wolf.common.lang.exception.NullReturnedException;
 
@@ -45,13 +46,19 @@ public class ResultTest {
     }
 
     public void demo() {
-        Result<Account> account = Rpc.call("account");
-        Account a = account.getNotNullData();
+        Account account = Rpc.getAccount().getNotNullData();
 
-        Goods goods = Rpc.getGoods();
-        Ump ump = Rpc.getUmp();
-        Order order = Rpc.getOrder();
+        Result<Goods> rGoods = Rpc.getGoods();
+        if ( rGoods.isNull() ) {
+            //do something
+        } else {
+            //do other things
+        }
 
+        Result<Order> rOrder = Rpc.getOrder();
+        if ( rOrder.isNull() ) {
+            rOrder.toBusinessException();
+        }
     }
 
     static class Parent{}
@@ -67,19 +74,19 @@ public class ResultTest {
             return new Result();
         }
 
-        public static Account getAccount(){
+        public static Result<Account> getAccount(){
             return null;
         }
 
-        public static Goods getGoods() {
+        public static Result<Goods> getGoods() {
             return null;
         }
 
-        public static Ump getUmp() {
+        public static Result<Ump> getUmp() {
             return null;
         }
 
-        public static Order getOrder() {
+        public static Result<Order> getOrder() {
             return null;
         }
     }

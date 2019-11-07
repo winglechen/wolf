@@ -40,7 +40,11 @@ public final class Result<T> implements Serializable {
     }
 
     public boolean isSuccess() {
-        return 0 == code;
+        return 0 == code && null != data;
+    }
+
+    public boolean isNull() {
+        return null == data;
     }
 
     public T getNotNullData() {
