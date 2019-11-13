@@ -1,7 +1,6 @@
 model: version
 
 schema:
-  - id
   - isDeleted Boolean "删除状态"
   - creator ULong "创建人"
   - lastEditor ULong "最后编辑人"
