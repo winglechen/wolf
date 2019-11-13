@@ -17,6 +17,7 @@
     <modules>
         <module>hello-plus</module>
         <module>hello-gen</module>
+        <module>hello-sharding</module>
     </modules>
 
     <dependencies>
@@ -48,6 +49,11 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
