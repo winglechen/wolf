@@ -7,21 +7,24 @@ spring:
     datasource:
       names: learn, account
       learn:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: 123456
-        jdbcUrl: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false
+        url: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false
       account:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: 123456
-        jdbcUrl: jdbc:mysql://127.0.0.1:3306/account?useSSL=false
-      sharding:
-        tables:
-          account:
-            actual-data-nodes: account.account
-          tag:
-            actual-data-nodes: learn.account
-        props:
-          sql.show: true
+        url: jdbc:mysql://127.0.0.1:3306/wolf_account?useSSL=false
+    sharding:
+      tables:
+        tag:
+          actual-data-nodes: learn.tag
+        account:
+          actual-data-nodes: account.account
+
 server:
-  port:8090
+  port: 8095
 

@@ -1,12 +1,13 @@
 package study.daydayup.wolf.demo.my.sharding;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.demo.my.sharding.dal.AccountDAO;
 import study.daydayup.wolf.demo.my.sharding.dal.AccountDO;
 import study.daydayup.wolf.demo.my.sharding.dal.TagDAO;
 import study.daydayup.wolf.demo.my.sharding.dal.TagDO;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.demo.my.sharding
@@ -16,20 +17,24 @@ import study.daydayup.wolf.demo.my.sharding.dal.TagDO;
  **/
 @RestController
 public class ShardingService {
-    @Autowired
+    @Resource
     private TagDAO tagDAO;
-    @Autowired
+    @Resource
     private AccountDAO accountDAO;
 
     @RequestMapping("/tag")
     public String tag() {
+//        System.out.println("hello tag");
+//        return "hello tag";
         TagDO tag = tagDAO.getById(1);
+        System.out.println("tag: " + tag);
         return tag.toString();
     }
 
     @RequestMapping("/account")
     public String account() {
         AccountDO account = accountDAO.getById(1);
+        System.out.println("account: " + account );
         return account.toString();
     }
 }
