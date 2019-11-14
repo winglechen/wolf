@@ -21,10 +21,10 @@
     </modules>
 
     <dependencies>
-        <dependency>
+        <!--dependency>
             <groupId>study.daydayup.wolf.boot</groupId>
             <artifactId>wolf-boot-starter</artifactId>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
