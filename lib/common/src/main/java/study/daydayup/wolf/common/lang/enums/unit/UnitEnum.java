@@ -12,6 +12,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum UnitEnum implements CodeBasedEnum {
+    PERCENTAGE(2, "percentage"),
     NONE(1, "none unit")
     ;
 
