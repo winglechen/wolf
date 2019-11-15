@@ -4,7 +4,11 @@
 
     <groupId>study.daydayup.wolf.business</groupId>
     <artifactId>pay</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>pay-api</module>
+    </modules>
 
     <parent>
         <groupId>study.daydayup.wolf</groupId>
@@ -20,7 +24,10 @@
             <groupId>study.daydayup.wolf.boot</groupId>
             <artifactId>wolf-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
     <build>
 
