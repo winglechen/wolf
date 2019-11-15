@@ -8,47 +8,43 @@ import study.daydayup.wolf.common.lang.string.ID;
  * @author Wingle
  * @since 2019/11/15 2:48 下午
  **/
-public class TradeNo  implements ID {
-    public static final int ORDER       = 0 ;
-    public static final int CONTRACT    = 20;
-    public static final int PAY         = 30;
-
-
-    private int tradeType;
+public class DateId implements ID {
+    private int category;
     private int dataCenterNo;
     private int shardingKey;
     private int shardingNums;
 
-    public static TradeNo getInstance() {
-        return new TradeNo();
+    public static DateId builder() {
+        return new DateId();
     }
 
-    TradeNo() {
-        this.tradeType = 0;
+    DateId() {
+        this.category = 0;
         this.dataCenterNo = 0;
         this.shardingKey = 0;
     }
 
-    public TradeNo tradeType(int tradeType) {
-        this.tradeType = tradeType;
+    public DateId category(int category) {
+        this.category = category;
         return this;
     }
 
-    public TradeNo dataCenterNo(int dataCenterNo) {
+    public DateId dataCenterNo(int dataCenterNo) {
         this.dataCenterNo = dataCenterNo;
         return this;
     }
 
-    public TradeNo shardingKey(int key) {
+    public DateId shardingKey(int key) {
         return this.shardingKey((long)key);
     }
 
-    public TradeNo shardingKey(long key) {
+    public DateId shardingKey(long key) {
         this.shardingKey = 0;
         return this;
     }
 
-    public TradeNo shardingKey(String key) {
+    //TODO
+    public DateId shardingKey(String key) {
 
         return this;
     }
