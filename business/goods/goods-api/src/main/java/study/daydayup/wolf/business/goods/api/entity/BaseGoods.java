@@ -5,7 +5,7 @@ import study.daydayup.wolf.framework.layer.api.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.key.BusinessKey;
 import study.daydayup.wolf.model.annotation.key.ForeignKey;
-import study.daydayup.wolf.model.type.money.Money;
+import study.daydayup.wolf.model.type.currency.Currency;
 import study.daydayup.wolf.model.type.string.Name;
 import study.daydayup.wolf.model.type.string.Tags;
 import study.daydayup.wolf.model.type.string.URI;
@@ -30,7 +30,7 @@ public class BaseGoods extends Entity {
     @NotNull
     private Name name;
     @NotNull
-    private Money price;
+    private Currency price;
 
     @NotNull
     private String feature;

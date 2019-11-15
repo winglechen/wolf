@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.lang.enums;
+package study.daydayup.wolf.common.lang.enums.currency;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;

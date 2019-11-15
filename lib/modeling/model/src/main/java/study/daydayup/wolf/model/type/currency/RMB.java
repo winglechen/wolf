@@ -1,6 +1,6 @@
-package study.daydayup.wolf.model.type.money;
+package study.daydayup.wolf.model.type.currency;
 
-import study.daydayup.wolf.common.lang.enums.RMBEnum;
+import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
 
 /**
  * study.daydayup.wolf.model.type.money
@@ -8,7 +8,7 @@ import study.daydayup.wolf.common.lang.enums.RMBEnum;
  * @author Wingle
  * @since 2019/10/15 12:48 下午
  **/
-public class RMB extends Money {
+public class RMB implements Currency {
     private long value;
     private RMBEnum unit;
     
