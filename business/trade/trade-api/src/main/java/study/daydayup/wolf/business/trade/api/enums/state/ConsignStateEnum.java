@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 6:55 PM
  **/
 @Getter
-public enum DeliveryStateEnum implements CodeBasedEnum {
+public enum ConsignStateEnum implements CodeBasedEnum {
     EXPIRED_SIGNED(50, "超时签收"),
     SIGNED(40, "已签收"),
     PART_SENDED(30, "部分已发货"),
@@ -20,7 +20,7 @@ public enum DeliveryStateEnum implements CodeBasedEnum {
 
     private int code;
     private String desc;
-    DeliveryStateEnum(int code, String desc) {
+    ConsignStateEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

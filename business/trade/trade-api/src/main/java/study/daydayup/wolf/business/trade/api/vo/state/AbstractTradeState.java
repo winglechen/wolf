@@ -1,7 +1,10 @@
 package study.daydayup.wolf.business.trade.api.vo.state;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.enums.state.CloseStateEnum;
+import study.daydayup.wolf.business.trade.api.enums.state.ConsignStateEnum;
 import study.daydayup.wolf.business.trade.api.enums.state.DisputeStateEnum;
+import study.daydayup.wolf.business.trade.api.enums.state.PayStateEnum;
 
 import java.util.Date;
 
@@ -17,19 +20,19 @@ public abstract class AbstractTradeState {
     protected int state;
 
     /**
-     * @see study.daydayup.wolf.business.trade.api.enums.state.PaymentStateEnum
+     * @see PayStateEnum
      */
     protected int paymentState;
     protected Date paidAt;
 
     /**
-     * @see study.daydayup.wolf.business.trade.api.enums.state.DeliveryStateEnum
+     * @see ConsignStateEnum
      */
     protected int deliveryState;
     protected Date sendedAt;
 
     /**
-     * @see study.daydayup.wolf.business.trade.api.enums.state.CompletedStateEnum
+     * @see CloseStateEnum
      */
     protected int completedState;
     protected Date completedAt;

@@ -10,16 +10,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 6:55 PM
  **/
 @Getter
-public enum PaymentStateEnum implements CodeBasedEnum {
-    NONEED_TO_PAY(40, "无需支付"),
-    PAID(30, "已支付"),
-    PART_PAID(20, "部分支付"),
-    WAIT_TO_PAY(10, "待支付")
+public enum CloseStateEnum implements CodeBasedEnum {
+    REFUND(20, "退款关闭"),
+    PAY_EXPIRED(10, "支付超时关闭")
     ;
 
     private int code;
     private String desc;
-    PaymentStateEnum(int code, String desc) {
+    CloseStateEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
