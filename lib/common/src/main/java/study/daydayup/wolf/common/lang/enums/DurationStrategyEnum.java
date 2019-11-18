@@ -10,7 +10,7 @@ import lombok.Getter;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum PeriodStrategyEnum implements CodeBasedEnum {
+public enum DurationStrategyEnum implements CodeBasedEnum {
     CLOSE_CLOSE(4, "close close"),
     CLOSE_OPEN(3, "close open"),
     OPEN_OPEN(2, "open open"),
@@ -20,7 +20,7 @@ public enum PeriodStrategyEnum implements CodeBasedEnum {
     private int code;
     private String desc;
 
-    PeriodStrategyEnum(int code, String desc) {
+    DurationStrategyEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
