@@ -5,7 +5,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 
 /**
  * study.daydayup.wolf.common.lang.enums
- * range(100~120)
+ * range(100~119)
  *
  * @author Wingle
  * @since 2019/9/29 4:51 PM
