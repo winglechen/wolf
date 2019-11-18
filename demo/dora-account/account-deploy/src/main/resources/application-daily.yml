@@ -1,0 +1,27 @@
+server:
+    port: 8081
+
+spring:
+    datasource:
+        url: jdbc:mysql://127.0.0.1:3306/account?logger=Slf4JLogger&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
+        username: root
+        password: 123
+        druid:
+            max-active: 20
+            initial-size: 5
+            max-wait: 60000
+            min-idle: 10
+            filters: stat
+            validation-query: select 1
+            validation-query-timeout: 30000
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+logging:
+    config: classpath:logback.xml
+    path: @project.parent.basedir@/logs
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://127.0.0.1:8761/eureka
