@@ -4,8 +4,6 @@ import lombok.Data;
 
 @Data
 public class BusinessException extends BaseException {
-    private String exception;
-
     public BusinessException(String message) {
         super(1000, message);
     }

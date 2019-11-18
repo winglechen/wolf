@@ -1,9 +1,8 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator;
 
 import com.alibaba.fastjson.JSON;
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.WechatAuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.WechatRequest;
 import study.daydayup.wolf.demo.account.biz.authorization.repository.AuthorizationRepository;
-import study.daydayup.wolf.demo.account.biz.authorization.vo.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,7 @@ import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatSessionKeyVO;
 @Getter
 @Setter
 @Slf4j
-public class WechatMiniAuthenticator implements Authenticator<WechatAuthorizationRequest> {
+public class WechatMiniAuthenticator implements Authenticator<WechatRequest> {
 
     private WechatSessionKeyVO wechatSessionKeyVO;
 
@@ -28,7 +27,7 @@ public class WechatMiniAuthenticator implements Authenticator<WechatAuthorizatio
     }
 
     @Override
-    public AccountVO authenticate(WechatAuthorizationRequest request) {
+    public AccountVO authenticate(WechatRequest request) {
         wechatSessionKeyVO = authorizationRepository.getSessionKey(request.getCode());
         AccountVO accountVO = getAccount();
         authorizationRepository.getWithCreateWechatSessionKey(accountWechat, wechatSessionKeyVO);

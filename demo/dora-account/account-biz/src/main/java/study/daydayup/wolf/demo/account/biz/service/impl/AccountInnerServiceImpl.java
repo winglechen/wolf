@@ -99,8 +99,8 @@ public class AccountInnerServiceImpl implements AccountInnerService {
         }
         AccountRequest accountRequest = new AccountRequest();
         accountRequest.setAccount(mobile);
-        accountRequest.setType(AccountTypeEnum.MOBILE.getType());
-        accountRequest.setSource(AccountSourceEnum.QIE_H5.getSource());
+        accountRequest.setType(AccountTypeEnum.MOBILE.getCode());
+        accountRequest.setSource(AccountSourceEnum.QIE_H5.getCode());
         accountRequest.setPassword("");
         accountRequest.setNickname(mobile);
         accountRequest.setGender(GenderEnum.UNKNOWN.getCode());

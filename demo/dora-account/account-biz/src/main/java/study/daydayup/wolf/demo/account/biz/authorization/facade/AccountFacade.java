@@ -32,8 +32,8 @@ public class AccountFacade {
         AccountRequest accountRequest = new AccountRequest();
         accountRequest.setAccount(wechatMpOAuthResponseVO.getUnionId());
         accountRequest.setPassword("");
-        accountRequest.setType(AccountTypeEnum.WECHAT_UNION_ID.getType());
-        accountRequest.setSource(AccountSourceEnum.WECHAT.getSource());
+        accountRequest.setType(AccountTypeEnum.WECHAT_UNION_ID.getCode());
+        accountRequest.setSource(AccountSourceEnum.WECHAT.getCode());
         accountRequest.setNickname(wechatMpUserInfoResponseVO.getNickname());
         accountRequest.setGender(wechatMpUserInfoResponseVO.getGender());
         accountRequest.setAvatar(wechatMpUserInfoResponseVO.getAvatar());
@@ -58,8 +58,8 @@ public class AccountFacade {
         AccountRequest accountRequest = new AccountRequest();
         accountRequest.setAccount(wechatSessionKeyVO.getUnionId());
         accountRequest.setPassword("");
-        accountRequest.setType(AccountTypeEnum.WECHAT_UNION_ID.getType());
-        accountRequest.setSource(AccountSourceEnum.WECHAT.getSource());
+        accountRequest.setType(AccountTypeEnum.WECHAT_UNION_ID.getCode());
+        accountRequest.setSource(AccountSourceEnum.WECHAT.getCode());
         accountRequest.setNickname(wechatSessionKeyVO.getUnionId());
         accountRequest.setGender(GenderEnum.UNKNOWN.getCode());
         accountRequest.setAvatar("");

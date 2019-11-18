@@ -1,8 +1,7 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.AuthorizationRequest;
-import study.daydayup.wolf.demo.account.api.enums.AuthorizationTypeEnum;
-import study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator.*;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.AuthRequest;
+import study.daydayup.wolf.demo.account.api.enums.AuthTypeEnum;
 import study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator.*;
 import study.daydayup.wolf.demo.account.biz.authorization.repository.AuthorizationRepository;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.AccountVO;
@@ -31,8 +30,8 @@ public class Authentication {
     }
 
     private void initAuthenticator() {
-        AuthorizationTypeEnum authorizationTypeEnum = AuthorizationTypeEnum.getAuthorizationTypeEnumByType(authorizationType);
-        switch (authorizationTypeEnum) {
+        AuthTypeEnum authTypeEnum = AuthTypeEnum.getAuthorizationTypeEnumByType(authorizationType);
+        switch (authTypeEnum) {
             case PASSWORD:
                 break;
 
@@ -61,7 +60,7 @@ public class Authentication {
 
 
 
-    public <T extends AuthorizationRequest> void authenticate(T authorizationRequest) {
+    public <T extends AuthRequest> void authenticate(T authorizationRequest) {
         accountVO = authenticator.authenticate(authorizationRequest);
         this.isAuthentic = accountVO.isValid();
     }

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.account.biz.service.impl;
 
-import study.daydayup.wolf.demo.account.api.dto.request.VerifyCodeSendRequest;
-import study.daydayup.wolf.demo.account.api.dto.response.VerifyCodeSendResponse;
+import study.daydayup.wolf.demo.account.api.dto.request.VerifyCodeRequest;
+import study.daydayup.wolf.demo.account.api.dto.response.VerifyCodeResponse;
 import study.daydayup.wolf.demo.account.api.exception.VerifyCodeSendErrorException;
 import study.daydayup.wolf.demo.account.api.service.VerifyCodeService;
 import study.daydayup.wolf.demo.account.biz.authorization.entity.VerifyCode;
@@ -24,8 +24,8 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
     private VerifyCodeDAO verifyCodeDAO;
 
     @Override
-    public VerifyCodeSendResponse send(@Valid VerifyCodeSendRequest verifyCodeSendRequest) {
-        VerifyCodeDO verifyCodeDO = verifyCodeDAO.getByMobile(verifyCodeSendRequest.getMobile());
+    public VerifyCodeResponse send(@Valid VerifyCodeRequest verifyCodeRequest) {
+        VerifyCodeDO verifyCodeDO = verifyCodeDAO.getByMobile(verifyCodeRequest.getMobile());
 
         long now = (new Date()).getTime();
         long duration = now - verifyCodeDO.getCreatedAt().getTime();
@@ -34,7 +34,7 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
         }
         //todo send sms service
 
-        VerifyCode verifyCode = new VerifyCode(verifyCodeSendRequest.getMobile());
+        VerifyCode verifyCode = new VerifyCode(verifyCodeRequest.getMobile());
         verifyCodeDO = new VerifyCodeDO();
         verifyCodeDO.setMobile(verifyCode.getMobile());
         verifyCodeDO.setCode(verifyCode.getCode());
@@ -44,9 +44,9 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
         verifyCodeDO.setUpdatedAt(new Date());
         verifyCodeDAO.insert(verifyCodeDO);
 
-        VerifyCodeSendResponse verifyCodeSendResponse = new VerifyCodeSendResponse();
-        verifyCodeSendResponse.setMobile(verifyCodeSendRequest.getMobile());
-        verifyCodeSendResponse.setNextSendSeconds(60);
-        return verifyCodeSendResponse;
+        VerifyCodeResponse verifyCodeResponse = new VerifyCodeResponse();
+        verifyCodeResponse.setMobile(verifyCodeRequest.getMobile());
+        verifyCodeResponse.setNextSendSeconds(60);
+        return verifyCodeResponse;
     }
 }

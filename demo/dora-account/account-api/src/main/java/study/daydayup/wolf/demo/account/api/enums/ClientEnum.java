@@ -10,9 +10,7 @@ public enum ClientEnum {
     ;
 
     private Integer type;
-
     private String id;
-
     private String desc;
 
     ClientEnum(Integer type, String id, String desc) {

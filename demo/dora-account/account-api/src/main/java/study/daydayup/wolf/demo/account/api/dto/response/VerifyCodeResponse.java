@@ -3,7 +3,7 @@ package study.daydayup.wolf.demo.account.api.dto.response;
 import lombok.Data;
 
 @Data
-public class VerifyCodeSendResponse {
+public class VerifyCodeResponse {
     private String mobile;
-    private Integer nextSendSeconds;
+    private int nextSendSeconds;
 }

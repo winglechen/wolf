@@ -3,7 +3,7 @@ package study.daydayup.wolf.demo.account.biz.authorization.facade;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import study.daydayup.wolf.demo.account.api.enums.AuthorizationTypeEnum;
+import study.daydayup.wolf.demo.account.api.enums.AuthTypeEnum;
 import study.daydayup.wolf.demo.account.api.exception.ThirdAuthorizeOauthException;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatMpOAuthResponseVO;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatMpUserInfoResponseVO;
@@ -30,7 +30,7 @@ public class WechatAuthorizationFacade {
 
     public WechatMpOAuthResponseVO authorize(Integer authorizationType, String authorizationCode) {
         CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
-        String requestBase = authorizationType.equals(AuthorizationTypeEnum.WECHAT_APP.getType()) ? wechatProperties.getAppAccessTokenUrl() : wechatProperties.getMpAccessTokenUrl();
+        String requestBase = authorizationType.equals(AuthTypeEnum.WECHAT_APP.getCode()) ? wechatProperties.getAppAccessTokenUrl() : wechatProperties.getMpAccessTokenUrl();
         String requestUrl = requestBase + authorizationCode;
         CloseableHttpResponse response = null;
         HttpGet httpget = new HttpGet(requestUrl);

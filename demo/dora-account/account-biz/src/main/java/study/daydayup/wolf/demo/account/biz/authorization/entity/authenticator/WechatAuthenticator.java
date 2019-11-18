@@ -1,8 +1,7 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.WechatAuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.WechatRequest;
 import study.daydayup.wolf.demo.account.biz.authorization.repository.AuthorizationRepository;
-import study.daydayup.wolf.demo.account.biz.authorization.vo.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +12,7 @@ import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatMpUserInfoRes
 
 @Getter
 @Setter
-public class WechatAuthenticator implements Authenticator<WechatAuthorizationRequest> {
+public class WechatAuthenticator implements Authenticator<WechatRequest> {
 
     private WechatMpOAuthResponseVO wechatMpOAuthResponse;
 
@@ -28,7 +27,7 @@ public class WechatAuthenticator implements Authenticator<WechatAuthorizationReq
     }
 
     @Override
-    public AccountVO authenticate(WechatAuthorizationRequest request) {
+    public AccountVO authenticate(WechatRequest request) {
         wechatMpOAuthResponse = authorizationRepository.authorize(request.getAuthorizationType(), request.getCode());
         AccountVO accountVO = getAccount();
 

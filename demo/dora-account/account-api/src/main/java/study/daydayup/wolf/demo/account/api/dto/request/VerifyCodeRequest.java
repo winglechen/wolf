@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-public class VerifyCodeSendRequest {
+public class VerifyCodeRequest {
 
     @NotBlank
     @Size(min = 11, max = 11, message = "请输入正确手机号码")

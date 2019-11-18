@@ -1,6 +1,6 @@
 package study.daydayup.wolf.demo.account.api.service;
 
-import study.daydayup.wolf.demo.account.api.dto.AccountWechatSessionKey;
+import study.daydayup.wolf.demo.account.api.dto.WechatSessionKey;
 import study.daydayup.wolf.demo.account.api.dto.request.account.AccountRequest;
 import study.daydayup.wolf.demo.account.api.entity.Account;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,5 +23,5 @@ public interface AccountService {
     Account getById(@RequestParam("id") Long id);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAccountWechatSessionKey")
-    AccountWechatSessionKey getAccountWechatSessionKey(@RequestParam("id") Long id);
+    WechatSessionKey getAccountWechatSessionKey(@RequestParam("id") Long id);
 }

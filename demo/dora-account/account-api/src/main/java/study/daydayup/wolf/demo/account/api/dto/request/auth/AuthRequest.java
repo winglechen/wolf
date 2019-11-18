@@ -1,14 +1,14 @@
-package study.daydayup.wolf.demo.account.api.dto.request.authorization;
+package study.daydayup.wolf.demo.account.api.dto.request.auth;
 
 import lombok.Data;
-import study.daydayup.wolf.demo.account.api.enums.AuthorizationTypeEnum;
+import study.daydayup.wolf.demo.account.api.enums.AuthTypeEnum;
 import study.daydayup.wolf.demo.account.api.enums.ClientEnum;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class AuthorizationRequest {
+public class AuthRequest {
 
     /**
      * @see ClientEnum
@@ -17,7 +17,7 @@ public class AuthorizationRequest {
     private String clientId;
 
     /**
-     * @see AuthorizationTypeEnum
+     * @see AuthTypeEnum
      */
     @NotNull(message = "授权类型不能为空")
     protected Integer authorizationType;

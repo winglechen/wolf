@@ -6,20 +6,20 @@ public enum AccountSourceEnum {
     ALIPAY(2, "支付宝"),
     WECHAT(3, "微信");
 
-    private Integer source;
+    private int code;
 
     private String desc;
 
-    public Integer getSource() {
-        return source;
+    public int getCode() {
+        return code;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    AccountSourceEnum(Integer source, String desc) {
-        this.source = source;
+    AccountSourceEnum(Integer code, String desc) {
+        this.code = code;
         this.desc = desc;
     }
 }

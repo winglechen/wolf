@@ -1,6 +1,6 @@
 package study.daydayup.wolf.demo.account.biz.service.impl;
 
-import study.daydayup.wolf.demo.account.api.dto.AccountWechatSessionKey;
+import study.daydayup.wolf.demo.account.api.dto.WechatSessionKey;
 import study.daydayup.wolf.demo.account.api.dto.request.account.AccountRequest;
 import study.daydayup.wolf.demo.account.api.entity.Account;
 import study.daydayup.wolf.demo.account.api.service.AccountService;
@@ -41,19 +41,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountWechatSessionKey getAccountWechatSessionKey(Long id) {
+    public WechatSessionKey getAccountWechatSessionKey(Long id) {
         WechatSessionKeyDO wechatSessionKeyDO = wechatSessionKeyDAO.getOneByUid(id);
         if (wechatSessionKeyDO == null) {
             return null;
         }
         AccountWechatDO accountWechatDO = accountWechatDAO.selectOneByUnionId(wechatSessionKeyDO.getUnionId());
-        AccountWechatSessionKey accountWechatSessionKey = new AccountWechatSessionKey();
-        accountWechatSessionKey.setUid(wechatSessionKeyDO.getUid());
-        accountWechatSessionKey.setOpenId(accountWechatDO != null ? accountWechatDO.getOpenId() : "");
-        accountWechatSessionKey.setMiniOpenId(wechatSessionKeyDO.getOpenId());
-        accountWechatSessionKey.setUnionId(wechatSessionKeyDO.getUnionId());
-        accountWechatSessionKey.setSessionKey(wechatSessionKeyDO.getSessionKey());
-        return accountWechatSessionKey;
+        WechatSessionKey wechatSessionKey = new WechatSessionKey();
+        wechatSessionKey.setUid(wechatSessionKeyDO.getUid());
+        wechatSessionKey.setOpenId(accountWechatDO != null ? accountWechatDO.getOpenId() : "");
+        wechatSessionKey.setMiniOpenId(wechatSessionKeyDO.getOpenId());
+        wechatSessionKey.setUnionId(wechatSessionKeyDO.getUnionId());
+        wechatSessionKey.setSessionKey(wechatSessionKeyDO.getSessionKey());
+        return wechatSessionKey;
     }
 
 

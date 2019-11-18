@@ -1,6 +1,6 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.AuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.AuthRequest;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.AccountVO;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ public class PasswordAuthenticator implements Authenticator {
 
 
     @Override
-    public AccountVO authenticate(AuthorizationRequest request) {
+    public AccountVO authenticate(AuthRequest request) {
         return null;
     }
 }

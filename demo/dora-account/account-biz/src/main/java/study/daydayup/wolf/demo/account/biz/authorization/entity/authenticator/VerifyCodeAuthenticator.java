@@ -1,6 +1,6 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.VerifyCodeAuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.VerifyCodeRequest;
 import study.daydayup.wolf.demo.account.api.exception.VerifyCodeAuthException;
 import study.daydayup.wolf.demo.account.biz.authorization.entity.VerifyCode;
 import study.daydayup.wolf.demo.account.biz.authorization.repository.AuthorizationRepository;
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class VerifyCodeAuthenticator implements Authenticator<VerifyCodeAuthorizationRequest> {
+public class VerifyCodeAuthenticator implements Authenticator<VerifyCodeRequest> {
 
     private AuthorizationRepository authorizationRepository;
 
@@ -23,7 +23,7 @@ public class VerifyCodeAuthenticator implements Authenticator<VerifyCodeAuthoriz
     }
 
     @Override
-    public AccountVO authenticate(VerifyCodeAuthorizationRequest verifyCodeAuthorizationRequest) {
+    public AccountVO authenticate(VerifyCodeRequest verifyCodeAuthorizationRequest) {
         if (verifyCodeAuthorizationRequest.getCode().equals("8888")) {
             accountVO = authorizationRepository.gitWithCreateAccount(verifyCodeAuthorizationRequest.getMobile());
             return accountVO;

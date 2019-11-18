@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.account.api.service;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.*;
-import study.daydayup.wolf.demo.account.api.dto.response.license.OAuth2ResponseDTO;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.*;
+import study.daydayup.wolf.demo.account.api.dto.response.license.OAuth2Response;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +14,18 @@ import javax.validation.Valid;
 public interface AuthorizationService  {
 
     @RequestMapping(method = RequestMethod.POST, value = "/alipayOauth2")
-    OAuth2ResponseDTO alipayOauth2(@RequestBody @Valid AlipayAuthorizationRequest alipayAuthorizationRequest);
+    OAuth2Response alipayOauth2(@RequestBody @Valid AlipayRequest alipayRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/passwordOauth2")
-    OAuth2ResponseDTO passwordOauth2(@RequestBody @Valid PasswordAuthorizationRequest passwordAuthorizationRequest);
+    OAuth2Response passwordOauth2(@RequestBody @Valid PasswordRequest passwordAuthorizationRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/refreshTokenOauth2")
-    OAuth2ResponseDTO refreshTokenOauth2(@RequestBody @Valid RefreshTokenAuthorizationRequest refreshTokenAuthorizationRequest);
+    OAuth2Response refreshTokenOauth2(@RequestBody @Valid RefreshTokenRequest refreshTokenAuthorizationRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/verifyCodeOauth2")
-    OAuth2ResponseDTO verifyCodeOauth2(@RequestBody @Valid VerifyCodeAuthorizationRequest verifyCodeAuthorizationRequest);
+    OAuth2Response verifyCodeOauth2(@RequestBody @Valid VerifyCodeRequest verifyCodeAuthorizationRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "/wechatAppOauth2")
-    OAuth2ResponseDTO wechatOauth2(@RequestBody @Valid WechatAuthorizationRequest wechatAuthorizationRequest);
+    OAuth2Response wechatOauth2(@RequestBody @Valid WechatRequest wechatAuthorizationRequest);
 
 }

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.account.api.service;
 
-import study.daydayup.wolf.demo.account.api.dto.request.VerifyCodeSendRequest;
-import study.daydayup.wolf.demo.account.api.dto.response.VerifyCodeSendResponse;
+import study.daydayup.wolf.demo.account.api.dto.request.VerifyCodeRequest;
+import study.daydayup.wolf.demo.account.api.dto.response.VerifyCodeResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,5 +14,5 @@ import javax.validation.Valid;
 public interface VerifyCodeService {
 
     @RequestMapping(method = RequestMethod.POST, value = "/send")
-    VerifyCodeSendResponse send(@RequestBody @Valid VerifyCodeSendRequest verifyCodeSendRequest);
+    VerifyCodeResponse send(@RequestBody @Valid VerifyCodeRequest verifyCodeRequest);
 }

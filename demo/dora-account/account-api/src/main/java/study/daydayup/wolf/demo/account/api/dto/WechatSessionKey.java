@@ -3,7 +3,7 @@ package study.daydayup.wolf.demo.account.api.dto;
 import lombok.Data;
 
 @Data
-public class AccountWechatSessionKey {
+public class WechatSessionKey {
 
     private Long uid;
 

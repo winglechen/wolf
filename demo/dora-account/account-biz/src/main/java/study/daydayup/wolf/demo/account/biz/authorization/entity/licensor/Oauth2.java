@@ -1,9 +1,9 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.licensor;
 
 import study.daydayup.wolf.demo.account.api.dto.LicenseDTO;
-import study.daydayup.wolf.demo.account.api.dto.response.license.OAuth2ResponseDTO;
+import study.daydayup.wolf.demo.account.api.dto.response.license.OAuth2Response;
 import study.daydayup.wolf.demo.account.api.dto.request.license.OAuth2LicenseRequest;
-import study.daydayup.wolf.demo.account.api.enums.AuthorizationTypeEnum;
+import study.daydayup.wolf.demo.account.api.enums.AuthTypeEnum;
 import study.daydayup.wolf.demo.account.api.exception.AuthorizationException;
 import study.daydayup.wolf.demo.account.api.exception.OAuth2AccessTokenExpiredException;
 import study.daydayup.wolf.demo.account.api.exception.OAuth2RefreshTokenExpiredException;
@@ -32,14 +32,14 @@ public class Oauth2 implements Licensor<OAuth2LicenseRequest> {
     }
 
     @Override
-    public OAuth2ResponseDTO grant(ClientVO clientVO, Authentication authentication) {
-        if (authentication.getAuthorizationType().equals(AuthorizationTypeEnum.REFRESH_TOKEN.getType())) {
+    public OAuth2Response grant(ClientVO clientVO, Authentication authentication) {
+        if (authentication.getAuthorizationType().equals(AuthTypeEnum.REFRESH_TOKEN.getCode())) {
             refresh(clientVO, authentication);
         } else {
             create(clientVO, authentication);
         }
 
-        OAuth2ResponseDTO auth2ResponseDTO = new OAuth2ResponseDTO();
+        OAuth2Response auth2ResponseDTO = new OAuth2Response();
         auth2ResponseDTO.setUid(authentication.getAccountVO().getUid());
         auth2ResponseDTO.setAccessToken(accessToken.getAccessToken());
         auth2ResponseDTO.setAccessTokenExpire(accessToken.getExpiredVO().getExpiredIn());

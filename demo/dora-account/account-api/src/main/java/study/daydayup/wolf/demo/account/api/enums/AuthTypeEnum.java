@@ -3,7 +3,7 @@ package study.daydayup.wolf.demo.account.api.enums;
 
 import study.daydayup.wolf.demo.account.api.exception.AuthorizationTypeNonsupportException;
 
-public enum AuthorizationTypeEnum {
+public enum AuthTypeEnum {
 
     PASSWORD(1, "password", "密码授权"),
 
@@ -19,14 +19,12 @@ public enum AuthorizationTypeEnum {
     REFRESH_TOKEN(8, "refresh_token", "刷新令牌")
     ;
 
-    private Integer type;
-
+    private int code;
     private String name;
-
     private String desc;
 
-    AuthorizationTypeEnum(Integer type, String name, String desc) {
-        this.type = type;
+    AuthTypeEnum(int code, String name, String desc) {
+        this.code = code;
         this.name = name;
         this.desc = desc;
     }
@@ -35,21 +33,18 @@ public enum AuthorizationTypeEnum {
         return name;
     }
 
-    public Integer getType() {
-        return type;
+    public int getCode() {
+        return code;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public static AuthorizationTypeEnum getAuthorizationTypeEnumByType(Integer type) {
-        if (type == null) {
-            throw new AuthorizationTypeNonsupportException("授权类型不能为空");
-        }
-        for (AuthorizationTypeEnum authorizationTypeEnum : AuthorizationTypeEnum.values()) {
-            if (authorizationTypeEnum.type.equals(type)) {
-                return authorizationTypeEnum;
+    public static AuthTypeEnum getAuthorizationTypeEnumByType(int type) {
+        for (AuthTypeEnum authTypeEnum : AuthTypeEnum.values()) {
+            if (authTypeEnum.code == type) {
+                return authTypeEnum;
             }
         }
         throw new AuthorizationTypeNonsupportException("不支持该授权类型");

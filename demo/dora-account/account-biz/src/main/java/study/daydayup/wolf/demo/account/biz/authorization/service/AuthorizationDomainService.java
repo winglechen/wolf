@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.account.biz.authorization.service;
 
 import study.daydayup.wolf.demo.account.api.dto.LicenseDTO;
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.AuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.AuthRequest;
 import study.daydayup.wolf.demo.account.api.dto.request.license.LicenseRequest;
 import study.daydayup.wolf.demo.account.api.exception.AuthorizationException;
 import study.daydayup.wolf.demo.account.biz.authorization.entity.Authentication;
@@ -17,7 +17,7 @@ public class AuthorizationDomainService {
     @Resource
     private AuthorizationFactory authorizationFactory;
 
-    public <T extends AuthorizationRequest> LicenseDTO authorize(T authorizationRequest, Integer grantType) {
+    public <T extends AuthRequest> LicenseDTO authorize(T authorizationRequest, Integer grantType) {
         Authentication authentication = authorizationFactory.registerAuthentication(authorizationRequest.getAuthorizationType());
         authentication.authenticate(authorizationRequest);
         if (!authentication.isAuthentic()) {

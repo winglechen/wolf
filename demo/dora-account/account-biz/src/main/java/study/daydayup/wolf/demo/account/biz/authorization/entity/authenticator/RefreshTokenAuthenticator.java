@@ -1,6 +1,6 @@
 package study.daydayup.wolf.demo.account.biz.authorization.entity.authenticator;
 
-import study.daydayup.wolf.demo.account.api.dto.request.authorization.RefreshTokenAuthorizationRequest;
+import study.daydayup.wolf.demo.account.api.dto.request.auth.RefreshTokenRequest;
 import study.daydayup.wolf.demo.account.api.exception.OAuth2RefreshTokenExpiredException;
 import study.daydayup.wolf.demo.account.biz.authorization.entity.licensor.RefreshToken;
 import study.daydayup.wolf.demo.account.biz.authorization.repository.AuthorizationRepository;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Getter
 @Slf4j
-public class RefreshTokenAuthenticator implements Authenticator<RefreshTokenAuthorizationRequest> {
+public class RefreshTokenAuthenticator implements Authenticator<RefreshTokenRequest> {
 
     private AuthorizationRepository authorizationRepository;
 
@@ -23,7 +23,7 @@ public class RefreshTokenAuthenticator implements Authenticator<RefreshTokenAuth
     }
 
     @Override
-    public AccountVO authenticate(RefreshTokenAuthorizationRequest request) {
+    public AccountVO authenticate(RefreshTokenRequest request) {
         refreshToken = authorizationRepository.getRefreshToken(request.getRefreshToken());
         if (refreshToken == null) {
             throw new OAuth2RefreshTokenExpiredException("刷新令牌错误");
