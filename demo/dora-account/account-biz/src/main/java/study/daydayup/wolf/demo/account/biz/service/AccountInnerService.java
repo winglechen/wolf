@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.account.biz.service;
 
 import study.daydayup.wolf.demo.account.api.dto.request.account.AccountRequest;
-import study.daydayup.wolf.demo.account.api.model.Account;
+import study.daydayup.wolf.demo.account.api.entity.Account;
 
 public interface AccountInnerService {
 

@@ -7,7 +7,7 @@ import study.daydayup.wolf.demo.account.api.enums.GenderEnum;
 import study.daydayup.wolf.demo.account.api.exception.AccountCreateException;
 import study.daydayup.wolf.demo.account.api.exception.AccountExistedException;
 import study.daydayup.wolf.demo.account.api.exception.AccountNotFindException;
-import study.daydayup.wolf.demo.account.api.model.Account;
+import study.daydayup.wolf.demo.account.api.entity.Account;
 import study.daydayup.wolf.demo.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.demo.account.biz.dal.dataobject.AccountDO;
 import study.daydayup.wolf.demo.account.biz.service.AccountInnerService;

@@ -26,7 +26,10 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
     @Override
     public VerifyCodeSendResponse send(@Valid VerifyCodeSendRequest verifyCodeSendRequest) {
         VerifyCodeDO verifyCodeDO = verifyCodeDAO.getByMobile(verifyCodeSendRequest.getMobile());
-        if (verifyCodeDO != null && (((new Date()).getTime() - verifyCodeDO.getCreatedAt().getTime()) < interval)) {
+
+        long now = (new Date()).getTime();
+        long duration = now - verifyCodeDO.getCreatedAt().getTime();
+        if (verifyCodeDO != null  &&  duration < interval ) {
             throw new VerifyCodeSendErrorException("验证码再次发送间隔需要60秒");
         }
         //todo send sms service

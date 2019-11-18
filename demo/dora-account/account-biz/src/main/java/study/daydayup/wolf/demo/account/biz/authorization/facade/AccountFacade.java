@@ -4,7 +4,7 @@ import study.daydayup.wolf.demo.account.api.dto.request.account.AccountRequest;
 import study.daydayup.wolf.demo.account.api.enums.AccountSourceEnum;
 import study.daydayup.wolf.demo.account.api.enums.AccountTypeEnum;
 import study.daydayup.wolf.demo.account.api.enums.GenderEnum;
-import study.daydayup.wolf.demo.account.api.model.Account;
+import study.daydayup.wolf.demo.account.api.entity.Account;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.AccountVO;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatMpOAuthResponseVO;
 import study.daydayup.wolf.demo.account.biz.authorization.vo.WechatMpUserInfoResponseVO;

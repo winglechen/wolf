@@ -4,8 +4,6 @@ import lombok.Data;
 
 @Data
 public class VerifyCodeSendResponse {
-
     private String mobile;
-
     private Integer nextSendSeconds;
 }

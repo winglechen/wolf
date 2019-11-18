@@ -2,7 +2,7 @@ package study.daydayup.wolf.demo.account.biz.service.impl;
 
 import study.daydayup.wolf.demo.account.api.dto.AccountWechatSessionKey;
 import study.daydayup.wolf.demo.account.api.dto.request.account.AccountRequest;
-import study.daydayup.wolf.demo.account.api.model.Account;
+import study.daydayup.wolf.demo.account.api.entity.Account;
 import study.daydayup.wolf.demo.account.api.service.AccountService;
 import study.daydayup.wolf.demo.account.biz.dal.dao.AccountWechatDAO;
 import study.daydayup.wolf.demo.account.biz.dal.dao.WechatSessionKeyDAO;
