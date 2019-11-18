@@ -19,7 +19,6 @@
         <module>trade</module>
         <module>uc</module>
         <module>ump</module>
-        <module>union-deploy-dubbo</module>
         <module>union</module>
     </modules>
 
