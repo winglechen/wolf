@@ -14,12 +14,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>account-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>account-biz</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
