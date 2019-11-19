@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.framework.layer.api.Entity;
 
 import javax.validation.constraints.NotBlank;
 
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  * @since 2019/9/27 5:12 PM
  **/
 @Data
-public class Account {
+public class Account extends Entity {
     private long id;
 
     @NotBlank

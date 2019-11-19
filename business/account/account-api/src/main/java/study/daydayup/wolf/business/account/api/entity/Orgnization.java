@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.framework.layer.api.Entity;
 
 /**
  * study.daydayup.wolf.business.account.api.entity
@@ -9,7 +10,7 @@ import lombok.Data;
  * @since 2019/9/27 5:36 PM
  **/
 @Data
-public class Orgnization {
+public class Orgnization extends Entity {
     private long id;
     /**
      * @see study.daydayup.wolf.business.account.api.enums.OrgTypeEnum
