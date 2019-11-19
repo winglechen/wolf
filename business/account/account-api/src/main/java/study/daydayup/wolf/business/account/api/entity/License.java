@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.account.api.entity.license;
+package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.business.account.api.entity.Account;

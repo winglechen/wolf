@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.account.api.entity.auth;
+package study.daydayup.wolf.business.account.api.entity.account;
 
 import lombok.Data;
 
@@ -9,5 +9,5 @@ import lombok.Data;
  * @since 2019/9/27 5:11 PM
  **/
 @Data
-public class AlipayData extends AuthData {
+public class AlipayAccount extends AuthAccount {
 }

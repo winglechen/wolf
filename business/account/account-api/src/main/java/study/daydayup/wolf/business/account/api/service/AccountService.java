@@ -10,4 +10,6 @@ import study.daydayup.wolf.business.account.api.entity.Account;
  **/
 public interface AccountService {
     long /* account id */ create(Account account);
+    Account findByAccount(String account);
+    Account findById(long id);
 }

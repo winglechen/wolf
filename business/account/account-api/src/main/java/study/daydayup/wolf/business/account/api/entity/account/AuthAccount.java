@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.account.api.entity.auth;
+package study.daydayup.wolf.business.account.api.entity.account;
 
 import lombok.Data;
 
@@ -9,5 +9,5 @@ import lombok.Data;
  * @since 2019/9/28 2:26 PM
  **/
 @Data
-public class AuthData {
+public class AuthAccount {
 }
