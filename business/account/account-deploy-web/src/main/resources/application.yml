@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: wolf-account-web
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: true
+        enabled: true
+        server-addr: 127.0.0.1:8848
+dubbo:
+  registry:
+    address: spring-cloud://localhost
+  cloud:
+    subscribed-services: ${provider.application.name}
+  application:
+    qos-enable: false
+
+
+server:
+  port: 9000
+
+provider:
+  application:
+    name: wolf-account
