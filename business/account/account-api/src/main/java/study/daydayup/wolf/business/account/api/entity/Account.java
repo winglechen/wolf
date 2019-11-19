@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * study.daydayup.wolf.business.account.api.entity
  *
@@ -10,10 +12,21 @@ import lombok.Data;
  **/
 @Data
 public class Account {
-    private long accountId;
+    private long id;
+
+    @NotBlank
     private String account;
-    private String name;
-    private String avatar;
-    private int gender;
+
+    /**
+     * @see study.daydayup.wolf.business.account.api.enums.AccountTypeEnum
+     */
+    private int accountType;
+
+    private String password;
+    private String salt;
+
+    private String roles;
+    private String source;
+
 
 }

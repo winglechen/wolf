@@ -10,7 +10,10 @@ import lombok.Data;
  **/
 @Data
 public class Orgnization {
-    private long orgId;
+    private long id;
+    /**
+     * @see study.daydayup.wolf.business.account.api.enums.OrgTypeEnum
+     */
     private int orgType;
     private String orgName;
 }

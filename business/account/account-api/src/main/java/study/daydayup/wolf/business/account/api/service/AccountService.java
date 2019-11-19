@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.account.api.service;
 
+import study.daydayup.wolf.business.account.api.entity.Account;
+
 /**
  * study.daydayup.wolf.business.account.api.service
  *
@@ -7,4 +9,5 @@ package study.daydayup.wolf.business.account.api.service;
  * @since 2019/9/27 5:21 PM
  **/
 public interface AccountService {
+    long /* account id */ create(Account account);
 }

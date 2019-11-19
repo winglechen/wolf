@@ -9,8 +9,8 @@ import study.daydayup.wolf.business.account.api.entity.Orgnization;
  * @since 2019/9/27 5:47 PM
  **/
 public interface OrgnizationService {
-     Orgnization create();
-     Orgnization find(long orgId);
-     Boolean remove(long orgId);
-     Boolean modify(Orgnization org);
+     long /*orgId*/ create(Orgnization org);
+     Orgnization findById(long orgId);
+     void removeById(long orgId);
+     void modifyById(Orgnization org);
 }

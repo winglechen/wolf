@@ -4,9 +4,11 @@ CREATE TABLE `account` (
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '账号类型 0 默认、1 手机、2 email、3 alipay open_id 4 wechat open_id 5 wechat union_id',
   `source` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '账号来源 0 默、 2 alipay、3 wechat',
   `password` varchar(50) NOT NULL DEFAULT '' COMMENT '密码',
+
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `gender` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '性别 0 默认、1 男、2 女',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+
   `version` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '版本号',
   `delete_flag` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除，1已删除',
   `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
