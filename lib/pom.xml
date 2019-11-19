@@ -16,6 +16,7 @@
         <module>framework</module>
         <module>modeling</module>
         <module>sharding</module>
+        <module>load-balancer</module>
     </modules>
 
     <properties>

@@ -11,6 +11,8 @@
     <description>middleware</description>
 
     <modules>
+        <module>communication</module>
+        <module>sequence</module>
     </modules>
 
     <properties>
