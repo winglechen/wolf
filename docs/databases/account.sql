@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `access_token`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `account_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
-    `client_id`     VARCHAR(10)         NOT NULL DEFAULT '' COMMENT 'client id',
+    `client_id`     VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'client id',
     `access_token`  VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'access token值',
     `refresh_token` VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'refresh token值',
     `expired_at`    DATETIME            NOT NULL DEFAULT '2019-09-01 00:00:00' COMMENT '过期时间',
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `refresh_token`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `account_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
-    `client_id`     VARCHAR(10)         NOT NULL DEFAULT '' COMMENT 'client id',
+    `client_id`     VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'client id',
     `refresh_token` VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'refresh token值',
     `expired_at`    DATETIME            NOT NULL DEFAULT '2019-09-01 00:00:00' COMMENT '过期时间',
     `version`       INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',

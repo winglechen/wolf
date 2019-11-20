@@ -16,4 +16,14 @@ public class AccountServiceImpl implements AccountService {
     public long create(Account account) {
         return 123;
     }
+
+    @Override
+    public Account findByAccount(String account) {
+        return null;
+    }
+
+    @Override
+    public Account findById(long id) {
+        return null;
+    }
 }

@@ -9,5 +9,5 @@ import lombok.Data;
  * @since 2019/9/27 5:11 PM
  **/
 @Data
-public class AlipayAccount extends AuthAccount {
+public class AlipayAccount {
 }

@@ -9,5 +9,5 @@ import lombok.Data;
  * @since 2019/9/27 5:12 PM
  **/
 @Data
-public class WechatAccount extends AuthAccount {
+public class WechatAccount {
 }
