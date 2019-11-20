@@ -10,11 +10,16 @@
         <!-- 格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
 
+        <!--
         <plugin type="org.mybatis.generator.plugins.LombokPlugin">
             <property name="hasLombok" value="true"/>
         </plugin>
+        -->
 
         <commentGenerator>
             <property name="suppressDate" value="false"/>
