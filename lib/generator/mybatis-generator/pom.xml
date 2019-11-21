@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-       Copyright ${license.git.copyrightYears} the original author or authors.
+       Copyright 2006-2019 the original author or authors.
 
        Licensed under the Apache License, Version 2.0 (the "License");
        you may not use this file except in compliance with the License.
@@ -338,12 +338,7 @@
 
   <modules>
     <module>mybatis-generator-core</module>
-    <module>mybatis-generator-systests-domtests</module>
     <module>mybatis-generator-maven-plugin</module>
-    <module>mybatis-generator-systests-common</module>
-    <module>mybatis-generator-systests-mybatis3</module>
-    <module>mybatis-generator-systests-mybatis3-java8</module>
-    <module>mybatis-generator-systests-ibatis2-java5</module>
   </modules>
 
   <profiles>
@@ -378,9 +373,6 @@
       <activation>
         <jdk>1.8</jdk>
       </activation>
-      <modules>
-        <module>mybatis-generator-systests-ibatis2-java2</module>
-      </modules>
     </profile>
     <profile>
       <id>jdk9</id>
