@@ -1,0 +1,47 @@
+#!/bin/sh
+
+line="--------------------------------------------"
+
+if [ -n "$1" ]; then
+    command=$1
+else
+    command="init"
+fi
+
+function init() {
+    echo "wolf init .... " 
+    echo $line
+
+    echo "start nacos"
+    echo $line
+    sh /code/bin/nacos/bin/startup.sh -m standalone > ./logs/wolf.log 2>&1  &
+
+    echo "start redis" 
+    echo $line
+}
+
+function clear() {
+    echo "wolf clear ..."
+    echo $line
+
+    echo "stop nacos"
+    echo $line
+    sh /code/bin/nacos/bin/shutdown.sh > ./logs/wolf.log 2>&1 &
+
+    echo "stop redis"
+
+}
+
+function start() {
+    echo "wolf starting ... "    
+}
+
+case "$command" in
+init)
+    init ;;
+start)
+    start ;;
+clear)
+    clear ;;
+esac
+
