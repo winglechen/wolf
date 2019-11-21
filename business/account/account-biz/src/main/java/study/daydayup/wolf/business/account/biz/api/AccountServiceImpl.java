@@ -10,20 +10,20 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  * @author Wingle
  * @since 2019/11/19 3:44 下午
  **/
-@RpcService(protocol = "dubbo")
-public class AccountServiceImpl implements AccountService {
-    @Override
-    public long create(Account account) {
-        return 123;
-    }
-
-    @Override
-    public Account findByAccount(String account) {
-        return null;
-    }
-
-    @Override
-    public Account findById(long id) {
-        return null;
-    }
-}
+//@RpcService(protocol = "dubbo")
+//public class AccountServiceImpl implements AccountService {
+//    @Override
+//    public long create(Account account) {
+//        return 123L;
+//    }
+//
+//    @Override
+//    public Account findByAccount(String account) {
+//        return new Account();
+//    }
+//
+//    @Override
+//    public Account findById(long id) {
+//        return new Account();
+//    }
+//}
