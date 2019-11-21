@@ -17,6 +17,7 @@
         <module>modeling</module>
         <module>sharding</module>
         <module>load-balancer</module>
+        <module>generator</module>
     </modules>
 
     <properties>

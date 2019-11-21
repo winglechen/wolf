@@ -13,8 +13,26 @@
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        -->
 
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+
+            <!-- enable annotations -->
+            <property name="builder" value="false"/>
+            <!-- annotation's option(boolean) -->
+            <property name="builder.fluent" value="false"/>
+            <!-- annotation's option(String) -->
+            <property name="builder.builderMethodName" value="Builder"/>
+
+            <property name="accessors" value="false"/>
+            <!-- annotation's option(array of String) -->
+            <property name="accessors.prefix" value="m_, _"/>
+
+            <!-- disable annotations -->
+            <property name="allArgsConstructor" value="false"/>
+        </plugin>
         <!--
         <plugin type="org.mybatis.generator.plugins.LombokPlugin">
             <property name="hasLombok" value="true"/>
@@ -48,7 +66,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="account" domainObjectName="AccountDO" mapperName="AccountDAO"
+        <table tableName="account" domainObjectName="AccountDO" mapperName="AccountAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -60,7 +78,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountDAO"
+        <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -72,7 +90,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountDAO"
+        <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -84,7 +102,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenDAO"
+        <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -96,7 +114,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="refresh_token" domainObjectName="RefreshTokenDO" mapperName="RefreshTokenDAO"
+        <table tableName="refresh_token" domainObjectName="RefreshTokenDO" mapperName="RefreshTokenAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -108,7 +126,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationDAO"
+        <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
