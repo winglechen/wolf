@@ -45,7 +45,7 @@ public class SelectByPrimaryKeyMethodGenerator extends AbstractMethodGenerator {
         imports.add(new FullyQualifiedJavaType("org.mybatis.dynamic.sql.select.SelectDSL")); //$NON-NLS-1$
         imports.add(recordType);
         
-        Method method = new Method("selectByPrimaryKey"); //$NON-NLS-1$
+        Method method = new Method("selectById"); //$NON-NLS-1$
         method.setDefault(true);
         context.getCommentGenerator().addGeneralMethodAnnotation(method, introspectedTable, imports);
         method.setReturnType(recordType);

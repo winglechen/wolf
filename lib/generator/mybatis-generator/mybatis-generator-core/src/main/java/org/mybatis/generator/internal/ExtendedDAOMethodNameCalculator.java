@@ -61,9 +61,9 @@ public class ExtendedDAOMethodNameCalculator implements DAOMethodNameCalculator 
         Rules rules = introspectedTable.getRules();
 
         if (!rules.generateUpdateByPrimaryKeyWithBLOBs()) {
-            sb.append("ByPrimaryKey"); //$NON-NLS-1$
+            sb.append("ById"); //$NON-NLS-1$
         } else if (rules.generateRecordWithBLOBsClass()) {
-            sb.append("ByPrimaryKey"); //$NON-NLS-1$
+            sb.append("ById"); //$NON-NLS-1$
         } else {
             sb.append("ByPrimaryKeyWithoutBLOBs"); //$NON-NLS-1$
         }
@@ -89,9 +89,9 @@ public class ExtendedDAOMethodNameCalculator implements DAOMethodNameCalculator 
         Rules rules = introspectedTable.getRules();
 
         if (!rules.generateUpdateByPrimaryKeyWithoutBLOBs()) {
-            sb.append("ByPrimaryKey"); //$NON-NLS-1$
+            sb.append("ById"); //$NON-NLS-1$
         } else if (rules.generateRecordWithBLOBsClass()) {
-            sb.append("ByPrimaryKey"); //$NON-NLS-1$
+            sb.append("ById"); //$NON-NLS-1$
         } else {
             sb.append("ByPrimaryKeyWithBLOBs"); //$NON-NLS-1$
         }
@@ -118,7 +118,7 @@ public class ExtendedDAOMethodNameCalculator implements DAOMethodNameCalculator 
         sb.append("delete"); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTable()
                 .getDomainObjectName());
-        sb.append("ByPrimaryKey"); //$NON-NLS-1$
+        sb.append("ById"); //$NON-NLS-1$
 
         return sb.toString();
     }
@@ -176,7 +176,7 @@ public class ExtendedDAOMethodNameCalculator implements DAOMethodNameCalculator 
         sb.append("select"); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTable()
                 .getDomainObjectName());
-        sb.append("ByPrimaryKey"); //$NON-NLS-1$
+        sb.append("ById"); //$NON-NLS-1$
 
         return sb.toString();
     }

@@ -46,7 +46,7 @@ public class DeleteByPrimaryKeyMethodGenerator extends AbstractMethodGenerator {
         imports.add(new FullyQualifiedJavaType("org.mybatis.dynamic.sql.delete.DeleteDSL")); //$NON-NLS-1$
         staticImports.add("org.mybatis.dynamic.sql.SqlBuilder.*"); //$NON-NLS-1$
         
-        Method method = new Method("deleteByPrimaryKey"); //$NON-NLS-1$
+        Method method = new Method("deleteById"); //$NON-NLS-1$
         method.setDefault(true);
         context.getCommentGenerator().addGeneralMethodAnnotation(method, introspectedTable, imports);
         method.setReturnType(FullyQualifiedJavaType.getIntInstance());

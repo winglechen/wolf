@@ -50,9 +50,9 @@ public class DefaultDAOMethodNameCalculator implements DAOMethodNameCalculator {
         Rules rules = introspectedTable.getRules();
 
         if (!rules.generateUpdateByPrimaryKeyWithBLOBs()) {
-            return "updateByPrimaryKey"; //$NON-NLS-1$
+            return "updateById"; //$NON-NLS-1$
         } else if (rules.generateRecordWithBLOBsClass()) {
-            return "updateByPrimaryKey"; //$NON-NLS-1$
+            return "updateById"; //$NON-NLS-1$
         } else {
             return "updateByPrimaryKeyWithoutBLOBs"; //$NON-NLS-1$
         }
@@ -71,9 +71,9 @@ public class DefaultDAOMethodNameCalculator implements DAOMethodNameCalculator {
         Rules rules = introspectedTable.getRules();
 
         if (!rules.generateUpdateByPrimaryKeyWithoutBLOBs()) {
-            return "updateByPrimaryKey"; //$NON-NLS-1$
+            return "updateById"; //$NON-NLS-1$
         } else if (rules.generateRecordWithBLOBsClass()) {
-            return "updateByPrimaryKey"; //$NON-NLS-1$
+            return "updateById"; //$NON-NLS-1$
         } else {
             return "updateByPrimaryKeyWithBLOBs"; //$NON-NLS-1$
         }
@@ -88,7 +88,7 @@ public class DefaultDAOMethodNameCalculator implements DAOMethodNameCalculator {
     @Override
     public String getDeleteByPrimaryKeyMethodName(
             IntrospectedTable introspectedTable) {
-        return "deleteByPrimaryKey"; //$NON-NLS-1$
+        return "deleteById"; //$NON-NLS-1$
     }
 
     /**
@@ -128,13 +128,13 @@ public class DefaultDAOMethodNameCalculator implements DAOMethodNameCalculator {
     @Override
     public String getSelectByPrimaryKeyMethodName(
             IntrospectedTable introspectedTable) {
-        return "selectByPrimaryKey"; //$NON-NLS-1$
+        return "selectById"; //$NON-NLS-1$
     }
 
     @Override
     public String getUpdateByPrimaryKeySelectiveMethodName(
             IntrospectedTable introspectedTable) {
-        return "updateByPrimaryKeySelective"; //$NON-NLS-1$
+        return "updateByIdSelective"; //$NON-NLS-1$
     }
 
     @Override

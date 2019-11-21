@@ -46,7 +46,7 @@ public class UpdateByPrimaryKeySelectiveMethodGenerator extends AbstractMethodGe
         imports.add(new FullyQualifiedJavaType("org.mybatis.dynamic.sql.update.UpdateDSL")); //$NON-NLS-1$
         imports.add(recordType);
         
-        Method method = new Method("updateByPrimaryKeySelective"); //$NON-NLS-1$
+        Method method = new Method("updateByIdSelective"); //$NON-NLS-1$
         method.setDefault(true);
         context.getCommentGenerator().addGeneralMethodAnnotation(method, introspectedTable, imports);
         
