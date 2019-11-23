@@ -18,6 +18,8 @@ public class AccessTokenDO implements Serializable {
 
     private Date expiredAt;
 
+    private Date refreshExpiredAt;
+
     private Integer version;
 
     private boolean deleteFlag;
@@ -42,6 +44,7 @@ public class AccessTokenDO implements Serializable {
         sb.append(", accessToken=").append(accessToken);
         sb.append(", refreshToken=").append(refreshToken);
         sb.append(", expiredAt=").append(expiredAt);
+        sb.append(", refreshExpiredAt=").append(refreshExpiredAt);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -69,6 +72,7 @@ public class AccessTokenDO implements Serializable {
             && (this.getAccessToken() == null ? other.getAccessToken() == null : this.getAccessToken().equals(other.getAccessToken()))
             && (this.getRefreshToken() == null ? other.getRefreshToken() == null : this.getRefreshToken().equals(other.getRefreshToken()))
             && (this.getExpiredAt() == null ? other.getExpiredAt() == null : this.getExpiredAt().equals(other.getExpiredAt()))
+            && (this.getRefreshExpiredAt() == null ? other.getRefreshExpiredAt() == null : this.getRefreshExpiredAt().equals(other.getRefreshExpiredAt()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -86,6 +90,7 @@ public class AccessTokenDO implements Serializable {
         result = prime * result + ((getAccessToken() == null) ? 0 : getAccessToken().hashCode());
         result = prime * result + ((getRefreshToken() == null) ? 0 : getRefreshToken().hashCode());
         result = prime * result + ((getExpiredAt() == null) ? 0 : getExpiredAt().hashCode());
+        result = prime * result + ((getRefreshExpiredAt() == null) ? 0 : getRefreshExpiredAt().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

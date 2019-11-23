@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `access_token`
     `client_id`             VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'client id',
     `access_token`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'access token值',
     `refresh_token`         VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'refresh token值',
-    `access_expired_at`     DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'accessToken过期时间',
+    `expired_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'accessToken过期时间',
     `refresh_expired_at`    DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'refreshToken过期时间',
 
     `version`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
@@ -97,25 +97,6 @@ CREATE TABLE IF NOT EXISTS `access_token`
     UNIQUE INDEX `udx_rfh_tk` (`refresh_token`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'access_token表';
-
-
--- DROP TABLE IF EXISTS `refresh_token`;
--- CREATE TABLE IF NOT EXISTS `refresh_token`
--- (
---     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
---     `account_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
---     `client_id`     VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'client id',
---     `refresh_token` VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'refresh token值',
---     `expired_at`    DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',
---     `version`       INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
---     `delete_flag`   TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
---     `last_editor`   BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
---     `created_at`    DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
---     `updated_at`    DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
---     UNIQUE INDEX `udx_rfh_tk` (`refresh_token`),
---     PRIMARY KEY (`id`)
--- ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'refresh_token表';
-
 
 DROP TABLE IF EXISTS `verify_code`;
 CREATE TABLE `verify_code`
