@@ -35,6 +35,7 @@
         <wolf-model.version>1.0.0-SNAPSHOT</wolf-model.version>
 
         <lombok.version>1.16.18</lombok.version>
+        <guava.version>28.1-jre</guava.version>
         <fastjson.version>1.2.61</fastjson.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
@@ -91,6 +92,12 @@
                 <groupId>study.daydayup.wolf</groupId>
                 <artifactId>model</artifactId>
                 <version>${wolf-model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
 
