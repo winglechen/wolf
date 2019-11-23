@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `access_token`
     `client_id`             VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'client id',
     `access_token`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'access token值',
     `refresh_token`         VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'refresh token值',
+    `scope`                 VARCHAR(200)        NOT NULL DEFAULT '' COMMENT 'scope',
     `expired_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'accessToken过期时间',
     `refresh_expired_at`    DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'refreshToken过期时间',
 

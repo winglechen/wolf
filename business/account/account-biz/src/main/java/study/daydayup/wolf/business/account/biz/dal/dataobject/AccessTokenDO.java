@@ -16,6 +16,8 @@ public class AccessTokenDO implements Serializable {
 
     private String refreshToken;
 
+    private String scope;
+
     private Date expiredAt;
 
     private Date refreshExpiredAt;
@@ -43,6 +45,7 @@ public class AccessTokenDO implements Serializable {
         sb.append(", clientId=").append(clientId);
         sb.append(", accessToken=").append(accessToken);
         sb.append(", refreshToken=").append(refreshToken);
+        sb.append(", scope=").append(scope);
         sb.append(", expiredAt=").append(expiredAt);
         sb.append(", refreshExpiredAt=").append(refreshExpiredAt);
         sb.append(", version=").append(version);
@@ -71,6 +74,7 @@ public class AccessTokenDO implements Serializable {
             && (this.getClientId() == null ? other.getClientId() == null : this.getClientId().equals(other.getClientId()))
             && (this.getAccessToken() == null ? other.getAccessToken() == null : this.getAccessToken().equals(other.getAccessToken()))
             && (this.getRefreshToken() == null ? other.getRefreshToken() == null : this.getRefreshToken().equals(other.getRefreshToken()))
+            && (this.getScope() == null ? other.getScope() == null : this.getScope().equals(other.getScope()))
             && (this.getExpiredAt() == null ? other.getExpiredAt() == null : this.getExpiredAt().equals(other.getExpiredAt()))
             && (this.getRefreshExpiredAt() == null ? other.getRefreshExpiredAt() == null : this.getRefreshExpiredAt().equals(other.getRefreshExpiredAt()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -89,6 +93,7 @@ public class AccessTokenDO implements Serializable {
         result = prime * result + ((getClientId() == null) ? 0 : getClientId().hashCode());
         result = prime * result + ((getAccessToken() == null) ? 0 : getAccessToken().hashCode());
         result = prime * result + ((getRefreshToken() == null) ? 0 : getRefreshToken().hashCode());
+        result = prime * result + ((getScope() == null) ? 0 : getScope().hashCode());
         result = prime * result + ((getExpiredAt() == null) ? 0 : getExpiredAt().hashCode());
         result = prime * result + ((getRefreshExpiredAt() == null) ? 0 : getRefreshExpiredAt().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

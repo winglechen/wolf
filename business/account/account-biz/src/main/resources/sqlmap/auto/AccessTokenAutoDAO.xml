@@ -7,6 +7,7 @@
     <result column="client_id" jdbcType="VARCHAR" property="clientId" />
     <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
     <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="scope" jdbcType="VARCHAR" property="scope" />
     <result column="expired_at" jdbcType="TIMESTAMP" property="expiredAt" />
     <result column="refresh_expired_at" jdbcType="TIMESTAMP" property="refreshExpiredAt" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -16,7 +17,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account_id, client_id, access_token, refresh_token, expired_at, refresh_expired_at, 
+    id, account_id, client_id, access_token, refresh_token, scope, expired_at, refresh_expired_at, 
     version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -27,15 +28,15 @@
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
     insert into access_token (id, account_id, client_id, 
-      access_token, refresh_token, expired_at, 
-      refresh_expired_at, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      access_token, refresh_token, scope, 
+      expired_at, refresh_expired_at, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{clientId,jdbcType=VARCHAR}, 
-      #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, #{expiredAt,jdbcType=TIMESTAMP}, 
-      #{refreshExpiredAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR}, 
+      #{expiredAt,jdbcType=TIMESTAMP}, #{refreshExpiredAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
     insert into access_token
@@ -54,6 +55,9 @@
       </if>
       <if test="refreshToken != null">
         refresh_token,
+      </if>
+      <if test="scope != null">
+        scope,
       </if>
       <if test="expiredAt != null">
         expired_at,
@@ -91,6 +95,9 @@
       <if test="refreshToken != null">
         #{refreshToken,jdbcType=VARCHAR},
       </if>
+      <if test="scope != null">
+        #{scope,jdbcType=VARCHAR},
+      </if>
       <if test="expiredAt != null">
         #{expiredAt,jdbcType=TIMESTAMP},
       </if>
@@ -127,6 +134,9 @@
       <if test="refreshToken != null">
         refresh_token = #{refreshToken,jdbcType=VARCHAR},
       </if>
+      <if test="scope != null">
+        scope = #{scope,jdbcType=VARCHAR},
+      </if>
       <if test="expiredAt != null">
         expired_at = #{expiredAt,jdbcType=TIMESTAMP},
       </if>
@@ -157,6 +167,7 @@
       client_id = #{clientId,jdbcType=VARCHAR},
       access_token = #{accessToken,jdbcType=VARCHAR},
       refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      scope = #{scope,jdbcType=VARCHAR},
       expired_at = #{expiredAt,jdbcType=TIMESTAMP},
       refresh_expired_at = #{refreshExpiredAt,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER},
