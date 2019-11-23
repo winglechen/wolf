@@ -8,6 +8,7 @@
         <module>security-biz</module>
         <module>account-deploy-web</module>
         <module>account-deploy-dubbo</module>
+        <module>auth-agent</module>
     </modules>
 
     <parent>
