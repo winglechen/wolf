@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum AccountTypeEnum implements CodeBasedEnum {
-    ORG(50, "组织"),
+    ORG(50, "organization"),
     ALIPAY(5, "alipay appid"),
     WECHAT(4, "wechat appid"),
     EMAIL(3, "email"),

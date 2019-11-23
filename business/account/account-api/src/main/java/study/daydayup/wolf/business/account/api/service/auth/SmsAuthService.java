@@ -8,7 +8,12 @@ import study.daydayup.wolf.business.account.api.entity.Account;
  * @author Wingle
  * @since 2019/9/27 5:19 PM
  **/
-public interface SmsCodeService extends AuthService{
-    void sendVerfiyCode();
-    long register(Account account);
+public interface SmsAuthService extends AuthService{
+    void sendVerifyCode();
+    /**
+     * login, register
+     * @object AccountType
+     * @param {Account<mobile phone>}
+     */
+
 }
