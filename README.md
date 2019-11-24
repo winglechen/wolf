@@ -1,4 +1,3 @@
-# test push to github and gitlab
 # wolf
 开源百亿级访问量电商中台解决方案
 
