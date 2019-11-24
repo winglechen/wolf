@@ -1,0 +1,42 @@
+CREATE DATABASE IF NOT EXISTS `wolf_product` DEFAULT CHARACTER SET utf8mb4;
+USE `wolf_product`;
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product`
+(
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
+    `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `category_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类目ID',
+    `product_type`  SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
+    `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
+    `feature`       VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品特色',
+    `main_pic`      VARCHAR(200) NOT NULL DEFAULT '' COMMENT '产品主图',
+    `main_video`    VARCHAR(200) NOT NULL DEFAULT '' COMMENT '产品主视频',
+    `price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
+    `vs_price`      VARCHAR(50) NOT NULL DEFAULT '' COMMENT '划线价',
+
+
+    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '产品';
+
+
+DROP TABLE IF EXISTS `product_detail`;
+CREATE TABLE IF NOT EXISTS `product_detail`
+(
+    `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
+    `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+
+    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '产品详情';
