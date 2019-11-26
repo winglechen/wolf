@@ -8,6 +8,8 @@ import study.daydayup.wolf.demo.my.sharding.dal.TagDAO;
 import study.daydayup.wolf.demo.my.sharding.dal.TagDO;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.demo.my.sharding
@@ -37,4 +39,39 @@ public class ShardingService {
         System.out.println("account: " + account );
         return account.toString();
     }
+
+    @RequestMapping("/tags")
+    public String tags() {
+        List<Map> list = tagDAO.selectAll();
+
+//        Map<String, Object> map = list.get(0);
+//        System.out.println("row[0]: " + map);
+//        System.out.println("map.class: " + map.getClass());
+//
+//        String id = (String) map.get("id");
+
+
+        for(Map item : list) {
+//            System.out.println(item);
+//            System.out.println("keys:" + item.keySet());
+//            System.out.println("vals:" + item.values());
+
+            if(item.get("id").equals(new Long(283))) {
+                System.out.println("<Long>283.tags= " + item.get("tags"));
+            }
+
+            if(item.get("id").toString().equals("283")) {
+                System.out.println("<String>283.tags= " + item.get("tags"));
+            }
+
+            if(item.get("tags").equals("abc")) {
+                System.out.println("abc.id= " + item.get("id"));
+            }
+        }
+
+       return "tags";
+    }
+
+//    public static void main(String[] args) {
+//    }
 }

@@ -16,6 +16,7 @@
         <module>assets-biz</module>
         <module>uc-deploy-dubbo</module>
         <module>uc-deploy-web</module>
+        <module>uc-agent</module>
     </modules>
 
     <parent>
