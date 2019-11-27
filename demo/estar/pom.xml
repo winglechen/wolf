@@ -17,6 +17,7 @@
         <module>estar-api</module>
         <module>estar-user</module>
         <module>estar-admin</module>
+        <module>estar-task</module>
     </modules>
 
 
