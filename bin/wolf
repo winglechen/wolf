@@ -19,6 +19,8 @@ function init() {
     echo "start redis" 
     echo $line
     sh /usr/local/redis/bin/redis-server > /code/github/wolf/logs/wolf.log 2>&1 &
+
+    
     
 }
 

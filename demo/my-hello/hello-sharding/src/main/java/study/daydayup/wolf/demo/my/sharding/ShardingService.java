@@ -56,8 +56,16 @@ public class ShardingService {
 //            System.out.println("keys:" + item.keySet());
 //            System.out.println("vals:" + item.values());
 
-            if(item.get("id").equals(new Long(283))) {
+            if(item.get("id").equals(Long.valueOf(283))) {
                 System.out.println("<Long>283.tags= " + item.get("tags"));
+            }
+
+            if(item.get("id").equals(283)) {
+                System.out.println("<283>283.tags= " + item.get("tags"));
+            }
+
+            if(283 == (long)item.get("id")) {
+                System.out.println("<scalar.long>283.tags= " + item.get("tags"));
             }
 
             if(item.get("id").toString().equals("283")) {

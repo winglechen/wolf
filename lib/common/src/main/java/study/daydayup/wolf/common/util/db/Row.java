@@ -10,22 +10,22 @@ import java.util.Map;
  * @author Wingle
  * @since 2019/11/25 9:40 下午
  **/
-public class Row extends HashMap<String, String> implements Serializable {
+public class Row extends HashMap<String, Object> implements Serializable {
     Row() {
         super();
     }
 
-    Row(Map<String, String> m) {
+    Row(Map<String, Object> m) {
         super(m);
     }
 
     public static Row of(Map<String, Object> data) {
 
-        Map<String, String> m = new HashMap<>();
-        for(Map.Entry<String, Object> entry : data.entrySet()) {
-            m.put(entry.getKey(), entry.getValue().toString());
-        }
+//        Map<String, String> m = new HashMap<>();
+//        for(Map.Entry<String, Object> entry : data.entrySet()) {
+//            m.put(entry.getKey(), entry.getValue().toString());
+//        }
 
-        return new Row(m);
+        return new Row(data);
     }
 }
