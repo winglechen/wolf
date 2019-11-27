@@ -10,7 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf</groupId>
-    <artifactId>sequence</artifactId>
+    <artifactId>mq</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>client</module>
+        <module>broker</module>
+    </modules>
 
 
 </project>
