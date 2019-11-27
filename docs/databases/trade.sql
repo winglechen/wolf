@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `duration`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `duration_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
     `duration_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
-    `interest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
-    `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
+    `INTerest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
+    `INTerest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
     `belated_payment`   INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
     `belated_payment_unit`INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
@@ -280,4 +280,52 @@ CREATE TABLE IF NOT EXISTS `order_line`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '订单项';
+
+
+DROP TABLE IF EXISTS `order_state_log`;
+CREATE TABLE IF NOT EXISTS `order_state_log`
+(
+    `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `order_no`      VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+    `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `order_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
+    `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+    `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    primary key (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
+
+DROP TABLE IF EXISTS `contract_state_log`;
+CREATE TABLE IF NOT EXISTS `contract_state_log`
+(
+    `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+    `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `contract_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
+    `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+    `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    primary key (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
+
+DROP TABLE IF EXISTS `price_change_log`;
+CREATE TABLE IF NOT EXISTS `price_change_log`
+(
+    `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `order_no`      VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+    `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+
+    `order_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `source_amount`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
+    `target_amount`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
+
+    `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    primary key (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
+
 
