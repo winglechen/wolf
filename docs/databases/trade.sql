@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `contract`;
 CREATE TABLE IF NOT EXISTS `contract`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
 
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `repayment_term`;
 CREATE TABLE IF NOT EXISTS `repayment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
@@ -63,7 +63,7 @@ COMMENT = '还款条款';
 DROP TABLE IF EXISTS `installment_term`;
 CREATE TABLE IF NOT EXISTS `installment_term`
 ( `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
@@ -88,7 +88,7 @@ DROP TABLE IF EXISTS `objects_term`;
 CREATE TABLE IF NOT EXISTS `objects_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -105,7 +105,7 @@ DROP TABLE IF EXISTS `payment_term`;
 CREATE TABLE IF NOT EXISTS `payment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `consign_term`;
 CREATE TABLE IF NOT EXISTS `consign_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `assurance_term`;
 CREATE TABLE IF NOT EXISTS `assurance_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS `trade_memo`;
 CREATE TABLE IF NOT EXISTS `trade_memo`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -174,7 +174,7 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
 
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -219,7 +219,7 @@ DROP TABLE IF EXISTS `order_address`;
 CREATE TABLE IF NOT EXISTS `order_address`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
     `address_type`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '地址类型',
 
@@ -245,7 +245,7 @@ DROP TABLE IF EXISTS `order_line`;
 CREATE TABLE IF NOT EXISTS `order_line`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `trade_no`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '交易号',
+    `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `product_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
