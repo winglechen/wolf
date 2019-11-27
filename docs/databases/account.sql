@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `account_wechat`
     `account_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
     `open_id`     VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '微信 open id',
     `union_id`    VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '微信 union id',
-    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号\\n',
+    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
