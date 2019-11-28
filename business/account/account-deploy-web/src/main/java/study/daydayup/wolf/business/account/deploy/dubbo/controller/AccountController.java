@@ -13,7 +13,6 @@ import study.daydayup.wolf.business.account.api.service.AccountService;
  * @since 2019/10/11 10:23 上午
  **/
 @RestController
-//@RequestMapping("/account")
 public class AccountController {
     @Reference
     private AccountService accountService;

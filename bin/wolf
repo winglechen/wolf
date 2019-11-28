@@ -14,11 +14,11 @@ function init() {
 
     echo "start nacos"
     echo $line
-    sh /code/bin/nacos/bin/startup.sh -m standalone > /code/github/wolf/logs/wolf.log 2>&1  &
+    sh /code/bin/nacos/bin/startup.sh -m standalone > /code/github/wolf/bin/logs/wolf.log 2>&1  &
 
     echo "start redis" 
     echo $line
-    sh /usr/local/redis/bin/redis-server > /code/github/wolf/logs/wolf.log 2>&1 &
+    sh /usr/local/redis/bin/redis-server > /code/github/wolf/bin/logs/wolf.log 2>&1 &
 
     
     
@@ -30,11 +30,11 @@ function clear() {
 
     echo "stop nacos"
     echo $line
-    sh /code/bin/nacos/bin/shutdown.sh > ./logs/wolf.log 2>&1 &
+    sh /code/bin/nacos/bin/shutdown.sh > /code/github/wolf/bin/logs/wolf.log 2>&1 &
 
     echo "stop redis"
     echo $line
-    sh /usr/local/redis/bin/redis-cli shutdown > /code/github/wolf/logs/wolf.log 2>&1 &
+    sh /usr/local/redis/bin/redis-cli shutdown > /code/github/wolf/bin/logs/wolf.log 2>&1 &
 }
 
 function start() {

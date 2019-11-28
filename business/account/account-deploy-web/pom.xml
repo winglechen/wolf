@@ -18,10 +18,10 @@
             <artifactId>account-api</artifactId>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>study.daydayup.wolf.business.account</groupId>
             <artifactId>account-biz</artifactId>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

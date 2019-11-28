@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
 
     public long create(Account account) {
-        return 123L;
+        return 123;
     }
 
     public Account findByAccount(String accountName) {
