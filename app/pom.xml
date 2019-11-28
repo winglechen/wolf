@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>demo</name>
-    <description>demo</description>
+    <name>app</name>
+    <description>app</description>
 
     <modules>
         <module>shop</module>

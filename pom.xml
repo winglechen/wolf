@@ -12,8 +12,8 @@
 
     <modules>
         <module>business</module>
-        <module>demo</module>
-        <module>framework</module>
+        <module>app</module>
+        <module>lib</module>
         <module>middleware</module>
         <module>bigdata</module>
         <module>alogrithm</module>
