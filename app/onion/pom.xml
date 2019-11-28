@@ -10,14 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.demo</groupId>
-    <artifactId>estar</artifactId>
+    <artifactId>onion</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>estar-biz</module>
-        <module>estar-api</module>
-        <module>estar-user</module>
-        <module>estar-admin</module>
-        <module>estar-task</module>
+        <module>onion-biz</module>
+        <module>onion-api</module>
+        <module>onion-user</module>
+        <module>onion-admin</module>
+        <module>onion-task</module>
     </modules>
 
 
