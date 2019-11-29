@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `onion` DEFAULT CHARACTER SET utf8mb4;
+USE `onion`;
+
 -- .后台用户管理信息表
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin`
@@ -40,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `admin_role`
 (
     `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `org_id`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织id',
-    `account_id`  BIGINT(20)          NOT NULL DEFAULT '' COMMENT '用户id',
-    `role_id`     BIGINT(20)          NOT NULL DEFAULT '' COMMENT '角色id',
+    `account_id`  BIGINT(20)          NOT NULL DEFAULT 0 COMMENT '用户id',
+    `role_id`     BIGINT(20)          NOT NULL DEFAULT 0 COMMENT '角色id',
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

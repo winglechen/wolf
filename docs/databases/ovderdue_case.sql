@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `onion` DEFAULT CHARACTER SET utf8mb4;
+USE `onion`;
+
 -- 1.催收任务信息表
 DROP TABLE IF EXISTS `overdue_case`;
 CREATE TABLE IF NOT EXISTS `overdue_case`
