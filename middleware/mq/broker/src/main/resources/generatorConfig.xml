@@ -67,7 +67,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="message" domainObjectName="MessageDO" mapperName="MessageAutoDAO"
+        <table tableName="wmq_message" domainObjectName="MessageDO" mapperName="MessageAutoDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -79,6 +79,53 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
+        <table tableName="wmq_scheduled_message" domainObjectName="ScheduledMessageDO" mapperName="ScheduledMessageAutoDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="wmq_tcc_message" domainObjectName="TccMessageDO" mapperName="TccMessageAutoDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="wmq_queue" domainObjectName="QueueDO" mapperName="QueueAutoDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="wmq_task" domainObjectName="TaskDO" mapperName="TaskAutoDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
 
     </context>
 </generatorConfiguration>
