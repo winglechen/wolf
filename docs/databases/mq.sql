@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `wmq_task`
     `topic`        VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'topic',
     `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
     `consumer`     VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'consumer',
+    `message_id`    VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'message_id',
 
     `offset`       INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT 'offset',
     `state`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'state',
@@ -108,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `wmq_task`
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `done_at`      DATETIME            COMMENT '完成时间',
 
+    INDEX `idx_msgid` (`message_id`, `topic`),
     INDEX `idx_timeout` (`state` ASC , `created_at` DESC ),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

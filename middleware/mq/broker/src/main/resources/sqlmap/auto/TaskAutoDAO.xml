@@ -6,13 +6,14 @@
     <result column="topic" jdbcType="VARCHAR" property="topic" />
     <result column="partition" jdbcType="TINYINT" property="partition" />
     <result column="consumer" jdbcType="VARCHAR" property="consumer" />
+    <result column="message_id" jdbcType="VARCHAR" property="messageId" />
     <result column="offset" jdbcType="INTEGER" property="offset" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="done_at" jdbcType="TIMESTAMP" property="doneAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, topic, partition, consumer, offset, state, created_at, done_at
+    id, topic, partition, consumer, message_id, offset, state, created_at, done_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,11 +23,13 @@
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
     insert into wmq_task (id, topic, partition, 
-      consumer, offset, state, 
-      created_at, done_at)
+      consumer, message_id, offset, 
+      state, created_at, done_at
+      )
     values (#{id,jdbcType=BIGINT}, #{topic,jdbcType=VARCHAR}, #{partition,jdbcType=TINYINT}, 
-      #{consumer,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{doneAt,jdbcType=TIMESTAMP})
+      #{consumer,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, 
+      #{state,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, #{doneAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
     insert into wmq_task
@@ -42,6 +45,9 @@
       </if>
       <if test="consumer != null">
         consumer,
+      </if>
+      <if test="messageId != null">
+        message_id,
       </if>
       <if test="offset != null">
         offset,
@@ -69,6 +75,9 @@
       <if test="consumer != null">
         #{consumer,jdbcType=VARCHAR},
       </if>
+      <if test="messageId != null">
+        #{messageId,jdbcType=VARCHAR},
+      </if>
       <if test="offset != null">
         #{offset,jdbcType=INTEGER},
       </if>
@@ -95,6 +104,9 @@
       <if test="consumer != null">
         consumer = #{consumer,jdbcType=VARCHAR},
       </if>
+      <if test="messageId != null">
+        message_id = #{messageId,jdbcType=VARCHAR},
+      </if>
       <if test="offset != null">
         offset = #{offset,jdbcType=INTEGER},
       </if>
@@ -115,6 +127,7 @@
     set topic = #{topic,jdbcType=VARCHAR},
       partition = #{partition,jdbcType=TINYINT},
       consumer = #{consumer,jdbcType=VARCHAR},
+      message_id = #{messageId,jdbcType=VARCHAR},
       offset = #{offset,jdbcType=INTEGER},
       state = #{state,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
