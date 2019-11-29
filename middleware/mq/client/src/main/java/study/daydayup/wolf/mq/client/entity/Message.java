@@ -12,7 +12,9 @@ import lombok.Data;
 public class Message {
     private long id;
     private String topic;
+    private Byte partition;
+
     private String messageId;
     private String tags;
-    private Object message;
+    private String message;
 }

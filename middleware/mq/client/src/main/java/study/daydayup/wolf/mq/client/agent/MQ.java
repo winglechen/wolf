@@ -1,4 +1,4 @@
-package study.daydayup.wolf.mq.client;
+package study.daydayup.wolf.mq.client.agent;
 
 import study.daydayup.wolf.mq.client.entity.Message;
 
@@ -9,12 +9,10 @@ import study.daydayup.wolf.mq.client.entity.Message;
  * @since 2019/11/28 6:49 下午
  **/
 public class MQ {
-    private String group;
-    private static final String defaultGroup = "g-wolf";
+    private String group = "g-wolf";
+    private long taskId = 0;
 
-    MQ() {
-        this(MQ.defaultGroup);
-    }
+    MQ() { }
 
     MQ(String group) {
         this.group = group;
@@ -25,10 +23,23 @@ public class MQ {
     }
 
     public Message sub(String topic) {
+        return sub(topic, "");
+    }
+
+    public Message sub(String topic, String tags) {
+        this.taskId = 0;
         return new Message();
     }
 
-    public void ack(Message message) {
+    public void ack() {
+
+    }
+
+    public void cancel() {
+
+    }
+
+    public void fail() {
 
     }
 
@@ -41,6 +52,10 @@ public class MQ {
     }
 
     public void cancel(String messageId) {
+
+    }
+
+    public void delay(Message message, long seconds) {
 
     }
 
