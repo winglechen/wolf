@@ -2,8 +2,8 @@ CREATE DATABASE IF NOT EXISTS `onion` DEFAULT CHARACTER SET utf8mb4;
 USE `onion`;
 
 -- 1.用户基础信息表
-DROP TABLE IF EXISTS `user_info`;
-CREATE TABLE IF NOT EXISTS `user_info`
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user`
 (
     `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户id',
     `account_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `user_info`
 
 
 -- 2.用户Aadhaar卡信息表
-DROP TABLE IF EXISTS `aadhaar_info`;
-CREATE TABLE IF NOT EXISTS `aadhaar_info`
+DROP TABLE IF EXISTS `aadhaar`;
+CREATE TABLE IF NOT EXISTS `aadhaar`
 (
     `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `account_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS `voterid_card`
 
 
 -- 4.用户护照信息表
-DROP TABLE IF EXISTS `passport_info`;
-CREATE TABLE IF NOT EXISTS `passport_info`
+DROP TABLE IF EXISTS `passport`;
+CREATE TABLE IF NOT EXISTS `passport`
 (
     `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `account_id`   BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
