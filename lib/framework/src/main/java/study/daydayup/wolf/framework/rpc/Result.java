@@ -20,6 +20,14 @@ public final class Result<T> implements Serializable {
 
     private String exception;
 
+    public static Result ok(){
+        return Result.ok(null);
+    }
+
+    public static <T> Result ok(T t){
+        return new Result(t);
+    }
+
     Result() {
         this(0, "", null);
     }
