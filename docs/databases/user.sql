@@ -5,24 +5,29 @@ USE `onion`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user`
 (
-    `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户id',
-    `account_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
-    `org_id`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `channel_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户渠道id',
-    `real_name`   VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '用户姓名',
-    `nickname`    VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '昵称',
-    `mobile`      VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '手机号',
-    `address`     VARCHAR(500)        NOT NULL DEFAULT '' COMMENT '住址',
-    `gender`      VARCHAR(10)         NOT NULL DEFAULT '' COMMENT '性别 male(男) female(女)',
-    `aadhaar_no`  VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'Aadhaar号码',
-    `pan_no`      VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'pan号码',
-    `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
-    # TODO: 分开认证状态
-    `auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '认证状态 0未认证 1:Aadhaar认证 2:PAN认证 3:护照认证 4:驾驶证认证 5:选民证认证',
-    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
-    `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    `id`                     BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户id',
+    `account_id`             BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
+    `org_id`                 BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `channel_id`             BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户渠道id',
+    `real_name`              VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '用户姓名',
+    `nickname`               VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '昵称',
+    `mobile`                 VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '手机号',
+    `address`                VARCHAR(500)        NOT NULL DEFAULT '' COMMENT '住址',
+    `gender`                 VARCHAR(10)         NOT NULL DEFAULT '' COMMENT '性别 male(男) female(女)',
+    `aadhaar_no`             VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'Aadhaar号码',
+    `pan_no`                 VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'pan号码',
+    `delete_flag`            TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `version`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+
+    `aadhaar_auth_status`    TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Aadhaar认证状态 0未认证 1未通过 2通过',
+    `pan_auth_status`        TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'PAN认证状态 0未认证 1未通过 2通过',
+    `passpord_auth_status`   TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '护照认证状态 0未认证 1未通过 2通过',
+    `dl_auth_status`         TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '驾驶证认证状态 0未认证 1未通过 2通过',
+    `voter_card_auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '选民证认证状态 0未认证 1未通过 2通过',
+
+    `last_editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`             DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`             DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
 
     UNIQUE INDEX `udx_aadhaar_no` (`aadhaar_no`),
     UNIQUE INDEX `udx_pan_no` (`pan_no`),
@@ -31,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `user`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户基础信息表';
 
 
--- 1.用户认证日志信息表
+-- 2.用户认证日志信息表
 DROP TABLE IF EXISTS `auth_log`;
 CREATE TABLE IF NOT EXISTS `auth_log`
 (
@@ -42,14 +47,14 @@ CREATE TABLE IF NOT EXISTS `auth_log`
 
     `real_name`   VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '用户姓名',
     `mobile`      VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '手机号',
-    `step`       TINYINT(2)         NOT NULL DEFAULT 0 COMMENT '认证操作步骤 1:Aadhaar认证 2:PAN认证 3:护照认证 4:驾驶证认证 5:选民证认证',
-    `card_no`  VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '认证识别证件号码',
-    `front_side`  VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '证件正面图片',
-    `back_side`  VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '证件背面图片',
+    `step`        TINYINT(2)          NOT NULL DEFAULT 0 COMMENT '认证操作步骤 1:Aadhaar认证 2:PAN认证 3:护照认证 4:驾驶证认证 5:选民证认证',
+    `card_no`     VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '认证识别证件号码',
+    `front_side`  VARCHAR(200)        NOT NULL DEFAULT '' COMMENT '证件正面图片',
+    `back_side`   VARCHAR(200)        NOT NULL DEFAULT '' COMMENT '证件背面图片',
 
+    `auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '认证状态 1未通过 2通过',
     `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
-    `auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '认证状态 0未认证 1:Aadhaar认证 2:PAN认证 3:护照认证 4:驾驶证认证 5:选民证认证',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
@@ -58,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `auth_log`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户认证日志信息表';
 
 
--- 2.用户Aadhaar卡信息表
+-- 3.用户Aadhaar卡信息表
 DROP TABLE IF EXISTS `aadhaar`;
 CREATE TABLE IF NOT EXISTS `aadhaar`
 (
@@ -93,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `aadhaar`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户Aadhaar卡信息表';
 
 
--- 2.用户pan_card卡信息表
+-- 4.用户pan_card卡信息表
 DROP TABLE IF EXISTS `pan_card`;
 CREATE TABLE IF NOT EXISTS `pan_card`
 (
@@ -113,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `pan_card`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户pan卡信息表';
 
 
--- 3.用户选民证信息表
+-- 5.用户选民证信息表
 DROP TABLE IF EXISTS `voter_card`;
 CREATE TABLE IF NOT EXISTS `voter_card`
 (
@@ -134,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `voter_card`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户选民证信息表';
 
 
--- 4.用户护照信息表
+-- 6.用户护照信息表
 DROP TABLE IF EXISTS `passport`;
 CREATE TABLE IF NOT EXISTS `passport`
 (
@@ -166,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `passport`
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户护照信息表';
 
 
--- 5.用户驾照信息表
+-- 7.用户驾照信息表
 DROP TABLE IF EXISTS `driving_license`;
 CREATE TABLE IF NOT EXISTS `driving_license`
 (
