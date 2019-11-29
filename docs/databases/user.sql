@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `pan_no`      VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'pan号码',
     `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    # TODO: 分开认证状态
     `auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '认证状态 0未认证 1:Aadhaar认证 2:PAN认证 3:护照认证 4:驾驶证认证 5:选民证认证',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -28,6 +29,9 @@ CREATE TABLE IF NOT EXISTS `user`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户基础信息表';
+
+
+#TODO: create table auth_log
 
 
 -- 2.用户Aadhaar卡信息表
@@ -86,22 +90,21 @@ CREATE TABLE IF NOT EXISTS `pan_card`
 
 
 -- 3.用户选民证信息表
-DROP TABLE IF EXISTS `voterid_card`;
-CREATE TABLE IF NOT EXISTS `voterid_card`
+DROP TABLE IF EXISTS `voter_card`;
+CREATE TABLE IF NOT EXISTS `voter_card`
 (
     `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `account_id`  BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账号id',
     `org_id`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `voterid_no`  VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '用户Aadhaar卡号',
+    `voter_no`    VARCHAR(20)         NOT NULL DEFAULT '' COMMENT '用户Aadhaar卡号',
     `name`        VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '选民证姓名',
     `father_name` VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '选民证父亲姓名',
     `address`     VARCHAR(500)        NOT NULL DEFAULT '' COMMENT '选民证地址',
     `sign_date`   VARCHAR(12)         NOT NULL DEFAULT '' COMMENT '签发日期',
-    `user_id`     BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
-    UNIQUE INDEX `udx_voterid_no` (`voterid_no`),
+    UNIQUE INDEX `udx_voter_no` (`voter_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户选民证信息表';
