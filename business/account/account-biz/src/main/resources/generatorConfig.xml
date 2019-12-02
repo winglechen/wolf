@@ -14,9 +14,7 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
-        <!--
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
-        -->
 
         <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
 

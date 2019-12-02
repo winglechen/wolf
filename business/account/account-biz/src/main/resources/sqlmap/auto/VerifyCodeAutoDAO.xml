@@ -20,6 +20,10 @@
     from verify_code
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from verify_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
     insert into verify_code (id, mobile, code, 
       expired_at, delete_flag, last_editor, 

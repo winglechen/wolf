@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO;
 
 @Mapper
 public interface VerifyCodeAutoDAO {
+    int deleteById(Long id);
+
     int insert(VerifyCodeDO record);
 
     int insertSelective(VerifyCodeDO record);

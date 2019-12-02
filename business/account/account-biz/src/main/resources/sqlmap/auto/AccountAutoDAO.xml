@@ -25,6 +25,10 @@
     from account
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
     insert into account (id, account, password, 
       salt, account_type, roles, 

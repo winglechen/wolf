@@ -22,6 +22,10 @@
     from account_wechat
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from account_wechat
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
     insert into account_wechat (id, account_id, open_id, 
       union_id, version, delete_flag, 

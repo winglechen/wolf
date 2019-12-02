@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO;
 
 @Mapper
 public interface AlipayAccountAutoDAO {
+    int deleteById(Long id);
+
     int insert(AlipayAccountDO record);
 
     int insertSelective(AlipayAccountDO record);

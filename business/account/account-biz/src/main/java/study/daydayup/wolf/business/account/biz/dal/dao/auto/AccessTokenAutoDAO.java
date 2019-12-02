@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 
 @Mapper
 public interface AccessTokenAutoDAO {
+    int deleteById(Long id);
+
     int insert(AccessTokenDO record);
 
     int insertSelective(AccessTokenDO record);

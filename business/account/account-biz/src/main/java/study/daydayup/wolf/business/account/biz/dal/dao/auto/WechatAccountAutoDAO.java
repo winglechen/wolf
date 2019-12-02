@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO;
 
 @Mapper
 public interface WechatAccountAutoDAO {
+    int deleteById(Long id);
+
     int insert(WechatAccountDO record);
 
     int insertSelective(WechatAccountDO record);

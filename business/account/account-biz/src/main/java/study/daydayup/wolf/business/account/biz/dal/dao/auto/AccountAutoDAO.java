@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 
 @Mapper
 public interface AccountAutoDAO {
+    int deleteById(Long id);
+
     int insert(AccountDO record);
 
     int insertSelective(AccountDO record);
