@@ -1,9 +1,16 @@
 package study.daydayup.wolf.mq.broker.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+import study.daydayup.wolf.mq.broker.dal.dao.QueueDAO;
 import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
+import study.daydayup.wolf.mq.broker.dal.dataobject.QueueDO;
 import study.daydayup.wolf.mq.broker.entity.Lock;
 import study.daydayup.wolf.mq.client.entity.Task;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.mq.broker.service
@@ -13,12 +20,23 @@ import study.daydayup.wolf.mq.client.entity.Task;
  **/
 @Component
 public class QueueBizService {
-    public Lock lock(String topic, String tags) {
-        return new Lock();
+    @Resource
+    private QueueDAO queueDAO;
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Lock lock(String topic, String consumer) {
+        Lock lock = new Lock();
+
+        QueueDO queueDO = queueDAO.lockByConsumer(topic, consumer);
+        BeanUtils.copyProperties(queueDO, lock);
+
+        return lock;
     }
 
-    public void unlock() {
+    public void unlock(Lock lock, int newOffset) {
+        int id = lock.getId();
 
+        queueDAO.unlockByConsumer(id, newOffset);
     }
 
     public MessageDO getMessage(Lock lock) {

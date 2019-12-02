@@ -22,18 +22,18 @@ public class QueueServiceImpl implements QueueService {
     private QueueBizService bizService;
 
     @Override
-    public Result<Task> sub(String topic) {
-        return sub(topic, "");
+    public Result<Task> sub(String topic, String consumer) {
+        return sub(topic, consumer,"");
     }
 
     @Override
-    public Result<Task> sub(String topic, String tags) {
-        Lock lock = bizService.lock(topic, tags);
+    public Result<Task> sub(String topic, String consumer, String tags) {
+        Lock lock = bizService.lock(topic, consumer);
 
         MessageDO messageDO = bizService.getMessage(lock);
         Task task = bizService.createTask(messageDO);
 
-        bizService.unlock();
+        bizService.unlock(lock, 1);
         return Result.ok(task);
     }
 

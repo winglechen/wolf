@@ -24,8 +24,12 @@ public final class Result<T> implements Serializable {
         return Result.ok(null);
     }
 
-    public static <T> Result ok(T t){
-        return new Result(t);
+    public static <T> Result<T> ok(T t){
+        return new Result<T>(t);
+    }
+
+    public static Result fail(long code, String message) {
+        return new Result(code, message);
     }
 
     Result() {

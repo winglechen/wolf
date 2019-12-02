@@ -27,7 +27,6 @@ public class MessageServiceImpl implements MessageService {
         BeanUtils.copyProperties(message, messageDO);
 
         Date now = new Date();
-        LocalDateTime.now();
         messageDO.setCreatedAt(now);
 
         messageDAO.insertSelective(messageDO);

@@ -10,4 +10,9 @@ import lombok.Data;
  **/
 @Data
 public class Lock {
+    private int id;
+    private String topic;
+    private String consumer;
+    private byte partition;
+    private int offset;
 }
