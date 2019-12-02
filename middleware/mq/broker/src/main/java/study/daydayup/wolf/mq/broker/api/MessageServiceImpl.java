@@ -8,6 +8,7 @@ import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 import study.daydayup.wolf.mq.client.entity.PubMessage;
 import study.daydayup.wolf.mq.client.service.MessageService;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -26,6 +27,7 @@ public class MessageServiceImpl implements MessageService {
         BeanUtils.copyProperties(message, messageDO);
 
         Date now = new Date();
+        LocalDateTime.now();
         messageDO.setCreatedAt(now);
 
         messageDAO.insertSelective(messageDO);

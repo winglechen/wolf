@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `user`
 
     `aadhaar_auth_status`    TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Aadhaar认证状态 0未认证 1未通过 2通过',
     `pan_auth_status`        TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'PAN认证状态 0未认证 1未通过 2通过',
-    `passpord_auth_status`   TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '护照认证状态 0未认证 1未通过 2通过',
+    `passport_auth_status`   TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '护照认证状态 0未认证 1未通过 2通过',
     `dl_auth_status`         TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '驾驶证认证状态 0未认证 1未通过 2通过',
     `voter_card_auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '选民证认证状态 0未认证 1未通过 2通过',
 
