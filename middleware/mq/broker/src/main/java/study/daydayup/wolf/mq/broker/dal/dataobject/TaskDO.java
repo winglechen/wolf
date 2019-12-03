@@ -20,9 +20,11 @@ public class TaskDO implements Serializable {
 
     private Byte state;
 
+    private Integer retryTimes;
+
     private Date createdAt;
 
-    private Date doneAt;
+    private Date updatedAt;
 
     private static final long serialVersionUID = 1L;
 
@@ -39,8 +41,9 @@ public class TaskDO implements Serializable {
         sb.append(", messageId=").append(messageId);
         sb.append(", offset=").append(offset);
         sb.append(", state=").append(state);
+        sb.append(", retryTimes=").append(retryTimes);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", doneAt=").append(doneAt);
+        sb.append(", updatedAt=").append(updatedAt);
         sb.append("]");
         return sb.toString();
     }
@@ -64,8 +67,9 @@ public class TaskDO implements Serializable {
             && (this.getMessageId() == null ? other.getMessageId() == null : this.getMessageId().equals(other.getMessageId()))
             && (this.getOffset() == null ? other.getOffset() == null : this.getOffset().equals(other.getOffset()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
+            && (this.getRetryTimes() == null ? other.getRetryTimes() == null : this.getRetryTimes().equals(other.getRetryTimes()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getDoneAt() == null ? other.getDoneAt() == null : this.getDoneAt().equals(other.getDoneAt()));
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
 
     @Override
@@ -79,8 +83,9 @@ public class TaskDO implements Serializable {
         result = prime * result + ((getMessageId() == null) ? 0 : getMessageId().hashCode());
         result = prime * result + ((getOffset() == null) ? 0 : getOffset().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
+        result = prime * result + ((getRetryTimes() == null) ? 0 : getRetryTimes().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getDoneAt() == null) ? 0 : getDoneAt().hashCode());
+        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
     }
 }
