@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Message implements Serializable {
     private int id;
     private String topic;
-    private byte partition;
+    private byte shard;
 
     private String messageId;
     private String tags;

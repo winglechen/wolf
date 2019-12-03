@@ -47,7 +47,7 @@ public class QueueServiceImpl implements QueueService {
     public Result<Task> sub(String topic, String consumer, String tags) {
         Lock lock = bizService.lock(topic, consumer);
 
-        Message message = messageBizService.findNextTopicMessage(lock.getTopic(), lock.getPartition(), lock.getOffset());
+        Message message = messageBizService.findNextTopicMessage(lock.getTopic(), lock.getShard(), lock.getOffset());
         if (null == message) {
             throw new FailedLockException();
         }

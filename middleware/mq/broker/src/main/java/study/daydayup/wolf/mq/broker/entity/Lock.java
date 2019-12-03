@@ -13,6 +13,6 @@ public class Lock {
     private int id;
     private String topic;
     private String consumer;
-    private byte partition;
+    private byte shard;
     private int offset;
 }

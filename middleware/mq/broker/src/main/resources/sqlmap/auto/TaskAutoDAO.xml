@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="topic" jdbcType="VARCHAR" property="topic" />
-    <result column="partition" jdbcType="TINYINT" property="partition" />
+    <result column="shard" jdbcType="TINYINT" property="shard" />
     <result column="consumer" jdbcType="VARCHAR" property="consumer" />
     <result column="message_id" jdbcType="VARCHAR" property="messageId" />
     <result column="offset" jdbcType="INTEGER" property="offset" />
@@ -14,8 +14,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, topic, partition, consumer, message_id, offset, state, retry_times, created_at, 
-    updated_at
+    id, topic, shard, consumer, message_id, offset, state, retry_times, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,11 +23,11 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
-    insert into wmq_task (id, topic, partition, 
+    insert into wmq_task (id, topic, shard, 
       consumer, message_id, offset, 
       state, retry_times, created_at, 
       updated_at)
-    values (#{id,jdbcType=BIGINT}, #{topic,jdbcType=VARCHAR}, #{partition,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=BIGINT}, #{topic,jdbcType=VARCHAR}, #{shard,jdbcType=TINYINT}, 
       #{consumer,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, 
       #{state,jdbcType=TINYINT}, #{retryTimes,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
@@ -42,8 +41,8 @@
       <if test="topic != null">
         topic,
       </if>
-      <if test="partition != null">
-        partition,
+      <if test="shard != null">
+        shard,
       </if>
       <if test="consumer != null">
         consumer,
@@ -74,8 +73,8 @@
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        #{shard,jdbcType=TINYINT},
       </if>
       <if test="consumer != null">
         #{consumer,jdbcType=VARCHAR},
@@ -106,8 +105,8 @@
       <if test="topic != null">
         topic = #{topic,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        partition = #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        shard = #{shard,jdbcType=TINYINT},
       </if>
       <if test="consumer != null">
         consumer = #{consumer,jdbcType=VARCHAR},
@@ -136,7 +135,7 @@
   <update id="updateById" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
     update wmq_task
     set topic = #{topic,jdbcType=VARCHAR},
-      partition = #{partition,jdbcType=TINYINT},
+      shard = #{shard,jdbcType=TINYINT},
       consumer = #{consumer,jdbcType=VARCHAR},
       message_id = #{messageId,jdbcType=VARCHAR},
       offset = #{offset,jdbcType=INTEGER},

@@ -8,7 +8,7 @@
         where
         id > #{id}
         and topic = #{topic}
-        and partition = #{partition}
+        and shard = #{shard}
         limit 1
     </select>
 

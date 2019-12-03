@@ -12,7 +12,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/wolf_mq?useSSL=falseuseUnicode=true&characterEncoding=utf8mb4
+    url: jdbc:mysql://127.0.0.1:3306/wolf_mq?useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
 

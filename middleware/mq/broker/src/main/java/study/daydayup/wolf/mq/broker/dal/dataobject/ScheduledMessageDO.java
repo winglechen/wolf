@@ -12,7 +12,7 @@ public class ScheduledMessageDO implements Serializable {
 
     private String producer;
 
-    private Byte partition;
+    private Byte shard;
 
     private Byte type;
 
@@ -43,7 +43,7 @@ public class ScheduledMessageDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", topic=").append(topic);
         sb.append(", producer=").append(producer);
-        sb.append(", partition=").append(partition);
+        sb.append(", shard=").append(shard);
         sb.append(", type=").append(type);
         sb.append(", interval=").append(interval);
         sb.append(", effectAt=").append(effectAt);
@@ -72,7 +72,7 @@ public class ScheduledMessageDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
             && (this.getProducer() == null ? other.getProducer() == null : this.getProducer().equals(other.getProducer()))
-            && (this.getPartition() == null ? other.getPartition() == null : this.getPartition().equals(other.getPartition()))
+            && (this.getShard() == null ? other.getShard() == null : this.getShard().equals(other.getShard()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getInterval() == null ? other.getInterval() == null : this.getInterval().equals(other.getInterval()))
             && (this.getEffectAt() == null ? other.getEffectAt() == null : this.getEffectAt().equals(other.getEffectAt()))
@@ -91,7 +91,7 @@ public class ScheduledMessageDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTopic() == null) ? 0 : getTopic().hashCode());
         result = prime * result + ((getProducer() == null) ? 0 : getProducer().hashCode());
-        result = prime * result + ((getPartition() == null) ? 0 : getPartition().hashCode());
+        result = prime * result + ((getShard() == null) ? 0 : getShard().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getInterval() == null) ? 0 : getInterval().hashCode());
         result = prime * result + ((getEffectAt() == null) ? 0 : getEffectAt().hashCode());

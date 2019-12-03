@@ -8,6 +8,7 @@ import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 import study.daydayup.wolf.mq.client.entity.PubMessage;
 import study.daydayup.wolf.mq.client.service.MessageService;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import java.util.Date;
  **/
 @RpcService
 public class MessageServiceImpl implements MessageService {
+    @Resource
     private MessageDAO messageDAO;
 
     @Override

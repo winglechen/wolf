@@ -10,7 +10,7 @@ public class TaskDO implements Serializable {
 
     private String topic;
 
-    private Byte partition;
+    private Byte shard;
 
     private String consumer;
 
@@ -36,7 +36,7 @@ public class TaskDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", topic=").append(topic);
-        sb.append(", partition=").append(partition);
+        sb.append(", shard=").append(shard);
         sb.append(", consumer=").append(consumer);
         sb.append(", messageId=").append(messageId);
         sb.append(", offset=").append(offset);
@@ -62,7 +62,7 @@ public class TaskDO implements Serializable {
         TaskDO other = (TaskDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
-            && (this.getPartition() == null ? other.getPartition() == null : this.getPartition().equals(other.getPartition()))
+            && (this.getShard() == null ? other.getShard() == null : this.getShard().equals(other.getShard()))
             && (this.getConsumer() == null ? other.getConsumer() == null : this.getConsumer().equals(other.getConsumer()))
             && (this.getMessageId() == null ? other.getMessageId() == null : this.getMessageId().equals(other.getMessageId()))
             && (this.getOffset() == null ? other.getOffset() == null : this.getOffset().equals(other.getOffset()))
@@ -78,7 +78,7 @@ public class TaskDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTopic() == null) ? 0 : getTopic().hashCode());
-        result = prime * result + ((getPartition() == null) ? 0 : getPartition().hashCode());
+        result = prime * result + ((getShard() == null) ? 0 : getShard().hashCode());
         result = prime * result + ((getConsumer() == null) ? 0 : getConsumer().hashCode());
         result = prime * result + ((getMessageId() == null) ? 0 : getMessageId().hashCode());
         result = prime * result + ((getOffset() == null) ? 0 : getOffset().hashCode());

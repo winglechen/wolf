@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `wmq_message`
 
     `topic`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'topic',
     `producer`     VARCHAR(100)         NOT NULL DEFAULT '' COMMENT 'producer',
-    `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
+    `shard`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'shard',
 
     `message_id`   VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'messageId',
     `tags`         VARCHAR(100)         NOT NULL DEFAULT '' COMMENT 'tags',
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `wmq_message`
     `delete_flag`  TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     UNIQUE INDEX `udx_msg` (`message_id` ASC),
-    INDEX `idx_topic` (`topic`, `partition`),
+    INDEX `idx_topic` (`topic`, `shard`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `wmq_tcc_message`
 
     `topic`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'topic',
     `producer`     VARCHAR(100)         NOT NULL DEFAULT '' COMMENT 'producer',
-    `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
+    `shard`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'shard',
     `state`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'state',
 
     `message_id`   VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'messageId',
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `wmq_scheduled_message`
 
     `topic`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'topic',
     `producer`     VARCHAR(100)         NOT NULL DEFAULT '' COMMENT 'producer',
-    `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
+    `shard`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'shard',
 
     `type`         TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'type',
     `interval`     INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '间隔时间',
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `wmq_queue`
 
     `topic`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'topic',
     `consumer`     VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'consumer',
-    `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
+    `shard`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'shard',
 
     `offset`       INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT 'offset',
     `locker`       TINYINT(1) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'locker',
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `wmq_queue`
     `delete_flag`  TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 
-    UNIQUE INDEX `udx_lock`(`topic`, `consumer`, `locker`, `partition`),
+    UNIQUE INDEX `udx_lock`(`topic`, `consumer`, `locker`, `shard`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `wmq_task`
     `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
 
     `topic`        VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'topic',
-    `partition`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'partition',
+    `shard`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'shard',
     `consumer`     VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'consumer',
     `message_id`    VARCHAR(50)          NOT NULL DEFAULT '' COMMENT 'message_id',
 

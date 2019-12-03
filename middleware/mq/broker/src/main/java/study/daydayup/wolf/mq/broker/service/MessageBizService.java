@@ -20,8 +20,8 @@ public class MessageBizService {
     @Resource
     private MessageDAO messageDAO;
 
-    public Message findNextTopicMessage(String topic, byte partition, int offset) {
-        MessageDO messageDO = messageDAO.selectNextTopicMessage(topic, partition, offset);
+    public Message findNextTopicMessage(String topic, byte shard, int offset) {
+        MessageDO messageDO = messageDAO.selectNextTopicMessage(topic, shard, offset);
         if (null == messageDO) {
             return null;
         }

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="topic" jdbcType="VARCHAR" property="topic" />
     <result column="producer" jdbcType="VARCHAR" property="producer" />
-    <result column="partition" jdbcType="TINYINT" property="partition" />
+    <result column="shard" jdbcType="TINYINT" property="shard" />
     <result column="type" jdbcType="TINYINT" property="type" />
     <result column="interval" jdbcType="INTEGER" property="interval" />
     <result column="effect_at" jdbcType="TIMESTAMP" property="effectAt" />
@@ -17,7 +17,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, topic, producer, partition, type, interval, effect_at, message_id, tags, message, 
+    id, topic, producer, shard, type, interval, effect_at, message_id, tags, message, 
     delete_flag, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -28,12 +28,12 @@
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.ScheduledMessageDO">
     insert into wmq_scheduled_message (id, topic, producer, 
-      partition, type, interval, 
+      shard, type, interval, 
       effect_at, message_id, tags, 
       message, delete_flag, created_at, 
       updated_at)
     values (#{id,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, 
-      #{partition,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{interval,jdbcType=INTEGER}, 
+      #{shard,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{interval,jdbcType=INTEGER}, 
       #{effectAt,jdbcType=TIMESTAMP}, #{messageId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{message,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
@@ -50,8 +50,8 @@
       <if test="producer != null">
         producer,
       </if>
-      <if test="partition != null">
-        partition,
+      <if test="shard != null">
+        shard,
       </if>
       <if test="type != null">
         type,
@@ -89,8 +89,8 @@
       <if test="producer != null">
         #{producer,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        #{shard,jdbcType=TINYINT},
       </if>
       <if test="type != null">
         #{type,jdbcType=TINYINT},
@@ -128,8 +128,8 @@
       <if test="producer != null">
         producer = #{producer,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        partition = #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        shard = #{shard,jdbcType=TINYINT},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=TINYINT},
@@ -165,7 +165,7 @@
     update wmq_scheduled_message
     set topic = #{topic,jdbcType=VARCHAR},
       producer = #{producer,jdbcType=VARCHAR},
-      partition = #{partition,jdbcType=TINYINT},
+      shard = #{shard,jdbcType=TINYINT},
       type = #{type,jdbcType=TINYINT},
       interval = #{interval,jdbcType=INTEGER},
       effect_at = #{effectAt,jdbcType=TIMESTAMP},

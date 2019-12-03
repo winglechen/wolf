@@ -12,7 +12,7 @@ public class QueueDO implements Serializable {
 
     private String consumer;
 
-    private Byte partition;
+    private Byte shard;
 
     private Integer offset;
 
@@ -35,7 +35,7 @@ public class QueueDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", topic=").append(topic);
         sb.append(", consumer=").append(consumer);
-        sb.append(", partition=").append(partition);
+        sb.append(", shard=").append(shard);
         sb.append(", offset=").append(offset);
         sb.append(", locker=").append(locker);
         sb.append(", lockedAt=").append(lockedAt);
@@ -60,7 +60,7 @@ public class QueueDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
             && (this.getConsumer() == null ? other.getConsumer() == null : this.getConsumer().equals(other.getConsumer()))
-            && (this.getPartition() == null ? other.getPartition() == null : this.getPartition().equals(other.getPartition()))
+            && (this.getShard() == null ? other.getShard() == null : this.getShard().equals(other.getShard()))
             && (this.getOffset() == null ? other.getOffset() == null : this.getOffset().equals(other.getOffset()))
             && (this.getLocker() == null ? other.getLocker() == null : this.getLocker().equals(other.getLocker()))
             && (this.getLockedAt() == null ? other.getLockedAt() == null : this.getLockedAt().equals(other.getLockedAt()))
@@ -75,7 +75,7 @@ public class QueueDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTopic() == null) ? 0 : getTopic().hashCode());
         result = prime * result + ((getConsumer() == null) ? 0 : getConsumer().hashCode());
-        result = prime * result + ((getPartition() == null) ? 0 : getPartition().hashCode());
+        result = prime * result + ((getShard() == null) ? 0 : getShard().hashCode());
         result = prime * result + ((getOffset() == null) ? 0 : getOffset().hashCode());
         result = prime * result + ((getLocker() == null) ? 0 : getLocker().hashCode());
         result = prime * result + ((getLockedAt() == null) ? 0 : getLockedAt().hashCode());

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="topic" jdbcType="VARCHAR" property="topic" />
     <result column="producer" jdbcType="VARCHAR" property="producer" />
-    <result column="partition" jdbcType="TINYINT" property="partition" />
+    <result column="shard" jdbcType="TINYINT" property="shard" />
     <result column="message_id" jdbcType="VARCHAR" property="messageId" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="message" jdbcType="VARCHAR" property="message" />
@@ -13,7 +13,7 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, topic, producer, partition, message_id, tags, message, delete_flag, created_at
+    id, topic, producer, shard, message_id, tags, message, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,11 +23,11 @@
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO">
     insert into wmq_message (id, topic, producer, 
-      partition, message_id, tags, 
+      shard, message_id, tags, 
       message, delete_flag, created_at
       )
     values (#{id,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, 
-      #{partition,jdbcType=TINYINT}, #{messageId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{shard,jdbcType=TINYINT}, #{messageId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{message,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -43,8 +43,8 @@
       <if test="producer != null">
         producer,
       </if>
-      <if test="partition != null">
-        partition,
+      <if test="shard != null">
+        shard,
       </if>
       <if test="messageId != null">
         message_id,
@@ -70,8 +70,8 @@
       <if test="producer != null">
         #{producer,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        #{shard,jdbcType=TINYINT},
       </if>
       <if test="messageId != null">
         #{messageId,jdbcType=VARCHAR},
@@ -97,8 +97,8 @@
       <if test="producer != null">
         producer = #{producer,jdbcType=VARCHAR},
       </if>
-      <if test="partition != null">
-        partition = #{partition,jdbcType=TINYINT},
+      <if test="shard != null">
+        shard = #{shard,jdbcType=TINYINT},
       </if>
       <if test="messageId != null">
         message_id = #{messageId,jdbcType=VARCHAR},
@@ -122,7 +122,7 @@
     update wmq_message
     set topic = #{topic,jdbcType=VARCHAR},
       producer = #{producer,jdbcType=VARCHAR},
-      partition = #{partition,jdbcType=TINYINT},
+      shard = #{shard,jdbcType=TINYINT},
       message_id = #{messageId,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
       message = #{message,jdbcType=VARCHAR},

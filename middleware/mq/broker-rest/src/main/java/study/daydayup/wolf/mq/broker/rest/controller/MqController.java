@@ -29,7 +29,7 @@ public class MqController {
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         message.setMessageId(uuid);
         message.setMessage("wolf-message");
-        message.setPartition((byte)1);
+        message.setShard((byte)1);
         message.setTags("test");
 
         queue.pub(message);

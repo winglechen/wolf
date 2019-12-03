@@ -12,7 +12,7 @@ public class TccMessageDO implements Serializable {
 
     private String producer;
 
-    private Byte partition;
+    private Byte shard;
 
     private Byte state;
 
@@ -37,7 +37,7 @@ public class TccMessageDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", topic=").append(topic);
         sb.append(", producer=").append(producer);
-        sb.append(", partition=").append(partition);
+        sb.append(", shard=").append(shard);
         sb.append(", state=").append(state);
         sb.append(", messageId=").append(messageId);
         sb.append(", tags=").append(tags);
@@ -63,7 +63,7 @@ public class TccMessageDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
             && (this.getProducer() == null ? other.getProducer() == null : this.getProducer().equals(other.getProducer()))
-            && (this.getPartition() == null ? other.getPartition() == null : this.getPartition().equals(other.getPartition()))
+            && (this.getShard() == null ? other.getShard() == null : this.getShard().equals(other.getShard()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getMessageId() == null ? other.getMessageId() == null : this.getMessageId().equals(other.getMessageId()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
@@ -79,7 +79,7 @@ public class TccMessageDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTopic() == null) ? 0 : getTopic().hashCode());
         result = prime * result + ((getProducer() == null) ? 0 : getProducer().hashCode());
-        result = prime * result + ((getPartition() == null) ? 0 : getPartition().hashCode());
+        result = prime * result + ((getShard() == null) ? 0 : getShard().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getMessageId() == null) ? 0 : getMessageId().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
