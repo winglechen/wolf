@@ -8,8 +8,10 @@ import study.daydayup.wolf.mq.broker.service.MessageBizService;
 import study.daydayup.wolf.mq.broker.service.QueueBizService;
 import study.daydayup.wolf.mq.broker.service.TaskBizService;
 import study.daydayup.wolf.mq.client.entity.Message;
+import study.daydayup.wolf.mq.client.entity.PubMessage;
 import study.daydayup.wolf.mq.client.entity.Task;
 import study.daydayup.wolf.mq.client.exception.FailedLockException;
+import study.daydayup.wolf.mq.client.service.MessageService;
 import study.daydayup.wolf.mq.client.service.QueueService;
 
 import javax.annotation.Resource;
@@ -28,6 +30,13 @@ public class QueueServiceImpl implements QueueService {
     private MessageBizService messageBizService;
     @Resource
     private TaskBizService taskBizService;
+    @Resource
+    private MessageService messageService;
+
+    @Override
+    public Result pub(PubMessage message) {
+        return messageService.pub(message);
+    }
 
     @Override
     public Result<Task> sub(String topic, String consumer) {

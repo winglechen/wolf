@@ -2,6 +2,8 @@ package study.daydayup.wolf.mq.client.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * study.daydayup.wolf.mq.client.message
  *
@@ -9,10 +11,10 @@ import lombok.Data;
  * @since 2019/11/28 6:52 下午
  **/
 @Data
-public class Message {
+public class Message implements Serializable {
     private int id;
     private String topic;
-    private Byte partition;
+    private byte partition;
 
     private String messageId;
     private String tags;
