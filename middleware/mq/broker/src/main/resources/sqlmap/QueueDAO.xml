@@ -17,7 +17,6 @@
     <update id="updateConsumerLock" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.QueueDO" >
         update wmq_queue
         set
-        offset = #{offset},
         locker = 1,
         locked_at = #{locked_at}
         where

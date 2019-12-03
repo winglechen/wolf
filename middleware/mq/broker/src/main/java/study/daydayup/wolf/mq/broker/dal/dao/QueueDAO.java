@@ -17,7 +17,7 @@ import java.util.Date;
 public interface QueueDAO extends QueueAutoDAO {
     public QueueDO lockByConsumer(@Param("topic") String topic, @Param("consumer") String consumer);
 
-    public int updateConsumerLock(@Param("id") int id, @Param("offset") int offset, @Param("locked_at") Date lockedAt);
+    public int updateConsumerLock(@Param("id") int id, @Param("locked_at") Date lockedAt);
 
     public int unlockByConsumer(@Param("id") int id, @Param("offset") int offset);
 }

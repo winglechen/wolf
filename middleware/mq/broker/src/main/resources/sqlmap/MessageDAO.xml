@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="study.daydayup.wolf.mq.broker.dal.dao.MessageDAO">
+    <select id="selectNextTopicMessage" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO" resultMap="study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO.BaseResultMap" >
+        select
+        <include refid="study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO.Base_Column_List" />
+        from wmq_message
+        where
+        id > #{id}
+        and topic = #{topic}
+        and partition = #{partition}
+        limit 1
+    </select>
 
 </mapper>

@@ -105,9 +105,10 @@ CREATE TABLE IF NOT EXISTS `wmq_task`
 
     `offset`       INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT 'offset',
     `state`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'state',
+    `retry_times`  INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT 'retry times',
 
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `done_at`      DATETIME            COMMENT '完成时间',
+    `updated_at`   DATETIME            COMMENT '更新时间',
 
     INDEX `idx_msgid` (`message_id`, `topic`),
     INDEX `idx_timeout` (`state` ASC , `created_at` DESC ),

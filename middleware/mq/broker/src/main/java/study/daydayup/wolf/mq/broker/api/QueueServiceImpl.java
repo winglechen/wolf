@@ -4,8 +4,12 @@ import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 import study.daydayup.wolf.mq.broker.entity.Lock;
+import study.daydayup.wolf.mq.broker.service.MessageBizService;
 import study.daydayup.wolf.mq.broker.service.QueueBizService;
+import study.daydayup.wolf.mq.broker.service.TaskBizService;
+import study.daydayup.wolf.mq.client.entity.Message;
 import study.daydayup.wolf.mq.client.entity.Task;
+import study.daydayup.wolf.mq.client.exception.FailedLockException;
 import study.daydayup.wolf.mq.client.service.QueueService;
 
 import javax.annotation.Resource;
@@ -20,6 +24,10 @@ import javax.annotation.Resource;
 public class QueueServiceImpl implements QueueService {
     @Resource
     private QueueBizService bizService;
+    @Resource
+    private MessageBizService messageBizService;
+    @Resource
+    private TaskBizService taskBizService;
 
     @Override
     public Result<Task> sub(String topic, String consumer) {
@@ -30,20 +38,26 @@ public class QueueServiceImpl implements QueueService {
     public Result<Task> sub(String topic, String consumer, String tags) {
         Lock lock = bizService.lock(topic, consumer);
 
-        MessageDO messageDO = bizService.getMessage(lock);
-        Task task = bizService.createTask(messageDO);
+        Message message = messageBizService.findNextTopicMessage(lock.getTopic(), lock.getPartition(), lock.getOffset());
+        if (null == message) {
+            throw new FailedLockException();
+        }
 
-        bizService.unlock(lock, 1);
+        Task task = taskBizService.createTask(consumer, message);
+        bizService.unlock(lock, message.getId());
+
         return Result.ok(task);
     }
 
     @Override
     public Result ack(long taskId) {
-        return null;
+        taskBizService.finishTask(taskId);
+        return Result.ok();
     }
 
     @Override
     public Result fail(long taskId) {
-        return null;
+        taskBizService.failTask(taskId);
+        return Result.ok();
     }
 }

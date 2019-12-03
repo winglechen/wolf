@@ -2,15 +2,16 @@ package study.daydayup.wolf.mq.broker.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import study.daydayup.wolf.mq.broker.dal.dao.QueueDAO;
 import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 import study.daydayup.wolf.mq.broker.dal.dataobject.QueueDO;
 import study.daydayup.wolf.mq.broker.entity.Lock;
 import study.daydayup.wolf.mq.client.entity.Task;
+import study.daydayup.wolf.mq.client.exception.FailedLockException;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * study.daydayup.wolf.mq.broker.service
@@ -23,12 +24,17 @@ public class QueueBizService {
     @Resource
     private QueueDAO queueDAO;
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional
     public Lock lock(String topic, String consumer) {
         Lock lock = new Lock();
 
         QueueDO queueDO = queueDAO.lockByConsumer(topic, consumer);
+        if (null == queueDO) {
+            throw new FailedLockException();
+        }
+
         BeanUtils.copyProperties(queueDO, lock);
+        queueDAO.updateConsumerLock(lock.getId(), new Date());
 
         return lock;
     }

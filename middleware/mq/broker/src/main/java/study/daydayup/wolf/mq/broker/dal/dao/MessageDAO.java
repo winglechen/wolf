@@ -1,7 +1,9 @@
 package study.daydayup.wolf.mq.broker.dal.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO;
+import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 
 /**
  * study.daydayup.wolf.mq.broker.dal.dao
@@ -11,4 +13,5 @@ import study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO;
  **/
 @Mapper
 public interface MessageDAO extends MessageAutoDAO {
+    MessageDO selectNextTopicMessage(@Param("topic") String topic, @Param("partition") byte partition, @Param("id") int id);
 }

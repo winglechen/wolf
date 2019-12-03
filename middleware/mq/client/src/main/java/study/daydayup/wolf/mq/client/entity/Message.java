@@ -10,7 +10,7 @@ import lombok.Data;
  **/
 @Data
 public class Message {
-    private long id;
+    private int id;
     private String topic;
     private Byte partition;
 

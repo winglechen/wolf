@@ -9,6 +9,9 @@ import study.daydayup.wolf.common.lang.exception.BusinessException;
  * @since 2019/12/2 5:35 下午
  **/
 public class FailedLockException extends BusinessException {
+    public FailedLockException() {
+        super("WolfMQ is busing now! Please try again later");
+    }
     public FailedLockException(String message) {
         super(message);
     }
