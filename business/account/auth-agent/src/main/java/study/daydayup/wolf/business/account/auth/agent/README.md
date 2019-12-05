@@ -1,9 +1,9 @@
 路径约定：
-/auth/password/login            GET account=xxx&password=yyy    => {setCookie(token, xxx) | response.Token=xxx}
-/auth/sms/login                 GET mobile=xxx&code=yyy         => {setCookie(token, xxx) | response.Token=xxx} 
-/auth/sms/code                  GET mobile=                     =>
-/auth/sms/voice                 GET mobile=                     =>
-/auth/sms/registerAndLogin      GET mobile=                     =>
+/auth/password/login            GET account=xxx&password=yyy&orgId=xxx      => {setCookie(token, xxx) | response.Token=xxx}
+/auth/sms/login                 GET mobile=xxx&code=yyy&orgId=xxx           => {setCookie(token, xxx) | response.Token=xxx} 
+/auth/sms/registerAndLogin      GET mobile&code&orgId                       =>
+/auth/sms/code                  GET mobile=                                 =>
+/auth/sms/voice                 GET mobile=                                 =>
 /auth/logout
 /auth/password/register
 /auth/...

@@ -6,6 +6,9 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.account.auth.agent.controller.AuthController;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.config
@@ -18,6 +21,8 @@ import study.daydayup.wolf.business.account.auth.agent.Session;
 @ConditionalOnWebApplication
 @ComponentScan("study.daydayup.wolf.business.account.auth.agent")
 public class AuthAutoConfiguration {
+    @Resource
+    private AuthConfig authConfig;
 
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)

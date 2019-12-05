@@ -4,6 +4,7 @@ import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import java.util.UUID;
 
 /**
@@ -18,6 +19,9 @@ public class HelloService {
     private boolean show = true;
     private String uuid;
 
+    @Resource
+    private HelloProperties config;
+
     @PostConstruct
     public void initMethod() {
         uuid = UUID.randomUUID().toString();
@@ -25,7 +29,7 @@ public class HelloService {
     }
 
     public String sayHello() {
-
+        System.out.println("config:" + config.getMsg());
         return "Hello, " + msg + "; uuid: " + uuid;
 //        return show ? "Hello, " + msg : "Hidden";
     }
