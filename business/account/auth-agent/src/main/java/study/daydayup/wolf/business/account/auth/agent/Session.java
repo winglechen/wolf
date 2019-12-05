@@ -1,11 +1,5 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-
 import javax.annotation.PreDestroy;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +11,7 @@ import java.util.Map;
  * @since 2019/12/4 5:50 下午
  **/
 public class Session {
-    private String sessionKey;
+    private String sessionID;
     private Map<String, Object> data;
 
     public void init(String token) {
@@ -25,11 +19,14 @@ public class Session {
             return;
         }
 
-        sessionKey = token;
-        data = new HashMap<>();
+        sessionID = token;
+        data = new HashMap<String, Object>();
         loadFromRedis();
     }
 
+    public String getSessionID() {
+        return sessionID;
+    }
 
     public void set(String key, Object value) {
 
