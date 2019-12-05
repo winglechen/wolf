@@ -16,8 +16,6 @@ import java.util.Map;
  * @author Wingle
  * @since 2019/12/4 5:50 下午
  **/
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.INTERFACES)
-@Component
 public class Session {
     private String sessionKey;
     private Map<String, Object> data;
@@ -42,11 +40,15 @@ public class Session {
     }
 
     @PreDestroy
-    public void storeDataToRedis() {
+    public void destroy() {
 
     }
 
     private void loadFromRedis() {
+        //TODO
+    }
+
+    private void loadFromRpc() {
         //TODO
     }
 

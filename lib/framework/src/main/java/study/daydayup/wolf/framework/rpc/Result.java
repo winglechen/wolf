@@ -25,7 +25,7 @@ public final class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> ok(T t){
-        return new Result<T>(t);
+        return new Result<T>(0, "ok", t);
     }
 
     public static Result fail(long code, String message) {
