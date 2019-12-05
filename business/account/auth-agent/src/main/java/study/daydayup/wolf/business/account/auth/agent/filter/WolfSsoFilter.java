@@ -11,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.filter
@@ -35,23 +36,34 @@ public class WolfSsoFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        //init ...
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-        //init Session
         session.init(request, response);
 
-        //check Login state
-        if (!isExcludedPath(request.getServletPath()) ) {
-            if (null == session.get("accountId")) {
-                accessDeny(response);
-                return ;
-            }
+        if(isAccessDenied(request.getServletPath())){
+            return;
         }
 
-        //chain go on
         chain.doFilter(servletRequest, servletResponse);
+    }
+
+    private boolean isAccessDenied(String path) {
+        if (isExcludedPath(path)) {
+            return false;
+        }
+
+        if(null == session.get("accountId")) {
+            return true;
+        }
+
+        Date now = new Date();
+        Date expiredAt = (Date) session.get("expiredAt");
+        if(expiredAt.before(now)) {
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isExcludedPath(String path) {

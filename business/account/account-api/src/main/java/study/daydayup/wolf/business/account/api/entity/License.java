@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.account.api.entity;
 import lombok.Data;
 import study.daydayup.wolf.business.account.api.entity.Account;
 
+import java.util.Date;
+
 /**
  * study.daydayup.wolf.business.account.api.entity.license
  *
@@ -11,5 +13,14 @@ import study.daydayup.wolf.business.account.api.entity.Account;
  **/
 @Data
 public class License {
-    private Account account;
+    private long accountId;
+
+    private String clientId;
+    private String scope;
+
+    private String accessToken;
+    private Date expiredAt;
+    private String refreshToken;
+    private Date refreshExpiredAt;
+
 }
