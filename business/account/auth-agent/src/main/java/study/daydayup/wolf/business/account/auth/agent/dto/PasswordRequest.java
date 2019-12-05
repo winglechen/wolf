@@ -18,4 +18,5 @@ public class PasswordRequest {
     @NotBlank
     private String password;
     private String RepeatedPassword;
+    private long orgId;
 }

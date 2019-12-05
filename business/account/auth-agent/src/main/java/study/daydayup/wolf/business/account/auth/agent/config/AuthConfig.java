@@ -14,7 +14,7 @@ import java.util.List;
  **/
 @Data
 @ConfigurationProperties(prefix = "wolf.auth")
-public class AuthProperties {
+public class AuthConfig {
     private boolean enable = true;
     private String mode = "exclude"; // include | exclude
     private List<String> paths = new ArrayList<>();

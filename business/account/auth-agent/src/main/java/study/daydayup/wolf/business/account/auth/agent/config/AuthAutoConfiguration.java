@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.account.auth.agent.Session;
  * @author Wingle
  * @since 2019/12/5 9:49 上午
  **/
-@EnableConfigurationProperties(AuthProperties.class)
+@EnableConfigurationProperties(AuthConfig.class)
 @Configuration
 @ConditionalOnWebApplication
 @ComponentScan("study.daydayup.wolf.business.account.auth.agent")

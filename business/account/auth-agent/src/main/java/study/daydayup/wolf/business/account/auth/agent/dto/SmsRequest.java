@@ -16,4 +16,5 @@ public class SmsRequest {
     private String mobile;
     @NotBlank
     private String code;
+    private long orgId;
 }
