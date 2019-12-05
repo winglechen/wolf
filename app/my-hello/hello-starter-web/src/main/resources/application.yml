@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: hello-starter-web
+  main:
+    allow-bean-definition-overriding: true
+
+hello:
+  msg: Hello Wingle From Config
+  show: true
+server:
+  port: 8090
