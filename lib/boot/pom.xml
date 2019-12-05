@@ -56,6 +56,8 @@
         <javax-el.version>3.0.0</javax-el.version>
         <glassfish-el.version>2.2.6</glassfish-el.version>
 
+        <javax.servlet-api>4.0.1</javax.servlet-api>
+
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <spring-cloud.alibaba.version>2.1.0.RELEASE</spring-cloud.alibaba.version>
 
@@ -124,6 +126,14 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api}</version>
+                <!--scope>provided</scope-->
             </dependency>
 
             <dependency>

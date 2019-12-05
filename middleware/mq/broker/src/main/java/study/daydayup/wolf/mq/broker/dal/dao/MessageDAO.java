@@ -4,6 +4,9 @@ import org.apache.ibatis.annotations.Param;
 import study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO;
 import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
 
+import java.util.List;
+
+
 /**
  * study.daydayup.wolf.mq.broker.dal.dao
  *
@@ -12,4 +15,5 @@ import study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO;
  **/
 public interface MessageDAO extends MessageAutoDAO {
     MessageDO selectNextTopicMessage(@Param("topic") String topic, @Param("shard") byte shard, @Param("id") int id);
+    List<MessageDO> selectByIds();
 }

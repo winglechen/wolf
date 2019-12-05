@@ -18,6 +18,11 @@
             <artifactId>account-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>auth-agent</artifactId>
+        </dependency>
+
         <!--dependency>
             <groupId>study.daydayup.wolf.business.account</groupId>
             <artifactId>account-biz</artifactId>
@@ -39,6 +44,11 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 
