@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.account.auth.agent.dto.SmsRequest;
+import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.validation.Valid;

@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.account.api.dto.request;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * study.daydayup.wolf.business.account.api.dto.request
  *
@@ -11,5 +13,6 @@ import study.daydayup.wolf.framework.layer.api.Request;
  **/
 @Data
 public class SmsCodeRequest extends Request {
+    @NotBlank
     private String mobile;
 }
