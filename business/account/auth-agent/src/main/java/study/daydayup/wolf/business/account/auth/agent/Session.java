@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
 import javax.annotation.PreDestroy;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +16,20 @@ public class Session {
     private String sessionID;
     private Map<String, Object> data;
 
-    public void init(String token) {
+    public void init(HttpServletRequest request, HttpServletResponse response) {
         if (null != data) {
             return;
         }
-
-        sessionID = token;
         data = new HashMap<String, Object>();
+
+        SessionIDCreator sessionIDCreator = new SessionIDCreator(request, response);
+        String token = sessionIDCreator.getExistedID();
+        if(null != token) {
+            sessionID = token;
+            return ;
+        }
+
+        sessionID = sessionIDCreator.create();
         loadFromRedis();
     }
 
@@ -43,6 +52,8 @@ public class Session {
 
     private void loadFromRedis() {
         //TODO
+
+        loadFromRpc();
     }
 
     private void loadFromRpc() {

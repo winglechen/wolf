@@ -3,7 +3,6 @@ package study.daydayup.wolf.business.account.auth.agent.filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.business.account.auth.agent.SessionID;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.util.AntPathMatcher;
 
@@ -40,11 +39,8 @@ public class WolfSsoFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-        //get Token From Cookie or Header
-        String sessionId = SessionID.init(request, response);
-
         //init Session
-        session.init(sessionId);
+        session.init(request, response);
 
         //check Login state
         if (!isExcludedPath(request.getServletPath()) ) {

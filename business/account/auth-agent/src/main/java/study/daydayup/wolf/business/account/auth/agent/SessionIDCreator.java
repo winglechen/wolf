@@ -14,7 +14,7 @@ import java.util.UUID;
  * @author Wingle
  * @since 2019/12/5 12:10 下午
  **/
-public class SessionID {
+public class SessionIDCreator {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private String sessionKey;
@@ -22,19 +22,13 @@ public class SessionID {
     @Resource
     private AuthConfig config;
 
-    SessionID(HttpServletRequest request, HttpServletResponse response) {
+    SessionIDCreator(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
         this.sessionKey = config.getSessionKey();
     }
 
-    public static String init(HttpServletRequest request, HttpServletResponse response) {
-        SessionID sessionID = new SessionID(request, response);
-
-        return sessionID.build();
-    }
-
-    public String build() {
+    public String getExistedID() {
         String sId;
 
         sId = CookieUtil.get(request, sessionKey);
@@ -47,13 +41,14 @@ public class SessionID {
             return sId;
         }
 
-        sId = create();
-        CookieUtil.set(response, sessionKey, sId, true);
         return sId;
     }
 
-    private String create() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+    public String create() {
+        String sId = UUID.randomUUID().toString().replaceAll("-", "");
+        CookieUtil.set(response, sessionKey, sId, true);
+
+        return sId;
     }
 
 }
