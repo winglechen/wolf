@@ -1,14 +1,17 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import study.daydayup.wolf.business.account.biz.dal.dao.auto.WechatAccountAutoDAO;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO;
 
-/**
- * study.daydayup.wolf.business.account.biz.dal.dao
- *
- * @author Wingle
- * @since 2019/11/21 3:00 下午
- **/
-@Mapper
-public interface WechatAccountDAO extends WechatAccountAutoDAO {
+public interface WechatAccountDAO {
+    int deleteById(Long id);
+
+    int insert(WechatAccountDO record);
+
+    int insertSelective(WechatAccountDO record);
+
+    WechatAccountDO selectById(Long id);
+
+    int updateByIdSelective(WechatAccountDO record);
+
+    int updateById(WechatAccountDO record);
 }

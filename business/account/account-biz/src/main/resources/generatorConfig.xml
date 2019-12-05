@@ -14,7 +14,9 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <!--
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        -->
 
         <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
 
@@ -55,17 +57,17 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="sqlmap/auto"
+        <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao.auto"
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="account" domainObjectName="AccountDO" mapperName="AccountAutoDAO"
+        <table tableName="account" domainObjectName="AccountDO" mapperName="AccountDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -77,7 +79,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountAutoDAO"
+        <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -89,7 +91,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountAutoDAO"
+        <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -101,7 +103,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenAutoDAO"
+        <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -113,7 +115,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="refresh_token" domainObjectName="RefreshTokenDO" mapperName="RefreshTokenAutoDAO"
+        <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"
@@ -125,19 +127,7 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationAutoDAO"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByPrimaryKey="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-        >
-            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="delete_flag" javaType="boolean"/>
-        </table>
-
-        <table tableName="verify_code" domainObjectName="VerifyCodeDO" mapperName="VerifyCodeAutoDAO"
+        <table tableName="verify_code" domainObjectName="VerifyCodeDO" mapperName="VerifyCodeDAO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByPrimaryKey="false"

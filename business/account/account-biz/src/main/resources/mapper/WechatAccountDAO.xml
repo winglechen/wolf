@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.business.account.biz.dal.dao.auto.AlipayAccountAutoDAO">
-  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO">
+<mapper namespace="study.daydayup.wolf.business.account.biz.dal.dao.WechatAccountDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="account_id" jdbcType="BIGINT" property="accountId" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="union_id" jdbcType="VARCHAR" property="unionId" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -12,28 +13,31 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account_id, open_id, version, delete_flag, last_editor, created_at, updated_at
+    id, account_id, open_id, union_id, version, delete_flag, last_editor, created_at, 
+    updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from account_alipay
+    from account_wechat
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
-    delete from account_alipay
+    delete from account_wechat
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO">
-    insert into account_alipay (id, account_id, open_id, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
+    insert into account_wechat (id, account_id, open_id, 
+      union_id, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{unionId,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO">
-    insert into account_alipay
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
+    insert into account_wechat
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -43,6 +47,9 @@
       </if>
       <if test="openId != null">
         open_id,
+      </if>
+      <if test="unionId != null">
+        union_id,
       </if>
       <if test="version != null">
         version,
@@ -68,6 +75,9 @@
       <if test="openId != null">
         #{openId,jdbcType=VARCHAR},
       </if>
+      <if test="unionId != null">
+        #{unionId,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
@@ -83,14 +93,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO">
-    update account_alipay
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
+    update account_wechat
     <set>
       <if test="accountId != null">
         account_id = #{accountId,jdbcType=BIGINT},
       </if>
       <if test="openId != null">
         open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null">
+        union_id = #{unionId,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -110,10 +123,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateById" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO">
-    update account_alipay
+  <update id="updateById" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.WechatAccountDO">
+    update account_wechat
     set account_id = #{accountId,jdbcType=BIGINT},
       open_id = #{openId,jdbcType=VARCHAR},
+      union_id = #{unionId,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

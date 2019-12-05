@@ -1,12 +1,17 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
 
-import study.daydayup.wolf.business.account.biz.dal.dao.auto.VerifyCodeAutoDAO;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO;
 
-/**
- * study.daydayup.wolf.business.account.biz.dal.dao
- *
- * @author Wingle
- * @since 2019/11/21 6:04 下午
- **/
-public interface VerifyCodeDAO extends VerifyCodeAutoDAO {
+public interface VerifyCodeDAO {
+    int deleteById(Long id);
+
+    int insert(VerifyCodeDO record);
+
+    int insertSelective(VerifyCodeDO record);
+
+    VerifyCodeDO selectById(Long id);
+
+    int updateByIdSelective(VerifyCodeDO record);
+
+    int updateById(VerifyCodeDO record);
 }

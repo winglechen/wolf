@@ -1,14 +1,17 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import study.daydayup.wolf.business.account.biz.dal.dao.auto.AccessTokenAutoDAO;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 
-/**
- * study.daydayup.wolf.business.account.biz.dal.dao
- *
- * @author Wingle
- * @since 2019/11/21 2:58 下午
- **/
-@Mapper
-public interface AccessTokenDAO extends AccessTokenAutoDAO {
+public interface AccessTokenDAO {
+    int deleteById(Long id);
+
+    int insert(AccessTokenDO record);
+
+    int insertSelective(AccessTokenDO record);
+
+    AccessTokenDO selectById(Long id);
+
+    int updateByIdSelective(AccessTokenDO record);
+
+    int updateById(AccessTokenDO record);
 }

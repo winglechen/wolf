@@ -1,14 +1,17 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import study.daydayup.wolf.business.account.biz.dal.dao.auto.AlipayAccountAutoDAO;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.AlipayAccountDO;
 
-/**
- * study.daydayup.wolf.business.account.biz.dal.dao
- *
- * @author Wingle
- * @since 2019/11/21 2:59 下午
- **/
-@Mapper
-public interface AlipayAccountDAO extends AlipayAccountAutoDAO {
+public interface AlipayAccountDAO {
+    int deleteById(Long id);
+
+    int insert(AlipayAccountDO record);
+
+    int insertSelective(AlipayAccountDO record);
+
+    AlipayAccountDO selectById(Long id);
+
+    int updateByIdSelective(AlipayAccountDO record);
+
+    int updateById(AlipayAccountDO record);
 }

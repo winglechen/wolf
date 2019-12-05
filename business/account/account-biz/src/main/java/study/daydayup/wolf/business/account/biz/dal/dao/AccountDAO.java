@@ -1,16 +1,31 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+import java.util.Collection;
 
-import org.apache.ibatis.annotations.Mapper;
-import study.daydayup.wolf.business.account.biz.dal.dao.auto.AccountAutoDAO;
+import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 
-/**
- * study.daydayup.wolf.business.account.biz.dal.dao
- *
- * @author Wingle
- * @since 2019/11/21 2:56 下午
- **/
-@Mapper
-public interface AccountDAO extends AccountAutoDAO {
-    AccountDO selectByAccount(String account);
+public interface AccountDAO {
+    int deleteById(Long id);
+
+    int insert(AccountDO record);
+
+    int insertSelective(AccountDO record);
+
+    AccountDO selectById(Long id);
+
+    int updateByIdSelective(AccountDO record);
+
+    int updateById(AccountDO record);
+
+    List<AccountDO> selectByIdIn(@Param("idCollection")Collection<Long> idCollection);
+
+    AccountDO selectByAccount(@Param("account")String account);
+
+
+
 }
+
+
+
