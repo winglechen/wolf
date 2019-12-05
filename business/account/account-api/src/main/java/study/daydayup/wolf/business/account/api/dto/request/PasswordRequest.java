@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.account.api.dto.request;
 
 import lombok.Data;
+import study.daydayup.wolf.business.account.api.entity.AuthEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;
@@ -19,5 +20,7 @@ public class PasswordRequest extends Request {
     @NotBlank
     private String password;
     private String RepeatedPassword;
-    private long orgId;
+    private String scope;
+
+    private AuthEnv env;
 }

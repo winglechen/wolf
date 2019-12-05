@@ -45,8 +45,12 @@ public class Session {
         return data.get(key);
     }
 
-    @PreDestroy
     public void destroy() {
+
+    }
+
+    @PreDestroy
+    public void storeToRedis() {
 
     }
 

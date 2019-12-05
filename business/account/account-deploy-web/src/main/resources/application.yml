@@ -17,6 +17,11 @@ dubbo:
   application:
     qos-enable: false
 
+wolf:
+  auth:
+    enable: true
+
+
 
 server:
   port: 9000

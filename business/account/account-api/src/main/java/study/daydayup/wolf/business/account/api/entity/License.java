@@ -13,7 +13,7 @@ import java.util.Date;
  **/
 @Data
 public class License {
-    private long accountId;
+    private Account account;
 
     private String clientId;
     private String scope;
