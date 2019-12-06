@@ -23,21 +23,24 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TccMessageDO">
-    insert into wmq_tcc_message (id, topic, producer, 
-      shard, state, message_id, 
-      tags, message, delete_flag, 
-      created_at)
-    values (#{id,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, 
-      #{shard,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{messageId,jdbcType=VARCHAR}, 
-      #{tags,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=BIT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wmq_tcc_message (topic, producer, shard, 
+      state, message_id, tags, 
+      message, delete_flag, created_at
+      )
+    values (#{topic,jdbcType=VARCHAR}, #{producer,jdbcType=VARCHAR}, #{shard,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{messageId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TccMessageDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into wmq_tcc_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="topic != null">
         topic,
       </if>
@@ -65,9 +68,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
       </if>

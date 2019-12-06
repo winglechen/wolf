@@ -75,8 +75,7 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
         >
-            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
@@ -88,7 +87,8 @@
                enableSelectByExample="false"
         >
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
+
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
@@ -100,7 +100,8 @@
                enableSelectByExample="false"
         >
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
+
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
@@ -112,7 +113,7 @@
                enableSelectByExample="false"
         >
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
@@ -124,7 +125,7 @@
                enableSelectByExample="false"
         >
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 

@@ -23,21 +23,24 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
-    insert into wmq_task (id, topic, shard, 
-      consumer, message_id, offset, 
-      state, retry_times, created_at, 
-      updated_at)
-    values (#{id,jdbcType=BIGINT}, #{topic,jdbcType=VARCHAR}, #{shard,jdbcType=TINYINT}, 
-      #{consumer,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, 
-      #{state,jdbcType=TINYINT}, #{retryTimes,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wmq_task (topic, shard, consumer, 
+      message_id, offset, state, 
+      retry_times, created_at, updated_at
+      )
+    values (#{topic,jdbcType=VARCHAR}, #{shard,jdbcType=TINYINT}, #{consumer,jdbcType=VARCHAR}, 
+      #{messageId,jdbcType=VARCHAR}, #{offset,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
+      #{retryTimes,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into wmq_task
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="topic != null">
         topic,
       </if>
@@ -67,9 +70,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="topic != null">
         #{topic,jdbcType=VARCHAR},
       </if>
