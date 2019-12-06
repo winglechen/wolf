@@ -24,7 +24,7 @@
     delete from organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
+  <insert id="insert" useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
     insert into organization (id, org_name, org_type, 
       version, delete_flag, last_editor, 
       created_at, updated_at)
@@ -32,7 +32,7 @@
       #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
+  <insert id="insertSelective" useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
     insert into organization
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

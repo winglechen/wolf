@@ -30,7 +30,7 @@
     delete from access_token
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
+  <insert id="insert"  useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
     insert into access_token (id, account_id, client_id, 
       access_token, refresh_token, scope, 
       expired_at, refresh_expired_at, version, 
@@ -42,7 +42,7 @@
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
+  <insert id="insertSelective"  useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO">
     insert into access_token
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

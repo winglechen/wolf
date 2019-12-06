@@ -24,7 +24,7 @@
     delete from verify_code
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
+  <insert id="insert" useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
     insert into verify_code (id, mobile, code, 
       expired_at, delete_flag, last_editor, 
       created_at, updated_at)
@@ -32,7 +32,7 @@
       #{expiredAt,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
+  <insert id="insertSelective" useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
     insert into verify_code
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

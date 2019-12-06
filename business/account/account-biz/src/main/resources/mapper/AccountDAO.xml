@@ -29,7 +29,7 @@
     delete from account
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
+  <insert id="insert"  useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
     insert into account (id, account, password, 
       salt, account_type, roles, 
       source, version, delete_flag, 
@@ -41,7 +41,7 @@
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
+  <insert id="insertSelective"  useGeneratedKeys="true" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
     insert into account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
