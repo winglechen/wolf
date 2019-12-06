@@ -57,8 +57,8 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mapper"
-                         targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
+                         targetProject="src/main/resources/mapper/auto">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--
@@ -78,7 +78,6 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountDAO"
@@ -91,7 +90,6 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountDAO"
@@ -104,7 +102,7 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            
         </table>
 
         <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenDAO"
@@ -117,7 +115,7 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            
         </table>
 
         <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationDAO"
@@ -130,7 +128,7 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            
         </table>
 
         <table tableName="verify_code" domainObjectName="VerifyCodeDO" mapperName="VerifyCodeDAO"
@@ -143,7 +141,7 @@
             <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            
         </table>
 
     </context>
