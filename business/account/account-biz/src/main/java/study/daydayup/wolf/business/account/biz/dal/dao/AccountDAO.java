@@ -9,9 +9,9 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 public interface AccountDAO {
     int deleteById(Long id);
 
-    int insert(AccountDO record);
+    long insert(AccountDO record);
 
-    int insertSelective(AccountDO record);
+    long insertSelective(AccountDO record);
 
     AccountDO selectById(Long id);
 
@@ -22,6 +22,8 @@ public interface AccountDAO {
     List<AccountDO> selectByIdIn(@Param("idCollection")Collection<Long> idCollection);
 
     AccountDO selectByAccount(@Param("account")String account);
+
+    long selectIdByAccount(@Param("account")String account);
 
 
 

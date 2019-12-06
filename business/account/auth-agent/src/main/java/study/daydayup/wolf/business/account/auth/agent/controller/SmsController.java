@@ -39,6 +39,10 @@ public class SmsController extends AuthController {
         }
 
         request.setEnv(null);
+        request.setToken(session.getSessionID());
+
+        String scope = formatScope(request.getScope(), request.getOrgId());
+        request.setScope(scope);
 
         OauthLicense license = smsService.registerAndLogin(request);
         saveLicenseToSession(license);

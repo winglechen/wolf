@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.api.service.licenser;
 
+import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 
 import java.util.Date;
@@ -14,6 +15,8 @@ public interface OauthLicenseService {
     OauthLicense findByAccessToken(String accessToken);
     OauthLicense findByRefreshToken(String refreshToken);
 
-    void createLicense(OauthLicense license);
+    OauthLicense grant(LicenseRequest request);
+
+    void create(OauthLicense license);
     void refresh(String refreshToken, Date expiredAt);
 }

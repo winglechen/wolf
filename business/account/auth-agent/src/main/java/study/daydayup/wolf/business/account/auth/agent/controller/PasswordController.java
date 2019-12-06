@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
+import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.framework.rpc.Result;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
@@ -20,6 +22,8 @@ import javax.validation.Valid;
 public class PasswordController extends AuthController {
     @Reference
     private PasswordAuthService passwordService;
+    @Resource
+    private Session session;
 
     @GetMapping("/auth/password/login")
     public Result login(@Valid PasswordRequest request) {
@@ -32,6 +36,10 @@ public class PasswordController extends AuthController {
         }
 
         request.setEnv(null);
+        request.setToken(session.getSessionID());
+
+        String scope = formatScope(request.getScope(), request.getOrgId());
+        request.setScope(scope);
 
         OauthLicense license = passwordService.registerAndLogin(request);
         saveLicenseToSession(license);

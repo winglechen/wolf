@@ -1,13 +1,19 @@
 package study.daydayup.wolf.business.account.biz.api;
 
 import org.springframework.beans.BeanUtils;
+import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.Account;
+import study.daydayup.wolf.business.account.api.enums.AccountTypeEnum;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
+import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -21,7 +27,44 @@ public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
 
     public long create(Account account) {
-        return 123;
+        if (null == account) {
+            return 0;
+        }
+
+        AccountDO accountDO = new AccountDO();
+        BeanUtils.copyProperties(account, accountDO);
+
+        return accountDAO.insertSelective(accountDO);
+    }
+
+    @Override
+    public long createSmsAccount(String mobile, String source) {
+        if(null == mobile) {
+            return 0;
+        }
+
+        AccountDO accountDO = new AccountDO();
+        accountDO.setAccount(mobile);
+        accountDO.setSource(source);
+        accountDO.setAccountType((byte)AccountTypeEnum.MOBILE.getCode());
+        accountDO.setCreatedAt(new Date());
+
+        return accountDAO.insertSelective(accountDO);
+    }
+
+    @Override
+    public long createPasswordAccount(@Valid PasswordRequest request) {
+        AccountDO accountDO = new AccountDO();
+        BeanUtils.copyProperties(request, accountDO);
+
+        accountDO.setAccountType((byte)AccountTypeEnum.NAME.getCode());
+        accountDO.setCreatedAt(new Date());
+
+        Password pass = Password.encrypt(request.getPassword());
+        accountDO.setPassword(pass.getPassword());
+        accountDO.setSalt(pass.getSalt());
+
+        return accountDAO.insertSelective(accountDO);
     }
 
     public Account findByAccount(String accountName) {
@@ -33,6 +76,19 @@ public class AccountServiceImpl implements AccountService {
         BeanUtils.copyProperties(accountDO, account);
 
         return account;
+    }
+
+    public long existByAccount(String account) {
+        if (null == account) {
+            return 0;
+        }
+
+        Long id = accountDAO.selectIdByAccount(account);
+        if (null != id) {
+            return (long)id;
+        }
+
+        return 0;
     }
 
     public Account findById(long id) {

@@ -23,4 +23,15 @@ public class AuthController {
     protected boolean isLogin() {
         return false;
     }
+
+    protected String formatScope(String scope, long orgId) {
+        StringBuilder builder = new StringBuilder();
+
+        if (null != scope) {
+            builder.append(scope);
+        }
+        builder.append(orgId);
+
+        return builder.toString();
+    }
 }

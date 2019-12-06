@@ -20,7 +20,15 @@ public class PasswordRequest extends Request {
     @NotBlank
     private String password;
     private String RepeatedPassword;
+
+    private String source;
+    private String token;
     private String scope;
+
+    private long orgId;
+
+    private long expiredIn;
+    private long refreshExpiredIn;
 
     private AuthEnv env;
 }

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.api.service;
 
+import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.Account;
 
 /**
@@ -9,7 +10,14 @@ import study.daydayup.wolf.business.account.api.entity.Account;
  * @since 2019/9/27 5:21 PM
  **/
 public interface AccountService {
-    long /* account id */ create(Account account);
+    long create(Account account);
+    long createSmsAccount(String mobile, String source);
+    long createPasswordAccount(PasswordRequest request);
+
+
+    long existByAccount(String account);
     Account findByAccount(String account);
     Account findById(long id);
+
+
 }
