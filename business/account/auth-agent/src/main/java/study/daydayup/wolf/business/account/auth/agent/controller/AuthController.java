@@ -21,6 +21,7 @@ public class AuthController {
     }
 
     protected boolean isLogin() {
+
         return false;
     }
 

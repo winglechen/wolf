@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.account.api.entity;
 import lombok.Data;
 import study.daydayup.wolf.business.account.api.entity.Account;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * @since 2019/9/27 5:29 PM
  **/
 @Data
-public class License {
+public class License implements Serializable {
     private Account account;
 
     private String clientId;

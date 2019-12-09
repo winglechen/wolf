@@ -22,7 +22,7 @@ public interface AccountDAO {
 
     AccountDO selectByAccount(@Param("account")String account);
 
-    long selectIdByAccount(@Param("account")String account);
+    Long selectIdByAccount(@Param("account")String account);
 
 
 

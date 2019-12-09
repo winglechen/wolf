@@ -18,12 +18,14 @@ public interface AccessTokenDAO {
 
     int updateById(AccessTokenDO record);
 
-    List<AccessTokenDO> selectByAccessToken(@Param("accessToken")String accessToken);
+    AccessTokenDO selectByAccessToken(@Param("accessToken")String accessToken);
 
-    int updateExpiredAtByRefreshToken(@Param("updatedExpiredAt")Date updatedExpiredAt,@Param("refreshToken")String refreshToken);
+    int updateExpiredAtByRefreshToken(@Param("refreshToken")String refreshToken,@Param("updatedExpiredAt")Date updatedExpiredAt,@Param("updatedAt") Date updatedAt);
 
-    int updateExpiredAtByAccountId(@Param("updatedExpiredAt")Date updatedExpiredAt,@Param("accountId")Long accountId);
+    int updateExpiredAtByAccountId(@Param("accountId")Long accountId, @Param("updatedExpiredAt")Date updatedExpiredAt,@Param("updatedAt") Date updatedAt);
 
+    int updateExpiredAtById(@Param("id")Long id, @Param("updatedExpiredAt")Date updatedExpiredAt, @Param("updatedAt") Date updatedAt);
 
+    Long selectIdByAccessToken(@Param("accessToken")String accessToken);
 
 }
