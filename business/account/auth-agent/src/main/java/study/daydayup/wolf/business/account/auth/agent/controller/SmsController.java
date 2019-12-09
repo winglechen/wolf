@@ -50,14 +50,22 @@ public class SmsController extends AuthController {
         request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
         OauthLicense license = smsService.registerAndLogin(request);
-        saveLicenseToSession(license);
+        if (null == license) {
+            System.out.println("invalid license");
+            return Result.fail(1000, "login failed");
+        }
 
+        saveLicenseToSession(license);
         return Result.ok();
     }
 
     @GetMapping("/auth/sms/code")
     public Result code(SmsCodeRequest request) {
         request.setEnv(null);
+//        request.setExpiredIn(authConfig.getCodeExpiredIn());
+        request.setExpiredIn(30);
+
+        //TODO: 防刷
 
         smsService.sendCode(request);
 

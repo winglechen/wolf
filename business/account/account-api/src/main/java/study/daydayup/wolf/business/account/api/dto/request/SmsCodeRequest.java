@@ -4,6 +4,7 @@ import lombok.Data;
 import study.daydayup.wolf.business.account.api.entity.AuthEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -16,6 +17,10 @@ import javax.validation.constraints.NotBlank;
 public class SmsCodeRequest extends Request {
     @NotBlank
     private String mobile;
+    @Min(1)
+    private int expiredIn;
+    @Min(4)
+    private int numCount;
 
     private AuthEnv env;
 }

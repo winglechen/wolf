@@ -29,7 +29,7 @@ public final class Result<T> implements Serializable {
     }
 
     public static Result fail(long code, String message) {
-        return new Result(code, message);
+        return new Result(code, message, "");
     }
 
     Result() {

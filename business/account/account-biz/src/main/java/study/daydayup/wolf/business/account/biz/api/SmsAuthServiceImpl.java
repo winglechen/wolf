@@ -8,9 +8,13 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
+import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
+import study.daydayup.wolf.common.util.DateUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -24,6 +28,8 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     private AccountService accountService;
     @Resource
     private OauthLicenseService licenseService;
+    @Resource
+    private VerifyCodeService verifyCodeService;
 
     @Override
     public long register(SmsRequest request) {
@@ -38,6 +44,11 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     @Override
     public OauthLicense registerAndLogin(SmsRequest request) {
         //verify the code
+        if (!verifyCodeService.verify(request.getMobile(), request.getCode())) {
+            System.out.println("invalid code:" + request.getCode());
+            return null;
+        }
+        System.out.println("valid code:" + request.getCode());
 
         //checkAccountExist
         long accountId = accountService.existByAccount(request.getMobile());
@@ -57,6 +68,14 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
     @Override
     public void sendCode(SmsCodeRequest request) {
+        String mobile = request.getMobile();
+        Date expiredAt = DateUtil.secondsLater(request.getExpiredIn());
 
+        verifyCodeService.send(mobile, createCode(), expiredAt);
+    }
+
+    private String createCode() {
+        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
+        return Integer.toString(num);
     }
 }

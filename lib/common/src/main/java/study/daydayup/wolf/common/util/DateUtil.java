@@ -25,4 +25,10 @@ public class DateUtil {
     public static LocalDateTime asLocalDateTime(Date date) {
         return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
+
+    public static Date secondsLater(int seconds) {
+        LocalDateTime now = LocalDateTime.now();
+        return DateUtil.asDate(now.plusSeconds(seconds));
+    }
+
 }
