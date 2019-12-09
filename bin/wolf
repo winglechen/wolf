@@ -18,7 +18,7 @@ function init() {
 
     echo "start redis" 
     echo $line
-    sh /usr/local/redis/bin/redis-server > /code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-server > /code/github/wolf/bin/logs/wolf.log 2>&1 &
 
     
     
@@ -34,7 +34,7 @@ function clear() {
 
     echo "stop redis"
     echo $line
-    sh /usr/local/redis/bin/redis-cli shutdown > /code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-cli shutdown > /code/github/wolf/bin/logs/wolf.log 2>&1 &
 }
 
 function start() {

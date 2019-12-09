@@ -7,6 +7,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.controller.AuthController;
+import study.daydayup.wolf.business.account.auth.agent.filter.WolfSsoFilter;
 
 import javax.annotation.Resource;
 
@@ -29,12 +30,17 @@ public class AuthAutoConfiguration {
     public Session session() {
         Session session = new Session();
 
+        System.out.println("auth auto config: session bean");
+
         return session;
     }
 
     @Bean
     public FilterRegistrationBean ssoFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setName("WolfSsoFilter");
+        registration.setFilter(new WolfSsoFilter());
+        System.out.println("auth auto config: session bean");
 
         return registration;
     }

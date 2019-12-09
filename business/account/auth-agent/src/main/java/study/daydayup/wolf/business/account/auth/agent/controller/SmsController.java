@@ -22,6 +22,10 @@ import javax.validation.Valid;
  **/
 @RestController
 public class SmsController extends AuthController {
+    SmsController() {
+        System.out.println("sms controller constructor init ...");
+    }
+
     @Reference
     private SmsAuthService smsService;
     @Resource

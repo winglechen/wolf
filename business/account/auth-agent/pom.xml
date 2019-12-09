@@ -12,6 +12,7 @@
 
     <groupId>study.daydayup.wolf.business.account</groupId>
     <artifactId>auth-agent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
