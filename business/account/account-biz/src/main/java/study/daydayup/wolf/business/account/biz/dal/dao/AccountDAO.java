@@ -3,7 +3,6 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Collection;
 
-import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 
 public interface AccountDAO {

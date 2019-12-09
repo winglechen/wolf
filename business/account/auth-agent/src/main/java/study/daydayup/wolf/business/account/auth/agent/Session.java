@@ -1,6 +1,9 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
+import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
+
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -16,13 +19,16 @@ public class Session {
     private String sessionID;
     private Map<String, Object> data;
 
+    @Resource
+    private AuthConfig config;
+
     public void init(HttpServletRequest request, HttpServletResponse response) {
         if (null != data) {
             return;
         }
         data = new HashMap<String, Object>();
 
-        SessionIDCreator sessionIDCreator = new SessionIDCreator(request, response);
+        SessionIDCreator sessionIDCreator = new SessionIDCreator(request, response, config);
         String token = sessionIDCreator.getExistedID();
         if(null != token) {
             sessionID = token;

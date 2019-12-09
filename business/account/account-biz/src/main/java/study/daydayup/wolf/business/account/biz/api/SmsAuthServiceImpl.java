@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2019/12/5 6:02 下午
  **/
+@RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
     @Resource
     private AccountService accountService;

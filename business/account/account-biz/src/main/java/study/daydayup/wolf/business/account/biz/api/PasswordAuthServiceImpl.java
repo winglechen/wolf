@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2019/12/5 6:01 下午
  **/
+@RpcService(protocol = "dubbo")
 public class PasswordAuthServiceImpl implements PasswordAuthService {
     @Resource
     private AccountService accountService;

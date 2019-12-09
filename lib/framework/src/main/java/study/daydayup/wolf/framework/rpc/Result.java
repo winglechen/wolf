@@ -21,7 +21,7 @@ public final class Result<T> implements Serializable {
     private String exception;
 
     public static Result ok(){
-        return Result.ok(null);
+        return Result.ok("");
     }
 
     public static <T> Result<T> ok(T t){

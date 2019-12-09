@@ -2,7 +2,13 @@ package study.daydayup.wolf.business.account.auth.agent.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.account.auth.agent.config.AuthAutoConfiguration;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.util.AntPathMatcher;
 
@@ -34,15 +40,16 @@ public class WolfSsoFilter implements Filter {
         System.out.println("wolf filter init");
     }
 
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-        System.out.println("wolf filter filtering");
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
         session.init(request, response);
 
         if(isAccessDenied(request.getServletPath())){
+            accessDeny(response);
             return;
         }
 

@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseSer
 import study.daydayup.wolf.business.account.biz.dal.dao.AccessTokenDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.UUID;
  * @author Wingle
  * @since 2019/12/5 7:20 下午
  **/
+@RpcService(protocol = "dubbo")
 public class OauthLicenseServiceImpl implements OauthLicenseService {
     @Resource
     private AccessTokenDAO accessTokenDAO;

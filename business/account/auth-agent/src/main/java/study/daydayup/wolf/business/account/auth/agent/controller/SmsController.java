@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
-import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -38,20 +37,24 @@ public class SmsController extends AuthController {
 
     @GetMapping("/auth/sms/registerAndLogin")
     public Result registerAndLogin(@Valid SmsRequest request) {
-        if (isLogin()) {
-            return Result.ok();
-        }
-
-        request.setEnv(null);
-        request.setToken(session.getSessionID());
-
-        String scope = formatScope(request.getScope(), request.getOrgId());
-        request.setScope(scope);
-
-        OauthLicense license = smsService.registerAndLogin(request);
-        saveLicenseToSession(license);
-
+        System.out.println("smsController.registerAndLogin");
         return Result.ok();
+
+
+//        if (isLogin()) {
+//            return Result.ok();
+//        }
+//
+//        request.setEnv(null);
+//        request.setToken(session.getSessionID());
+//
+//        String scope = formatScope(request.getScope(), request.getOrgId());
+//        request.setScope(scope);
+//
+//        OauthLicense license = smsService.registerAndLogin(request);
+//        saveLicenseToSession(license);
+//
+//        return Result.ok();
     }
 
     @GetMapping("/auth/sms/code")

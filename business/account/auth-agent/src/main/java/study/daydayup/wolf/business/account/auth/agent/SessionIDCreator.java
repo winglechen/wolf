@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
 
@@ -19,12 +20,12 @@ public class SessionIDCreator {
     private HttpServletResponse response;
     private String sessionKey;
 
-    @Resource
     private AuthConfig config;
 
-    SessionIDCreator(HttpServletRequest request, HttpServletResponse response) {
+    SessionIDCreator(HttpServletRequest request, HttpServletResponse response, AuthConfig config) {
         this.request = request;
         this.response = response;
+        this.config = config;
         this.sessionKey = config.getSessionKey();
     }
 
