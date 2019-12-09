@@ -62,8 +62,7 @@ public class SmsController extends AuthController {
     @GetMapping("/auth/sms/code")
     public Result code(SmsCodeRequest request) {
         request.setEnv(null);
-//        request.setExpiredIn(authConfig.getCodeExpiredIn());
-        request.setExpiredIn(30);
+        request.setExpiredIn(authConfig.getCodeExpiredIn());
 
         //TODO: 防刷
 

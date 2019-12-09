@@ -1,4 +1,5 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
+import java.util.Date;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -18,5 +19,9 @@ public interface VerifyCodeDAO {
     int updateById(VerifyCodeDO record);
 
     VerifyCodeDO selectByMobile(@Param("mobile")String mobile);
+
+    int updateExpiredAtById(@Param("id")Long id,@Param("updatedExpiredAt")Date updatedExpiredAt);
+
+
 
 }

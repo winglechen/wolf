@@ -26,7 +26,7 @@ public class AuthConfig {
     private String authPath = "/auth/**/*";
     private String excludedPaths = "/auth/**/*";
 
-    private int codeExpiredIn = 10;
+    private int codeExpiredIn = 5*60;
     private int expiredIn = 60*60*2;
     private int refreshExpiredIn = 60*60*24*7;
 

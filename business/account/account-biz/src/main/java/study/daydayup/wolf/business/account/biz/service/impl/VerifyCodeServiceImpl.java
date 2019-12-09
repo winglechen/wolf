@@ -36,22 +36,25 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
         VerifyCodeDO verifyCodeDO = verifyCodeDAO.selectByMobile(mobile);
 
         if (null == verifyCodeDO) {
-            System.out.println("no verify code");
             return false;
         }
 
         if ( !code.equals(verifyCodeDO.getCode()) ) {
-            System.out.println("different code");
             return false;
         }
 
         Date now = new Date();
         if (verifyCodeDO.getExpiredAt().before(now)) {
-            System.out.println("code expired");
             return false;
         }
-        System.out.println("correct code");
+        deactivate(verifyCodeDO.getId(), now);
 
         return true;
     }
+
+    private void deactivate(Long id, Date expiredAt) {
+        verifyCodeDAO.updateExpiredAtById(id, expiredAt);
+    }
+
+
 }
