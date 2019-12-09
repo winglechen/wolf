@@ -14,8 +14,5 @@ public class DateUtilTest {
 
     @Test
     public void test_date_is_null_work_fine() {
-        System.out.println("world");
-        Date d = new Date(0);
-        DateUtil.isNull(d);
     }
 }
