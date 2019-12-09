@@ -26,8 +26,8 @@ public class SmsRequest extends Request {
     private String scope;
     private String source;
 
-    private long expiredIn;
-    private long refreshExpiredIn;
+    private int expiredIn;
+    private int refreshExpiredIn;
 
     private AuthEnv env;
 }

@@ -120,7 +120,7 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         LocalDateTime expiredAt = now.plusSeconds(request.getExpiredIn());
         accessTokenDO.setExpiredAt(DateUtil.asDate(expiredAt));
 
-        LocalDateTime refreshExpiredAt = now.plusSeconds(request.getRefreshExpiredIn());
+        LocalDateTime refreshExpiredAt = expiredAt.plusSeconds(request.getRefreshExpiredIn());
         accessTokenDO.setRefreshExpiredAt(DateUtil.asDate(refreshExpiredAt) );
     }
 
