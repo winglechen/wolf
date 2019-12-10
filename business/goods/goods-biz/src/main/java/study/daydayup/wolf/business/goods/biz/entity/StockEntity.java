@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.goods.biz.model;
+package study.daydayup.wolf.business.goods.biz.entity;
 
 import study.daydayup.wolf.business.goods.api.entity.Stock;
 

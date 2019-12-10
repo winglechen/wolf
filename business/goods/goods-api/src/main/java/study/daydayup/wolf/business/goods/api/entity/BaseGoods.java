@@ -5,6 +5,7 @@ import study.daydayup.wolf.framework.layer.api.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.column.BusinessKey;
 import study.daydayup.wolf.model.annotation.column.ForeignKey;
+import study.daydayup.wolf.model.annotation.column.PrimaryKey;
 import study.daydayup.wolf.model.type.currency.Currency;
 import study.daydayup.wolf.model.type.string.Name;
 import study.daydayup.wolf.model.type.string.Tags;
@@ -20,7 +21,7 @@ import javax.validation.constraints.NotNull;
  **/
 @Data
 public class BaseGoods extends Entity {
-    @BusinessKey @NotNull
+    @BusinessKey @PrimaryKey @NotNull
     private long goodsId;
     @ForeignKey @NotNull
     private long orgId;
