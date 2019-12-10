@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class BaseGoods extends Entity {
     @BusinessKey @PrimaryKey @NotNull
-    private long goodsId;
+    private long id;
     @ForeignKey @NotNull
     private long orgId;
     @ForeignKey @NotNull

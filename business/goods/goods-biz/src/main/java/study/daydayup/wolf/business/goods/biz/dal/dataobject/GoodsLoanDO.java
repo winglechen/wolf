@@ -36,6 +36,8 @@ public class GoodsLoanDO implements Serializable {
 
     private Integer belatedPaymentUnit;
 
+    private String installment;
+
     private Integer version;
 
     private boolean deleteFlag;

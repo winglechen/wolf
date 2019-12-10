@@ -100,6 +100,8 @@ CREATE TABLE IF NOT EXISTS `goods_loan`
     `belated_payment`   INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金',
     `belated_payment_unit`INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
+    `installment`       text COMMENT '分期信息',
+
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
