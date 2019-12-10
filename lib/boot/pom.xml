@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>starter</module>
+        <module>wolf-boot-starter</module>
         <module>wolf-business-dependencies</module>
         <module>wolf-business-starter</module>
     </modules>

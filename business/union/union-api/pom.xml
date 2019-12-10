@@ -13,4 +13,52 @@
     <artifactId>union-api</artifactId>
 
 
+    <dependencies>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>account-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.org</groupId>
+            <artifactId>org-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.goods</groupId>
+            <artifactId>goods-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.ump</groupId>
+            <artifactId>ump-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>trade-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.pay</groupId>
+            <artifactId>pay-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+    </dependencies>
+
 </project>
