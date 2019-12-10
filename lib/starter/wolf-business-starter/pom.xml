@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>boot</artifactId>
+        <groupId>study.daydayup.wolf</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>study.daydayup.wolf.boot</groupId>
+    <artifactId>wolf-business-starter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- business api start -->
+        <dependency>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>account-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.org</groupId>
+            <artifactId>org-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.goods</groupId>
+            <artifactId>goods-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.ump</groupId>
+            <artifactId>ump-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>trade-api</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.pay</groupId>
+            <artifactId>pay-api</artifactId>
+
+        </dependency>
+        <!-- business api end -->
+
+    </dependencies>
+
+</project>

@@ -8,9 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>wolf-boot-starter</module>
         <module>wolf-business-dependencies</module>
-        <module>wolf-business-starter</module>
     </modules>
 
     <name>wolf-parent</name>
@@ -29,6 +27,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <wolf-boot.version>1.0.0-SNAPSHOT</wolf-boot.version>
+        <wolf-business.version>1.0.0-SNAPSHOT</wolf-business.version>
 
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
@@ -69,7 +68,9 @@
 
     </properties>
 
+
     <dependencies>
+
 
     </dependencies>
 
@@ -80,6 +81,14 @@
                 <groupId>study.daydayup.wolf.boot</groupId>
                 <artifactId>wolf-boot-starter</artifactId>
                 <version>${wolf-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>study.daydayup.wolf.boot</groupId>
+                <artifactId>wolf-business-dependencies</artifactId>
+                <version>${wolf-business.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
 

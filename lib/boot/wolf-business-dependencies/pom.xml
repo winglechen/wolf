@@ -2,15 +2,117 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
+    <!--parent>
         <artifactId>boot</artifactId>
         <groupId>study.daydayup.wolf</groupId>
         <version>1.0.0-SNAPSHOT</version>
-    </parent>
+    </parent-->
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.boot</groupId>
     <artifactId>wolf-business-dependencies</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
+    <properties>
+        <version.snapshot>1.0.0-SNAPSHOT</version.snapshot>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- business agent start -->
+            <dependency>
+                <groupId>study.daydayup.wolf.business.account</groupId>
+                <artifactId>auth-agent</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.uc</groupId>
+                <artifactId>uc-agent</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <!-- business agent end -->
+
+            <!-- business api start -->
+            <dependency>
+                <groupId>study.daydayup.wolf.business.account</groupId>
+                <artifactId>account-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.org</groupId>
+                <artifactId>org-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.uc</groupId>
+                <artifactId>uc-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.goods</groupId>
+                <artifactId>goods-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.ump</groupId>
+                <artifactId>ump-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>trade-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.pay</groupId>
+                <artifactId>pay-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <!-- business api end -->
+
+            <!-- business biz start -->
+            <dependency>
+                <groupId>study.daydayup.wolf.business.account</groupId>
+                <artifactId>account-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.org</groupId>
+                <artifactId>org-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.uc</groupId>
+                <artifactId>uc-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.goods</groupId>
+                <artifactId>goods-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.ump</groupId>
+                <artifactId>ump-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>trade-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.pay</groupId>
+                <artifactId>pay-biz</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <!-- business biz end -->
+
+
+        </dependencies>
+
+    </dependencyManagement>
 
 </project>

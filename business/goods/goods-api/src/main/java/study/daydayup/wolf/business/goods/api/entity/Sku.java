@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Entity;
-import study.daydayup.wolf.model.annotation.key.ParentKey;
+import study.daydayup.wolf.model.annotation.column.ParentKey;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
