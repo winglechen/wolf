@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="chargeUnit" jdbcType="INTEGER" property="chargeunit" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="stock_type" jdbcType="INTEGER" property="stockType" />
+    <result column="vs_price" jdbcType="VARCHAR" property="vsPrice" />
+    <result column="feature" jdbcType="VARCHAR" property="feature" />
+    <result column="main_pic" jdbcType="VARCHAR" property="mainPic" />
+    <result column="main_video" jdbcType="VARCHAR" property="mainVideo" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, category_id, goods_type, name, price, currency, chargeUnit, state, stock_type, 
+    vs_price, feature, main_pic, main_video, code, tags, creator, version, delete_flag, 
+    last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods (org_id, category_id, goods_type, 
+      name, price, currency, 
+      chargeUnit, state, stock_type, 
+      vs_price, feature, main_pic, 
+      main_video, code, tags, 
+      creator, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
+    values (#{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, #{goodsType,jdbcType=SMALLINT}, 
+      #{name,jdbcType=VARCHAR}, #{price,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{chargeunit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
+      #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{mainPic,jdbcType=VARCHAR}, 
+      #{mainVideo,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="chargeunit != null">
+        chargeUnit,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="stockType != null">
+        stock_type,
+      </if>
+      <if test="vsPrice != null">
+        vs_price,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="mainPic != null">
+        main_pic,
+      </if>
+      <if test="mainVideo != null">
+        main_video,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      delete_flag,
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="chargeunit != null">
+        #{chargeunit,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="stockType != null">
+        #{stockType,jdbcType=INTEGER},
+      </if>
+      <if test="vsPrice != null">
+        #{vsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPic != null">
+        #{mainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="mainVideo != null">
+        #{mainVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      #{deleteFlag,jdbcType=TINYINT},
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    update goods
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=SMALLINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="chargeunit != null">
+        chargeUnit = #{chargeunit,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="stockType != null">
+        stock_type = #{stockType,jdbcType=INTEGER},
+      </if>
+      <if test="vsPrice != null">
+        vs_price = #{vsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="mainPic != null">
+        main_pic = #{mainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="mainVideo != null">
+        main_video = #{mainVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    update goods
+    set org_id = #{orgId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      goods_type = #{goodsType,jdbcType=SMALLINT},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=INTEGER},
+      chargeUnit = #{chargeunit,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      stock_type = #{stockType,jdbcType=INTEGER},
+      vs_price = #{vsPrice,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      main_pic = #{mainPic,jdbcType=VARCHAR},
+      main_video = #{mainVideo,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=BIGINT},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
