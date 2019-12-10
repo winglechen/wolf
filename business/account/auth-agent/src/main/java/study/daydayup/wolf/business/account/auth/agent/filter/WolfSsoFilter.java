@@ -103,9 +103,9 @@ public class WolfSsoFilter implements Filter {
         StringBuilder failMessage = new StringBuilder();
         failMessage.append("{\"code\":");
         failMessage.append(config.getDenyCode());
-        failMessage.append(", \"msg\":\"");
+        failMessage.append(", \"message\":\"");
         failMessage.append(config.getDenyMessage());
-        failMessage.append("\", \"data\"=\"\"}");
+        failMessage.append("\", \"data\":\"\"}");
 
         response.getWriter().println(failMessage.toString());
     }
