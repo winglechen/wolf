@@ -42,7 +42,7 @@ wolf:
 
 
 server:
-  port: 9000
+  port: 9100
 
 provider:
   application:
