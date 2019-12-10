@@ -19,8 +19,6 @@ import javax.annotation.Resource;
 public class LogoutController extends AuthController {
     @Resource
     private Session session;
-    @Reference
-    private AuthService authService;
 
     @RequestMapping("/auth/logout")
     public Result logout() {

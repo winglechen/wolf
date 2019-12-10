@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
  **/
 public interface AccessTokenService {
     License create(@Valid LicenseRequest request);
+    License findByToken(@NotBlank String accessToken);
+    void expire(@NotBlank String accessToken);
     void refresh(@NotBlank String refreshToken, int seconds);
     void refreshById(long id, int seconds);
     void refreshByAccountId(long accountId, int seconds);

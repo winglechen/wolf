@@ -26,6 +26,8 @@ public interface AccessTokenDAO {
 
     int updateExpiredAtById(@Param("id")Long id, @Param("updatedExpiredAt")Date updatedExpiredAt, @Param("updatedAt") Date updatedAt);
 
+    int updateExpiredAtByAccessToken(@Param("accessToken")String accessToken, @Param("updatedExpiredAt")Date updatedExpiredAt);
+
     Long selectIdByAccessToken(@Param("accessToken")String accessToken);
 
 }

@@ -30,7 +30,20 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
 
     @Override
     public OauthLicense findByAccessToken(String accessToken) {
-        return null;
+        if (null == accessToken || "" == accessToken) {
+            return null;
+        }
+
+        License license = accessTokenService.findByToken(accessToken);
+        return licenseToOauth(license);
+    }
+
+    @Override
+    public void expire(String accessToken) {
+        if (null == accessToken || "" == accessToken) {
+            return ;
+        }
+
     }
 
     @Override
@@ -42,10 +55,7 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
     public OauthLicense grant(@Valid LicenseRequest request) {
         License license = accessTokenService.create(request);
 
-        OauthLicense oauthLicense = new OauthLicense();
-        BeanUtils.copyProperties(license, oauthLicense);
-
-        return oauthLicense;
+        return licenseToOauth(license);
     }
 
     @Override
@@ -56,6 +66,17 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
     @Override
     public void refresh(String refreshToken, Date expiredAt) {
 
+    }
+
+    private OauthLicense licenseToOauth(License license) {
+        if (null == license) {
+            return null;
+        }
+
+        OauthLicense oauthLicense = new OauthLicense();
+        BeanUtils.copyProperties(license, oauthLicense);
+
+        return oauthLicense;
     }
 
 }

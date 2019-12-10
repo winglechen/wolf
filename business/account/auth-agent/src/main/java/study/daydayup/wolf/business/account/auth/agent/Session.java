@@ -1,5 +1,8 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
+import org.apache.dubbo.config.annotation.Reference;
+import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
+import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 
 import javax.annotation.PreDestroy;
@@ -21,6 +24,8 @@ public class Session {
 
     @Resource
     private AuthConfig config;
+    @Reference
+    private OauthLicenseService oauthLicenseService;
 
     public void init(HttpServletRequest request, HttpServletResponse response) {
         if (null != data) {
@@ -44,7 +49,7 @@ public class Session {
     }
 
     public void set(String key, Object value) {
-
+        data.put(key, value);
     }
 
     public Object get(String key) {
@@ -52,7 +57,8 @@ public class Session {
     }
 
     public void destroy() {
-
+        data.clear();
+        oauthLicenseService.expire(sessionID);
     }
 
     @PreDestroy
@@ -68,6 +74,11 @@ public class Session {
 
     private void loadFromRpc() {
         //TODO
+        OauthLicense license = oauthLicenseService.findByAccessToken(sessionID);
+        if (null == license) {
+            return;
+        }
+
     }
 
 }

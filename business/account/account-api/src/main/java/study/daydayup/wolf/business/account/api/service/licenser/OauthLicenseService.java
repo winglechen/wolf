@@ -19,4 +19,5 @@ public interface OauthLicenseService {
 
     void create(OauthLicense license);
     void refresh(String refreshToken, Date expiredAt);
+    void expire(String accessToken);
 }

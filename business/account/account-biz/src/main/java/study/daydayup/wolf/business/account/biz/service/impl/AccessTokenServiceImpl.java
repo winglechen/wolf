@@ -44,12 +44,33 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         return doToLicense(accessTokenDO);
     }
 
+    @Override
+    public License findByToken(@NotBlank String accessToken) {
+        if (null == accessToken || "".equals(accessToken)) {
+            return null;
+        }
+        AccessTokenDO accessTokenDO = accessTokenDAO.selectByAccessToken(accessToken);
+        return doToLicense(accessTokenDO);
+    }
+
+    @Override
+    public void expire(@NotBlank String accessToken) {
+        if (null == accessToken || "".equals(accessToken)) {
+            return ;
+        }
+        accessTokenDAO.updateExpiredAtByAccessToken(accessToken, new Date());
+    }
+
     private long create(AccessTokenDO accessTokenDO) {
         return accessTokenDAO.insertSelective(accessTokenDO);
     }
 
     @Override
     public void refresh(@NotBlank String refreshToken, int seconds) {
+        if (null == refreshToken || "".equals(refreshToken) ) {
+            return;
+        }
+
         LocalDateTime now = LocalDateTime.now();
 
         Date updatedAt = DateUtil.asDate(now);
@@ -91,6 +112,10 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
 
     private License doToLicense(AccessTokenDO accessTokenDO) {
+        if (null == accessTokenDO) {
+            return  null;
+        }
+
         License license = new License();
         BeanUtils.copyProperties(accessTokenDO, license);
 
