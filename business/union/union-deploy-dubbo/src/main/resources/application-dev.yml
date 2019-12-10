@@ -1,0 +1,6 @@
+
+
+spring:
+  shardingsphere:
+    datasource:
+      names: account, goods, trade, mq
