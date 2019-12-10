@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `sku`
 COMMENT = 'sku';
 
 DROP TABLE IF EXISTS `loan_detail`;
-CREATE TABLE IF NOT EXISTS `loan_detail`
+DROP TABLE IF EXISTS `goods_loan`;
+CREATE TABLE IF NOT EXISTS `goods_loan`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
@@ -109,8 +110,9 @@ CREATE TABLE IF NOT EXISTS `loan_detail`
 COMMENT = 'loan';
 
 
-DROP TABLE IF EXISTS `intallment_detail`;
-CREATE TABLE IF NOT EXISTS `installment_detail`
+DROP TABLE IF EXISTS `installment_detail`;
+DROP TABLE IF EXISTS `goods_installment`;
+CREATE TABLE IF NOT EXISTS `goods_installment`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',

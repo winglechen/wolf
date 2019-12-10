@@ -11,34 +11,6 @@ spring:
         enabled: true
         register-enabled: true
         server-addr: 127.0.0.1:8848
-#  datasource:
-#    username: root
-#    password: 123456
-#    url: jdbc:mysql://127.0.0.1:3306/wolf_union?useSSL=false
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-
-#  shardingsphere:
-#    datasource:
-#      names: learn, union
-#      learn:
-#        type: com.alibaba.druid.pool.DruidDataSource
-#        driver-class-name: com.mysql.jdbc.Driver
-#        username: root
-#        password: 123456
-#        url: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false
-#      union:
-#        type: com.alibaba.druid.pool.DruidDataSource
-#        driver-class-name: com.mysql.jdbc.Driver
-#        username: root
-#        password: 123456
-#        url: jdbc:mysql://127.0.0.1:3306/wolf_union?useSSL=false
-#    sharding:
-#      tables:
-#        tag:
-#          actual-data-nodes: learn.tag
-#        union:
-#          actual-data-nodes: union.union
 
 mybatis:
 #  type-aliases-package: study.daydayup.wolf.business.union.biz.dal.dataobject
