@@ -1,6 +1,5 @@
-package study.daydayup.wolf.business.account.deploy.dubbo;
+package study.daydayup.wolf.business.account.deploy.web;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -12,10 +11,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @since 2019/9/29 2:13 PM
  **/
 @SpringBootApplication(scanBasePackages = {"study.daydayup.wolf.business.account"})
-@MapperScan({"study.daydayup.wolf.business.account.biz.dal.dao"})
 @EnableDiscoveryClient
-public class AccountApplication {
+public class AccountConsumer {
     public static void main(String[] args) {
-        SpringApplication.run(AccountApplication.class, args);
+        SpringApplication.run(AccountConsumer.class, args);
     }
 }
