@@ -11,6 +11,86 @@
 
     <groupId>study.daydayup.wolf.business.union</groupId>
     <artifactId>union-deploy-dubbo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
+    <properties>
+        <version.snapshot>1.0.0-SNAPSHOT</version.snapshot>
+    </properties>
+
+    <dependencies>
+
+        <!-- lib dependency start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+            <version>4.0.0-RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- lib dependency end -->
+
+
+        <!-- business biz start -->
+        <dependency>
+            <groupId>study.daydayup.wolf.business.account</groupId>
+            <artifactId>account-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.org</groupId>
+            <artifactId>org-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>acl-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.goods</groupId>
+            <artifactId>goods-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.ump</groupId>
+            <artifactId>ump-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>buy-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.pay</groupId>
+            <artifactId>pay-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <!-- business biz end -->
+
+    </dependencies>
 
 </project>

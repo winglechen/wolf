@@ -29,7 +29,7 @@ public abstract class AbstractTradeState {
      * @see ConsignStateEnum
      */
     protected int deliveryState;
-    protected Date sendedAt;
+    protected Date sendAt;
 
     /**
      * @see CloseStateEnum

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.account.deploy.web;
+package study.daydayup.wolf.business.account.deploy.dubbo;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

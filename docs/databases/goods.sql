@@ -1,13 +1,13 @@
-CREATE DATABASE IF NOT EXISTS `wolf_product` DEFAULT CHARACTER SET utf8mb4;
-USE `wolf_product`;
+CREATE DATABASE IF NOT EXISTS `wolf_goods` DEFAULT CHARACTER SET utf8mb4;
+USE `wolf_goods`;
 
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE IF NOT EXISTS `product`
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE IF NOT EXISTS `goods`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `category_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类目ID',
-    `product_type`  SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
+    `goods_type`    SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
 
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
     `price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `product`
 
     `code`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '产品编码',
     `tags`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'tags',
-    `creator` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建人',
+    `creator`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建人',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `product`
 COMMENT = '产品';
 
 
-DROP TABLE IF EXISTS `product_detail`;
-CREATE TABLE IF NOT EXISTS `product_detail`
+DROP TABLE IF EXISTS `goods_detail`;
+CREATE TABLE IF NOT EXISTS `goods_detail`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `sku`;
 CREATE TABLE IF NOT EXISTS `sku`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `product_id`    BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
+    `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS `loan_detail`;
 CREATE TABLE IF NOT EXISTS `loan_detail`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `product_id`    BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
+    `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `repay_strategy`    INT(10) NOT NULL DEFAULT 0 COMMENT '还款策略',
@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `intallment_detail`;
 CREATE TABLE IF NOT EXISTS `installment_detail`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
-    `product_id`    BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
+    `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `duration`      INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',

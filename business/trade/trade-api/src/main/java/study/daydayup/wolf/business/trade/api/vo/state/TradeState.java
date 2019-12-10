@@ -10,21 +10,4 @@ import java.util.Date;
  **/
 public interface TradeState {
     String getTradeNo();
-
-    int getState();
-    String getName();
-
-    int getPaymentState();
-    Date getPaidAt();
-
-    int getDeliveryState();
-    Date getSendedAt();
-
-    int getCompletedState();
-    Date getCompletedAt();
-
-    int getAfterSaleState();
-    Date getAfterSaleAt();
-
-    Date getCreatedAt();
 }

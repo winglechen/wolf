@@ -19,5 +19,21 @@
 
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.boot</groupId>
+            <artifactId>wolf-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.boot</groupId>
+            <artifactId>wolf-business-starter</artifactId>
+        </dependency>
+
+    </dependencies>
+
 
 </project>

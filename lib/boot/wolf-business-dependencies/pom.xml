@@ -72,43 +72,7 @@
             </dependency>
             <!-- business api end -->
 
-            <!-- business biz start -->
-            <dependency>
-                <groupId>study.daydayup.wolf.business.account</groupId>
-                <artifactId>account-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.org</groupId>
-                <artifactId>org-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.uc</groupId>
-                <artifactId>uc-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.goods</groupId>
-                <artifactId>goods-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.ump</groupId>
-                <artifactId>ump-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.trade</groupId>
-                <artifactId>trade-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.pay</groupId>
-                <artifactId>pay-biz</artifactId>
-                <version>${version.snapshot}</version>
-            </dependency>
-            <!-- business biz end -->
+
 
 
         </dependencies>
