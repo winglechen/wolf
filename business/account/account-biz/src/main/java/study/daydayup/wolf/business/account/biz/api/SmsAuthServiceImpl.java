@@ -75,7 +75,9 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     private String createCode() {
-        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
-        return Integer.toString(num);
+        return "123";
+        //TODO remove the mock data
+//        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
+//        return Integer.toString(num);
     }
 }

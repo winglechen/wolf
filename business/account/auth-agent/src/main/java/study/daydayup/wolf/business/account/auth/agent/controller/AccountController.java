@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.account.deploy.web.controller;
+package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
