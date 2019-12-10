@@ -55,10 +55,20 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
     @Override
     public void expire(@NotBlank String accessToken) {
+        expire(accessToken, new Date());
+    }
+
+    @Override
+    public void expire(@NotBlank String accessToken, Date expiredAt) {
         if (null == accessToken || "".equals(accessToken)) {
             return ;
         }
-        accessTokenDAO.updateExpiredAtByAccessToken(accessToken, new Date());
+
+        if (null == expiredAt) {
+            expiredAt = new Date();
+        }
+
+        accessTokenDAO.updateExpiredAtByAccessToken(accessToken, expiredAt);
     }
 
     private long create(AccessTokenDO accessTokenDO) {

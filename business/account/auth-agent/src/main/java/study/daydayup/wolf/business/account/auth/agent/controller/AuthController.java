@@ -17,12 +17,11 @@ public class AuthController {
     private Session session;
 
     protected void saveLicenseToSession(OauthLicense license) {
-
+        session.saveLicense(license);
     }
 
     protected boolean isLogin() {
-
-        return false;
+        return session.isLogin();
     }
 
     protected String formatScope(String scope, long orgId) {

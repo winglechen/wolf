@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.account.biz.dal.dao.AccessTokenDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 import study.daydayup.wolf.business.account.biz.service.AccessTokenService;
 import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.common.util.StringUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -44,6 +45,20 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
             return ;
         }
 
+        Date expiredAt = new Date();
+        expire(accessToken, expiredAt);
+    }
+
+    @Override
+    public void expire(String accessToken, Date expiredAt) {
+        if (!StringUtil.hasValue(accessToken)) {
+            return;
+        }
+
+        if (null == expiredAt) {
+            expiredAt = new Date();
+        }
+        accessTokenService.expire(accessToken, expiredAt);
     }
 
     @Override
@@ -67,6 +82,8 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
     public void refresh(String refreshToken, Date expiredAt) {
 
     }
+
+
 
     private OauthLicense licenseToOauth(License license) {
         if (null == license) {

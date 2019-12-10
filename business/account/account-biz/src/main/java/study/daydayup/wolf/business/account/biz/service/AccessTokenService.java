@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.account.api.entity.License;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.biz.service
@@ -16,6 +17,7 @@ public interface AccessTokenService {
     License create(@Valid LicenseRequest request);
     License findByToken(@NotBlank String accessToken);
     void expire(@NotBlank String accessToken);
+    void expire(@NotBlank String accessToken, Date expiredAt);
     void refresh(@NotBlank String refreshToken, int seconds);
     void refreshById(long id, int seconds);
     void refreshByAccountId(long accountId, int seconds);

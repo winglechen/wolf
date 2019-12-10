@@ -14,8 +14,7 @@ import java.util.Date;
  **/
 @Data
 public class License implements Serializable {
-    private Account account;
-
+    private Long accountId;
     private String clientId;
     private String scope;
 
