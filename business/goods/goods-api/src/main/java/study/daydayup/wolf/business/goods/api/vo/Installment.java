@@ -1,8 +1,7 @@
-package study.daydayup.wolf.business.goods.api.entity;
+package study.daydayup.wolf.business.goods.api.vo;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.domain.Entity;
-import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
 

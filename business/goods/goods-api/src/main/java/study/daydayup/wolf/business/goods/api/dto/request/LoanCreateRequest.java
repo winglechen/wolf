@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.goods.api.dto.request;
 
 import lombok.Data;
-import study.daydayup.wolf.business.goods.api.entity.Installment;
+import study.daydayup.wolf.business.goods.api.vo.Installment;
 
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.List;
  * @since 2019/12/10 8:56 下午
  **/
 @Data
+@Deprecated
 public class LoanCreateRequest extends GoodsCreateRequest {
     //loan add by user
     @Min(1)

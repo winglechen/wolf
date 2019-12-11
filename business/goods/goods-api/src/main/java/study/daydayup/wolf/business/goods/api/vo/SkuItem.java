@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.goods.api.entity;
+package study.daydayup.wolf.business.goods.api.vo;
 
 import study.daydayup.wolf.framework.layer.domain.Entity;
 

@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Builder;
 import lombok.Data;
-import study.daydayup.wolf.model.type.string.URI;
+import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 
 import java.util.List;
 

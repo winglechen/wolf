@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.goods.api.service;
 
-import study.daydayup.wolf.business.goods.api.dto.request.LoanCreateRequest;
-import study.daydayup.wolf.business.goods.api.entity.Loan;
+import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @since 2019/12/10 8:47 下午
  **/
 public interface LoanService {
-    long create(LoanCreateRequest request);
-    int modify(Loan loan);
-    List<Loan> findByOrgId(long orgId);
+    long create(LoanGoods goods);
+    int modify(LoanGoods goods);
+    List<LoanGoods> findByOrgId(long orgId);
 }

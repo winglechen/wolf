@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.api.service;
 
-import study.daydayup.wolf.business.goods.api.entity.BaseGoods;
+import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.biz.api;
 
-import study.daydayup.wolf.business.goods.api.entity.Loan;
+import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.goods.api.service.LoanService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 

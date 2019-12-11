@@ -1,6 +1,8 @@
-package study.daydayup.wolf.business.goods.api.entity;
+package study.daydayup.wolf.business.goods.api.entity.goods;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
+@Builder
 public class BaseGoods extends Entity {
     @BusinessKey @PrimaryKey @NotNull
     private long id;
