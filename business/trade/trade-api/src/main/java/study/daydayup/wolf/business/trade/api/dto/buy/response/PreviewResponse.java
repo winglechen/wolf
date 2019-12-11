@@ -9,6 +9,6 @@ import lombok.Data;
  * @since 2019/10/9 1:39 下午
  **/
 @Data
-public class PrepareResponse {
+public class PreviewResponse {
     private String tradeNo;
 }

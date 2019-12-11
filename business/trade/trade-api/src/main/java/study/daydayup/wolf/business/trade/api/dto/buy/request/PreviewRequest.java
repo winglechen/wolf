@@ -14,7 +14,7 @@ import study.daydayup.wolf.business.trade.api.vo.SelfFetchAddress;
  * @since 2019/10/9 1:43 下午
  **/
 @Data
-public class PrepareRequest {
+public class PreviewRequest {
     /**
      * @see study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum
      */

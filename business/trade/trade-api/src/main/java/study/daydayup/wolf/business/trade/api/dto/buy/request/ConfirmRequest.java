@@ -10,7 +10,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.UmpDTO;
  * @since 2019/10/5 11:26 AM
  **/
 @Data
-public class ConfirmRequest extends PrepareRequest {
+public class ConfirmRequest extends PreviewRequest {
     private String TradeNo;
     private UmpDTO ump;
 }
