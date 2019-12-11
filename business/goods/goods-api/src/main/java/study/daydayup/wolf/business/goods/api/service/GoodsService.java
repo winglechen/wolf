@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.goods.api.service;
 
+import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 
@@ -12,9 +13,12 @@ import java.util.List;
  * @since 2019/10/29 12:12 上午
  **/
 public interface GoodsService {
-    BaseGoods findBaseGoodsById();
-    List<BaseGoods> findBaseGoodsByOrgId();
+    Goods findById(long goodsId, long orgId, GoodsOption option);
+    List<Goods> findByOrgId(long orgId, GoodsOption option);
 
     long create(Goods goods);
     int modify(Goods goods);
+
+    int listing(long goodsId, long orgId);
+    int delisting(long goodsId, long orgId);
 }

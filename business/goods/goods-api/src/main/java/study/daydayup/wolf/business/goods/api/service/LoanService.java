@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.goods.api.service;
 
+import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
  **/
 public interface LoanService {
     long create(LoanGoods goods);
-    int modify(LoanGoods goods);
+    LoanGoods findById(long goodsId, long orgId, GoodsOption option);
     List<LoanGoods> findByOrgId(long orgId);
+
+    int modify(LoanGoods goods);
 }

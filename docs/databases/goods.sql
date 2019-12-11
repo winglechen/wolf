@@ -12,10 +12,11 @@ CREATE TABLE IF NOT EXISTS `goods`
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
     `price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
     `currency`      INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
-    `chargeUnit`    INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
+    `charge_unit`    INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
 
     `state`         TINYINT(4) NOT NULL DEFAULT 0 COMMENT '产品状态',
     `stock_type`    INT(10) NOT NULL DEFAULT 0 COMMENT '库存类型',
+    `sku_type`      INT(10) NOT NULL DEFAULT 0 COMMENT 'SKU类型',
 
     `vs_price`      VARCHAR(50) NOT NULL DEFAULT '' COMMENT '划线价',
     `feature`       VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品特色',
