@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.Entity;
+import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.column.BusinessKey;
 import study.daydayup.wolf.model.annotation.column.ForeignKey;

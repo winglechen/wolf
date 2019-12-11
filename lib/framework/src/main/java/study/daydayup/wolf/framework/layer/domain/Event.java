@@ -1,4 +1,6 @@
 package study.daydayup.wolf.framework.layer.domain;
 
-public abstract class Event {
+import java.io.Serializable;
+
+public abstract class Event implements Serializable {
 }

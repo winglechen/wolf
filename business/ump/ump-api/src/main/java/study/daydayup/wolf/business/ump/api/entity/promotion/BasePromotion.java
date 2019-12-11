@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.ump.api.entity.promotion;
 
-import study.daydayup.wolf.framework.layer.api.Entity;
+import study.daydayup.wolf.framework.layer.domain.Entity;
 
 /**
  * study.daydayup.wolf.business.ump.api.entity.promotion

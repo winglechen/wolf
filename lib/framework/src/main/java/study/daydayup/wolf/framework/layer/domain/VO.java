@@ -1,4 +1,6 @@
 package study.daydayup.wolf.framework.layer.domain;
 
-public abstract class VO {
+import java.io.Serializable;
+
+public abstract class VO implements Serializable {
 }

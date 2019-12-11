@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.Entity;
+import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import javax.validation.constraints.NotBlank;
 

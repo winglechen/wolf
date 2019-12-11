@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.api.dto.request;
 
 import lombok.Data;
+import study.daydayup.wolf.business.goods.api.entity.Installment;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
@@ -14,18 +15,7 @@ import java.util.List;
  * @since 2019/12/10 8:56 下午
  **/
 @Data
-public class LoanCreateRequest extends Request {
-    @Min(1)
-    private long orgId;
-    @NotBlank
-    private String name;
-    @Min(1)
-    private long price;
-
-    //goods defined in the config
-    private int currency;
-    private int chargeUnit;
-
+public class LoanCreateRequest extends GoodsCreateRequest {
     //loan add by user
     @Min(1)
     private int handlingFeeRate;
@@ -35,7 +25,6 @@ public class LoanCreateRequest extends Request {
     private int interest;
     @Min(1)
     private int belatedPayment;
-
 
     //loan defined in the config
     private int interestUnit;
@@ -47,7 +36,7 @@ public class LoanCreateRequest extends Request {
     private int amountStrategy;
     private int feePayStrategy;
 
-    private List<InstallmentRequest> installments;
+    private List<Installment> installments;
 
 
 

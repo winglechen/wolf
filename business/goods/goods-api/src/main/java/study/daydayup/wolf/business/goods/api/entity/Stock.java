@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.api.entity;
 
-import study.daydayup.wolf.framework.layer.api.Entity;
+import study.daydayup.wolf.framework.layer.domain.Entity;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity

@@ -1,6 +1,7 @@
-package study.daydayup.wolf.business.goods.api.dto.request;
+package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Min;
  * @since 2019/12/10 9:15 下午
  **/
 @Data
-public class InstallmentRequest extends Request {
+public class Installment extends Entity {
     @Min(1)
     private int duration;
     @Min(1)
