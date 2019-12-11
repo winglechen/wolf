@@ -11,11 +11,11 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum GoodsTypeEnum implements CodeBasedEnum {
-    LOAN_GOODS(50, "票务商品"),
-    TICKET_GOODS(40, "票务商品"),
-    VIRTUAL_GOODS(30, "虚拟商品"),
-    IOT_GOODS(20, "IOT商品"),
-    NORMAL_GOODS(10, "普通商品")
+    LOAN(50, "票务商品"),
+    TICKET(40, "票务商品"),
+    VIRTUAL(30, "虚拟商品"),
+    IOT(20, "IOT商品"),
+    NORMAL(10, "普通商品")
     ;
 
     private int code;

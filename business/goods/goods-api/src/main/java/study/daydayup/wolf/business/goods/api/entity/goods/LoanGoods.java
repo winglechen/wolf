@@ -13,5 +13,4 @@ import study.daydayup.wolf.business.goods.api.entity.Goods;
 @Data
 @Builder
 public class LoanGoods extends Goods {
-    private int duration;
 }

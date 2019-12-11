@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.goods.api.entity;
 import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
+import study.daydayup.wolf.business.goods.api.vo.Installment;
+import study.daydayup.wolf.business.goods.api.vo.Loan;
 
 import java.util.List;
 
@@ -15,8 +17,11 @@ import java.util.List;
 @Data
 @Builder
 public class Goods extends BaseGoods {
-    private List<String> pics;
+    private String pics;
     private String skuInfo;
     private String detail;
+
     private List<Sku> skuList;
+    private Loan loan;
+    private List<Installment> installmentList;
 }

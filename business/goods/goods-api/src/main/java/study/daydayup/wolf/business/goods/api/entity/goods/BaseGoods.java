@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
+import study.daydayup.wolf.business.goods.api.vo.Installment;
+import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.column.BusinessKey;
@@ -14,7 +16,10 @@ import study.daydayup.wolf.model.type.string.Name;
 import study.daydayup.wolf.model.type.string.Tags;
 import study.daydayup.wolf.model.type.string.URI;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
@@ -25,38 +30,25 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 public class BaseGoods extends Entity {
-    @BusinessKey @PrimaryKey @NotNull
+    @BusinessKey @PrimaryKey
     private long id;
-    @ForeignKey @NotNull
+    @ForeignKey @Min(1)
     private long orgId;
-    @ForeignKey @NotNull
+    @ForeignKey
     private long categoryId;
-
-    @NotNull
-    private Name name;
-    @NotNull
-    private Currency price;
-
-    @NotNull
-    private String feature;
-    @NotNull
-    private String vsPrice;
-    @NotNull
-    private String code;
-    @NotNull
-    private URI mainPic;
-    @NotNull
-    private URI mainVideo;
-    @NotNull
-    private Tags tags;
-
-    @NotNull
-    private DataVersion version;
-
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum
      */
     private int goodsType;
+    @NotBlank
+    private Name name;
+    @Min(1)
+    private long price;
+    @Min(1)
+    private int currency;
+    private int chargeUnit;
+
+
     /**
      * @see GoodsStateEnum
      */
@@ -66,4 +58,19 @@ public class BaseGoods extends Entity {
      */
     private int stockType;
 
+
+    private String vsPrice;
+    private String feature;
+    private String mainPic;
+    private String mainVideo;
+    private String code;
+    private String tags;
+
+    private long creator;
+
+    private Loan loan;
+    private List<Installment> installments;
+
+
+    private int version;
 }

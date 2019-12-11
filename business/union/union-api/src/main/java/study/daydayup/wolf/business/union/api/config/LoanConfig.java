@@ -11,6 +11,7 @@ import study.daydayup.wolf.common.lang.enums.finance.PrepayStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.finance.RepayStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.unit.DurationEnum;
 import study.daydayup.wolf.common.lang.enums.unit.InterestEnum;
+import study.daydayup.wolf.common.lang.enums.unit.UnitEnum;
 
 /**
  * study.daydayup.wolf.business.union.api.config
@@ -29,10 +30,11 @@ public class LoanConfig {
     private int amountStrategy      = 0;
     private int feePayStrategy      = FeeStrategyEnum.PRE.getCode();
 
-    private int goodsType           = GoodsTypeEnum.LOAN_GOODS.getCode();
+    private int goodsType           = GoodsTypeEnum.LOAN.getCode();
     private int stockType           = StockTypeEnum.NO_STOCK.getCode();
     private int categoryId          = 0;
-    private byte state              = (byte) GoodsStateEnum.SALABLE.getCode();
+    private int state               = GoodsStateEnum.SALABLE.getCode();
     private int currency            = IndianRupeeEnum.RUPEE.getCode();
+    private int chargeUnit          = UnitEnum.NONE.getCode();
 
 }
