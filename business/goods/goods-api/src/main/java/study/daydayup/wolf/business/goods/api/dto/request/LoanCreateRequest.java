@@ -2,10 +2,8 @@ package study.daydayup.wolf.business.goods.api.dto.request;
 
 import lombok.Data;
 import study.daydayup.wolf.business.goods.api.entity.Installment;
-import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**

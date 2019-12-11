@@ -10,19 +10,16 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/18 5:44 下午
  **/
 @Getter
-public enum SoldStateEnum implements CodeBasedEnum {
-    TIMER_STOCK(60, "时段库存"),
-    TOKEN_STOCK(50, "令牌库存"),
-    NUMBER_STOCK(40, "数字库存"),
-    BOOL_STOCK(30, "是否库存"),
-    SOLD_STATE_STOCK(20, "上下架库存"),
-    NO_STOCK(10, "无库存")
+public enum GoodsStateEnum implements CodeBasedEnum {
+    UNSALABLE(2, "下架"),
+    SALABLE(1, "上架"),
+    DEFAULT(0, "默认")
     ;
 
     private int code;
     private String desc;
 
-    SoldStateEnum(int code, String desc) {
+    GoodsStateEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

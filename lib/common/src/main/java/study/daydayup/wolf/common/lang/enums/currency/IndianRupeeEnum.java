@@ -13,6 +13,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 public enum IndianRupeeEnum implements CodeBasedEnum {
     CRORE(1009104,"crore"),
     LAKH(1009103, "lakh"),
+    //1rupee = 100paise
     PAISE(1009102, "paise"),
     RUPEE(1009101,"rupee")
     ;

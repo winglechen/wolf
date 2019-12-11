@@ -76,19 +76,23 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <dependency>
-                <groupId>study.daydayup.wolf.boot</groupId>
-                <artifactId>wolf-boot-starter</artifactId>
-                <version>${wolf-boot.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>study.daydayup.wolf.boot</groupId>
                 <artifactId>wolf-business-dependencies</artifactId>
                 <version>${wolf-business.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>study.daydayup.wolf.boot</groupId>
+                <artifactId>wolf-boot-starter</artifactId>
+                <version>${wolf-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.boot</groupId>
+                <artifactId>wolf-business-starter</artifactId>
+                <version>${wolf-business.version}</version>
             </dependency>
 
 

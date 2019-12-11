@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.column.BusinessKey;
@@ -54,9 +55,9 @@ public class BaseGoods extends Entity {
      */
     private int goodsType;
     /**
-     * @see study.daydayup.wolf.business.goods.api.enums.SoldStateEnum
+     * @see GoodsStateEnum
      */
-    private int soldState;
+    private int state;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.StockTypeEnum
      */
