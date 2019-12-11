@@ -9,9 +9,10 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="price" jdbcType="BIGINT" property="price" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
-    <result column="chargeUnit" jdbcType="INTEGER" property="chargeunit" />
+    <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="stock_type" jdbcType="INTEGER" property="stockType" />
+    <result column="sku_type" jdbcType="INTEGER" property="skuType" />
     <result column="vs_price" jdbcType="VARCHAR" property="vsPrice" />
     <result column="feature" jdbcType="VARCHAR" property="feature" />
     <result column="main_pic" jdbcType="VARCHAR" property="mainPic" />
@@ -26,9 +27,9 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, category_id, goods_type, name, price, currency, chargeUnit, state, stock_type, 
-    vs_price, feature, main_pic, main_video, code, tags, creator, version, delete_flag, 
-    last_editor, created_at, updated_at
+    id, org_id, category_id, goods_type, `name`, price, currency, charge_unit, `state`, 
+    stock_type, sku_type, vs_price, feature, main_pic, main_video, code, tags, creator, 
+    version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -41,21 +42,21 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into goods (org_id, category_id, goods_type, 
-      name, price, currency, 
-      chargeUnit, state, stock_type, 
-      vs_price, feature, main_pic, 
-      main_video, code, tags, 
-      creator, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      `name`, price, currency, 
+      charge_unit, `state`, stock_type, 
+      sku_type, vs_price, feature, 
+      main_pic, main_video, code, 
+      tags, creator, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, #{goodsType,jdbcType=SMALLINT}, 
       #{name,jdbcType=VARCHAR}, #{price,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
-      #{chargeunit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
-      #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{mainPic,jdbcType=VARCHAR}, 
-      #{mainVideo,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{chargeUnit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
+      #{skuType,jdbcType=INTEGER}, #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
+      #{mainPic,jdbcType=VARCHAR}, #{mainVideo,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -73,7 +74,7 @@
         goods_type,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="price != null">
         price,
@@ -81,14 +82,17 @@
       <if test="currency != null">
         currency,
       </if>
-      <if test="chargeunit != null">
-        chargeUnit,
+      <if test="chargeUnit != null">
+        charge_unit,
       </if>
       <if test="state != null">
-        state,
+        `state`,
       </if>
       <if test="stockType != null">
         stock_type,
+      </if>
+      <if test="skuType != null">
+        sku_type,
       </if>
       <if test="vsPrice != null">
         vs_price,
@@ -144,14 +148,17 @@
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
       </if>
-      <if test="chargeunit != null">
-        #{chargeunit,jdbcType=INTEGER},
+      <if test="chargeUnit != null">
+        #{chargeUnit,jdbcType=INTEGER},
       </if>
       <if test="state != null">
         #{state,jdbcType=TINYINT},
       </if>
       <if test="stockType != null">
         #{stockType,jdbcType=INTEGER},
+      </if>
+      <if test="skuType != null">
+        #{skuType,jdbcType=INTEGER},
       </if>
       <if test="vsPrice != null">
         #{vsPrice,jdbcType=VARCHAR},
@@ -202,7 +209,7 @@
         goods_type = #{goodsType,jdbcType=SMALLINT},
       </if>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=BIGINT},
@@ -210,14 +217,17 @@
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
       </if>
-      <if test="chargeunit != null">
-        chargeUnit = #{chargeunit,jdbcType=INTEGER},
+      <if test="chargeUnit != null">
+        charge_unit = #{chargeUnit,jdbcType=INTEGER},
       </if>
       <if test="state != null">
-        state = #{state,jdbcType=TINYINT},
+        `state` = #{state,jdbcType=TINYINT},
       </if>
       <if test="stockType != null">
         stock_type = #{stockType,jdbcType=INTEGER},
+      </if>
+      <if test="skuType != null">
+        sku_type = #{skuType,jdbcType=INTEGER},
       </if>
       <if test="vsPrice != null">
         vs_price = #{vsPrice,jdbcType=VARCHAR},
@@ -263,12 +273,13 @@
     set org_id = #{orgId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=INTEGER},
       goods_type = #{goodsType,jdbcType=SMALLINT},
-      name = #{name,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=BIGINT},
       currency = #{currency,jdbcType=INTEGER},
-      chargeUnit = #{chargeunit,jdbcType=INTEGER},
-      state = #{state,jdbcType=TINYINT},
+      charge_unit = #{chargeUnit,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=TINYINT},
       stock_type = #{stockType,jdbcType=INTEGER},
+      sku_type = #{skuType,jdbcType=INTEGER},
       vs_price = #{vsPrice,jdbcType=VARCHAR},
       feature = #{feature,jdbcType=VARCHAR},
       main_pic = #{mainPic,jdbcType=VARCHAR},

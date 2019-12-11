@@ -71,6 +71,7 @@ public class GoodsLoanDO implements Serializable {
         sb.append(", interestUnit=").append(interestUnit);
         sb.append(", belatedPayment=").append(belatedPayment);
         sb.append(", belatedPaymentUnit=").append(belatedPaymentUnit);
+        sb.append(", installment=").append(installment);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -107,6 +108,7 @@ public class GoodsLoanDO implements Serializable {
             && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
             && (this.getBelatedPayment() == null ? other.getBelatedPayment() == null : this.getBelatedPayment().equals(other.getBelatedPayment()))
             && (this.getBelatedPaymentUnit() == null ? other.getBelatedPaymentUnit() == null : this.getBelatedPaymentUnit().equals(other.getBelatedPaymentUnit()))
+            && (this.getInstallment() == null ? other.getInstallment() == null : this.getInstallment().equals(other.getInstallment()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -133,6 +135,7 @@ public class GoodsLoanDO implements Serializable {
         result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
         result = prime * result + ((getBelatedPayment() == null) ? 0 : getBelatedPayment().hashCode());
         result = prime * result + ((getBelatedPaymentUnit() == null) ? 0 : getBelatedPaymentUnit().hashCode());
+        result = prime * result + ((getInstallment() == null) ? 0 : getInstallment().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

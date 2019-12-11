@@ -1,8 +1,9 @@
 package study.daydayup.wolf.business.goods.biz.dal.dao;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 
+@Mapper
 public interface GoodsDAO {
     int insert(GoodsDO record);
 
@@ -13,10 +14,4 @@ public interface GoodsDAO {
     int updateByIdSelective(GoodsDO record);
 
     int updateById(GoodsDO record);
-
-    int updateStateById(@Param("updatedState")Byte updatedState,@Param("id")Long id);
-
-
-
-
 }

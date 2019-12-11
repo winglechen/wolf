@@ -10,15 +10,17 @@
         <!-- 格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
-        <property name="beginningDelimiter" value="`"/>
-        <property name="endingDelimiter" value="`"/>
-
         <!--
+
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin">
         -->
 
@@ -74,6 +76,8 @@
                enableSelectByExample="false"
         >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="goods_type" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 

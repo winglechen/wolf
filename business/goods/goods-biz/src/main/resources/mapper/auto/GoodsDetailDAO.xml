@@ -4,45 +4,39 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="pics" jdbcType="VARCHAR" property="pics" />
+    <result column="sku_info" jdbcType="VARCHAR" property="skuInfo" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs">
-    <result column="pics" jdbcType="LONGVARCHAR" property="pics" />
-    <result column="sku_info" jdbcType="LONGVARCHAR" property="skuInfo" />
-    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
-  </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, version, delete_flag, last_editor, created_at, updated_at
+    id, org_id, pics, sku_info, detail, version, delete_flag, last_editor, created_at, 
+    updated_at
   </sql>
-  <sql id="Blob_Column_List">
-    pics, sku_info, detail
-  </sql>
-  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from goods_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs">
+  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods_detail (org_id, version, delete_flag, 
-      last_editor, created_at, updated_at, 
-      pics, sku_info, detail
+    insert into goods_detail (org_id, pics, sku_info, 
+      detail, version, delete_flag, 
+      last_editor, created_at, updated_at
       )
-    values (#{orgId,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
-      #{pics,jdbcType=LONGVARCHAR}, #{skuInfo,jdbcType=LONGVARCHAR}, #{detail,jdbcType=LONGVARCHAR}
+    values (#{orgId,jdbcType=BIGINT}, #{pics,jdbcType=VARCHAR}, #{skuInfo,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs">
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -50,6 +44,15 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orgId != null">
         org_id,
+      </if>
+      <if test="pics != null">
+        pics,
+      </if>
+      <if test="skuInfo != null">
+        sku_info,
+      </if>
+      <if test="detail != null">
+        detail,
       </if>
       <if test="version != null">
         version,
@@ -64,19 +67,19 @@
       <if test="updatedAt != null">
         updated_at,
       </if>
-      <if test="pics != null">
-        pics,
-      </if>
-      <if test="skuInfo != null">
-        sku_info,
-      </if>
-      <if test="detail != null">
-        detail,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="pics != null">
+        #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInfo != null">
+        #{skuInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -91,22 +94,22 @@
       <if test="updatedAt != null">
         #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="pics != null">
-        #{pics,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="skuInfo != null">
-        #{skuInfo,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="detail != null">
-        #{detail,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs">
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     update goods_detail
     <set>
       <if test="orgId != null">
         org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="pics != null">
+        pics = #{pics,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInfo != null">
+        sku_info = #{skuInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -123,34 +126,15 @@
       <if test="updatedAt != null">
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="pics != null">
-        pics = #{pics,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="skuInfo != null">
-        sku_info = #{skuInfo,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="detail != null">
-        detail = #{detail,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs">
-    update goods_detail
-    set org_id = #{orgId,jdbcType=BIGINT},
-      version = #{version,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=TINYINT},
-      last_editor = #{lastEditor,jdbcType=BIGINT},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      pics = #{pics,jdbcType=LONGVARCHAR},
-      sku_info = #{skuInfo,jdbcType=LONGVARCHAR},
-      detail = #{detail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     update goods_detail
     set org_id = #{orgId,jdbcType=BIGINT},
+      pics = #{pics,jdbcType=VARCHAR},
+      sku_info = #{skuInfo,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

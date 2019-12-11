@@ -16,7 +16,7 @@ public class SkuDO implements Serializable {
 
     private Integer currency;
 
-    private Integer chargeunit;
+    private Integer chargeUnit;
 
     private Integer stockType;
 
@@ -47,7 +47,7 @@ public class SkuDO implements Serializable {
         sb.append(", orgId=").append(orgId);
         sb.append(", price=").append(price);
         sb.append(", currency=").append(currency);
-        sb.append(", chargeunit=").append(chargeunit);
+        sb.append(", chargeUnit=").append(chargeUnit);
         sb.append(", stockType=").append(stockType);
         sb.append(", sku=").append(sku);
         sb.append(", skuKey=").append(skuKey);
@@ -77,7 +77,7 @@ public class SkuDO implements Serializable {
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
-            && (this.getChargeunit() == null ? other.getChargeunit() == null : this.getChargeunit().equals(other.getChargeunit()))
+            && (this.getChargeUnit() == null ? other.getChargeUnit() == null : this.getChargeUnit().equals(other.getChargeUnit()))
             && (this.getStockType() == null ? other.getStockType() == null : this.getStockType().equals(other.getStockType()))
             && (this.getSku() == null ? other.getSku() == null : this.getSku().equals(other.getSku()))
             && (this.getSkuKey() == null ? other.getSkuKey() == null : this.getSkuKey().equals(other.getSkuKey()))
@@ -97,7 +97,7 @@ public class SkuDO implements Serializable {
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
-        result = prime * result + ((getChargeunit() == null) ? 0 : getChargeunit().hashCode());
+        result = prime * result + ((getChargeUnit() == null) ? 0 : getChargeUnit().hashCode());
         result = prime * result + ((getStockType() == null) ? 0 : getStockType().hashCode());
         result = prime * result + ((getSku() == null) ? 0 : getSku().hashCode());
         result = prime * result + ((getSkuKey() == null) ? 0 : getSkuKey().hashCode());

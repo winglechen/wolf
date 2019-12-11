@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `sku`
 
     `price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
     `currency`      INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
-    `chargeUnit`    INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
+    `charge_unit`   INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
     `stock_type`    INT(10) NOT NULL DEFAULT 0 COMMENT '库存类型',
     `sku`           VARCHAR(1000) NOT NULL DEFAULT '' COMMENT 'sku',
     `sku_key`       VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'skuKey',

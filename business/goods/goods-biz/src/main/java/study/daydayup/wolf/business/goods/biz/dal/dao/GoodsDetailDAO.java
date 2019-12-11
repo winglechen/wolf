@@ -1,18 +1,17 @@
 package study.daydayup.wolf.business.goods.biz.dal.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO;
-import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDOWithBLOBs;
 
+@Mapper
 public interface GoodsDetailDAO {
-    int insert(GoodsDetailDOWithBLOBs record);
+    int insert(GoodsDetailDO record);
 
-    int insertSelective(GoodsDetailDOWithBLOBs record);
+    int insertSelective(GoodsDetailDO record);
 
-    GoodsDetailDOWithBLOBs selectById(Long id);
+    GoodsDetailDO selectById(Long id);
 
-    int updateByIdSelective(GoodsDetailDOWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(GoodsDetailDOWithBLOBs record);
+    int updateByIdSelective(GoodsDetailDO record);
 
     int updateById(GoodsDetailDO record);
 }

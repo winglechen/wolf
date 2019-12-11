@@ -17,6 +17,7 @@
     <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
     <result column="belated_payment" jdbcType="INTEGER" property="belatedPayment" />
     <result column="belated_payment_unit" jdbcType="INTEGER" property="belatedPaymentUnit" />
+    <result column="installment" jdbcType="VARCHAR" property="installment" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -26,8 +27,8 @@
   <sql id="Base_Column_List">
     id, goods_id, org_id, repay_strategy, prepay_strategy, amount_strategy, handling_fee_rate, 
     fee_pay_strategy, duration, duration_unit, duration_strategy, interest, interest_unit, 
-    belated_payment, belated_payment_unit, version, delete_flag, last_editor, created_at, 
-    updated_at
+    belated_payment, belated_payment_unit, installment, version, delete_flag, last_editor, 
+    created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -43,16 +44,16 @@
       prepay_strategy, amount_strategy, handling_fee_rate, 
       fee_pay_strategy, duration, duration_unit, 
       duration_strategy, interest, interest_unit, 
-      belated_payment, belated_payment_unit, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      belated_payment, belated_payment_unit, installment, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{repayStrategy,jdbcType=INTEGER}, 
       #{prepayStrategy,jdbcType=INTEGER}, #{amountStrategy,jdbcType=INTEGER}, #{handlingFeeRate,jdbcType=INTEGER}, 
       #{feePayStrategy,jdbcType=INTEGER}, #{duration,jdbcType=INTEGER}, #{durationUnit,jdbcType=INTEGER}, 
       #{durationStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER}, 
-      #{belatedPayment,jdbcType=INTEGER}, #{belatedPaymentUnit,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{belatedPayment,jdbcType=INTEGER}, #{belatedPaymentUnit,jdbcType=INTEGER}, #{installment,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -101,6 +102,9 @@
       </if>
       <if test="belatedPaymentUnit != null">
         belated_payment_unit,
+      </if>
+      <if test="installment != null">
+        installment,
       </if>
       <if test="version != null">
         version,
@@ -158,6 +162,9 @@
       </if>
       <if test="belatedPaymentUnit != null">
         #{belatedPaymentUnit,jdbcType=INTEGER},
+      </if>
+      <if test="installment != null">
+        #{installment,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -219,6 +226,9 @@
       <if test="belatedPaymentUnit != null">
         belated_payment_unit = #{belatedPaymentUnit,jdbcType=INTEGER},
       </if>
+      <if test="installment != null">
+        installment = #{installment,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -253,6 +263,7 @@
       interest_unit = #{interestUnit,jdbcType=INTEGER},
       belated_payment = #{belatedPayment,jdbcType=INTEGER},
       belated_payment_unit = #{belatedPaymentUnit,jdbcType=INTEGER},
+      installment = #{installment,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

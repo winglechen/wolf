@@ -12,7 +12,7 @@ public class GoodsDO implements Serializable {
 
     private Integer categoryId;
 
-    private Short goodsType;
+    private Integer goodsType;
 
     private String name;
 
@@ -20,11 +20,13 @@ public class GoodsDO implements Serializable {
 
     private Integer currency;
 
-    private Integer chargeunit;
+    private Integer chargeUnit;
 
-    private Byte state;
+    private Integer state;
 
     private Integer stockType;
+
+    private Integer skuType;
 
     private String vsPrice;
 
@@ -65,9 +67,10 @@ public class GoodsDO implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", price=").append(price);
         sb.append(", currency=").append(currency);
-        sb.append(", chargeunit=").append(chargeunit);
+        sb.append(", chargeUnit=").append(chargeUnit);
         sb.append(", state=").append(state);
         sb.append(", stockType=").append(stockType);
+        sb.append(", skuType=").append(skuType);
         sb.append(", vsPrice=").append(vsPrice);
         sb.append(", feature=").append(feature);
         sb.append(", mainPic=").append(mainPic);
@@ -103,9 +106,10 @@ public class GoodsDO implements Serializable {
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
-            && (this.getChargeunit() == null ? other.getChargeunit() == null : this.getChargeunit().equals(other.getChargeunit()))
+            && (this.getChargeUnit() == null ? other.getChargeUnit() == null : this.getChargeUnit().equals(other.getChargeUnit()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getStockType() == null ? other.getStockType() == null : this.getStockType().equals(other.getStockType()))
+            && (this.getSkuType() == null ? other.getSkuType() == null : this.getSkuType().equals(other.getSkuType()))
             && (this.getVsPrice() == null ? other.getVsPrice() == null : this.getVsPrice().equals(other.getVsPrice()))
             && (this.getFeature() == null ? other.getFeature() == null : this.getFeature().equals(other.getFeature()))
             && (this.getMainPic() == null ? other.getMainPic() == null : this.getMainPic().equals(other.getMainPic()))
@@ -131,9 +135,10 @@ public class GoodsDO implements Serializable {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
-        result = prime * result + ((getChargeunit() == null) ? 0 : getChargeunit().hashCode());
+        result = prime * result + ((getChargeUnit() == null) ? 0 : getChargeUnit().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getStockType() == null) ? 0 : getStockType().hashCode());
+        result = prime * result + ((getSkuType() == null) ? 0 : getSkuType().hashCode());
         result = prime * result + ((getVsPrice() == null) ? 0 : getVsPrice().hashCode());
         result = prime * result + ((getFeature() == null) ? 0 : getFeature().hashCode());
         result = prime * result + ((getMainPic() == null) ? 0 : getMainPic().hashCode());

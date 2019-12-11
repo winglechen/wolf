@@ -7,7 +7,7 @@
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="price" jdbcType="BIGINT" property="price" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
-    <result column="chargeUnit" jdbcType="INTEGER" property="chargeunit" />
+    <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="stock_type" jdbcType="INTEGER" property="stockType" />
     <result column="sku" jdbcType="VARCHAR" property="sku" />
     <result column="sku_key" jdbcType="VARCHAR" property="skuKey" />
@@ -18,7 +18,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, goods_id, org_id, price, currency, chargeUnit, stock_type, sku, sku_key, version, 
+    id, goods_id, org_id, price, currency, charge_unit, stock_type, sku, sku_key, version, 
     delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -32,12 +32,12 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into sku (goods_id, org_id, price, 
-      currency, chargeUnit, stock_type, 
+      currency, charge_unit, stock_type, 
       sku, sku_key, version, 
       delete_flag, last_editor, created_at, 
       updated_at)
     values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{price,jdbcType=BIGINT}, 
-      #{currency,jdbcType=INTEGER}, #{chargeunit,jdbcType=INTEGER}, #{stockType,jdbcType=INTEGER}, 
+      #{currency,jdbcType=INTEGER}, #{chargeUnit,jdbcType=INTEGER}, #{stockType,jdbcType=INTEGER}, 
       #{sku,jdbcType=VARCHAR}, #{skuKey,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
@@ -60,8 +60,8 @@
       <if test="currency != null">
         currency,
       </if>
-      <if test="chargeunit != null">
-        chargeUnit,
+      <if test="chargeUnit != null">
+        charge_unit,
       </if>
       <if test="stockType != null">
         stock_type,
@@ -99,8 +99,8 @@
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
       </if>
-      <if test="chargeunit != null">
-        #{chargeunit,jdbcType=INTEGER},
+      <if test="chargeUnit != null">
+        #{chargeUnit,jdbcType=INTEGER},
       </if>
       <if test="stockType != null">
         #{stockType,jdbcType=INTEGER},
@@ -141,8 +141,8 @@
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
       </if>
-      <if test="chargeunit != null">
-        chargeUnit = #{chargeunit,jdbcType=INTEGER},
+      <if test="chargeUnit != null">
+        charge_unit = #{chargeUnit,jdbcType=INTEGER},
       </if>
       <if test="stockType != null">
         stock_type = #{stockType,jdbcType=INTEGER},
@@ -177,7 +177,7 @@
       org_id = #{orgId,jdbcType=BIGINT},
       price = #{price,jdbcType=BIGINT},
       currency = #{currency,jdbcType=INTEGER},
-      chargeUnit = #{chargeunit,jdbcType=INTEGER},
+      charge_unit = #{chargeUnit,jdbcType=INTEGER},
       stock_type = #{stockType,jdbcType=INTEGER},
       sku = #{sku,jdbcType=VARCHAR},
       sku_key = #{skuKey,jdbcType=VARCHAR},
