@@ -36,6 +36,8 @@
     <include refid="Base_Column_List" />
     from goods
     where id = #{id,jdbcType=BIGINT}
+    and org_id = #{orgId,jdbcType=BIGINT}
+    limit 1
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">

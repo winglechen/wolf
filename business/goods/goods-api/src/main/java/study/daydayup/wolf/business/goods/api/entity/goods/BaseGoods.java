@@ -28,8 +28,9 @@ import java.util.List;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
-@Builder
 public class BaseGoods extends Entity {
+    @Builder
+    public BaseGoods() {}
     @BusinessKey @PrimaryKey
     private long id;
     @ForeignKey @Min(1)
@@ -67,10 +68,6 @@ public class BaseGoods extends Entity {
     private String tags;
 
     private long creator;
-
-    private Loan loan;
-    private List<Installment> installments;
-
 
     private int version;
 }
