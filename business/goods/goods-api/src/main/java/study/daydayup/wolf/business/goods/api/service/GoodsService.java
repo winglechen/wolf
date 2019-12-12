@@ -21,4 +21,5 @@ public interface GoodsService {
 
     int listing(long goodsId, long orgId);
     int delisting(long goodsId, long orgId);
+    int delistingAll(long orgId);
 }

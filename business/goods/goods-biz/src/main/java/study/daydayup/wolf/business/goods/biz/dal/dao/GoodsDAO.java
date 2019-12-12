@@ -22,4 +22,8 @@ public interface GoodsDAO {
 
     List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
 
+    int updateStateByOrgId(@Param("orgId")Long orgId, @Param("oldState")Integer oldState, @Param("newState") Integer newSate);
+
+
+
 }

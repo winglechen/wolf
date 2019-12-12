@@ -19,10 +19,10 @@ import java.util.List;
 public class Goods extends BaseGoods {
     @Builder
     public Goods() {}
-    private String pics;
-    private String skuInfo;
-    private String detail;
+    protected String pics;
+    protected String skuInfo;
+    protected String detail;
 
-    private List<Sku> skuList;
+    protected List<Sku> skuList;
 
 }

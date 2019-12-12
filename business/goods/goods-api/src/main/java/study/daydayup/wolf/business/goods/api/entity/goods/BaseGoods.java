@@ -32,42 +32,42 @@ public class BaseGoods extends Entity {
     @Builder
     public BaseGoods() {}
     @BusinessKey @PrimaryKey
-    private long id;
+    protected long id;
     @ForeignKey @Min(1)
-    private long orgId;
+    protected long orgId;
     @ForeignKey
-    private long categoryId;
+    protected long categoryId;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum
      */
-    private int goodsType;
+    protected int goodsType;
     @NotBlank
-    private Name name;
+    protected Name name;
     @Min(1)
-    private long price;
+    protected long price;
     @Min(1)
-    private int currency;
-    private int chargeUnit;
+    protected int currency;
+    protected int chargeUnit;
 
 
     /**
      * @see GoodsStateEnum
      */
-    private int state;
+    protected int state;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.StockTypeEnum
      */
-    private int stockType;
+    protected int stockType;
 
 
-    private String vsPrice;
-    private String feature;
-    private String mainPic;
-    private String mainVideo;
-    private String code;
-    private String tags;
+    protected String vsPrice;
+    protected String feature;
+    protected String mainPic;
+    protected String mainVideo;
+    protected String code;
+    protected String tags;
 
-    private long creator;
+    protected long creator;
 
-    private int version;
+    protected int version;
 }
