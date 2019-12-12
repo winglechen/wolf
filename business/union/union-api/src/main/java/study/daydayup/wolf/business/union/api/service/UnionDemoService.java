@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.api;
+package study.daydayup.wolf.business.union.api.service;
 
 /**
  * study.daydayup.wolf.business.union.api

@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.union.deploy.web.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.union.api.UnionDemoService;
+import study.daydayup.wolf.business.union.api.service.UnionDemoService;
 
 /**
  * study.daydayup.wolf.business.union.deploy.web.controller

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.union.deploy.dubbo;
 
-import study.daydayup.wolf.business.union.api.UnionDemoService;
+import study.daydayup.wolf.business.union.api.service.UnionDemoService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 /**

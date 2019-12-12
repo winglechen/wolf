@@ -13,6 +13,7 @@ import java.util.List;
  **/
 public interface LoanService {
     long create(LoanGoods goods);
+    LoanGoods findById(long goodsId, long orgId);
     LoanGoods findById(long goodsId, long orgId, GoodsOption option);
     List<LoanGoods> findByOrgId(long orgId);
 

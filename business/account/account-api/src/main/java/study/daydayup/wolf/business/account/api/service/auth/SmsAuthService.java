@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
  * @author Wingle
  * @since 2019/9/27 5:19 PM
  **/
+//TODO return Result<?>
 public interface SmsAuthService {
     long register(SmsRequest request);
     OauthLicense login(SmsRequest request);

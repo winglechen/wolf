@@ -6,7 +6,6 @@ import java.util.Map;
 /**
  * Strategy interface for {@code String}-based path matching.
  *
- * <p>The default implementation is {@link com.xxl.sso.core.path.impl.AntPathMatcher}, supporting the Ant-style pattern syntax.		(borrowed from spring)
  */
 public interface PathMatcher {
 

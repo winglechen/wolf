@@ -48,7 +48,6 @@ public class SmsAuthServiceImpl implements SmsAuthService {
             System.out.println("invalid code:" + request.getCode());
             return null;
         }
-        System.out.println("valid code:" + request.getCode());
 
         //checkAccountExist
         long accountId = accountService.existByAccount(request.getMobile());

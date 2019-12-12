@@ -32,6 +32,11 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
+    public LoanGoods findById(long goodsId, long orgId) {
+        return findById(goodsId, orgId, null);
+    }
+
+    @Override
     public LoanGoods findById(long goodsId, long orgId, GoodsOption option) {
         LoanEntity entity = repository.findById(goodsId, orgId);
         if (entity == null) {
