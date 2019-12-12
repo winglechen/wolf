@@ -23,15 +23,13 @@ import study.daydayup.wolf.common.lang.enums.unit.UnitEnum;
  **/
 @Data
 @Component
-@ConfigurationProperties(prefix = "wolf.loan")
-public class LoanConfig {
-    private int interestUnit        = InterestEnum.COMPOUND_PER_DAY.getCode();
-    private int belatedPaymentUnit  = InterestEnum.RATE_PER_DAY.getCode();
-    private int durationUnit        = DurationEnum.DAYS.getCode();
-    private int durationStrategy    = DurationStrategyEnum.CLOSE_CLOSE.getCode();
-    private int repayStrategy       = RepayStrategyEnum.CONTRACT.getCode();
-    private int prepayStrategy      = PrepayStrategyEnum.CONTRACT.getCode();
-    private int amountStrategy      = 0;
-    private int feePayStrategy      = FeeStrategyEnum.PRE.getCode();
+@ConfigurationProperties(prefix = "wolf.goods")
+public class GoodsConfig {
+    private int goodsType           = GoodsTypeEnum.LOAN.getCode();
+    private int stockType           = StockTypeEnum.NO_STOCK.getCode();
+    private int categoryId          = 0;
+    private int state               = GoodsStateEnum.SALABLE.getCode();
+    private int currency            = IndianRupeeEnum.RUPEE.getCode();
+    private int chargeUnit          = UnitEnum.NONE.getCode();
 
 }
