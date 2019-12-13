@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.exception.FailedCreateLoanException;
+import study.daydayup.wolf.business.goods.api.exception.GoodsNotFoundException;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO;
@@ -44,6 +45,18 @@ public class LoanRepository extends Repository {
         saveInstallmentDO(goodsId, entity);
 
         return goodsId;
+    }
+
+    public int modify(LoanEntity entity) {
+        if (entity == null) {
+            return 0;
+        }
+
+        modifyGoodsDO(entity);
+        modifyLoanDO(entity);
+        modifyInstallmentDO(entity);
+
+        return 1;
     }
 
     public LoanEntity findById(long id, long orgId) {
@@ -130,12 +143,24 @@ public class LoanRepository extends Repository {
         return (long)id;
     }
 
+    private int modifyGoodsDO(LoanEntity entity) {
+        long id = entity.getId();
+        if (id <= 0) {
+            throw new GoodsNotFoundException();
+        }
+
+        GoodsDO goodsDO = new GoodsDO();
+        BeanUtils.copyProperties(entity, goodsDO);
+        return goodsDAO.updateByIdSelective(goodsDO);
+    }
+
     private void saveLoanDO(long goodsId, LoanEntity entity) {
         GoodsLoanDO loanDO = new GoodsLoanDO();
         BeanUtils.copyProperties(entity.getLoan(), loanDO);
 
         loanDO.setId(null);
         loanDO.setGoodsId(goodsId);
+        loanDO.setOrgId(entity.getOrgId());
 
         String installments = JSON.toJSONString(entity.getInstallmentList());
         loanDO.setInstallment(installments);
@@ -143,7 +168,28 @@ public class LoanRepository extends Repository {
         loanDAO.insertSelective(loanDO);
     }
 
+    private int modifyLoanDO(LoanEntity entity) {
+        Loan loan = entity.getLoan();
+
+        GoodsLoanDO loanDO = new GoodsLoanDO();
+        BeanUtils.copyProperties(loan, loanDO);
+
+        loanDO.setId(null);
+        loanDO.setOrgId(entity.getOrgId());
+        loanDO.setGoodsId(entity.getId());
+
+        String installments = JSON.toJSONString(entity.getInstallmentList());
+        loanDO.setInstallment(installments);
+
+        return loanDAO.updateByGoodsIdSelective(loanDO);
+    }
+
     private void saveInstallmentDO(long goodsId, LoanEntity entity) {
 
     }
+
+    private int modifyInstallmentDO(LoanEntity entity) {
+        return 1;
+    }
+
 }

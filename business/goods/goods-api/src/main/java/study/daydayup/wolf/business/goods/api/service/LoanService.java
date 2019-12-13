@@ -18,4 +18,5 @@ public interface LoanService {
     List<LoanGoods> findByOrgId(long orgId);
 
     int modify(LoanGoods goods);
+    int remove(long goodsId, long orgId);
 }

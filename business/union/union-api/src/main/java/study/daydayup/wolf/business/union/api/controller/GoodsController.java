@@ -7,11 +7,11 @@ import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
+import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.goods.api.service.LoanService;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.union.api.config.GoodsConfig;
 import study.daydayup.wolf.business.union.api.config.LoanConfig;
-import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
@@ -26,9 +26,11 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/api/v1")
-public class GoodsController extends Controller {
+public class GoodsController extends BaseController {
     @Reference
     private LoanService loanService;
+    @Reference
+    private GoodsService goodsService;
     @Resource
     private GoodsConfig goodsConfig;
     @Resource
@@ -39,11 +41,13 @@ public class GoodsController extends Controller {
     @PostMapping("/goods")
     public Result create(@Valid @RequestBody LoanGoods goods) {
         BeanUtils.copyProperties(goodsConfig, goods);
-        goods.setId(0);
 
         Loan loan = goods.getLoan();
         BeanUtils.copyProperties(loanConfig, loan);
         goods.setLoan(loan);
+
+        goods.setId(0);
+        goods.setOrgId(getFromSession("orgId", Long.class));
 
         loanService.create(goods);
         return Result.ok();
@@ -55,18 +59,18 @@ public class GoodsController extends Controller {
             throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
         }
 
-        Long orgId = (Long)session.get("orgId");
-        if (orgId == null) {
-            throw new SessionNotFoundException("orgId");
-        }
-
+        Long orgId = getFromSession("orgId", Long.class);
         LoanGoods goods = loanService.findById(goodsId, orgId);
+
         return Result.ok(goods);
     }
 
     @GetMapping("/goods")
     public Result<List<LoanGoods>> findByOrgId() {
-        return Result.ok();
+        Long orgId = getFromSession("orgId", Long.class);
+        List<LoanGoods> goods = loanService.findByOrgId(orgId);
+
+        return Result.ok(goods);
     }
 
     @PostMapping("/goods/search")
@@ -75,22 +79,36 @@ public class GoodsController extends Controller {
     }
 
     @PutMapping("/goods")
-    public Result modify(@RequestBody Goods goods) {
+    public Result modify(@Valid @RequestBody LoanGoods goods) {
+        Long orgId = getFromSession("orgId", Long.class);
+        goods.setOrgId(orgId);
+
+        loanService.modify(goods);
         return Result.ok();
     }
 
     @DeleteMapping("/goods/{goodsId}")
     public Result remove(@RequestParam("goodsId") long goodsId) {
+        Long orgId = getFromSession("orgId", Long.class);
+        goodsService.remove(goodsId, orgId);
         return Result.ok();
     }
 
     @PutMapping("/goods/{goodsId}")
     public Result listing(@RequestParam("goodsId") long goodsId) {
+        Long orgId = getFromSession("orgId", Long.class);
+
+        goodsService.delistingAll(orgId);
+        goodsService.listing(goodsId, orgId);
+
         return Result.ok();
     }
 
     @PutMapping("/goods/{goodsId}")
     public Result delisting(@RequestParam("goodsId") long goodsId) {
+        Long orgId = getFromSession("orgId", Long.class);
+        goodsService.delisting(goodsId, orgId);
+
         return Result.ok();
     }
 }

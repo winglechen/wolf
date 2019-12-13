@@ -42,6 +42,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public int remove(long goodsId, long orgId) {
+        GoodsEntity entity = new GoodsEntity(goodsId, orgId);
+        return entity.trash();
+    }
+
+    @Override
     public int listing(long goodsId, long orgId) {
         GoodsEntity entity = new GoodsEntity(goodsId, orgId);
         return entity.listing();

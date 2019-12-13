@@ -18,6 +18,7 @@ public interface GoodsService {
 
     long create(Goods goods);
     int modify(Goods goods);
+    int remove(long goodsId, long orgId);
 
     int listing(long goodsId, long orgId);
     int delisting(long goodsId, long orgId);

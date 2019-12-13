@@ -16,6 +16,8 @@ public interface GoodsLoanDAO {
 
     int updateByIdSelective(GoodsLoanDO record);
 
+    int updateByGoodsIdSelective(GoodsLoanDO record);
+
     int updateById(GoodsLoanDO record);
 
     List<GoodsLoanDO> selectByGoodsIdIn(@Param("goodsIdCollection")Collection<Long> goodsIdCollection, @Param("orgId") long orgId);

@@ -40,4 +40,8 @@ public class GoodsEntity extends Goods {
         GoodsStateEnum state = GoodsStateEnum.UNSALABLE;
         return goodsDAO.updateStateById(id, orgId, state.getCode());
     }
+
+    public int trash() {
+        return goodsDAO.updateDeleteFlagById(id, orgId, true);
+    }
 }
