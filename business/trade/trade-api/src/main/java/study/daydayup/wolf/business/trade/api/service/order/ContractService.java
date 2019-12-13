@@ -7,4 +7,5 @@ package study.daydayup.wolf.business.trade.api.service.order;
  * @since 2019/10/9 6:56 下午
  **/
 public interface ContractService {
+    void phaseIn();
 }

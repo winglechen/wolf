@@ -17,6 +17,7 @@ public class GoodsRequest {
 
     private int amount;
 
+    private int giftFlag;
     private long promotionId;
 
     private GoodsMemo memo;

@@ -71,18 +71,6 @@ public class LoanRepository extends Repository {
         return getLoanByGoodsDO(goodsDO);
     }
 
-    private LoanEntity getLoanByGoodsDO(GoodsDO goodsDO) {
-        if (null == goodsDO) {
-            return null;
-        }
-
-        LoanEntity entity = new LoanEntity();
-        BeanUtils.copyProperties(goodsDO, entity);
-
-        GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
-        return setLoanToEntity(entity, loanDO);
-    }
-
     public List<LoanEntity> findByOrgId(long orgId) {
         List<GoodsDO> goodsDOList = goodsDAO.selectByOrgId(orgId);
         if (goodsDOList.isEmpty()) {
@@ -100,6 +88,19 @@ public class LoanRepository extends Repository {
         }
 
         return entityList;
+    }
+
+    // private methods stat
+    private LoanEntity getLoanByGoodsDO(GoodsDO goodsDO) {
+        if (null == goodsDO) {
+            return null;
+        }
+
+        LoanEntity entity = new LoanEntity();
+        BeanUtils.copyProperties(goodsDO, entity);
+
+        GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
+        return setLoanToEntity(entity, loanDO);
     }
 
     private LoanEntity mergeGoodsAndLoan(GoodsDO goodsDO, GoodsLoanDO loanDO) {

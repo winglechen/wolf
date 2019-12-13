@@ -44,4 +44,5 @@ public class GoodsEntity extends Goods {
     public int trash() {
         return goodsDAO.updateDeleteFlagById(id, orgId, true);
     }
+
 }
