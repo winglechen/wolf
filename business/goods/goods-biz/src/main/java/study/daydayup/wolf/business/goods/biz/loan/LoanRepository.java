@@ -61,14 +61,25 @@ public class LoanRepository extends Repository {
 
     public LoanEntity findById(long id, long orgId) {
         GoodsDO goodsDO = goodsDAO.selectById(id, orgId);
-        if (goodsDO == null) {
+
+        return getLoanByGoodsDO(goodsDO);
+    }
+
+    public LoanEntity findOneByOrgId(long orgId) {
+        GoodsDO goodsDO = goodsDAO.selectOneByOrgId(orgId);
+
+        return getLoanByGoodsDO(goodsDO);
+    }
+
+    private LoanEntity getLoanByGoodsDO(GoodsDO goodsDO) {
+        if (null == goodsDO) {
             return null;
         }
 
         LoanEntity entity = new LoanEntity();
         BeanUtils.copyProperties(goodsDO, entity);
 
-        GoodsLoanDO loanDO = loanDAO.selectById(goodsDO.getId());
+        GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
         return setLoanToEntity(entity, loanDO);
     }
 

@@ -65,6 +65,16 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
+    public LoanGoods findOneByOrgId(long orgId) {
+        LoanEntity entity = repository.findOneByOrgId(orgId);
+        if (null == entity) {
+            return null;
+        }
+
+        return (LoanGoods) entity;
+    }
+
+    @Override
     public int remove(long goodsId, long orgId) {
         return 0;
     }

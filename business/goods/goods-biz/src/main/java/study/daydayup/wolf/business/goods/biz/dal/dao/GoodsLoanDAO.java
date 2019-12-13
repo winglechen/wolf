@@ -22,5 +22,7 @@ public interface GoodsLoanDAO {
 
     List<GoodsLoanDO> selectByGoodsIdIn(@Param("goodsIdCollection")Collection<Long> goodsIdCollection, @Param("orgId") long orgId);
 
+    GoodsLoanDO selectByGoodsId(@Param("goodsId")Long goodsId, @Param("orgId")Long orgId);
+
 
 }

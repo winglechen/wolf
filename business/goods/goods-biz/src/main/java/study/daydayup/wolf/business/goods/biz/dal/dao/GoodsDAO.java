@@ -20,12 +20,13 @@ public interface GoodsDAO {
 
     int updateStateById(@Param("id")Long id,@Param("orgId")Long orgId,@Param("updatedState")Integer updatedState);
 
-    List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
-
     int updateStateByOrgId(@Param("orgId")Long orgId, @Param("oldState")Integer oldState, @Param("newState") Integer newSate);
 
     int updateDeleteFlagById(@Param("id")Long id,@Param("orgId")Long orgId, @Param("updatedDeleteFlag")Boolean updatedDeleteFlag);
 
+    List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
+
+    GoodsDO selectOneByOrgId(@Param("orgId")Long orgId);
 
 
 }

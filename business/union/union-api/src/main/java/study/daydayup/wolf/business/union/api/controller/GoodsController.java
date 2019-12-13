@@ -65,6 +65,14 @@ public class GoodsController extends BaseController {
         return Result.ok(goods);
     }
 
+    @GetMapping("/goods/one")
+    public Result<LoanGoods> findOneByOrgId() {
+        Long orgId = getFromSession("orgId", Long.class);
+        LoanGoods goods = loanService.findOneByOrgId(orgId);
+
+        return Result.ok(goods);
+    }
+
     @GetMapping("/goods")
     public Result<List<LoanGoods>> findByOrgId() {
         Long orgId = getFromSession("orgId", Long.class);

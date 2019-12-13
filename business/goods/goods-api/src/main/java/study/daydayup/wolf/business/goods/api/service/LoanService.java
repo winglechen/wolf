@@ -16,6 +16,7 @@ public interface LoanService {
     LoanGoods findById(long goodsId, long orgId);
     LoanGoods findById(long goodsId, long orgId, GoodsOption option);
     List<LoanGoods> findByOrgId(long orgId);
+    LoanGoods findOneByOrgId(long orgId);
 
     int modify(LoanGoods goods);
     int remove(long goodsId, long orgId);
