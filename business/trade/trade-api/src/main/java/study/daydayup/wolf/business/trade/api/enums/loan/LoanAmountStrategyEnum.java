@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum LoanAmountStrategyEnum implements CodeBasedEnum {
-    NONEED_TO_PAY(40, "无需支付"),
+    NO_NEED_TO_PAY(40, "无需支付"),
     PAID(30, "已支付"),
     PART_PAID(20, "部分支付"),
     WAIT_TO_PAY(10, "待支付")

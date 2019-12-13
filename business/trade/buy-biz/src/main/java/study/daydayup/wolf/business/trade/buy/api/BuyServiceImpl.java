@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.service.impl;
+package study.daydayup.wolf.business.trade.buy.api;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;

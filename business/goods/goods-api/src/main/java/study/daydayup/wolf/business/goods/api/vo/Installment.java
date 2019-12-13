@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.api.vo;
 
 import lombok.Data;
+import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import javax.validation.constraints.Min;
@@ -19,4 +20,9 @@ public class Installment extends Entity {
     private int percentage;
     @Min(1)
     private int feePercentage;
+
+    /**
+     * @see study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum
+     */
+    private int type = InstallmentTypeEnum.DEFAULT.getCode();
 }
