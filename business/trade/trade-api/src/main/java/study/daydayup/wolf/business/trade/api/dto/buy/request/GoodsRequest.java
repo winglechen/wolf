@@ -1,6 +1,7 @@
-package study.daydayup.wolf.business.trade.api.dto.buy;
+package study.daydayup.wolf.business.trade.api.dto.buy.request;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.vo.buy.GoodsMemo;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
@@ -9,15 +10,14 @@ import lombok.Data;
  * @since 2019/10/5 1:28 PM
  **/
 @Data
-public class TradeGoodsDTO {
+public class GoodsRequest {
     private long orgId;
     private long goodsId;
     private long skuId;
 
     private int amount;
-    private int chargeUnit;
 
     private long promotionId;
 
-    private GoodsMessageDTO goodsMessageDTO;
+    private GoodsMemo memo;
 }

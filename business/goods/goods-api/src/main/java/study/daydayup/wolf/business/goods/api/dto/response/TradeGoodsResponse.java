@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2019/12/12 10:09 上午
  **/
 @Data
-public class TradingGoods extends Response {
+public class TradeGoodsResponse extends Response {
     //goodsInfo
     @Min(1)
     private long id;

@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.request;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.dto.buy.UmpDTO;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
@@ -12,5 +11,5 @@ import study.daydayup.wolf.business.trade.api.dto.buy.UmpDTO;
 @Data
 public class ConfirmRequest extends PreviewRequest {
     private String TradeNo;
-    private UmpDTO ump;
+    private UmpRequest ump;
 }

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.domain.entity.context;
 
-import study.daydayup.wolf.business.trade.api.entity.buy.Buyer;
+import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.buy.domain.entity.Seller;
 import study.daydayup.wolf.business.trade.buy.domain.entity.TradeGoods;
 

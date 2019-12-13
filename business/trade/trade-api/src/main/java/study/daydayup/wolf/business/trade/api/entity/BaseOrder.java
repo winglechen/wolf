@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.vo.OrderState;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity
