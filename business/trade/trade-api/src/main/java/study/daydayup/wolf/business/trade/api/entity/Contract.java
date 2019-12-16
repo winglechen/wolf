@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
-import study.daydayup.wolf.framework.layer.domain.Entity;
+import lombok.Data;
+import study.daydayup.wolf.business.trade.api.entity.contract.BaseContract;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity
@@ -8,5 +9,6 @@ import study.daydayup.wolf.framework.layer.domain.Entity;
  * @author Wingle
  * @since 2019/10/4 12:04 AM
  **/
-public class Contract extends Entity {
+@Data
+public class Contract extends BaseContract {
 }

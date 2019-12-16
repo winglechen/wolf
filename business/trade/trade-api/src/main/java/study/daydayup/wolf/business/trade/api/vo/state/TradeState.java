@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.trade.api.vo.state;
 
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.trade.api.vo.state

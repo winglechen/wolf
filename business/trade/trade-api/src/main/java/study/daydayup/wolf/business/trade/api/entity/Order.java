@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.entity.order.BaseOrder;
+import study.daydayup.wolf.business.trade.api.entity.order.OrderLine;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.vo.SellerMemo;
 import study.daydayup.wolf.business.trade.api.vo.TradeAddress;

@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.response;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.entity.Contract;
+import study.daydayup.wolf.business.trade.api.entity.Order;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy.response
@@ -10,5 +12,6 @@ import lombok.Data;
  **/
 @Data
 public class PreviewResponse {
-    private String tradeNo;
+    private Contract contract;
+    private Order order;
 }

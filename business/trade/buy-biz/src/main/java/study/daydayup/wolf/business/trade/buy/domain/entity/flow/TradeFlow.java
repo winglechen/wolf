@@ -1,7 +1,5 @@
 package study.daydayup.wolf.business.trade.buy.domain.entity.flow;
 
-import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.buy.domain.entity.node.TradeFlowNode;
 

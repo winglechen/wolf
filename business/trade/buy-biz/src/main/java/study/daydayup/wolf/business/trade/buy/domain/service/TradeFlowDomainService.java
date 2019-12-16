@@ -1,9 +1,8 @@
 package study.daydayup.wolf.business.trade.buy.domain.service;
 
-import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.PreviewRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
@@ -22,7 +21,7 @@ import study.daydayup.wolf.common.util.EnumUtil;
  **/
 public class TradeFlowDomainService implements BuyService {
     @Override
-    public PreviewResponse preview(PreviewRequest request) {
+    public PreviewResponse preview(BuyRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = TradeFlowFactory.create(tradeType);
 
@@ -30,7 +29,7 @@ public class TradeFlowDomainService implements BuyService {
     }
 
     @Override
-    public ConfirmResponse confirm(ConfirmRequest request) {
+    public ConfirmResponse confirm(BuyRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = TradeFlowFactory.create(tradeType);
         tradeFlow.buildConfirmFlow();

@@ -1,12 +1,15 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.response;
 
+import lombok.Data;
+import study.daydayup.wolf.framework.layer.api.Response;
+
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
  *
  * @author Wingle
  * @since 2019/10/5 11:27 AM
  **/
-public class ConfirmResponse {
+@Data
+public class ConfirmResponse extends Response {
     private String orderNo;
-    private long totalAmount;
 }

@@ -1,9 +1,8 @@
 package study.daydayup.wolf.business.trade.buy.domain.entity.flow;
 
-import study.daydayup.wolf.business.trade.api.dto.buy.request.ConfirmRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.PreviewRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
@@ -35,7 +34,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     }
 
     @Override
-    public ConfirmResponse confirm(ConfirmRequest request) {
+    public ConfirmResponse confirm(BuyRequest request) {
         ConfirmResponse response = new ConfirmResponse();
 
         for(TradeFlowNode node : nodeList) {
@@ -47,7 +46,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
 
     @Override
-    public PreviewResponse preview(PreviewRequest request) {
+    public PreviewResponse preview(BuyRequest request) {
         return null;
     }
 

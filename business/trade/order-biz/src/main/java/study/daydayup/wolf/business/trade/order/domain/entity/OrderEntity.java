@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.order.domain.entity;
 
+import lombok.Data;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 
 /**
@@ -8,5 +9,9 @@ import study.daydayup.wolf.business.trade.api.entity.Order;
  * @author Wingle
  * @since 2019/10/5 7:21 PM
  **/
-public class OrderEntity extends Order {
+@Data
+public class OrderEntity {
+    private Order model;
+    private Order changes;
+    private Order rules;
 }

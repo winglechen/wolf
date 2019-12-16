@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.api.Response;
  * @since 2019/12/13 4:16 下午
  **/
 @Data
-public class PermitResponse extends Response {
+public class LicenseResponse extends Response {
 }

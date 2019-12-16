@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.enums;
+package study.daydayup.wolf.business.trade.api.enums.order;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;

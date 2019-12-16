@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/13 4:14 下午
  **/
 @Data
-public class PermitRequest extends Request {
+public class LicenseRequest extends Request {
 }

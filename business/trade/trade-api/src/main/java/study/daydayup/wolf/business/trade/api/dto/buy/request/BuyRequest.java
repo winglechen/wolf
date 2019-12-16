@@ -6,7 +6,10 @@ import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
+import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -16,12 +19,15 @@ import java.util.List;
  * @since 2019/10/9 1:43 下午
  **/
 @Data
-public class PreviewRequest extends Request {
+public class BuyRequest extends Request {
+    private String tradeNo;
+    @NotNull
     private Buyer buyer;
 
     /**
-     * @see study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum
+     * @see TradeTypeEnum
      */
+    @NotNull @Min(1)
     private int tradeType;
     private String relatedTradeNo;
 
@@ -33,5 +39,6 @@ public class PreviewRequest extends Request {
     private BuyerMemo buyerMemo;
 
     private UmpRequest umpRequest;
+    @NotNull
     private List<GoodsRequest> goodsRequestList;
 }

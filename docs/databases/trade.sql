@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `contract`
     `source`            VARCHAR(200) NOT NULL DEFAULT '' COMMENT '交易来源',
     `tags`              VARCHAR(200) NOT NULL DEFAULT '' COMMENT '交易标签',
 
-    `contract_type`     TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '合同类型',
+    `trade_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '合同类型',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
@@ -62,8 +63,10 @@ COMMENT = '还款条款';
 
 DROP TABLE IF EXISTS `installment_term`;
 CREATE TABLE IF NOT EXISTS `installment_term`
-( `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+(
+    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
@@ -89,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `objects_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -106,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `payment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -123,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `consign_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -140,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `assurance_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -157,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `trade_memo`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
 
@@ -184,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `order`
     `source`            VARCHAR(200) NOT NULL DEFAULT '' COMMENT '交易来源',
     `tags`              VARCHAR(200) NOT NULL DEFAULT '' COMMENT '交易标签',
 
-    `order_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型',
+    `trade_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单类型',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
@@ -220,10 +228,11 @@ CREATE TABLE IF NOT EXISTS `order_address`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
     `address_type`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '地址类型',
 
-    `area_code`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '地区码',
+    `area_code`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '地区码',
     `country`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '国家',
     `province`         VARCHAR(100) NOT NULL DEFAULT '' COMMENT '省',
     `city`             VARCHAR(100) NOT NULL DEFAULT '' COMMENT '市',
@@ -246,22 +255,23 @@ CREATE TABLE IF NOT EXISTS `order_line`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
-    `goods_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
     `sku_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
     `category_id`       MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类目ID',
-    `goods_type`      SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
-    `goods_version`   INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `goods_type`        SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
+    `goods_version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `sku`               VARCHAR(1000) NOT NULL DEFAULT '' COMMENT 'sku',
-    `goods_name`      VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
-    `goods_main_pic`  VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品主图',
+    `goods_name`        VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
+    `goods_main_pic`    VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品主图',
 
     `sale_price`        BIGINT(20) NOT NULL DEFAULT 0 COMMENT '产品原价',
     `pay_price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '支付价格',
     `postage`           BIGINT(20) NOT NULL DEFAULT 0 COMMENT '邮费',
     `currency`          INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
-    `chargeUnit`        INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
+    `charge_unit`        INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
     `quantity`          INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
 
     `buyer_message`     VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '买家留言',
@@ -283,33 +293,34 @@ CREATE TABLE IF NOT EXISTS `order_line`
 
 
 DROP TABLE IF EXISTS `order_state_log`;
-CREATE TABLE IF NOT EXISTS `order_state_log`
+DROP TABLE IF EXISTS `trade_state_log`;
+CREATE TABLE IF NOT EXISTS `trade_state_log`
 (
     `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `order_no`      VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '订单号',
-    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+    `trade_no`      VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `trade_phase`   TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
-    `order_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
     `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+    `source_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 
 DROP TABLE IF EXISTS `contract_state_log`;
-CREATE TABLE IF NOT EXISTS `contract_state_log`
-(
-    `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
-    `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
-    `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
-    `contract_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
-    `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
-    `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
-    `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    primary key (id)
-) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
+# CREATE TABLE IF NOT EXISTS `contract_state_log`
+# (
+#     `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+#     `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+#     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+#     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+#     `contract_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+#     `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
+#     `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+#     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+#     primary key (id)
+# ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 
 DROP TABLE IF EXISTS `price_change_log`;
 CREATE TABLE IF NOT EXISTS `price_change_log`
@@ -320,10 +331,11 @@ CREATE TABLE IF NOT EXISTS `price_change_log`
     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
-    `order_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
-    `source_amount`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
-    `target_amount`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
+    `order_version` INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `source_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
+    `target_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
 
+    `editor`        BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '编辑人',
     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
