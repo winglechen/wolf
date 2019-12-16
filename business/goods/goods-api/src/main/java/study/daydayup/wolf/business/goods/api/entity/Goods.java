@@ -2,10 +2,7 @@ package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
-import study.daydayup.wolf.business.goods.api.vo.Installment;
-import study.daydayup.wolf.business.goods.api.vo.Loan;
 
 import java.util.List;
 

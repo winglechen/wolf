@@ -2,24 +2,15 @@ package study.daydayup.wolf.business.goods.api.entity.goods;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
-import study.daydayup.wolf.business.goods.api.vo.Installment;
-import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.domain.Entity;
-import study.daydayup.wolf.framework.layer.dal.DataVersion;
 import study.daydayup.wolf.model.annotation.column.BusinessKey;
 import study.daydayup.wolf.model.annotation.column.ForeignKey;
 import study.daydayup.wolf.model.annotation.column.PrimaryKey;
-import study.daydayup.wolf.model.type.currency.Currency;
 import study.daydayup.wolf.model.type.string.Name;
-import study.daydayup.wolf.model.type.string.Tags;
-import study.daydayup.wolf.model.type.string.URI;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
