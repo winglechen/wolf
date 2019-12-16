@@ -21,6 +21,8 @@ import java.util.List;
 public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsDAO goodsDAO;
+    @Resource
+    private GoodsEntity goodsEntity;
     @Override
     public Goods findById(long goodsId, long orgId, GoodsOption option) {
         return null;
@@ -43,20 +45,20 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int remove(long goodsId, long orgId) {
-        GoodsEntity entity = new GoodsEntity(goodsId, orgId);
-        return entity.trash();
+        goodsEntity.init(goodsId, orgId);
+        return goodsEntity.trash();
     }
 
     @Override
     public int listing(long goodsId, long orgId) {
-        GoodsEntity entity = new GoodsEntity(goodsId, orgId);
-        return entity.listing();
+        goodsEntity.init(goodsId, orgId);
+        return goodsEntity.listing();
     }
 
     @Override
     public int delisting(long goodsId, long orgId) {
-        GoodsEntity entity = new GoodsEntity(goodsId, orgId);
-        return entity.delisting();
+        goodsEntity.init(goodsId, orgId);
+        return goodsEntity.delisting();
     }
 
     @Override

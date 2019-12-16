@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.goods;
 
 import lombok.Builder;
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.business.goods.api.exception.InvalidGoodsIdException;
@@ -14,13 +15,14 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2019/10/3 11:14 PM
  **/
+@Component
 public class GoodsEntity extends Goods {
     @Resource
     private GoodsDAO goodsDAO;
     @Builder
     public GoodsEntity(){};
 
-    public GoodsEntity(long id, long orgId) {
+    public GoodsEntity init(long id, long orgId) {
         if (id <= 0) {
             throw new InvalidGoodsIdException(id);
         }
@@ -29,6 +31,8 @@ public class GoodsEntity extends Goods {
         if (orgId > 0) {
             this.orgId = orgId;
         }
+
+        return this;
     }
 
     public int listing() {
