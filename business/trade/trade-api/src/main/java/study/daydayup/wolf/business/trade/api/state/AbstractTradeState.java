@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.vo.state;
+package study.daydayup.wolf.business.trade.api.state;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.enums.state.CompletedStateEnum;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * study.daydayup.wolf.business.trade.api.vo.state
+ * study.daydayup.wolf.business.trade.api.state
  *
  * @author Wingle
  * @since 2019/10/10 11:26 上午

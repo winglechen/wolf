@@ -1,11 +1,8 @@
 package study.daydayup.wolf.business.trade.api.vo.order;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.vo.state.TradeState;
+import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Model;
-import study.daydayup.wolf.framework.layer.domain.Entity;
-
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity.buy

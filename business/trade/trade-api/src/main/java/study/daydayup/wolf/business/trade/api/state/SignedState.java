@@ -1,9 +1,9 @@
-package study.daydayup.wolf.business.trade.api.vo.state;
+package study.daydayup.wolf.business.trade.api.state;
 
 import lombok.Data;
 
 /**
- * study.daydayup.wolf.business.trade.api.vo.state
+ * study.daydayup.wolf.business.trade.api.state
  *
  * @author Wingle
  * @since 2019/10/5 11:24 PM
