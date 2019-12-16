@@ -19,14 +19,6 @@
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
     <result column="consign_method" jdbcType="TINYINT" property="consignMethod" />
     <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
-    <result column="pay_state" jdbcType="TINYINT" property="payState" />
-    <result column="consign_state" jdbcType="TINYINT" property="consignState" />
-    <result column="completed_state" jdbcType="TINYINT" property="completedState" />
-    <result column="dispute_state" jdbcType="TINYINT" property="disputeState" />
-    <result column="paid_at" jdbcType="TIMESTAMP" property="paidAt" />
-    <result column="consigned_at" jdbcType="TIMESTAMP" property="consignedAt" />
-    <result column="dispute_at" jdbcType="TIMESTAMP" property="disputeAt" />
-    <result column="completed_at" jdbcType="TIMESTAMP" property="completedAt" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -36,9 +28,7 @@
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, buyer_name, seller_name, `source`, tags, trade_type, 
     `state`, related_trade_no, amount, postage, currency, payment_method, consign_method, 
-    out_trade_no, pay_state, consign_state, completed_state, dispute_state, paid_at, 
-    consigned_at, dispute_at, completed_at, version, delete_flag, last_editor, created_at, 
-    updated_at
+    out_trade_no, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -55,21 +45,17 @@
       tags, trade_type, `state`, 
       related_trade_no, amount, postage, 
       currency, payment_method, consign_method, 
-      out_trade_no, pay_state, consign_state, 
-      completed_state, dispute_state, paid_at, 
-      consigned_at, dispute_at, completed_at, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      out_trade_no, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{relatedTradeNo,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, 
       #{currency,jdbcType=INTEGER}, #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, 
-      #{outTradeNo,jdbcType=VARCHAR}, #{payState,jdbcType=TINYINT}, #{consignState,jdbcType=TINYINT}, 
-      #{completedState,jdbcType=TINYINT}, #{disputeState,jdbcType=TINYINT}, #{paidAt,jdbcType=TIMESTAMP}, 
-      #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, #{completedAt,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{outTradeNo,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -124,30 +110,6 @@
       </if>
       <if test="outTradeNo != null">
         out_trade_no,
-      </if>
-      <if test="payState != null">
-        pay_state,
-      </if>
-      <if test="consignState != null">
-        consign_state,
-      </if>
-      <if test="completedState != null">
-        completed_state,
-      </if>
-      <if test="disputeState != null">
-        dispute_state,
-      </if>
-      <if test="paidAt != null">
-        paid_at,
-      </if>
-      <if test="consignedAt != null">
-        consigned_at,
-      </if>
-      <if test="disputeAt != null">
-        dispute_at,
-      </if>
-      <if test="completedAt != null">
-        completed_at,
       </if>
       <if test="version != null">
         version,
@@ -211,30 +173,6 @@
       </if>
       <if test="outTradeNo != null">
         #{outTradeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payState != null">
-        #{payState,jdbcType=TINYINT},
-      </if>
-      <if test="consignState != null">
-        #{consignState,jdbcType=TINYINT},
-      </if>
-      <if test="completedState != null">
-        #{completedState,jdbcType=TINYINT},
-      </if>
-      <if test="disputeState != null">
-        #{disputeState,jdbcType=TINYINT},
-      </if>
-      <if test="paidAt != null">
-        #{paidAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="consignedAt != null">
-        #{consignedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="disputeAt != null">
-        #{disputeAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="completedAt != null">
-        #{completedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -302,30 +240,6 @@
       <if test="outTradeNo != null">
         out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="payState != null">
-        pay_state = #{payState,jdbcType=TINYINT},
-      </if>
-      <if test="consignState != null">
-        consign_state = #{consignState,jdbcType=TINYINT},
-      </if>
-      <if test="completedState != null">
-        completed_state = #{completedState,jdbcType=TINYINT},
-      </if>
-      <if test="disputeState != null">
-        dispute_state = #{disputeState,jdbcType=TINYINT},
-      </if>
-      <if test="paidAt != null">
-        paid_at = #{paidAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="consignedAt != null">
-        consigned_at = #{consignedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="disputeAt != null">
-        dispute_at = #{disputeAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="completedAt != null">
-        completed_at = #{completedAt,jdbcType=TIMESTAMP},
-      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -362,14 +276,6 @@
       payment_method = #{paymentMethod,jdbcType=TINYINT},
       consign_method = #{consignMethod,jdbcType=TINYINT},
       out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
-      pay_state = #{payState,jdbcType=TINYINT},
-      consign_state = #{consignState,jdbcType=TINYINT},
-      completed_state = #{completedState,jdbcType=TINYINT},
-      dispute_state = #{disputeState,jdbcType=TINYINT},
-      paid_at = #{paidAt,jdbcType=TIMESTAMP},
-      consigned_at = #{consignedAt,jdbcType=TIMESTAMP},
-      dispute_at = #{disputeAt,jdbcType=TIMESTAMP},
-      completed_at = #{completedAt,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

@@ -11,59 +11,29 @@ public class OrderDO implements Serializable {
     private String tradeNo;
 
     private Long buyerId;
-
     private Long sellerId;
-
     private String buyerName;
-
     private String sellerName;
 
     private String source;
-
     private String tags;
 
     private Integer tradeType;
-
     private Integer state;
-
     private String relatedTradeNo;
 
     private Long amount;
-
     private Long postage;
-
     private Integer currency;
 
     private Integer paymentMethod;
-
     private Integer consignMethod;
-
     private String outTradeNo;
 
-    private Integer payState;
-
-    private Integer consignState;
-
-    private Integer completedState;
-
-    private Integer disputeState;
-
-    private LocalDateTime paidAt;
-
-    private LocalDateTime consignedAt;
-
-    private LocalDateTime disputeAt;
-
-    private LocalDateTime completedAt;
-
     private Integer version;
-
     private boolean deleteFlag;
-
     private Long lastEditor;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
@@ -91,14 +61,6 @@ public class OrderDO implements Serializable {
         sb.append(", paymentMethod=").append(paymentMethod);
         sb.append(", consignMethod=").append(consignMethod);
         sb.append(", outTradeNo=").append(outTradeNo);
-        sb.append(", payState=").append(payState);
-        sb.append(", consignState=").append(consignState);
-        sb.append(", completedState=").append(completedState);
-        sb.append(", disputeState=").append(disputeState);
-        sb.append(", paidAt=").append(paidAt);
-        sb.append(", consignedAt=").append(consignedAt);
-        sb.append(", disputeAt=").append(disputeAt);
-        sb.append(", completedAt=").append(completedAt);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -137,14 +99,6 @@ public class OrderDO implements Serializable {
             && (this.getPaymentMethod() == null ? other.getPaymentMethod() == null : this.getPaymentMethod().equals(other.getPaymentMethod()))
             && (this.getConsignMethod() == null ? other.getConsignMethod() == null : this.getConsignMethod().equals(other.getConsignMethod()))
             && (this.getOutTradeNo() == null ? other.getOutTradeNo() == null : this.getOutTradeNo().equals(other.getOutTradeNo()))
-            && (this.getPayState() == null ? other.getPayState() == null : this.getPayState().equals(other.getPayState()))
-            && (this.getConsignState() == null ? other.getConsignState() == null : this.getConsignState().equals(other.getConsignState()))
-            && (this.getCompletedState() == null ? other.getCompletedState() == null : this.getCompletedState().equals(other.getCompletedState()))
-            && (this.getDisputeState() == null ? other.getDisputeState() == null : this.getDisputeState().equals(other.getDisputeState()))
-            && (this.getPaidAt() == null ? other.getPaidAt() == null : this.getPaidAt().equals(other.getPaidAt()))
-            && (this.getConsignedAt() == null ? other.getConsignedAt() == null : this.getConsignedAt().equals(other.getConsignedAt()))
-            && (this.getDisputeAt() == null ? other.getDisputeAt() == null : this.getDisputeAt().equals(other.getDisputeAt()))
-            && (this.getCompletedAt() == null ? other.getCompletedAt() == null : this.getCompletedAt().equals(other.getCompletedAt()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -173,14 +127,6 @@ public class OrderDO implements Serializable {
         result = prime * result + ((getPaymentMethod() == null) ? 0 : getPaymentMethod().hashCode());
         result = prime * result + ((getConsignMethod() == null) ? 0 : getConsignMethod().hashCode());
         result = prime * result + ((getOutTradeNo() == null) ? 0 : getOutTradeNo().hashCode());
-        result = prime * result + ((getPayState() == null) ? 0 : getPayState().hashCode());
-        result = prime * result + ((getConsignState() == null) ? 0 : getConsignState().hashCode());
-        result = prime * result + ((getCompletedState() == null) ? 0 : getCompletedState().hashCode());
-        result = prime * result + ((getDisputeState() == null) ? 0 : getDisputeState().hashCode());
-        result = prime * result + ((getPaidAt() == null) ? 0 : getPaidAt().hashCode());
-        result = prime * result + ((getConsignedAt() == null) ? 0 : getConsignedAt().hashCode());
-        result = prime * result + ((getDisputeAt() == null) ? 0 : getDisputeAt().hashCode());
-        result = prime * result + ((getCompletedAt() == null) ? 0 : getCompletedAt().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

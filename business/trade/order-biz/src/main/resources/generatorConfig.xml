@@ -124,7 +124,7 @@
             <columnOverride column="payment_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="consign_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
 
-            <columnOverride column="pay_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="payment_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="consign_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="completed_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="dispute_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
@@ -154,6 +154,7 @@
 
             <columnOverride column="source_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
             <columnOverride column="target_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="trade_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="trade_phase" javaType="java.lang.Integer" jdbcType="TINYINT" />
 
             <columnOverride column="delete_flag" javaType="boolean"/>

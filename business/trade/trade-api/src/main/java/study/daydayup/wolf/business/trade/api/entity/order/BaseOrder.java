@@ -12,11 +12,12 @@ import study.daydayup.wolf.business.trade.api.vo.order.OrderState;
  **/
 @Data
 public class BaseOrder extends Trade {
+    protected long amount;
+    protected long postage;
+    protected int currency;
 
-    protected int amount;
-    protected int postage;
     protected int paymentMethod;
+    protected int consignMethod;
 
-    protected String payNo;
-    protected String outerTradeNo;
+    protected String outTradeNo;
 }
