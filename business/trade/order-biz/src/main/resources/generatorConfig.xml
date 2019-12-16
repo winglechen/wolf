@@ -107,7 +107,7 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
-        <table tableName="assurance_term" domainObjectName="AssuranceTermDO" mapperName="AssuranceTermDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        <table tableName="postage_term" domainObjectName="PostageTermDO" mapperName="PostageTermDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>

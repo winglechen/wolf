@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
 COMMENT = '还款条款';
 
 DROP TABLE IF EXISTS `installment_term`;
-CREATE TABLE IF NOT EXISTS `installment_term`
+DROP TABLE IF EXISTS `postage_term`;
+CREATE TABLE IF NOT EXISTS `postage_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
-    COMMENT = '分期条款';
+    COMMENT = '运费条款';
 
 DROP TABLE IF EXISTS `objects_term`;
 CREATE TABLE IF NOT EXISTS `objects_term`

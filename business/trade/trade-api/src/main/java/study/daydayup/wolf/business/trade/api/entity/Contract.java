@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.entity.contract.BaseContract;
+import study.daydayup.wolf.business.trade.api.vo.contract.*;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity
@@ -11,4 +12,14 @@ import study.daydayup.wolf.business.trade.api.entity.contract.BaseContract;
  **/
 @Data
 public class Contract extends BaseContract {
+    private ObjectsTerm objectsTerm;
+    private PaymentTerm paymentTerm;
+
+    private ConsignTerm consignTerm;
+    private PostageTerm postageTerm;
+
+    private LoanTerm loanTerm;
+    private RepaymentTerm repaymentTerm;
+    private InstallmentTerm installmentTerm;
+    private TaxTerm taxTerm;
 }
