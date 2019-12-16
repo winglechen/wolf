@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderLineDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
+    <result column="goods_version" jdbcType="INTEGER" property="goodsVersion" />
+    <result column="sku" jdbcType="VARCHAR" property="sku" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_main_pic" jdbcType="VARCHAR" property="goodsMainPic" />
+    <result column="sale_price" jdbcType="BIGINT" property="salePrice" />
+    <result column="pay_price" jdbcType="BIGINT" property="payPrice" />
+    <result column="postage" jdbcType="BIGINT" property="postage" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
+    <result column="gift_flag" jdbcType="BIT" property="giftFlag" />
+    <result column="consign_state" jdbcType="TINYINT" property="consignState" />
+    <result column="dispute_state" jdbcType="TINYINT" property="disputeState" />
+    <result column="consigned_at" jdbcType="TIMESTAMP" property="consignedAt" />
+    <result column="dispute_at" jdbcType="TIMESTAMP" property="disputeAt" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, trade_no, buyer_id, seller_id, goods_id, sku_id, category_id, goods_type, goods_version, 
+    sku, goods_name, goods_main_pic, sale_price, pay_price, postage, currency, charge_unit, 
+    quantity, buyer_message, gift_flag, consign_state, dispute_state, consigned_at, dispute_at, 
+    version, delete_flag, last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_line
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_line (trade_no, buyer_id, seller_id, 
+      goods_id, sku_id, category_id, 
+      goods_type, goods_version, sku, 
+      goods_name, goods_main_pic, sale_price, 
+      pay_price, postage, currency, 
+      charge_unit, quantity, buyer_message, 
+      gift_flag, consign_state, dispute_state, 
+      consigned_at, dispute_at, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
+    values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
+      #{goodsId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, 
+      #{goodsType,jdbcType=SMALLINT}, #{goodsVersion,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{salePrice,jdbcType=BIGINT}, 
+      #{payPrice,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, 
+      #{giftFlag,jdbcType=BIT}, #{consignState,jdbcType=TINYINT}, #{disputeState,jdbcType=TINYINT}, 
+      #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=BIT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="goodsVersion != null">
+        goods_version,
+      </if>
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsMainPic != null">
+        goods_main_pic,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="payPrice != null">
+        pay_price,
+      </if>
+      <if test="postage != null">
+        postage,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="chargeUnit != null">
+        charge_unit,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="buyerMessage != null">
+        buyer_message,
+      </if>
+      gift_flag,
+      <if test="consignState != null">
+        consign_state,
+      </if>
+      <if test="disputeState != null">
+        dispute_state,
+      </if>
+      <if test="consignedAt != null">
+        consigned_at,
+      </if>
+      <if test="disputeAt != null">
+        dispute_at,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      delete_flag,
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=SMALLINT},
+      </if>
+      <if test="goodsVersion != null">
+        #{goodsVersion,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMainPic != null">
+        #{goodsMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=BIGINT},
+      </if>
+      <if test="payPrice != null">
+        #{payPrice,jdbcType=BIGINT},
+      </if>
+      <if test="postage != null">
+        #{postage,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="chargeUnit != null">
+        #{chargeUnit,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="buyerMessage != null">
+        #{buyerMessage,jdbcType=VARCHAR},
+      </if>
+      #{giftFlag,jdbcType=BIT},
+      <if test="consignState != null">
+        #{consignState,jdbcType=TINYINT},
+      </if>
+      <if test="disputeState != null">
+        #{disputeState,jdbcType=TINYINT},
+      </if>
+      <if test="consignedAt != null">
+        #{consignedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disputeAt != null">
+        #{disputeAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      #{deleteFlag,jdbcType=BIT},
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
+    update order_line
+    <set>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=SMALLINT},
+      </if>
+      <if test="goodsVersion != null">
+        goods_version = #{goodsVersion,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMainPic != null">
+        goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=BIGINT},
+      </if>
+      <if test="payPrice != null">
+        pay_price = #{payPrice,jdbcType=BIGINT},
+      </if>
+      <if test="postage != null">
+        postage = #{postage,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="chargeUnit != null">
+        charge_unit = #{chargeUnit,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="buyerMessage != null">
+        buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="giftFlag != null">
+        gift_flag = #{giftFlag,jdbcType=BIT},
+      </if>
+      <if test="consignState != null">
+        consign_state = #{consignState,jdbcType=TINYINT},
+      </if>
+      <if test="disputeState != null">
+        dispute_state = #{disputeState,jdbcType=TINYINT},
+      </if>
+      <if test="consignedAt != null">
+        consigned_at = #{consignedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disputeAt != null">
+        dispute_at = #{disputeAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
+    update order_line
+    set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      seller_id = #{sellerId,jdbcType=BIGINT},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      goods_type = #{goodsType,jdbcType=SMALLINT},
+      goods_version = #{goodsVersion,jdbcType=INTEGER},
+      sku = #{sku,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
+      sale_price = #{salePrice,jdbcType=BIGINT},
+      pay_price = #{payPrice,jdbcType=BIGINT},
+      postage = #{postage,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=INTEGER},
+      charge_unit = #{chargeUnit,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      gift_flag = #{giftFlag,jdbcType=BIT},
+      consign_state = #{consignState,jdbcType=TINYINT},
+      dispute_state = #{disputeState,jdbcType=TINYINT},
+      consigned_at = #{consignedAt,jdbcType=TIMESTAMP},
+      dispute_at = #{disputeAt,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=BIT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

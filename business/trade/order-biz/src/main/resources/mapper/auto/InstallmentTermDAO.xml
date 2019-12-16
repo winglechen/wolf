@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
+    <result column="installment_no" jdbcType="TINYINT" property="installmentNo" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="effect_at" jdbcType="TIMESTAMP" property="effectAt" />
+    <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="percentage" jdbcType="INTEGER" property="percentage" />
+    <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, trade_no, buyer_id, seller_id, installment_no, `state`, effect_at, related_trade_no, 
+    duration, percentage, fee_percentage, version, delete_flag, last_editor, created_at, 
+    updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from installment_term
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into installment_term (trade_no, buyer_id, seller_id, 
+      installment_no, `state`, effect_at, 
+      related_trade_no, duration, percentage, 
+      fee_percentage, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
+    values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
+      #{installmentNo,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{effectAt,jdbcType=TIMESTAMP}, 
+      #{relatedTradeNo,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
+      #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into installment_term
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="installmentNo != null">
+        installment_no,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="effectAt != null">
+        effect_at,
+      </if>
+      <if test="relatedTradeNo != null">
+        related_trade_no,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="percentage != null">
+        percentage,
+      </if>
+      <if test="feePercentage != null">
+        fee_percentage,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      delete_flag,
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="installmentNo != null">
+        #{installmentNo,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="effectAt != null">
+        #{effectAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relatedTradeNo != null">
+        #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="percentage != null">
+        #{percentage,jdbcType=INTEGER},
+      </if>
+      <if test="feePercentage != null">
+        #{feePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      #{deleteFlag,jdbcType=TINYINT},
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
+    update installment_term
+    <set>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="installmentNo != null">
+        installment_no = #{installmentNo,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="effectAt != null">
+        effect_at = #{effectAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relatedTradeNo != null">
+        related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="percentage != null">
+        percentage = #{percentage,jdbcType=INTEGER},
+      </if>
+      <if test="feePercentage != null">
+        fee_percentage = #{feePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
+    update installment_term
+    set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      seller_id = #{sellerId,jdbcType=BIGINT},
+      installment_no = #{installmentNo,jdbcType=TINYINT},
+      `state` = #{state,jdbcType=TINYINT},
+      effect_at = #{effectAt,jdbcType=TIMESTAMP},
+      related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      percentage = #{percentage,jdbcType=INTEGER},
+      fee_percentage = #{feePercentage,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
