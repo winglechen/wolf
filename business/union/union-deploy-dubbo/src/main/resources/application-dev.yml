@@ -1,4 +1,3 @@
-
 spring:
   shardingsphere:
     datasource:
@@ -69,3 +68,7 @@ spring:
         wmq_scheduled_message.actual-data-nodes: mq.wmq_scheduled_message
         wmq_task.actual-data-nodes: mq.wmq_task
         wmq_tcc_message.actual-data-nodes: mq.wmq_tcc_message
+
+logging:
+  level:
+    root: info

@@ -1,6 +1,8 @@
 spring:
   application:
     name: wolf-union-web
+  profiles:
+    active: dev
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -47,3 +49,6 @@ server:
 provider:
   application:
     name: wolf-union
+
+logging:
+  level: info
