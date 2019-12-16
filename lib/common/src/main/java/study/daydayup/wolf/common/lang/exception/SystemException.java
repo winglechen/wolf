@@ -4,6 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class SystemException extends BaseException {
+    public SystemException() {
+        super(500, "system exception");
+    }
 
     public SystemException(String message) {
         super(500, message);

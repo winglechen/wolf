@@ -1,11 +1,11 @@
-package study.daydayup.wolf.common.util.db;
+package study.daydayup.wolf.common.io.db;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * study.daydayup.wolf.common.util.db
+ * study.daydayup.wolf.common.io.db
  *
  * @author Wingle
  * @since 2019/11/25 9:40 下午

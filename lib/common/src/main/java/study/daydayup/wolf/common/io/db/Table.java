@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util.db;
+package study.daydayup.wolf.common.io.db;
 
 import lombok.Data;
 

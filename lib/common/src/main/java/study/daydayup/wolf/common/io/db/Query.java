@@ -1,11 +1,9 @@
-package study.daydayup.wolf.common.util.db;
+package study.daydayup.wolf.common.io.db;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
- * study.daydayup.wolf.common.util.db
+ * study.daydayup.wolf.common.io.db
  *
  * @author Wingle
  * @since 2019/11/25 9:09 下午
