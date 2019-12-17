@@ -13,7 +13,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 public enum OrderStateEnum implements CodeBasedEnum {
     CLOSED(110, "收礼订单"),
     COMPLETED(100, "代付订单"),
-    SENDED(30, "团购订单"),
+    SEND(30, "团购订单"),
     PAID(20, "分销订单"),
     WAIT_TO_PAY(10, "普通订单")
     ;

@@ -13,6 +13,6 @@ public interface TradeEvent {
     String getTradeNo();
     long getSellerId();
     long getBuyerId();
-    TradeTypeEnum getTradeType();
-    TradePhaseEnum getTradePhase();
+    int getTradeType();
+    int getTradePhase();
 }

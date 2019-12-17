@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.order.biz.tsm.machine;
+package study.daydayup.wolf.business.trade.order.biz.tsm.base.machine;
 
 /**
  * study.daydayup.wolf.business.trade.order.tsm.machine

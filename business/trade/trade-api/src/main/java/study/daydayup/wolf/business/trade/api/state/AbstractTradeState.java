@@ -1,10 +1,8 @@
 package study.daydayup.wolf.business.trade.api.state;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.enums.state.CompletedStateEnum;
-import study.daydayup.wolf.business.trade.api.enums.state.ConsignStateEnum;
-import study.daydayup.wolf.business.trade.api.enums.state.DisputeStateEnum;
-import study.daydayup.wolf.business.trade.api.enums.state.PayStateEnum;
+import lombok.Setter;
+import study.daydayup.wolf.business.trade.api.exception.InvalidTradeStateException;
 
 import java.time.LocalDateTime;
 
@@ -15,34 +13,28 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2019/10/10 11:26 上午
  **/
-@Data
-public abstract class AbstractTradeState {
-    protected String TradeNo;
+@Setter
+public abstract class AbstractTradeState implements TradeState {
     protected int state;
+    protected String name;
+    protected LocalDateTime updatedAt;
 
-    /**
-     * @see PayStateEnum
-     */
-    protected int paymentState;
-    protected LocalDateTime paidAt;
+    @Override
+    public int getState() {
+        if (state <= 0) {
+            throw new InvalidTradeStateException(state);
+        }
 
-    /**
-     * @see ConsignStateEnum
-     */
-    protected int consignState;
-    protected LocalDateTime consignedAt;
+        return state;
+    }
 
-    /**
-     * @see CompletedStateEnum
-     */
-    protected int completedState;
-    protected LocalDateTime completedAt;
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        if (updatedAt == null) {
+            updatedAt = LocalDateTime.now();
+        }
 
-    /**
-     * @see DisputeStateEnum
-     */
-    protected int disputeState;
-    protected LocalDateTime disputedAt;
+        return updatedAt;
+    }
 
-    protected LocalDateTime createAt;
 }

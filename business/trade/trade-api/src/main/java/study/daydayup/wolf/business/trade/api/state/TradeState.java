@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.state;
 
 
+import java.time.LocalDateTime;
+
 /**
  * study.daydayup.wolf.business.trade.api.state
  *
@@ -8,4 +10,6 @@ package study.daydayup.wolf.business.trade.api.state;
  * @since 2019/10/5 11:22 PM
  **/
 public interface TradeState {
+    int getState();
+    LocalDateTime getUpdatedAt();
 }

@@ -44,6 +44,34 @@ public class DefaultStateMachineTest {
         assertEquals("send event bind fail", expectedConsigned, consigned);
     }
 
+    @Test
+    public void test_different_event_instance() {
+        StateMachine<TradeState, TradeEvent> stateMachine = new DefaultStateMachine<>();
+
+        TradeState paid = new Paid();
+        TradeState consigned = new Consigned();
+        TradeEvent sendEvent = new SendEvent();
+
+        stateMachine.add(paid, consigned, sendEvent);
+
+        TradeState expectedState = stateMachine.fire(paid, new SendEvent());
+        assertEquals("different event instance fail.", expectedState, consigned);
+
+    }
+
+    @Test
+    public void test_different_state_instance() {
+        StateMachine<TradeState, TradeEvent> stateMachine = new DefaultStateMachine<>();
+
+        TradeState paid = new Paid();
+        TradeState consigned = new Consigned();
+        TradeEvent sendEvent = new SendEvent();
+
+        stateMachine.add(paid, consigned, sendEvent);
+
+        TradeState expectedState = stateMachine.fire(new Paid(), new SendEvent());
+        assertEquals("different source instance fail.", expectedState, consigned);
+    }
 
     interface TradeState { }
 

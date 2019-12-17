@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.order.biz.service.impl;
+package study.daydayup.wolf.business.trade.order.biz.api;
 
 /**
  * study.daydayup.wolf.business.trade.order.service.impl

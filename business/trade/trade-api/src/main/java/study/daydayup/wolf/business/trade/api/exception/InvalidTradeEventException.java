@@ -10,6 +10,6 @@ import study.daydayup.wolf.common.lang.exception.SystemException;
  **/
 public class InvalidTradeEventException extends SystemException {
     public InvalidTradeEventException(String msg) {
-        super(160001, msg);
+        super(160002, msg);
     }
 }

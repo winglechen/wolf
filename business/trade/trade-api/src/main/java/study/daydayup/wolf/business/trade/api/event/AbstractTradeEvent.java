@@ -17,8 +17,14 @@ public abstract class AbstractTradeEvent implements TradeEvent{
     protected long buyerId;
     protected long sellerId;
 
-    protected TradeTypeEnum tradeType;
-    protected TradePhaseEnum tradePhase;
+    /**
+     * @see TradeTypeEnum
+     */
+    protected int tradeType;
+    /**
+     * @see TradePhaseEnum
+     */
+    protected int tradePhase;
 
     @Override
     public String getTradeNo() {
@@ -38,8 +44,8 @@ public abstract class AbstractTradeEvent implements TradeEvent{
     }
 
     @Override
-    public TradeTypeEnum getTradeType() {
-        if (tradeType == null) {
+    public int getTradeType() {
+        if (tradeType <= 0) {
             throw new InvalidTradeEventException("Can't find tradeType");
         }
 
@@ -47,8 +53,8 @@ public abstract class AbstractTradeEvent implements TradeEvent{
     }
 
     @Override
-    public TradePhaseEnum getTradePhase() {
-        if (tradePhase == null) {
+    public int getTradePhase() {
+        if (tradePhase <= 0) {
             throw new InvalidTradeEventException("Can't find tradePhase");
         }
         return tradePhase;
