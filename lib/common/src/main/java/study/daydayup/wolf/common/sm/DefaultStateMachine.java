@@ -15,8 +15,14 @@ public class DefaultStateMachine<State, Event> implements StateMachine<State, Ev
     private State initState;
     private Map<String, Map<String, State>> data;
 
+    public DefaultStateMachine() {
+        this(null);
+    }
+
     public DefaultStateMachine(State state) {
-        this.initState = state;
+        if (state != null) {
+            this.initState = state;
+        }
 
         data = new HashMap<>();
 //        data = new ConcurrentHashMap<>();
@@ -50,7 +56,7 @@ public class DefaultStateMachine<State, Event> implements StateMachine<State, Ev
         }
 
         State state = stateMap.get(eventKey);
-        if (state != null && targetKey.equals(state.getClass().getSimpleName())) {
+        if (state != null) {
             throw new DuplicateStateMapException(sourceKey, targetKey, eventKey);
         }
 
