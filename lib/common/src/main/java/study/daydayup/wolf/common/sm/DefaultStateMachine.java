@@ -3,7 +3,6 @@ package study.daydayup.wolf.common.sm;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * study.daydayup.wolf.common.sm
@@ -25,7 +24,6 @@ public class DefaultStateMachine<State, Event> implements StateMachine<State, Ev
         }
 
         data = new HashMap<>();
-//        data = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -41,12 +39,13 @@ public class DefaultStateMachine<State, Event> implements StateMachine<State, Ev
     }
 
     @Override
-    public DefaultStateMachine<State, Event> add(State source, State target, Event event) {
+    public StateMachine<State, Event> add(State source, State target, Event event) {
         String sourceKey = source.getClass().getSimpleName();
-        String eventKey = event.getClass().getSimpleName();
+        String eventKey  = event.getClass().getSimpleName();
         String targetKey = target.getClass().getSimpleName();
 
-        Map<String, State> stateMap = this.data.get(sourceKey);
+        Map<String, State> stateMap;
+        stateMap = this.data.get(sourceKey);
         if (stateMap == null) {
             stateMap = new HashMap<>();
             stateMap.put(eventKey, target);

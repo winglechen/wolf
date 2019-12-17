@@ -12,5 +12,6 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 @Data
 public class CompetedState extends AbstractTradeState implements TradeState {
-    private String name = "交易完成";
+    protected int code = 200;
+    protected String name = "完成";
 }

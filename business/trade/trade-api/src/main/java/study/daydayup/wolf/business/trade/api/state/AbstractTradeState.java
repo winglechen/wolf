@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.trade.api.state;
 
-import lombok.Data;
 import lombok.Setter;
 import study.daydayup.wolf.business.trade.api.exception.InvalidTradeStateException;
 
@@ -15,17 +14,17 @@ import java.time.LocalDateTime;
  **/
 @Setter
 public abstract class AbstractTradeState implements TradeState {
-    protected int state;
+    protected int code;
     protected String name;
     protected LocalDateTime updatedAt;
 
     @Override
-    public int getState() {
-        if (state <= 0) {
-            throw new InvalidTradeStateException(state);
+    public int getCode() {
+        if (code <= 0) {
+            throw new InvalidTradeStateException(code);
         }
 
-        return state;
+        return code;
     }
 
     @Override

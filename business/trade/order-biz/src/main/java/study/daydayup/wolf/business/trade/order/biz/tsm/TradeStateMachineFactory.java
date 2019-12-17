@@ -12,4 +12,5 @@ import study.daydayup.wolf.common.sm.StateMachine;
  **/
 public interface TradeStateMachineFactory {
     StateMachine<TradeState, TradeEvent> create();
+    TradeStateMap getStateMap();
 }
