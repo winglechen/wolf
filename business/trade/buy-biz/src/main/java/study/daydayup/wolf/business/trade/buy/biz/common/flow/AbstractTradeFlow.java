@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow;
+package study.daydayup.wolf.business.trade.buy.biz.common.flow;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.PayRequest;
@@ -7,8 +7,9 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
-import study.daydayup.wolf.business.trade.buy.biz.domain.entity.context.TradeFlowContext;
-import study.daydayup.wolf.business.trade.buy.biz.domain.entity.node.TradeFlowNode;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 
 import java.util.ArrayList;
 
@@ -19,17 +20,17 @@ import java.util.ArrayList;
  * @since 2019/10/5 2:03 PM
  **/
 public abstract class AbstractTradeFlow implements TradeFlow {
-    protected TradeFlowContext context;
-    protected ArrayList<TradeFlowNode> nodeList;
+    protected TradeContext context;
+    protected ArrayList<TradeNode> nodeList;
 
     @Override
     public void init() {
-        context = new TradeFlowContext();
+        context = new TradeContext();
         nodeList = new ArrayList<>();
     }
 
     @Override
-    public void addNode(TradeFlowNode node){
+    public void addNode(TradeNode node){
         nodeList.add(node);
     }
 
@@ -37,7 +38,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     public ConfirmResponse confirm(BuyRequest request) {
         ConfirmResponse response = new ConfirmResponse();
 
-        for(TradeFlowNode node : nodeList) {
+        for(TradeNode node : nodeList) {
             node.run(request, response, context);
         }
 

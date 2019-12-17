@@ -1,5 +1,7 @@
-package study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow;
+package study.daydayup.wolf.business.trade.buy.biz.common.flow;
 
+
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow

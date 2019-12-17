@@ -31,7 +31,7 @@ public class BuyRequest extends Request {
     private int tradeType;
     private String relatedTradeNo;
 
-    private String tradeSource;
+    private String source;
     private TradeEnv env;
     private String tags;
 

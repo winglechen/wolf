@@ -1,7 +1,8 @@
-package study.daydayup.wolf.business.trade.buy.biz.domain.factory;
+package study.daydayup.wolf.business.trade.buy.biz.common.factory;
 
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow.*;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
+import study.daydayup.wolf.business.trade.buy.biz.common.flow.*;
 import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeException;
 
 /**

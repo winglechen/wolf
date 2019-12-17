@@ -11,4 +11,13 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  **/
 @Data
 public class TradeGoods extends VO {
+    private long shopId;
+    private long goodsId;
+    private String goodsName;
+    private TradeSku sku;
+    private int num;
+
+    private long originalPrice;
+    private long discountPrice;
+    private long postage;
 }

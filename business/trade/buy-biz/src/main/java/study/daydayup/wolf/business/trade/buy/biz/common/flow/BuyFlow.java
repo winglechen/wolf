@@ -1,6 +1,7 @@
-package study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow;
+package study.daydayup.wolf.business.trade.buy.biz.common.flow;
 
-import study.daydayup.wolf.business.trade.buy.biz.domain.entity.node.*;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
+import study.daydayup.wolf.business.trade.buy.biz.common.node.*;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow
@@ -14,7 +15,7 @@ public class BuyFlow extends AbstractTradeFlow implements TradeFlow {
         addNode(new ShopStatusCheckNode());
         addNode(new GoodsStatusCheckNode());
         addNode(new StockOperationNode());
-        addNode(new UmpFlowNode());
+        addNode(new UmpNode());
         addNode(new OrderCreateNode());
     }
 
