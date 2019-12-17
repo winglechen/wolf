@@ -22,7 +22,35 @@
     </modules>
 
     <properties>
+        <trade.version>1.0.0-SNAPSHOT</trade.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>trade-api</artifactId>
+                <version>${trade.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>after-sale-biz</artifactId>
+                <version>${trade.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>buy-biz</artifactId>
+                <version>${trade.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.trade</groupId>
+                <artifactId>order-biz</artifactId>
+                <version>${trade.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
