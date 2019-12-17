@@ -39,7 +39,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         ConfirmResponse response = new ConfirmResponse();
 
         for(TradeNode node : nodeList) {
-            node.run(request, response, context);
+            node.run(context);
         }
 
         return response;

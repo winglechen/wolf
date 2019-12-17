@@ -21,5 +21,4 @@ public class Goods extends BaseGoods {
     protected String detail;
 
     protected List<Sku> skuList;
-
 }

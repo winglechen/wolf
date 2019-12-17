@@ -13,6 +13,8 @@ import study.daydayup.wolf.business.trade.buy.biz.service.TradeFlowService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
+import javax.annotation.Resource;
+
 /**
  * study.daydayup.wolf.business.trade.buy.service.impl
  *
@@ -21,27 +23,30 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  **/
 @RpcService(protocol = "dubbo")
 public class BuyServiceImpl implements BuyService {
+    @Resource
+    private TradeFlowService flowService;
+
     @Override
     public Result<PreviewResponse> preview(@Validated BuyRequest request) {
-        PreviewResponse response =  new TradeFlowService().preview(request);
+        PreviewResponse response =  flowService.preview(request);
         return Result.ok(response);
     }
 
     @Override
     public Result<ConfirmResponse> confirm(@Validated BuyRequest request) {
-        ConfirmResponse response = new TradeFlowService().confirm(request);
+        ConfirmResponse response = flowService.confirm(request);
         return Result.ok(response);
     }
 
     @Override
     public Result<PayResponse> pay(@Validated PayRequest request) {
-        PayResponse response = new TradeFlowService().pay(request);
+        PayResponse response = flowService.pay(request);
         return Result.ok(response);
     }
 
     @Override
     public Result<PayNotifyResponse> payNotify(@Validated PayNotifyRequest request) {
-        PayNotifyResponse response = new TradeFlowService().payNotify(request);
+        PayNotifyResponse response = flowService.payNotify(request);
         return Result.ok(response);
     }
 }

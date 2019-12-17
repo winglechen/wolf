@@ -1,10 +1,15 @@
 package study.daydayup.wolf.business.trade.buy.biz.common.factory;
 
+import org.apache.catalina.core.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.common.flow.*;
 import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.buy.biz.loan.flow.*;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.factory
@@ -12,7 +17,37 @@ import study.daydayup.wolf.business.trade.buy.biz.loan.flow.*;
  * @author Wingle
  * @since 2019/10/5 11:32 AM
  **/
+@Component
 public class TradeFlowFactory {
+    @Resource
+    private static BuyFlow buyFlow;
+    @Resource
+    private static GiftFlow giftFlow;
+    @Resource
+    private static GiftReceiveFlow giftReceiveFlow;
+    @Resource
+    private static PeerpayFlow peerpayFlow;
+    @Resource
+    private static PeerpayPayFlow peerpayPayFlow;
+    @Resource
+    private static SecKillFlow secKillFlow;
+    @Resource
+    private static GroupBuyFlow groupBuyFlow;
+    @Resource
+    private static GroupParticipateFlow groupParticipateFlow;
+    @Resource
+    private static FenXiaoFlow fenXiaoFlow;
+    @Resource
+    private static CollectionOrderFlow collectionOrderFlow;
+    @Resource
+    private static LoanProxyFlow loanProxyFlow;
+    @Resource
+    private static RepayOrderFlow repayOrderFlow;
+    @Resource
+    private static LoanOrderFlow loanOrderFlow;
+    @Resource
+    private static LoanContractFlow loanContractFlow;
+
     public static TradeFlow create() {
         return create(TradeTypeEnum.ORDER);
     }
@@ -27,33 +62,33 @@ public class TradeFlowFactory {
     private static TradeFlow createByTradeType(TradeTypeEnum tradeTypeEnum) {
         switch (tradeTypeEnum) {
             case ORDER:
-                return new BuyFlow();
+                return buyFlow;
             case GIFT:
-                return new GiftFlow();
+                return giftFlow;
             case GIFT_RECEIVE:
-                return new GiftReceiveFlow();
+                return giftReceiveFlow;
             case PEERPAY:
-                return new PeerpayFlow();
+                return peerpayFlow;
             case PEERPAY_PAY:
-                return new PeerpayPayFlow();
+                return peerpayPayFlow;
             case SECKILL:
-                return new SecKillFlow();
+                return secKillFlow;
             case GROUP_BUY:
-                return new GroupBuyFlow();
+                return groupBuyFlow;
             case GROUP_PARTICIPATE:
-                return new GroupParticipateFlow();
+                return groupParticipateFlow;
             case FENXIAO:
-                return new FenXiaoFlow();
+                return fenXiaoFlow;
             case COLLECTION_ORDER:
-                return new CollectionOrderFlow();
+                return collectionOrderFlow;
             case LOAN_PROXY:
-                return new LoanProxyFlow();
+                return loanProxyFlow;
             case REPAY_ORDER:
-                return new RepayOrderFlow();
+                return repayOrderFlow;
             case LOAN_ORDER:
-                return new LoanOrderFlow();
+                return loanOrderFlow;
             case LOAN_CONTRACT:
-                return new LoanContractFlow();
+                return loanContractFlow;
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }

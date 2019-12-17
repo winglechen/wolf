@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.loan;
+package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
