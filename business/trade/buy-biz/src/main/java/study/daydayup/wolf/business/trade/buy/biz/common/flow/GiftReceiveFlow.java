@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.common.flow;
 
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.buy.biz.common.AbstractTradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
 
 /**

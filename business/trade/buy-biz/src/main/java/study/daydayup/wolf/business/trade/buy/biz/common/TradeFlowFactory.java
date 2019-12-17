@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.common.factory;
+package study.daydayup.wolf.business.trade.buy.biz.common;
 
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,46 +20,46 @@ import javax.annotation.Resource;
 @Component
 public class TradeFlowFactory {
     @Resource
-    private static BuyFlow buyFlow;
+    private BuyFlow buyFlow;
     @Resource
-    private static GiftFlow giftFlow;
+    private GiftFlow giftFlow;
     @Resource
-    private static GiftReceiveFlow giftReceiveFlow;
+    private GiftReceiveFlow giftReceiveFlow;
     @Resource
-    private static PeerpayFlow peerpayFlow;
+    private PeerpayFlow peerpayFlow;
     @Resource
-    private static PeerpayPayFlow peerpayPayFlow;
+    private PeerpayPayFlow peerpayPayFlow;
     @Resource
-    private static SecKillFlow secKillFlow;
+    private SecKillFlow secKillFlow;
     @Resource
-    private static GroupBuyFlow groupBuyFlow;
+    private GroupBuyFlow groupBuyFlow;
     @Resource
-    private static GroupParticipateFlow groupParticipateFlow;
+    private GroupParticipateFlow groupParticipateFlow;
     @Resource
-    private static FenXiaoFlow fenXiaoFlow;
+    private FenXiaoFlow fenXiaoFlow;
     @Resource
-    private static CollectionOrderFlow collectionOrderFlow;
+    private CollectionOrderFlow collectionOrderFlow;
     @Resource
-    private static LoanProxyFlow loanProxyFlow;
+    private LoanProxyFlow loanProxyFlow;
     @Resource
-    private static RepayOrderFlow repayOrderFlow;
+    private RepayOrderFlow repayOrderFlow;
     @Resource
-    private static LoanOrderFlow loanOrderFlow;
+    private LoanOrderFlow loanOrderFlow;
     @Resource
-    private static LoanContractFlow loanContractFlow;
+    private LoanContractFlow loanContractFlow;
 
-    public static TradeFlow create() {
+    public TradeFlow create() {
         return create(TradeTypeEnum.ORDER);
     }
 
-    public static TradeFlow create(TradeTypeEnum tradeTypeEnum) {
+    public TradeFlow create(TradeTypeEnum tradeTypeEnum) {
         TradeFlow tradeFlow = createByTradeType(tradeTypeEnum);
         initTradeFlow(tradeFlow);
 
         return tradeFlow;
     }
 
-    private static TradeFlow createByTradeType(TradeTypeEnum tradeTypeEnum) {
+    private TradeFlow createByTradeType(TradeTypeEnum tradeTypeEnum) {
         switch (tradeTypeEnum) {
             case ORDER:
                 return buyFlow;
@@ -94,7 +94,7 @@ public class TradeFlowFactory {
         }
     }
 
-    private static void initTradeFlow(TradeFlow tradeFlow) {
+    private void initTradeFlow(TradeFlow tradeFlow) {
         tradeFlow.init();
     }
 }

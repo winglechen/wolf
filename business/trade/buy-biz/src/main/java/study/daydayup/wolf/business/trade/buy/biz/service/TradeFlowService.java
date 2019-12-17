@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.biz.common.factory.TradeFlowFactory;
+import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlowFactory;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
 import study.daydayup.wolf.common.util.EnumUtil;
 
