@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.trade.buy.biz.domain.factory;
 
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow.*;
-import study.daydayup.wolf.business.trade.buy.domain.entity.flow.*;
 import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeException;
 
 /**
@@ -13,7 +12,7 @@ import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeExce
  **/
 public class TradeFlowFactory {
     public static TradeFlow create() {
-        return create(TradeTypeEnum.NORMAL);
+        return create(TradeTypeEnum.ORDER);
     }
 
     public static TradeFlow create(TradeTypeEnum tradeTypeEnum) {
@@ -24,9 +23,8 @@ public class TradeFlowFactory {
     }
 
     private static TradeFlow createByTradeType(TradeTypeEnum tradeTypeEnum) {
-        TradeFlow tradeFlow;
         switch (tradeTypeEnum) {
-            case NORMAL:
+            case ORDER:
                 return new BuyFlow();
             case GIFT:
                 return new GiftFlow();
@@ -40,12 +38,12 @@ public class TradeFlowFactory {
                 return new SecKillFlow();
             case GROUP_BUY:
                 return new GroupBuyFlow();
-            case GROUP_PARTICPATE:
+            case GROUP_PARTICIPATE:
                 return new GroupParticipateFlow();
             case FENXIAO:
                 return new FenXiaoFlow();
             default:
-                throw new UnsupportedTradeTypeException("No such tradeFlow: " + tradeTypeEnum);
+                throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }
     }
 

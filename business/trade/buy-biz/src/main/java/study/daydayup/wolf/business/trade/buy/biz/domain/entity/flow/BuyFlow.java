@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.domain.entity.flow;
 
 import study.daydayup.wolf.business.trade.buy.biz.domain.entity.node.*;
-import study.daydayup.wolf.business.trade.buy.domain.entity.node.*;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow

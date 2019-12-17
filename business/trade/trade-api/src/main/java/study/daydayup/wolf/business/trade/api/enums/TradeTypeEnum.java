@@ -11,6 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum TradeTypeEnum implements CodeBasedEnum {
+    FENXIAO(100, "分销"),
+
     GIFT(90, "送礼"),
     GIFT_RECEIVE(80, "收礼"),
 

@@ -14,7 +14,6 @@ import study.daydayup.wolf.framework.layer.domain.Entity;
 public class ContractEntity extends Entity {
     private Contract model;
     private Contract changes;
-    private Contract rules;
 
 
 }
