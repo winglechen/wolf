@@ -29,11 +29,7 @@ public class GetSellerNode extends AbstractTradeNode implements TradeNode {
     public void run(BuyContext context) {
         init(context);
 
-        List<TradeGoods> goodsList = context.getGoodsList();
-        if (goodsList == null || goodsList.isEmpty()) {
-            throw new GoodsNotFoundException();
-        }
-
+        List<TradeGoods> goodsList = getGoodsList();
         TradeGoods goods = goodsList.get(0);
 
         Seller seller = new Seller();

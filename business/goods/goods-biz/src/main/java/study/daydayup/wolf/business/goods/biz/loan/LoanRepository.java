@@ -173,6 +173,8 @@ public class LoanRepository extends Repository {
         loanDO.setId(null);
         loanDO.setGoodsId(goodsId);
         loanDO.setOrgId(entity.getOrgId());
+        loanDO.setHandlingFeeRate(10000 * loanDO.getHandlingFeeRate());
+        loanDO.setInterest(1000000 * loanDO.getInterest());
 
         String installments = JSON.toJSONString(entity.getInstallmentList());
         loanDO.setInstallment(installments);

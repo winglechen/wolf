@@ -21,9 +21,8 @@ import java.util.List;
  * @since 2019/10/5 11:01 AM
  **/
 @Data
+@Builder
 public class BuyContext {
-    @Builder
-    BuyContext(){}
 
     private TradeTypeEnum tradeType;
     private TradePhaseEnum tradePhase;

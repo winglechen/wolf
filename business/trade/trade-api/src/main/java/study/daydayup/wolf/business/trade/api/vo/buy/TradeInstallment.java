@@ -25,6 +25,4 @@ public class TradeInstallment extends VO {
     private int percentage;
     private int feePercentage;
     private int installmentType;
-
-    private LocalDateTime effectAt;
 }

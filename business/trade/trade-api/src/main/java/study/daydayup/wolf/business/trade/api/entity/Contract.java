@@ -1,8 +1,13 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.entity.contract.BaseContract;
 import study.daydayup.wolf.business.trade.api.vo.contract.*;
+
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity
@@ -11,7 +16,9 @@ import study.daydayup.wolf.business.trade.api.vo.contract.*;
  * @since 2019/10/4 12:04 AM
  **/
 @Data
+@SuperBuilder(toBuilder = true)
 public class Contract extends BaseContract {
+
     private ObjectsTerm objectsTerm;
     private PaymentTerm paymentTerm;
 
@@ -20,6 +27,6 @@ public class Contract extends BaseContract {
 
     private LoanTerm loanTerm;
     private RepaymentTerm repaymentTerm;
-    private InstallmentTerm installmentTerm;
+    private List<InstallmentTerm> installmentTermList;
     private TaxTerm taxTerm;
 }

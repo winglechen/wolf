@@ -66,6 +66,9 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
             goods.setGiftFlag(goodsRequest.getGiftFlag());
             goods.setPromotionId(goodsRequest.getPromotionId());
             goods.setMemo(goodsRequest.getMemo());
+
+            goods.setPayPrice(goods.getSalePrice());
+            goods.setPostage(0);
         }
     }
 

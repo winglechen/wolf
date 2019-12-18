@@ -16,14 +16,16 @@ import javax.validation.constraints.Min;
 public class TradeLoan extends VO {
     private long handlingFee;
     private int handlingFeeRate;
-    private int duration;
+
     private int interest;
     private int belatedPayment;
-
     private int interestUnit;
     private int belatedPaymentUnit;
+
+    private int duration;
     private int durationUnit;
     private int durationStrategy;
+
     private int repayStrategy;
     private int prepayStrategy;
     private int amountStrategy;
