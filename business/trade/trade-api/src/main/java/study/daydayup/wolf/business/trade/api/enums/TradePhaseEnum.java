@@ -17,11 +17,8 @@ public enum TradePhaseEnum implements CodeBasedEnum {
 
     AFTER_SALE_PHASE(70, "售后阶段"),
 
-    ORDER_PHASE(60, "订单阶段"),
-    ORDER_PREVIEW_PHASE(50, "订单预览阶段"),
-
-    CONTRACT_PHASE(40, "合同阶段"),
-    CONTRACT_PREVIEW_PHASE(30, "合同预览阶段"),
+    CONFIRM_PHASE(40, "确认阶段"),
+    PREVIEW_PHASE(30, "预览阶段"),
 
     LICENSE_PHASE(20, "获取令牌阶段"),
     UMP_PHASE(10, "营销阶段")

@@ -15,7 +15,7 @@ public class GoodsRequest {
     private long goodsId;
     private long skuId;
 
-    private int amount;
+    private int quantity;
 
     private int giftFlag;
     private long promotionId;

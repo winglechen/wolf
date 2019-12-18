@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.common.node;
 
 import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
+import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 
 import java.util.EnumSet;
 
@@ -14,7 +14,7 @@ import java.util.EnumSet;
  **/
 public abstract class AbstractTradeNode implements TradeNode {
     protected EnumSet<TradePhaseEnum> phases;
-    protected TradeContext context;
+    protected BuyContext context;
 
     @Override
     public boolean effectsInPhase(TradePhaseEnum tradePhase) {

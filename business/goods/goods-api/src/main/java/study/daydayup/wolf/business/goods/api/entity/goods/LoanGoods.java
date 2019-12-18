@@ -18,6 +18,7 @@ import java.util.List;
 public class LoanGoods extends Goods {
     @Builder
     public LoanGoods(){}
+
     private Loan loan;
     private List<Installment> installmentList;
 }

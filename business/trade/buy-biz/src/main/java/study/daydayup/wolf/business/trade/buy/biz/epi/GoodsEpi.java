@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.epi;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.goods.api.dto.request.TradeGoodsRequest;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 
@@ -19,7 +20,7 @@ public class GoodsEpi {
     @Reference
     private GoodsService goodsService;
 
-    List<TradeGoods> fetch(GoodsRequest request) {
+    List<TradeGoods> fetch(TradeGoodsRequest request) {
         return null;
     }
 }

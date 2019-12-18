@@ -7,10 +7,13 @@
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="installment_no" jdbcType="TINYINT" property="installmentNo" />
+    <result column="installment_type" jdbcType="TINYINT" property="installmentType" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="effect_at" jdbcType="TIMESTAMP" property="effectAt" />
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
     <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="duration_unit" jdbcType="INTEGER" property="durationUnit" />
+    <result column="duration_strategy" jdbcType="INTEGER" property="durationStrategy" />
     <result column="percentage" jdbcType="INTEGER" property="percentage" />
     <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -20,9 +23,9 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, buyer_id, seller_id, installment_no, `state`, effect_at, related_trade_no, 
-    duration, percentage, fee_percentage, version, delete_flag, last_editor, created_at, 
-    updated_at
+    id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, effect_at, 
+    related_trade_no, duration, duration_unit, duration_strategy, percentage, fee_percentage, 
+    version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -35,14 +38,16 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into installment_term (trade_no, buyer_id, seller_id, 
-      installment_no, `state`, effect_at, 
-      related_trade_no, duration, percentage, 
+      installment_no, installment_type, `state`, 
+      effect_at, related_trade_no, duration, 
+      duration_unit, duration_strategy, percentage, 
       fee_percentage, version, delete_flag, 
       last_editor, created_at, updated_at
       )
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
-      #{installmentNo,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{effectAt,jdbcType=TIMESTAMP}, 
-      #{relatedTradeNo,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
+      #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{effectAt,jdbcType=TIMESTAMP}, #{relatedTradeNo,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, 
+      #{durationUnit,jdbcType=INTEGER}, #{durationStrategy,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
       #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
@@ -65,6 +70,9 @@
       <if test="installmentNo != null">
         installment_no,
       </if>
+      <if test="installmentType != null">
+        installment_type,
+      </if>
       <if test="state != null">
         `state`,
       </if>
@@ -76,6 +84,12 @@
       </if>
       <if test="duration != null">
         duration,
+      </if>
+      <if test="durationUnit != null">
+        duration_unit,
+      </if>
+      <if test="durationStrategy != null">
+        duration_strategy,
       </if>
       <if test="percentage != null">
         percentage,
@@ -110,6 +124,9 @@
       <if test="installmentNo != null">
         #{installmentNo,jdbcType=TINYINT},
       </if>
+      <if test="installmentType != null">
+        #{installmentType,jdbcType=TINYINT},
+      </if>
       <if test="state != null">
         #{state,jdbcType=TINYINT},
       </if>
@@ -121,6 +138,12 @@
       </if>
       <if test="duration != null">
         #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="durationUnit != null">
+        #{durationUnit,jdbcType=INTEGER},
+      </if>
+      <if test="durationStrategy != null">
+        #{durationStrategy,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         #{percentage,jdbcType=INTEGER},
@@ -158,6 +181,9 @@
       <if test="installmentNo != null">
         installment_no = #{installmentNo,jdbcType=TINYINT},
       </if>
+      <if test="installmentType != null">
+        installment_type = #{installmentType,jdbcType=TINYINT},
+      </if>
       <if test="state != null">
         `state` = #{state,jdbcType=TINYINT},
       </if>
@@ -169,6 +195,12 @@
       </if>
       <if test="duration != null">
         duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="durationUnit != null">
+        duration_unit = #{durationUnit,jdbcType=INTEGER},
+      </if>
+      <if test="durationStrategy != null">
+        duration_strategy = #{durationStrategy,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         percentage = #{percentage,jdbcType=INTEGER},
@@ -200,10 +232,13 @@
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
       installment_no = #{installmentNo,jdbcType=TINYINT},
+      installment_type = #{installmentType,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       effect_at = #{effectAt,jdbcType=TIMESTAMP},
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=INTEGER},
+      duration_unit = #{durationUnit,jdbcType=INTEGER},
+      duration_strategy = #{durationStrategy,jdbcType=INTEGER},
       percentage = #{percentage,jdbcType=INTEGER},
       fee_percentage = #{feePercentage,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},

@@ -11,29 +11,43 @@ public class OrderDO implements Serializable {
     private String tradeNo;
 
     private Long buyerId;
+
     private Long sellerId;
+
     private String buyerName;
+
     private String sellerName;
 
     private String source;
+
     private String tags;
 
     private Integer tradeType;
+
     private Integer state;
+
     private String relatedTradeNo;
 
     private Long amount;
+
     private Long postage;
+
     private Integer currency;
 
     private Integer paymentMethod;
+
     private Integer consignMethod;
+
     private String outTradeNo;
 
     private Integer version;
+
     private boolean deleteFlag;
+
     private Long lastEditor;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;

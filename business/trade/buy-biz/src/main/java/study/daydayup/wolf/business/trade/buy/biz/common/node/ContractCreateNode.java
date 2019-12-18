@@ -1,8 +1,11 @@
 package study.daydayup.wolf.business.trade.buy.biz.common.node;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
+import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
+
+import java.util.EnumSet;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.node
@@ -12,8 +15,20 @@ import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
  **/
 @Component
 public class ContractCreateNode extends AbstractTradeNode implements TradeNode {
-    @Override
-    public void run(TradeContext context) {
+    private BuyContext context;
 
+    @Override
+    public void run(BuyContext context) {
+        init(context);
+
+        if (!effectsInPhase(context.getTradePhase())) {
+            return;
+        }
+
+    }
+
+    private void init(BuyContext context) {
+        this.context = context;
+        phases = EnumSet.of(TradePhaseEnum.CONFIRM_PHASE);
     }
 }

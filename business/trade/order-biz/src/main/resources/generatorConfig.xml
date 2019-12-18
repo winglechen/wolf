@@ -90,6 +90,7 @@
         <table tableName="installment_term" domainObjectName="InstallmentTermDO" mapperName="InstallmentTermDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="installment_no" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="installment_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>

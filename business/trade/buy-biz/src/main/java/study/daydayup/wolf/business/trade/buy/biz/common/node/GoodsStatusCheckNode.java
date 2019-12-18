@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.common.node;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
+import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.node
@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
 @Component
 public class GoodsStatusCheckNode extends AbstractTradeNode implements TradeNode {
     @Override
-    public void run(TradeContext context) {
+    public void run(BuyContext context) {
 
     }
 }

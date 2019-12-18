@@ -42,7 +42,7 @@ public class OrderLineDO implements Serializable {
 
     private Integer quantity;
 
-    private String buyerMessage;
+    private String buyerMemo;
 
     private boolean giftFlag;
 
@@ -90,7 +90,7 @@ public class OrderLineDO implements Serializable {
         sb.append(", currency=").append(currency);
         sb.append(", chargeUnit=").append(chargeUnit);
         sb.append(", quantity=").append(quantity);
-        sb.append(", buyerMessage=").append(buyerMessage);
+        sb.append(", buyerMemo=").append(buyerMemo);
         sb.append(", giftFlag=").append(giftFlag);
         sb.append(", consignState=").append(consignState);
         sb.append(", disputeState=").append(disputeState);
@@ -135,7 +135,7 @@ public class OrderLineDO implements Serializable {
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getChargeUnit() == null ? other.getChargeUnit() == null : this.getChargeUnit().equals(other.getChargeUnit()))
             && (this.getQuantity() == null ? other.getQuantity() == null : this.getQuantity().equals(other.getQuantity()))
-            && (this.getBuyerMessage() == null ? other.getBuyerMessage() == null : this.getBuyerMessage().equals(other.getBuyerMessage()))
+            && (this.getBuyerMemo() == null ? other.getBuyerMemo() == null : this.getBuyerMemo().equals(other.getBuyerMemo()))
             && (this.isGiftFlag() == other.isGiftFlag())
             && (this.getConsignState() == null ? other.getConsignState() == null : this.getConsignState().equals(other.getConsignState()))
             && (this.getDisputeState() == null ? other.getDisputeState() == null : this.getDisputeState().equals(other.getDisputeState()))
@@ -170,7 +170,7 @@ public class OrderLineDO implements Serializable {
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getChargeUnit() == null) ? 0 : getChargeUnit().hashCode());
         result = prime * result + ((getQuantity() == null) ? 0 : getQuantity().hashCode());
-        result = prime * result + ((getBuyerMessage() == null) ? 0 : getBuyerMessage().hashCode());
+        result = prime * result + ((getBuyerMemo() == null) ? 0 : getBuyerMemo().hashCode());
         result = prime * result + (isGiftFlag() ? 1231 : 1237);
         result = prime * result + ((getConsignState() == null) ? 0 : getConsignState().hashCode());
         result = prime * result + ((getDisputeState() == null) ? 0 : getDisputeState().hashCode());

@@ -33,7 +33,7 @@ public class BaseGoods extends Entity {
      */
     protected int goodsType;
     @NotBlank
-    protected Name name;
+    protected String name;
     @Min(1)
     protected long price;
     @Min(1)

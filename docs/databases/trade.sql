@@ -62,8 +62,7 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
 COMMENT = '还款条款';
 
 DROP TABLE IF EXISTS `installment_term`;
-DROP TABLE IF EXISTS `postage_term`;
-CREATE TABLE IF NOT EXISTS `postage_term`
+CREATE TABLE IF NOT EXISTS `installment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
@@ -71,11 +70,14 @@ CREATE TABLE IF NOT EXISTS `postage_term`
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
+    `installment_type`  TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期类型',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `effect_at`         DATETIME COMMENT '生效时间',
     `related_trade_no`  VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
     `duration`      INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `duration_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `duration_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
     `percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
@@ -143,7 +145,8 @@ CREATE TABLE IF NOT EXISTS `consign_term`
     COMMENT = '物流条款';
 
 DROP TABLE IF EXISTS `assurance_term`;
-CREATE TABLE IF NOT EXISTS `assurance_term`
+DROP TABLE IF EXISTS `postage_term`;
+CREATE TABLE IF NOT EXISTS `postage_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
     `trade_no`          VARCHAR(30) NOT NULL DEFAULT '' COMMENT '交易号',
@@ -275,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `order_line`
     `charge_unit`        INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
     `quantity`          INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
 
-    `buyer_message`     VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '买家留言',
+    `buyer_memo`        VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '买家留言',
     `gift_flag`         TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '礼品标识',
 
     `consign_state`     TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付状态',

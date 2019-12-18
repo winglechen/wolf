@@ -20,7 +20,7 @@
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
-    <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
+    <result column="buyer_memo" jdbcType="VARCHAR" property="buyerMemo" />
     <result column="gift_flag" jdbcType="BIT" property="giftFlag" />
     <result column="consign_state" jdbcType="TINYINT" property="consignState" />
     <result column="dispute_state" jdbcType="TINYINT" property="disputeState" />
@@ -35,7 +35,7 @@
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, goods_id, sku_id, category_id, goods_type, goods_version, 
     sku, goods_name, goods_main_pic, sale_price, pay_price, postage, currency, charge_unit, 
-    quantity, buyer_message, gift_flag, consign_state, dispute_state, consigned_at, dispute_at, 
+    quantity, buyer_memo, gift_flag, consign_state, dispute_state, consigned_at, dispute_at, 
     version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -53,7 +53,7 @@
       goods_type, goods_version, sku, 
       goods_name, goods_main_pic, sale_price, 
       pay_price, postage, currency, 
-      charge_unit, quantity, buyer_message, 
+      charge_unit, quantity, buyer_memo, 
       gift_flag, consign_state, dispute_state, 
       consigned_at, dispute_at, version, 
       delete_flag, last_editor, created_at, 
@@ -63,7 +63,7 @@
       #{goodsType,jdbcType=SMALLINT}, #{goodsVersion,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{salePrice,jdbcType=BIGINT}, 
       #{payPrice,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
-      #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{buyerMessage,jdbcType=VARCHAR}, 
+      #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{buyerMemo,jdbcType=VARCHAR}, 
       #{giftFlag,jdbcType=BIT}, #{consignState,jdbcType=TINYINT}, #{disputeState,jdbcType=TINYINT}, 
       #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=BIT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
@@ -126,8 +126,8 @@
       <if test="quantity != null">
         quantity,
       </if>
-      <if test="buyerMessage != null">
-        buyer_message,
+      <if test="buyerMemo != null">
+        buyer_memo,
       </if>
       gift_flag,
       <if test="consignState != null">
@@ -208,8 +208,8 @@
       <if test="quantity != null">
         #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="buyerMessage != null">
-        #{buyerMessage,jdbcType=VARCHAR},
+      <if test="buyerMemo != null">
+        #{buyerMemo,jdbcType=VARCHAR},
       </if>
       #{giftFlag,jdbcType=BIT},
       <if test="consignState != null">
@@ -293,8 +293,8 @@
       <if test="quantity != null">
         quantity = #{quantity,jdbcType=INTEGER},
       </if>
-      <if test="buyerMessage != null">
-        buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      <if test="buyerMemo != null">
+        buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
       </if>
       <if test="giftFlag != null">
         gift_flag = #{giftFlag,jdbcType=BIT},
@@ -348,7 +348,7 @@
       currency = #{currency,jdbcType=INTEGER},
       charge_unit = #{chargeUnit,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
-      buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+      buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
       gift_flag = #{giftFlag,jdbcType=BIT},
       consign_state = #{consignState,jdbcType=TINYINT},
       dispute_state = #{disputeState,jdbcType=TINYINT},

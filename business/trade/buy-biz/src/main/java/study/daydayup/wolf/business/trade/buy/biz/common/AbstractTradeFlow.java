@@ -7,11 +7,12 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeContext;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
+import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
+import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContextBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow
@@ -20,12 +21,10 @@ import java.util.ArrayList;
  * @since 2019/10/5 2:03 PM
  **/
 public abstract class AbstractTradeFlow implements TradeFlow {
-    protected TradeContext context;
-    protected ArrayList<TradeNode> nodeList;
+    protected List<TradeNode> nodeList;
 
     @Override
     public void init() {
-        context = new TradeContext();
         nodeList = new ArrayList<>();
     }
 
@@ -36,11 +35,11 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
     @Override
     public ConfirmResponse confirm(BuyRequest request) {
-        ConfirmResponse response = new ConfirmResponse();
+        BuyContext context = BuyContextBuilder.build(request);
+        context.setTradePhase(TradePhaseEnum.CONFIRM_PHASE);
 
-        for(TradeNode node : nodeList) {
-            node.run(context);
-        }
+        ConfirmResponse response = new ConfirmResponse();
+        execute(context);
 
         return response;
     }
@@ -48,7 +47,13 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
     @Override
     public PreviewResponse preview(BuyRequest request) {
-        return null;
+        BuyContext context = BuyContextBuilder.build(request);
+        context.setTradePhase(TradePhaseEnum.PREVIEW_PHASE);
+
+        PreviewResponse response = new PreviewResponse();
+        execute(context);
+
+        return response;
     }
 
     @Override
@@ -59,6 +64,12 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     @Override
     public PayNotifyResponse payNotify(PayNotifyRequest request) {
         return null;
+    }
+
+    protected void execute(BuyContext context) {
+        for(TradeNode node : nodeList) {
+            node.run(context);
+        }
     }
 
 
