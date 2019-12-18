@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.buy.biz.loan.node.GetSellerNode;
 import study.daydayup.wolf.business.trade.buy.biz.loan.node.StoreContractNode;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,24 +30,40 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
     @Resource
     private StoreContractNode storeContractNode;
 
-
     @Override
     public List<TradeNode> buildConfirmFlow() {
-        return null;
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        nodeList.add(fetchGoodsNode);
+        nodeList.add(getSellerNode);
+        nodeList.add(createContractNode);
+        nodeList.add(storeContractNode);
+
+        return nodeList;
     }
 
     @Override
     public List<TradeNode> buildPreviewFlow() {
-        return null;
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        nodeList.add(fetchGoodsNode);
+        nodeList.add(getSellerNode);
+        nodeList.add(createContractNode);
+
+        return nodeList;
     }
 
     @Override
     public List<TradeNode> buildPayFlow() {
-        return null;
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        return nodeList;
     }
 
     @Override
     public List<TradeNode> buildPayNotifyFlow() {
-        return null;
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        return nodeList;
     }
 }

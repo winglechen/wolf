@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.exception.buy.GoodsNotFoundException;
+import study.daydayup.wolf.business.trade.api.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
@@ -28,7 +30,16 @@ public class GetSellerNode extends AbstractTradeNode implements TradeNode {
         init(context);
 
         List<TradeGoods> goodsList = context.getGoodsList();
+        if (goodsList == null || goodsList.isEmpty()) {
+            throw new GoodsNotFoundException();
+        }
 
+        TradeGoods goods = goodsList.get(0);
+
+        Seller seller = new Seller();
+        seller.setId(goods.getSellId());
+
+        context.setSeller(seller);
     }
 
     private void init(BuyContext context) {
