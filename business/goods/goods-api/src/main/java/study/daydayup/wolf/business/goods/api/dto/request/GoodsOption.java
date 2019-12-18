@@ -11,11 +11,12 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/11 7:28 下午
  **/
 @Data
-@Builder
 public class GoodsOption extends Request {
+    @Builder
+    public GoodsOption(){}
     private boolean withDetail          = false;
-    private boolean withSku             = false;
+    private boolean withSku             = true;
     private boolean withStatistics      = false;
     private boolean withStock           = false;
-    private boolean withLoan            = false;
+    private boolean withLoan            = true;
 }

@@ -24,5 +24,4 @@ public interface GoodsLoanDAO {
 
     GoodsLoanDO selectByGoodsId(@Param("goodsId")Long goodsId, @Param("orgId")Long orgId);
 
-
 }

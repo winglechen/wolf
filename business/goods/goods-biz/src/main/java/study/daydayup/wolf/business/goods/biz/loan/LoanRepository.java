@@ -113,21 +113,6 @@ public class LoanRepository extends Repository {
         return setLoanToEntity(entity, loanDO);
     }
 
-    private Map<Long, GoodsLoanDO> findLoanByGoodsDOList(List<GoodsDO> goodsDOList, long orgId) {
-        List<Long> goodsIds = goodsDOList.stream()
-                .map(GoodsDO::getId)
-                .collect(Collectors.toList());
-        List<GoodsLoanDO> loanDOList = loanDAO.selectByGoodsIdIn(goodsIds, orgId);
-        Map<Long, GoodsLoanDO> loanMap = new HashMap<>();
-        if (loanDOList != null) {
-            loanMap = loanDOList.stream().collect(
-                    Collectors.toMap(GoodsLoanDO::getGoodsId, Function.identity())
-            );
-        }
-
-        return loanMap;
-    }
-
     private LoanEntity setLoanToEntity(LoanEntity entity, GoodsLoanDO loanDO) {
         if (loanDO == null) {
             return entity;
@@ -141,6 +126,21 @@ public class LoanRepository extends Repository {
         entity.setInstallmentList(installmentList);
 
         return entity;
+    }
+
+    private Map<Long, GoodsLoanDO> findLoanByGoodsDOList(List<GoodsDO> goodsDOList, long orgId) {
+        List<Long> goodsIds = goodsDOList.stream()
+                .map(GoodsDO::getId)
+                .collect(Collectors.toList());
+        List<GoodsLoanDO> loanDOList = loanDAO.selectByGoodsIdIn(goodsIds, orgId);
+        Map<Long, GoodsLoanDO> loanMap = new HashMap<>();
+        if (loanDOList != null) {
+            loanMap = loanDOList.stream().collect(
+                    Collectors.toMap(GoodsLoanDO::getGoodsId, Function.identity())
+            );
+        }
+
+        return loanMap;
     }
 
     private long saveGoodsDO(LoanEntity entity) {

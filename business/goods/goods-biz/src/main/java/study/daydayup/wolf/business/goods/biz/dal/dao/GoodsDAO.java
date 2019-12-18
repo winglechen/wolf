@@ -1,4 +1,5 @@
 package study.daydayup.wolf.business.goods.biz.dal.dao;
+import java.util.Collection;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,6 +28,11 @@ public interface GoodsDAO {
     List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
 
     GoodsDO selectOneByOrgId(@Param("orgId")Long orgId);
+
+
+    List<GoodsDO> selectByIdIn(@Param("idCollection")Collection<Long> idCollection, @Param("orgId") long orgId);
+
+    List<GoodsDO> selectSalableByIdIn(@Param("idCollection")Collection<Long> idCollection, @Param("orgId") long orgId);
 
 
 }
