@@ -21,16 +21,8 @@ import java.util.List;
  * @since 2019/10/5 2:03 PM
  **/
 public abstract class AbstractTradeFlow implements TradeFlow {
-    protected List<TradeNode> nodeList;
-
     @Override
     public void init() {
-        nodeList = new ArrayList<>();
-    }
-
-    @Override
-    public void addNode(TradeNode node){
-        nodeList.add(node);
     }
 
     @Override
@@ -39,7 +31,9 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         context.setTradePhase(TradePhaseEnum.CONFIRM_PHASE);
 
         ConfirmResponse response = new ConfirmResponse();
-        execute(context);
+
+        List<TradeNode> nodeList = buildConfirmFlow();
+        execute(nodeList, context);
 
         return response;
     }
@@ -51,7 +45,8 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         context.setTradePhase(TradePhaseEnum.PREVIEW_PHASE);
 
         PreviewResponse response = new PreviewResponse();
-        execute(context);
+        List<TradeNode> nodeList = buildPreviewFlow();
+        execute(nodeList, context);
 
         return response;
     }
@@ -66,7 +61,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         return null;
     }
 
-    protected void execute(BuyContext context) {
+    protected void execute(List<TradeNode> nodeList, BuyContext context) {
         for(TradeNode node : nodeList) {
             node.run(context);
         }

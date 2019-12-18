@@ -32,7 +32,7 @@ public class BuyContext {
     private Buyer buyer;
     private Seller seller;
 
-    private List<TradeGoods> goods;
+    private List<TradeGoods> goodsList;
     private TradeUmp ump;
 
     private Contract contract;

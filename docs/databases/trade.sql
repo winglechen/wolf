@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
     `effect_at`         DATETIME COMMENT '生效时间',
+
     `duration`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `duration_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
     `duration_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
@@ -72,14 +73,20 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `installment_type`  TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期类型',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
-    `effect_at`         DATETIME COMMENT '生效时间',
     `related_trade_no`  VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
-    `duration`      INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `duration_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `duration_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
-    `percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
-    `fee_percentage`INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+    `effect_at`         DATETIME COMMENT '生效时间',
+    `due_at`            DATETIME COMMENT '到期时间',
+    `overdue_at`        DATETIME COMMENT '逾期时间',
+
+    `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
+    `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
+
+    `duration`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
+    `fee_percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -270,6 +277,7 @@ CREATE TABLE IF NOT EXISTS `order_line`
     `sku`               VARCHAR(1000) NOT NULL DEFAULT '' COMMENT 'sku',
     `goods_name`        VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
     `goods_main_pic`    VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品主图',
+    `goods_code`        VARCHAR(50) NOT NULL DEFAULT '' COMMENT '产品编码',
 
     `sale_price`        BIGINT(20) NOT NULL DEFAULT 0 COMMENT '产品原价',
     `pay_price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '支付价格',

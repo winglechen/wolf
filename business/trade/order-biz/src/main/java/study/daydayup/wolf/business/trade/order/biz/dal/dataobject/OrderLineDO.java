@@ -30,6 +30,8 @@ public class OrderLineDO implements Serializable {
 
     private String goodsMainPic;
 
+    private String goodsCode;
+
     private Long salePrice;
 
     private Long payPrice;
@@ -84,6 +86,7 @@ public class OrderLineDO implements Serializable {
         sb.append(", sku=").append(sku);
         sb.append(", goodsName=").append(goodsName);
         sb.append(", goodsMainPic=").append(goodsMainPic);
+        sb.append(", goodsCode=").append(goodsCode);
         sb.append(", salePrice=").append(salePrice);
         sb.append(", payPrice=").append(payPrice);
         sb.append(", postage=").append(postage);
@@ -129,6 +132,7 @@ public class OrderLineDO implements Serializable {
             && (this.getSku() == null ? other.getSku() == null : this.getSku().equals(other.getSku()))
             && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
             && (this.getGoodsMainPic() == null ? other.getGoodsMainPic() == null : this.getGoodsMainPic().equals(other.getGoodsMainPic()))
+            && (this.getGoodsCode() == null ? other.getGoodsCode() == null : this.getGoodsCode().equals(other.getGoodsCode()))
             && (this.getSalePrice() == null ? other.getSalePrice() == null : this.getSalePrice().equals(other.getSalePrice()))
             && (this.getPayPrice() == null ? other.getPayPrice() == null : this.getPayPrice().equals(other.getPayPrice()))
             && (this.getPostage() == null ? other.getPostage() == null : this.getPostage().equals(other.getPostage()))
@@ -164,6 +168,7 @@ public class OrderLineDO implements Serializable {
         result = prime * result + ((getSku() == null) ? 0 : getSku().hashCode());
         result = prime * result + ((getGoodsName() == null) ? 0 : getGoodsName().hashCode());
         result = prime * result + ((getGoodsMainPic() == null) ? 0 : getGoodsMainPic().hashCode());
+        result = prime * result + ((getGoodsCode() == null) ? 0 : getGoodsCode().hashCode());
         result = prime * result + ((getSalePrice() == null) ? 0 : getSalePrice().hashCode());
         result = prime * result + ((getPayPrice() == null) ? 0 : getPayPrice().hashCode());
         result = prime * result + ((getPostage() == null) ? 0 : getPostage().hashCode());

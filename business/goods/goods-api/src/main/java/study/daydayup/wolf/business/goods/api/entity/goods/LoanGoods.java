@@ -15,8 +15,8 @@ import java.util.List;
  * @since 2019/12/11 5:17 下午
  **/
 @Data
+@Builder
 public class LoanGoods extends Goods {
-    @Builder
     public LoanGoods(){}
 
     private Loan loan;

@@ -13,8 +13,8 @@ import java.util.List;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
+@Builder
 public class Goods extends BaseGoods {
-    @Builder
     public Goods() {}
     protected String pics;
     protected String skuInfo;

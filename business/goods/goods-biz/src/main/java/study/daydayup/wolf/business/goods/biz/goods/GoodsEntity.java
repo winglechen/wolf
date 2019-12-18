@@ -16,10 +16,10 @@ import javax.annotation.Resource;
  * @since 2019/10/3 11:14 PM
  **/
 @Component
+@Builder
 public class GoodsEntity extends Goods {
     @Resource
     private GoodsDAO goodsDAO;
-    @Builder
     public GoodsEntity(){};
 
     public GoodsEntity init(long id, long orgId) {

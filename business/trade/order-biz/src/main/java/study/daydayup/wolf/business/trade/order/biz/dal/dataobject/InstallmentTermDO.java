@@ -20,15 +20,21 @@ public class InstallmentTermDO implements Serializable {
 
     private Integer state;
 
-    private LocalDateTime effectAt;
-
     private String relatedTradeNo;
 
+    private LocalDateTime effectAt;
+
+    private LocalDateTime dueAt;
+
+    private LocalDateTime overdueAt;
+
+    private Long amount;
+
+    private Long interest;
+
+    private Long handlingFee;
+
     private Integer duration;
-
-    private Integer durationUnit;
-
-    private Integer durationStrategy;
 
     private Integer percentage;
 
@@ -59,11 +65,14 @@ public class InstallmentTermDO implements Serializable {
         sb.append(", installmentNo=").append(installmentNo);
         sb.append(", installmentType=").append(installmentType);
         sb.append(", state=").append(state);
-        sb.append(", effectAt=").append(effectAt);
         sb.append(", relatedTradeNo=").append(relatedTradeNo);
+        sb.append(", effectAt=").append(effectAt);
+        sb.append(", dueAt=").append(dueAt);
+        sb.append(", overdueAt=").append(overdueAt);
+        sb.append(", amount=").append(amount);
+        sb.append(", interest=").append(interest);
+        sb.append(", handlingFee=").append(handlingFee);
         sb.append(", duration=").append(duration);
-        sb.append(", durationUnit=").append(durationUnit);
-        sb.append(", durationStrategy=").append(durationStrategy);
         sb.append(", percentage=").append(percentage);
         sb.append(", feePercentage=").append(feePercentage);
         sb.append(", version=").append(version);
@@ -94,11 +103,14 @@ public class InstallmentTermDO implements Serializable {
             && (this.getInstallmentNo() == null ? other.getInstallmentNo() == null : this.getInstallmentNo().equals(other.getInstallmentNo()))
             && (this.getInstallmentType() == null ? other.getInstallmentType() == null : this.getInstallmentType().equals(other.getInstallmentType()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getEffectAt() == null ? other.getEffectAt() == null : this.getEffectAt().equals(other.getEffectAt()))
             && (this.getRelatedTradeNo() == null ? other.getRelatedTradeNo() == null : this.getRelatedTradeNo().equals(other.getRelatedTradeNo()))
+            && (this.getEffectAt() == null ? other.getEffectAt() == null : this.getEffectAt().equals(other.getEffectAt()))
+            && (this.getDueAt() == null ? other.getDueAt() == null : this.getDueAt().equals(other.getDueAt()))
+            && (this.getOverdueAt() == null ? other.getOverdueAt() == null : this.getOverdueAt().equals(other.getOverdueAt()))
+            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
+            && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
             && (this.getDuration() == null ? other.getDuration() == null : this.getDuration().equals(other.getDuration()))
-            && (this.getDurationUnit() == null ? other.getDurationUnit() == null : this.getDurationUnit().equals(other.getDurationUnit()))
-            && (this.getDurationStrategy() == null ? other.getDurationStrategy() == null : this.getDurationStrategy().equals(other.getDurationStrategy()))
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -119,11 +131,14 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getInstallmentNo() == null) ? 0 : getInstallmentNo().hashCode());
         result = prime * result + ((getInstallmentType() == null) ? 0 : getInstallmentType().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getEffectAt() == null) ? 0 : getEffectAt().hashCode());
         result = prime * result + ((getRelatedTradeNo() == null) ? 0 : getRelatedTradeNo().hashCode());
+        result = prime * result + ((getEffectAt() == null) ? 0 : getEffectAt().hashCode());
+        result = prime * result + ((getDueAt() == null) ? 0 : getDueAt().hashCode());
+        result = prime * result + ((getOverdueAt() == null) ? 0 : getOverdueAt().hashCode());
+        result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
+        result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
         result = prime * result + ((getDuration() == null) ? 0 : getDuration().hashCode());
-        result = prime * result + ((getDurationUnit() == null) ? 0 : getDurationUnit().hashCode());
-        result = prime * result + ((getDurationStrategy() == null) ? 0 : getDurationStrategy().hashCode());
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

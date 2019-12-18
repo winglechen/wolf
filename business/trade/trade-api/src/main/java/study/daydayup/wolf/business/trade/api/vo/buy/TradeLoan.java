@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.vo.buy;
 
+import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.domain.VO;
 

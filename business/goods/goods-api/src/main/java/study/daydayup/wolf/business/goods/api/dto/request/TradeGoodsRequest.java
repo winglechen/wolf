@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.goods.api.dto.request;
 
+import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
 
@@ -10,6 +11,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/18 10:01 上午
  **/
 @Data
+@Builder
 public class TradeGoodsRequest extends Request {
     private long orgId;
     private long goodsId;

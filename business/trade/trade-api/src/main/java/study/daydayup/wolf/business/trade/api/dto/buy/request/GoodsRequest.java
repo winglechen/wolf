@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.trade.api.dto.buy.request;
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.vo.buy.GoodsMemo;
 
+import javax.validation.constraints.Min;
+
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
  *
@@ -11,7 +13,9 @@ import study.daydayup.wolf.business.trade.api.vo.buy.GoodsMemo;
  **/
 @Data
 public class GoodsRequest {
+    @Min(1)
     private long orgId;
+    @Min(1)
     private long goodsId;
     private long skuId;
 

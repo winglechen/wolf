@@ -19,8 +19,8 @@ import javax.validation.constraints.NotBlank;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
+@Builder
 public class BaseGoods extends Entity {
-    @Builder
     public BaseGoods() {}
     @BusinessKey @PrimaryKey
     protected long id;

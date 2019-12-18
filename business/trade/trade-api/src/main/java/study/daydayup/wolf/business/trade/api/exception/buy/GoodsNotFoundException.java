@@ -10,7 +10,11 @@ import study.daydayup.wolf.common.lang.string.Msg;
  * @since 2019/10/7 11:28 下午
  **/
 public class GoodsNotFoundException extends BusinessException {
-    public GoodsNotFoundException(long goodsId) {
+    public GoodsNotFoundException() {
+        this(null);
+    }
+
+    public GoodsNotFoundException(Long goodsId) {
         super(160101, Msg.join("Can't find goods: ", goodsId));
     }
 }

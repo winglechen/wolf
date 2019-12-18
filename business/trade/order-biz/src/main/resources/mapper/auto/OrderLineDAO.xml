@@ -14,6 +14,7 @@
     <result column="sku" jdbcType="VARCHAR" property="sku" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
     <result column="goods_main_pic" jdbcType="VARCHAR" property="goodsMainPic" />
+    <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="sale_price" jdbcType="BIGINT" property="salePrice" />
     <result column="pay_price" jdbcType="BIGINT" property="payPrice" />
     <result column="postage" jdbcType="BIGINT" property="postage" />
@@ -34,9 +35,9 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, goods_id, sku_id, category_id, goods_type, goods_version, 
-    sku, goods_name, goods_main_pic, sale_price, pay_price, postage, currency, charge_unit, 
-    quantity, buyer_memo, gift_flag, consign_state, dispute_state, consigned_at, dispute_at, 
-    version, delete_flag, last_editor, created_at, updated_at
+    sku, goods_name, goods_main_pic, goods_code, sale_price, pay_price, postage, currency, 
+    charge_unit, quantity, buyer_memo, gift_flag, consign_state, dispute_state, consigned_at, 
+    dispute_at, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -51,23 +52,23 @@
     insert into order_line (trade_no, buyer_id, seller_id, 
       goods_id, sku_id, category_id, 
       goods_type, goods_version, sku, 
-      goods_name, goods_main_pic, sale_price, 
-      pay_price, postage, currency, 
-      charge_unit, quantity, buyer_memo, 
-      gift_flag, consign_state, dispute_state, 
-      consigned_at, dispute_at, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      goods_name, goods_main_pic, goods_code, 
+      sale_price, pay_price, postage, 
+      currency, charge_unit, quantity, 
+      buyer_memo, gift_flag, consign_state, 
+      dispute_state, consigned_at, dispute_at, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{goodsId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, 
       #{goodsType,jdbcType=SMALLINT}, #{goodsVersion,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
-      #{goodsName,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{salePrice,jdbcType=BIGINT}, 
-      #{payPrice,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
-      #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{buyerMemo,jdbcType=VARCHAR}, 
-      #{giftFlag,jdbcType=BIT}, #{consignState,jdbcType=TINYINT}, #{disputeState,jdbcType=TINYINT}, 
-      #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=BIT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{goodsName,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR}, 
+      #{salePrice,jdbcType=BIGINT}, #{payPrice,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, 
+      #{currency,jdbcType=INTEGER}, #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{buyerMemo,jdbcType=VARCHAR}, #{giftFlag,jdbcType=BIT}, #{consignState,jdbcType=TINYINT}, 
+      #{disputeState,jdbcType=TINYINT}, #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderLineDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -107,6 +108,9 @@
       </if>
       <if test="goodsMainPic != null">
         goods_main_pic,
+      </if>
+      <if test="goodsCode != null">
+        goods_code,
       </if>
       <if test="salePrice != null">
         sale_price,
@@ -189,6 +193,9 @@
       </if>
       <if test="goodsMainPic != null">
         #{goodsMainPic,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCode != null">
+        #{goodsCode,jdbcType=VARCHAR},
       </if>
       <if test="salePrice != null">
         #{salePrice,jdbcType=BIGINT},
@@ -275,6 +282,9 @@
       <if test="goodsMainPic != null">
         goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
       </if>
+      <if test="goodsCode != null">
+        goods_code = #{goodsCode,jdbcType=VARCHAR},
+      </if>
       <if test="salePrice != null">
         sale_price = #{salePrice,jdbcType=BIGINT},
       </if>
@@ -342,6 +352,7 @@
       sku = #{sku,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
+      goods_code = #{goodsCode,jdbcType=VARCHAR},
       sale_price = #{salePrice,jdbcType=BIGINT},
       pay_price = #{payPrice,jdbcType=BIGINT},
       postage = #{postage,jdbcType=BIGINT},
