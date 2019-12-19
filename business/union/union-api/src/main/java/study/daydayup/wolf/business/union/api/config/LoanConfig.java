@@ -29,7 +29,7 @@ public class LoanConfig {
     private int belatedPaymentUnit  = InterestEnum.RATE_PER_DAY.getCode();
     private int durationUnit        = DurationEnum.DAYS.getCode();
     private int durationStrategy    = DurationStrategyEnum.CLOSE_CLOSE.getCode();
-    private int repayStrategy       = RepayStrategyEnum.ONE_OFF.getCode();
+    private int repayStrategy       = RepayStrategyEnum.CONTRACT.getCode();
     private int prepayStrategy      = PrepayStrategyEnum.ALLOW.getCode();
     private int amountStrategy      = 0;
     private int feePayStrategy      = FeeStrategyEnum.PRE.getCode();
