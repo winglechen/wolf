@@ -12,7 +12,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum CountableUnitEnum implements CodeBasedEnum {
-    QUANTITY(101, "quantity")
+    QUANTITY(1000, "quantity")
     ;
 
     private int code;

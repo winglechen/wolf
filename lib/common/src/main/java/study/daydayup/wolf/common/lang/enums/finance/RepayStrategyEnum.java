@@ -12,6 +12,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 @Getter
 public enum RepayStrategyEnum implements CodeBasedEnum {
     UNKNOWN(3, "未知"),
+    ONE_OFF(2, "一次性还款付息"),
     CONTRACT(1, "约定还款")
     ;
 

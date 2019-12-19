@@ -1,14 +1,16 @@
 package study.daydayup.wolf.model.type.currency;
 
 import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
+import study.daydayup.wolf.model.contract.Currency;
+import study.daydayup.wolf.model.contract.DataType;
 
 /**
  * study.daydayup.wolf.model.type.money
- *
+ * TODO: add BigDecimal support
  * @author Wingle
  * @since 2019/10/15 12:48 下午
  **/
-public class RMB implements Currency {
+public class RMB implements Currency, DataType {
     private long value;
     private RMBEnum unit;
     
@@ -18,41 +20,41 @@ public class RMB implements Currency {
     } 
     
     public long toYuan() {
-        RMBEnum targetUnit = RMBEnum.YUAN;
-        return convert(targetUnit);
+        return convertTo(RMBEnum.YUAN);
+    }
+
+    public long toJiao() {
+        return convertTo(RMBEnum.JIAO);
     }
     
     public long toFen() {
-        RMBEnum targetUnit = RMBEnum.FEN;
-        return convert(targetUnit);
+        return convertTo(RMBEnum.FEN);
     }
     
     public long toLi() {
-        RMBEnum targetUnit = RMBEnum.LI;
-        return convert(targetUnit);
+        return convertTo(RMBEnum.LI);
     }
     
     public long toHao() {
-        RMBEnum targetUnit = RMBEnum.HAO;
-        return convert(targetUnit);
+        return convertTo(RMBEnum.HAO);
     }
     
     public long toSi() {
-        RMBEnum targetUnit = RMBEnum.SI;
-        return convert(targetUnit);
+        return convertTo(RMBEnum.SI);
     }
 
-    //TODO add unitTest
-    private long convert(RMBEnum targetUnit) {
-        if(this.unit.equals(targetUnit)) {
+    private long convertTo(RMBEnum targetUnit) {
+        if (this.unit.equals(targetUnit)) {
             return this.value;
         }
         
         int sourceCode = this.unit.getCode();
         int targetCode = targetUnit.getCode();
-        long diff = targetCode - sourceCode;
-        diff  = (long) Math.pow(10,  diff);
+        long step = targetCode - sourceCode;
 
-        return this.value * diff;
+        double newValue  = Math.pow(10,  step);
+        newValue = value * newValue;
+
+        return (long) newValue;
     }
 }

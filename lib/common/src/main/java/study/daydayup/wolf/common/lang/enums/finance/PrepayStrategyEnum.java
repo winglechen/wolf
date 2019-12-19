@@ -11,7 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PrepayStrategyEnum implements CodeBasedEnum {
-    UNKNOWN(3, "未知"),
+    NOT_ALLOW(3, "不允许"),
+    ALLOW(2, "请允许"),
     CONTRACT(1, "约定还款")
     ;
 

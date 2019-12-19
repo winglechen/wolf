@@ -1,4 +1,4 @@
-package study.daydayup.wolf.model.type.currency;
+package study.daydayup.wolf.model.contract;
 
 /**
  * study.daydayup.wolf.model.type.money
