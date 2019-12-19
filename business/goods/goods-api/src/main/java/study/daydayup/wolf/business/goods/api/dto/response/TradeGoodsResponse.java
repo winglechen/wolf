@@ -2,12 +2,10 @@ package study.daydayup.wolf.business.goods.api.dto.response;
 
 import lombok.Data;
 import study.daydayup.wolf.business.goods.api.entity.Sku;
-import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.api.Response;
-import study.daydayup.wolf.model.annotation.column.ForeignKey;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

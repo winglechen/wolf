@@ -4,10 +4,9 @@ import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
-import study.daydayup.wolf.model.annotation.column.BusinessKey;
-import study.daydayup.wolf.model.annotation.column.ForeignKey;
-import study.daydayup.wolf.model.annotation.column.PrimaryKey;
-import study.daydayup.wolf.model.type.string.Name;
+import study.daydayup.wolf.common.model.annotation.column.BusinessKey;
+import study.daydayup.wolf.common.model.annotation.column.ForeignKey;
+import study.daydayup.wolf.common.model.annotation.column.PrimaryKey;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
