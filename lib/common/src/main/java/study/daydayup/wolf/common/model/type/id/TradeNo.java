@@ -31,6 +31,14 @@ public class TradeNo implements ID {
     private long accountId;
     private long uuid;
 
+    public static TradeNo of(String stringNo) {
+        return of(stringNo, 0);
+    }
+
+    public static TradeNo of(String stringNo, int shards) {
+        return new TradeNoParser(shards).parse(stringNo);
+    }
+
     public String create() {
         StringBuilder tradeNo = new StringBuilder(addDatetime());
 
