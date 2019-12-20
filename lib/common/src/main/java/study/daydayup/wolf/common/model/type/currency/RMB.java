@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.model.contract.DataType;
  * @author Wingle
  * @since 2019/10/15 12:48 下午
  **/
-public class RMB implements Currency, DataType {
+public class RMB implements Currency {
     private long value;
     private RMBEnum unit;
     
