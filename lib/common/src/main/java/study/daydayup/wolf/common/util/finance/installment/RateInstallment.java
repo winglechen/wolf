@@ -1,5 +1,9 @@
 package study.daydayup.wolf.common.util.finance.installment;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+
 /**
  * study.daydayup.wolf.common.util.finance
  *
@@ -11,6 +15,12 @@ public class RateInstallment {
     private int count;
 
     public RateInstallment(long totalAmount) {
+
+    }
+
+
+    public static void main(String[] args) {
+
 
     }
 }

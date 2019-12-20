@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.exception.SystemException;
  **/
 public class EnumNotFoundException extends SystemException {
     public EnumNotFoundException(String message) {
-        super(message);
+        super(500, message);
     }
 
     public EnumNotFoundException(long code, String message) {
