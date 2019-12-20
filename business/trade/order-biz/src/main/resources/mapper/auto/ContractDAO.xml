@@ -13,6 +13,7 @@
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
+    <result column="expired_at" jdbcType="TIMESTAMP" property="expiredAt" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -21,7 +22,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, buyer_name, seller_name, `source`, tags, trade_type, 
-    `state`, related_trade_no, version, delete_flag, last_editor, created_at, updated_at
+    `state`, related_trade_no, expired_at, version, delete_flag, last_editor, created_at, 
+    updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -36,15 +38,15 @@
     insert into contract (trade_no, buyer_id, seller_id, 
       buyer_name, seller_name, `source`, 
       tags, trade_type, `state`, 
-      related_trade_no, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      related_trade_no, expired_at, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
-      #{relatedTradeNo,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{relatedTradeNo,jdbcType=VARCHAR}, #{expiredAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -81,6 +83,9 @@
       </if>
       <if test="relatedTradeNo != null">
         related_trade_no,
+      </if>
+      <if test="expiredAt != null">
+        expired_at,
       </if>
       <if test="version != null">
         version,
@@ -126,6 +131,9 @@
       </if>
       <if test="relatedTradeNo != null">
         #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredAt != null">
+        #{expiredAt,jdbcType=TIMESTAMP},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -175,6 +183,9 @@
       <if test="relatedTradeNo != null">
         related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="expiredAt != null">
+        expired_at = #{expiredAt,jdbcType=TIMESTAMP},
+      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -205,6 +216,7 @@
       trade_type = #{tradeType,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      expired_at = #{expiredAt,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

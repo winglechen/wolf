@@ -28,6 +28,8 @@ public class ContractDO implements Serializable {
 
     private String relatedTradeNo;
 
+    private LocalDateTime expiredAt;
+
     private Integer version;
 
     private boolean deleteFlag;
@@ -57,6 +59,7 @@ public class ContractDO implements Serializable {
         sb.append(", tradeType=").append(tradeType);
         sb.append(", state=").append(state);
         sb.append(", relatedTradeNo=").append(relatedTradeNo);
+        sb.append(", expiredAt=").append(expiredAt);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -89,6 +92,7 @@ public class ContractDO implements Serializable {
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getRelatedTradeNo() == null ? other.getRelatedTradeNo() == null : this.getRelatedTradeNo().equals(other.getRelatedTradeNo()))
+            && (this.getExpiredAt() == null ? other.getExpiredAt() == null : this.getExpiredAt().equals(other.getExpiredAt()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -111,6 +115,7 @@ public class ContractDO implements Serializable {
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getRelatedTradeNo() == null) ? 0 : getRelatedTradeNo().hashCode());
+        result = prime * result + ((getExpiredAt() == null) ? 0 : getExpiredAt().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS `wolf_trade` DEFAULT CHARACTER SET utf8mb4;
 USE `wolf_trade`;
 
-
+#当日借当日还
 DROP TABLE IF EXISTS `contract`;
 CREATE TABLE IF NOT EXISTS `contract`
 (
@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `contract`
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(32) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
+    `expired_at`        DATETIME COMMENT '过期时间',
+
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
@@ -29,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `contract`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '合同';
 
+# 只读表
 DROP TABLE IF EXISTS `repayment_term`;
 CREATE TABLE IF NOT EXISTS `repayment_term`
 (
@@ -43,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
     `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
-#     `effect_at`         DATETIME COMMENT '生效时间',
 
     `period`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `period_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
@@ -62,6 +64,11 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '还款条款';
 
+# 更改生效时间、state (以下操作都是非必须)
+# 生成还款订单 at due_at
+# 关闭还款订单 at overdue_at | due_at + one day
+# 提前还款：取消还款订单 + 更新state
+# 还款成功：更新state
 DROP TABLE IF EXISTS `installment_term`;
 CREATE TABLE IF NOT EXISTS `installment_term`
 (
@@ -77,13 +84,12 @@ CREATE TABLE IF NOT EXISTS `installment_term`
 
     `effect_at`         DATE COMMENT '生效时间',
     `due_at`            DATE COMMENT '到期时间',
-    `overdue_at`        DATE COMMENT '逾期时间',
 
     `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
     `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
-    `period`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
@@ -225,6 +231,8 @@ CREATE TABLE IF NOT EXISTS `order`
 #     `disputed_at`       DATETIME COMMENT '售后时间',
 #     `completed_at`      DATETIME COMMENT '完成时间',
 
+    `expired_at`        DATETIME COMMENT '过期时间',
+
     `version`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
@@ -304,20 +312,30 @@ CREATE TABLE IF NOT EXISTS `order_line`
     COMMENT = '订单项';
 
 
+#首逾
 DROP TABLE IF EXISTS `order_state_log`;
 DROP TABLE IF EXISTS `trade_state_log`;
 CREATE TABLE IF NOT EXISTS `trade_state_log`
 (
-    `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `trade_no`      VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '订单号',
-    `trade_type`    TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易类型',
-    `trade_phase`   TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
-    `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
-    `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
-    `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
-    `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
-    `source_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
-    `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `id`                INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `trade_no`          VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `trade_type`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易类型',
+    `trade_phase`       TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
+
+    `buyer_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `seller_id`         BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `source_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
+    `target_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+
+    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
+    `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
+    `consign_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付方式',
+
+    `tags`              VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易标签',
+    `trade_source`      VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易来源',
+
+    `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 

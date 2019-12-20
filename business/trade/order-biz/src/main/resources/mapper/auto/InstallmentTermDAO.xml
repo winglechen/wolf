@@ -12,7 +12,6 @@
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
     <result column="effect_at" jdbcType="DATE" property="effectAt" />
     <result column="due_at" jdbcType="DATE" property="dueAt" />
-    <result column="overdue_at" jdbcType="DATE" property="overdueAt" />
     <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="interest" jdbcType="BIGINT" property="interest" />
     <result column="handling_fee" jdbcType="BIGINT" property="handlingFee" />
@@ -27,8 +26,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, related_trade_no, 
-    effect_at, due_at, overdue_at, amount, interest, handling_fee, period, percentage, 
-    fee_percentage, version, delete_flag, last_editor, created_at, updated_at
+    effect_at, due_at, amount, interest, handling_fee, period, percentage, fee_percentage, 
+    version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -43,19 +42,17 @@
     insert into installment_term (trade_no, buyer_id, seller_id, 
       installment_no, installment_type, `state`, 
       related_trade_no, effect_at, due_at, 
-      overdue_at, amount, interest, 
-      handling_fee, period, percentage, 
-      fee_percentage, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      amount, interest, handling_fee, 
+      period, percentage, fee_percentage, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
-      #{overdueAt,jdbcType=DATE}, #{amount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, 
-      #{handlingFee,jdbcType=BIGINT}, #{period,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
-      #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{amount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, #{handlingFee,jdbcType=BIGINT}, 
+      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, #{feePercentage,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -89,9 +86,6 @@
       </if>
       <if test="dueAt != null">
         due_at,
-      </if>
-      <if test="overdueAt != null">
-        overdue_at,
       </if>
       <if test="amount != null">
         amount,
@@ -152,9 +146,6 @@
       </if>
       <if test="dueAt != null">
         #{dueAt,jdbcType=DATE},
-      </if>
-      <if test="overdueAt != null">
-        #{overdueAt,jdbcType=DATE},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=BIGINT},
@@ -219,9 +210,6 @@
       <if test="dueAt != null">
         due_at = #{dueAt,jdbcType=DATE},
       </if>
-      <if test="overdueAt != null">
-        overdue_at = #{overdueAt,jdbcType=DATE},
-      </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=BIGINT},
       </if>
@@ -269,7 +257,6 @@
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       effect_at = #{effectAt,jdbcType=DATE},
       due_at = #{dueAt,jdbcType=DATE},
-      overdue_at = #{overdueAt,jdbcType=DATE},
       amount = #{amount,jdbcType=BIGINT},
       interest = #{interest,jdbcType=BIGINT},
       handling_fee = #{handlingFee,jdbcType=BIGINT},

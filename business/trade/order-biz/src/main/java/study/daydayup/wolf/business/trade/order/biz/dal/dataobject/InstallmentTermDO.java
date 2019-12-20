@@ -27,8 +27,6 @@ public class InstallmentTermDO implements Serializable {
 
     private LocalDate dueAt;
 
-    private LocalDate overdueAt;
-
     private Long amount;
 
     private Long interest;
@@ -69,7 +67,6 @@ public class InstallmentTermDO implements Serializable {
         sb.append(", relatedTradeNo=").append(relatedTradeNo);
         sb.append(", effectAt=").append(effectAt);
         sb.append(", dueAt=").append(dueAt);
-        sb.append(", overdueAt=").append(overdueAt);
         sb.append(", amount=").append(amount);
         sb.append(", interest=").append(interest);
         sb.append(", handlingFee=").append(handlingFee);
@@ -107,7 +104,6 @@ public class InstallmentTermDO implements Serializable {
             && (this.getRelatedTradeNo() == null ? other.getRelatedTradeNo() == null : this.getRelatedTradeNo().equals(other.getRelatedTradeNo()))
             && (this.getEffectAt() == null ? other.getEffectAt() == null : this.getEffectAt().equals(other.getEffectAt()))
             && (this.getDueAt() == null ? other.getDueAt() == null : this.getDueAt().equals(other.getDueAt()))
-            && (this.getOverdueAt() == null ? other.getOverdueAt() == null : this.getOverdueAt().equals(other.getOverdueAt()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
@@ -135,7 +131,6 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getRelatedTradeNo() == null) ? 0 : getRelatedTradeNo().hashCode());
         result = prime * result + ((getEffectAt() == null) ? 0 : getEffectAt().hashCode());
         result = prime * result + ((getDueAt() == null) ? 0 : getDueAt().hashCode());
-        result = prime * result + ((getOverdueAt() == null) ? 0 : getOverdueAt().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
