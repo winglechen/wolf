@@ -131,34 +131,4 @@ public class TradeNo implements ID {
         int key = ThreadLocalRandom.current().nextInt(start, end);
         return String.valueOf(key);
     }
-
-
-    public static void main(String[] args) {
-//        System.out.println("TradeNo:" + new TradeNo().create());
-//        System.out.println("length:" + "20191220134655094329598966778997".length());
-
-
-        String tradeNo = TradeNo.builder()
-                .accountId(123)
-                .dataCenterId(3)
-                .tradePhase(TradePhaseEnum.ORDER_PHASE)
-                .build()
-                .create();
-        System.out.println("TradeNo:" + tradeNo);
-        System.out.println("length:" + tradeNo.length());
-
-
-        TradeNoParser parser = new TradeNoParser();
-        TradeNo obj = parser.parse(tradeNo);
-
-        if (obj != null) {
-            System.out.println("shard:" + obj.getShard());
-            System.out.println("phase:" + obj.getTradePhase());
-            System.out.println("data center:" + obj.getDataCenterId());
-        } else {
-            System.out.println("parse error");
-        }
-
-    }
-
 }
