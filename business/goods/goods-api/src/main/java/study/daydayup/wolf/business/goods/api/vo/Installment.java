@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
 @Data
 public class Installment extends Entity {
     @Min(1)
-    private int duration;
+    private int period;
     @Min(1)
     private int percentage;
     @Min(1)

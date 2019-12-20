@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class TradeInstallment extends VO {
     private int installmentNo;
 
-    private int duration;
+    private int period;
 
     private int percentage;
     private int feePercentage;

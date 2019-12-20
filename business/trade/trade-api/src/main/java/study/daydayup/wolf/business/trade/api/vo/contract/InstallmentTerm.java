@@ -21,7 +21,7 @@ public class InstallmentTerm extends ContractTerm {
 
     private int installmentNo;
 
-    private int duration;
+    private int period;
     private int percentage;
     private int feePercentage;
     private int installmentType;

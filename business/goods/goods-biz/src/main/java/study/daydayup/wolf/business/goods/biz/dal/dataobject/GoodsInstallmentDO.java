@@ -12,7 +12,7 @@ public class GoodsInstallmentDO implements Serializable {
 
     private Long orgId;
 
-    private Integer duration;
+    private Integer period;
 
     private Integer percentage;
 
@@ -39,7 +39,7 @@ public class GoodsInstallmentDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", goodsId=").append(goodsId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", duration=").append(duration);
+        sb.append(", period=").append(period);
         sb.append(", percentage=").append(percentage);
         sb.append(", feePercentage=").append(feePercentage);
         sb.append(", version=").append(version);
@@ -66,7 +66,7 @@ public class GoodsInstallmentDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getDuration() == null ? other.getDuration() == null : this.getDuration().equals(other.getDuration()))
+            && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -83,7 +83,7 @@ public class GoodsInstallmentDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getDuration() == null) ? 0 : getDuration().hashCode());
+        result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

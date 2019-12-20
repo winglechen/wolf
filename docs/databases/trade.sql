@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
     `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
-    `effect_at`         DATETIME COMMENT '生效时间',
+#     `effect_at`         DATETIME COMMENT '生效时间',
 
-    `duration`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `duration_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `duration_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
+    `period`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `period_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
     `interest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
     `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
-    `belated_payment`   INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
-    `belated_payment_unit`INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
+    `penalty`           INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -75,15 +75,15 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(50) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
-    `effect_at`         DATETIME COMMENT '生效时间',
-    `due_at`            DATETIME COMMENT '到期时间',
-    `overdue_at`        DATETIME COMMENT '逾期时间',
+    `effect_at`         DATE COMMENT '生效时间',
+    `due_at`            DATE COMMENT '到期时间',
+    `overdue_at`        DATE COMMENT '逾期时间',
 
     `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
     `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
-    `duration`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 

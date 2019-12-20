@@ -93,13 +93,13 @@ CREATE TABLE IF NOT EXISTS `goods_loan`
     `amount_strategy`   INT(10) NOT NULL DEFAULT 0 COMMENT '金额策略',
     `handling_fee_rate` INT(10) NOT NULL DEFAULT 0 COMMENT '手续费',
     `fee_pay_strategy`  INT(10) NOT NULL DEFAULT 0 COMMENT '手续费策略',
-    `duration`          INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `duration_unit`     INT(10) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `duration_strategy` INT(10) NOT NULL DEFAULT 0 COMMENT '时长策略',
+    `period`          INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period_unit`     INT(10) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `period_strategy` INT(10) NOT NULL DEFAULT 0 COMMENT '时长策略',
     `interest`          INT(10) NOT NULL DEFAULT 0 COMMENT '利息',
     `interest_unit`     INT(10) NOT NULL DEFAULT 0 COMMENT '利息单位',
-    `belated_payment`   INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金',
-    `belated_payment_unit`INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
+    `penalty`           INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty_unit`      INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `installment`       text COMMENT '分期信息',
 
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `goods_installment`
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
-    `duration`      INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period`      INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`    INT(10) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`INT(10) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 

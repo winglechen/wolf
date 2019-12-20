@@ -11,22 +11,22 @@ import java.math.BigDecimal;
 public class PDLInterest {
     private static final int MAX_INTEREST = 60;
 
-    public static long rate(long amount, int ratePerMillion, int duration) {
-        return rate(amount, ratePerMillion, duration, false);
+    public static long rate(long amount, int ratePerMillion, int period) {
+        return rate(amount, ratePerMillion, period, false);
     }
 
-    public static long rate(long amount, int ratePerMillion, int duration, boolean maxCheck) {
-        if (amount <= 0 || ratePerMillion <= 0 || duration <= 0) {
+    public static long rate(long amount, int ratePerMillion, int period, boolean maxCheck) {
+        if (amount <= 0 || ratePerMillion <= 0 || period <= 0) {
             return 0;
         }
 
         BigDecimal nAmount = new BigDecimal(amount);
-        BigDecimal nDuration = new BigDecimal(duration);
+        BigDecimal nperiod = new BigDecimal(period);
 
         BigDecimal nRate   = new BigDecimal(ratePerMillion)
                 .divide(new BigDecimal(1000000));
 
-        BigDecimal interest = nAmount.multiply(nRate).multiply(nDuration);
+        BigDecimal interest = nAmount.multiply(nRate).multiply(nperiod);
 
         if (maxCheck) {
             interest = maxInterestCheck(nAmount, interest);
@@ -37,8 +37,8 @@ public class PDLInterest {
         return interest.longValue();
     }
 
-    public static long compound(long amount, int ratePerMillion, int duration) {
-        if (amount <= 0 || ratePerMillion <= 0 || duration <= 0) {
+    public static long compound(long amount, int ratePerMillion, int period) {
+        if (amount <= 0 || ratePerMillion <= 0 || period <= 0) {
             return 0;
         }
 
@@ -47,7 +47,7 @@ public class PDLInterest {
         BigDecimal nRate   = new BigDecimal(ratePerMillion)
                 .divide(new BigDecimal(1000000))
                 .add(new BigDecimal(1));
-        BigDecimal interest = nRate.pow(duration);
+        BigDecimal interest = nRate.pow(period);
 
         interest = interest.multiply(nAmount);
         interest = interest.setScale(0, BigDecimal.ROUND_HALF_UP);

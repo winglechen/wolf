@@ -10,13 +10,13 @@
     <result column="installment_type" jdbcType="TINYINT" property="installmentType" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
-    <result column="effect_at" jdbcType="TIMESTAMP" property="effectAt" />
-    <result column="due_at" jdbcType="TIMESTAMP" property="dueAt" />
-    <result column="overdue_at" jdbcType="TIMESTAMP" property="overdueAt" />
+    <result column="effect_at" jdbcType="DATE" property="effectAt" />
+    <result column="due_at" jdbcType="DATE" property="dueAt" />
+    <result column="overdue_at" jdbcType="DATE" property="overdueAt" />
     <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="interest" jdbcType="BIGINT" property="interest" />
     <result column="handling_fee" jdbcType="BIGINT" property="handlingFee" />
-    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="period" jdbcType="INTEGER" property="period" />
     <result column="percentage" jdbcType="INTEGER" property="percentage" />
     <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -27,7 +27,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, related_trade_no, 
-    effect_at, due_at, overdue_at, amount, interest, handling_fee, duration, percentage, 
+    effect_at, due_at, overdue_at, amount, interest, handling_fee, period, percentage, 
     fee_percentage, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -44,15 +44,15 @@
       installment_no, installment_type, `state`, 
       related_trade_no, effect_at, due_at, 
       overdue_at, amount, interest, 
-      handling_fee, duration, percentage, 
+      handling_fee, period, percentage, 
       fee_percentage, version, delete_flag, 
       last_editor, created_at, updated_at
       )
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
-      #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=TIMESTAMP}, #{dueAt,jdbcType=TIMESTAMP}, 
-      #{overdueAt,jdbcType=TIMESTAMP}, #{amount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, 
-      #{handlingFee,jdbcType=BIGINT}, #{duration,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
+      #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
+      #{overdueAt,jdbcType=DATE}, #{amount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, 
+      #{handlingFee,jdbcType=BIGINT}, #{period,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, 
       #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
@@ -102,8 +102,8 @@
       <if test="handlingFee != null">
         handling_fee,
       </if>
-      <if test="duration != null">
-        duration,
+      <if test="period != null">
+        period,
       </if>
       <if test="percentage != null">
         percentage,
@@ -148,13 +148,13 @@
         #{relatedTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="effectAt != null">
-        #{effectAt,jdbcType=TIMESTAMP},
+        #{effectAt,jdbcType=DATE},
       </if>
       <if test="dueAt != null">
-        #{dueAt,jdbcType=TIMESTAMP},
+        #{dueAt,jdbcType=DATE},
       </if>
       <if test="overdueAt != null">
-        #{overdueAt,jdbcType=TIMESTAMP},
+        #{overdueAt,jdbcType=DATE},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=BIGINT},
@@ -165,8 +165,8 @@
       <if test="handlingFee != null">
         #{handlingFee,jdbcType=BIGINT},
       </if>
-      <if test="duration != null">
-        #{duration,jdbcType=INTEGER},
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         #{percentage,jdbcType=INTEGER},
@@ -214,13 +214,13 @@
         related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="effectAt != null">
-        effect_at = #{effectAt,jdbcType=TIMESTAMP},
+        effect_at = #{effectAt,jdbcType=DATE},
       </if>
       <if test="dueAt != null">
-        due_at = #{dueAt,jdbcType=TIMESTAMP},
+        due_at = #{dueAt,jdbcType=DATE},
       </if>
       <if test="overdueAt != null">
-        overdue_at = #{overdueAt,jdbcType=TIMESTAMP},
+        overdue_at = #{overdueAt,jdbcType=DATE},
       </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=BIGINT},
@@ -231,8 +231,8 @@
       <if test="handlingFee != null">
         handling_fee = #{handlingFee,jdbcType=BIGINT},
       </if>
-      <if test="duration != null">
-        duration = #{duration,jdbcType=INTEGER},
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         percentage = #{percentage,jdbcType=INTEGER},
@@ -267,13 +267,13 @@
       installment_type = #{installmentType,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
-      effect_at = #{effectAt,jdbcType=TIMESTAMP},
-      due_at = #{dueAt,jdbcType=TIMESTAMP},
-      overdue_at = #{overdueAt,jdbcType=TIMESTAMP},
+      effect_at = #{effectAt,jdbcType=DATE},
+      due_at = #{dueAt,jdbcType=DATE},
+      overdue_at = #{overdueAt,jdbcType=DATE},
       amount = #{amount,jdbcType=BIGINT},
       interest = #{interest,jdbcType=BIGINT},
       handling_fee = #{handlingFee,jdbcType=BIGINT},
-      duration = #{duration,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
       percentage = #{percentage,jdbcType=INTEGER},
       fee_percentage = #{feePercentage,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},

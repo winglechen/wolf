@@ -18,13 +18,13 @@ public class TradeLoan extends VO {
     private int handlingFeeRate;
 
     private int interest;
-    private int belatedPayment;
+    private int penalty;
     private int interestUnit;
-    private int belatedPaymentUnit;
+    private int penaltyUnit;
 
-    private int duration;
-    private int durationUnit;
-    private int durationStrategy;
+    private int period;
+    private int periodUnit;
+    private int periodStrategy;
 
     private int repayStrategy;
     private int prepayStrategy;

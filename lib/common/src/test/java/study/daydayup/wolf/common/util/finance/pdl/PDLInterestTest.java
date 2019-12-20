@@ -29,12 +29,12 @@ public class PDLInterestTest {
     @Test
     public void test_actual_case1() {
         long amount, interest, penalty, result, expected;
-        int rate, penaltyRate, duration;
+        int rate, penaltyRate, period;
 
         amount      = 3000;
         rate        = 1000; //0.1%
         penaltyRate = 20000; //2%
-        duration    = 7;
+        period    = 7;
         //case 1
         interest = PDLInterest.rate(amount, rate, 2);
         result = amount + interest;
@@ -43,14 +43,14 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 2
-        interest = PDLInterest.rate(amount, rate, duration);
+        interest = PDLInterest.rate(amount, rate, period);
         result = amount + interest;
         //System.out.println("正常还："  + result);
         expected = 3021;
         assertEquals("interest cal fail", result, expected);
 
         //case 3
-        interest  = PDLInterest.rate(amount, rate, duration);
+        interest  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 4, true);
         result  = amount + interest + penalty;
         //System.out.println("逾期4天还：" + result);
@@ -58,7 +58,7 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 4
-        interest  = PDLInterest.rate(amount, rate, duration);
+        interest  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 38, true);
         result  = amount + interest + penalty;
         //System.out.println("逾期38天还：" + result);
@@ -69,12 +69,12 @@ public class PDLInterestTest {
     @Test
     public void test_actual_case2() {
         long amount, interest, penalty, result, expected;
-        int rate, penaltyRate, duration;
+        int rate, penaltyRate, period;
 
         amount      = 5000;
         rate        = 10000; //0.1%
         penaltyRate = 10000; //2%
-        duration    = 14;
+        period    = 14;
         //case 1
         interest = PDLInterest.rate(amount, rate, 2);
         result = amount + interest;
@@ -83,14 +83,14 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 2
-        interest = PDLInterest.rate(amount, rate, duration);
+        interest = PDLInterest.rate(amount, rate, period);
         result = amount + interest;
         //System.out.println("正常还："  + result);
         expected = 5700;
         assertEquals("interest cal fail", result, expected);
 
         //case 3
-        result  = PDLInterest.rate(amount, rate, duration);
+        result  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 4, true);
         result  = amount + result + penalty;
         //System.out.println("逾期4天还：" + result);
@@ -98,7 +98,7 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 4
-        result  = PDLInterest.rate(amount, rate, duration);
+        result  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 42, true);
         result  = amount + result + penalty;
         //System.out.println("逾期2天还：" + result);
@@ -109,12 +109,12 @@ public class PDLInterestTest {
     @Test
     public void test_actual_case3() {
         long amount, interest, penalty, result, expected;
-        int rate, penaltyRate, duration;
+        int rate, penaltyRate, period;
 
         amount      = 43000;
         rate        = 1000; //0.1%
         penaltyRate = 20000; //2%
-        duration    = 7;
+        period    = 7;
         //case 1
         interest = PDLInterest.rate(amount, rate, 2);
         result = amount + interest;
@@ -123,14 +123,14 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 2
-        interest = PDLInterest.rate(amount, rate, duration);
+        interest = PDLInterest.rate(amount, rate, period);
         result = amount + interest;
         //System.out.println("正常还："  + result);
         expected = 43301;
         assertEquals("interest cal fail", result, expected);
 
         //case 3
-        interest  = PDLInterest.rate(amount, rate, duration);
+        interest  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 4, true);
         result  = amount + interest + penalty;
         //System.out.println("逾期4天还：" + result);
@@ -138,7 +138,7 @@ public class PDLInterestTest {
         assertEquals("interest cal fail", result, expected);
 
         //case 4
-        interest  = PDLInterest.rate(amount, rate, duration);
+        interest  = PDLInterest.rate(amount, rate, period);
         penalty = PDLInterest.rate(amount, penaltyRate, 63, true);
         result  = amount + interest + penalty;
         //System.out.println("逾期2天还：" + result);

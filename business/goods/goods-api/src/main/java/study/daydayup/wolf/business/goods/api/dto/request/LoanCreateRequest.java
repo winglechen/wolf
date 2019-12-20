@@ -19,17 +19,17 @@ public class LoanCreateRequest extends GoodsCreateRequest {
     @Min(1)
     private int handlingFeeRate;
     @Min(1)
-    private int duration;
+    private int period;
     @Min(1)
     private int interest;
     @Min(1)
-    private int belatedPayment;
+    private int penalty;
 
     //loan defined in the config
     private int interestUnit;
-    private int belatedPaymentUnit;
-    private int durationUnit;
-    private int durationStrategy;
+    private int penaltyUnit;
+    private int periodUnit;
+    private int periodStrategy;
     private int repayStrategy;
     private int prepayStrategy;
     private int amountStrategy;

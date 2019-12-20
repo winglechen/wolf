@@ -10,13 +10,13 @@
     <result column="amount_strategy" jdbcType="INTEGER" property="amountStrategy" />
     <result column="handling_fee_rate" jdbcType="INTEGER" property="handlingFeeRate" />
     <result column="fee_pay_strategy" jdbcType="INTEGER" property="feePayStrategy" />
-    <result column="duration" jdbcType="INTEGER" property="duration" />
-    <result column="duration_unit" jdbcType="INTEGER" property="durationUnit" />
-    <result column="duration_strategy" jdbcType="INTEGER" property="durationStrategy" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
+    <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
     <result column="interest" jdbcType="INTEGER" property="interest" />
     <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
-    <result column="belated_payment" jdbcType="INTEGER" property="belatedPayment" />
-    <result column="belated_payment_unit" jdbcType="INTEGER" property="belatedPaymentUnit" />
+    <result column="penalty" jdbcType="INTEGER" property="penalty" />
+    <result column="penalty_unit" jdbcType="INTEGER" property="penaltyUnit" />
     <result column="installment" jdbcType="VARCHAR" property="installment" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
@@ -26,8 +26,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, goods_id, org_id, repay_strategy, prepay_strategy, amount_strategy, handling_fee_rate, 
-    fee_pay_strategy, duration, duration_unit, duration_strategy, interest, interest_unit, 
-    belated_payment, belated_payment_unit, installment, version, delete_flag, last_editor, 
+    fee_pay_strategy, period, period_unit, period_strategy, interest, interest_unit,
+    penalty, penalty_unit, installment, version, delete_flag, last_editor,
     created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -42,16 +42,16 @@
     </selectKey>
     insert into goods_loan (goods_id, org_id, repay_strategy, 
       prepay_strategy, amount_strategy, handling_fee_rate, 
-      fee_pay_strategy, duration, duration_unit, 
-      duration_strategy, interest, interest_unit, 
-      belated_payment, belated_payment_unit, installment, 
+      fee_pay_strategy, period, period_unit,
+      period_strategy, interest, interest_unit,
+      penalty, penalty_unit, installment,
       version, delete_flag, last_editor, 
       created_at, updated_at)
     values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{repayStrategy,jdbcType=INTEGER}, 
       #{prepayStrategy,jdbcType=INTEGER}, #{amountStrategy,jdbcType=INTEGER}, #{handlingFeeRate,jdbcType=INTEGER}, 
-      #{feePayStrategy,jdbcType=INTEGER}, #{duration,jdbcType=INTEGER}, #{durationUnit,jdbcType=INTEGER}, 
-      #{durationStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER}, 
-      #{belatedPayment,jdbcType=INTEGER}, #{belatedPaymentUnit,jdbcType=INTEGER}, #{installment,jdbcType=VARCHAR}, 
+      #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER},
+      #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER},
+      #{penalty,jdbcType=INTEGER}, #{penaltyUnit,jdbcType=INTEGER}, #{installment,jdbcType=VARCHAR},
       #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
@@ -82,14 +82,14 @@
       <if test="feePayStrategy != null">
         fee_pay_strategy,
       </if>
-      <if test="duration != null">
-        duration,
+      <if test="period != null">
+        period,
       </if>
-      <if test="durationUnit != null">
-        duration_unit,
+      <if test="periodUnit != null">
+        period_unit,
       </if>
-      <if test="durationStrategy != null">
-        duration_strategy,
+      <if test="periodStrategy != null">
+        period_strategy,
       </if>
       <if test="interest != null">
         interest,
@@ -97,11 +97,11 @@
       <if test="interestUnit != null">
         interest_unit,
       </if>
-      <if test="belatedPayment != null">
-        belated_payment,
+      <if test="penalty != null">
+        penalty,
       </if>
-      <if test="belatedPaymentUnit != null">
-        belated_payment_unit,
+      <if test="penaltyUnit != null">
+        penalty_unit,
       </if>
       <if test="installment != null">
         installment,
@@ -142,14 +142,14 @@
       <if test="feePayStrategy != null">
         #{feePayStrategy,jdbcType=INTEGER},
       </if>
-      <if test="duration != null">
-        #{duration,jdbcType=INTEGER},
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
       </if>
-      <if test="durationUnit != null">
-        #{durationUnit,jdbcType=INTEGER},
+      <if test="periodUnit != null">
+        #{periodUnit,jdbcType=INTEGER},
       </if>
-      <if test="durationStrategy != null">
-        #{durationStrategy,jdbcType=INTEGER},
+      <if test="periodStrategy != null">
+        #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="interest != null">
         #{interest,jdbcType=INTEGER},
@@ -157,11 +157,11 @@
       <if test="interestUnit != null">
         #{interestUnit,jdbcType=INTEGER},
       </if>
-      <if test="belatedPayment != null">
-        #{belatedPayment,jdbcType=INTEGER},
+      <if test="penalty != null">
+        #{penalty,jdbcType=INTEGER},
       </if>
-      <if test="belatedPaymentUnit != null">
-        #{belatedPaymentUnit,jdbcType=INTEGER},
+      <if test="penaltyUnit != null">
+        #{penaltyUnit,jdbcType=INTEGER},
       </if>
       <if test="installment != null">
         #{installment,jdbcType=VARCHAR},
@@ -205,14 +205,14 @@
       <if test="feePayStrategy != null">
         fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
       </if>
-      <if test="duration != null">
-        duration = #{duration,jdbcType=INTEGER},
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
       </if>
-      <if test="durationUnit != null">
-        duration_unit = #{durationUnit,jdbcType=INTEGER},
+      <if test="periodUnit != null">
+        period_unit = #{periodUnit,jdbcType=INTEGER},
       </if>
-      <if test="durationStrategy != null">
-        duration_strategy = #{durationStrategy,jdbcType=INTEGER},
+      <if test="periodStrategy != null">
+        period_strategy = #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="interest != null">
         interest = #{interest,jdbcType=INTEGER},
@@ -220,11 +220,11 @@
       <if test="interestUnit != null">
         interest_unit = #{interestUnit,jdbcType=INTEGER},
       </if>
-      <if test="belatedPayment != null">
-        belated_payment = #{belatedPayment,jdbcType=INTEGER},
+      <if test="penalty != null">
+        penalty = #{penalty,jdbcType=INTEGER},
       </if>
-      <if test="belatedPaymentUnit != null">
-        belated_payment_unit = #{belatedPaymentUnit,jdbcType=INTEGER},
+      <if test="penaltyUnit != null">
+        penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
       </if>
       <if test="installment != null">
         installment = #{installment,jdbcType=VARCHAR},
@@ -256,13 +256,13 @@
       amount_strategy = #{amountStrategy,jdbcType=INTEGER},
       handling_fee_rate = #{handlingFeeRate,jdbcType=INTEGER},
       fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
-      duration = #{duration,jdbcType=INTEGER},
-      duration_unit = #{durationUnit,jdbcType=INTEGER},
-      duration_strategy = #{durationStrategy,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      period_unit = #{periodUnit,jdbcType=INTEGER},
+      period_strategy = #{periodStrategy,jdbcType=INTEGER},
       interest = #{interest,jdbcType=INTEGER},
       interest_unit = #{interestUnit,jdbcType=INTEGER},
-      belated_payment = #{belatedPayment,jdbcType=INTEGER},
-      belated_payment_unit = #{belatedPaymentUnit,jdbcType=INTEGER},
+      penalty = #{penalty,jdbcType=INTEGER},
+      penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
       installment = #{installment,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},

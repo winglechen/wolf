@@ -22,19 +22,19 @@ public class GoodsLoanDO implements Serializable {
 
     private Integer feePayStrategy;
 
-    private Integer duration;
+    private Integer period;
 
-    private Integer durationUnit;
+    private Integer periodUnit;
 
-    private Integer durationStrategy;
+    private Integer periodStrategy;
 
     private Integer interest;
 
     private Integer interestUnit;
 
-    private Integer belatedPayment;
+    private Integer penalty;
 
-    private Integer belatedPaymentUnit;
+    private Integer penaltyUnit;
 
     private String installment;
 
@@ -64,13 +64,13 @@ public class GoodsLoanDO implements Serializable {
         sb.append(", amountStrategy=").append(amountStrategy);
         sb.append(", handlingFeeRate=").append(handlingFeeRate);
         sb.append(", feePayStrategy=").append(feePayStrategy);
-        sb.append(", duration=").append(duration);
-        sb.append(", durationUnit=").append(durationUnit);
-        sb.append(", durationStrategy=").append(durationStrategy);
+        sb.append(", period=").append(period);
+        sb.append(", periodUnit=").append(periodUnit);
+        sb.append(", periodStrategy=").append(periodStrategy);
         sb.append(", interest=").append(interest);
         sb.append(", interestUnit=").append(interestUnit);
-        sb.append(", belatedPayment=").append(belatedPayment);
-        sb.append(", belatedPaymentUnit=").append(belatedPaymentUnit);
+        sb.append(", penalty=").append(penalty);
+        sb.append(", penaltyUnit=").append(penaltyUnit);
         sb.append(", installment=").append(installment);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
@@ -101,13 +101,13 @@ public class GoodsLoanDO implements Serializable {
             && (this.getAmountStrategy() == null ? other.getAmountStrategy() == null : this.getAmountStrategy().equals(other.getAmountStrategy()))
             && (this.getHandlingFeeRate() == null ? other.getHandlingFeeRate() == null : this.getHandlingFeeRate().equals(other.getHandlingFeeRate()))
             && (this.getFeePayStrategy() == null ? other.getFeePayStrategy() == null : this.getFeePayStrategy().equals(other.getFeePayStrategy()))
-            && (this.getDuration() == null ? other.getDuration() == null : this.getDuration().equals(other.getDuration()))
-            && (this.getDurationUnit() == null ? other.getDurationUnit() == null : this.getDurationUnit().equals(other.getDurationUnit()))
-            && (this.getDurationStrategy() == null ? other.getDurationStrategy() == null : this.getDurationStrategy().equals(other.getDurationStrategy()))
+            && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
+            && (this.getPeriodUnit() == null ? other.getPeriodUnit() == null : this.getPeriodUnit().equals(other.getPeriodUnit()))
+            && (this.getPeriodStrategy() == null ? other.getPeriodStrategy() == null : this.getPeriodStrategy().equals(other.getPeriodStrategy()))
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
-            && (this.getBelatedPayment() == null ? other.getBelatedPayment() == null : this.getBelatedPayment().equals(other.getBelatedPayment()))
-            && (this.getBelatedPaymentUnit() == null ? other.getBelatedPaymentUnit() == null : this.getBelatedPaymentUnit().equals(other.getBelatedPaymentUnit()))
+            && (this.getPenalty() == null ? other.getPenalty() == null : this.getPenalty().equals(other.getPenalty()))
+            && (this.getPenaltyUnit() == null ? other.getPenaltyUnit() == null : this.getPenaltyUnit().equals(other.getPenaltyUnit()))
             && (this.getInstallment() == null ? other.getInstallment() == null : this.getInstallment().equals(other.getInstallment()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
@@ -128,13 +128,13 @@ public class GoodsLoanDO implements Serializable {
         result = prime * result + ((getAmountStrategy() == null) ? 0 : getAmountStrategy().hashCode());
         result = prime * result + ((getHandlingFeeRate() == null) ? 0 : getHandlingFeeRate().hashCode());
         result = prime * result + ((getFeePayStrategy() == null) ? 0 : getFeePayStrategy().hashCode());
-        result = prime * result + ((getDuration() == null) ? 0 : getDuration().hashCode());
-        result = prime * result + ((getDurationUnit() == null) ? 0 : getDurationUnit().hashCode());
-        result = prime * result + ((getDurationStrategy() == null) ? 0 : getDurationStrategy().hashCode());
+        result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
+        result = prime * result + ((getPeriodUnit() == null) ? 0 : getPeriodUnit().hashCode());
+        result = prime * result + ((getPeriodStrategy() == null) ? 0 : getPeriodStrategy().hashCode());
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
-        result = prime * result + ((getBelatedPayment() == null) ? 0 : getBelatedPayment().hashCode());
-        result = prime * result + ((getBelatedPaymentUnit() == null) ? 0 : getBelatedPaymentUnit().hashCode());
+        result = prime * result + ((getPenalty() == null) ? 0 : getPenalty().hashCode());
+        result = prime * result + ((getPenaltyUnit() == null) ? 0 : getPenaltyUnit().hashCode());
         result = prime * result + ((getInstallment() == null) ? 0 : getInstallment().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);

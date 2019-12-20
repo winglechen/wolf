@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum DurationEnum implements CodeBasedEnum {
+public enum PeriodEnum implements CodeBasedEnum {
     SECONDS(110, "seconds"),
     MINUTES(111, "minutes"),
     HOURS(112, "hours"),
@@ -24,7 +24,7 @@ public enum DurationEnum implements CodeBasedEnum {
     private int code;
     private String desc;
 
-    DurationEnum(int code, String desc) {
+    PeriodEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

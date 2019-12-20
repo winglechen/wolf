@@ -21,14 +21,14 @@
             <if test="feePayStrategy != null">
                 fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
             </if>
-            <if test="duration != null">
-                duration = #{duration,jdbcType=INTEGER},
+            <if test="period != null">
+                period = #{period,jdbcType=INTEGER},
             </if>
-            <if test="durationUnit != null">
-                duration_unit = #{durationUnit,jdbcType=INTEGER},
+            <if test="periodUnit != null">
+                period_unit = #{periodUnit,jdbcType=INTEGER},
             </if>
-            <if test="durationStrategy != null">
-                duration_strategy = #{durationStrategy,jdbcType=INTEGER},
+            <if test="periodStrategy != null">
+                period_strategy = #{periodStrategy,jdbcType=INTEGER},
             </if>
             <if test="interest != null">
                 interest = #{interest,jdbcType=INTEGER},
@@ -36,11 +36,11 @@
             <if test="interestUnit != null">
                 interest_unit = #{interestUnit,jdbcType=INTEGER},
             </if>
-            <if test="belatedPayment != null">
-                belated_payment = #{belatedPayment,jdbcType=INTEGER},
+            <if test="penalty != null">
+                penalty = #{penalty,jdbcType=INTEGER},
             </if>
-            <if test="belatedPaymentUnit != null">
-                belated_payment_unit = #{belatedPaymentUnit,jdbcType=INTEGER},
+            <if test="penaltyUnit != null">
+                penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
             </if>
             <if test="installment != null">
                 installment = #{installment,jdbcType=VARCHAR},
