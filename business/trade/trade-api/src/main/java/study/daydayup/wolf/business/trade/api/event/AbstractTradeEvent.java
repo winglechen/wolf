@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.event;
 
 import lombok.Setter;
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventException;
 

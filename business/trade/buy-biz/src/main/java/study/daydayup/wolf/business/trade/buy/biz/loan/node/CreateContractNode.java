@@ -103,7 +103,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                     .buyerId(contract.getBuyerId())
                     .sellerId(contract.getSellerId())
                     .installmentNo(i+1)
-                    .period(installment.getperiod())
+                    .period(installment.getPeriod())
                     .percentage(installment.getPercentage())
                     .feePercentage(installment.getFeePercentage())
                     .installmentType(installment.getInstallmentType())

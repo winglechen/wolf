@@ -1,8 +1,5 @@
 package study.daydayup.wolf.business.trade.api.event;
 
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-
 /**
  * study.daydayup.wolf.business.trade.api.event
  *

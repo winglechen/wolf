@@ -7,11 +7,10 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContextBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +27,6 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     @Override
     public ConfirmResponse confirm(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
-        context.setTradePhase(TradePhaseEnum.CONFIRM_PHASE);
 
         ConfirmResponse response = new ConfirmResponse();
 
@@ -42,7 +40,6 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     @Override
     public PreviewResponse preview(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
-        context.setTradePhase(TradePhaseEnum.PREVIEW_PHASE);
 
         PreviewResponse response = new PreviewResponse();
         List<TradeNode> nodeList = buildPreviewFlow();

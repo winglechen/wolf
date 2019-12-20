@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.common;
 
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 
 /**
@@ -11,6 +11,4 @@ import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
  **/
 public interface TradeNode {
     void run(BuyContext context);
-
-    boolean effectsInPhase(TradePhaseEnum tradePhase);
 }

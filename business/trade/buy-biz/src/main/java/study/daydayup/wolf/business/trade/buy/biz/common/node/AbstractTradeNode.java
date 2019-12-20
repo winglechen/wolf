@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.common.node;
 
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.api.exception.buy.GoodsNotFoundException;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
@@ -16,17 +16,7 @@ import java.util.List;
  * @since 2019/10/5 11:23 AM
  **/
 public abstract class AbstractTradeNode implements TradeNode {
-    protected EnumSet<TradePhaseEnum> phases;
     protected BuyContext context;
-
-    @Override
-    public boolean effectsInPhase(TradePhaseEnum tradePhase) {
-        if (phases == null) {
-            return false;
-        }
-
-        return phases.contains(tradePhase);
-    }
 
     protected List<TradeGoods> getGoodsList() {
         List<TradeGoods> goodsList = context.getGoodsList();

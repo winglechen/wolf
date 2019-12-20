@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.enums;
+package study.daydayup.wolf.common.lang.enums.trade;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
@@ -11,17 +11,16 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum TradePhaseEnum implements CodeBasedEnum {
-    CLEARING_PHASE(120, "清算阶段"),
-    SETTLEMENT_PHASE(110, "结算阶段"),
-    PAYMENT_PHASE(100, "支付阶段"),
+    CLEARING_PHASE(8, "清算阶段"),
+    SETTLEMENT_PHASE(7, "结算阶段"),
+    PAYMENT_PHASE(6, "支付阶段"),
 
-    AFTER_SALE_PHASE(70, "售后阶段"),
+    AFTER_SALE_PHASE(5, "售后阶段"),
+    ORDER_PHASE(4, "订单阶段"),
+    CONTRACT_PHASE(3, "合同阶段"),
 
-    CONFIRM_PHASE(40, "确认阶段"),
-    PREVIEW_PHASE(30, "预览阶段"),
-
-    LICENSE_PHASE(20, "获取令牌阶段"),
-    UMP_PHASE(10, "营销阶段")
+    LICENSE_PHASE(2, "获取令牌阶段"),
+    UMP_PHASE(1, "营销阶段")
     ;
 
     private int code;

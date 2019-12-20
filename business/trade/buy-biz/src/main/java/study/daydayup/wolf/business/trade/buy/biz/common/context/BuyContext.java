@@ -5,7 +5,7 @@ import lombok.Data;
 import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.entity.Order;
-import study.daydayup.wolf.business.trade.api.enums.TradePhaseEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.vo.buy.Seller;
