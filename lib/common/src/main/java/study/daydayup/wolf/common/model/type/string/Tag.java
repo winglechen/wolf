@@ -30,7 +30,7 @@ public class Tag implements DataType {
         if (delimiter != null) {
             this.delimiter = delimiter;
         }
-        parseStringTag(tagString);
+        addStringTag(tagString);
     }
 
     public Tag add(String tag) {
@@ -48,13 +48,37 @@ public class Tag implements DataType {
     }
 
     public Tag addString(String tagString) {
-        parseStringTag(tagString);
+        addStringTag(tagString);
         return this;
     }
 
     public Tag addAll(Collection<String> tagList) {
         for (String tag: tagList ) {
             add(tag);
+        }
+        return this;
+    }
+
+    public Tag remove(String tag) {
+        if (tag == null) {
+            return this;
+        }
+
+        tag = tag.trim();
+        tags.remove(tag);
+
+        return this;
+    }
+
+    public Tag removeString(String tagString) {
+        removeStringTag(tagString);
+
+        return this;
+    }
+
+    public Tag removeAll(Collection<String> tagList) {
+        for (String tag: tagList ) {
+            remove(tag);
         }
         return this;
     }
@@ -71,7 +95,7 @@ public class Tag implements DataType {
         return String.join(delimiter, tags);
     }
 
-    private void parseStringTag(String tagString) {
+    private void addStringTag(String tagString) {
         if (tagString == null) {
             return;
         }
@@ -83,6 +107,21 @@ public class Tag implements DataType {
 
         for (String tag : tagArray ) {
             add(tag);
+        }
+    }
+
+    private void removeStringTag(String tagString) {
+        if (tagString == null) {
+            return;
+        }
+
+        String[] tagArray = tagString.split(delimiter);
+        if (0 == tagArray.length) {
+            return;
+        }
+
+        for (String tag : tagArray ) {
+            remove(tag);
         }
     }
 

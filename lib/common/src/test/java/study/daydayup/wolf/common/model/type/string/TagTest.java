@@ -30,13 +30,30 @@ public class TagTest {
         String tagString = "php, java, js, php";
         Tag tag = new Tag(tagString);
 
-        assertTrue("tag add fail", tag.contains("php"));
-        assertTrue("tag add fail", tag.contains("java"));
-        assertTrue("tag add fail", tag.contains("js"));
+        assertTrue("tag contains fail", tag.contains("php"));
+        assertTrue("tag contains fail", tag.contains("java"));
+        assertTrue("tag contains fail", tag.contains("js"));
 
         String expected = "java,js,php";
         assertEquals("tag join fail", expected, tag.toString());
 
     }
+
+    @Test
+    public void remove() {
+        String tagString = "php, java, js, php";
+        Tag tag = new Tag(tagString);
+
+        assertTrue("tag remove fail", tag.contains("php"));
+        assertTrue("tag remove fail", tag.contains("java"));
+
+        tag.remove("js");
+        assertFalse("tag remove fail", tag.contains("js"));
+
+        String expected = "java,php";
+        assertEquals("tag join fail", expected, tag.toString());
+
+    }
+
 
 }
