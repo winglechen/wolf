@@ -15,14 +15,16 @@ import java.util.List;
  * @since 2019/12/19 9:59 下午
  **/
 @Data
-public class RateInstallment {
+public class AverageInstallment {
     private long total;
     private long remain;
+    private Rate rate;
+
     private int nums;
     private int step;
     private List<Long> splitList;
 
-    public RateInstallment(long total, int nums) {
+    public AverageInstallment(long total, int nums) {
         if (nums <= 0 || total <= 0) {
             throw  new IllegalArgumentException("installment args can't less than 0");
         }
@@ -31,21 +33,22 @@ public class RateInstallment {
         this.remain = total;
         this.nums = nums;
         splitList = new ArrayList<>();
+
+        initRate(nums);
     }
 
-    public long split(int rate) {
-        return split(rate, RateEnum.PER_MILLION);
+    private void initRate(int nums) {
+        BigDecimal r = new BigDecimal(100);
+        BigDecimal n = new BigDecimal(nums);
+
+        r = r.divide(n, BigDecimal.ROUND_HALF_UP);
+        r = r.setScale(0, BigDecimal.ROUND_HALF_UP);
+
+        rate = new Rate(r.intValue(), RateEnum.PER_HUNDRED);
     }
 
-    public long split(int rate, RateEnum unit) {
-        if (0 == rate) {
-            return 0;
-        }
-        return split(new Rate(rate, unit));
-    }
-
-    public long split(Rate rate) {
-        if (remain <= 0 || null == rate) {
+    public long split() {
+        if (remain <= 0) {
             return 0;
         }
 
