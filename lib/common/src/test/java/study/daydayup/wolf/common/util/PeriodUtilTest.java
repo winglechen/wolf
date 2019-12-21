@@ -21,8 +21,8 @@ public class PeriodUtilTest {
         int days, expected;
 
         //case 1 
-        start = LocalDate.of(2019, 01, 01);
-        end = LocalDate.of(2019, 01, 01);
+        start = LocalDate.of(2019, 1, 1);
+        end = LocalDate.of(2019, 1, 1);
 
         expected = 1;
         days = PeriodUtil.daysBetween(start, end, PeriodStrategyEnum.CLOSE_CLOSE);
@@ -47,8 +47,8 @@ public class PeriodUtilTest {
         int days, expected;
 
         //case 1
-        start = LocalDate.of(2019, 01, 01);
-        end = LocalDate.of(2019, 01, 10);
+        start = LocalDate.of(2019, 1, 1);
+        end = LocalDate.of(2019, 1, 10);
 
         expected = 10;
         days = PeriodUtil.daysBetween(start, end, PeriodStrategyEnum.CLOSE_CLOSE);
@@ -73,8 +73,8 @@ public class PeriodUtilTest {
         int days, expected;
 
         //case 1
-        start = LocalDate.of(2019, 01, 01);
-        end = LocalDate.of(2019, 02, 10);
+        start = LocalDate.of(2019, 1, 1);
+        end = LocalDate.of(2019, 2, 10);
 
         expected = 41;
         days = PeriodUtil.daysBetween(start, end, PeriodStrategyEnum.CLOSE_CLOSE);
@@ -99,8 +99,8 @@ public class PeriodUtilTest {
         int days, expected;
 
         //case 1
-        start = LocalDate.of(2018, 01, 01);
-        end = LocalDate.of(2019, 01, 01);
+        start = LocalDate.of(2018, 1, 1);
+        end = LocalDate.of(2019, 1, 1);
 
         expected = 366;
         days = PeriodUtil.daysBetween(start, end, PeriodStrategyEnum.CLOSE_CLOSE);
@@ -125,8 +125,8 @@ public class PeriodUtilTest {
         int days, expected;
 
         //case 1
-        start = LocalDate.of(2019, 01, 01);
-        end = LocalDate.of(2018, 01, 01);
+        start = LocalDate.of(2019, 1, 1);
+        end = LocalDate.of(2018, 1, 1);
 
         expected = -366;
         days = PeriodUtil.daysBetween(start, end, PeriodStrategyEnum.CLOSE_CLOSE);
@@ -145,6 +145,123 @@ public class PeriodUtilTest {
         assertEquals("same day count daysBetween: close close strategy fail", expected, days);
     }
 
+    @Test
+    public void sameDaysAfter() {
+        LocalDate start, end, expected;
 
+        int days = 0;
+        start = LocalDate.of(2019, 1, 1);
 
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("same day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("same day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("same day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("same day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void smallDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = 5;
+        start = LocalDate.of(2019, 1, 1);
+
+        expected = LocalDate.of(2019, 1, 5);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("same day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 6);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("same day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 6);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("same day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 7);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("same day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void bigDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = 40;
+        start = LocalDate.of(2019, 1, 1);
+
+        expected = LocalDate.of(2019, 2, 9);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("same day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 2, 10);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("same day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 2, 10);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("same day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 2, 11);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("same day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void largeDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = 375;
+        start = LocalDate.of(2018, 1, 1);
+
+        expected = LocalDate.of(2019, 1, 10);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("same day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 11);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("same day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 11);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("same day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 12);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("same day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void negativeDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = -355;
+        start = LocalDate.of(2019, 1, 1);
+
+        expected = LocalDate.of(2018, 1, 10);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("negative day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2018, 1, 11);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("negative day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2018, 1, 11);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("negative day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2018, 1, 12);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("negative day daysAfter: open open strategy fail", expected, end);
+    }
 }
