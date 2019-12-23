@@ -1,9 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.vo.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
@@ -12,8 +10,6 @@ import study.daydayup.wolf.common.util.EnumUtil;
 import study.daydayup.wolf.common.util.PeriodUtil;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,6 +31,7 @@ public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNo
             return;
         }
 
+        initPeriodStrategy();
         addEffectTime(terms);
     }
 
@@ -54,7 +51,6 @@ public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNo
             term.setEffectAt(start);
             term.setDueAt(end);
         }
-
     }
 
 //    public static void main(String[] args) {
