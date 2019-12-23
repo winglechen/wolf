@@ -17,8 +17,9 @@ public class BuyContextBuilder {
     private BuyRequest request;
 
     public BuyContextBuilder(BuyRequest request) {
-        context = new BuyContext();
-        context.setRequest(request);
+        context = BuyContext.builder()
+                .request(request)
+                .build();
         this.request = request;
     }
 

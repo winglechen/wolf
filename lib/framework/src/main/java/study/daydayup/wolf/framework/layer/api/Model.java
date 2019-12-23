@@ -1,6 +1,6 @@
 package study.daydayup.wolf.framework.layer.api;
 
-import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -11,4 +11,5 @@ import java.io.Serializable;
  * @since 2019/10/3 11:01 PM
  **/
 public abstract class Model implements Serializable {
+
 }

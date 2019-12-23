@@ -15,8 +15,6 @@ import java.util.EnumSet;
  **/
 @Component
 public class ContractCreateNode extends AbstractTradeNode implements TradeNode {
-    private BuyContext context;
-
     @Override
     public void run(BuyContext context) {
         init(context);
@@ -24,7 +22,4 @@ public class ContractCreateNode extends AbstractTradeNode implements TradeNode {
 
     }
 
-    private void init(BuyContext context) {
-        this.context = context;
-    }
 }

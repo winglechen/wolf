@@ -33,9 +33,8 @@ public class LoanEntity extends Entity {
     }
 
     public RepaymentTerm getRepayment() {
-        RepaymentTerm repayment = new RepaymentTerm();
+        return null;
 
-        return repayment;
     }
 
     public List<InstallmentTerm> getInstallmentList() {

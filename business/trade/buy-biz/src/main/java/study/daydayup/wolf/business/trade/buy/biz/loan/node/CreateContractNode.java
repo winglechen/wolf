@@ -18,7 +18,7 @@ import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.util.finance.Rate;
 import study.daydayup.wolf.common.util.finance.installment.RateInstallment;
-import study.daydayup.wolf.common.util.finance.pdl.PDLInterest;
+import study.daydayup.wolf.common.util.finance.Interest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         long fee = Rate.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
         loanTerm.setHandlingFee(fee);
 
-        long interest = PDLInterest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());
+        long interest = Interest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());
         loanTerm.setInterest(interest);
     }
 
@@ -110,7 +110,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .tradeNo(contract.getTradeNo())
                 .buyerId(contract.getBuyerId())
                 .sellerId(contract.getSellerId())
-                .installmentNo(0)
+                .installmentNo(1)
                 .period(loan.getPeriod())
                 .percentage(1000000)
                 .feePercentage(1000000)
@@ -168,7 +168,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     private void calculateInstallmentInterest(InstallmentTerm term) {
         LoanTerm loan = contract.getLoanTerm();
 
-        long interest = PDLInterest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
+        long interest = Interest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
         term.setInterest(interest);
     }
 

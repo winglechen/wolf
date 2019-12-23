@@ -15,9 +15,8 @@ import java.time.LocalDateTime;
  * @since 2019/12/18 10:57 上午
  **/
 @Data
-@Builder
 @NoArgsConstructor
-public class TradeInstallment extends VO {
+public class TradeInstallment {
     private int installmentNo;
 
     private int period;

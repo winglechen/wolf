@@ -3,10 +3,17 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.vo.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
+import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
+import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.PeriodUtil;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,6 +24,7 @@ import java.util.List;
  **/
 @Component
 public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNode {
+    private PeriodStrategyEnum strategy;
 
     @Override
     public void run(BuyContext context) {
@@ -27,8 +35,45 @@ public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNo
             return;
         }
 
+        addEffectTime(terms);
+    }
 
+    private void initPeriodStrategy() {
+        int code = context.getContract().getLoanTerm().getPeriodStrategy();
+        strategy = EnumUtil.codeOf(code, PeriodStrategyEnum.class);
+    }
+
+    private void addEffectTime(List<InstallmentTerm> terms) {
+        LocalDate start;
+        LocalDate end   = PeriodUtil.daysAfter(-1, PeriodStrategyEnum.OPEN_CLOSE);
+
+        for (InstallmentTerm term: terms ) {
+            start = PeriodUtil.daysAfter(1, PeriodStrategyEnum.OPEN_CLOSE, end);
+            end   = PeriodUtil.daysAfter(term.getPeriod(), strategy, start);
+
+            term.setEffectAt(start);
+            term.setDueAt(end);
+        }
 
     }
+
+//    public static void main(String[] args) {
+//        List<Integer> arr = Arrays.asList(3, 5, 7, 8);
+//
+//        LocalDate start;
+//        LocalDate end   = PeriodUtil.daysAfter(-1, PeriodStrategyEnum.OPEN_CLOSE);
+//
+//        for (int i = 0; i < arr.size(); i++) {
+//            int no = i + 1;
+//            int days = arr.get(i);
+//
+//            start = PeriodUtil.daysAfter(1, PeriodStrategyEnum.OPEN_CLOSE, end);
+//            end   = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+//
+//            System.out.println("第" + no + "期(" + days +"天)：" +start + " ~ " + end);
+//        }
+//    }
+
+
 
 }

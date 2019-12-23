@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.vo;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.enums.order.AddressTypeEnum;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
 /**
@@ -12,7 +13,7 @@ import study.daydayup.wolf.framework.layer.domain.VO;
 @Data
 public class TradeAddress extends VO {
     /**
-     * @see
+     * @see AddressTypeEnum
      */
     private int addressType;
 

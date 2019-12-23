@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
@@ -17,9 +18,8 @@ import java.time.LocalDateTime;
  **/
 @Data
 @SuperBuilder(toBuilder = true)
-public class Trade extends Model {
-    public Trade() {}
-
+@NoArgsConstructor
+public class Trade {
     protected String tradeNo;
     /**
      * @see TradeTypeEnum

@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.vo.contract;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 
 /**
@@ -10,5 +12,6 @@ import lombok.Data;
  * @since 2019/12/13 3:58 下午
  **/
 @Data
-public class TaxTerm extends ContractTerm {
+@Builder
+public class TaxTerm {
 }

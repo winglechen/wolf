@@ -15,8 +15,7 @@ import java.util.List;
  **/
 @Data
 @Builder
-@NoArgsConstructor
-public class TradeGoods extends VO {
+public class TradeGoods {
     private long sellId;
     private long goodsId;
     protected long categoryId;

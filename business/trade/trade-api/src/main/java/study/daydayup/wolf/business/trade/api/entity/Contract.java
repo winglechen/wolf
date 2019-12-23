@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.vo.contract.*;
@@ -13,10 +14,11 @@ import java.util.List;
  * @author Wingle
  * @since 2019/10/4 12:04 AM
  **/
+@EqualsAndHashCode(callSuper = false)
 @Data
 @SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 public class Contract extends Trade {
-    public Contract() {}
 
     private ObjectsTerm objectsTerm;
     private PaymentTerm paymentTerm;

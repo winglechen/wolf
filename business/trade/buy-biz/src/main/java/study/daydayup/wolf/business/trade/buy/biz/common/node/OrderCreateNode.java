@@ -15,15 +15,11 @@ import java.util.EnumSet;
  **/
 @Component
 public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
-    private BuyContext context;
-
     @Override
     public void run(BuyContext context) {
         init(context);
 
     }
 
-    private void init(BuyContext context) {
-        this.context = context;
-    }
+
 }

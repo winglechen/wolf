@@ -170,6 +170,30 @@ public class PeriodUtilTest {
     }
 
     @Test
+    public void tomorrowDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = 1;
+        start = LocalDate.of(2019, 1, 1);
+
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("same day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("same day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("same day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 3);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("same day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
     public void smallDaysAfter() {
         LocalDate start, end, expected;
 
@@ -248,7 +272,7 @@ public class PeriodUtilTest {
         int days = -355;
         start = LocalDate.of(2019, 1, 1);
 
-        expected = LocalDate.of(2018, 1, 10);
+        expected = LocalDate.of(2018, 1, 12);
         end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
         assertEquals("negative day daysAfter: close close strategy fail", expected, end);
 
@@ -260,7 +284,55 @@ public class PeriodUtilTest {
         end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
         assertEquals("negative day daysAfter: open close strategy fail", expected, end);
 
-        expected = LocalDate.of(2018, 1, 12);
+        expected = LocalDate.of(2018, 1, 10);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("negative day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void yesterdayDaysAfter() {
+        LocalDate start, end, expected;
+
+        int days = -1;
+        start = LocalDate.of(2019, 1, 3);
+
+        expected = LocalDate.of(2019, 1, 3);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("negative day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("negative day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("negative day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 1);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
+        assertEquals("negative day daysAfter: open open strategy fail", expected, end);
+    }
+
+    @Test
+    public void twoDaysAgo() {
+        LocalDate start, end, expected;
+
+        int days = -2;
+        start = LocalDate.of(2019, 1, 4);
+
+        expected = LocalDate.of(2019, 1, 3);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
+        assertEquals("negative day daysAfter: close close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_OPEN, start);
+        assertEquals("negative day daysAfter: close open strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 2);
+        end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_CLOSE, start);
+        assertEquals("negative day daysAfter: open close strategy fail", expected, end);
+
+        expected = LocalDate.of(2019, 1, 1);
         end = PeriodUtil.daysAfter(days, PeriodStrategyEnum.OPEN_OPEN, start);
         assertEquals("negative day daysAfter: open open strategy fail", expected, end);
     }

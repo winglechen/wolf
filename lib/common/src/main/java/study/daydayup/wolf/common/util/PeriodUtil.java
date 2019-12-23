@@ -35,7 +35,12 @@ public class PeriodUtil {
                 plusDays = -1;
         }
 
-        days = days + plusDays;
+        if (days > 0) {
+            days = days + plusDays;
+        } else {
+            days = days + plusDays * -1;
+        }
+
         return start.plusDays(days);
     }
 

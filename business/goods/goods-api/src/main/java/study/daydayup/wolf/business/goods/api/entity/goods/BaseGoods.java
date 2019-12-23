@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.goods.api.entity.goods;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.common.model.annotation.column.BusinessKey;
@@ -18,8 +20,9 @@ import javax.validation.constraints.NotBlank;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
-@Builder
-public class BaseGoods extends Entity {
+@EqualsAndHashCode(callSuper = false)
+@SuperBuilder(toBuilder = true)
+public class BaseGoods {
     public BaseGoods() {}
     @BusinessKey @PrimaryKey
     protected long id;

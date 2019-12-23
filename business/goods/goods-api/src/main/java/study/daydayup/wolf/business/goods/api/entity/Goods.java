@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.goods.api.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
  * @since 2019/10/3 11:00 PM
  **/
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = false)
+@SuperBuilder(toBuilder = true)
 public class Goods extends BaseGoods {
     public Goods() {}
     protected String pics;

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.vo.contract;
 
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
 /**

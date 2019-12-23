@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.api.vo.contract;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +16,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @Builder
-@NoArgsConstructor
-public class LoanTerm extends ContractTerm {
+public class LoanTerm {
     private String tradeNo;
     private long buyerId;
     private long sellerId;

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util.finance.pdl;
+package study.daydayup.wolf.common.util.finance;
 
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * @author Wingle
  * @since 2019/12/19 4:45 下午
  **/
-public class PDLInterest {
+public class Interest {
     private static final int MAX_INTEREST = 60;
 
     public static long rate(long amount, int ratePerMillion, int period) {
@@ -56,7 +56,7 @@ public class PDLInterest {
     }
 
     private static BigDecimal maxInterestCheck(BigDecimal amount, BigDecimal interest) {
-        BigDecimal maxInterest = amount.multiply(new BigDecimal(PDLInterest.MAX_INTEREST))
+        BigDecimal maxInterest = amount.multiply(new BigDecimal(Interest.MAX_INTEREST))
                 .divide(new BigDecimal(100));
 
         if (-1 == interest.compareTo(maxInterest)) {
