@@ -242,16 +242,6 @@ CREATE TABLE IF NOT EXISTS `order`
     `consign_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付方式',
     `out_trade_no`      VARCHAR(50) NOT NULL DEFAULT '' COMMENT '外部交易号',
 
-#     `payment_state`     TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付状态',
-#     `consign_state`     TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付状态',
-#     `completed_state`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '完成状态',
-#     `dispute_state`     TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '售后状态',
-#
-#     `paid_at`           DATETIME COMMENT '支付时间',
-#     `consigned_at`      DATETIME COMMENT '交付时间',
-#     `disputed_at`       DATETIME COMMENT '售后时间',
-#     `completed_at`      DATETIME COMMENT '完成时间',
-
     `expired_at`        DATETIME COMMENT '过期时间',
 
     `version`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
