@@ -22,25 +22,24 @@ public class RepaymentTerm extends ContractTerm {
     private long sellerId;
 
     private long amount;
-    private long handlingFee;
     private int currency;
-
-    private int handlingFeeRate;
-
-    private int interest;
-    private int penalty;
-    private int interestUnit;
-    private int penaltyUnit;
 
     private int period;
     private int periodUnit;
     private int periodStrategy;
 
-    private int repayStrategy;
-    private int prepayStrategy;
-    private int amountStrategy;
+    private long handlingFee;
+    private int handlingFeeRate;
     private int feePayStrategy;
 
-    private LocalDateTime effectAt;
-    private int version;
+    private int interest;
+    private int interestRate;
+    private int interestUnit;
+
+    private int penalty;
+    private int penaltyRate;
+    private int penaltyUnit;
+
+    private int repayStrategy;
+    private int prepayStrategy;
 }

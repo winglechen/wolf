@@ -14,11 +14,7 @@ import study.daydayup.wolf.business.trade.api.vo.buy.TradeInstallment;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeLoan;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 
 /**
@@ -83,7 +79,11 @@ public class GoodsEpi {
 
     private TradeLoan formatTradeLoan(TradeGoodsResponse response) {
         TradeLoan loan = new TradeLoan();
-        BeanUtils.copyProperties(response.getLoan(), loan);
+        Loan loanFromGoods = response.getLoan();
+        BeanUtils.copyProperties(loanFromGoods, loan);
+
+        loan.setInterestRate(loanFromGoods.getInterest());
+        loan.setPenaltyRate(loanFromGoods.getPenalty());
 
         return loan;
     }

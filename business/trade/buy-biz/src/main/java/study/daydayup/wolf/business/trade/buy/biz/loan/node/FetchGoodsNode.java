@@ -40,7 +40,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void validGoodsList(List<TradeGoods> goodsList) {
-        if (goodsList == null) {
+        if (goodsList == null || goodsList.isEmpty()) {
             throw new GoodsNotFoundException();
         }
 

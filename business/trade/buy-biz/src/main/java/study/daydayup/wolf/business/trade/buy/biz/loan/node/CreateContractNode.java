@@ -2,29 +2,26 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.goods.api.vo.Installment;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.exception.buy.GoodsNotFoundException;
 import study.daydayup.wolf.business.trade.api.state.loan.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeInstallment;
 import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.vo.contract.RepaymentTerm;
+import study.daydayup.wolf.business.trade.api.vo.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
+import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.util.finance.Rate;
+import study.daydayup.wolf.common.util.finance.pdl.PDLInterest;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.node
@@ -34,9 +31,6 @@ import java.util.stream.Collectors;
  **/
 @Component
 public class CreateContractNode extends AbstractTradeNode implements TradeNode {
-    @Resource
-    private GoodsEpi goodsEpi;
-
     private TradeGoods goods;
     private Contract contract;
 
@@ -46,8 +40,8 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
         createTradeNo();
         initSellerAndBuyer();
-
-
+        initLoanTerm();
+        initInstallmentTerm();
     }
 
     protected void init(BuyContext context) {
@@ -63,7 +57,13 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void createTradeNo() {
-        contract.setTradeNo("1234567890");
+        String tradeNo = TradeNo.builder()
+                .tradePhase(context.getTradePhase())
+                .accountId(context.getBuyer().getId())
+                .build()
+                .toString();
+
+        contract.setTradeNo(tradeNo);
     }
 
     private void initSellerAndBuyer() {
@@ -76,8 +76,8 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setSellerName(seller.getName());
     }
 
-    private void initRepaymentTerm() {
-        RepaymentTerm repaymentTerm = RepaymentTerm.builder()
+    private void initLoanTerm() {
+        LoanTerm loanTerm = LoanTerm.builder()
                 .tradeNo(contract.getTradeNo())
                 .buyerId(contract.getBuyerId())
                 .sellerId(contract.getSellerId())
@@ -85,9 +85,18 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .currency(goods.getCurrency())
                 .build();
 
-        BeanUtils.copyProperties(goods.getLoan(), repaymentTerm);
+        BeanUtils.copyProperties(goods.getLoan(), loanTerm);
+        calculateLoanAmount(loanTerm);
 
-        contract.setRepaymentTerm(repaymentTerm);
+        contract.setLoanTerm(loanTerm);
+    }
+
+    private void calculateLoanAmount(LoanTerm loanTerm) {
+        long fee = Rate.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
+        loanTerm.setHandlingFee(fee);
+
+        long interest = PDLInterest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());
+        loanTerm.setInterest(interest);
     }
 
     private void initInstallmentTerm() {
@@ -108,7 +117,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                     .installmentType(installment.getInstallmentType())
                     .build();
 
-            computeInstallmentAmount(term);
+            calculateInstallmentAmount(term);
 
             terms.add(term);
         }
@@ -116,9 +125,17 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setInstallmentTermList(terms);
     }
 
-    private void computeInstallmentAmount(InstallmentTerm term) {
-        long amount     = contract.getRepaymentTerm().getAmount();
-        int  feeRate    = contract.getRepaymentTerm().getHandlingFeeRate();
+    private void calculateInstallmentAmount(InstallmentTerm term) {
+        LoanTerm loan = contract.getLoanTerm();
+
+        long amount = Rate.calculate(loan.getAmount(), term.getPercentage());
+        term.setAmount(amount);
+
+        long fee = Rate.calculate(loan.getHandlingFee(), term.getFeePercentage());
+        term.setHandlingFee(fee);
+
+        long interest = PDLInterest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
+        term.setInterest(interest);
     }
 
 }

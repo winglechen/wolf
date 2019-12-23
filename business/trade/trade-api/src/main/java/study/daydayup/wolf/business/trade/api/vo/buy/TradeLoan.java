@@ -14,11 +14,10 @@ import javax.validation.constraints.Min;
  **/
 @Data
 public class TradeLoan extends VO {
-    private long handlingFee;
     private int handlingFeeRate;
 
-    private int interest;
-    private int penalty;
+    private int interestRate;
+    private int penaltyRate;
     private int interestUnit;
     private int penaltyUnit;
 
