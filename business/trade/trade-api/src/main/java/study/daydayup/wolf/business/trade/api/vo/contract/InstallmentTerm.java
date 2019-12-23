@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.api.vo.contract;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -30,9 +31,8 @@ public class InstallmentTerm extends ContractTerm {
     private long interest;
     private long handlingFee;
 
-    private LocalDateTime effectAt;
-    private LocalDateTime dueAt;
-    private LocalDateTime overdueAt;
+    private LocalDate effectAt;
+    private LocalDate dueAt;
 
     private int version;
 }

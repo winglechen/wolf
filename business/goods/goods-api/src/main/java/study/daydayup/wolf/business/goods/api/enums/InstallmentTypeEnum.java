@@ -11,6 +11,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum InstallmentTypeEnum implements CodeBasedEnum {
+    NO_INSTALLMENTS(30, "no installment"),
     FAKE(20, "fake"),
     DEFAULT(10, "normal")
     ;

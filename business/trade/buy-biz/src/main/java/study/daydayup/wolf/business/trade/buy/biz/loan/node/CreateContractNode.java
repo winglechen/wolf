@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.state.loan.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
@@ -101,20 +102,46 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         loanTerm.setInterest(interest);
     }
 
-    private void initInstallmentTerm() {
+    private void createInstallmentByLoan() {
         LoanTerm loan = contract.getLoanTerm();
         List<InstallmentTerm> terms = new ArrayList<>();
 
+        InstallmentTerm installmentTerm = InstallmentTerm.builder()
+                .tradeNo(contract.getTradeNo())
+                .buyerId(contract.getBuyerId())
+                .sellerId(contract.getSellerId())
+                .installmentNo(0)
+                .period(loan.getPeriod())
+                .percentage(1000000)
+                .feePercentage(1000000)
+                .installmentType(InstallmentTypeEnum.NO_INSTALLMENTS.getCode())
+                .amount(loan.getAmount())
+                .interest(loan.getInterest())
+                .handlingFee(loan.getHandlingFee())
+                .build();
+
+        terms.add(installmentTerm);
+        contract.setInstallmentTermList(terms);
+    }
+
+    private void initInstallmentTerm() {
         List<TradeInstallment> installments = goods.getInstallmentList();
         int installmentCount = installments.size();
+        if (0 == installmentCount) {
+            createInstallmentByLoan();
+            return;
+        }
+
+        LoanTerm loan = contract.getLoanTerm();
+        List<InstallmentTerm> terms = new ArrayList<>();
 
         RateInstallment rateInstallment = new RateInstallment(loan.getAmount(), installmentCount);
         RateInstallment rateFee = new RateInstallment(loan.getHandlingFee(), installmentCount);
 
         for (int i = 0; i < installmentCount; i++) {
             TradeInstallment installment = installments.get(i);
-            InstallmentTerm term = initInstallmentTerm(installment, i);
 
+            InstallmentTerm term = buildInstallmentTerm(installment, i);
             calculateInstallmentInterest(term);
             term.setAmount(rateInstallment.split(term.getPercentage()));
             setInstallmentFee(term, rateFee.split(term.getFeePercentage()));
@@ -125,7 +152,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setInstallmentTermList(terms);
     }
 
-    private InstallmentTerm initInstallmentTerm(TradeInstallment installment, int i) {
+    private InstallmentTerm buildInstallmentTerm(TradeInstallment installment, int i) {
         return InstallmentTerm.builder()
                 .tradeNo(contract.getTradeNo())
                 .buyerId(contract.getBuyerId())
