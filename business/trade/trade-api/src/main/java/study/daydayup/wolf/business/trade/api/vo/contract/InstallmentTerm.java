@@ -15,7 +15,7 @@ import java.time.LocalDate;
  **/
 @Data
 @Builder
-public class InstallmentTerm {
+public class InstallmentTerm extends ContractTerm {
     private String tradeNo;
     private long buyerId;
     private long sellerId;

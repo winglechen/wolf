@@ -2,6 +2,8 @@ package study.daydayup.wolf.framework.layer.dal;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -19,6 +21,6 @@ public class DataObject {
     private long creator;
     private long lastEditor;
 
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

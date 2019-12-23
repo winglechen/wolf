@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.entity.order.OrderLine;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
@@ -18,7 +19,7 @@ import java.util.List;
  **/
 @EqualsAndHashCode(callSuper = false)
 @Data
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 public class Order extends Trade {
     protected long amount;
     protected long postage;

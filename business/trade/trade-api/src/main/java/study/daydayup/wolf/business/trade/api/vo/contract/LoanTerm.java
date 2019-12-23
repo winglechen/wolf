@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 
 
 /**
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @Builder
-public class LoanTerm {
+public class LoanTerm extends ContractTerm {
     private String tradeNo;
     private long buyerId;
     private long sellerId;
