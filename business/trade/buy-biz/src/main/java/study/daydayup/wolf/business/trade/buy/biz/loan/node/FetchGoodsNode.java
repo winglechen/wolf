@@ -26,8 +26,6 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
     @Resource
     private GoodsEpi goodsEpi;
 
-    private BuyContext context;
-
     @Override
     public void run(BuyContext context) {
         init(context);
@@ -39,10 +37,6 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
         mergeRequestToGoods(goodsList);
 
         context.setGoodsList(goodsList);
-    }
-
-    private void init(BuyContext context) {
-        this.context = context;
     }
 
     private void validGoodsList(List<TradeGoods> goodsList) {

@@ -31,6 +31,39 @@ CREATE TABLE IF NOT EXISTS `contract`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '合同';
 
+
+DROP TABLE IF EXISTS `loan_term`;
+CREATE TABLE IF NOT EXISTS `loan_term`
+(
+    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
+    `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
+
+    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '借款金额',
+    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
+    `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
+    `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
+    `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
+    `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
+
+    `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
+    `interest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
+    `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
+    `penalty`           INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
+
+    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+    COMMENT = '借款条款';
+
 # 只读表
 DROP TABLE IF EXISTS `repayment_term`;
 CREATE TABLE IF NOT EXISTS `repayment_term`
@@ -40,20 +73,8 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
-    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
-    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
-    `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
-    `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
-
-    `period`          INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `period_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `period_strategy` INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
-    `interest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
-    `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
-    `penalty`           INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
-    `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

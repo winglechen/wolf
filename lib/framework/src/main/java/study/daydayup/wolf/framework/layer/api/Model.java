@@ -1,5 +1,7 @@
 package study.daydayup.wolf.framework.layer.api;
 
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**

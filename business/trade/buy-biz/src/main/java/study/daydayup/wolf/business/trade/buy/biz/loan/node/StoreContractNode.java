@@ -21,17 +21,11 @@ public class StoreContractNode extends AbstractTradeNode implements TradeNode {
     @Resource
     private GoodsEpi goodsEpi;
 
-    private BuyContext context;
-
     @Override
     public void run(BuyContext context) {
         init(context);
 
         List<TradeGoods> goodsList = context.getGoodsList();
-    }
-
-    private void init(BuyContext context) {
-        this.context = context;
     }
 
 }

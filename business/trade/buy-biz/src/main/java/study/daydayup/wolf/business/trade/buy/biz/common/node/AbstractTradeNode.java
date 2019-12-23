@@ -18,6 +18,10 @@ import java.util.List;
 public abstract class AbstractTradeNode implements TradeNode {
     protected BuyContext context;
 
+    protected void init(BuyContext context) {
+        this.context = context;
+    }
+
     protected List<TradeGoods> getGoodsList() {
         List<TradeGoods> goodsList = context.getGoodsList();
         if (goodsList == null || goodsList.isEmpty()) {

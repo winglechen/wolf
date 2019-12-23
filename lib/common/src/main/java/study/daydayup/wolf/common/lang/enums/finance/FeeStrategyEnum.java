@@ -11,7 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum FeeStrategyEnum implements CodeBasedEnum {
-    POST(3, "未知"),
+    INSTALLMENT(3, "后付待续费"),
+    POST(2, "后付待续费"),
     PRE(1, "提前付手续费")
     ;
 

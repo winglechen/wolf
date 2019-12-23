@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @Builder
+@NoArgsConstructor
 public class RepaymentTerm extends ContractTerm {
     private String tradeNo;
     private long buyerId;

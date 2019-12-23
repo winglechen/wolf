@@ -37,7 +37,6 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     @Resource
     private GoodsEpi goodsEpi;
 
-    private BuyContext context;
     private TradeGoods goods;
     private Contract contract;
 
@@ -51,7 +50,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
     }
 
-    private void init(BuyContext context) {
+    protected void init(BuyContext context) {
         this.context = context;
         goods = getGoodsList().get(0);
 

@@ -1,11 +1,13 @@
 package study.daydayup.wolf.business.trade.api.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.entity.order.BaseOrder;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.entity.order.OrderLine;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.vo.SellerMemo;
 import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
+
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.api.entity
@@ -14,14 +16,21 @@ import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
  * @since 2019/10/4 12:04 AM
  **/
 @Data
-public class Order extends BaseOrder {
-    private int deliveryMethod;
-    private int postagePaymentMethod;
+@SuperBuilder(toBuilder = true)
+public class Order extends Trade {
+    protected long amount;
+    protected long postage;
+    protected int currency;
 
-    private TradeAddress address;
+    protected String outTradeNo;
 
-    private BuyerMemo buyerMemo;
-    private SellerMemo sellerMemo;
+    protected int consignMethod;
+    protected int paymentMethod;
 
-    private OrderLine[] orderLines;
+    protected TradeAddress address;
+
+    protected BuyerMemo buyerMemo;
+    protected SellerMemo sellerMemo;
+
+    protected List<OrderLine> orderLineList;
 }

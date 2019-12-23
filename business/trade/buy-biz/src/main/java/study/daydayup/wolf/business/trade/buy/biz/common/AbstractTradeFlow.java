@@ -7,7 +7,6 @@ import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
-import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContextBuilder;
 

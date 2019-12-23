@@ -31,6 +31,17 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
     private StoreContractNode storeContractNode;
 
     @Override
+    public List<TradeNode> buildPreviewFlow() {
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        nodeList.add(fetchGoodsNode);
+        nodeList.add(getSellerNode);
+        nodeList.add(createContractNode);
+
+        return nodeList;
+    }
+
+    @Override
     public List<TradeNode> buildConfirmFlow() {
         List<TradeNode> nodeList = new ArrayList<>();
 
@@ -38,17 +49,6 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
         nodeList.add(getSellerNode);
         nodeList.add(createContractNode);
         nodeList.add(storeContractNode);
-
-        return nodeList;
-    }
-
-    @Override
-    public List<TradeNode> buildPreviewFlow() {
-        List<TradeNode> nodeList = new ArrayList<>();
-
-        nodeList.add(fetchGoodsNode);
-        nodeList.add(getSellerNode);
-        nodeList.add(createContractNode);
 
         return nodeList;
     }

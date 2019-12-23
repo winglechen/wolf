@@ -34,6 +34,5 @@ public class BuyContextBuilder {
 
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         context.setTradeType(tradeType);
-
     }
 }

@@ -23,7 +23,6 @@ public class GetSellerNode extends AbstractTradeNode implements TradeNode {
     @Resource
     private GoodsEpi goodsEpi;
 
-    private BuyContext context;
 
     @Override
     public void run(BuyContext context) {
@@ -38,8 +37,5 @@ public class GetSellerNode extends AbstractTradeNode implements TradeNode {
         context.setSeller(seller);
     }
 
-    private void init(BuyContext context) {
-        this.context = context;
-    }
 
 }
