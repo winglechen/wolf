@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.model.annotation.column.ParentKey;
  * @since 2019/10/3 11:01 PM
  **/
 @Data
-public class Sku extends Entity {
+public class Sku implements Entity  {
     private long skuId;
     @ParentKey
     private long goodsId;

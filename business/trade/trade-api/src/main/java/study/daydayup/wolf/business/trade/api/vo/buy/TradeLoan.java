@@ -13,7 +13,7 @@ import javax.validation.constraints.Min;
  * @since 2019/12/18 10:53 上午
  **/
 @Data
-public class TradeLoan extends VO {
+public class TradeLoan implements VO  {
     private int handlingFeeRate;
 
     private int interestRate;

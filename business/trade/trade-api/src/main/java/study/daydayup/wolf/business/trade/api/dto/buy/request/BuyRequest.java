@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2019/10/9 1:43 下午
  **/
 @Data
-public class BuyRequest extends Request {
+public class BuyRequest implements Request {
     private String tradeNo;
     @NotNull
     private Buyer buyer;

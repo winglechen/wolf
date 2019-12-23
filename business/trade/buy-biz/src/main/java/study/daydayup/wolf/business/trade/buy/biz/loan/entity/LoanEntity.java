@@ -13,7 +13,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/23 10:16 上午
  **/
-public class LoanEntity extends Entity {
+public class LoanEntity implements Entity  {
     private Contract model;
     private Contract changes;
     private Contract locker;

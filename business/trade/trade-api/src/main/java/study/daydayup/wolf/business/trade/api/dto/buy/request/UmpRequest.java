@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/10/9 1:53 下午
  **/
 @Data
-public class UmpRequest extends Request {
+public class UmpRequest implements Request {
 }

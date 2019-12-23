@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/16 5:33 下午
  **/
 @Data
-public class ContractOption extends Request {
+public class ContractOption implements Request {
     private boolean withConsignTerm;
     private boolean withInstallmentTerm;
     private boolean withLoanTerm;

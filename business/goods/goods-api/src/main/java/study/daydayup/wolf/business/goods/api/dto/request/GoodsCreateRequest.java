@@ -18,7 +18,7 @@ import java.util.List;
  **/
 @Data
 @Deprecated
-public class GoodsCreateRequest extends Request {
+public class GoodsCreateRequest implements Request {
     @Null
     private long id;
     @Min(1)

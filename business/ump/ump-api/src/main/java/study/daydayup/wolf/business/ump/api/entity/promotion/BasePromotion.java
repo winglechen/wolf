@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.domain.Entity;
  * @author Wingle
  * @since 2019/10/4 12:08 AM
  **/
-public class BasePromotion extends Entity {
+public class BasePromotion implements Entity  {
 }

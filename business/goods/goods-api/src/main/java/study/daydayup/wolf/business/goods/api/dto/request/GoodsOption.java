@@ -11,7 +11,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/11 7:28 下午
  **/
 @Data
-public class GoodsOption extends Request {
+public class GoodsOption implements Request {
     @Builder
     public GoodsOption(){}
     private boolean withDetail          = false;

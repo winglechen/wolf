@@ -10,6 +10,6 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @since 2019/10/5 1:51 PM
  **/
 @Data
-public class TradeSku extends VO {
+public class TradeSku implements VO  {
     private long skuId;
 }

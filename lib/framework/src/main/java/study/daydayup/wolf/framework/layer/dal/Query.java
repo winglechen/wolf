@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Wingle
  * @since 2018/12/26 11:02 PM
  **/
-public abstract class Query implements Serializable {
+public interface Query extends Serializable {
 }

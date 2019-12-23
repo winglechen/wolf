@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/16 5:34 下午
  **/
 @Data
-public class OrderOption extends Request {
+public class OrderOption implements Request {
     private boolean withOrderLine;
     private boolean withAddress;
 

@@ -1,6 +1,5 @@
 package study.daydayup.wolf.framework.layer.dal;
 
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.framework.layer.dal

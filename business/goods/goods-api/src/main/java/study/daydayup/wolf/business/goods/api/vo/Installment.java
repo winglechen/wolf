@@ -13,7 +13,7 @@ import javax.validation.constraints.Min;
  * @since 2019/12/10 9:15 下午
  **/
 @Data
-public class Installment extends Entity {
+public class Installment implements Entity  {
     @Min(1)
     private int period;
     @Min(1)

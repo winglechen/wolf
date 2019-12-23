@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  * @since 2019/12/6 3:54 下午
  **/
 @Data
-public class LicenseRequest extends Request {
+public class LicenseRequest implements Request {
     @NotNull @Min(1)
     private long accountId;
 

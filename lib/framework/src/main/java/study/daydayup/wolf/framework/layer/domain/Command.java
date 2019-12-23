@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Wingle
  * @since 2018/12/26 11:40 PM
  **/
-public abstract class Command implements Serializable {
+public interface Command extends Serializable {
 }

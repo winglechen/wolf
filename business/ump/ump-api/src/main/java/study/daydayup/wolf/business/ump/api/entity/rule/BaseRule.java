@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.domain.Entity;
  * @author Wingle
  * @since 2019/10/4 12:07 AM
  **/
-public class BaseRule extends Entity {
+public class BaseRule implements Entity  {
 }

@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Wingle
  * @since 2018/12/26 11:45 PM
  **/
-public abstract class State implements Serializable {
+public interface State extends Serializable {
 }

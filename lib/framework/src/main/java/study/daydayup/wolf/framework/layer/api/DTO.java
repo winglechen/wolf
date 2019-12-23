@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Wingle
  * @since 2018/12/26 11:43 PM
  **/
-public abstract class DTO implements Serializable {
+public interface DTO extends Serializable {
 }

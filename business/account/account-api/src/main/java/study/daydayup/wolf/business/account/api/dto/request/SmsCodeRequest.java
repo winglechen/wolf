@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  * @since 2019/11/21 9:56 下午
  **/
 @Data
-public class SmsCodeRequest extends Request {
+public class SmsCodeRequest implements Request {
     @NotBlank
     private String mobile;
     @Min(1)

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
  * @since 2019/9/27 5:12 PM
  **/
 @Data
-public class Account extends Entity {
+public class Account implements Entity  {
     private long id;
 
     @NotBlank

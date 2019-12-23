@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
  * @since 2019/10/5 1:36 PM
  **/
 @Data
-public class Buyer extends VO {
+public class Buyer implements VO  {
     @Min(1)
     private long id;
     private String name;

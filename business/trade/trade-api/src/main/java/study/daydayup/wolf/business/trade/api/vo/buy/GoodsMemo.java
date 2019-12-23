@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @since 2019/12/13 3:29 下午
  **/
 @Data
-public class GoodsMemo extends VO {
+public class GoodsMemo implements VO  {
 }

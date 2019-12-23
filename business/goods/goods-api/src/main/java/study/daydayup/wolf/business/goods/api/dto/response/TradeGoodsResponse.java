@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2019/12/12 10:09 上午
  **/
 @Data
-public class TradeGoodsResponse extends Response {
+public class TradeGoodsResponse implements Response {
     private long id;
     @Min(1)
     private long orgId;

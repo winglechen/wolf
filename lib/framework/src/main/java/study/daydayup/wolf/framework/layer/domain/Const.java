@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Wingle
  * @since 2018/12/26 11:47 PM
  **/
-public class Const implements Serializable {
+public interface Const extends Serializable {
 }

@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.api.Response;
  * @since 2019/10/9 1:42 下午
  **/
 @Data
-public class PayResponse extends Response {
+public class PayResponse implements Response {
 }

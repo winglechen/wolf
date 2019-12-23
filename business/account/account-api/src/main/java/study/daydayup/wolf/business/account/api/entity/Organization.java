@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.domain.Entity;
  * @since 2019/9/27 5:36 PM
  **/
 @Data
-public class Organization extends Entity {
+public class Organization implements Entity  {
     private long id;
     /**
      * @see study.daydayup.wolf.business.account.api.enums.OrgTypeEnum

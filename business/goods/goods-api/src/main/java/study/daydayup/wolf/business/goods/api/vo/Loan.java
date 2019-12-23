@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
  * @since 2019/12/10 8:48 下午
  **/
 @Data
-public class Loan extends Entity {
+public class Loan implements Entity  {
     private long goodsId;
     //loan add by user
     @Min(1)

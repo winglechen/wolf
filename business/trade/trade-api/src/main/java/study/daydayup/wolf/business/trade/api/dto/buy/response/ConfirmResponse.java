@@ -10,6 +10,6 @@ import study.daydayup.wolf.framework.layer.api.Response;
  * @since 2019/10/5 11:27 AM
  **/
 @Data
-public class ConfirmResponse extends Response {
+public class ConfirmResponse implements Response {
     private String orderNo;
 }

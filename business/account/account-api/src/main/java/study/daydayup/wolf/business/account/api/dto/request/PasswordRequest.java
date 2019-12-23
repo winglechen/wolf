@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  * @since 2019/12/5 10:07 上午
  **/
 @Data
-public class PasswordRequest extends Request {
+public class PasswordRequest implements Request {
     @NotBlank
     private String account;
     @NotBlank

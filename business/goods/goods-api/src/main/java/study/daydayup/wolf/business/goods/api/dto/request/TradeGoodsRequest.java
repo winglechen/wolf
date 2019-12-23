@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  **/
 @Data
 @Builder
-public class TradeGoodsRequest extends Request {
+public class TradeGoodsRequest implements Request {
     private long orgId;
     private long goodsId;
     private long skuId;

@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  * @since 2019/12/12 9:59 上午
  **/
 @Component
-public class LoanRepository extends Repository {
+public class LoanRepository implements  Repository {
     @Resource
     private GoodsDAO goodsDAO;
     @Resource

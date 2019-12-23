@@ -11,7 +11,7 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @since 2019/10/5 1:26 PM
  **/
 @Data
-public class TradeAddress extends VO {
+public class TradeAddress implements VO  {
     /**
      * @see AddressTypeEnum
      */

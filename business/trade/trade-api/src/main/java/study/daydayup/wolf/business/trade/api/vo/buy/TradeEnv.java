@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @author Wingle
  * @since 2019/12/13 3:28 下午
  **/
-public class TradeEnv extends VO {
+public class TradeEnv implements VO  {
 }

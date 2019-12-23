@@ -14,7 +14,7 @@ import java.util.Date;
  * @since 2019/12/5 10:07 上午
  **/
 @Data
-public class SmsRequest extends Request {
+public class SmsRequest implements Request {
     @NotBlank
     private String mobile;
     @NotBlank
