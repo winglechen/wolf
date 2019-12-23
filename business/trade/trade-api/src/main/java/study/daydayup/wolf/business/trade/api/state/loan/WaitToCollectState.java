@@ -11,7 +11,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @since 2019/10/5 11:23 PM
  **/
 @Data
-public class WaitToApproveState extends AbstractTradeState implements TradeState {
+public class WaitToCollectState extends AbstractTradeState implements TradeState {
     protected int code = 1;
     protected String name = "wait to approve";
 

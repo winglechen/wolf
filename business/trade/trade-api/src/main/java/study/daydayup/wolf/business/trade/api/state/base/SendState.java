@@ -10,4 +10,6 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @since 2019/10/5 11:24 PM
  **/
 public class SendState extends AbstractTradeState implements TradeState {
+    protected int code = 20;
+    protected String name = "send";
 }

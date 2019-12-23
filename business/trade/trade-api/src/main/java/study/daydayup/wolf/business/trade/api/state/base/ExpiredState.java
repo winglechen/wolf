@@ -12,5 +12,6 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 @Data
 public class ExpiredState extends AbstractTradeState implements TradeState {
+    protected int code = 220;
     private String name = "支付超时";
 }

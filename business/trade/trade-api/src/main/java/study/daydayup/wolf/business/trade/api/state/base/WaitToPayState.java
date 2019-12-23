@@ -12,5 +12,6 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 @Data
 public class WaitToPayState extends AbstractTradeState implements TradeState {
-    private String name = "待支付";
+    protected int code = 1;
+    private String name = "wait to pay";
 }
