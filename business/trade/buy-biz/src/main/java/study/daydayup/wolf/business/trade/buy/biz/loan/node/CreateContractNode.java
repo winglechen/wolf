@@ -13,12 +13,12 @@ import study.daydayup.wolf.business.trade.api.vo.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
+import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.util.finance.Rate;
+import study.daydayup.wolf.common.util.finance.installment.RateInstallment;
 import study.daydayup.wolf.common.util.finance.pdl.PDLInterest;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,8 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         initSellerAndBuyer();
         initLoanTerm();
         initInstallmentTerm();
+
+        context.setContract(contract);
     }
 
     protected void init(BuyContext context) {
@@ -100,24 +102,22 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void initInstallmentTerm() {
+        LoanTerm loan = contract.getLoanTerm();
         List<InstallmentTerm> terms = new ArrayList<>();
+
         List<TradeInstallment> installments = goods.getInstallmentList();
+        int installmentCount = installments.size();
 
-        for (int i = 0, len=installments.size(); i < len; i++) {
+        RateInstallment rateInstallment = new RateInstallment(loan.getAmount(), installmentCount);
+        RateInstallment rateFee = new RateInstallment(loan.getHandlingFee(), installmentCount);
+
+        for (int i = 0; i < installmentCount; i++) {
             TradeInstallment installment = installments.get(i);
+            InstallmentTerm term = initInstallmentTerm(installment, i);
 
-            InstallmentTerm term = InstallmentTerm.builder()
-                    .tradeNo(contract.getTradeNo())
-                    .buyerId(contract.getBuyerId())
-                    .sellerId(contract.getSellerId())
-                    .installmentNo(i+1)
-                    .period(installment.getPeriod())
-                    .percentage(installment.getPercentage())
-                    .feePercentage(installment.getFeePercentage())
-                    .installmentType(installment.getInstallmentType())
-                    .build();
-
-            calculateInstallmentAmount(term);
+            calculateInstallmentInterest(term);
+            term.setAmount(rateInstallment.split(term.getPercentage()));
+            setInstallmentFee(term, rateFee.split(term.getFeePercentage()));
 
             terms.add(term);
         }
@@ -125,17 +125,39 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setInstallmentTermList(terms);
     }
 
-    private void calculateInstallmentAmount(InstallmentTerm term) {
+    private InstallmentTerm initInstallmentTerm(TradeInstallment installment, int i) {
+        return InstallmentTerm.builder()
+                .tradeNo(contract.getTradeNo())
+                .buyerId(contract.getBuyerId())
+                .sellerId(contract.getSellerId())
+                .installmentNo(i+1)
+                .period(installment.getPeriod())
+                .percentage(installment.getPercentage())
+                .feePercentage(installment.getFeePercentage())
+                .installmentType(installment.getInstallmentType())
+                .build();
+    }
+
+    private void calculateInstallmentInterest(InstallmentTerm term) {
         LoanTerm loan = contract.getLoanTerm();
-
-        long amount = Rate.calculate(loan.getAmount(), term.getPercentage());
-        term.setAmount(amount);
-
-        long fee = Rate.calculate(loan.getHandlingFee(), term.getFeePercentage());
-        term.setHandlingFee(fee);
 
         long interest = PDLInterest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
         term.setInterest(interest);
+    }
+
+    private void setInstallmentFee(InstallmentTerm term, long fee) {
+        LoanTerm loan = contract.getLoanTerm();
+        int feeStrategy = loan.getFeePayStrategy();
+        term.setHandlingFee(0);
+
+        if (feeStrategy == FeeStrategyEnum.PRE.getCode()) {
+            term.setHandlingFee(0);
+            return;
+        }
+
+        if (feeStrategy == FeeStrategyEnum.POST.getCode()) {
+            term.setHandlingFee(fee);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
@@ -18,6 +19,7 @@ public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNo
     public void run(BuyContext context) {
         init(context);
 
+        Contract contract = context.getContract();
     }
 
 }
