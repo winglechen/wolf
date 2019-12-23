@@ -12,4 +12,5 @@ import java.time.LocalDateTime;
 public interface TradeState {
     int getCode();
     LocalDateTime getUpdatedAt();
+    String getName();
 }

@@ -1,8 +1,9 @@
 package study.daydayup.wolf.business.trade.api.state.base;
 
-import lombok.Data;
+
 import study.daydayup.wolf.business.trade.api.state.AbstractTradeState;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
+import study.daydayup.wolf.business.trade.api.util.LocaleUtil;
 
 /**
  * study.daydayup.wolf.business.trade.api.state
@@ -10,8 +11,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @author Wingle
  * @since 2019/10/5 11:23 PM
  **/
-@Data
+
 public class ClosedState extends AbstractTradeState implements TradeState {
     protected int code = 210;
-    private String name = "交易关闭";
 }

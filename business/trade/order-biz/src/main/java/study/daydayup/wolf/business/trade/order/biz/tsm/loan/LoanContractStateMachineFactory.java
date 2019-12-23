@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.order.biz.tsm.loan;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.event.loan.*;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
-import study.daydayup.wolf.business.trade.api.state.base.CompetedState;
+import study.daydayup.wolf.business.trade.api.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.state.loan.*;
 import study.daydayup.wolf.business.trade.api.state.loan.contract.*;
 import study.daydayup.wolf.business.trade.order.biz.tsm.DefaultTradeStateMap;
@@ -29,11 +29,10 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
     private TradeState loaned               = new LoanedState();
 
     private TradeState repaying             = new RepayingState();
-    private TradeState repayOverdue         = new RepayOverdueState();
     private TradeState installmentOverdue   = new OverdueState();
     private TradeState repaid               = new RepaidState();
 
-    private TradeState completed            = new CompetedState();
+    private TradeState completed            = new CompletedState();
     private TradeState overduePaid          = new OverduePaidState();
     private TradeState refused              = new RefusedState();
 
@@ -70,7 +69,6 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
 
                 .addState(repaying)
                 .addState(repaid)
-                .addState(repayOverdue)
                 .addState(installmentOverdue)
 
                 .addState(overduePaid)
@@ -83,9 +81,8 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
                 .add(approved, loaning, new LoanBeginEvent())
                 .add(loaning, loaned, new LoanSuccessEvent())
                 .add(loaned, repaying, new RepayBeginEvent())
-                .add(repaying, repayOverdue, new RepayOverDueEvent())
+                .add(repaying, overduePaid, new RepayOverDueEvent())
                 .add(repaying, completed, new RepaySuccessEvent())
-                .add(repayOverdue, overduePaid, new RepaySuccessEvent())
                 ;
     }
 
