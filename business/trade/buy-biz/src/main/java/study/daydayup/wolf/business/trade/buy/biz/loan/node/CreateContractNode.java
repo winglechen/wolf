@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.state.loan.WaitToApproveState;
+import study.daydayup.wolf.business.trade.api.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;

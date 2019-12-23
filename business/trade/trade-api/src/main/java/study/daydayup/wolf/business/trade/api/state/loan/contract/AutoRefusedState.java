@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.state.loan;
+package study.daydayup.wolf.business.trade.api.state.loan.contract;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.state.AbstractTradeState;

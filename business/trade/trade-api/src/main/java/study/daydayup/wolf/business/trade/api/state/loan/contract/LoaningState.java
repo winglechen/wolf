@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.state.loan;
+package study.daydayup.wolf.business.trade.api.state.loan.contract;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.state.AbstractTradeState;
@@ -11,7 +11,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @since 2019/10/5 11:23 PM
  **/
 @Data
-public class RefusedState extends AbstractTradeState implements TradeState {
-    protected int code = 210;
-    private String name = "待支付";
+public class LoaningState extends AbstractTradeState implements TradeState {
+    protected int code = 20;
+    protected String name = "放款中";
 }

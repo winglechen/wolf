@@ -11,7 +11,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @since 2019/10/5 11:23 PM
  **/
 @Data
-public class RepayingState extends AbstractTradeState implements TradeState {
-    protected int code = 40;
+public class OverdueState extends AbstractTradeState implements TradeState {
+    protected int code = 70;
     protected String name = "放款中";
 }

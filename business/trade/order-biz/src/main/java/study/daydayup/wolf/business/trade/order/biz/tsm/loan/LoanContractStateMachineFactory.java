@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.trade.api.event.loan.*;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.api.state.base.CompetedState;
 import study.daydayup.wolf.business.trade.api.state.loan.*;
+import study.daydayup.wolf.business.trade.api.state.loan.contract.*;
 import study.daydayup.wolf.business.trade.order.biz.tsm.DefaultTradeStateMap;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMachineFactory;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMap;
@@ -29,7 +30,7 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
 
     private TradeState repaying             = new RepayingState();
     private TradeState repayOverdue         = new RepayOverdueState();
-    private TradeState installmentOverdue   = new InstallmentOverdueState();
+    private TradeState installmentOverdue   = new OverdueState();
     private TradeState repaid               = new RepaidState();
 
     private TradeState completed            = new CompetedState();
