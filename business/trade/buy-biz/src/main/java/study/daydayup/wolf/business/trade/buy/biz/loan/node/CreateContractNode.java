@@ -119,7 +119,6 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     private void computeInstallmentAmount(InstallmentTerm term) {
         long amount     = contract.getRepaymentTerm().getAmount();
         int  feeRate    = contract.getRepaymentTerm().getHandlingFeeRate();
-        long fee        = Math.round( amount * feeRate / 1000000);
     }
 
 }
