@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.api.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.state.loan.*;
 import study.daydayup.wolf.business.trade.api.state.loan.contract.*;
+import study.daydayup.wolf.business.trade.api.state.loan.installment.OverdueState;
 import study.daydayup.wolf.business.trade.order.biz.tsm.DefaultTradeStateMap;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMachineFactory;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMap;
