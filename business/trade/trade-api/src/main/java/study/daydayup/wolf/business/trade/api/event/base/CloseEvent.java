@@ -9,5 +9,5 @@ import study.daydayup.wolf.business.trade.api.event.TradeEvent;
  * @author Wingle
  * @since 2019/10/5 11:18 PM
  **/
-public class ClosedEvent extends AbstractTradeEvent implements TradeEvent {
+public class CloseEvent extends AbstractTradeEvent implements TradeEvent {
 }

@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @author Wingle
  * @since 2019/10/5 11:24 PM
  **/
-public class DeliveredState extends AbstractTradeState implements TradeState {
+public class SendState extends AbstractTradeState implements TradeState {
     {
         code = 20;
     }

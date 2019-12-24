@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.event.TradeEvent;
  * study.daydayup.wolf.business.trade.api.event
  *
  * @author Wingle
- * @since 2019/10/5 11:17 PM
+ * @since 2019/10/5 11:16 PM
  **/
-public class ExpiredEvent extends AbstractTradeEvent implements TradeEvent {
+public class SignEvent extends AbstractTradeEvent implements TradeEvent {
 }
