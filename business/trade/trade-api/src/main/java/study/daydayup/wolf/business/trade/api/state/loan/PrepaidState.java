@@ -13,5 +13,4 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
 
 public class PrepaidState extends AbstractTradeState implements TradeState {
     protected int code = 13;
-    private String name = "已支付";
 }

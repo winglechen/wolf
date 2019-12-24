@@ -13,5 +13,4 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
 
 public class ApprovedState extends AbstractTradeState implements TradeState {
     protected int code = 10;
-    protected String name = "审核通过";
 }

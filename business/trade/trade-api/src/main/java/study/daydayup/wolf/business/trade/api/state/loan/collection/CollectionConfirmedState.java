@@ -13,6 +13,5 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
 
 public class CollectionConfirmedState extends AbstractTradeState implements TradeState {
     protected int code = 20;
-    protected String name = "wait to approve";
 
 }

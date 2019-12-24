@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.trade.api.state.base;
 
 import study.daydayup.wolf.business.trade.api.state.AbstractTradeState;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
-import study.daydayup.wolf.business.trade.api.util.LocaleUtil;
 
 /**
  * study.daydayup.wolf.business.trade.api.state

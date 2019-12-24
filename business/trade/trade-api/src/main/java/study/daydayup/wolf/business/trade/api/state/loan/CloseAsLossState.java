@@ -13,5 +13,4 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
 
 public class CloseAsLossState extends AbstractTradeState implements TradeState {
     protected int code = 212;
-    private String name = "待支付";
 }
