@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.event.TradeEvent;
  * study.daydayup.wolf.business.trade.api.event.loan
  *
  * @author Wingle
- * @since 2019/12/16 6:39 下午
+ * @since 2019/12/16 6:37 下午
  **/
-public class RepayBeginEvent extends AbstractTradeEvent implements TradeEvent {
+public class MarkLossEvent extends AbstractTradeEvent implements TradeEvent {
 }

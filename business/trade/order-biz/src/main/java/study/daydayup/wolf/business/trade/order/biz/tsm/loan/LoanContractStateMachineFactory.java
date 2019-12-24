@@ -2,11 +2,16 @@ package study.daydayup.wolf.business.trade.order.biz.tsm.loan;
 
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.event.loan.*;
+import study.daydayup.wolf.business.trade.api.event.loan.repay.RepayBeginEvent;
+import study.daydayup.wolf.business.trade.api.event.loan.repay.RepayOverdueEvent;
+import study.daydayup.wolf.business.trade.api.event.loan.repay.RepaySuccessEvent;
+import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanBeginEvent;
+import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanSuccessEvent;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.api.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.state.loan.*;
 import study.daydayup.wolf.business.trade.api.state.loan.contract.*;
-import study.daydayup.wolf.business.trade.api.state.loan.installment.OverdueState;
+import study.daydayup.wolf.business.trade.api.state.loan.repay.OverdueState;
 import study.daydayup.wolf.business.trade.order.biz.tsm.DefaultTradeStateMap;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMachineFactory;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMap;
@@ -82,7 +87,7 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
                 .add(approved, loaning, new LoanBeginEvent())
                 .add(loaning, loaned, new LoanSuccessEvent())
                 .add(loaned, repaying, new RepayBeginEvent())
-                .add(repaying, overduePaid, new RepayOverDueEvent())
+                .add(repaying, overduePaid, new RepayOverdueEvent())
                 .add(repaying, completed, new RepaySuccessEvent())
                 ;
     }

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.state.loan.installment;
+package study.daydayup.wolf.business.trade.api.state.loan.repay;
 
 
 import study.daydayup.wolf.business.trade.api.state.AbstractTradeState;
@@ -11,8 +11,8 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  * @since 2019/10/5 11:23 PM
  **/
 
-public class PartlyRepaidState extends AbstractTradeState implements TradeState {
+public class DueState extends AbstractTradeState implements TradeState {
     {
-        code = 15;
+        code = 3;
     }
 }

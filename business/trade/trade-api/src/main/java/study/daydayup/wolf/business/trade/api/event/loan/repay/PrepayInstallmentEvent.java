@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.event.loan;
+package study.daydayup.wolf.business.trade.api.event.loan.repay;
 
 import study.daydayup.wolf.business.trade.api.event.AbstractTradeEvent;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
@@ -9,5 +9,5 @@ import study.daydayup.wolf.business.trade.api.event.TradeEvent;
  * @author Wingle
  * @since 2019/12/16 6:38 下午
  **/
-public class RepayDueEvent extends AbstractTradeEvent implements TradeEvent {
+public class PrepayInstallmentEvent extends AbstractTradeEvent implements TradeEvent {
 }

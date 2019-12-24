@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.event.loan;
+package study.daydayup.wolf.business.trade.api.event.loan.loan;
 
 import study.daydayup.wolf.business.trade.api.event.AbstractTradeEvent;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
