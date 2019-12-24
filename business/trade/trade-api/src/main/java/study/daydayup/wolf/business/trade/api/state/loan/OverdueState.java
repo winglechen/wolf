@@ -12,5 +12,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 
 public class OverdueState extends AbstractTradeState implements TradeState {
-    protected int code = 70;
+    {
+        code = 70;
+    }
 }

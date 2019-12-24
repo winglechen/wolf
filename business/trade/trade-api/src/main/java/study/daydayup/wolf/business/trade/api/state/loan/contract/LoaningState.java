@@ -12,5 +12,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 
 public class LoaningState extends AbstractTradeState implements TradeState {
-    protected int code = 20;
+    {
+        code = 20;
+    }
 }

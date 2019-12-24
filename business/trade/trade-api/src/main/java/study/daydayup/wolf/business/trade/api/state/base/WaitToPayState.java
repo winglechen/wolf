@@ -12,5 +12,7 @@ import study.daydayup.wolf.business.trade.api.state.TradeState;
  **/
 
 public class WaitToPayState extends AbstractTradeState implements TradeState {
-    protected int code = 1;
+    {
+        code = 1;
+    }
 }
