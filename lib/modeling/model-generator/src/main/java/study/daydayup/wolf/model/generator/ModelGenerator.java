@@ -7,10 +7,10 @@ package study.daydayup.wolf.model.generator;
  * @since 2019/10/15 9:43 下午
  **/
 public class ModelGenerator {
-    public static void generateDDL() {}
-    public static void generateDAO() {}
+    public static void generateDdl() {}
+    public static void generateDao() {}
 
-    public static void generateDO() {}
+    public static void generateDo() {}
     public static void generateEntity() {}
     public static void generateModel() {}
 }

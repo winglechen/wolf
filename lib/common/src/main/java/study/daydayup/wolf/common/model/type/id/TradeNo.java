@@ -46,11 +46,11 @@ public class TradeNo implements ID {
         tradeNo.append(addShardKey());
         tradeNo.append(addDataCenterKey());
 
-        tradeNo.append(addUUID());
+        tradeNo.append(addUuid());
         return tradeNo.toString();
     }
 
-    private String addUUID() {
+    private String addUuid() {
         if (uuid > 0) {
             //TODO padding length
             return String.valueOf(uuid);

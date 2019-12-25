@@ -42,7 +42,7 @@ public class SmsController extends AuthController {
         }
 
         request.setEnv(null);
-        request.setToken(session.getSessionID());
+        request.setToken(session.getSessionId());
 
         String scope = formatScope(request.getScope(), request.getOrgId());
         request.setScope(scope);

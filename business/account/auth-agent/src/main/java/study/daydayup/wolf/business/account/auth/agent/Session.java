@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
 import org.apache.dubbo.config.annotation.Reference;
-import study.daydayup.wolf.business.account.api.entity.License;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
@@ -21,7 +20,7 @@ import java.util.Map;
  * @since 2019/12/4 5:50 下午
  **/
 public class Session {
-    private String sessionID;
+    private String sessionId;
     private Map<String, Object> data;
 
     @Resource
@@ -35,19 +34,19 @@ public class Session {
         }
         data = new HashMap<String, Object>();
 
-        SessionIDCreator sessionIDCreator = new SessionIDCreator(request, response, config);
-        String token = sessionIDCreator.getExistedID();
+        SessionIdCreator sessionIdCreator = new SessionIdCreator(request, response, config);
+        String token = sessionIdCreator.getExistedId();
         if(null != token) {
-            sessionID = token;
+            sessionId = token;
         } else {
-            sessionID = sessionIDCreator.create();
+            sessionId = sessionIdCreator.create();
         }
 
         loadFromRedis();
     }
 
-    public String getSessionID() {
-        return sessionID;
+    public String getSessionId() {
+        return sessionId;
     }
 
     public void set(String key, Object value) {
@@ -86,7 +85,7 @@ public class Session {
         }
 
         set("expiredAt", now);
-        oauthLicenseService.expire(sessionID, now);
+        oauthLicenseService.expire(sessionId, now);
     }
 
     @PreDestroy
@@ -101,7 +100,7 @@ public class Session {
     }
 
     private void loadFromRpc() {
-        OauthLicense license = oauthLicenseService.findByAccessToken(sessionID);
+        OauthLicense license = oauthLicenseService.findByAccessToken(sessionId);
         saveLicense(license);
     }
 

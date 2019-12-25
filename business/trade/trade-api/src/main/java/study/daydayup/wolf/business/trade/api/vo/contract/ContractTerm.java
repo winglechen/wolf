@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @author Wingle
  * @since 2019/12/16 10:56 上午
  **/
-public abstract class ContractTerm implements VO  {
+public class ContractTerm implements VO  {
 }

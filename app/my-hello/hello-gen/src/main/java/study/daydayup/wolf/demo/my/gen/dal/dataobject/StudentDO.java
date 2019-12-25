@@ -1,5 +1,8 @@
 package study.daydayup.wolf.demo.my.gen.dal.dataobject;
 
+import lombok.Data;
+
+@Data
 public class StudentDO {
     private Integer id;
 

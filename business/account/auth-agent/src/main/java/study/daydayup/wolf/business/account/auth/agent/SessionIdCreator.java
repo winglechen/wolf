@@ -15,21 +15,21 @@ import java.util.UUID;
  * @author Wingle
  * @since 2019/12/5 12:10 下午
  **/
-public class SessionIDCreator {
+public class SessionIdCreator {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private String sessionKey;
 
     private AuthConfig config;
 
-    SessionIDCreator(HttpServletRequest request, HttpServletResponse response, AuthConfig config) {
+    SessionIdCreator(HttpServletRequest request, HttpServletResponse response, AuthConfig config) {
         this.request = request;
         this.response = response;
         this.config = config;
         this.sessionKey = config.getSessionKey();
     }
 
-    public String getExistedID() {
+    public String getExistedId() {
         String sId;
 
         sId = CookieUtil.get(request, sessionKey);
