@@ -2,8 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.common.context;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;

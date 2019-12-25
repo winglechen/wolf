@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.event;
 
-import lombok.Setter;
+import lombok.Data;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventException;
@@ -11,25 +11,20 @@ import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventExcepti
  * @author Wingle
  * @since 2019/10/5 11:14 PM
  **/
-@Setter
+@Data
 public abstract class AbstractTradeEvent implements TradeEvent{
     protected String tradeNo;
-    protected long buyerId;
-    protected long sellerId;
-
+    protected String relatedTradeNo;
     /**
      * @see TradeTypeEnum
      */
     protected int tradeType;
-    /**
-     * @see TradePhaseEnum
-     */
-    protected int tradePhase;
 
-    @Override
-    public String getTradeNo() {
-        return tradeNo;
-    }
+    protected long buyerId;
+    protected long sellerId;
+
+    protected String source;
+    protected String tags;
 
     @Override
     public long getBuyerId() {
@@ -50,14 +45,6 @@ public abstract class AbstractTradeEvent implements TradeEvent{
         }
 
         return tradeType;
-    }
-
-    @Override
-    public int getTradePhase() {
-        if (tradePhase <= 0) {
-            throw new InvalidTradeEventException("Can't find tradePhase");
-        }
-        return tradePhase;
     }
 
     protected void checkBuyerAndSeller() {

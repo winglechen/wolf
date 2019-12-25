@@ -8,7 +8,7 @@ import study.daydayup.wolf.business.goods.api.dto.response.TradeGoodsResponse;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.GoodsRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeInstallment;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeLoan;

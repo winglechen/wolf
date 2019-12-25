@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.buy.request;
+package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;

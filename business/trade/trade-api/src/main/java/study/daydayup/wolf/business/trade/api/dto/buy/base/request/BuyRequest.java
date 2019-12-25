@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.buy.request;
+package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * study.daydayup.wolf.business.trade.api.dto.buy.request
+ * study.daydayup.wolf.business.trade.api.dto.buy.base.request
  *
  * @author Wingle
  * @since 2019/10/9 1:43 下午

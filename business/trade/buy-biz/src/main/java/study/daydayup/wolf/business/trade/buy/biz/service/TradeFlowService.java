@@ -1,13 +1,13 @@
 package study.daydayup.wolf.business.trade.buy.biz.service;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.PayNotifyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.ConfirmResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.PayNotifyResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.PayResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayNotifyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlowFactory;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;

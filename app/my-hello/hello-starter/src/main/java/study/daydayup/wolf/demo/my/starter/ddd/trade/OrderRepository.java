@@ -40,6 +40,7 @@ public class OrderRepository implements Repository {
         OrderDAO orderDAO = new OrderDAO();
         orderDAO.update(lockerDO, changesDO);
 
+
         fireEvents(entity);
     }
 

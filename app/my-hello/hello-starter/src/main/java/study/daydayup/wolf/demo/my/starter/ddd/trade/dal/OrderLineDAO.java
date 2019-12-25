@@ -7,4 +7,5 @@ package study.daydayup.wolf.demo.my.starter.ddd.trade.dal;
  * @since 2019/12/25 4:32 下午
  **/
 public class OrderLineDAO {
+
 }
