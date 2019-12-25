@@ -39,9 +39,6 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
     private TradeState overduePaid          = new OverduePaidState();
     private TradeState refused              = new RefusedState();
 
-    public LoanContractStateMachineFactory() {
-    }
-
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
         machine = new DefaultStateMachine<TradeState, TradeEvent>(waitToApprove)

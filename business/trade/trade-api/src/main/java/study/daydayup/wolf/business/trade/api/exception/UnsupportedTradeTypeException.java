@@ -10,6 +10,10 @@ import study.daydayup.wolf.common.lang.string.Msg;
  * @since 2019/10/7 11:28 下午
  **/
 public class UnsupportedTradeTypeException extends SystemException {
+    public UnsupportedTradeTypeException() {
+        this(0);
+    }
+
     public UnsupportedTradeTypeException(int tradeType) {
         super(160001, Msg.join("unsupported tradeType: ", tradeType));
     }
