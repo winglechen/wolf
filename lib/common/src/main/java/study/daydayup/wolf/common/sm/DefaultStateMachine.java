@@ -3,6 +3,7 @@ package study.daydayup.wolf.common.sm;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * study.daydayup.wolf.common.sm
@@ -10,69 +11,103 @@ import java.util.Map;
  * @author Wingle
  * @since 2019/12/16 10:32 下午
  **/
-public class DefaultStateMachine<State, Event> implements StateMachine<State, Event> {
-    private State initState;
-    private Map<String, Map<String, State>> data;
+public class DefaultStateMachine<S extends State, E extends Event> implements StateMachine<S, E> {
+    private S initState;
+    private Map<String, Map<String, S>> data;
+    private Map<Integer, S> stateCodeMap;
 
     public DefaultStateMachine() {
         this(null);
     }
 
-    public DefaultStateMachine(State state) {
-        if (state != null) {
-            this.initState = state;
-        }
-
+    public DefaultStateMachine(S state) {
         data = new HashMap<>();
+        stateCodeMap = new HashMap<>();
+        init(state);
     }
 
     @Override
-    public DefaultStateMachine<State, Event> init(State state) {
-        this.initState = state;
+    public DefaultStateMachine<S, E> init(S state) {
+        if (state != null) {
+            this.initState = state;
+            registerState(state);
+        }
 
         return this;
     }
 
     @Override
-    public State getInitState() {
+    public S getInitState() {
         return initState;
     }
 
     @Override
-    public StateMachine<State, Event> add(State source, State target, Event event) {
+    public StateMachine<S, E> add(S source, S target, E event) {
+        registerStates(source, target);
+
         String sourceKey = source.getClass().getSimpleName();
         String eventKey  = event.getClass().getSimpleName();
-        String targetKey = target.getClass().getSimpleName();
 
-        Map<String, State> stateMap;
-        stateMap = this.data.get(sourceKey);
+        Map<String, S> stateMap = this.data.get(sourceKey);
         if (stateMap == null) {
-            stateMap = new HashMap<>();
-            stateMap.put(eventKey, target);
-
-            this.data.put(sourceKey, stateMap);
+            createStateMap(sourceKey, eventKey, target);
             return this;
         }
+        addStateToMap(stateMap, sourceKey, eventKey, target);
 
-        State state = stateMap.get(eventKey);
-        if (state != null) {
-            throw new DuplicateStateMapException(sourceKey, targetKey, eventKey);
-        }
-
-        stateMap.put(eventKey, target);
         return this;
     }
 
     @Override
-    public State fire(State source, Event event) {
+    public S fire(S source, E event) {
         String sourceKey = source.getClass().getSimpleName();
         String eventKey = event.getClass().getSimpleName();
 
-        Map<String, State> stateMap = this.data.get(sourceKey);
+        Map<String, S> stateMap = this.data.get(sourceKey);
         if (stateMap == null) {
             return null;
         }
 
         return stateMap.get(eventKey);
     }
+
+    @Override
+    public S getStateByCode(int code) {
+        return stateCodeMap.get(code);
+    }
+
+    @SafeVarargs
+    private final void registerStates(S... states) {
+        for (S state: states ) {
+            registerState(state);
+        }
+    }
+
+    private void registerState(S state) {
+        int code = state.getCode();
+
+        if (stateCodeMap.containsKey(code)) {
+            return;
+        }
+        stateCodeMap.put(code, state);
+    }
+
+    private void createStateMap(String sourceKey, String eventKey, S target) {
+        Map<String, S> stateMap = new TreeMap<>();
+        stateMap.put(eventKey, target);
+
+        data.put(sourceKey, stateMap);
+    }
+
+    private void addStateToMap(Map<String, S> stateMap, String sourceKey, String eventKey, S target) {
+        S state = stateMap.get(eventKey);
+
+        if (state != null) {
+            String targetKey = target.getClass().getSimpleName();
+            throw new DuplicateStateMapException(sourceKey, targetKey, eventKey);
+        }
+
+        stateMap.put(eventKey, target);
+    }
+
 }

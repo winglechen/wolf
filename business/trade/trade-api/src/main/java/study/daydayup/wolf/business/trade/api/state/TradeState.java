@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.state;
 
 
+import study.daydayup.wolf.common.sm.State;
+
 import java.time.LocalDateTime;
 
 /**
@@ -9,8 +11,7 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2019/10/5 11:22 PM
  **/
-public interface TradeState {
-    int getCode();
+public interface TradeState extends State {
     LocalDateTime getUpdatedAt();
     String getName();
 }

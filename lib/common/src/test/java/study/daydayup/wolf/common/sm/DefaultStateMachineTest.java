@@ -73,15 +73,46 @@ public class DefaultStateMachineTest {
         assertEquals("different source instance fail.", expectedState, consigned);
     }
 
-    interface TradeState { }
+    @Test
+    public void test_get_state_by_code() {
+        StateMachine<TradeState, TradeEvent> stateMachine = new DefaultStateMachine<>();
 
-    interface TradeEvent { }
+        TradeState paid = new Paid();
+        TradeState consigned = new Consigned();
+        TradeEvent sendEvent = new SendEvent();
 
-    static class WaitToPay implements TradeState {}
+        stateMachine.add(paid, consigned, sendEvent);
 
-    static class Paid implements TradeState {}
+        TradeState paidFromSM = stateMachine.getStateByCode(2);
+        TradeState consignFromSM = stateMachine.getStateByCode(3);
+        assertEquals("get state by code from StateMachine fail.", consignFromSM, consigned);
+        assertEquals("get state by code from StateMachine fail.", paid, paidFromSM);
+    }
 
-    static class Consigned implements TradeState {}
+    interface TradeState extends State { }
+
+    interface TradeEvent extends Event { }
+
+    static class WaitToPay implements TradeState {
+        @Override
+        public int getCode() {
+            return 1;
+        }
+    }
+
+    static class Paid implements TradeState {
+        @Override
+        public int getCode() {
+            return 2;
+        }
+    }
+
+    static class Consigned implements TradeState {
+        @Override
+        public int getCode() {
+            return 3;
+        }
+    }
 
     static class PayEvent implements TradeEvent {}
     static class SendEvent implements TradeEvent {}
