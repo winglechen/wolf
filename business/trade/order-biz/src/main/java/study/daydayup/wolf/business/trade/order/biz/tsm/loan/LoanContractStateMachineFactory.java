@@ -40,22 +40,12 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
     private TradeState refused              = new RefusedState();
 
     public LoanContractStateMachineFactory() {
-        machine = new DefaultStateMachine<TradeState, TradeEvent>();
     }
 
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
-        initMachine();
-        bindEvents();
-        return machine;
-    }
-
-    private void initMachine() {
-        machine.init(waitToApprove);
-    }
-
-    private void bindEvents() {
-        machine.bind(waitToApprove, approved, new ApprovalEvent())
+        machine = new DefaultStateMachine<TradeState, TradeEvent>(waitToApprove)
+                .bind(waitToApprove, approved, new ApprovalEvent())
                 .bind(waitToApprove, refused, new RefuseEvent())
                 .bind(approved, loaning, new LoanBeginEvent())
                 .bind(loaning, loaned, new LoanSuccessEvent())
@@ -63,6 +53,8 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
                 .bind(repaying, overduePaid, new RepayOverdueEvent())
                 .bind(repaying, completed, new RepaySuccessEvent())
                 ;
+
+        return machine;
     }
 
 }
