@@ -2,6 +2,8 @@ package study.daydayup.wolf.common.sm;
 
 import org.junit.Test;
 
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 /**
@@ -18,7 +20,7 @@ public class DefaultStateMachineTest {
 
         TradeState initState = stateMachine.getInitState();
         TradeState expected  = new WaitToPay();
-        assertEquals("InitState failed", expected.getClass().getSimpleName(), initState.getClass().getSimpleName());
+        assertEquals("InitState failed", expected.getClass().getName(), initState.getClass().getName());
     }
 
     @Test
@@ -88,6 +90,22 @@ public class DefaultStateMachineTest {
         assertEquals("get state by code from StateMachine fail.", consignFromSM, consigned);
         assertEquals("get state by code from StateMachine fail.", paid, paidFromSM);
     }
+
+    @Test
+    public void test_get_bind_event_list() {
+        StateMachine<TradeState, TradeEvent> stateMachine = new DefaultStateMachine<>();
+
+        TradeState paid = new Paid();
+        TradeState consigned = new Consigned();
+        TradeEvent sendEvent = new SendEvent();
+
+        stateMachine.add(paid, consigned, sendEvent);
+
+        Set<TradeEvent> events = stateMachine.getBindEventList(paid);
+        assertTrue("get bind event list fail", events.contains(sendEvent));
+    }
+
+
 
     interface TradeState extends State { }
 
