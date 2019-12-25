@@ -2,13 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.business.account.auth.agent.config.AuthAutoConfiguration;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.util.AntPathMatcher;
 
@@ -27,7 +21,7 @@ import java.util.Date;
  **/
 public class WolfSsoFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(WolfSsoFilter.class);
-    private static final AntPathMatcher pathMatcher = new AntPathMatcher();
+    private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
 
     @Resource
     private AuthConfig config;
@@ -75,7 +69,7 @@ public class WolfSsoFilter implements Filter {
     }
 
     private boolean isExcludedPath(String path) {
-        if ( pathMatcher.match(config.getAuthPath(), path) ) {
+        if ( PATH_MATCHER.match(config.getAuthPath(), path) ) {
             return true;
         }
 
@@ -89,7 +83,7 @@ public class WolfSsoFilter implements Filter {
         }
 
         for (String excludedPath : excludedPaths.split(",") ) {
-            if( pathMatcher.match(excludedPath.trim(), path) ) {
+            if( PATH_MATCHER.match(excludedPath.trim(), path) ) {
                 return true;
             }
         }

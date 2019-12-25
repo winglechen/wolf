@@ -48,7 +48,7 @@ public class TradeNoParser {
         String s = stringNo.substring(15, 19);
         Integer num = Integer.valueOf(s);
 
-        if (num <= 0 ) {
+        if (null == num || num <= 0) {
             return 0;
         }
 
@@ -70,7 +70,7 @@ public class TradeNoParser {
         String s = stringNo.substring(19, 23);
         Integer num = Integer.valueOf(s);
 
-        if (num <= 0 ) {
+        if (null == num || num <= 0 ) {
             return 0;
         }
 

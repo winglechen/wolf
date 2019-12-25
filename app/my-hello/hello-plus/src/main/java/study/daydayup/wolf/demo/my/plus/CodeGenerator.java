@@ -27,16 +27,19 @@ public class CodeGenerator {
     private static GlobalConfig gc = new GlobalConfig();
 
     //作者、包名、去除表前缀
-    private static final String author = "winlechen";
-    private static final String package_name = "study.daydayup.wolf.demo.my.plus";
+    private static final String AUTHOR = "winlechen";
+    private static final String PACKAGE_NAME = "study.daydayup.wolf.demo.my.plus";
     private static final String TABLE_PREFIX = "";
 
     //数据库
-    private static final String url = "jdbc:mysql://127.0.0.1:3306/wolf_account?useSSL=false";
-    private static final String driverName = "com.mysql.jdbc.Driver";
-    private static final String userName = "root";
-    private static final String password = "123456";
-    private static final String table_name = "account";
+    /**
+     *
+     */
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/wolf_account?useSSL=false";
+    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    private static final String USER_NAME = "root";
+    private static final String PASSWORD = "123456";
+    private static final String TABLE_NAME = "account";
 
 
     public static void main(String[] args) {
@@ -65,7 +68,7 @@ public class CodeGenerator {
         // 设置Controller为RestController
         strategy.setRestControllerStyle(true);
         //由数据库该表生成
-        strategy.setInclude(table_name);
+        strategy.setInclude(TABLE_NAME);
         //去除表前缀
         strategy.setTablePrefix(TABLE_PREFIX);
         mpg.setStrategy(strategy);
@@ -77,7 +80,7 @@ public class CodeGenerator {
         gc.setOutputDir(projectPath);//代码生成位置
 
         gc.setFileOverride(true);//覆盖已有文件
-        gc.setAuthor(author);
+        gc.setAuthor(AUTHOR);
         gc.setSwagger2(true);
         gc.setIdType(IdType.AUTO);//主键ID类型
         gc.setDateType(DateType.ONLY_DATE);//设置时间类型为Date
@@ -93,7 +96,7 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
 
         PackageConfig pc = new PackageConfig();// 包配置
-        pc.setParent(package_name);
+        pc.setParent(PACKAGE_NAME);
         pc.setEntity("dal.dataobject");
         pc.setMapper("dal.dao");
         mpg.setPackageInfo(pc);
@@ -101,10 +104,10 @@ public class CodeGenerator {
 
     private static void setDataSource() {
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl(url);
-        dsc.setDriverName(driverName);
-        dsc.setUsername(userName);
-        dsc.setPassword(password);
+        dsc.setUrl(URL);
+        dsc.setDriverName(DRIVER_NAME);
+        dsc.setUsername(USER_NAME);
+        dsc.setPassword(PASSWORD);
         mpg.setDataSource(dsc);
     }
 

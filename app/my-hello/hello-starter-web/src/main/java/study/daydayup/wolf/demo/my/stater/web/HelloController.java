@@ -18,7 +18,6 @@ import javax.annotation.Resource;
 public class HelloController {
     @Resource
     private HelloContainer helloContainer;
-//    private HelloService helloService;
 
     @Resource
     private DemoService demoService;

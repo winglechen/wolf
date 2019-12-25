@@ -19,7 +19,7 @@ public class ShaEncrypt {
         }
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         messageDigest.update(text.getBytes());
-        byte byteBuffer[] = messageDigest.digest();
+        byte[] byteBuffer = messageDigest.digest();
 
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < byteBuffer.length; i++) {

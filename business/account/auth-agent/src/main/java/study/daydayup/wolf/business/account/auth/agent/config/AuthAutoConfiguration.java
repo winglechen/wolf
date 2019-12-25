@@ -44,10 +44,6 @@ public class AuthAutoConfiguration {
     public FilterRegistrationBean disableAutoFilterRegistration(@Qualifier("wolfSsoFilter") WolfSsoFilter filter) {
         FilterRegistrationBean registration = new FilterRegistrationBean(filter);
             registration.setEnabled(false);
-//        registration.setOrder(Integer.MAX_VALUE);
-//        registration.setName("WolfSsoFilter");
-//        registration.setFilter(new WolfSsoFilter());
-//        System.out.println("auth auto config: session bean");
 
         return registration;
     }

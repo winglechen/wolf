@@ -91,6 +91,7 @@ public class Tag implements DataType {
         return tags.contains(tag.trim());
     }
 
+    @Override
     public String toString() {
         return String.join(delimiter, tags);
     }

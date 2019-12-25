@@ -9,11 +9,11 @@ import java.util.Set;
  * @since 2019/12/16 10:20 下午
  **/
 public interface StateMachine <S extends State, E extends Event> {
-    StateMachine<S, E> init(S S);
+    StateMachine<S, E> init(S state);
     S getInitState();
 
-    StateMachine<S, E> bind(S source, S target, E E);
-    S fire(S source,E E);
+    StateMachine<S, E> bind(S source, S target, E event);
+    S fire(S source,E event);
     Set<E> getBindEventList(S source);
 
     S getStateByCode(int code);

@@ -47,6 +47,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         context.setContract(contract);
     }
 
+    @Override
     protected void init(BuyContext context) {
         this.context = context;
         goods = getGoodsList().get(0);

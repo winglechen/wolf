@@ -43,6 +43,7 @@ public class Table extends LinkedList<Row>{
                 case BOTTOM:
                     addLast(Row.of(item));
                     break;
+                default:
             }
         }
     }

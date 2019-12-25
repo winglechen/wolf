@@ -21,11 +21,6 @@ public class Row extends HashMap<String, Object> implements Serializable {
 
     public static Row of(Map<String, Object> data) {
 
-//        Map<String, String> m = new HashMap<>();
-//        for(Map.Entry<String, Object> entry : data.entrySet()) {
-//            m.put(entry.getKey(), entry.getValue().toString());
-//        }
-
         return new Row(data);
     }
 }

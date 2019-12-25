@@ -41,6 +41,6 @@ public class LocalDateDemo {
     static class Account implements Serializable {
         private Date createdAt;
         private Date updatedAt;
-        private Date ExpiredAt;
+        private Date expiredAt;
     }
 }

@@ -26,13 +26,16 @@ public class PeriodUtil {
             return start;
         }
 
-        int plusDays = 0;
+        int plusDays;
         switch (strategy) {
             case OPEN_OPEN:
                 plusDays = 1;
                 break;
             case CLOSE_CLOSE:
                 plusDays = -1;
+                break;
+            default:
+                plusDays = 0;
         }
 
         if (days > 0) {
@@ -50,7 +53,7 @@ public class PeriodUtil {
             return sameDayCount(strategy);
         }
 
-        int extraDays = 0;
+        int extraDays;
         switch (strategy) {
             case OPEN_OPEN:
                 extraDays = -1;
@@ -58,6 +61,8 @@ public class PeriodUtil {
             case CLOSE_CLOSE:
                 extraDays = 1;
                 break;
+            default:
+                extraDays = 0;
         }
 
         if (days < 0) {

@@ -22,7 +22,7 @@ public class AuthConfig {
 
     private String sessionKey = "WSESSIONID";
 
-    private String mode = "exclude"; // include | exclude
+    private String mode = "exclude";
     private String authPath = "/auth/**/*";
     private String excludedPaths = "/auth/**/*";
 

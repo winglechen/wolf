@@ -26,6 +26,7 @@ public class AccountServiceImpl implements AccountService {
     @Resource
     private AccountDAO accountDAO;
 
+    @Override
     public long create(Account account) {
         if (null == account) {
             return 0;
@@ -67,6 +68,7 @@ public class AccountServiceImpl implements AccountService {
         return accountDAO.insertSelective(accountDO);
     }
 
+    @Override
     public Account findByAccount(String accountName) {
         if (null == accountName) {
             return null;
@@ -78,6 +80,7 @@ public class AccountServiceImpl implements AccountService {
         return account;
     }
 
+    @Override
     public long existByAccount(String account) {
         if (null == account) {
             return 0;
@@ -91,6 +94,7 @@ public class AccountServiceImpl implements AccountService {
         return 0;
     }
 
+    @Override
     public Account findById(long id) {
         if (id < 0) {
             return null;

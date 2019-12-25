@@ -26,8 +26,6 @@ public class ShardingService {
 
     @RequestMapping("/tag")
     public String tag() {
-//        System.out.println("hello tag");
-//        return "hello tag";
         TagDO tag = tagDAO.getById(1);
         System.out.println("tag: " + tag);
         return tag.toString();
@@ -43,19 +41,7 @@ public class ShardingService {
     @RequestMapping("/tags")
     public String tags() {
         List<Map> list = tagDAO.selectAll();
-
-//        Map<String, Object> map = list.get(0);
-//        System.out.println("row[0]: " + map);
-//        System.out.println("map.class: " + map.getClass());
-//
-//        String id = (String) map.get("id");
-
-
         for(Map item : list) {
-//            System.out.println(item);
-//            System.out.println("keys:" + item.keySet());
-//            System.out.println("vals:" + item.values());
-
             if(item.get("id").equals(Long.valueOf(283))) {
                 System.out.println("<Long>283.tags= " + item.get("tags"));
             }
@@ -68,11 +54,11 @@ public class ShardingService {
                 System.out.println("<scalar.long>283.tags= " + item.get("tags"));
             }
 
-            if(item.get("id").toString().equals("283")) {
+            if("283".equals(item.get("id").toString())) {
                 System.out.println("<String>283.tags= " + item.get("tags"));
             }
 
-            if(item.get("tags").equals("abc")) {
+            if("abc".equals(item.get("tags"))) {
                 System.out.println("abc.id= " + item.get("id"));
             }
         }
