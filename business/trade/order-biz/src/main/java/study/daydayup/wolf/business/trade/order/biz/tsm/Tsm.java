@@ -1,7 +1,5 @@
 package study.daydayup.wolf.business.trade.order.biz.tsm;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeException;
@@ -30,15 +28,15 @@ public class Tsm {
     private static TradeStateMachineFactory createFactory(TradeTypeEnum tradeTypeEnum) {
         switch (tradeTypeEnum) {
             case LOAN_CONTRACT:
-                return new LoanContractStateMachineFactory();
+                return new LoanContractFactory();
             case LOAN_ORDER:
-                return new LoanOrderStateMachineFactory();
+                return new LoanOrderFactory();
             case LOAN_PROXY:
-                return new LoanProxyStateMachineFactory();
+                return new LoanProxyFactory();
             case REPAY_ORDER:
-                return new RepayOrderStateMachineFactory();
+                return new RepayOrderFactory();
             case COLLECTION_ORDER:
-                return new CollectionOrderStateMachineFactory();
+                return new CollectionOrderFactory();
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }

@@ -22,7 +22,7 @@ import study.daydayup.wolf.common.sm.StateMachine;
  * @author Wingle
  * @since 2019/12/17 12:19 下午
  **/
-public class LoanContractStateMachineFactory implements TradeStateMachineFactory {
+public class LoanContractFactory implements TradeStateMachineFactory {
     private StateMachine<TradeState, TradeEvent> machine;
 
     private TradeState waitToApprove        = new WaitToApproveState();
@@ -32,7 +32,7 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
     private TradeState loaned               = new LoanedState();
 
     private TradeState repaying             = new RepayingState();
-    private TradeState installmentOverdue   = new OverdueState();
+    private TradeState overdue              = new OverdueState();
     private TradeState repaid               = new RepaidState();
 
     private TradeState completed            = new CompletedState();
@@ -42,13 +42,21 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
         machine = new DefaultStateMachine<TradeState, TradeEvent>(waitToApprove)
-                .bind(waitToApprove, approved, new ApprovalEvent())
+                .bind(waitToApprove, approved, new ApproveEvent())
                 .bind(waitToApprove, refused, new RefuseEvent())
+
                 .bind(approved, loaning, new LoanBeginEvent())
+                .bind(approved, loaned, new LoanSuccessEvent())
                 .bind(loaning, loaned, new LoanSuccessEvent())
+
                 .bind(loaned, repaying, new RepayBeginEvent())
-                .bind(repaying, overduePaid, new RepayOverdueEvent())
+                .bind(loaned, overdue, new RepayOverdueEvent())
+                .bind(loaned, completed, new RepaySuccessEvent())
+
+                .bind(repaying, overdue, new RepayOverdueEvent())
                 .bind(repaying, completed, new RepaySuccessEvent())
+
+                .bind(overdue, overduePaid, new RepayOverdueEvent())
                 ;
 
         return machine;
