@@ -14,7 +14,7 @@ import study.daydayup.wolf.common.util.EnumUtil;
  **/
 @Component
 //@Scope()
-public class TsmFactory {
+public class Tsm {
     public static TradeStateMachineFactory createFactory(int tradeType) {
         TradeTypeEnum tradeTypeEnum = EnumUtil.codeOf(tradeType, TradeTypeEnum.class);
 

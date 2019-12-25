@@ -36,8 +36,8 @@ public class DefaultStateMachineTest {
 
         assertEquals("init state fail", init, stateMachine.getInitState());
 
-        stateMachine.add(init, paid, payEvent);
-        stateMachine.add(paid, consigned, sendEvent);
+        stateMachine.bind(init, paid, payEvent);
+        stateMachine.bind(paid, consigned, sendEvent);
 
         TradeState expectedPaid = stateMachine.fire(init, payEvent);
         assertEquals("paid event bind fail", expectedPaid, paid);
@@ -54,7 +54,7 @@ public class DefaultStateMachineTest {
         TradeState consigned = new Consigned();
         TradeEvent sendEvent = new SendEvent();
 
-        stateMachine.add(paid, consigned, sendEvent);
+        stateMachine.bind(paid, consigned, sendEvent);
 
         TradeState expectedState = stateMachine.fire(paid, new SendEvent());
         assertEquals("different event instance fail.", expectedState, consigned);
@@ -69,7 +69,7 @@ public class DefaultStateMachineTest {
         TradeState consigned = new Consigned();
         TradeEvent sendEvent = new SendEvent();
 
-        stateMachine.add(paid, consigned, sendEvent);
+        stateMachine.bind(paid, consigned, sendEvent);
 
         TradeState expectedState = stateMachine.fire(new Paid(), new SendEvent());
         assertEquals("different source instance fail.", expectedState, consigned);
@@ -83,7 +83,7 @@ public class DefaultStateMachineTest {
         TradeState consigned = new Consigned();
         TradeEvent sendEvent = new SendEvent();
 
-        stateMachine.add(paid, consigned, sendEvent);
+        stateMachine.bind(paid, consigned, sendEvent);
 
         TradeState paidFromSM = stateMachine.getStateByCode(2);
         TradeState consignFromSM = stateMachine.getStateByCode(3);
@@ -99,7 +99,7 @@ public class DefaultStateMachineTest {
         TradeState consigned = new Consigned();
         TradeEvent sendEvent = new SendEvent();
 
-        stateMachine.add(paid, consigned, sendEvent);
+        stateMachine.bind(paid, consigned, sendEvent);
 
         Set<TradeEvent> events = stateMachine.getBindEventList(paid);
         assertTrue("get bind event list fail", events.contains(sendEvent));

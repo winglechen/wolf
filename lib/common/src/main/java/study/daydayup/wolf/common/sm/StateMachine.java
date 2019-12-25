@@ -12,7 +12,7 @@ public interface StateMachine <S extends State, E extends Event> {
     StateMachine<S, E> init(S S);
     S getInitState();
 
-    StateMachine<S, E> add(S source, S target, E E);
+    StateMachine<S, E> bind(S source, S target, E E);
     S fire(S source,E E);
     Set<E> getBindEventList(S source);
 

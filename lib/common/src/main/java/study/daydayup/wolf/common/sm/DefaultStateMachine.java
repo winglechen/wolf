@@ -43,7 +43,7 @@ public class DefaultStateMachine<S extends State, E extends Event> implements St
     }
 
     @Override
-    public StateMachine<S, E> add(S source, S target, E event) {
+    public StateMachine<S, E> bind(S source, S target, E event) {
         registerStates(source, target);
 
         String sourceKey = source.getClass().getName();

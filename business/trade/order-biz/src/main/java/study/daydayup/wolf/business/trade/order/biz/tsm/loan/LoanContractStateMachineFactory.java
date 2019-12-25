@@ -12,9 +12,7 @@ import study.daydayup.wolf.business.trade.api.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.state.loan.*;
 import study.daydayup.wolf.business.trade.api.state.loan.contract.*;
 import study.daydayup.wolf.business.trade.api.state.loan.repay.OverdueState;
-import study.daydayup.wolf.business.trade.order.biz.tsm.DefaultTradeStateMap;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMachineFactory;
-import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMap;
 import study.daydayup.wolf.common.sm.DefaultStateMachine;
 import study.daydayup.wolf.common.sm.StateMachine;
 
@@ -26,7 +24,6 @@ import study.daydayup.wolf.common.sm.StateMachine;
  **/
 public class LoanContractStateMachineFactory implements TradeStateMachineFactory {
     private StateMachine<TradeState, TradeEvent> machine;
-    private TradeStateMap stateMap;
 
     private TradeState waitToApprove        = new WaitToApproveState();
     private TradeState approved             = new ApprovedState();
@@ -44,51 +41,27 @@ public class LoanContractStateMachineFactory implements TradeStateMachineFactory
 
     public LoanContractStateMachineFactory() {
         machine = new DefaultStateMachine<TradeState, TradeEvent>();
-        stateMap = new DefaultTradeStateMap();
-
-        registerState();
     }
 
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
         initMachine();
-        addEvents();
+        bindEvents();
         return machine;
-    }
-
-    @Override
-    public TradeStateMap getStateMap() {
-        return stateMap;
     }
 
     private void initMachine() {
         machine.init(waitToApprove);
     }
 
-    private void registerState() {
-        stateMap.addState(waitToApprove)
-                .addState(refused)
-                .addState(approved)
-
-                .addState(loaning)
-                .addState(loaned)
-
-                .addState(repaying)
-                .addState(repaid)
-                .addState(installmentOverdue)
-
-                .addState(overduePaid)
-                .addState(completed);
-    }
-
-    private void addEvents() {
-        machine.add(waitToApprove, approved, new ApprovalEvent())
-                .add(waitToApprove, refused, new RefuseEvent())
-                .add(approved, loaning, new LoanBeginEvent())
-                .add(loaning, loaned, new LoanSuccessEvent())
-                .add(loaned, repaying, new RepayBeginEvent())
-                .add(repaying, overduePaid, new RepayOverdueEvent())
-                .add(repaying, completed, new RepaySuccessEvent())
+    private void bindEvents() {
+        machine.bind(waitToApprove, approved, new ApprovalEvent())
+                .bind(waitToApprove, refused, new RefuseEvent())
+                .bind(approved, loaning, new LoanBeginEvent())
+                .bind(loaning, loaned, new LoanSuccessEvent())
+                .bind(loaned, repaying, new RepayBeginEvent())
+                .bind(repaying, overduePaid, new RepayOverdueEvent())
+                .bind(repaying, completed, new RepaySuccessEvent())
                 ;
     }
 
