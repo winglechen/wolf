@@ -1,7 +1,5 @@
 package study.daydayup.wolf.framework.layer.domain;
 
-import java.io.Serializable;
-
 /**
  * study.daydayup.common.framework.layer.domain
  *
