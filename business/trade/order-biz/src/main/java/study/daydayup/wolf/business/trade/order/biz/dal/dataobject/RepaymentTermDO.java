@@ -20,7 +20,7 @@ public class RepaymentTermDO implements Serializable {
 
     private Integer version;
 
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     private Long lastEditor;
 
@@ -70,7 +70,7 @@ public class RepaymentTermDO implements Serializable {
             && (this.getRepayStrategy() == null ? other.getRepayStrategy() == null : this.getRepayStrategy().equals(other.getRepayStrategy()))
             && (this.getPrepayStrategy() == null ? other.getPrepayStrategy() == null : this.getPrepayStrategy().equals(other.getPrepayStrategy()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.isDeleteFlag() == other.isDeleteFlag())
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
@@ -87,7 +87,7 @@ public class RepaymentTermDO implements Serializable {
         result = prime * result + ((getRepayStrategy() == null) ? 0 : getRepayStrategy().hashCode());
         result = prime * result + ((getPrepayStrategy() == null) ? 0 : getPrepayStrategy().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
-        result = prime * result + (isDeleteFlag() ? 1231 : 1237);
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());

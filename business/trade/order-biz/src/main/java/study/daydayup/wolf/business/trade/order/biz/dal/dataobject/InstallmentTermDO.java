@@ -41,7 +41,7 @@ public class InstallmentTermDO implements Serializable {
 
     private Integer version;
 
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     private Long lastEditor;
 
@@ -111,7 +111,7 @@ public class InstallmentTermDO implements Serializable {
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.isDeleteFlag() == other.isDeleteFlag())
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
@@ -138,7 +138,7 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
-        result = prime * result + (isDeleteFlag() ? 1231 : 1237);
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());

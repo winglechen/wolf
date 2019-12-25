@@ -108,7 +108,9 @@
       <if test="version != null">
         version,
       </if>
-      delete_flag,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
       <if test="lastEditor != null">
         last_editor,
       </if>
@@ -168,7 +170,9 @@
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
-      #{deleteFlag,jdbcType=TINYINT},
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
       <if test="lastEditor != null">
         #{lastEditor,jdbcType=BIGINT},
       </if>

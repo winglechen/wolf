@@ -133,7 +133,9 @@
       <if test="buyerMemo != null">
         buyer_memo,
       </if>
-      gift_flag,
+      <if test="giftFlag != null">
+        gift_flag,
+      </if>
       <if test="consignState != null">
         consign_state,
       </if>
@@ -149,7 +151,9 @@
       <if test="version != null">
         version,
       </if>
-      delete_flag,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
       <if test="lastEditor != null">
         last_editor,
       </if>
@@ -218,7 +222,9 @@
       <if test="buyerMemo != null">
         #{buyerMemo,jdbcType=VARCHAR},
       </if>
-      #{giftFlag,jdbcType=BIT},
+      <if test="giftFlag != null">
+        #{giftFlag,jdbcType=BIT},
+      </if>
       <if test="consignState != null">
         #{consignState,jdbcType=TINYINT},
       </if>
@@ -234,7 +240,9 @@
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
-      #{deleteFlag,jdbcType=BIT},
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
       <if test="lastEditor != null">
         #{lastEditor,jdbcType=BIGINT},
       </if>

@@ -16,7 +16,7 @@ public class PostageTermDO implements Serializable {
 
     private Integer version;
 
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     private Long lastEditor;
 
@@ -62,7 +62,7 @@ public class PostageTermDO implements Serializable {
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.isDeleteFlag() == other.isDeleteFlag())
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
@@ -77,7 +77,7 @@ public class PostageTermDO implements Serializable {
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
-        result = prime * result + (isDeleteFlag() ? 1231 : 1237);
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());

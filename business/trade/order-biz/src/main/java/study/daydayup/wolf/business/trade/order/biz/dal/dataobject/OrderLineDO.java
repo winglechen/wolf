@@ -46,7 +46,7 @@ public class OrderLineDO implements Serializable {
 
     private String buyerMemo;
 
-    private boolean giftFlag;
+    private Boolean giftFlag;
 
     private Integer consignState;
 
@@ -58,7 +58,7 @@ public class OrderLineDO implements Serializable {
 
     private Integer version;
 
-    private boolean deleteFlag;
+    private Boolean deleteFlag;
 
     private Long lastEditor;
 
@@ -140,13 +140,13 @@ public class OrderLineDO implements Serializable {
             && (this.getChargeUnit() == null ? other.getChargeUnit() == null : this.getChargeUnit().equals(other.getChargeUnit()))
             && (this.getQuantity() == null ? other.getQuantity() == null : this.getQuantity().equals(other.getQuantity()))
             && (this.getBuyerMemo() == null ? other.getBuyerMemo() == null : this.getBuyerMemo().equals(other.getBuyerMemo()))
-            && (this.isGiftFlag() == other.isGiftFlag())
+            && (this.getGiftFlag() == null ? other.getGiftFlag() == null : this.getGiftFlag().equals(other.getGiftFlag()))
             && (this.getConsignState() == null ? other.getConsignState() == null : this.getConsignState().equals(other.getConsignState()))
             && (this.getDisputeState() == null ? other.getDisputeState() == null : this.getDisputeState().equals(other.getDisputeState()))
             && (this.getConsignedAt() == null ? other.getConsignedAt() == null : this.getConsignedAt().equals(other.getConsignedAt()))
             && (this.getDisputeAt() == null ? other.getDisputeAt() == null : this.getDisputeAt().equals(other.getDisputeAt()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
-            && (this.isDeleteFlag() == other.isDeleteFlag())
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
@@ -176,13 +176,13 @@ public class OrderLineDO implements Serializable {
         result = prime * result + ((getChargeUnit() == null) ? 0 : getChargeUnit().hashCode());
         result = prime * result + ((getQuantity() == null) ? 0 : getQuantity().hashCode());
         result = prime * result + ((getBuyerMemo() == null) ? 0 : getBuyerMemo().hashCode());
-        result = prime * result + (isGiftFlag() ? 1231 : 1237);
+        result = prime * result + ((getGiftFlag() == null) ? 0 : getGiftFlag().hashCode());
         result = prime * result + ((getConsignState() == null) ? 0 : getConsignState().hashCode());
         result = prime * result + ((getDisputeState() == null) ? 0 : getDisputeState().hashCode());
         result = prime * result + ((getConsignedAt() == null) ? 0 : getConsignedAt().hashCode());
         result = prime * result + ((getDisputeAt() == null) ? 0 : getDisputeAt().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
-        result = prime * result + (isDeleteFlag() ? 1231 : 1237);
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
