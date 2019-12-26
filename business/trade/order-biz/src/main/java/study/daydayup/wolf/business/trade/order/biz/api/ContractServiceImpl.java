@@ -26,12 +26,12 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void modify(Contract locker, Contract changes) {
+    public void modify(@Validated Contract locker, Contract changes) {
         contractRepository.save(locker, changes);
     }
 
     @Override
-    public Contract find(TradeId tradeId) {
+    public Contract find(@Validated TradeId tradeId) {
         tradeId.valid();
         return contractRepository.find(tradeId);
     }

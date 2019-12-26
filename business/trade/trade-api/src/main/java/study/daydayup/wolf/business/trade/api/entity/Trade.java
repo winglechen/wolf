@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.entity.trade.TradeStateLog;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Model;
 
@@ -33,6 +34,7 @@ public class Trade implements Model {
     @NotNull @Min(1)
     protected Integer tradeType;
     protected TradeState state;
+    protected TradeEvent stateEvent;
     protected String relatedTradeNo;
 
     protected Long  buyerId;

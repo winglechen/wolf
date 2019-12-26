@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
-import study.daydayup.wolf.business.trade.api.vo.TradeAddress;
+import study.daydayup.wolf.business.trade.api.vo.OrderAddress;
 import study.daydayup.wolf.business.trade.api.vo.buy.TradeEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
@@ -35,7 +35,7 @@ public class BuyRequest implements Request {
     private TradeEnv env;
     private String tags;
 
-    private TradeAddress address;
+    private OrderAddress address;
     private BuyerMemo buyerMemo;
 
     private UmpRequest umpRequest;

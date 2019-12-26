@@ -22,8 +22,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Contract extends Trade {
 
-    private TradeEvent stateEvent;
-
     private ObjectsTerm objectsTerm;
     private PaymentTerm paymentTerm;
 
