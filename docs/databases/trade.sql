@@ -329,8 +329,10 @@ DROP TABLE IF EXISTS `trade_state_log`;
 CREATE TABLE IF NOT EXISTS `trade_state_log`
 (
     `id`                INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `trade_no`          VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `trade_no`          VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '交易号',
+    `related_trade_no`  VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '关联交易号',
     `trade_type`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易类型',
+    `trade_phase`       TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
 
     `buyer_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -342,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `consign_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付方式',
 
     `tags`              VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易标签',
-    `trade_source`      VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易来源',
+    `source`            VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易来源',
 
     `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -353,7 +355,7 @@ DROP TABLE IF EXISTS `contract_state_log`;
 # CREATE TABLE IF NOT EXISTS `contract_state_log`
 # (
 #     `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-#     `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+#     `contract_no`   VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '合同号',
 #     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
 #     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
 #     `contract_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
@@ -367,12 +369,14 @@ DROP TABLE IF EXISTS `price_change_log`;
 CREATE TABLE IF NOT EXISTS `price_change_log`
 (
     `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `order_no`      VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '订单号',
-    `contract_no`   VARCHAR(30)          NOT NULL DEFAULT '' COMMENT '合同号',
+    `trade_no`      VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '订单号',
+    `line_id`       BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '订单项ID',
+
     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
-    `order_version` INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `source_version`INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '历史版本号',
+
     `source_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
     `target_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
 

@@ -3,50 +3,67 @@
 <mapper namespace="study.daydayup.wolf.business.trade.order.biz.dal.dao.TradeStateLogDAO">
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
-    <result column="contract_no" jdbcType="VARCHAR" property="contractNo" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
+    <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
+    <result column="trade_phase" jdbcType="TINYINT" property="tradePhase" />
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
-    <result column="order_version" jdbcType="INTEGER" property="orderVersion" />
-    <result column="source_amount" jdbcType="BIGINT" property="sourceAmount" />
-    <result column="target_amount" jdbcType="BIGINT" property="targetAmount" />
-    <result column="editor" jdbcType="BIGINT" property="editor" />
+    <result column="source_state" jdbcType="SMALLINT" property="sourceState" />
+    <result column="target_state" jdbcType="SMALLINT" property="targetState" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
+    <result column="consign_method" jdbcType="TINYINT" property="consignMethod" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_no, contract_no, buyer_id, seller_id, order_version, source_amount, target_amount, 
-    editor, created_at
+    id, trade_no, related_trade_no, trade_type, trade_phase, buyer_id, seller_id, source_state, 
+    target_state, amount, payment_method, consign_method, tags, `source`, source_version, 
+    created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from price_change_log
+    from trade_state_log
     where id = #{id,jdbcType=INTEGER}
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into price_change_log (order_no, contract_no, buyer_id, 
-      seller_id, order_version, source_amount, 
-      target_amount, editor, created_at
+    insert into trade_state_log (trade_no, related_trade_no, trade_type, 
+      trade_phase, buyer_id, seller_id, 
+      source_state, target_state, amount, 
+      payment_method, consign_method, tags, 
+      `source`, source_version, created_at
       )
-    values (#{orderNo,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, 
-      #{sellerId,jdbcType=BIGINT}, #{orderVersion,jdbcType=INTEGER}, #{sourceAmount,jdbcType=BIGINT}, 
-      #{targetAmount,jdbcType=BIGINT}, #{editor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}
+    values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, 
+      #{tradePhase,jdbcType=TINYINT}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
+      #{sourceState,jdbcType=SMALLINT}, #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, 
+      #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into price_change_log
+    insert into trade_state_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderNo != null">
-        order_no,
+      <if test="tradeNo != null">
+        trade_no,
       </if>
-      <if test="contractNo != null">
-        contract_no,
+      <if test="relatedTradeNo != null">
+        related_trade_no,
+      </if>
+      <if test="tradeType != null">
+        trade_type,
+      </if>
+      <if test="tradePhase != null">
+        trade_phase,
       </if>
       <if test="buyerId != null">
         buyer_id,
@@ -54,28 +71,46 @@
       <if test="sellerId != null">
         seller_id,
       </if>
-      <if test="orderVersion != null">
-        order_version,
+      <if test="sourceState != null">
+        source_state,
       </if>
-      <if test="sourceAmount != null">
-        source_amount,
+      <if test="targetState != null">
+        target_state,
       </if>
-      <if test="targetAmount != null">
-        target_amount,
+      <if test="amount != null">
+        amount,
       </if>
-      <if test="editor != null">
-        editor,
+      <if test="paymentMethod != null">
+        payment_method,
+      </if>
+      <if test="consignMethod != null">
+        consign_method,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="sourceVersion != null">
+        source_version,
       </if>
       <if test="createdAt != null">
         created_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="contractNo != null">
-        #{contractNo,jdbcType=VARCHAR},
+      <if test="relatedTradeNo != null">
+        #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="tradePhase != null">
+        #{tradePhase,jdbcType=TINYINT},
       </if>
       <if test="buyerId != null">
         #{buyerId,jdbcType=BIGINT},
@@ -83,17 +118,29 @@
       <if test="sellerId != null">
         #{sellerId,jdbcType=BIGINT},
       </if>
-      <if test="orderVersion != null">
-        #{orderVersion,jdbcType=INTEGER},
+      <if test="sourceState != null">
+        #{sourceState,jdbcType=SMALLINT},
       </if>
-      <if test="sourceAmount != null">
-        #{sourceAmount,jdbcType=BIGINT},
+      <if test="targetState != null">
+        #{targetState,jdbcType=SMALLINT},
       </if>
-      <if test="targetAmount != null">
-        #{targetAmount,jdbcType=BIGINT},
+      <if test="amount != null">
+        #{amount,jdbcType=BIGINT},
       </if>
-      <if test="editor != null">
-        #{editor,jdbcType=BIGINT},
+      <if test="paymentMethod != null">
+        #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="consignMethod != null">
+        #{consignMethod,jdbcType=TINYINT},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceVersion != null">
+        #{sourceVersion,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -101,13 +148,19 @@
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
-    update price_change_log
+    update trade_state_log
     <set>
-      <if test="orderNo != null">
-        order_no = #{orderNo,jdbcType=VARCHAR},
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="contractNo != null">
-        contract_no = #{contractNo,jdbcType=VARCHAR},
+      <if test="relatedTradeNo != null">
+        related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        trade_type = #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="tradePhase != null">
+        trade_phase = #{tradePhase,jdbcType=TINYINT},
       </if>
       <if test="buyerId != null">
         buyer_id = #{buyerId,jdbcType=BIGINT},
@@ -115,17 +168,29 @@
       <if test="sellerId != null">
         seller_id = #{sellerId,jdbcType=BIGINT},
       </if>
-      <if test="orderVersion != null">
-        order_version = #{orderVersion,jdbcType=INTEGER},
+      <if test="sourceState != null">
+        source_state = #{sourceState,jdbcType=SMALLINT},
       </if>
-      <if test="sourceAmount != null">
-        source_amount = #{sourceAmount,jdbcType=BIGINT},
+      <if test="targetState != null">
+        target_state = #{targetState,jdbcType=SMALLINT},
       </if>
-      <if test="targetAmount != null">
-        target_amount = #{targetAmount,jdbcType=BIGINT},
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
       </if>
-      <if test="editor != null">
-        editor = #{editor,jdbcType=BIGINT},
+      <if test="paymentMethod != null">
+        payment_method = #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="consignMethod != null">
+        consign_method = #{consignMethod,jdbcType=TINYINT},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceVersion != null">
+        source_version = #{sourceVersion,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -134,15 +199,21 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
-    update price_change_log
-    set order_no = #{orderNo,jdbcType=VARCHAR},
-      contract_no = #{contractNo,jdbcType=VARCHAR},
+    update trade_state_log
+    set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=TINYINT},
+      trade_phase = #{tradePhase,jdbcType=TINYINT},
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
-      order_version = #{orderVersion,jdbcType=INTEGER},
-      source_amount = #{sourceAmount,jdbcType=BIGINT},
-      target_amount = #{targetAmount,jdbcType=BIGINT},
-      editor = #{editor,jdbcType=BIGINT},
+      source_state = #{sourceState,jdbcType=SMALLINT},
+      target_state = #{targetState,jdbcType=SMALLINT},
+      amount = #{amount,jdbcType=BIGINT},
+      payment_method = #{paymentMethod,jdbcType=TINYINT},
+      consign_method = #{consignMethod,jdbcType=TINYINT},
+      tags = #{tags,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
+      source_version = #{sourceVersion,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
