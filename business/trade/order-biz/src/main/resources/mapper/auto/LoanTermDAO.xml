@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.trade.order.biz.dal.dao.LoanTermDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="installment_num" jdbcType="TINYINT" property="installmentNum" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="repay_strategy" jdbcType="INTEGER" property="repayStrategy" />
+    <result column="prepay_strategy" jdbcType="INTEGER" property="prepayStrategy" />
+    <result column="handling_fee" jdbcType="BIGINT" property="handlingFee" />
+    <result column="fee_pay_strategy" jdbcType="INTEGER" property="feePayStrategy" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
+    <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
+    <result column="interest" jdbcType="INTEGER" property="interest" />
+    <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
+    <result column="penalty" jdbcType="INTEGER" property="penalty" />
+    <result column="penalty_unit" jdbcType="INTEGER" property="penaltyUnit" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, trade_no, buyer_id, seller_id, amount, installment_num, currency, repay_strategy, 
+    prepay_strategy, handling_fee, fee_pay_strategy, period, period_unit, period_strategy, 
+    interest, interest_unit, penalty, penalty_unit, version, delete_flag, last_editor, 
+    created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loan_term
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_term (trade_no, buyer_id, seller_id, 
+      amount, installment_num, currency, 
+      repay_strategy, prepay_strategy, handling_fee, 
+      fee_pay_strategy, period, period_unit, 
+      period_strategy, interest, interest_unit, 
+      penalty, penalty_unit, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
+    values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=BIGINT}, #{installmentNum,jdbcType=TINYINT}, #{currency,jdbcType=INTEGER}, 
+      #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{handlingFee,jdbcType=BIGINT}, 
+      #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER}, 
+      #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER}, 
+      #{penalty,jdbcType=INTEGER}, #{penaltyUnit,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_term
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="sellerId != null">
+        seller_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="installmentNum != null">
+        installment_num,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="repayStrategy != null">
+        repay_strategy,
+      </if>
+      <if test="prepayStrategy != null">
+        prepay_strategy,
+      </if>
+      <if test="handlingFee != null">
+        handling_fee,
+      </if>
+      <if test="feePayStrategy != null">
+        fee_pay_strategy,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="periodUnit != null">
+        period_unit,
+      </if>
+      <if test="periodStrategy != null">
+        period_strategy,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="interestUnit != null">
+        interest_unit,
+      </if>
+      <if test="penalty != null">
+        penalty,
+      </if>
+      <if test="penaltyUnit != null">
+        penalty_unit,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="installmentNum != null">
+        #{installmentNum,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="repayStrategy != null">
+        #{repayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="prepayStrategy != null">
+        #{prepayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="handlingFee != null">
+        #{handlingFee,jdbcType=BIGINT},
+      </if>
+      <if test="feePayStrategy != null">
+        #{feePayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="periodUnit != null">
+        #{periodUnit,jdbcType=INTEGER},
+      </if>
+      <if test="periodStrategy != null">
+        #{periodStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=INTEGER},
+      </if>
+      <if test="interestUnit != null">
+        #{interestUnit,jdbcType=INTEGER},
+      </if>
+      <if test="penalty != null">
+        #{penalty,jdbcType=INTEGER},
+      </if>
+      <if test="penaltyUnit != null">
+        #{penaltyUnit,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
+    update loan_term
+    <set>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="installmentNum != null">
+        installment_num = #{installmentNum,jdbcType=TINYINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="repayStrategy != null">
+        repay_strategy = #{repayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="prepayStrategy != null">
+        prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="handlingFee != null">
+        handling_fee = #{handlingFee,jdbcType=BIGINT},
+      </if>
+      <if test="feePayStrategy != null">
+        fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="periodUnit != null">
+        period_unit = #{periodUnit,jdbcType=INTEGER},
+      </if>
+      <if test="periodStrategy != null">
+        period_strategy = #{periodStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=INTEGER},
+      </if>
+      <if test="interestUnit != null">
+        interest_unit = #{interestUnit,jdbcType=INTEGER},
+      </if>
+      <if test="penalty != null">
+        penalty = #{penalty,jdbcType=INTEGER},
+      </if>
+      <if test="penaltyUnit != null">
+        penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
+    update loan_term
+    set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      seller_id = #{sellerId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=BIGINT},
+      installment_num = #{installmentNum,jdbcType=TINYINT},
+      currency = #{currency,jdbcType=INTEGER},
+      repay_strategy = #{repayStrategy,jdbcType=INTEGER},
+      prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
+      handling_fee = #{handlingFee,jdbcType=BIGINT},
+      fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      period_unit = #{periodUnit,jdbcType=INTEGER},
+      period_strategy = #{periodStrategy,jdbcType=INTEGER},
+      interest = #{interest,jdbcType=INTEGER},
+      interest_unit = #{interestUnit,jdbcType=INTEGER},
+      penalty = #{penalty,jdbcType=INTEGER},
+      penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

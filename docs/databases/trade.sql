@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '借款金额',
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',

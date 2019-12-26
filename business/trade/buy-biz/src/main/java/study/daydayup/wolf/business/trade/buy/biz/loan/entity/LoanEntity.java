@@ -12,6 +12,7 @@ import study.daydayup.wolf.business.trade.api.vo.contract.RepaymentTerm;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,6 +88,7 @@ public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
         changes.setStateEvent(event);
 
         //loan.installment.effect
+        List<InstallmentTerm> installmentTerms = new ArrayList<>();
     }
 
     public void due() {

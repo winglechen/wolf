@@ -87,6 +87,12 @@
             <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
         </table>
 
+        <table tableName="loan_term" domainObjectName="LoanTermDO" mapperName="LoanTermDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="installment_num" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
+        </table>
+
         <table tableName="installment_term" domainObjectName="InstallmentTermDO" mapperName="InstallmentTermDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="installment_no" javaType="java.lang.Integer" jdbcType="TINYINT" />
