@@ -35,6 +35,7 @@ public class TradeStateLog implements Model {
     private String source;
 
     private Integer sourceVersion;
+    private Integer targetVersion;
     private LocalDateTime createdAt;
 
 }

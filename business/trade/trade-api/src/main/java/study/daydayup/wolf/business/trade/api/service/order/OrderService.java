@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 
 /**
@@ -10,4 +11,6 @@ import study.daydayup.wolf.business.trade.api.entity.Order;
  **/
 public interface OrderService {
     void create(Order order);
+    void modify(Order locker, Order changes);
+    Order find(TradeId tradeId);
 }

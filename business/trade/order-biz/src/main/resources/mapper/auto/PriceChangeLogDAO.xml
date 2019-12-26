@@ -8,14 +8,15 @@
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
+    <result column="target_version" jdbcType="INTEGER" property="targetVersion" />
     <result column="source_amount" jdbcType="BIGINT" property="sourceAmount" />
     <result column="target_amount" jdbcType="BIGINT" property="targetAmount" />
     <result column="editor" jdbcType="BIGINT" property="editor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, line_id, buyer_id, seller_id, source_version, source_amount, target_amount, 
-    editor, created_at
+    id, trade_no, line_id, buyer_id, seller_id, source_version, target_version, source_amount, 
+    target_amount, editor, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,13 +29,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into price_change_log (trade_no, line_id, buyer_id, 
-      seller_id, source_version, source_amount, 
-      target_amount, editor, created_at
-      )
+      seller_id, source_version, target_version, 
+      source_amount, target_amount, editor, 
+      created_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{lineId,jdbcType=BIGINT}, #{buyerId,jdbcType=BIGINT}, 
-      #{sellerId,jdbcType=BIGINT}, #{sourceVersion,jdbcType=INTEGER}, #{sourceAmount,jdbcType=BIGINT}, 
-      #{targetAmount,jdbcType=BIGINT}, #{editor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{sellerId,jdbcType=BIGINT}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
+      #{sourceAmount,jdbcType=BIGINT}, #{targetAmount,jdbcType=BIGINT}, #{editor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.PriceChangeLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -56,6 +57,9 @@
       </if>
       <if test="sourceVersion != null">
         source_version,
+      </if>
+      <if test="targetVersion != null">
+        target_version,
       </if>
       <if test="sourceAmount != null">
         source_amount,
@@ -85,6 +89,9 @@
       </if>
       <if test="sourceVersion != null">
         #{sourceVersion,jdbcType=INTEGER},
+      </if>
+      <if test="targetVersion != null">
+        #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="sourceAmount != null">
         #{sourceAmount,jdbcType=BIGINT},
@@ -118,6 +125,9 @@
       <if test="sourceVersion != null">
         source_version = #{sourceVersion,jdbcType=INTEGER},
       </if>
+      <if test="targetVersion != null">
+        target_version = #{targetVersion,jdbcType=INTEGER},
+      </if>
       <if test="sourceAmount != null">
         source_amount = #{sourceAmount,jdbcType=BIGINT},
       </if>
@@ -140,6 +150,7 @@
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
       source_version = #{sourceVersion,jdbcType=INTEGER},
+      target_version = #{targetVersion,jdbcType=INTEGER},
       source_amount = #{sourceAmount,jdbcType=BIGINT},
       target_amount = #{targetAmount,jdbcType=BIGINT},
       editor = #{editor,jdbcType=BIGINT},

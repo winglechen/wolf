@@ -18,6 +18,8 @@ public class PriceChangeLogDO implements Serializable {
 
     private Integer sourceVersion;
 
+    private Integer targetVersion;
+
     private Long sourceAmount;
 
     private Long targetAmount;
@@ -40,6 +42,7 @@ public class PriceChangeLogDO implements Serializable {
         sb.append(", buyerId=").append(buyerId);
         sb.append(", sellerId=").append(sellerId);
         sb.append(", sourceVersion=").append(sourceVersion);
+        sb.append(", targetVersion=").append(targetVersion);
         sb.append(", sourceAmount=").append(sourceAmount);
         sb.append(", targetAmount=").append(targetAmount);
         sb.append(", editor=").append(editor);
@@ -66,6 +69,7 @@ public class PriceChangeLogDO implements Serializable {
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
             && (this.getSourceVersion() == null ? other.getSourceVersion() == null : this.getSourceVersion().equals(other.getSourceVersion()))
+            && (this.getTargetVersion() == null ? other.getTargetVersion() == null : this.getTargetVersion().equals(other.getTargetVersion()))
             && (this.getSourceAmount() == null ? other.getSourceAmount() == null : this.getSourceAmount().equals(other.getSourceAmount()))
             && (this.getTargetAmount() == null ? other.getTargetAmount() == null : this.getTargetAmount().equals(other.getTargetAmount()))
             && (this.getEditor() == null ? other.getEditor() == null : this.getEditor().equals(other.getEditor()))
@@ -82,6 +86,7 @@ public class PriceChangeLogDO implements Serializable {
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
         result = prime * result + ((getSourceVersion() == null) ? 0 : getSourceVersion().hashCode());
+        result = prime * result + ((getTargetVersion() == null) ? 0 : getTargetVersion().hashCode());
         result = prime * result + ((getSourceAmount() == null) ? 0 : getSourceAmount().hashCode());
         result = prime * result + ((getTargetAmount() == null) ? 0 : getTargetAmount().hashCode());
         result = prime * result + ((getEditor() == null) ? 0 : getEditor().hashCode());

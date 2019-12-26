@@ -10,6 +10,9 @@ import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -22,10 +25,12 @@ import java.time.LocalDateTime;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public class Trade implements Model {
+    @NotBlank
     protected String tradeNo;
     /**
      * @see TradeTypeEnum
      */
+    @NotNull @Min(1)
     protected Integer tradeType;
     protected TradeState state;
     protected String relatedTradeNo;

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 
 /**
@@ -10,4 +11,6 @@ import study.daydayup.wolf.business.trade.api.entity.Contract;
  **/
 public interface ContractService {
     void create(Contract contract);
+    void modify(Contract locker, Contract changes);
+    Contract find(TradeId tradeId);
 }

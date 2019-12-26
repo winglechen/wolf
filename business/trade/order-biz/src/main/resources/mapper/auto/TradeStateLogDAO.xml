@@ -17,12 +17,13 @@
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
+    <result column="target_version" jdbcType="INTEGER" property="targetVersion" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, related_trade_no, trade_type, trade_phase, buyer_id, seller_id, source_state, 
     target_state, amount, payment_method, consign_method, tags, `source`, source_version, 
-    created_at
+    target_version, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -38,14 +39,14 @@
       trade_phase, buyer_id, seller_id, 
       source_state, target_state, amount, 
       payment_method, consign_method, tags, 
-      `source`, source_version, created_at
-      )
+      `source`, source_version, target_version, 
+      created_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, 
       #{tradePhase,jdbcType=TINYINT}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{sourceState,jdbcType=SMALLINT}, #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, 
       #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -95,6 +96,9 @@
       <if test="sourceVersion != null">
         source_version,
       </if>
+      <if test="targetVersion != null">
+        target_version,
+      </if>
       <if test="createdAt != null">
         created_at,
       </if>
@@ -141,6 +145,9 @@
       </if>
       <if test="sourceVersion != null">
         #{sourceVersion,jdbcType=INTEGER},
+      </if>
+      <if test="targetVersion != null">
+        #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -192,6 +199,9 @@
       <if test="sourceVersion != null">
         source_version = #{sourceVersion,jdbcType=INTEGER},
       </if>
+      <if test="targetVersion != null">
+        target_version = #{targetVersion,jdbcType=INTEGER},
+      </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -214,6 +224,7 @@
       tags = #{tags,jdbcType=VARCHAR},
       `source` = #{source,jdbcType=VARCHAR},
       source_version = #{sourceVersion,jdbcType=INTEGER},
+      target_version = #{targetVersion,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

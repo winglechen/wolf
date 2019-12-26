@@ -348,6 +348,7 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `source`            VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '交易来源',
 
     `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `target_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '更新版本号',
     `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
@@ -377,6 +378,7 @@ CREATE TABLE IF NOT EXISTS `price_change_log`
     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `source_version`INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `target_version`INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '更新版本号',
 
     `source_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
     `target_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',

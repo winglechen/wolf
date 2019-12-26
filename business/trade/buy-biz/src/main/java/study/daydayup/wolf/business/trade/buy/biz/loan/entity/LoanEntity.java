@@ -23,6 +23,10 @@ import java.util.List;
  **/
 public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
     public LoanEntity(Contract model) {
+        this(model, true);
+    }
+
+    public LoanEntity(Contract model, boolean isNew) {
         this.model = model;
         this.locker = Contract.builder()
                 .tradeNo(model.getTradeNo())
