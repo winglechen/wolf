@@ -16,6 +16,9 @@ public interface LoanService {
     void startLoan(TradeId tradeId);
     void completeLoan(TradeId tradeId);
 
+    void createLoanProxy();
+    void prepay();
+
     void due(TradeId tradeId);
     void overdue(TradeId tradeId);
     void markAsLoss(TradeId tradeId);
@@ -31,4 +34,11 @@ public interface LoanService {
      * @param event 相关订单支付成功事件
      */
     void subscribePaidEvent(PaidEvent event);
+    /**
+     * 生成放款订单 + 调用放款接口
+     */
+    void subscribeLoanEvent();
+    void subscribeDueEvent();
+    void subscribeOverdueEvent();
+    void subscribeLossEvent();
 }
