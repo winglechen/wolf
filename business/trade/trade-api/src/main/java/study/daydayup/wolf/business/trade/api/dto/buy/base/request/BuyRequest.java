@@ -28,7 +28,7 @@ public class BuyRequest implements Request {
      * @see TradeTypeEnum
      */
     @NotNull @Min(1)
-    private int tradeType;
+    private Integer tradeType;
     private String relatedTradeNo;
 
     private String source;

@@ -14,15 +14,15 @@ import javax.validation.constraints.Min;
 @Data
 public class GoodsRequest {
     @Min(1)
-    private long orgId;
+    private Long  orgId;
     @Min(1)
-    private long goodsId;
-    private long skuId;
+    private Long  goodsId;
+    private Long  skuId;
 
-    private int quantity;
+    private Integer quantity;
 
-    private int giftFlag;
-    private long promotionId;
+    private Integer giftFlag;
+    private Long  promotionId;
 
     private GoodsMemo memo;
 }

@@ -11,5 +11,5 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  **/
 @Data
 public class TradeSku implements VO  {
-    private long skuId;
+    private Long  skuId;
 }

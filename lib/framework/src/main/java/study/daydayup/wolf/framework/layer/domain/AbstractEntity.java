@@ -2,6 +2,9 @@ package study.daydayup.wolf.framework.layer.domain;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * study.daydayup.wolf.framework.layer.domain
  *
@@ -10,9 +13,15 @@ import lombok.Data;
  **/
 @Data
 public abstract class AbstractEntity<T> implements Entity {
-    protected boolean isNew = false;
+    protected boolean isNew = true;
 
     protected T model;
     protected T changes;
     protected T locker;
+
+    protected List<Event> eventList = new ArrayList<>();
+
+    protected void fire(Event event) {
+        eventList.add(event);
+    }
 }

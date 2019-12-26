@@ -17,11 +17,11 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class TradeInstallment {
-    private int installmentNo;
+    private Integer installmentNo;
 
-    private int period;
+    private Integer period;
 
-    private int percentage;
-    private int feePercentage;
-    private int installmentType;
+    private Integer percentage;
+    private Integer feePercentage;
+    private Integer installmentType;
 }

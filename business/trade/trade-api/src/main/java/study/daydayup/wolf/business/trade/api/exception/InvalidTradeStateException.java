@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.string.Msg;
  * @since 2019/12/16 7:48 下午
  **/
 public class InvalidTradeStateException extends SystemException {
-    public InvalidTradeStateException(int state) {
+    public InvalidTradeStateException(Integer state) {
         super(160003, Msg.join("Invalid trade state: ", state));
     }
 }

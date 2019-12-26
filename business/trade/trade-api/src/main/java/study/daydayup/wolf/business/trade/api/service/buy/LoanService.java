@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.service.buy;
 
-import study.daydayup.wolf.business.trade.api.dto.buy.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.event.base.PaidEvent;
 
 /**

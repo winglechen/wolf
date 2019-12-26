@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 @Data
 public class Buyer implements VO  {
     @Min(1)
-    private long id;
+    private Long  id;
     private String name;
     private String avatar;
 }

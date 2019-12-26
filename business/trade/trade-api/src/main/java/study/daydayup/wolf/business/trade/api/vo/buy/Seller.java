@@ -13,7 +13,7 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  **/
 @Data
 public class Seller implements VO  {
-    private long id;
+    private Long  id;
     private String name;
     private String logo;
 }

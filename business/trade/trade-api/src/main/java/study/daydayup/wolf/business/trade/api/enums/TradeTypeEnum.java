@@ -35,9 +35,9 @@ public enum TradeTypeEnum implements CodeBasedEnum {
     ORDER(1, "普通订单")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    TradeTypeEnum(int code, String desc) {
+    TradeTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

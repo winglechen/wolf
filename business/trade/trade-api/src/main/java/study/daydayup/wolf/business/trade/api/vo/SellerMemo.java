@@ -10,6 +10,6 @@ import lombok.Data;
  **/
 @Data
 public class SellerMemo {
-    private int star;
+    private Integer star;
     private String memo;
 }

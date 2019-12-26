@@ -16,9 +16,9 @@ public enum ConsignMethodEnum implements CodeBasedEnum {
     NO_LOGISTICS(1, "无需物流")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    ConsignMethodEnum(int code, String desc) {
+    ConsignMethodEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

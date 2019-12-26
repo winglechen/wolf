@@ -14,19 +14,19 @@ import javax.validation.constraints.Min;
  **/
 @Data
 public class TradeLoan implements VO  {
-    private int handlingFeeRate;
+    private Integer handlingFeeRate;
 
-    private int interestRate;
-    private int penaltyRate;
-    private int interestUnit;
-    private int penaltyUnit;
+    private Integer interestRate;
+    private Integer penaltyRate;
+    private Integer interestUnit;
+    private Integer penaltyUnit;
 
-    private int period;
-    private int periodUnit;
-    private int periodStrategy;
+    private Integer period;
+    private Integer periodUnit;
+    private Integer periodStrategy;
 
-    private int repayStrategy;
-    private int prepayStrategy;
-    private int amountStrategy;
-    private int feePayStrategy;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
+    private Integer amountStrategy;
+    private Integer feePayStrategy;
 }

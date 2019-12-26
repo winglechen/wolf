@@ -17,9 +17,9 @@ public enum LoanAmountStrategyEnum implements CodeBasedEnum {
     WAIT_TO_PAY(10, "待支付")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    LoanAmountStrategyEnum(int code, String desc) {
+    LoanAmountStrategyEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

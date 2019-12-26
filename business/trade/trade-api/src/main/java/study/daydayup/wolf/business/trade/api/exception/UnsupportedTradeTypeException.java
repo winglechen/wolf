@@ -14,7 +14,7 @@ public class UnsupportedTradeTypeException extends SystemException {
         this(0);
     }
 
-    public UnsupportedTradeTypeException(int tradeType) {
+    public UnsupportedTradeTypeException(Integer tradeType) {
         super(160001, Msg.join("unsupported tradeType: ", tradeType));
     }
 }

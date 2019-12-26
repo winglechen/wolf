@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.string.Msg;
  * @since 2019/12/16 7:48 下午
  **/
 public class TradeStateNotFoundException extends SystemException {
-    public TradeStateNotFoundException(int state) {
+    public TradeStateNotFoundException(Integer state) {
         super(160004, Msg.join("Invalid trade state: ", state));
     }
 }

@@ -16,9 +16,9 @@ public enum OrderLineTypeEnum implements CodeBasedEnum {
     UNKNOWN(0, "未知交易"),
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    OrderLineTypeEnum(int code, String desc) {
+    OrderLineTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -16,9 +16,9 @@ public enum DisputeStateEnum implements CodeBasedEnum {
     REQUEST_MADE(10, "发起维权")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    DisputeStateEnum(int code, String desc) {
+    DisputeStateEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

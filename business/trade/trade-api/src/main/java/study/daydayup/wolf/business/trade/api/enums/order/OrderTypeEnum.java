@@ -21,9 +21,9 @@ public enum  OrderTypeEnum implements CodeBasedEnum {
     NORMAL(10, "普通订单")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    OrderTypeEnum(int code, String desc) {
+    OrderTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

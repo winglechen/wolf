@@ -15,9 +15,9 @@ public class TradeAddress implements VO  {
     /**
      * @see AddressTypeEnum
      */
-    private int addressType;
+    private Integer addressType;
 
-    private int areaCode;
+    private Integer areaCode;
     private String province;
     private String city;
     private String county;

@@ -17,22 +17,22 @@ import java.time.LocalDate;
 @Builder
 public class InstallmentTerm extends ContractTerm {
     private String tradeNo;
-    private long buyerId;
-    private long sellerId;
+    private Long  buyerId;
+    private Long  sellerId;
 
-    private int installmentNo;
+    private Integer installmentNo;
 
-    private int period;
-    private int percentage;
-    private int feePercentage;
-    private int installmentType;
+    private Integer period;
+    private Integer percentage;
+    private Integer feePercentage;
+    private Integer installmentType;
 
-    private long amount;
-    private long interest;
-    private long handlingFee;
+    private Long  amount;
+    private Long  interest;
+    private Long  handlingFee;
 
     private LocalDate effectAt;
     private LocalDate dueAt;
 
-    private int version;
+    private Integer version;
 }

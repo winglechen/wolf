@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.buy;
+package study.daydayup.wolf.business.trade.api.dto;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
@@ -14,7 +14,7 @@ public class OrderOption implements Request {
     private boolean withOrderLine;
     private boolean withAddress;
 
-    private int orderLineNum    = -1;
+    private Integer orderLineNum    = -1;
 
     private boolean withRelatedOrders;
     private boolean withStateLog;

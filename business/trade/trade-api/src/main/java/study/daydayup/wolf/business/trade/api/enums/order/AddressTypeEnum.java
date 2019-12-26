@@ -16,9 +16,9 @@ public enum AddressTypeEnum implements CodeBasedEnum {
     NO_ADDRESS(1, "无地址")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
-    AddressTypeEnum(int code, String desc) {
+    AddressTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

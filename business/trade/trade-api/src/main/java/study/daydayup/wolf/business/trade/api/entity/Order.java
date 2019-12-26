@@ -21,14 +21,14 @@ import java.util.List;
 @Data
 @SuperBuilder(toBuilder = true)
 public class Order extends Trade {
-    protected long amount;
-    protected long postage;
-    protected int currency;
+    protected Long  amount;
+    protected Long  postage;
+    protected Integer currency;
 
     protected String outTradeNo;
 
-    protected int consignMethod;
-    protected int paymentMethod;
+    protected Integer consignMethod;
+    protected Integer paymentMethod;
 
     protected TradeAddress address;
 

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.loan;
 
-import study.daydayup.wolf.business.trade.api.dto.buy.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 /**

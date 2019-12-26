@@ -16,28 +16,28 @@ import lombok.experimental.SuperBuilder;
 public class RepaymentTerm {
 
     private String tradeNo;
-    private long buyerId;
-    private long sellerId;
+    private Long  buyerId;
+    private Long  sellerId;
 
-    private long amount;
-    private int currency;
+    private Long  amount;
+    private Integer currency;
 
-    private int period;
-    private int periodUnit;
-    private int periodStrategy;
+    private Integer period;
+    private Integer periodUnit;
+    private Integer periodStrategy;
 
-    private long handlingFee;
-    private int handlingFeeRate;
-    private int feePayStrategy;
+    private Long  handlingFee;
+    private Integer handlingFeeRate;
+    private Integer feePayStrategy;
 
-    private int interest;
-    private int interestRate;
-    private int interestUnit;
+    private Integer interest;
+    private Integer interestRate;
+    private Integer interestUnit;
 
-    private int penalty;
-    private int penaltyRate;
-    private int penaltyUnit;
+    private Integer penalty;
+    private Integer penaltyRate;
+    private Integer penaltyUnit;
 
-    private int repayStrategy;
-    private int prepayStrategy;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
 }

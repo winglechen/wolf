@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.vo.contract.RepaymentTerm;
@@ -15,16 +16,27 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/23 10:16 上午
  **/
-@Data
 public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
     public LoanEntity(Contract model) {
         this.model = model;
-        this.changes = new Contract();
         this.locker = Contract.builder()
                 .tradeNo(model.getTradeNo())
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
                 .build();
+    }
+
+    public LoanEntity(TradeId tradeId) {
+        tradeId.valid();
+        Contract contract = Contract.builder()
+                .tradeNo(tradeId.getTradeNo())
+                .buyerId(tradeId.getBuyerId())
+                .sellerId(tradeId.getSellerId())
+                .build();
+
+        model = contract;
+        locker = contract;
+        isNew = false;
     }
 
     public void approve() {

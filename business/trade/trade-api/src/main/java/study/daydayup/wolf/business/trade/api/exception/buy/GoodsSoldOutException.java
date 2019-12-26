@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.string.Msg;
  * @since 2019/10/7 11:28 下午
  **/
 public class GoodsSoldOutException extends BusinessException {
-    public GoodsSoldOutException(long goodsId) {
+    public GoodsSoldOutException(Long  goodsId) {
         super(160102, Msg.join("Goods sold out:", goodsId));
     }
 }

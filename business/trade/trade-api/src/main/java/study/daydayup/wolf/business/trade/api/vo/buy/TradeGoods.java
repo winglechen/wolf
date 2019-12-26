@@ -16,27 +16,27 @@ import java.util.List;
 @Data
 @Builder
 public class TradeGoods {
-    private long sellId;
-    private long goodsId;
-    protected long categoryId;
+    private Long  sellId;
+    private Long  goodsId;
+    protected Long  categoryId;
     private String goodsName;
-    private int goodsType;
+    private Integer goodsType;
 
-    private long salePrice;
+    private Long  salePrice;
 
-    private int currency;
-    private int chargeUnit;
+    private Integer currency;
+    private Integer chargeUnit;
 
     private String goodsMainPic;
-    private int goodsVersion;
+    private Integer goodsVersion;
     private String goodsCode;
 
-    private long payPrice;
-    private long postage;
+    private Long  payPrice;
+    private Long  postage;
 
-    private int giftFlag;
-    private int quantity;
-    private long promotionId;
+    private Integer giftFlag;
+    private Integer quantity;
+    private Long  promotionId;
     private GoodsMemo memo;
 
     private TradeSku sku;

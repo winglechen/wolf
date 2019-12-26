@@ -18,28 +18,28 @@ public abstract class AbstractTradeEvent implements TradeEvent{
     /**
      * @see TradeTypeEnum
      */
-    protected int tradeType;
+    protected Integer tradeType;
 
-    protected long buyerId;
-    protected long sellerId;
+    protected Long  buyerId;
+    protected Long  sellerId;
 
     protected String source;
     protected String tags;
 
     @Override
-    public long getBuyerId() {
+    public Long  getBuyerId() {
         checkBuyerAndSeller();
         return buyerId;
     }
 
     @Override
-    public long getSellerId() {
+    public Long  getSellerId() {
         checkBuyerAndSeller();
         return sellerId;
     }
 
     @Override
-    public int getTradeType() {
+    public Integer getTradeType() {
         if (tradeType <= 0) {
             throw new InvalidTradeEventException("Can't find tradeType");
         }

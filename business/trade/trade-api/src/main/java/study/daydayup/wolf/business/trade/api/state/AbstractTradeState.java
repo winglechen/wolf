@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 public abstract class AbstractTradeState implements TradeState {
     protected final String STATE_NAMESPACE_PREFIX = "study.daydayup.wolf.business.trade.api";
 
-    protected int code;
+    protected Integer code;
     protected String name;
     protected LocalDateTime updatedAt;
 
     @Override
-    public int getCode() {
+    public Integer getCode() {
         if (code <= 0) {
             throw new InvalidTradeStateException(code);
         }

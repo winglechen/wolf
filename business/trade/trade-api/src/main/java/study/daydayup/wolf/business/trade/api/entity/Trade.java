@@ -24,13 +24,13 @@ public class Trade {
     /**
      * @see TradeTypeEnum
      */
-    protected int tradeType;
-    protected int state;
+    protected Integer tradeType;
+    protected Integer state;
     protected String relatedTradeNo;
 
-    protected long buyerId;
+    protected Long  buyerId;
     protected String buyerName;
-    protected long sellerId;
+    protected Long  sellerId;
     protected String sellerName;
 
     protected String source;
