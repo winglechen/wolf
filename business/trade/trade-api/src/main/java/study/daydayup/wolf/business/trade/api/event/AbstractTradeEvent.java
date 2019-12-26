@@ -1,7 +1,8 @@
 package study.daydayup.wolf.business.trade.api.event;
 
 import lombok.Data;
-import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventException;
 
@@ -12,6 +13,8 @@ import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventExcepti
  * @since 2019/10/5 11:14 PM
  **/
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public abstract class AbstractTradeEvent implements TradeEvent{
     protected String tradeNo;
     protected String relatedTradeNo;

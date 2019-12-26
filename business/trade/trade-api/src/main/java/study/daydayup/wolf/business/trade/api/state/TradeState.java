@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * @since 2019/10/5 11:22 PM
  **/
 public interface TradeState extends State {
-    LocalDateTime getUpdatedAt();
+    int getCode();
     String getName();
+    LocalDateTime getUpdatedAt();
 }

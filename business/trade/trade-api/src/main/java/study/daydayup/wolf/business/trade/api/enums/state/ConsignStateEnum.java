@@ -18,9 +18,9 @@ public enum ConsignStateEnum implements CodeBasedEnum {
     SENDED(10, "已发货")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    ConsignStateEnum(Integer code, String desc) {
+    ConsignStateEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }

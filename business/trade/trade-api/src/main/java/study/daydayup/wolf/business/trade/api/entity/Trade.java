@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class Trade {
      * @see TradeTypeEnum
      */
     protected Integer tradeType;
-    protected Integer state;
+    protected TradeState state;
     protected String relatedTradeNo;
 
     protected Long  buyerId;

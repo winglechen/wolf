@@ -15,9 +15,9 @@ public enum CompletedStateEnum implements CodeBasedEnum {
     PAY_EXPIRED(10, "支付超时关闭")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    CompletedStateEnum(Integer code, String desc) {
+    CompletedStateEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }

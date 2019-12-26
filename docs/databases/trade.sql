@@ -331,7 +331,6 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `id`                INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
     `trade_no`          VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '订单号',
     `trade_type`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易类型',
-    `trade_phase`       TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
 
     `buyer_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',

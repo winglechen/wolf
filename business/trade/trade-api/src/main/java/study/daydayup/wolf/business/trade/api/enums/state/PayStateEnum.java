@@ -17,9 +17,9 @@ public enum PayStateEnum implements CodeBasedEnum {
     WAIT_TO_PAY(10, "待支付")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    PayStateEnum(Integer code, String desc) {
+    PayStateEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }

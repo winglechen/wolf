@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.vo.contract.*;
 
 import java.util.List;
@@ -20,6 +21,8 @@ import java.util.List;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public class Contract extends Trade {
+
+    private TradeEvent stateEvent;
 
     private ObjectsTerm objectsTerm;
     private PaymentTerm paymentTerm;

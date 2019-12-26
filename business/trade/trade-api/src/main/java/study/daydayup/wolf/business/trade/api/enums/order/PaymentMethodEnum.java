@@ -18,9 +18,9 @@ public enum PaymentMethodEnum implements CodeBasedEnum {
     NO_NEED_TO_PAY(254, "无需支付")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    PaymentMethodEnum(Integer code, String desc) {
+    PaymentMethodEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -15,9 +15,9 @@ public enum ContractStateEnum implements CodeBasedEnum {
     CREATED(10, "合同创建")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    ContractStateEnum(Integer code, String desc) {
+    ContractStateEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }

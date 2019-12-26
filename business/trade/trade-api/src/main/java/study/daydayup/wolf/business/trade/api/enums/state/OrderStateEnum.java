@@ -18,9 +18,9 @@ public enum OrderStateEnum implements CodeBasedEnum {
     WAIT_TO_PAY(10, "普通订单")
     ;
 
-    private Integer code;
+    private int   code;
     private String desc;
-    OrderStateEnum(Integer code, String desc) {
+    OrderStateEnum(int   code, String desc) {
         this.code = code;
         this.desc = desc;
     }
