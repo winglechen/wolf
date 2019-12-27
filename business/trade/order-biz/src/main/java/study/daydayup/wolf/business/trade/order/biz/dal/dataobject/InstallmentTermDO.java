@@ -10,43 +10,31 @@ public class InstallmentTermDO implements Serializable {
     private Long id;
 
     private String tradeNo;
-
     private Long buyerId;
-
     private Long sellerId;
 
     private Integer installmentNo;
-
     private Integer installmentType;
-
     private Integer state;
+
 
     private String relatedTradeNo;
 
-    private LocalDate effectAt;
-
-    private LocalDate dueAt;
-
-    private Long amount;
-
-    private Long interest;
-
-    private Long handlingFee;
-
     private Integer period;
-
     private Integer percentage;
-
     private Integer feePercentage;
 
+    private Long amount;
+    private Long interest;
+    private Long handlingFee;
+
+    private LocalDate effectAt;
+    private LocalDate dueAt;
+
     private Integer version;
-
     private Boolean deleteFlag;
-
     private Long lastEditor;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;

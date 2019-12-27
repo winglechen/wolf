@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.vo.contract;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
@@ -16,20 +16,23 @@ import java.time.LocalDate;
  * @since 2019/12/13 3:53 下午
  **/
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 public class InstallmentTerm extends ContractTerm {
     private String tradeNo;
     private Long  buyerId;
     private Long  sellerId;
 
     private Integer installmentNo;
+    private Integer installmentType;
     private TradeState state;
     private TradeEvent stateEvent;
+
+    private String relatedTradeNo;
 
     private Integer period;
     private Integer percentage;
     private Integer feePercentage;
-    private Integer installmentType;
 
     private Long  amount;
     private Long  interest;
