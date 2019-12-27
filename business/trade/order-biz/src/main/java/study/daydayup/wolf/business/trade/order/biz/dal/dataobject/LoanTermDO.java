@@ -11,45 +11,32 @@ public class LoanTermDO implements Serializable {
     private String tradeNo;
 
     private Long buyerId;
-
     private Long sellerId;
 
     private Long amount;
-
     private Integer installmentNum;
-
     private Integer currency;
 
     private Integer repayStrategy;
-
     private Integer prepayStrategy;
 
     private Long handlingFee;
-
     private Integer feePayStrategy;
 
     private Integer period;
-
     private Integer periodUnit;
-
     private Integer periodStrategy;
 
     private Integer interest;
-
     private Integer interestUnit;
 
     private Integer penalty;
-
     private Integer penaltyUnit;
 
     private Integer version;
-
     private Boolean deleteFlag;
-
     private Long lastEditor;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;

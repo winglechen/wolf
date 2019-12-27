@@ -1,4 +1,6 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dao;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
@@ -14,4 +16,11 @@ public interface ContractDAO {
     int updateByIdSelective(ContractDO record);
 
     int updateById(ContractDO record);
+
+    int updateByTradeNo(@Param("updated")ContractDO updated,@Param("locker")ContractDO locker);
+
+    ContractDO selectByTradeNo(@Param("tradeNo")String tradeNo, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
+
+
+
 }
