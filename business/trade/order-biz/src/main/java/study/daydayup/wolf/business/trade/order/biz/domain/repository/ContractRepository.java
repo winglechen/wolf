@@ -1,9 +1,15 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
+import study.daydayup.wolf.business.trade.api.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
+import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
+import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
+import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -40,8 +46,7 @@ public class ContractRepository extends AbstractRepository implements Repository
         if (contract == null) {
             return;
         }
-
-        //insert contract
+        insertContract(contract);
 
         consignTermRepository.add(contract.getConsignTerm());
         installmentTermRepository.add(contract.getInstallmentTermList());
@@ -54,6 +59,10 @@ public class ContractRepository extends AbstractRepository implements Repository
     }
 
     public void save(Contract locker, Contract changes) {
+        if (locker == null || null == changes) {
+            return;
+        }
+        updateContract(locker, changes);
 
         consignTermRepository.save(locker.getConsignTerm(), changes.getConsignTerm());
         installmentTermRepository.save(locker.getInstallmentTermList(), changes.getInstallmentTermList());
@@ -66,6 +75,11 @@ public class ContractRepository extends AbstractRepository implements Repository
     }
 
     public Contract find(TradeId tradeId) {
+        ContractDO contractDO = findContract(tradeId);
+        if (contractDO == null) {
+            return null;
+        }
+
         Contract.ContractBuilder builder = Contract.builder()
                 .consignTerm(consignTermRepository.find(tradeId))
                 .installmentTermList(installmentTermRepository.find(tradeId))
@@ -78,8 +92,32 @@ public class ContractRepository extends AbstractRepository implements Repository
                 ;
 
         Contract contract = builder.build();
+        BeanUtils.copyProperties(contractDO, contract);
 
         return contract;
     }
+
+    private ContractDO findContract(TradeId tradeId) {
+        tradeId.valid();
+
+        return null;
+    }
+
+    private void insertContract(Contract contract) {
+
+        ContractDO contractDO = new ContractDO();
+        BeanUtils.copyProperties(contract, contractDO);
+
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contract.getTradeType());
+        TradeState initState = stateMachine.getInitState();
+        contractDO.setState(initState.getCode());
+
+        contractDAO.insertSelective(contractDO);
+    }
+
+    private int updateContract(Contract locker, Contract changes) {
+        return 0;
+    }
+
 
 }

@@ -5,9 +5,9 @@ import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 
 @Mapper
 public interface ContractDAO {
-    int insert(ContractDO record);
+    Long insert(ContractDO record);
 
-    int insertSelective(ContractDO record);
+    Long insertSelective(ContractDO record);
 
     ContractDO selectById(Long id);
 

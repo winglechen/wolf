@@ -45,7 +45,8 @@ public class Trade implements Model {
     protected String source;
     protected String tags;
 
-    protected TradeStateLog stateLog;
-
     protected LocalDateTime createdAt;
+    protected LocalDateTime expiredAt;
+
+    protected TradeStateLog stateLog;
 }

@@ -15,12 +15,12 @@ import study.daydayup.wolf.common.util.EnumUtil;
  * @since 2019/12/17 12:09 下午
  **/
 public class Tsm {
-    public StateMachine<TradeState, TradeEvent> create(int tradeType) {
+    public static StateMachine<TradeState, TradeEvent> create(int tradeType) {
         TradeTypeEnum tradeTypeEnum = EnumUtil.codeOf(tradeType, TradeTypeEnum.class);
         return create(tradeTypeEnum);
     }
 
-    public StateMachine<TradeState, TradeEvent> create(TradeTypeEnum tradeTypeEnum) {
+    public static StateMachine<TradeState, TradeEvent> create(TradeTypeEnum tradeTypeEnum) {
         TradeStateMachineFactory factory = createFactory(tradeTypeEnum);
         return factory.create();
     }
