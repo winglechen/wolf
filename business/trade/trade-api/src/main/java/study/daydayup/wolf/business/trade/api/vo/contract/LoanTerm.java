@@ -14,7 +14,8 @@ import lombok.experimental.SuperBuilder;
  * @since 2019/12/13 3:54 下午
  **/
 @Data
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 public class LoanTerm extends ContractTerm {
     private String tradeNo;
     private Long  buyerId;

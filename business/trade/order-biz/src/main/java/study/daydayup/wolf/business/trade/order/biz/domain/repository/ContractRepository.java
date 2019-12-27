@@ -67,14 +67,14 @@ public class ContractRepository extends AbstractRepository implements Repository
         }
         updateContract(locker, changes);
 
-        consignTermRepository.save(locker.getConsignTerm(), changes.getConsignTerm());
+//        consignTermRepository.save(locker.getConsignTerm(), changes.getConsignTerm());
         installmentTermRepository.save(locker.getInstallmentTermList(), changes.getInstallmentTermList());
-        loanTermRepository.save(locker.getLoanTerm(), changes.getLoanTerm());
-        objectsTermRepository.save(locker.getObjectsTerm(), changes.getObjectsTerm());
-        paymentTermRepository.save(locker.getPaymentTerm(), changes.getPaymentTerm());
-        postageTermRepository.save(locker.getPostageTerm(), changes.getPostageTerm());
-        repaymentTermRepository.save(locker.getRepaymentTerm(), changes.getRepaymentTerm());
-        taxTermRepository.save(locker.getTaxTerm(), changes.getTaxTerm());
+//        loanTermRepository.save(locker.getLoanTerm(), changes.getLoanTerm());
+//        objectsTermRepository.save(locker.getObjectsTerm(), changes.getObjectsTerm());
+//        paymentTermRepository.save(locker.getPaymentTerm(), changes.getPaymentTerm());
+//        postageTermRepository.save(locker.getPostageTerm(), changes.getPostageTerm());
+//        repaymentTermRepository.save(locker.getRepaymentTerm(), changes.getRepaymentTerm());
+//        taxTermRepository.save(locker.getTaxTerm(), changes.getTaxTerm());
     }
 
     public Contract find(TradeId tradeId) {
