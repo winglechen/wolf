@@ -3,11 +3,16 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.exception.InvalidContractException;
+import study.daydayup.wolf.business.trade.api.exception.order.TradeStateNotFoundException;
+import study.daydayup.wolf.business.trade.api.exception.order.UnsupportedStateChangeException;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO;
+import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
+import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -36,7 +41,11 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
 
         List<InstallmentTermDO>  installmentTermDOList = batchModelToDO(installmentTerms, true);
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+        Integer state = stateMachine.getInitState().getCode();
+
         for (InstallmentTermDO installmentTermDO: installmentTermDOList) {
+            installmentTermDO.setState(state);
             installmentTermDAO.insertSelective(installmentTermDO);
         }
     }
@@ -54,7 +63,16 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
             throw new InvalidContractException("Invalid installment: locker and change's size are not match");
         }
 
+        TradeState state = getChangedState(lockers.get(0), changes.get(0));
+        for (int i = 0, size=lockerDOs.size(); i < size; i++) {
+            InstallmentTermDO lockerDO = lockerDOs.get(i);
+            InstallmentTermDO changeDO = changeDOs.get(i);
+            if (state != null) {
+                changeDO.setState(state.getCode());
+            }
 
+            installmentTermDAO.updateByTradeNo(changeDO, lockerDO);
+        }
     }
 
     public List<InstallmentTerm> find(TradeId tradeId) {
@@ -67,14 +85,45 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         return batchDOToModel(installmentTermDOList, true);
     }
 
+    private TradeState getChangedState(InstallmentTerm locker, InstallmentTerm change) {
+        if (null == locker.getState() || null == change.getStateEvent()) {
+            return null;
+        }
+
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+
+        TradeState state = stateMachine.fire(locker.getState(), change.getStateEvent());
+        if (state == null) {
+            throw new UnsupportedStateChangeException(locker.getState(), change.getStateEvent());
+        }
+
+        return state;
+    }
+
+    private TradeState getByCode(Integer code) {
+        if (code == null || code < 1) {
+            return null;
+        }
+
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+        TradeState state = stateMachine.getStateByCode(code);
+        if (state == null) {
+            throw new TradeStateNotFoundException(code);
+        }
+
+        return state;
+    }
+
     private InstallmentTerm DOToModel(InstallmentTermDO installmentTermDO) {
         if (installmentTermDO == null) {
             return null;
         }
 
         InstallmentTerm installmentTerm = new InstallmentTerm();
-
         BeanUtils.copyProperties(installmentTermDO, installmentTerm);
+
+        installmentTerm.setState(getByCode(installmentTermDO.getState()));
+
         return installmentTerm;
     }
 

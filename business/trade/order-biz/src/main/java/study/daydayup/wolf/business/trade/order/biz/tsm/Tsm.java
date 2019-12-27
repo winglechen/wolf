@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.util.EnumUtil;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.tsm
- *
+ * TODO: store the instance
  * @author Wingle
  * @since 2019/12/17 12:09 下午
  **/
@@ -23,6 +23,16 @@ public class Tsm {
     public static StateMachine<TradeState, TradeEvent> create(TradeTypeEnum tradeTypeEnum) {
         TradeStateMachineFactory factory = createFactory(tradeTypeEnum);
         return factory.create();
+    }
+
+    private static StateMachine<TradeState, TradeEvent> installmentTsm;
+    public static StateMachine<TradeState, TradeEvent> createForInstallment() {
+        if (installmentTsm != null) {
+            return installmentTsm;
+        }
+
+        installmentTsm = new InstallmentTermFactory().create();
+        return installmentTsm;
     }
 
     private static TradeStateMachineFactory createFactory(TradeTypeEnum tradeTypeEnum) {

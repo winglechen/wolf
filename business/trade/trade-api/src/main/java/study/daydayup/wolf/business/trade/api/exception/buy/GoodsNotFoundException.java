@@ -15,6 +15,6 @@ public class GoodsNotFoundException extends BusinessException {
     }
 
     public GoodsNotFoundException(Long goodsId) {
-        super(160101, Msg.join("Can't find goods: ", goodsId));
+        super(160501, Msg.join("Can't find goods: ", goodsId));
     }
 }
