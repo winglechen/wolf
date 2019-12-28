@@ -25,16 +25,6 @@ public class Tsm {
         return factory.create();
     }
 
-    private static StateMachine<TradeState, TradeEvent> installmentTsm;
-    public static StateMachine<TradeState, TradeEvent> createForInstallment() {
-        if (installmentTsm != null) {
-            return installmentTsm;
-        }
-
-        installmentTsm = new InstallmentTermFactory().create();
-        return installmentTsm;
-    }
-
     private static TradeStateMachineFactory createFactory(TradeTypeEnum tradeTypeEnum) {
         switch (tradeTypeEnum) {
             case LOAN_CONTRACT:
@@ -47,6 +37,8 @@ public class Tsm {
                 return new RepayOrderFactory();
             case COLLECTION_ORDER:
                 return new CollectionOrderFactory();
+            case INSTALLMENT_TERM:
+                return new InstallmentTermFactory();
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }

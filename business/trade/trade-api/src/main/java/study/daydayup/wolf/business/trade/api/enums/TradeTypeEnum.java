@@ -25,6 +25,9 @@ public enum TradeTypeEnum implements CodeBasedEnum {
     GROUP_PARTICIPATE(30, "团购参与"),
 
 
+    REPAY_TERM(9, "催收订单"),
+    INSTALLMENT_TERM(8, "催收订单"),
+
     COLLECTION_ORDER(7, "催收订单"),
     LOAN_PROXY(6, "放款代理"),
     REPAY_ORDER(5, "还款订单"),

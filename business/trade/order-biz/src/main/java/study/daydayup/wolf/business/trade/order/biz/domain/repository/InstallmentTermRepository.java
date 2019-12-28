@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.exception.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.exception.order.TradeStateNotFoundException;
@@ -90,7 +91,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
             return null;
         }
 
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
 
         TradeState state = stateMachine.fire(locker.getState(), change.getStateEvent());
         if (state == null) {
@@ -105,7 +106,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
             return null;
         }
 
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
         TradeState state = stateMachine.getStateByCode(code);
         if (state == null) {
             throw new TradeStateNotFoundException(code);
