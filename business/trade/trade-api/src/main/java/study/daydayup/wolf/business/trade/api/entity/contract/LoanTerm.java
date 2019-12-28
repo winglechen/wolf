@@ -16,29 +16,29 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 public class LoanTerm extends ContractTerm {
-    private String tradeNo;
-    private Long  buyerId;
-    private Long  sellerId;
+    protected String tradeNo;
+    protected Long  buyerId;
+    protected Long  sellerId;
 
-    private Long  amount;
-    private Integer currency;
+    protected Long  amount;
+    protected Integer currency;
 
-    private Integer period;
-    private Integer periodUnit;
-    private Integer periodStrategy;
+    protected Integer period;
+    protected Integer periodUnit;
+    protected Integer periodStrategy;
 
-    private Long  handlingFee;
-    private Integer handlingFeeRate;
-    private Integer feePayStrategy;
+    protected Long  handlingFee;
+    protected Integer handlingFeeRate;
+    protected Integer feePayStrategy;
 
-    private Long  interest;
-    private Integer interestRate;
-    private Integer interestUnit;
+    protected Long  interest;
+    protected Integer interestRate;
+    protected Integer interestUnit;
 
-    private Long  penalty;
-    private Integer penaltyRate;
-    private Integer penaltyUnit;
+    protected Long  penalty;
+    protected Integer penaltyRate;
+    protected Integer penaltyUnit;
 
-    private Integer repayStrategy;
-    private Integer prepayStrategy;
+    protected Integer repayStrategy;
+    protected Integer prepayStrategy;
 }

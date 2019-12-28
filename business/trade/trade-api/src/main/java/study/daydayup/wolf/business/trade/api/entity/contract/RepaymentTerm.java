@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.entity.contract;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.entity.trade.TradeStateLog;
 
 
 /**
@@ -12,15 +13,19 @@ import lombok.Data;
 @Data
 public class RepaymentTerm {
 
-    private String tradeNo;
-    private Long  buyerId;
-    private Long  sellerId;
+    protected String tradeNo;
+    protected Long  buyerId;
+    protected Long  sellerId;
 
-    private Long  LoanAmount;
-    private Long  paidAmount;
-    private Long  lossAmount;
-    private Integer currency;
+    protected Integer repayStrategy;
+    protected Integer prepayStrategy;
 
-    private Integer repayStrategy;
-    private Integer prepayStrategy;
+    protected Integer state;
+
+    protected Long  LoanAmount;
+    protected Long  paidAmount;
+    protected Long  lossAmount;
+    protected Integer currency;
+
+    protected TradeStateLog stateLog;
 }

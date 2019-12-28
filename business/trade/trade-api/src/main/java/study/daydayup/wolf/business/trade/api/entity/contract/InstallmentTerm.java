@@ -20,29 +20,29 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 public class InstallmentTerm extends ContractTerm {
-    private String tradeNo;
-    private Long  buyerId;
-    private Long  sellerId;
+    protected String tradeNo;
+    protected Long  buyerId;
+    protected Long  sellerId;
 
-    private Integer installmentNo;
-    private Integer installmentType;
-    private TradeState state;
-    private TradeEvent stateEvent;
+    protected Integer installmentNo;
+    protected Integer installmentType;
+    protected TradeState state;
+    protected TradeEvent stateEvent;
 
-    private String relatedTradeNo;
+    protected String relatedTradeNo;
 
-    private Integer period;
-    private Integer percentage;
-    private Integer feePercentage;
+    protected Integer period;
+    protected Integer percentage;
+    protected Integer feePercentage;
 
-    private Long  amount;
-    private Long  interest;
-    private Long  handlingFee;
+    protected Long  amount;
+    protected Long  interest;
+    protected Long  handlingFee;
 
-    private LocalDate effectAt;
-    private LocalDate dueAt;
+    protected LocalDate effectAt;
+    protected LocalDate dueAt;
 
-    private Integer version;
+    protected Integer version;
 
-    private TradeStateLog stateLog;
+    protected TradeStateLog stateLog;
 }
