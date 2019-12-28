@@ -77,6 +77,12 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
 
+    `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
+
+    `loan_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
+    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '实还金额',
+    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
+
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
@@ -110,6 +116,9 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
     `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
+
+    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
@@ -333,7 +342,6 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `trade_no`          VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '交易号',
     `related_trade_no`  VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '关联交易号',
     `trade_type`        TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易类型',
-    `trade_phase`       TINYINT(4) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '交易阶段',
 
     `buyer_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',

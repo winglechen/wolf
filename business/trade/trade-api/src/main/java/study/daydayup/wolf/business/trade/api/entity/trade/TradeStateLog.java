@@ -20,7 +20,6 @@ public class TradeStateLog implements Model {
     private String tradeNo;
     private String relatedTradeNo;
     private Integer tradeType;
-    private Integer tradePhase;
 
     private Long buyerId;
     private Long sellerId;

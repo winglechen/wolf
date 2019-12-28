@@ -162,7 +162,6 @@
             <columnOverride column="source_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
             <columnOverride column="target_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
             <columnOverride column="trade_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="trade_phase" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="payment_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="consign_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
 

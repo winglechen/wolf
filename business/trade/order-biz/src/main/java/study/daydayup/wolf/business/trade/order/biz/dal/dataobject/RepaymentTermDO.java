@@ -18,6 +18,14 @@ public class RepaymentTermDO implements Serializable {
 
     private Integer prepayStrategy;
 
+    private Byte state;
+
+    private Long loanAmount;
+
+    private Long paidAmount;
+
+    private Long lossAmount;
+
     private Integer version;
 
     private Boolean deleteFlag;
@@ -42,6 +50,10 @@ public class RepaymentTermDO implements Serializable {
         sb.append(", sellerId=").append(sellerId);
         sb.append(", repayStrategy=").append(repayStrategy);
         sb.append(", prepayStrategy=").append(prepayStrategy);
+        sb.append(", state=").append(state);
+        sb.append(", loanAmount=").append(loanAmount);
+        sb.append(", paidAmount=").append(paidAmount);
+        sb.append(", lossAmount=").append(lossAmount);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -69,6 +81,10 @@ public class RepaymentTermDO implements Serializable {
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
             && (this.getRepayStrategy() == null ? other.getRepayStrategy() == null : this.getRepayStrategy().equals(other.getRepayStrategy()))
             && (this.getPrepayStrategy() == null ? other.getPrepayStrategy() == null : this.getPrepayStrategy().equals(other.getPrepayStrategy()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
+            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
+            && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
+            && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -86,6 +102,10 @@ public class RepaymentTermDO implements Serializable {
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
         result = prime * result + ((getRepayStrategy() == null) ? 0 : getRepayStrategy().hashCode());
         result = prime * result + ((getPrepayStrategy() == null) ? 0 : getPrepayStrategy().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
+        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
+        result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
+        result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

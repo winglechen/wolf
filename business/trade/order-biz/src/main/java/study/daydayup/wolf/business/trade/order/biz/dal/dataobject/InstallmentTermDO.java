@@ -10,31 +10,47 @@ public class InstallmentTermDO implements Serializable {
     private Long id;
 
     private String tradeNo;
+
     private Long buyerId;
+
     private Long sellerId;
 
     private Integer installmentNo;
-    private Integer installmentType;
-    private Integer state;
 
+    private Integer installmentType;
+
+    private Integer state;
 
     private String relatedTradeNo;
 
-    private Integer period;
-    private Integer percentage;
-    private Integer feePercentage;
-
-    private Long amount;
-    private Long interest;
-    private Long handlingFee;
-
     private LocalDate effectAt;
+
     private LocalDate dueAt;
 
+    private Long amount;
+
+    private Long interest;
+
+    private Long handlingFee;
+
+    private Long paidAmount;
+
+    private Long lossAmount;
+
+    private Integer period;
+
+    private Integer percentage;
+
+    private Integer feePercentage;
+
     private Integer version;
+
     private Boolean deleteFlag;
+
     private Long lastEditor;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +74,8 @@ public class InstallmentTermDO implements Serializable {
         sb.append(", amount=").append(amount);
         sb.append(", interest=").append(interest);
         sb.append(", handlingFee=").append(handlingFee);
+        sb.append(", paidAmount=").append(paidAmount);
+        sb.append(", lossAmount=").append(lossAmount);
         sb.append(", period=").append(period);
         sb.append(", percentage=").append(percentage);
         sb.append(", feePercentage=").append(feePercentage);
@@ -95,6 +113,8 @@ public class InstallmentTermDO implements Serializable {
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
+            && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
+            && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
@@ -122,6 +142,8 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
+        result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
+        result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());

@@ -6,7 +6,6 @@
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
-    <result column="trade_phase" jdbcType="TINYINT" property="tradePhase" />
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="source_state" jdbcType="SMALLINT" property="sourceState" />
@@ -21,9 +20,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, related_trade_no, trade_type, trade_phase, buyer_id, seller_id, source_state, 
-    target_state, amount, payment_method, consign_method, tags, `source`, source_version, 
-    target_version, created_at
+    id, trade_no, related_trade_no, trade_type, buyer_id, seller_id, source_state, target_state, 
+    amount, payment_method, consign_method, tags, `source`, source_version, target_version, 
+    created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,17 +35,17 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into trade_state_log (trade_no, related_trade_no, trade_type, 
-      trade_phase, buyer_id, seller_id, 
-      source_state, target_state, amount, 
-      payment_method, consign_method, tags, 
-      `source`, source_version, target_version, 
-      created_at)
+      buyer_id, seller_id, source_state, 
+      target_state, amount, payment_method, 
+      consign_method, tags, `source`, 
+      source_version, target_version, created_at
+      )
     values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, 
-      #{tradePhase,jdbcType=TINYINT}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
-      #{sourceState,jdbcType=SMALLINT}, #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, 
-      #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, #{sourceState,jdbcType=SMALLINT}, 
+      #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, #{paymentMethod,jdbcType=TINYINT}, 
+      #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -62,9 +61,6 @@
       </if>
       <if test="tradeType != null">
         trade_type,
-      </if>
-      <if test="tradePhase != null">
-        trade_phase,
       </if>
       <if test="buyerId != null">
         buyer_id,
@@ -112,9 +108,6 @@
       </if>
       <if test="tradeType != null">
         #{tradeType,jdbcType=TINYINT},
-      </if>
-      <if test="tradePhase != null">
-        #{tradePhase,jdbcType=TINYINT},
       </if>
       <if test="buyerId != null">
         #{buyerId,jdbcType=BIGINT},
@@ -166,9 +159,6 @@
       <if test="tradeType != null">
         trade_type = #{tradeType,jdbcType=TINYINT},
       </if>
-      <if test="tradePhase != null">
-        trade_phase = #{tradePhase,jdbcType=TINYINT},
-      </if>
       <if test="buyerId != null">
         buyer_id = #{buyerId,jdbcType=BIGINT},
       </if>
@@ -213,7 +203,6 @@
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       trade_type = #{tradeType,jdbcType=TINYINT},
-      trade_phase = #{tradePhase,jdbcType=TINYINT},
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
       source_state = #{sourceState,jdbcType=SMALLINT},

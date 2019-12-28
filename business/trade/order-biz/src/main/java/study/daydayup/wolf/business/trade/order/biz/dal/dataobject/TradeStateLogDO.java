@@ -14,8 +14,6 @@ public class TradeStateLogDO implements Serializable {
 
     private Integer tradeType;
 
-    private Integer tradePhase;
-
     private Long buyerId;
 
     private Long sellerId;
@@ -52,7 +50,6 @@ public class TradeStateLogDO implements Serializable {
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", relatedTradeNo=").append(relatedTradeNo);
         sb.append(", tradeType=").append(tradeType);
-        sb.append(", tradePhase=").append(tradePhase);
         sb.append(", buyerId=").append(buyerId);
         sb.append(", sellerId=").append(sellerId);
         sb.append(", sourceState=").append(sourceState);
@@ -85,7 +82,6 @@ public class TradeStateLogDO implements Serializable {
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getRelatedTradeNo() == null ? other.getRelatedTradeNo() == null : this.getRelatedTradeNo().equals(other.getRelatedTradeNo()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
-            && (this.getTradePhase() == null ? other.getTradePhase() == null : this.getTradePhase().equals(other.getTradePhase()))
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
             && (this.getSourceState() == null ? other.getSourceState() == null : this.getSourceState().equals(other.getSourceState()))
@@ -108,7 +104,6 @@ public class TradeStateLogDO implements Serializable {
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getRelatedTradeNo() == null) ? 0 : getRelatedTradeNo().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
-        result = prime * result + ((getTradePhase() == null) ? 0 : getTradePhase().hashCode());
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
         result = prime * result + ((getSourceState() == null) ? 0 : getSourceState().hashCode());

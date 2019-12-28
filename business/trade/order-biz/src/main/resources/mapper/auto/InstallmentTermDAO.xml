@@ -15,6 +15,8 @@
     <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="interest" jdbcType="BIGINT" property="interest" />
     <result column="handling_fee" jdbcType="BIGINT" property="handlingFee" />
+    <result column="paid_amount" jdbcType="BIGINT" property="paidAmount" />
+    <result column="loss_amount" jdbcType="BIGINT" property="lossAmount" />
     <result column="period" jdbcType="INTEGER" property="period" />
     <result column="percentage" jdbcType="INTEGER" property="percentage" />
     <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
@@ -26,8 +28,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, related_trade_no, 
-    effect_at, due_at, amount, interest, handling_fee, period, percentage, fee_percentage, 
-    version, delete_flag, last_editor, created_at, updated_at
+    effect_at, due_at, amount, interest, handling_fee, paid_amount, loss_amount, period, 
+    percentage, fee_percentage, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -43,16 +45,18 @@
       installment_no, installment_type, `state`, 
       related_trade_no, effect_at, due_at, 
       amount, interest, handling_fee, 
-      period, percentage, fee_percentage, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      paid_amount, loss_amount, period, 
+      percentage, fee_percentage, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
       #{amount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, #{handlingFee,jdbcType=BIGINT}, 
-      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, #{feePercentage,jdbcType=INTEGER}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{paidAmount,jdbcType=BIGINT}, #{lossAmount,jdbcType=BIGINT}, #{period,jdbcType=INTEGER}, 
+      #{percentage,jdbcType=INTEGER}, #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -95,6 +99,12 @@
       </if>
       <if test="handlingFee != null">
         handling_fee,
+      </if>
+      <if test="paidAmount != null">
+        paid_amount,
+      </if>
+      <if test="lossAmount != null">
+        loss_amount,
       </if>
       <if test="period != null">
         period,
@@ -157,6 +167,12 @@
       </if>
       <if test="handlingFee != null">
         #{handlingFee,jdbcType=BIGINT},
+      </if>
+      <if test="paidAmount != null">
+        #{paidAmount,jdbcType=BIGINT},
+      </if>
+      <if test="lossAmount != null">
+        #{lossAmount,jdbcType=BIGINT},
       </if>
       <if test="period != null">
         #{period,jdbcType=INTEGER},
@@ -223,6 +239,12 @@
       <if test="handlingFee != null">
         handling_fee = #{handlingFee,jdbcType=BIGINT},
       </if>
+      <if test="paidAmount != null">
+        paid_amount = #{paidAmount,jdbcType=BIGINT},
+      </if>
+      <if test="lossAmount != null">
+        loss_amount = #{lossAmount,jdbcType=BIGINT},
+      </if>
       <if test="period != null">
         period = #{period,jdbcType=INTEGER},
       </if>
@@ -264,6 +286,8 @@
       amount = #{amount,jdbcType=BIGINT},
       interest = #{interest,jdbcType=BIGINT},
       handling_fee = #{handlingFee,jdbcType=BIGINT},
+      paid_amount = #{paidAmount,jdbcType=BIGINT},
+      loss_amount = #{lossAmount,jdbcType=BIGINT},
       period = #{period,jdbcType=INTEGER},
       percentage = #{percentage,jdbcType=INTEGER},
       fee_percentage = #{feePercentage,jdbcType=INTEGER},

@@ -8,6 +8,10 @@
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="repay_strategy" jdbcType="INTEGER" property="repayStrategy" />
     <result column="prepay_strategy" jdbcType="INTEGER" property="prepayStrategy" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="loan_amount" jdbcType="BIGINT" property="loanAmount" />
+    <result column="paid_amount" jdbcType="BIGINT" property="paidAmount" />
+    <result column="loss_amount" jdbcType="BIGINT" property="lossAmount" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -15,8 +19,8 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, buyer_id, seller_id, repay_strategy, prepay_strategy, version, delete_flag, 
-    last_editor, created_at, updated_at
+    id, trade_no, buyer_id, seller_id, repay_strategy, prepay_strategy, `state`, loan_amount, 
+    paid_amount, loss_amount, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -29,13 +33,15 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into repayment_term (trade_no, buyer_id, seller_id, 
-      repay_strategy, prepay_strategy, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      repay_strategy, prepay_strategy, `state`, 
+      loan_amount, paid_amount, loss_amount, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
-      #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
+      #{loanAmount,jdbcType=BIGINT}, #{paidAmount,jdbcType=BIGINT}, #{lossAmount,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.RepaymentTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -57,6 +63,18 @@
       </if>
       <if test="prepayStrategy != null">
         prepay_strategy,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="loanAmount != null">
+        loan_amount,
+      </if>
+      <if test="paidAmount != null">
+        paid_amount,
+      </if>
+      <if test="lossAmount != null">
+        loss_amount,
       </if>
       <if test="version != null">
         version,
@@ -89,6 +107,18 @@
       </if>
       <if test="prepayStrategy != null">
         #{prepayStrategy,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="loanAmount != null">
+        #{loanAmount,jdbcType=BIGINT},
+      </if>
+      <if test="paidAmount != null">
+        #{paidAmount,jdbcType=BIGINT},
+      </if>
+      <if test="lossAmount != null">
+        #{lossAmount,jdbcType=BIGINT},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -125,6 +155,18 @@
       <if test="prepayStrategy != null">
         prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
       </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="loanAmount != null">
+        loan_amount = #{loanAmount,jdbcType=BIGINT},
+      </if>
+      <if test="paidAmount != null">
+        paid_amount = #{paidAmount,jdbcType=BIGINT},
+      </if>
+      <if test="lossAmount != null">
+        loss_amount = #{lossAmount,jdbcType=BIGINT},
+      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -150,6 +192,10 @@
       seller_id = #{sellerId,jdbcType=BIGINT},
       repay_strategy = #{repayStrategy,jdbcType=INTEGER},
       prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
+      `state` = #{state,jdbcType=TINYINT},
+      loan_amount = #{loanAmount,jdbcType=BIGINT},
+      paid_amount = #{paidAmount,jdbcType=BIGINT},
+      loss_amount = #{lossAmount,jdbcType=BIGINT},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
