@@ -24,6 +24,8 @@ public class TradeStateLogDO implements Serializable {
 
     private Long amount;
 
+    private Integer currency;
+
     private Integer paymentMethod;
 
     private Integer consignMethod;
@@ -55,6 +57,7 @@ public class TradeStateLogDO implements Serializable {
         sb.append(", sourceState=").append(sourceState);
         sb.append(", targetState=").append(targetState);
         sb.append(", amount=").append(amount);
+        sb.append(", currency=").append(currency);
         sb.append(", paymentMethod=").append(paymentMethod);
         sb.append(", consignMethod=").append(consignMethod);
         sb.append(", tags=").append(tags);
@@ -87,6 +90,7 @@ public class TradeStateLogDO implements Serializable {
             && (this.getSourceState() == null ? other.getSourceState() == null : this.getSourceState().equals(other.getSourceState()))
             && (this.getTargetState() == null ? other.getTargetState() == null : this.getTargetState().equals(other.getTargetState()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getPaymentMethod() == null ? other.getPaymentMethod() == null : this.getPaymentMethod().equals(other.getPaymentMethod()))
             && (this.getConsignMethod() == null ? other.getConsignMethod() == null : this.getConsignMethod().equals(other.getConsignMethod()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
@@ -109,6 +113,7 @@ public class TradeStateLogDO implements Serializable {
         result = prime * result + ((getSourceState() == null) ? 0 : getSourceState().hashCode());
         result = prime * result + ((getTargetState() == null) ? 0 : getTargetState().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getPaymentMethod() == null) ? 0 : getPaymentMethod().hashCode());
         result = prime * result + ((getConsignMethod() == null) ? 0 : getConsignMethod().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());

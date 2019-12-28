@@ -11,6 +11,7 @@
     <result column="source_state" jdbcType="SMALLINT" property="sourceState" />
     <result column="target_state" jdbcType="SMALLINT" property="targetState" />
     <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
     <result column="consign_method" jdbcType="TINYINT" property="consignMethod" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
@@ -21,8 +22,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, trade_no, related_trade_no, trade_type, buyer_id, seller_id, source_state, target_state, 
-    amount, payment_method, consign_method, tags, `source`, source_version, target_version, 
-    created_at
+    amount, currency, payment_method, consign_method, tags, `source`, source_version, 
+    target_version, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,16 +37,16 @@
     </selectKey>
     insert into trade_state_log (trade_no, related_trade_no, trade_type, 
       buyer_id, seller_id, source_state, 
-      target_state, amount, payment_method, 
-      consign_method, tags, `source`, 
-      source_version, target_version, created_at
-      )
+      target_state, amount, currency, 
+      payment_method, consign_method, tags, 
+      `source`, source_version, target_version, 
+      created_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, 
       #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, #{sourceState,jdbcType=SMALLINT}, 
-      #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, #{paymentMethod,jdbcType=TINYINT}, 
-      #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
-      #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -76,6 +77,9 @@
       </if>
       <if test="amount != null">
         amount,
+      </if>
+      <if test="currency != null">
+        currency,
       </if>
       <if test="paymentMethod != null">
         payment_method,
@@ -123,6 +127,9 @@
       </if>
       <if test="amount != null">
         #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
       </if>
       <if test="paymentMethod != null">
         #{paymentMethod,jdbcType=TINYINT},
@@ -174,6 +181,9 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=BIGINT},
       </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
       <if test="paymentMethod != null">
         payment_method = #{paymentMethod,jdbcType=TINYINT},
       </if>
@@ -208,6 +218,7 @@
       source_state = #{sourceState,jdbcType=SMALLINT},
       target_state = #{targetState,jdbcType=SMALLINT},
       amount = #{amount,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=INTEGER},
       payment_method = #{paymentMethod,jdbcType=TINYINT},
       consign_method = #{consignMethod,jdbcType=TINYINT},
       tags = #{tags,jdbcType=VARCHAR},
