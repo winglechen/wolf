@@ -41,8 +41,9 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '借款金额',
-    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
+
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
     `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
@@ -80,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `loan_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
+    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '实还金额',
     `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
 
@@ -114,11 +116,13 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `due_at`            DATE COMMENT '到期时间',
 
     `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
+    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+
     `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
-    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
-    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
@@ -349,6 +353,7 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `target_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
+    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
     `consign_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付方式',
 
