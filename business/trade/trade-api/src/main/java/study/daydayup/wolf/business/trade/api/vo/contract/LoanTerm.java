@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.trade.api.vo.contract;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
