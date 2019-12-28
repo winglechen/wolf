@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.trade.api.exception.InvalidContractException
 import study.daydayup.wolf.business.trade.api.exception.order.TradeStateNotFoundException;
 import study.daydayup.wolf.business.trade.api.exception.order.UnsupportedStateChangeException;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
-import study.daydayup.wolf.business.trade.api.vo.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;

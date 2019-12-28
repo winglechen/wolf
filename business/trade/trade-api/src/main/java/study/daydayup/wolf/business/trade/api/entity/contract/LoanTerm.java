@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.vo.contract;
+package study.daydayup.wolf.business.trade.api.entity.contract;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 
 /**
- * study.daydayup.wolf.business.trade.api.vo.contract
+ * study.daydayup.wolf.business.trade.api.entity.contract
  *
  * @author Wingle
  * @since 2019/12/13 3:54 下午

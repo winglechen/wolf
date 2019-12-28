@@ -1,8 +1,9 @@
-package study.daydayup.wolf.business.trade.api.vo.contract;
+package study.daydayup.wolf.business.trade.api.entity.contract;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import study.daydayup.wolf.business.trade.api.entity.trade.TradeStateLog;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 
 
 /**
- * study.daydayup.wolf.business.trade.api.vo.contract
+ * study.daydayup.wolf.business.trade.api.entity.contract
  *
  * @author Wingle
  * @since 2019/12/13 3:53 下午
@@ -42,4 +43,6 @@ public class InstallmentTerm extends ContractTerm {
     private LocalDate dueAt;
 
     private Integer version;
+
+    private TradeStateLog stateLog;
 }
