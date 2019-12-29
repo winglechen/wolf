@@ -125,11 +125,9 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
-
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
-
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -231,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `trade_memo`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '交易备注';
 
-
+#tags: firstOrder、installment_no
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order`
 (
@@ -338,9 +336,7 @@ CREATE TABLE IF NOT EXISTS `order_line`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '订单项';
 
-
 #首逾
-DROP TABLE IF EXISTS `order_state_log`;
 DROP TABLE IF EXISTS `trade_state_log`;
 CREATE TABLE IF NOT EXISTS `trade_state_log`
 (
@@ -367,20 +363,6 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
-
-DROP TABLE IF EXISTS `contract_state_log`;
-# CREATE TABLE IF NOT EXISTS `contract_state_log`
-# (
-#     `id`            INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
-#     `contract_no`   VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '合同号',
-#     `buyer_id`      BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
-#     `seller_id`     BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
-#     `contract_version` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
-#     `source_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
-#     `target_state`  SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
-#     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-#     primary key (id)
-# ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 
 DROP TABLE IF EXISTS `price_change_log`;
 CREATE TABLE IF NOT EXISTS `price_change_log`
