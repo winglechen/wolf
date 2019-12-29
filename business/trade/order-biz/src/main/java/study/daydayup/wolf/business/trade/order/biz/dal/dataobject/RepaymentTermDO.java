@@ -18,7 +18,7 @@ public class RepaymentTermDO implements Serializable {
 
     private Integer prepayStrategy;
 
-    private Byte state;
+    private Integer state;
 
     private Long loanAmount;
 

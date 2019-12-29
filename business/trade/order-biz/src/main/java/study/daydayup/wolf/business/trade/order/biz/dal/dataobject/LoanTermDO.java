@@ -14,6 +14,8 @@ public class LoanTermDO implements Serializable {
 
     private Long sellerId;
 
+    private Integer state;
+
     private Long amount;
 
     private Integer currency;
@@ -64,6 +66,7 @@ public class LoanTermDO implements Serializable {
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", buyerId=").append(buyerId);
         sb.append(", sellerId=").append(sellerId);
+        sb.append(", state=").append(state);
         sb.append(", amount=").append(amount);
         sb.append(", currency=").append(currency);
         sb.append(", installmentNum=").append(installmentNum);
@@ -103,6 +106,7 @@ public class LoanTermDO implements Serializable {
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getInstallmentNum() == null ? other.getInstallmentNum() == null : this.getInstallmentNum().equals(other.getInstallmentNum()))
@@ -132,6 +136,7 @@ public class LoanTermDO implements Serializable {
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getInstallmentNum() == null) ? 0 : getInstallmentNum().hashCode());

@@ -6,6 +6,7 @@
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
+    <result column="state" jdbcType="TINYINT" property="state" />
     <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="installment_num" jdbcType="TINYINT" property="installmentNum" />
@@ -27,7 +28,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, buyer_id, seller_id, amount, currency, installment_num, repay_strategy, 
+    id, trade_no, buyer_id, seller_id, `state`, amount, currency, installment_num, repay_strategy, 
     prepay_strategy, handling_fee, fee_pay_strategy, period, period_unit, period_strategy, 
     interest, interest_unit, penalty, penalty_unit, version, delete_flag, last_editor, 
     created_at, updated_at
@@ -43,21 +44,21 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into loan_term (trade_no, buyer_id, seller_id, 
-      amount, currency, installment_num, 
-      repay_strategy, prepay_strategy, handling_fee, 
-      fee_pay_strategy, period, period_unit, 
-      period_strategy, interest, interest_unit, 
-      penalty, penalty_unit, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      `state`, amount, currency, 
+      installment_num, repay_strategy, prepay_strategy, 
+      handling_fee, fee_pay_strategy, period, 
+      period_unit, period_strategy, interest, 
+      interest_unit, penalty, penalty_unit, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
-      #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, #{installmentNum,jdbcType=TINYINT}, 
-      #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{handlingFee,jdbcType=BIGINT}, 
-      #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER}, 
-      #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER}, 
-      #{penalty,jdbcType=INTEGER}, #{penaltyUnit,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{state,jdbcType=TINYINT}, #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{installmentNum,jdbcType=TINYINT}, #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, 
+      #{handlingFee,jdbcType=BIGINT}, #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, 
+      #{periodUnit,jdbcType=INTEGER}, #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, 
+      #{interestUnit,jdbcType=INTEGER}, #{penalty,jdbcType=INTEGER}, #{penaltyUnit,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -73,6 +74,9 @@
       </if>
       <if test="sellerId != null">
         seller_id,
+      </if>
+      <if test="state != null">
+        `state`,
       </if>
       <if test="amount != null">
         amount,
@@ -141,6 +145,9 @@
       </if>
       <if test="sellerId != null">
         #{sellerId,jdbcType=BIGINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=BIGINT},
@@ -213,6 +220,9 @@
       <if test="sellerId != null">
         seller_id = #{sellerId,jdbcType=BIGINT},
       </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=TINYINT},
+      </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=BIGINT},
       </if>
@@ -278,6 +288,7 @@
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
+      `state` = #{state,jdbcType=TINYINT},
       amount = #{amount,jdbcType=BIGINT},
       currency = #{currency,jdbcType=INTEGER},
       installment_num = #{installmentNum,jdbcType=TINYINT},
