@@ -29,7 +29,8 @@ public class OrderRepository extends AbstractRepository implements Repository {
             return;
         }
 
-        if (isExists(entity)) {
+        if (null != findExistsOrder(entity)) {
+            entity.setKey(findExistsOrder(entity));
             updateEntity(entity);
             return;
         }
@@ -37,19 +38,23 @@ public class OrderRepository extends AbstractRepository implements Repository {
         createEntity(entity);
     }
 
-    private boolean isExists(OrderEntity entity) {
+    private Order findExistsOrder(OrderEntity entity) {
         RelatedTradeRequest request = entityToRequest(entity);
         List<Order> orderList = orderService.findRelatedTrade(request);
         if (orderList == null || orderList.isEmpty()) {
-            return false;
+            return null;
         }
 
-        return true;
+        return orderToKey(orderList.get(0));
     }
 
     private void updateEntity(OrderEntity entity) {
-        Order key = entityToKey(entity);
+        Order key = entity.getKey();
         Order changes = entityToChanges(entity);
+
+        if (key == null || null == changes) {
+            return;
+        }
 
         orderService.modify(key, changes);
     }
@@ -67,12 +72,41 @@ public class OrderRepository extends AbstractRepository implements Repository {
         return request;
     }
 
-    private Order entityToKey(OrderEntity entity) {
-        return null;
+    private Order orderToKey(Order order) {
+        if (order == null) {
+            return null;
+        }
+
+        Order key = Order.builder()
+                .tradeNo(order.getTradeNo())
+                .state(order.getState())
+                .buyerId(order.getBuyerId())
+                .sellerId(order.getSellerId())
+                .version(order.getVersion())
+                .build();
+
+        return key;
     }
 
     private Order entityToChanges(OrderEntity entity) {
-        return null;
+        if (entity == null || null == entity.getModel()) {
+            return null;
+        }
+
+        Order order = entity.getModel();
+        Order changes = Order.builder()
+                .tags(order.getTags())
+                .state(order.getState())
+                .amount(order.getAmount())
+                .postage(order.getPostage())
+                .paymentMethod(order.getPaymentMethod())
+                .consignMethod(order.getConsignMethod())
+                .outTradeNo(order.getOutTradeNo())
+                .expiredAt(order.getExpiredAt())
+                .deleteFlag(order.getDeleteFlag())
+                .build();
+
+        return changes;
     }
 
 }

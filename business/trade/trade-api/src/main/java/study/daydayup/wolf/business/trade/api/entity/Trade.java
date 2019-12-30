@@ -45,6 +45,9 @@ public class Trade implements Model {
     protected String source;
     protected String tags;
 
+    protected Integer version;
+    protected Boolean deleteFlag;
+
     protected LocalDateTime createdAt;
     protected LocalDateTime expiredAt;
 
