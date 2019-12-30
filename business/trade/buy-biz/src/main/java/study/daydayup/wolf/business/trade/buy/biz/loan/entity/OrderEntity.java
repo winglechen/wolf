@@ -37,8 +37,11 @@ public class OrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     public void loan() {
+        LocalDateTime expiredAt = LocalDateTime.now().plusDays(30);
+
         model = createOrder(TradeTypeEnum.LOAN_ORDER);
         model.setAmount(contract.getLoanTerm().getAmount());
+        model.setExpiredAt(expiredAt);
 
         setLoanTag();
     }

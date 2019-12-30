@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.event.base.CreateEvent;
 import study.daydayup.wolf.business.trade.api.exception.order.TradeStateNotFoundException;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderDAO;
@@ -69,6 +70,10 @@ public class OrderRepository extends AbstractRepository implements Repository {
         //set tradeType
         if (null != request.getTradeType()) {
             orderDO.setTradeType(request.getTradeType().getCode());
+
+            if (null != request.getStateEvent() && request.getStateEvent() instanceof CreateEvent) {
+                orderDO.setState(Tsm.getInitState(request.getTradeType().getCode()).getCode());
+            }
         }
 
         List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(orderDO);

@@ -52,6 +52,14 @@ public class Tsm {
         return stateMachine.fire(state, event);
     }
 
+    public static TradeState getInitState(Integer tradeType) {
+        if (tradeType == null) {
+            return null;
+        }
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(tradeType);
+        return stateMachine.getInitState();
+    }
+
     private static TradeStateMachineFactory createFactory(TradeTypeEnum tradeTypeEnum) {
         switch (tradeTypeEnum) {
             case LOAN_CONTRACT:

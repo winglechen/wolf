@@ -1,7 +1,10 @@
 package study.daydayup.wolf.business.trade.api.dto.tm;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.exception.InvalidTradeIdException;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Request;
@@ -16,6 +19,8 @@ import java.time.LocalDateTime;
  * @since 2019/12/30 11:10 下午
  **/
 @Data
+@Builder
+@NoArgsConstructor
 public class RelatedTradeRequest implements Request {
     @NotBlank
     private String relatedTradeNo;
@@ -25,6 +30,7 @@ public class RelatedTradeRequest implements Request {
 
     private TradeTypeEnum tradeType;
     private TradeState state;
+    private TradeEvent stateEvent;
     private LocalDateTime expiredAfter;
 
     public void valid() {
