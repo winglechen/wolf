@@ -3,11 +3,13 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderRepository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.order.service.impl
@@ -38,5 +40,10 @@ public class OrderServiceImpl implements OrderService {
     public Order find(@Validated TradeId tradeId, OrderOption option) {
         tradeId.valid();
         return orderRepository.find(tradeId, option);
+    }
+
+    @Override
+    public List<Order> findRelatedTrade(RelatedTradeRequest request) {
+        return null;
     }
 }

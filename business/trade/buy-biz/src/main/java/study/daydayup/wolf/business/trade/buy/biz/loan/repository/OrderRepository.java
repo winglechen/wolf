@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.repository;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
@@ -23,5 +24,9 @@ public class OrderRepository extends AbstractRepository implements Repository {
 
     public void save(OrderEntity order) {
 
+    }
+
+    public OrderEntity findRelatedTrade(RelatedTradeRequest request) {
+        return null;
     }
 }

@@ -8,6 +8,8 @@ import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.vo.SellerMemo;
 import study.daydayup.wolf.business.trade.api.vo.OrderAddress;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ import java.util.List;
 @Data
 @SuperBuilder(toBuilder = true)
 public class Order extends Trade {
+    @NotNull @Min(0)
     protected Long  amount;
     protected Long  postage;
     protected Integer currency;

@@ -71,8 +71,16 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void prepay() {
+    public void prepay(TradeId tradeId, Integer installmentNo) {
+        tradeId.valid();
+        if (installmentNo == null || installmentNo < 1) {
+            throw new IllegalArgumentException("installmentNo can't be null");
+        }
 
+        LoanEntity contract = loanRepository.find(tradeId);
+        OrderEntity order = new OrderEntity(contract.getModel());
+        order.repay(installmentNo);
+        orderRepository.save(order);
     }
 
     @Override
@@ -90,12 +98,18 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public void overdue(TradeId tradeId, Integer installmentNo) {
-
+        tradeId.valid();
+        if (installmentNo == null || installmentNo < 1) {
+            throw new IllegalArgumentException("installmentNo can't be null");
+        }
     }
 
     @Override
     public void markAsLoss(TradeId tradeId, Integer installmentNo) {
-
+        tradeId.valid();
+        if (installmentNo == null || installmentNo < 1) {
+            throw new IllegalArgumentException("installmentNo can't be null");
+        }
     }
 
     @Override

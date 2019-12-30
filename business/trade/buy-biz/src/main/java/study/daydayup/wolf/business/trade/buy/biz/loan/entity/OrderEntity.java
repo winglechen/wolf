@@ -2,16 +2,20 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import study.daydayup.wolf.business.trade.api.constant.TradeTag;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
+import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.exception.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.exception.buy.InstallmentNotEffectedException;
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
+import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
+import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.common.util.EnumUtil;
 import study.daydayup.wolf.common.util.PeriodUtil;
 import study.daydayup.wolf.common.util.finance.Interest;
+import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import java.time.LocalDate;
@@ -24,9 +28,12 @@ import java.time.LocalTime;
  * @author Wingle
  * @since 2019/12/13 4:41 下午
  **/
-public class OrderEntity extends AbstractOrder implements Entity  {
+public class OrderEntity extends AbstractEntity<Order> implements Entity  {
+    private Contract contract;
+
     public OrderEntity(Contract contract) {
-        super(contract);
+        this.contract = contract;
+        this.isNew = true;
     }
 
     public void loan() {
@@ -172,4 +179,27 @@ public class OrderEntity extends AbstractOrder implements Entity  {
         return Interest.rate(loan.getAmount(), loan.getPenaltyRate(),penaltyPeriod, true);
     }
 
+    private Order createOrder(TradeTypeEnum tradeType) {
+        return Order.builder()
+                .tradeNo(createOrderNo())
+                .tradeType(tradeType.getCode())
+                .relatedTradeNo(contract.getTradeNo())
+                .buyerId(contract.getBuyerId())
+                .buyerName(contract.getBuyerName())
+                .sellerId(contract.getSellerId())
+                .sellerName(contract.getSellerName())
+                .source(contract.getSource())
+                .createdAt(LocalDateTime.now())
+                .postage(0L)
+                .currency(contract.getLoanTerm().getCurrency())
+                .build();
+    }
+
+    private String createOrderNo() {
+        return TradeNo.builder()
+                .accountId(contract.getBuyerId())
+                .tradePhase(TradePhaseEnum.ORDER_PHASE)
+                .build()
+                .toString();
+    }
 }
