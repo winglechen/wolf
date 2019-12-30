@@ -42,7 +42,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
 
         List<InstallmentTermDO>  installmentTermDOList = batchModelToDO(installmentTerms, true);
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.createForInstallment();
+        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
         Integer state = stateMachine.getInitState().getCode();
 
         for (InstallmentTermDO installmentTermDO: installmentTermDOList) {

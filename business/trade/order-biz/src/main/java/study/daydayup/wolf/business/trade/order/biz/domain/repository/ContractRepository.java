@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -128,7 +127,7 @@ public class ContractRepository extends AbstractRepository implements Repository
         ContractDO changesDO = modelToDO(changes);
         changesDO.setUpdatedAt(LocalDateTime.now());
 
-        TradeState state = getTradeState(key.getTradeType(), changes.getStateEvent(), key.getState());
+        TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
         if (state != null) {
             changesDO.setState(state.getCode());
 
@@ -137,19 +136,7 @@ public class ContractRepository extends AbstractRepository implements Repository
             }
         }
 
-        return contractDAO.updateByTradeNo(changesDO, keyDO);
-    }
-
-    private TradeState getTradeState(Integer tradeType, TradeEvent event, TradeState state) {
-        if (null == tradeType || event == null) {
-            return null;
-        }
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(tradeType);
-        if (state == null) {
-            return stateMachine.getInitState();
-        }
-
-        return stateMachine.fire(state, event);
+        return contractDAO.updateByKey(changesDO, keyDO);
     }
 
     private ContractDO modelToDO(Contract contract) {
