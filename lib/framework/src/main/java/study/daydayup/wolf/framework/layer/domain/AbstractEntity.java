@@ -17,7 +17,7 @@ public abstract class AbstractEntity<T> implements Entity {
 
     protected T model;
     protected T changes;
-    protected T locker;
+    protected T key;
 
     protected List<Event> eventList = new ArrayList<>();
 

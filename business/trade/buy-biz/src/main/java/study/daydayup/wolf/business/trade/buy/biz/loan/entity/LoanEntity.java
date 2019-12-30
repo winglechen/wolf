@@ -1,25 +1,15 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
-import study.daydayup.wolf.business.trade.api.constant.TradeTag;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.entity.Order;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.event.loan.ApproveEvent;
 import study.daydayup.wolf.business.trade.api.event.loan.RefuseEvent;
 import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanBeginEvent;
 import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanSuccessEvent;
 import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.exception.InvalidContractException;
-import study.daydayup.wolf.business.trade.api.exception.buy.InstallmentOverdueException;
-import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.common.model.type.id.TradeNo;
-import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +26,7 @@ public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
 
     public LoanEntity(Contract model, boolean isNew) {
         this.model = model;
-        this.locker = Contract.builder()
+        this.key = Contract.builder()
                 .tradeNo(model.getTradeNo())
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
@@ -52,7 +42,7 @@ public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
                 .build();
 
         model = contract;
-        locker = contract;
+        key = contract;
         isNew = false;
     }
 

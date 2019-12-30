@@ -32,12 +32,12 @@ public class LoanRepository extends AbstractRepository implements Repository {
 
     public void save(LoanEntity entity) {
         if (entity == null
-                || null == entity.getLocker()
+                || null == entity.getKey()
                 || null == entity.getChanges()) {
             return;
         }
 
-        contractService.modify(entity.getLocker(), entity.getChanges());
+        contractService.modify(entity.getKey(), entity.getChanges());
         fire(entity.getEventList());
     }
 

@@ -31,7 +31,7 @@ public class OrderRepository implements Repository {
     }
 
     public void save(OrderEntity entity) {
-        Order locker = entity.getLocker();
+        Order locker = entity.getKey();
         Order changes = entity.getChanges();
 
         OrderDO lockerDO = new OrderDO(locker);
