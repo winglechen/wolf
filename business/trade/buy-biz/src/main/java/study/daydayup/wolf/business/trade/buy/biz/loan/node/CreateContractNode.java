@@ -54,7 +54,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
         contract = Contract.builder()
                 .tradeType(context.getTradeType().getCode())
-                .state(new WaitToApproveState().getCode())
+                .state(new WaitToApproveState())
                 .source(context.getRequest().getSource())
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -176,10 +176,10 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     private void setInstallmentFee(InstallmentTerm term, long fee) {
         LoanTerm loan = contract.getLoanTerm();
         int feeStrategy = loan.getFeePayStrategy();
-        term.setHandlingFee(0);
+        term.setHandlingFee(0L);
 
         if (feeStrategy == FeeStrategyEnum.PRE.getCode()) {
-            term.setHandlingFee(0);
+            term.setHandlingFee(0L);
             return;
         }
 
