@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.dto.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
@@ -23,6 +24,10 @@ public class OrderRepository extends AbstractRepository implements Repository {
     }
 
     public Order find(TradeId tradeId) {
+        return find(tradeId, null);
+    }
+
+    public Order find(TradeId tradeId, OrderOption option) {
         return null;
     }
 }

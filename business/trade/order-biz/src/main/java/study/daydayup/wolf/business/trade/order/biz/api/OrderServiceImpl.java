@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.api;
 
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.trade.api.dto.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
@@ -30,7 +31,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order find(@Validated TradeId tradeId) {
+        return find(tradeId, null);
+    }
+
+    @Override
+    public Order find(@Validated TradeId tradeId, OrderOption option) {
         tradeId.valid();
-        return orderRepository.find(tradeId);
+        return orderRepository.find(tradeId, option);
     }
 }

@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import study.daydayup.wolf.business.trade.api.constant.TradeTag;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
@@ -25,9 +24,20 @@ import java.time.LocalTime;
  * @author Wingle
  * @since 2019/12/13 4:41 下午
  **/
-public class RepayOrderEntity extends AbstractLoanOrder implements Entity  {
-    public RepayOrderEntity(Contract contract) {
+public class OrderEntity extends AbstractOrder implements Entity  {
+    public OrderEntity(Contract contract) {
         super(contract);
+    }
+
+    public void loan() {
+        model = createOrder(TradeTypeEnum.LOAN_ORDER);
+        model.setAmount(contract.getLoanTerm().getAmount());
+
+        setLoanTag();
+    }
+
+    public void loanByProxy() {
+
     }
 
     public void repay(int installmentNo) {
@@ -41,7 +51,7 @@ public class RepayOrderEntity extends AbstractLoanOrder implements Entity  {
         long amount = calculateAmount(installmentTerm, period);
         model.setAmount(amount);
 
-        setTradeTag(installmentNo);
+        setInstallmentTag(installmentNo);
     }
 
     public void prepayAll() {
@@ -53,11 +63,21 @@ public class RepayOrderEntity extends AbstractLoanOrder implements Entity  {
         model.setTradeType(TradeTypeEnum.COLLECTION_ORDER.getCode());
     }
 
+    public void collectPartly() {}
+
     public void collectAll() {
 
     }
 
-    private void setTradeTag(int installmentNo) {
+    private void setLoanTag() {
+        Tag contractTag = new Tag(model.getTags());
+        if (!contractTag.contains(TradeTag.FIRST_TRADE)) {
+            return;
+        }
+        model.setTags(TradeTag.FIRST_TRADE);
+    }
+
+    private void setInstallmentTag(int installmentNo) {
         Tag orderTag = new Tag("installment_" + installmentNo);
 
         Tag contractTag = new Tag(model.getTags());

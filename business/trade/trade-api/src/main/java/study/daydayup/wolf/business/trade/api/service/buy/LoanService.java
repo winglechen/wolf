@@ -19,9 +19,9 @@ public interface LoanService {
     void createLoanProxy();
     void prepay();
 
-    void due(TradeId tradeId);
-    void overdue(TradeId tradeId);
-    void markAsLoss(TradeId tradeId);
+    void due(TradeId tradeId, Integer installmentNo);
+    void overdue(TradeId tradeId, Integer installmentNo);
+    void markAsLoss(TradeId tradeId, Integer installmentNo);
 
     void scanDueLoan();
     void scanOverdueLoan();

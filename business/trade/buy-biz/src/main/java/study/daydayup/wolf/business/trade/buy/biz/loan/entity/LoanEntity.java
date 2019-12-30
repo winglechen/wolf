@@ -55,6 +55,7 @@ public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
                 .build();
         changes.setStateEvent(event);
     }
+
     public void refuse() {
         //loan.state:refused
         RefuseEvent event = RefuseEvent.builder()

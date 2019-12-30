@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.repository;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
@@ -8,7 +9,6 @@ import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
-import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.repository
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  **/
 @Component
 public class LoanRepository extends AbstractRepository implements Repository {
-    @Resource
+    @Reference
     private ContractService contractService;
 
     public void add(LoanEntity entity) {

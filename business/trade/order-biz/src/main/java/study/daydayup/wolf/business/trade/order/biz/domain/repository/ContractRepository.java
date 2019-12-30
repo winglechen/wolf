@@ -1,8 +1,10 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.trade.api.dto.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
@@ -78,6 +80,10 @@ public class ContractRepository extends AbstractRepository implements Repository
     }
 
     public Contract find(TradeId tradeId) {
+        return find(tradeId, null);
+    }
+
+    public Contract find(TradeId tradeId, ContractOption option) {
         ContractDO contractDO = findContract(tradeId);
         if (contractDO == null) {
             return null;

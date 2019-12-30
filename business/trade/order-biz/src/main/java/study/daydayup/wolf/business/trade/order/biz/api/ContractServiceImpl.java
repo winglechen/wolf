@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.trade.api.dto.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
@@ -32,6 +33,11 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Contract find(@Validated TradeId tradeId) {
+        return find(tradeId, null);
+    }
+
+    @Override
+    public Contract find(TradeId tradeId, ContractOption option) {
         tradeId.valid();
         return contractRepository.find(tradeId);
     }

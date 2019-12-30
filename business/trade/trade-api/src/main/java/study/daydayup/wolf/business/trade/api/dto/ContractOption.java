@@ -14,6 +14,7 @@ public class ContractOption implements Request {
     private boolean withConsignTerm;
     private boolean withInstallmentTerm;
     private boolean withLoanTerm;
+    private boolean withRepaymentTerm;
     private boolean withObjectsTerm;
     private boolean withPaymentTerm;
     private boolean withPostageTerm;
