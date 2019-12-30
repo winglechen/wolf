@@ -51,28 +51,28 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
     }
 
-    public void save(List<InstallmentTerm> lockers, List<InstallmentTerm> changes) {
-        if (lockers == null || lockers.isEmpty()
+    public void save(List<InstallmentTerm> keys, List<InstallmentTerm> changes) {
+        if (keys == null || keys.isEmpty()
                 || null == changes || changes.isEmpty()
-                || lockers.size() != changes.size()) {
+                || keys.size() != changes.size()) {
             return;
         }
 
-        List<InstallmentTermDO> lockerDOs = batchModelToDO(lockers, true);
+        List<InstallmentTermDO> keyDOs = batchModelToDO(keys, true);
         List<InstallmentTermDO> changeDOs = batchModelToDO(changes, true);
-        if (lockers.size() != lockerDOs.size() || changes.size() != changeDOs.size()) {
-            throw new InvalidContractException("Invalid installment: locker and change's size are not match");
+        if (keys.size() != keyDOs.size() || changes.size() != changeDOs.size()) {
+            throw new InvalidContractException("Invalid installment: key and change's size are not match");
         }
 
-        TradeState state = getChangedState(lockers.get(0), changes.get(0));
-        for (int i = 0, size=lockerDOs.size(); i < size; i++) {
-            InstallmentTermDO lockerDO = lockerDOs.get(i);
+        TradeState state = getChangedState(keys.get(0), changes.get(0));
+        for (int i = 0, size=keyDOs.size(); i < size; i++) {
+            InstallmentTermDO keyDO = keyDOs.get(i);
             InstallmentTermDO changeDO = changeDOs.get(i);
             if (state != null) {
                 changeDO.setState(state.getCode());
             }
 
-            installmentTermDAO.updateByTradeNo(changeDO, lockerDO);
+            installmentTermDAO.updateByTradeNo(changeDO, keyDO);
         }
     }
 
@@ -86,16 +86,16 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         return batchDOToModel(installmentTermDOList, true);
     }
 
-    private TradeState getChangedState(InstallmentTerm locker, InstallmentTerm change) {
-        if (null == locker.getState() || null == change.getStateEvent()) {
+    private TradeState getChangedState(InstallmentTerm key, InstallmentTerm change) {
+        if (null == key.getState() || null == change.getStateEvent()) {
             return null;
         }
 
         StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
 
-        TradeState state = stateMachine.fire(locker.getState(), change.getStateEvent());
+        TradeState state = stateMachine.fire(key.getState(), change.getStateEvent());
         if (state == null) {
-            throw new UnsupportedStateChangeException(locker.getState(), change.getStateEvent());
+            throw new UnsupportedStateChangeException(key.getState(), change.getStateEvent());
         }
 
         return state;

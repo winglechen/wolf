@@ -34,18 +34,18 @@
                 updated_at = #{updated.updatedAt,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where trade_no=#{locker.tradeNo,jdbcType=VARCHAR}
-        <if test="locker.state != null" >
-            and state = #{locker.state,jdbcType=TINYINT}
+        where trade_no=#{key.tradeNo,jdbcType=VARCHAR}
+        <if test="key.state != null" >
+            and state = #{key.state,jdbcType=TINYINT}
         </if>
-        <if test="locker.buyerId != null">
-            and buyer_id = #{locker.buyerId,jdbcType=BIGINT}
+        <if test="key.buyerId != null">
+            and buyer_id = #{key.buyerId,jdbcType=BIGINT}
         </if>
-        <if test="locker.sellerId != null ">
-            and seller_id = #{locker.sellerId,jdbcType=BIGINT}
+        <if test="key.sellerId != null ">
+            and seller_id = #{key.sellerId,jdbcType=BIGINT}
         </if>
-        <if test="locker.version != null" >
-            and version = #{locker.version,jdbcType=INTEGER}
+        <if test="key.version != null" >
+            and version = #{key.version,jdbcType=INTEGER}
         </if>
         limit 1
     </update>

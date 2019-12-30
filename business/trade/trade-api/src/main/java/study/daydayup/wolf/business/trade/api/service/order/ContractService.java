@@ -11,6 +11,6 @@ import study.daydayup.wolf.business.trade.api.entity.Contract;
  **/
 public interface ContractService {
     void create(Contract contract);
-    void modify(Contract locker, Contract changes);
+    void modify(Contract key, Contract changes);
     Contract find(TradeId tradeId);
 }

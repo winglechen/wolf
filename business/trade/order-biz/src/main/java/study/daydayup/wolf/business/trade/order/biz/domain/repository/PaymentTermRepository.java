@@ -18,7 +18,7 @@ public class PaymentTermRepository extends AbstractRepository implements Reposit
 
     }
 
-    public void save(PaymentTerm locker, PaymentTerm changes) {
+    public void save(PaymentTerm key, PaymentTerm changes) {
 
     }
 

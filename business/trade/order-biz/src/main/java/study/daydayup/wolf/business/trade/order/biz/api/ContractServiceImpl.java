@@ -26,8 +26,8 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void modify(@Validated Contract locker, Contract changes) {
-        contractRepository.save(locker, changes);
+    public void modify(@Validated Contract key, Contract changes) {
+        contractRepository.save(key, changes);
     }
 
     @Override

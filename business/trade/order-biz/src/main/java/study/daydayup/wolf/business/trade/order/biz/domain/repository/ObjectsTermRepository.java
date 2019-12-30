@@ -18,7 +18,7 @@ public class ObjectsTermRepository extends AbstractRepository implements Reposit
 
     }
 
-    public void save(ObjectsTerm locker, ObjectsTerm changes) {
+    public void save(ObjectsTerm key, ObjectsTerm changes) {
 
     }
 

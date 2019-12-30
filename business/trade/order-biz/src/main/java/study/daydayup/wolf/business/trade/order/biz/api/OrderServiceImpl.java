@@ -24,8 +24,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void modify(@Validated Order locker, Order changes) {
-        orderRepository.save(locker, changes);
+    public void modify(@Validated Order key, Order changes) {
+        orderRepository.save(key, changes);
     }
 
     @Override

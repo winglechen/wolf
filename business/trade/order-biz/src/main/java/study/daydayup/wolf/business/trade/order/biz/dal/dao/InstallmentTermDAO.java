@@ -19,7 +19,7 @@ public interface InstallmentTermDAO {
 
     List<InstallmentTermDO> selectByTradeNo(@Param("tradeNo")String tradeNo, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
-    int updateByTradeNo(@Param("updated")InstallmentTermDO updated,@Param("locker")InstallmentTermDO locker);
+    int updateByTradeNo(@Param("updated")InstallmentTermDO updated,@Param("key")InstallmentTermDO key);
 
 
 

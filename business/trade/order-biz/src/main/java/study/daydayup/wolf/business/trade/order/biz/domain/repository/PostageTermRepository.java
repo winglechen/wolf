@@ -18,7 +18,7 @@ public class PostageTermRepository extends AbstractRepository implements Reposit
 
     }
 
-    public void save(PostageTerm locker, PostageTerm changes) {
+    public void save(PostageTerm key, PostageTerm changes) {
 
     }
 

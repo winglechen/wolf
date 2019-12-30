@@ -17,7 +17,7 @@ public interface ContractDAO {
 
     int updateById(ContractDO record);
 
-    int updateByTradeNo(@Param("updated")ContractDO updated,@Param("locker")ContractDO locker);
+    int updateByTradeNo(@Param("updated")ContractDO updated,@Param("key")ContractDO key);
 
     ContractDO selectByTradeNo(@Param("tradeNo")String tradeNo, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 

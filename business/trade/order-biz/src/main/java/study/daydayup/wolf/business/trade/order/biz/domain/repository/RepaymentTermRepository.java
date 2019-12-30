@@ -18,7 +18,7 @@ public class RepaymentTermRepository extends AbstractRepository implements Repos
 
     }
 
-    public void save(RepaymentTerm locker, RepaymentTerm changes) {
+    public void save(RepaymentTerm key, RepaymentTerm changes) {
 
     }
 

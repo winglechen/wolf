@@ -11,6 +11,6 @@ import study.daydayup.wolf.business.trade.api.entity.Order;
  **/
 public interface OrderService {
     void create(Order order);
-    void modify(Order locker, Order changes);
+    void modify(Order key, Order changes);
     Order find(TradeId tradeId);
 }

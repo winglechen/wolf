@@ -31,7 +31,7 @@ public class LoanTermRepository extends AbstractRepository implements Repository
         loanTermDAO.insertSelective(loanTermDO);
     }
 
-    public void save(LoanTerm locker, LoanTerm changes) {
+    public void save(LoanTerm key, LoanTerm changes) {
 
     }
 

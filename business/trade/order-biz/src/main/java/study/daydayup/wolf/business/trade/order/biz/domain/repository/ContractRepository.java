@@ -61,20 +61,20 @@ public class ContractRepository extends AbstractRepository implements Repository
         taxTermRepository.add(contract.getTaxTerm());
     }
 
-    public void save(Contract locker, Contract changes) {
-        if (locker == null || null == changes) {
+    public void save(Contract key, Contract changes) {
+        if (key == null || null == changes) {
             return;
         }
-        updateContract(locker, changes);
+        updateContract(key, changes);
 
-//        consignTermRepository.save(locker.getConsignTerm(), changes.getConsignTerm());
-        installmentTermRepository.save(locker.getInstallmentTermList(), changes.getInstallmentTermList());
-//        loanTermRepository.save(locker.getLoanTerm(), changes.getLoanTerm());
-//        objectsTermRepository.save(locker.getObjectsTerm(), changes.getObjectsTerm());
-//        paymentTermRepository.save(locker.getPaymentTerm(), changes.getPaymentTerm());
-//        postageTermRepository.save(locker.getPostageTerm(), changes.getPostageTerm());
-//        repaymentTermRepository.save(locker.getRepaymentTerm(), changes.getRepaymentTerm());
-//        taxTermRepository.save(locker.getTaxTerm(), changes.getTaxTerm());
+//        consignTermRepository.save(key.getConsignTerm(), changes.getConsignTerm());
+        installmentTermRepository.save(key.getInstallmentTermList(), changes.getInstallmentTermList());
+//        loanTermRepository.save(key.getLoanTerm(), changes.getLoanTerm());
+//        objectsTermRepository.save(key.getObjectsTerm(), changes.getObjectsTerm());
+//        paymentTermRepository.save(key.getPaymentTerm(), changes.getPaymentTerm());
+//        postageTermRepository.save(key.getPostageTerm(), changes.getPostageTerm());
+//        repaymentTermRepository.save(key.getRepaymentTerm(), changes.getRepaymentTerm());
+//        taxTermRepository.save(key.getTaxTerm(), changes.getTaxTerm());
     }
 
     public Contract find(TradeId tradeId) {
@@ -117,21 +117,21 @@ public class ContractRepository extends AbstractRepository implements Repository
         contractDAO.insertSelective(contractDO);
     }
 
-    private int updateContract(@Validated Contract locker, Contract changes) {
-        ContractDO lockerDO = modelToDO(locker);
+    private int updateContract(@Validated Contract key, Contract changes) {
+        ContractDO keyDO = modelToDO(key);
         ContractDO changesDO = modelToDO(changes);
         changesDO.setUpdatedAt(LocalDateTime.now());
 
-        TradeState state = getTradeState(locker.getTradeType(), changes.getStateEvent(), locker.getState());
+        TradeState state = getTradeState(key.getTradeType(), changes.getStateEvent(), key.getState());
         if (state != null) {
             changesDO.setState(state.getCode());
 
-            if (locker.getState() != null) {
-                lockerDO.setState(locker.getState().getCode());
+            if (key.getState() != null) {
+                keyDO.setState(key.getState().getCode());
             }
         }
 
-        return contractDAO.updateByTradeNo(changesDO, lockerDO);
+        return contractDAO.updateByTradeNo(changesDO, keyDO);
     }
 
     private TradeState getTradeState(Integer tradeType, TradeEvent event, TradeState state) {

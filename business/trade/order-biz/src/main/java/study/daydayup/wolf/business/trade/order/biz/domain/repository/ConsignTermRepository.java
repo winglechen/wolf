@@ -18,7 +18,7 @@ public class ConsignTermRepository extends AbstractRepository implements Reposit
 
     }
 
-    public void save(ConsignTerm locker, ConsignTerm changes) {
+    public void save(ConsignTerm key, ConsignTerm changes) {
 
     }
 
