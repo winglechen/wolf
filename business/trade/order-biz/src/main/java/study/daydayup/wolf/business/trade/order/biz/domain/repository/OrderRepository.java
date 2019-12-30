@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.exception.order.TradeStateNotFoundException;
@@ -19,6 +20,8 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.domain.repository
@@ -48,6 +51,28 @@ public class OrderRepository extends AbstractRepository implements Repository {
         }
         updateOrder(key, changes);
         lineRepository.save(key.getOrderLineList(), changes.getOrderLineList());
+    }
+
+    public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
+        request.valid();
+        OrderDO orderDO = OrderDO.builder()
+                .relatedTradeNo(request.getRelatedTradeNo())
+                .buyerId(request.getBuyerId())
+                .sellerId(request.getSellerId())
+                .expiredAt(request.getExpiredAfter())
+                .build();
+
+        //set state
+        if (null != request.getState()) {
+            orderDO.setState(request.getState().getCode());
+        }
+        //set tradeType
+        if (null != request.getTradeType()) {
+            orderDO.setTradeType(request.getTradeType().getCode());
+        }
+
+        List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(orderDO);
+        return batchDoToModel(orderDOs);
     }
 
     public Order find(TradeId tradeId) {
@@ -83,6 +108,23 @@ public class OrderRepository extends AbstractRepository implements Repository {
             }
         }
         return orderDAO.updateByKey(keyDO, changesDO);
+    }
+
+    private List<Order> batchDoToModel(List<OrderDO> orderDOs) {
+        if (orderDOs == null || orderDOs.isEmpty()) {
+            return null;
+        }
+
+        List<Order> orders = new ArrayList<>();
+        for (OrderDO orderDO: orderDOs) {
+            Order order = DOToModel(orderDO);
+            if (order == null) {
+                continue;
+            }
+            orders.add(order);
+        }
+
+        return orders;
     }
 
     private OrderDO modelToDO(Order order) {

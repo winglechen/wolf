@@ -85,7 +85,7 @@ public class OrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     private void setInstallmentTag(int installmentNo) {
-        Tag orderTag = new Tag("installment_" + installmentNo);
+        Tag orderTag = new Tag(TradeTag.INSTALLMENT_PREFIX + installmentNo);
 
         Tag contractTag = new Tag(model.getTags());
         if (contractTag.contains(TradeTag.FIRST_TRADE)

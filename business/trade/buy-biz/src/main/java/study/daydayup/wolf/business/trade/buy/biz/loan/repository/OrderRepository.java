@@ -2,11 +2,8 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.repository;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
-import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
-import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.OrderEntity;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;

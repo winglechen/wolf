@@ -43,7 +43,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findRelatedTrade(RelatedTradeRequest request) {
-        return null;
+    public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
+        request.valid();
+        return orderRepository.findRelatedTrade(request);
     }
 }
