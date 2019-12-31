@@ -5,8 +5,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
+import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.OrderEntity;
+import study.daydayup.wolf.common.util.EnumUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -45,7 +47,43 @@ public class OrderRepository extends AbstractRepository implements Repository {
             return null;
         }
 
-        return orderToKey(orderList.get(0));
+        TradeTypeEnum tradeType = EnumUtil.codeOf(entity.getModel().getTradeType(), TradeTypeEnum.class);
+        switch (tradeType) {
+            case LOAN_ORDER:
+                return orderToKey(orderList.get(0));
+            case OVERDUE_REPAY:
+            case PREPAY_All:
+            case PREPAY_ORDER:
+            case REPAY_ORDER:
+                return findRepayOrder(orderList, entity);
+            case LOAN_PROXY:
+                return findLoanProxyOrder(orderList, entity);
+            case COLLECTION_ORDER:
+                return findCollectionOrder(orderList, entity);
+            default:
+                return null;
+        }
+    }
+
+    private Order findRepayOrder(List<Order> orderList, OrderEntity entity) {
+        String entityTags = entity.getModel().getTags();
+
+        for (Order order: orderList) {
+            if (!entityTags.equals(order.getTags())) {
+                continue;
+            }
+            return orderToKey(order);
+        }
+
+        return null;
+    }
+
+    private Order findLoanProxyOrder(List<Order> orderList, OrderEntity entity) {
+        return null;
+    }
+
+    private Order findCollectionOrder(List<Order> orderList, OrderEntity entity) {
+        return null;
     }
 
     private void updateEntity(OrderEntity entity) {

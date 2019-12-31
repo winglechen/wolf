@@ -79,5 +79,6 @@
         <if test="key.expiredAt != null ">
             and expired_at > #{key.expiredAt,jdbcType=BIGINT}
         </if>
+        ORDER BY id DESC
     </select>
 </mapper>
