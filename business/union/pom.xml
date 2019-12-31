@@ -18,6 +18,7 @@
         <module>union-api</module>
         <module>union-deploy-web</module>
         <module>union-deploy-dubbo</module>
+        <module>union-app</module>
 
     </modules>
 
@@ -31,6 +32,11 @@
             <dependency>
                 <groupId>study.daydayup.wolf.business.union</groupId>
                 <artifactId>union-api</artifactId>
+                <version>${union.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.union</groupId>
+                <artifactId>union-app</artifactId>
                 <version>${union.version}</version>
             </dependency>
             <dependency>

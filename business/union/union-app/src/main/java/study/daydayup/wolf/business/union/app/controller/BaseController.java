@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.api.controller;
+package study.daydayup.wolf.business.union.app.controller;
 
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
