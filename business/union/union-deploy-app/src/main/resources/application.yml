@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: wolf-union-app
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: true
+        enabled: true
+        server-addr: 127.0.0.1:8848
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
+
+dubbo:
+  registry:
+    address: spring-cloud://localhost
+  cloud:
+    subscribed-services: ${provider.application.name}
+  application:
+    qos-enable: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include : "*"
+
+wolf:
+  auth:
+    enable: true
+
+
+
+server:
+  port: 9101
+
+provider:
+  application:
+    name: wolf-union
+
+logging:
+  level: info
