@@ -94,7 +94,7 @@ public class AccountServiceImpl implements AccountService {
         AccountDO accountDO = selectByAccount(request.getAccount());
         String salt = accountDO.getSalt();
 
-        if (!verifyPassword(, accountDO.getPassword(), request.getPassword())) {
+        if (!verifyPassword(salt, accountDO.getPassword(), request.getPassword())) {
             throw new AuthFailedException();
         }
 
