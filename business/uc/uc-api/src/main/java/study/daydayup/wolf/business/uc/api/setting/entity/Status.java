@@ -34,9 +34,4 @@ public class Status implements Model {
     protected Long s20 = 0L;
 
     protected Integer version;
-
-
-
-
-
 }

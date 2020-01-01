@@ -73,7 +73,7 @@ public class CustomerStatusAgent {
             return null;
         }
 
-        Class<StatusEnum> clazz = group.getGroup();
+        Class<? extends StatusEnum> clazz = group.getGroup();
         Map<String, Boolean> map = new HashMap<>();
 
         for(StatusEnum status: clazz.getEnumConstants()) {

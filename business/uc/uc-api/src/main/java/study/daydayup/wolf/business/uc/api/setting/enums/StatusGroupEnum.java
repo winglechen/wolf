@@ -17,8 +17,8 @@ public enum StatusGroupEnum  {
     ;
 
 
-    private Class<StatusEnum> group;
-    StatusGroupEnum(Class<StatusEnum> group) {
+    private Class<? extends StatusEnum> group;
+    StatusGroupEnum(Class<? extends StatusEnum> group) {
         this.group = group;
     }
 }

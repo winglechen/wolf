@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @since 2020/1/1 11:11 上午
  **/
 @Data
-public class CustomerStatus extends Status implements Model {
+public class CustomerStatus extends Status {
     @NotNull @Min(1)
     private Long accountId;
     @NotNull @Min(1)

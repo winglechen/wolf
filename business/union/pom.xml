@@ -19,6 +19,7 @@
         <module>union-deploy-web</module>
         <module>union-deploy-dubbo</module>
         <module>union-app</module>
+        <module>union-deploy-app</module>
 
     </modules>
 
