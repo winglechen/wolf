@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.tm;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class RelatedTradeRequest implements Request {
     @NotBlank
     private String relatedTradeNo;

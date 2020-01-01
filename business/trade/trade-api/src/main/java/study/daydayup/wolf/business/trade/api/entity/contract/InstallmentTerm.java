@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.entity.trade.TradeStateLog;
 import study.daydayup.wolf.business.trade.api.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.state.TradeState;
+import study.daydayup.wolf.framework.layer.domain.VO;
 
 import java.time.LocalDate;
 
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class InstallmentTerm extends ContractTerm {
+public class InstallmentTerm implements VO {
     protected String tradeNo;
     protected Long  buyerId;
     protected Long  sellerId;

@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.trade.api.exception.InvalidTradeEventExcepti
  * @since 2019/10/5 11:14 PM
  **/
 @Data
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public abstract class AbstractTradeEvent implements TradeEvent{
     protected String tradeNo;

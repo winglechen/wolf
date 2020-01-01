@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.api.entity.contract;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
+import study.daydayup.wolf.framework.layer.domain.VO;
 
 
 /**
@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class LoanTerm extends ContractTerm {
+public class LoanTerm implements VO {
     protected String tradeNo;
     protected Long  buyerId;
     protected Long  sellerId;

@@ -1,12 +1,14 @@
 package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
@@ -46,4 +48,18 @@ public class PasswordController extends AuthController {
 
         return Result.ok();
     }
+
+    @GetMapping("/auth/password/register")
+    public Result register(@Validated PasswordRequest request) {
+        request.setEnv(null);
+        request.setToken(session.getSessionId());
+
+        String scope = formatScope(request.getScope(), request.getOrgId());
+        request.setScope(scope);
+
+        passwordService.register(request);
+
+        return Result.ok();
+    }
+
 }

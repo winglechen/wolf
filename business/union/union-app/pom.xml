@@ -17,6 +17,10 @@
             <groupId>study.daydayup.wolf.business.account</groupId>
             <artifactId>auth-agent</artifactId>
         </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-agent</artifactId>
+        </dependency>
 
     </dependencies>
 

@@ -10,6 +10,6 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  * @since 2019/12/12 11:18 上午
  **/
 @Component
-public class LoanDomainService extends Service {
+public class LoanDomainService implements Service {
 
 }
