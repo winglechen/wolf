@@ -43,7 +43,8 @@ public class PasswordController extends AuthController {
         String scope = formatScope(request.getScope(), request.getOrgId());
         request.setScope(scope);
 
-        OauthLicense license = passwordService.registerAndLogin(request);
+        Result<OauthLicense> result = passwordService.registerAndLogin(request);
+        OauthLicense license = result.getNotNullData();
         saveLicenseToSession(license);
 
         return Result.ok();
