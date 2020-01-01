@@ -25,3 +25,28 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+GET http://localhost:9101/auth/password/register?account=18067966016&password=123456
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/auth/password/login?account=18067966016&password=123456
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/auth/password/login?account=18067966016&password=abcdef
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/auth/password/registerAndLogin?account=18067966016&password=123456
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/auth/password/change?account=18067966016&password=123456&newPassword=abcdef
+Accept: */*
+Cache-Control: no-cache
+
+###
