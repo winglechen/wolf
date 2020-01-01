@@ -13,7 +13,9 @@ public interface AccountService {
     long create(Account account);
     long createSmsAccount(String mobile, String source);
     long createPasswordAccount(PasswordRequest request);
+    long verifyPasswordAccount(PasswordRequest request);
 
+    void changePassword(PasswordRequest request);
 
     long existByAccount(String account);
     Account findByAccount(String account);

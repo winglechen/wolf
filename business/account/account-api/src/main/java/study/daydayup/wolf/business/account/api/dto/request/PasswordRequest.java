@@ -19,6 +19,7 @@ public class PasswordRequest implements Request {
     private String account;
     @NotBlank
     private String password;
+    private String newPassword;
     private String repeatedPassword;
 
     private String source;

@@ -10,24 +10,23 @@ import lombok.Data;
  **/
 @Data
 public class Password {
-    private String password;
-    private String salt;
 
+    public static String createSalt() {
+        return Salt.create();
+    }
 
-    public static Password encrypt(String userPassword) {
-        Password password = new Password();
-
-        String salt = Salt.create();
-        password.setSalt(salt);
+    public static String encrypt(String userPassword, String salt) {
+        if (null == userPassword || salt == null) {
+            throw new IllegalArgumentException("password salt can't be null");
+        }
 
         String encryptedPassword = userPassword + salt;
         try {
             encryptedPassword = ShaEncrypt.sha512(encryptedPassword).substring(0, 32);
-            password.setPassword(encryptedPassword);
         } catch (Exception e) {
             throw new ShaEncryptFailedException("password encrypt failed");
         }
 
-        return password;
+        return encryptedPassword;
     }
 }

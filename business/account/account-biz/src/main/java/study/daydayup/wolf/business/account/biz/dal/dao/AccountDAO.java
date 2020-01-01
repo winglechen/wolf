@@ -24,6 +24,8 @@ public interface AccountDAO {
 
     Long selectIdByAccount(@Param("account")String account);
 
+    AccountDO selectByPassword(@Param("account")String account, @Param("password")String password);
+
 
 
 }

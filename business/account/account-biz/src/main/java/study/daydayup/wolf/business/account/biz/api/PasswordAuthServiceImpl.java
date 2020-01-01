@@ -2,12 +2,18 @@ package study.daydayup.wolf.business.account.biz.api;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
+import study.daydayup.wolf.business.account.api.exception.AccountExistsException;
+import study.daydayup.wolf.business.account.api.exception.AccountNotFoundException;
+import study.daydayup.wolf.business.account.api.exception.CreateLicenseFailedException;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
+import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -27,37 +33,58 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
     private OauthLicenseService licenseService;
 
     @Override
-    public Result<Long> register(PasswordRequest request) {
-        return Result.ok(0L);
+    public Result<Long> register(@Validated PasswordRequest request) {
+        long accountId = accountService.existByAccount(request.getAccount());
+        if (accountId > 0) {
+            throw new AccountExistsException();
+        }
+
+        accountId = accountService.createPasswordAccount(request);
+        return Result.ok(accountId);
     }
 
     @Override
-    public Result changePassword(PasswordRequest request) {
+    public Result changePassword(@Validated PasswordRequest request) {
+        if (null == request.getNewPassword()) {
+            throw new IllegalArgumentException("new password can't be null");
+        }
 
+        accountService.changePassword(request);
         return Result.ok();
     }
 
     @Override
-    public Result<OauthLicense> login(PasswordRequest request) {
-        return Result.ok(null);
+    public Result<OauthLicense> login(@Validated PasswordRequest request) {
+        long accountId = accountService.verifyPasswordAccount(request);
+
+        return Result.ok(createLicense(accountId, request));
     }
 
     @Override
-    public Result<OauthLicense> registerAndLogin(PasswordRequest request) {
-        //checkAccountExist
+    public Result<OauthLicense> registerAndLogin(@Validated PasswordRequest request) {
         long accountId = accountService.existByAccount(request.getAccount());
 
-        //create account if needed
         if (0 == accountId) {
             accountId = accountService.createPasswordAccount(request);
         }
 
-        //grant the license
+        return Result.ok(createLicense(accountId, request));
+    }
+
+    private OauthLicense createLicense(Long accountId, PasswordRequest request) {
+        if (accountId == null || accountId <= 0) {
+            throw new CreateLicenseFailedException();
+        }
+
         LicenseRequest licenseRequest = new LicenseRequest();
         BeanUtils.copyProperties(request, licenseRequest);
         licenseRequest.setAccountId(accountId);
 
         OauthLicense license = licenseService.grant(licenseRequest);
-        return Result.ok(license);
+        if (license == null) {
+            throw new CreateLicenseFailedException();
+        }
+        return license;
     }
+
 }

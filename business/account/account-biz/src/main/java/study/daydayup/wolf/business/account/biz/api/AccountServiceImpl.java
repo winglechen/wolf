@@ -1,9 +1,12 @@
 package study.daydayup.wolf.business.account.biz.api;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.api.enums.AccountTypeEnum;
+import study.daydayup.wolf.business.account.api.exception.AccountNotFoundException;
+import study.daydayup.wolf.business.account.api.exception.AuthFailedException;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
@@ -61,19 +64,74 @@ public class AccountServiceImpl implements AccountService {
         accountDO.setAccountType((byte)AccountTypeEnum.NAME.getCode());
         accountDO.setCreatedAt(new Date());
 
-        Password pass = Password.encrypt(request.getPassword());
-        accountDO.setPassword(pass.getPassword());
-        accountDO.setSalt(pass.getSalt());
+        String salt = Password.createSalt();
+        String pass = Password.encrypt(request.getPassword(), salt);
+        accountDO.setPassword(pass);
+        accountDO.setSalt(salt);
 
         return accountDAO.insertSelective(accountDO);
     }
 
     @Override
-    public Account findByAccount(String accountName) {
+    public long verifyPasswordAccount(@Validated PasswordRequest request) {
+        String accountName = request.getAccount();
+        String password = request.getPassword();
+        if (null == accountName || null == password) {
+            return 0;
+        }
+
+        AccountDO accountDO = selectByAccount(accountName);
+        if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
+            throw new AuthFailedException();
+        }
+
+
+        return accountDO.getId();
+    }
+
+    @Override
+    public void changePassword(@Validated PasswordRequest request) {
+        AccountDO accountDO = selectByAccount(request.getAccount());
+        String salt = accountDO.getSalt();
+
+        if (!verifyPassword(, accountDO.getPassword(), request.getPassword())) {
+            throw new AuthFailedException();
+        }
+
+        String encryptPassword = Password.encrypt(request.getNewPassword(), salt);
+        AccountDO newAccountDO = new AccountDO();
+        newAccountDO.setId(accountDO.getId());
+        newAccountDO.setPassword(encryptPassword);
+
+        accountDAO.updateByIdSelective(newAccountDO);
+    }
+
+    private boolean verifyPassword(String salt, String realPassword, String password) {
+        String encryptPassword = Password.encrypt(password, salt);
+        if (encryptPassword.equals(realPassword)) {
+            return true;
+        }
+        return false;
+    }
+
+    private AccountDO selectByAccount(String accountName) {
         if (null == accountName) {
             return null;
         }
+
         AccountDO accountDO = accountDAO.selectByAccount(accountName);
+        if (accountDO == null || null == accountDO.getId()) {
+            throw new AccountNotFoundException();
+        }
+
+        return accountDO;
+    }
+
+
+
+    @Override
+    public Account findByAccount(String accountName) {
+        AccountDO accountDO = selectByAccount(accountName);
         Account account = new Account();
         BeanUtils.copyProperties(accountDO, account);
 
