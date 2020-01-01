@@ -29,6 +29,20 @@ public class PasswordController extends AuthController {
 
     @GetMapping("/auth/password/login")
     public Result login(@Valid PasswordRequest request) {
+        if(isLogin()) {
+            return Result.ok();
+        }
+
+        request.setEnv(null);
+        request.setToken(session.getSessionId());
+
+        String scope = formatScope(request.getScope(), request.getOrgId());
+        request.setScope(scope);
+
+        Result<OauthLicense> result = passwordService.login(request);
+        OauthLicense license = result.getNotNullData();
+        saveLicenseToSession(license);
+
         return Result.ok();
     }
 
@@ -53,15 +67,15 @@ public class PasswordController extends AuthController {
     @GetMapping("/auth/password/register")
     public Result register(@Validated PasswordRequest request) {
         request.setEnv(null);
-
         passwordService.register(request);
 
         return Result.ok();
     }
 
     @GetMapping("/auth/password/change")
-    public Result changePassword(PasswordRequest request) {
+    public Result changePassword(@Validated PasswordRequest request) {
         request.setEnv(null);
+        passwordService.changePassword(request);
 
         return Result.ok();
     }

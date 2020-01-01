@@ -57,6 +57,10 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
     public Result<OauthLicense> login(@Validated PasswordRequest request) {
         long accountId = accountService.verifyPasswordAccount(request);
 
+        if (0 == accountId) {
+            throw new AccountNotFoundException();
+        }
+
         return Result.ok(createLicense(accountId, request));
     }
 
