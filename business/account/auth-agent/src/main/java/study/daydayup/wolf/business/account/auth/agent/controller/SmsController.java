@@ -51,7 +51,6 @@ public class SmsController extends AuthController {
 
         OauthLicense license = smsService.registerAndLogin(request);
         if (null == license) {
-            System.out.println("invalid license");
             return Result.fail(1000, "login failed");
         }
 

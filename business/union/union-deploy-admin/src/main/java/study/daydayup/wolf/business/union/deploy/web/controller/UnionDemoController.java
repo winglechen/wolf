@@ -12,13 +12,5 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class UnionDemoController {
-    @Reference
-    private UnionDemoService demoService;
 
-    @RequestMapping("/show")
-    public String show() {
-        String show = demoService.show();
-
-        return show;
-    }
 }

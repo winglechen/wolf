@@ -50,5 +50,4 @@ provider:
   application:
     name: wolf-union
 
-logging:
-  level: info
+

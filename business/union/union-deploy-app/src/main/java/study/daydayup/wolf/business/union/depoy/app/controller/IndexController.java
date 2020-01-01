@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.app.controller;
+package study.daydayup.wolf.business.union.depoy.app.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

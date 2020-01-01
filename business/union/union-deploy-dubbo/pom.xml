@@ -63,12 +63,12 @@
         </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
-            <artifactId>acl-biz</artifactId>
+            <artifactId>setting-biz</artifactId>
             <version>${version.snapshot}</version>
         </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
-            <artifactId>setting-biz</artifactId>
+            <artifactId>acl-biz</artifactId>
             <version>${version.snapshot}</version>
         </dependency>
         <dependency>
@@ -99,5 +99,11 @@
         <!-- business biz end -->
 
     </dependencies>
+
+    <build>
+
+
+    </build>
+
 
 </project>

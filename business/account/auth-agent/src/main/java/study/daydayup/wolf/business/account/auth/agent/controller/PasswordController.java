@@ -52,12 +52,15 @@ public class PasswordController extends AuthController {
     @GetMapping("/auth/password/register")
     public Result register(@Validated PasswordRequest request) {
         request.setEnv(null);
-        request.setToken(session.getSessionId());
-
-        String scope = formatScope(request.getScope(), request.getOrgId());
-        request.setScope(scope);
 
         passwordService.register(request);
+
+        return Result.ok();
+    }
+
+    @GetMapping("/auth/password/change")
+    public Result changePassword(PasswordRequest request) {
+        request.setEnv(null);
 
         return Result.ok();
     }

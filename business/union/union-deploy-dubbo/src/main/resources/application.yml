@@ -13,8 +13,8 @@ spring:
         server-addr: 127.0.0.1:8848
 
 mybatis:
-#  type-aliases-package: study.daydayup.wolf.business.union.biz.dal.dataobject
-  mapper-locations: classpath:mapper/*.xml, mapper/auto/*.xml
+  mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/auto/*.xml
+  type-aliases-package: study.daydayup.wolf.business.*.dal.dataobject
 
 dubbo:
   scan:

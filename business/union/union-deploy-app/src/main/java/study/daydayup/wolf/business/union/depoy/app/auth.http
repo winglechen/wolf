@@ -1,21 +1,26 @@
-GET http://localhost:9100/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
+GET http://localhost:9101/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
-GET http://localhost:9100/auth/sms/code?mobile=18067966015
+GET http://localhost:9101/auth/sms/code?mobile=18067966015
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
-GET http://localhost:9100/auth/logout
+GET http://localhost:9101/auth/logout
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/account/show
+GET http://localhost:9101/account/show
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/auth/show
 Accept: */*
 Cache-Control: no-cache
 

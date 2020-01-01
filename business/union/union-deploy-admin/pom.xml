@@ -15,10 +15,10 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>study.daydayup.wolf.business.union</groupId>
-            <artifactId>union-api</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>study.daydayup.wolf.business.union</groupId>-->
+<!--            <artifactId>union-api</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>study.daydayup.wolf.business.account</groupId>

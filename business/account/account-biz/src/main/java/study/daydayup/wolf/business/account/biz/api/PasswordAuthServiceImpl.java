@@ -31,6 +31,11 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
     }
 
     @Override
+    public void changePassword(PasswordRequest request) {
+
+    }
+
+    @Override
     public OauthLicense login(PasswordRequest request) {
         return null;
     }

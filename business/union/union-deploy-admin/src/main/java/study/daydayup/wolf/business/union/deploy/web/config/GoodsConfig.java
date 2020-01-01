@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.api.config;
+package study.daydayup.wolf.business.union.deploy.web.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,7 +10,7 @@ import study.daydayup.wolf.common.lang.enums.currency.IndianRupeeEnum;
 import study.daydayup.wolf.common.lang.enums.unit.UnitEnum;
 
 /**
- * study.daydayup.wolf.business.union.api.config
+ * study.daydayup.wolf.business.union.deploy.web.config
  *
  * @author Wingle
  * @since 2019/12/11 4:16 下午
