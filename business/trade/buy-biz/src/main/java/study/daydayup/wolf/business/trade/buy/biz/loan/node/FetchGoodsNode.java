@@ -62,7 +62,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
             goods.setMemo(goodsRequest.getMemo());
 
             goods.setPayPrice(goods.getSalePrice());
-            goods.setPostage(0);
+            goods.setPostage(0L);
         }
     }
 

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.goods;
 
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
@@ -16,7 +17,8 @@ import javax.annotation.Resource;
  * @since 2019/10/3 11:14 PM
  **/
 @Component
-@Builder
+@EqualsAndHashCode(callSuper = false)
+@SuperBuilder(toBuilder = true)
 public class GoodsEntity extends Goods {
     @Resource
     private GoodsDAO goodsDAO;

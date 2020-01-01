@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderDO implements Serializable {
     private Long id;
 

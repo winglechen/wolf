@@ -11,7 +11,7 @@ import study.daydayup.wolf.framework.layer.dal.Query;
  * @since 2019/12/16 9:30 上午
  **/
 @Data
-public class AccountQuery extends Query {
+public class AccountQuery implements Query {
     private AccountDO model;
     private AccountDO changes;
     private AccountDO rules;
