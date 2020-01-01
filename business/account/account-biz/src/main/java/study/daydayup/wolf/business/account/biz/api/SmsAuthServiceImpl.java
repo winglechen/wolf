@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
 import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -32,21 +33,20 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     private VerifyCodeService verifyCodeService;
 
     @Override
-    public long register(SmsRequest request) {
-        return 0;
+    public Result<Long> register(SmsRequest request) {
+        return Result.ok(0L);
     }
 
     @Override
-    public OauthLicense login(SmsRequest request) {
-        return null;
+    public Result<OauthLicense> login(SmsRequest request) {
+        return Result.ok(null);
     }
 
     @Override
-    public OauthLicense registerAndLogin(SmsRequest request) {
+    public Result<OauthLicense> registerAndLogin(SmsRequest request) {
         //verify the code
         if (!verifyCodeService.verify(request.getMobile(), request.getCode())) {
-            System.out.println("invalid code:" + request.getCode());
-            return null;
+            return Result.fail(110000, "invalid code:" + request.getCode());
         }
 
         //checkAccountExist
@@ -62,15 +62,17 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         BeanUtils.copyProperties(request, licenseRequest);
         licenseRequest.setAccountId(accountId);
 
-        return licenseService.grant(licenseRequest);
+        OauthLicense license = licenseService.grant(licenseRequest);
+        return Result.ok(license);
     }
 
     @Override
-    public void sendCode(SmsCodeRequest request) {
+    public Result sendCode(SmsCodeRequest request) {
         String mobile = request.getMobile();
         Date expiredAt = DateUtil.secondsLater(request.getExpiredIn());
 
         verifyCodeService.send(mobile, createCode(), expiredAt);
+        return Result.ok();
     }
 
     private String createCode() {

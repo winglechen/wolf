@@ -11,7 +11,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2019/9/27 5:19 PM
  **/
 public interface PasswordAuthService {
-    Result register(PasswordRequest request);
+    Result<Long> register(PasswordRequest request);
     Result changePassword(PasswordRequest request);
 
     Result<OauthLicense> login(PasswordRequest request);

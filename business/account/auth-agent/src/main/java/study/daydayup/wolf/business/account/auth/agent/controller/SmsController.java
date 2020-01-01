@@ -49,10 +49,8 @@ public class SmsController extends AuthController {
         request.setExpiredIn(authConfig.getExpiredIn());
         request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
-        OauthLicense license = smsService.registerAndLogin(request);
-        if (null == license) {
-            return Result.fail(1000, "login failed");
-        }
+        Result<OauthLicense> result = smsService.registerAndLogin(request);
+        OauthLicense license = result.getNotNullData();
 
         saveLicenseToSession(license);
         return Result.ok();
@@ -64,7 +62,6 @@ public class SmsController extends AuthController {
         request.setExpiredIn(authConfig.getCodeExpiredIn());
 
         //TODO: 防刷
-
         smsService.sendCode(request);
 
         return Result.ok();
