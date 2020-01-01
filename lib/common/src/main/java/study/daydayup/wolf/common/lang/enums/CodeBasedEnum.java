@@ -8,4 +8,5 @@ package study.daydayup.wolf.common.lang.enums;
  **/
 public interface CodeBasedEnum {
     int getCode();
+    String getDesc();
 }

@@ -20,7 +20,7 @@ public class Status implements Model {
     protected Long s7 = 0L;
     protected Long s8 = 0L;
     protected Long s9 = 0L;
-    protected Long s10L = 0L;
+    protected Long s10 = 0L;
 
     protected Long s11 = 0L;
     protected Long s12 = 0L;
@@ -31,7 +31,12 @@ public class Status implements Model {
     protected Long s17 = 0L;
     protected Long s18 = 0L;
     protected Long s19 = 0L;
-    protected Long s20L = 0L;
+    protected Long s20 = 0L;
 
     protected Integer version;
+
+
+
+
+
 }

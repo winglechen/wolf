@@ -10,10 +10,10 @@ import lombok.Getter;
  **/
 @Getter
 public enum TradeTagEnum implements StatusEnum {
-    LOAN_REPAID_TIMEOUT(33, "{trade.loan.repaid.timeout}"),
-    LOAN_REFUSED_TIMEOUT(32, "{trade.loan.refused.timeout}"),
-    LOAN_LOANING(31, "{trade.loan.loaning}"),
-    FIRST_TRADE(30, "{trade.first}")
+    LOAN_REPAID_TIMEOUT(33, "trade.loan.repaid.timeout"),
+    LOAN_REFUSED_TIMEOUT(32, "trade.loan.refused.timeout"),
+    LOAN_LOANING(31, "trade.loan.loaning"),
+    FIRST_TRADE(30, "trade.first")
     ;
 
     private int code;
