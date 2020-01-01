@@ -16,12 +16,14 @@
         <module>uc-deploy-dubbo</module>
         <module>uc-deploy-web</module>
         <module>uc-agent</module>
+        <module>setting-biz</module>
     </modules>
 
     <parent>
         <groupId>study.daydayup.wolf</groupId>
         <artifactId>boot</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath />
     </parent>
 
     <properties>
@@ -32,7 +34,10 @@
             <groupId>study.daydayup.wolf.boot</groupId>
             <artifactId>wolf-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
     <build>
 

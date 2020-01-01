@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+        <!-- 格式化JAVA代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+
+
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <!--
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin">
+        -->
+
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+
+            <!-- enable annotations -->
+            <property name="builder" value="false"/>
+            <!-- annotation's option(java.lang.Boolean) -->
+            <property name="builder.fluent" value="false"/>
+            <!-- annotation's option(String) -->
+            <property name="builder.builderMethodName" value="Builder"/>
+
+            <property name="accessors" value="false"/>
+            <!-- annotation's option(array of String) -->
+            <property name="accessors.prefix" value="m_, _"/>
+
+            <!-- disable annotations -->
+            <property name="allArgsConstructor" value="false"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/wolf_setting?useSSL=false"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper/auto"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.uc.setting.biz.dal.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="account_status" domainObjectName="AccountStatusDO" mapperName="AccountStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="customer_status" domainObjectName="CustomerStatusDO" mapperName="CustomerStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
