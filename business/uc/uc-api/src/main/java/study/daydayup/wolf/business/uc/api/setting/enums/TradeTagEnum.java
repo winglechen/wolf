@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.uc.api.setting.enums;
 
 import lombok.Getter;
-import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 
 /**
  * study.daydayup.wolf.business.trade.api.enums
@@ -10,7 +9,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum TradeTagEnum implements CodeBasedEnum {
+public enum TradeTagEnum implements StatusEnum {
     LOAN_REPAID_TIMEOUT(33, "{trade.loan.repaid.timeout}"),
     LOAN_REFUSED_TIMEOUT(32, "{trade.loan.refused.timeout}"),
     LOAN_LOANING(31, "{trade.loan.loaning}"),

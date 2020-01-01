@@ -26,6 +26,9 @@ public class AccountStatusServiceImpl implements AccountStatusService {
             return null;
         }
         AccountStatusDO accountStatusDO = dao.findByAccountId(accountId);
+        if (accountStatusDO == null) {
+            return initStatus(accountId);
+        }
         return DOToModel(accountStatusDO);
     }
 
@@ -41,6 +44,16 @@ public class AccountStatusServiceImpl implements AccountStatusService {
             return;
         }
         dao.updateByAccountId(modelToDO(accountStatus), accountStatus.getAccountId());
+    }
+
+    private AccountStatus initStatus(Long accountId) {
+        AccountStatus status = new AccountStatus();
+        status.setAccountId(accountId);
+
+        AccountStatusDO statusDO = modelToDO(status);
+        dao.insertSelective(statusDO);
+
+        return status;
     }
 
     private AccountStatus DOToModel(AccountStatusDO accountStatusDO) {

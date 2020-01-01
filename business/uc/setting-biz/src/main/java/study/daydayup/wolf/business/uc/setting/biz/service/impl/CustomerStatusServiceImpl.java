@@ -28,6 +28,9 @@ public class CustomerStatusServiceImpl implements CustomerStatusService {
         }
 
         CustomerStatusDO customerStatusDO = dao.findByAccountId(accountId, orgId);
+        if (customerStatusDO == null) {
+            return initStatus(accountId, orgId);
+        }
         return DOToModel(customerStatusDO);
     }
 
@@ -44,6 +47,17 @@ public class CustomerStatusServiceImpl implements CustomerStatusService {
         }
 
         dao.updateByAccountId(modelToDO(customerStatus), customerStatus.getAccountId(), customerStatus.getOrgId());
+    }
+
+    private CustomerStatus initStatus(Long accountId, Long orgId) {
+        CustomerStatus status = new CustomerStatus();
+        status.setAccountId(accountId);
+        status.setOrgId(orgId);
+
+        CustomerStatusDO statusDO = modelToDO(status);
+        dao.insertSelective(statusDO);
+
+        return status;
     }
 
     private CustomerStatus DOToModel(CustomerStatusDO customerStatusDO) {

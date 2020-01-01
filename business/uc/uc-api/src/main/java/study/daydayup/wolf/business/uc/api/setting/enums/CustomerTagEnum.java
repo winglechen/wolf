@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.uc.api.setting.enums;
 
 import lombok.Getter;
-import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 
 /**
  * study.daydayup.wolf.business.trade.api.enums
@@ -10,7 +9,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum CustomerTagEnum implements CodeBasedEnum {
+public enum CustomerTagEnum implements StatusEnum {
 
     BLOCK_LIST(50, "customer.tag.blockList")
     ;
