@@ -11,5 +11,5 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  **/
 public interface AccountStatusService extends Service {
     AccountStatus find(Long accountId);
-    void modify(AccountStatus accountStatus);
+    void save(AccountStatus accountStatus);
 }
