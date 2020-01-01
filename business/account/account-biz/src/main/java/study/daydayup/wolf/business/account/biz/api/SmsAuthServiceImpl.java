@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.api;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
@@ -14,7 +15,6 @@ import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SmsAuthServiceImpl implements SmsAuthService {
     @Resource
     private AccountService accountService;
-    @Resource
+    @Reference
     private OauthLicenseService licenseService;
     @Resource
     private VerifyCodeService verifyCodeService;

@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2019/12/26 8:36 下午
  **/
 @Component
-public class OrderRepository extends AbstractRepository implements Repository {
+public class LoanOrderRepository extends AbstractRepository implements Repository {
     @Reference
     private OrderService orderService;
 

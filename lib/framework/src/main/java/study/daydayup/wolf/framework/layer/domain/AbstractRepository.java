@@ -2,6 +2,7 @@ package study.daydayup.wolf.framework.layer.domain;
 
 import com.google.common.eventbus.EventBus;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/25 4:06 下午
  **/
+@Component
 public abstract class AbstractRepository {
     @Resource
     @Qualifier("trade")

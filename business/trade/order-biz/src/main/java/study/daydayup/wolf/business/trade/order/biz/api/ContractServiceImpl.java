@@ -1,12 +1,12 @@
 package study.daydayup.wolf.business.trade.order.biz.api;
 
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.entity.Contract;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractRepository;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2019/12/16 10:32 上午
  **/
-@Component
+@RpcService(protocol = "dubbo")
 public class ContractServiceImpl implements ContractService {
     @Resource
     private ContractRepository contractRepository;

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.*;
  * @since 2019/12/5 9:49 上午
  **/
 @Configuration
+@ComponentScan("study.daydayup.wolf.business.trade.api.util")
 public class TradeAutoConfiguration {
 
     @Bean("trade")

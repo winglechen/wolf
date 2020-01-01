@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.api;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
 public class PasswordAuthServiceImpl implements PasswordAuthService {
     @Resource
     private AccountService accountService;
-    @Resource
+    @Reference
     private OauthLicenseService licenseService;
 
     @Override

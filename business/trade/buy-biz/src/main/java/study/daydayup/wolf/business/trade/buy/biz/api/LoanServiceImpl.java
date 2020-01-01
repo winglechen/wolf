@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.OrderEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanRepository;
-import study.daydayup.wolf.business.trade.buy.biz.loan.repository.OrderRepository;
+import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanOrderRepository;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -23,7 +23,7 @@ public class LoanServiceImpl implements LoanService {
     @Resource
     private LoanRepository loanRepository;
     @Resource
-    private OrderRepository orderRepository;
+    private LoanOrderRepository loanOrderRepository;
 
     @Override
     public void approve(@Validated TradeId tradeId) {
@@ -53,7 +53,7 @@ public class LoanServiceImpl implements LoanService {
 
         OrderEntity order = new OrderEntity(contract.getModel());
         order.loan();
-        orderRepository.save(order);
+        loanOrderRepository.save(order);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class LoanServiceImpl implements LoanService {
         LoanEntity contract = loanRepository.find(tradeId);
         OrderEntity order = new OrderEntity(contract.getModel());
         order.repay(installmentNo);
-        orderRepository.save(order);
+        loanOrderRepository.save(order);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class LoanServiceImpl implements LoanService {
         LoanEntity contract = loanRepository.find(tradeId);
         OrderEntity order = new OrderEntity(contract.getModel());
         order.repay(installmentNo);
-        orderRepository.save(order);
+        loanOrderRepository.save(order);
     }
 
     @Override

@@ -19,10 +19,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>study.daydayup.wolf.business.union</groupId>
-            <artifactId>union-api</artifactId>
-        </dependency>
+
 
         <!-- lib dependency start -->
         <dependency>
@@ -65,11 +62,6 @@
             <version>${version.snapshot}</version>
         </dependency>
         <dependency>
-            <groupId>study.daydayup.wolf.business.org</groupId>
-            <artifactId>org-biz</artifactId>
-            <version>${version.snapshot}</version>
-        </dependency>
-        <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>acl-biz</artifactId>
             <version>${version.snapshot}</version>
@@ -92,6 +84,11 @@
         <dependency>
             <groupId>study.daydayup.wolf.business.trade</groupId>
             <artifactId>buy-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>order-biz</artifactId>
             <version>${version.snapshot}</version>
         </dependency>
         <dependency>

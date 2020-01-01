@@ -2,18 +2,18 @@ package study.daydayup.wolf.business.union.api.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
-import study.daydayup.wolf.business.goods.api.service.LoanService;
+import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.union.api.config.GoodsConfig;
 import study.daydayup.wolf.business.union.api.config.LoanConfig;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class GoodsController extends BaseController {
     @Reference
-    private LoanService loanService;
+    private LoanGoodsService loanGoodsService;
     @Reference
     private GoodsService goodsService;
     @Resource
@@ -37,7 +37,7 @@ public class GoodsController extends BaseController {
     private Session session;
 
     @PostMapping("/goods")
-    public Result create(@Valid @RequestBody LoanGoods goods) {
+    public Result create(@Validated @RequestBody LoanGoods goods) {
         BeanUtils.copyProperties(goodsConfig, goods);
 
         Loan loan = goods.getLoan();
@@ -47,7 +47,7 @@ public class GoodsController extends BaseController {
         goods.setId(0);
         goods.setOrgId(getFromSession("orgId", Long.class));
 
-        loanService.create(goods);
+        loanGoodsService.create(goods);
         return Result.ok();
     }
 
@@ -58,7 +58,7 @@ public class GoodsController extends BaseController {
         }
 
         Long orgId = getFromSession("orgId", Long.class);
-        LoanGoods goods = loanService.findById(goodsId, orgId);
+        LoanGoods goods = loanGoodsService.findById(goodsId, orgId);
 
         return Result.ok(goods);
     }
@@ -66,7 +66,7 @@ public class GoodsController extends BaseController {
     @GetMapping("/goods/one")
     public Result<LoanGoods> findOneByOrgId() {
         Long orgId = getFromSession("orgId", Long.class);
-        LoanGoods goods = loanService.findOneByOrgId(orgId);
+        LoanGoods goods = loanGoodsService.findOneByOrgId(orgId);
 
         return Result.ok(goods);
     }
@@ -74,7 +74,7 @@ public class GoodsController extends BaseController {
     @GetMapping("/goods")
     public Result<List<LoanGoods>> findByOrgId() {
         Long orgId = getFromSession("orgId", Long.class);
-        List<LoanGoods> goods = loanService.findByOrgId(orgId);
+        List<LoanGoods> goods = loanGoodsService.findByOrgId(orgId);
 
         return Result.ok(goods);
     }
@@ -85,11 +85,11 @@ public class GoodsController extends BaseController {
     }
 
     @PutMapping("/goods")
-    public Result modify(@Valid @RequestBody LoanGoods goods) {
+    public Result modify(@Validated @RequestBody LoanGoods goods) {
         Long orgId = getFromSession("orgId", Long.class);
         goods.setOrgId(orgId);
 
-        loanService.modify(goods);
+        loanGoodsService.modify(goods);
         return Result.ok();
     }
 

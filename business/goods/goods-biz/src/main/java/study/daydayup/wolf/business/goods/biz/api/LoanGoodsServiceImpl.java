@@ -3,9 +3,9 @@ package study.daydayup.wolf.business.goods.biz.api;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
-import study.daydayup.wolf.business.goods.api.service.LoanService;
+import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.biz.loan.LoanEntity;
-import study.daydayup.wolf.business.goods.biz.loan.LoanRepository;
+import study.daydayup.wolf.business.goods.biz.loan.LoanGoodsRepository;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -19,9 +19,9 @@ import java.util.List;
  * @since 2019/12/10 8:52 下午
  **/
 @RpcService(protocol = "dubbo")
-public class LoanServiceImpl implements LoanService {
+public class LoanGoodsServiceImpl implements LoanGoodsService {
     @Resource
-    private LoanRepository repository;
+    private LoanGoodsRepository repository;
 
     @Override
     public long create(LoanGoods goods) {

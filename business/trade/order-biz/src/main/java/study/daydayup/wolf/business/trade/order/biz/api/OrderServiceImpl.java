@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderRepository;
+import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/16 10:33 上午
  **/
+@RpcService(protocol = "dubbo")
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderRepository orderRepository;

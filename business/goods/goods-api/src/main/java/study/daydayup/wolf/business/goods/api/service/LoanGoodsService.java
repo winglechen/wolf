@@ -11,7 +11,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/10 8:47 下午
  **/
-public interface LoanService {
+public interface LoanGoodsService {
     long create(LoanGoods goods);
     LoanGoods findById(long goodsId, long orgId);
     LoanGoods findById(long goodsId, long orgId, GoodsOption option);

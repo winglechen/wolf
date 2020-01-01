@@ -15,13 +15,13 @@ import javax.annotation.Resource;
 @Component
 public class LocaleUtil {
     @Resource
-    private static MessageSource messageSource;
+    private MessageSource messageSource;
 
     public LocaleUtil(MessageSource source) {
         messageSource = source;
     }
 
-    public static String get(String key) {
+    public String get(String key) {
         try {
             return messageSource.getMessage(key, null, LocaleContextHolder.getLocale());
         } catch (Exception e) {
