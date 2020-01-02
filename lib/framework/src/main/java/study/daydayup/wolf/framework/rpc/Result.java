@@ -32,6 +32,10 @@ public final class Result<T> implements Serializable {
         return new Result(code, message, null);
     }
 
+    public static <T> Result<T> fail(long code, String message, T t) {
+        return new Result(code, message, t);
+    }
+
     Result() {
         this(0, "", null);
     }

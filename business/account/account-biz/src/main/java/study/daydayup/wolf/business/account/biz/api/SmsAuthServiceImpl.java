@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
+import study.daydayup.wolf.business.account.api.exception.InvalidVerifyCodeException;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
@@ -45,26 +46,19 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
     @Override
     public Result<OauthLicense> registerAndLogin(SmsRequest request) {
-        //verify the code
         if (!verifyCodeService.verify(request.getMobile(), request.getCode())) {
-            return Result.fail(110000, "invalid code:" + request.getCode());
+            throw new InvalidVerifyCodeException();
         }
 
-        //checkAccountExist
         long accountId = accountService.existByAccount(request.getMobile());
-        System.out.println("service check account: "  + request.getMobile() + "; accountId: " + accountId);
-
-        //create account if needed
         if (0 == accountId) {
             accountId = accountService.createSmsAccount(request.getMobile(), request.getSource());
         }
 
-        //grant the license
         LicenseRequest licenseRequest = new LicenseRequest();
         BeanUtils.copyProperties(request, licenseRequest);
         licenseRequest.setAccountId(accountId);
 
-        System.out.println("service license request: "  + licenseRequest);
         OauthLicense license = licenseService.grant(licenseRequest);
         return Result.ok(license);
     }

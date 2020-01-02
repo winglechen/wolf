@@ -30,19 +30,25 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     @Override
     public License create(@Valid LicenseRequest request) {
         AccessTokenDO accessTokenDO = accessTokenDAO.selectByAccessToken(request.getToken());
-
-        if (null == accessTokenDO) {
-            accessTokenDO = new AccessTokenDO();
-            initTokenDO(accessTokenDO, request);
-            formatTokens(accessTokenDO, request);
-            formatCreateDates(accessTokenDO, request);
-            create(accessTokenDO);
-        } else {
-            refreshById(accessTokenDO.getId(), request.getExpiredIn());
+        if (accessTokenDO == null) {
+            return createLicense(request, true);
         }
 
-        return doToLicense(accessTokenDO);
+        Long requestAccountId = request.getAccountId();
+        Long dbAccountId = accessTokenDO.getAccountId();
+        if (dbAccountId == null) {
+            return createLicense(request, true);
+        }
+
+        if (requestAccountId.equals(dbAccountId)) {
+            refreshById(accessTokenDO.getId(), request.getExpiredIn());
+            return doToLicense(accessTokenDO);
+        }
+
+        //accessToken conflict
+        return createLicense(request, false);
     }
+
 
     @Override
     public License findByToken(@NotBlank String accessToken) {
@@ -120,6 +126,19 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         return 0;
     }
 
+    private License createLicense(LicenseRequest request, boolean useRequestToken) {
+        if (!useRequestToken) {
+            request.setToken(null);
+        }
+
+        AccessTokenDO accessTokenDO = new AccessTokenDO();
+        initTokenDO(accessTokenDO, request);
+        formatTokens(accessTokenDO, request);
+        formatCreateDates(accessTokenDO, request);
+        create(accessTokenDO);
+
+        return doToLicense(accessTokenDO);
+    }
 
     private License doToLicense(AccessTokenDO accessTokenDO) {
         if (null == accessTokenDO) {
