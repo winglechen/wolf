@@ -15,6 +15,7 @@ import java.util.UUID;
  * @author Wingle
  * @since 2019/12/5 12:10 下午
  **/
+@Deprecated
 public class SessionIdCreator {
     private HttpServletRequest request;
     private HttpServletResponse response;

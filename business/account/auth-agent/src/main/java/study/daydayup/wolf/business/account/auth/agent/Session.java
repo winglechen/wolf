@@ -4,6 +4,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
+import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
 
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent
@@ -21,8 +23,11 @@ import java.util.Map;
  **/
 public class Session {
     private String sessionId;
+    private String sessionKey;
     private Map<String, Object> data;
-    private SessionIdCreator sessionIdCreator;
+
+    private HttpServletRequest request;
+    private HttpServletResponse response;
 
     @Resource
     private AuthConfig config;
@@ -35,14 +40,11 @@ public class Session {
         }
         data = new HashMap<String, Object>();
 
-        sessionIdCreator = new SessionIdCreator(request, response, config);
-        String token = sessionIdCreator.getExistedId();
-        if(null != token) {
-            sessionId = token;
-        } else {
-            sessionId = sessionIdCreator.create();
-        }
+        this.request = request;
+        this.response = response;
+        this.sessionKey = config.getSessionKey();
 
+        initSessionId();
         loadFromRedis();
     }
 
@@ -60,7 +62,7 @@ public class Session {
         }
 
         this.sessionId = sessionId;
-        sessionIdCreator.changeId(sessionId);
+        saveSessionId();
     }
 
     public void set(String key, Object value) {
@@ -107,17 +109,6 @@ public class Session {
 
     }
 
-    private void loadFromRedis() {
-        //TODO
-
-        loadFromRpc();
-    }
-
-    private void loadFromRpc() {
-        OauthLicense license = oauthLicenseService.findByAccessToken(sessionId);
-        saveLicense(license);
-    }
-
     public void saveLicense(OauthLicense license) {
         if (null == license) {
             return;
@@ -132,6 +123,47 @@ public class Session {
         String scope = license.getScope().trim();
         Long orgId = Long.valueOf(scope);
         set("orgId", orgId);
+
+        if (!sessionId.equals(license.getAccessToken())) {
+            setSessionId(license.getAccessToken());
+        }
+    }
+
+
+    private void initSessionId() {
+        sessionId = createSessionId();
+        saveSessionId();
+    }
+
+    private void saveSessionId() {
+        CookieUtil.set(response, sessionKey, sessionId, true);
+    }
+
+    private String createSessionId() {
+        String sId;
+
+        sId = CookieUtil.get(request, sessionKey);
+        if (null != sId) {
+            return sId;
+        }
+
+        sId = request.getHeader(sessionKey);
+        if (null != sId) {
+            return sId;
+        }
+
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    private void loadFromRedis() {
+        //TODO
+
+        loadFromRpc();
+    }
+
+    private void loadFromRpc() {
+        OauthLicense license = oauthLicenseService.findByAccessToken(sessionId);
+        saveLicense(license);
     }
 
 }
