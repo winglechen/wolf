@@ -38,7 +38,11 @@ public class AccountServiceImpl implements AccountService {
         AccountDO accountDO = new AccountDO();
         BeanUtils.copyProperties(account, accountDO);
 
-        return accountDAO.insertSelective(accountDO);
+        accountDAO.insertSelective(accountDO);
+        if (null == accountDO.getId()) {
+            return 0;
+        }
+        return accountDO.getId();
     }
 
     @Override
@@ -53,7 +57,11 @@ public class AccountServiceImpl implements AccountService {
         accountDO.setAccountType((byte)AccountTypeEnum.MOBILE.getCode());
         accountDO.setCreatedAt(new Date());
 
-        return accountDAO.insertSelective(accountDO);
+        accountDAO.insertSelective(accountDO);
+        if (null == accountDO.getId()) {
+            return 0;
+        }
+        return accountDO.getId();
     }
 
     @Override
@@ -69,7 +77,11 @@ public class AccountServiceImpl implements AccountService {
         accountDO.setPassword(pass);
         accountDO.setSalt(salt);
 
-        return accountDAO.insertSelective(accountDO);
+        accountDAO.insertSelective(accountDO);
+        if (null == accountDO.getId()) {
+            return 0;
+        }
+        return accountDO.getId();
     }
 
     @Override
@@ -84,7 +96,6 @@ public class AccountServiceImpl implements AccountService {
         if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
             throw new AuthFailedException();
         }
-
 
         return accountDO.getId();
     }
