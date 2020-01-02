@@ -12,8 +12,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  **/
 @SpringBootApplication(scanBasePackages = {"study.daydayup.wolf.business.union"})
 @EnableDiscoveryClient
-public class WebUnionApplication {
+public class AdminUnionApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WebUnionApplication.class, args);
+        SpringApplication.run(AdminUnionApplication.class, args);
     }
 }

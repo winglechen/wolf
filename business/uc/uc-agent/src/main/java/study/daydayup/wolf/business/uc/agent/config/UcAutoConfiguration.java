@@ -5,8 +5,6 @@ import org.springframework.web.context.WebApplicationContext;
 import study.daydayup.wolf.business.uc.agent.setting.AccountStatusAgent;
 import study.daydayup.wolf.business.uc.agent.setting.CustomerStatusAgent;
 
-import javax.annotation.Resource;
-import javax.servlet.DispatcherType;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.config

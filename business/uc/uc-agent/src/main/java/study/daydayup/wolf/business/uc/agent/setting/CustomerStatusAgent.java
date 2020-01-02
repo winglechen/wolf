@@ -1,10 +1,9 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
-import study.daydayup.wolf.business.uc.api.setting.enums.StatusGroupEnum;
+import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusGroupEnum;
 import study.daydayup.wolf.business.uc.api.setting.exception.StatusNotFoundException;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
 
@@ -18,7 +17,6 @@ import java.util.Map;
  * @author Wingle
  * @since 2020/1/1 2:47 下午
  **/
-@Component
 public class CustomerStatusAgent {
     private final int STATUS_LENGTH = 20;
     private boolean isInit = false;
@@ -58,17 +56,17 @@ public class CustomerStatusAgent {
         return statusSet.get(code);
     }
 
-    public Map<String, Boolean> getGroup(StatusGroupEnum... groups) {
+    public Map<String, Boolean> getGroup(CustomerStatusGroupEnum... groups) {
         Map<String, Boolean> map = new HashMap<>();
 
-        for (StatusGroupEnum group: groups) {
+        for (CustomerStatusGroupEnum group: groups) {
             map.putAll(getGroup(group));
         }
 
         return map;
     }
 
-    public Map<String, Boolean> getGroup(StatusGroupEnum group) {
+    public Map<String, Boolean> getGroup(CustomerStatusGroupEnum group) {
         if (group == null) {
             return null;
         }

@@ -100,7 +100,7 @@ public class GoodsController extends BaseController {
         return Result.ok();
     }
 
-    @PutMapping("/goods/{goodsId}")
+    @PutMapping("/goods/listing/{goodsId}")
     public Result listing(@RequestParam("goodsId") long goodsId) {
         Long orgId = getFromSession("orgId", Long.class);
 
@@ -110,7 +110,7 @@ public class GoodsController extends BaseController {
         return Result.ok();
     }
 
-    @PutMapping("/goods/{goodsId}")
+    @PutMapping("/goods/delisting/{goodsId}")
     public Result delisting(@RequestParam("goodsId") long goodsId) {
         Long orgId = getFromSession("orgId", Long.class);
         goodsService.delisting(goodsId, orgId);

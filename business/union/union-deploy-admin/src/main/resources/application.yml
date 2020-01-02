@@ -1,6 +1,6 @@
 spring:
   application:
-    name: wolf-union-web
+    name: wolf-union-admin
   profiles:
     active: dev
   main:
@@ -50,5 +50,3 @@ provider:
   application:
     name: wolf-union
 
-logging:
-  level: info

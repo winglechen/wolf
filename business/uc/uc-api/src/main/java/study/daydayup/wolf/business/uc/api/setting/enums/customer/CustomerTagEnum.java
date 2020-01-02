@@ -1,6 +1,7 @@
-package study.daydayup.wolf.business.uc.api.setting.enums;
+package study.daydayup.wolf.business.uc.api.setting.enums.customer;
 
 import lombok.Getter;
+import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
 
 /**
  * study.daydayup.wolf.business.trade.api.enums
