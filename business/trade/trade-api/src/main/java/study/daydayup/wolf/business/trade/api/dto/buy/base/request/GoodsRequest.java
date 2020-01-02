@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.vo.buy.GoodsMemo;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.GoodsMemo;
 
 import javax.validation.constraints.Min;
 

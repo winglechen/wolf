@@ -1,14 +1,9 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.node

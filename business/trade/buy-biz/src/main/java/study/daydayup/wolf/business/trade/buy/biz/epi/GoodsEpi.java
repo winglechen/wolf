@@ -9,9 +9,9 @@ import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeInstallment;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeLoan;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeInstallment;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeLoan;
 
 import java.util.ArrayList;
 import java.util.List;

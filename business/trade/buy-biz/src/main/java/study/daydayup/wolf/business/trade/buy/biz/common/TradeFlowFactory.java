@@ -1,12 +1,9 @@
 package study.daydayup.wolf.business.trade.buy.biz.common;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.buy.biz.common.flow.*;
-import study.daydayup.wolf.business.trade.api.exception.UnsupportedTradeTypeException;
+import study.daydayup.wolf.business.trade.api.domain.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.buy.biz.loan.flow.*;
 
 import javax.annotation.Resource;

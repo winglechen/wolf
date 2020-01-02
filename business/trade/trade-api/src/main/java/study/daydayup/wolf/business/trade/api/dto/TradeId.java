@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.dto;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.exception.InvalidTradeIdException;
+import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeIdException;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;

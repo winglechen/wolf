@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractRepository;
 import study.daydayup.wolf.framework.rpc.RpcService;

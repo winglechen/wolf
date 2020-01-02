@@ -4,7 +4,7 @@ import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 
 /**
- * study.daydayup.wolf.business.trade.api.enums
+ * study.daydayup.wolf.business.trade.api.domain.enums
  *
  * @author Wingle
  * @since 2019/10/9 6:30 下午

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
-import study.daydayup.wolf.business.trade.api.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 
 /**
  * study.daydayup.wolf.business.trade.api.service.order

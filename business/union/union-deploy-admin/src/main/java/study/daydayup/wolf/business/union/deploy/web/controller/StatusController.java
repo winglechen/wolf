@@ -2,11 +2,9 @@ package study.daydayup.wolf.business.union.deploy.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.trade.api.constant.TradeTag;
 import study.daydayup.wolf.business.uc.agent.setting.CustomerStatusAgent;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusGroupEnum;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.TradeTagEnum;
-import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
 import java.util.Map;

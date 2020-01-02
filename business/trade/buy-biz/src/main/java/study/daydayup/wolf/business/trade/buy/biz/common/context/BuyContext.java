@@ -3,14 +3,14 @@ package study.daydayup.wolf.business.trade.buy.biz.common.context;
 import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
-import study.daydayup.wolf.business.trade.api.vo.buy.Seller;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeUmp;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeUmp;
 
 import java.util.List;
 

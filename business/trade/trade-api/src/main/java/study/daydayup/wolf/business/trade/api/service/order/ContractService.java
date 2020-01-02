@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.dto.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 
 /**
  * study.daydayup.wolf.business.trade.api.service.tm

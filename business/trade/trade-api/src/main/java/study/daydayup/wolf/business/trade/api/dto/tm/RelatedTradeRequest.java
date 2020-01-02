@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.api.event.TradeEvent;
-import study.daydayup.wolf.business.trade.api.exception.InvalidTradeIdException;
-import study.daydayup.wolf.business.trade.api.state.TradeState;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeIdException;
+import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;

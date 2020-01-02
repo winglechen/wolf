@@ -1,12 +1,12 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.vo.BuyerMemo;
-import study.daydayup.wolf.business.trade.api.vo.buy.Buyer;
-import study.daydayup.wolf.business.trade.api.vo.OrderAddress;
-import study.daydayup.wolf.business.trade.api.vo.buy.TradeEnv;
+import study.daydayup.wolf.business.trade.api.domain.vo.BuyerMemo;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
+import study.daydayup.wolf.business.trade.api.domain.vo.OrderAddress;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

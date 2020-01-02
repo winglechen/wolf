@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.tsm;
 
-import study.daydayup.wolf.business.trade.api.event.TradeEvent;
-import study.daydayup.wolf.business.trade.api.state.TradeState;
+import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.common.sm.StateMachine;
 
 /**

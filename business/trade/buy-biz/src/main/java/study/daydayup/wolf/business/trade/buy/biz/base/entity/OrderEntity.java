@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.base.entity;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 

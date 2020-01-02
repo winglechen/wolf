@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.trade.buy.biz.api;
 
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.event.base.PaidEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.OrderEntity;

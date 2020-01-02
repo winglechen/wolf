@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.entity.contract.LoanTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.LoanTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;

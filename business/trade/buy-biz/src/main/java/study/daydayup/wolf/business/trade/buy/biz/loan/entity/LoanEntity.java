@@ -1,12 +1,12 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.event.loan.ApproveEvent;
-import study.daydayup.wolf.business.trade.api.event.loan.RefuseEvent;
-import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanBeginEvent;
-import study.daydayup.wolf.business.trade.api.event.loan.loan.LoanSuccessEvent;
-import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.ApproveEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.RefuseEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanBeginEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanSuccessEvent;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 

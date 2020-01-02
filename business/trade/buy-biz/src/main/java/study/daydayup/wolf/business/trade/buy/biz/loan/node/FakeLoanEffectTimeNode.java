@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;

@@ -1,8 +1,8 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.base.response;
 
 import lombok.Data;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy.base.response

@@ -4,7 +4,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
-import study.daydayup.wolf.business.trade.api.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderRepository;
 import study.daydayup.wolf.framework.rpc.RpcService;

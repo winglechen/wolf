@@ -1,13 +1,13 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
-import study.daydayup.wolf.business.trade.api.constant.TradeTag;
-import study.daydayup.wolf.business.trade.api.entity.Contract;
-import study.daydayup.wolf.business.trade.api.entity.Order;
-import study.daydayup.wolf.business.trade.api.entity.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.entity.contract.LoanTerm;
-import study.daydayup.wolf.business.trade.api.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.api.exception.InvalidContractException;
-import study.daydayup.wolf.business.trade.api.exception.buy.InstallmentNotEffectedException;
+import study.daydayup.wolf.business.trade.api.config.TradeTag;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.exception.InvalidContractException;
+import study.daydayup.wolf.business.trade.api.domain.exception.buy.InstallmentNotEffectedException;
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
