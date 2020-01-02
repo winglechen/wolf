@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 public class TradeStateLog implements Model {
+    private Integer id;
+
     private String tradeNo;
     private String relatedTradeNo;
     private Integer tradeType;

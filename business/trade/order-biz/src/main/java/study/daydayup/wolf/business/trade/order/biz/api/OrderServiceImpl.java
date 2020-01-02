@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.api;
 
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.trade.api.dto.OrderOption;
+import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.domain.exception;
+package study.daydayup.wolf.business.trade.api.domain.exception.order;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
 

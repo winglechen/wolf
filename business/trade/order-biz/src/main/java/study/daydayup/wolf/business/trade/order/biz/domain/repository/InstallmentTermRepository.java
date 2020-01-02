@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
-import study.daydayup.wolf.business.trade.api.domain.exception.InvalidContractException;
+import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.TradeStateNotFoundException;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.UnsupportedStateChangeException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
