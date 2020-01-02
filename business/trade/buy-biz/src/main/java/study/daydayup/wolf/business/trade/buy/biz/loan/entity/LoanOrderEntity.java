@@ -28,10 +28,10 @@ import java.time.LocalTime;
  * @author Wingle
  * @since 2019/12/13 4:41 下午
  **/
-public class OrderEntity extends AbstractEntity<Order> implements Entity  {
+public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
     private Contract contract;
 
-    public OrderEntity(Contract contract) {
+    public LoanOrderEntity(Contract contract) {
         this.contract = contract;
         this.isNew = true;
     }

@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
-import study.daydayup.wolf.business.trade.buy.biz.loan.entity.OrderEntity;
+import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
 import study.daydayup.wolf.common.util.EnumUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
@@ -26,7 +26,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
     @Reference
     private OrderService orderService;
 
-    public void save(OrderEntity entity) {
+    public void save(LoanOrderEntity entity) {
         if (entity == null || null == entity.getModel()) {
             return;
         }
@@ -40,7 +40,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         createEntity(entity);
     }
 
-    private Order findExistsOrder(OrderEntity entity) {
+    private Order findExistsOrder(LoanOrderEntity entity) {
         RelatedTradeRequest request = entityToRequest(entity);
         List<Order> orderList = orderService.findRelatedTrade(request);
         if (orderList == null || orderList.isEmpty()) {
@@ -65,7 +65,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         }
     }
 
-    private Order findRepayOrder(List<Order> orderList, OrderEntity entity) {
+    private Order findRepayOrder(List<Order> orderList, LoanOrderEntity entity) {
         String entityTags = entity.getModel().getTags();
 
         for (Order order: orderList) {
@@ -78,15 +78,15 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         return null;
     }
 
-    private Order findLoanProxyOrder(List<Order> orderList, OrderEntity entity) {
+    private Order findLoanProxyOrder(List<Order> orderList, LoanOrderEntity entity) {
         return null;
     }
 
-    private Order findCollectionOrder(List<Order> orderList, OrderEntity entity) {
+    private Order findCollectionOrder(List<Order> orderList, LoanOrderEntity entity) {
         return null;
     }
 
-    private void updateEntity(OrderEntity entity) {
+    private void updateEntity(LoanOrderEntity entity) {
         Order key = entity.getKey();
         Order changes = entityToChanges(entity);
 
@@ -97,11 +97,11 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         orderService.modify(key, changes);
     }
 
-    private void createEntity(OrderEntity entity) {
+    private void createEntity(LoanOrderEntity entity) {
         orderService.create(entity.getModel());
     }
 
-    private RelatedTradeRequest entityToRequest(OrderEntity entity) {
+    private RelatedTradeRequest entityToRequest(LoanOrderEntity entity) {
         RelatedTradeRequest request = new RelatedTradeRequest();
 
         BeanUtils.copyProperties(entity.getModel(), request);
@@ -126,7 +126,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         return key;
     }
 
-    private Order entityToChanges(OrderEntity entity) {
+    private Order entityToChanges(LoanOrderEntity entity) {
         if (entity == null || null == entity.getModel()) {
             return null;
         }

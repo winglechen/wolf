@@ -19,12 +19,12 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/23 10:16 上午
  **/
-public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
-    public LoanEntity(Contract model) {
+public class LoanContractEntity extends AbstractEntity<Contract> implements Entity  {
+    public LoanContractEntity(Contract model) {
         this(model, true);
     }
 
-    public LoanEntity(Contract model, boolean isNew) {
+    public LoanContractEntity(Contract model, boolean isNew) {
         this.model = model;
         this.key = Contract.builder()
                 .tradeNo(model.getTradeNo())
@@ -33,7 +33,7 @@ public class LoanEntity extends AbstractEntity<Contract> implements Entity  {
                 .build();
     }
 
-    public LoanEntity(TradeId tradeId) {
+    public LoanContractEntity(TradeId tradeId) {
         tradeId.valid();
         Contract contract = Contract.builder()
                 .tradeNo(tradeId.getTradeNo())

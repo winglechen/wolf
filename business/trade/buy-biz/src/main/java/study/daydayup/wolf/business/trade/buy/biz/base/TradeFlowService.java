@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.service;
+package study.daydayup.wolf.business.trade.buy.biz.base;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayNotifyRequest;
@@ -9,8 +9,6 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyRes
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlowFactory;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
 import study.daydayup.wolf.common.util.EnumUtil;
 
 import javax.annotation.Resource;

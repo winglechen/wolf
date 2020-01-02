@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.common;
+package study.daydayup.wolf.business.trade.buy.biz.base;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayNotifyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
@@ -7,8 +7,8 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmRespo
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
-import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
-import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContextBuilder;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContextBuilder;
 
 import java.util.List;
 

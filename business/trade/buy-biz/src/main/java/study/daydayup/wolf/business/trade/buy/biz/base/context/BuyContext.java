@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.buy.biz.common.context;
+package study.daydayup.wolf.business.trade.buy.biz.base.context;
 
 import lombok.Builder;
 import lombok.Data;

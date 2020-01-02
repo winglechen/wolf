@@ -1,8 +1,8 @@
-package study.daydayup.wolf.business.trade.buy.biz.common;
+package study.daydayup.wolf.business.trade.buy.biz.base;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.buy.biz.common.flow.*;
+import study.daydayup.wolf.business.trade.buy.biz.base.flow.*;
 import study.daydayup.wolf.business.trade.api.domain.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.buy.biz.loan.flow.*;
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
-import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanEntity;
+import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -21,7 +21,7 @@ public class LoanRepository extends AbstractRepository implements Repository {
     @Reference
     private ContractService contractService;
 
-    public void add(LoanEntity entity) {
+    public void add(LoanContractEntity entity) {
         if (entity == null || null == entity.getModel()) {
             return;
         }
@@ -30,7 +30,7 @@ public class LoanRepository extends AbstractRepository implements Repository {
         fire(entity.getEventList());
     }
 
-    public void save(LoanEntity entity) {
+    public void save(LoanContractEntity entity) {
         if (entity == null
                 || null == entity.getKey()
                 || null == entity.getChanges()) {
@@ -41,7 +41,7 @@ public class LoanRepository extends AbstractRepository implements Repository {
         fire(entity.getEventList());
     }
 
-    public LoanEntity find(TradeId tradeId) {
+    public LoanContractEntity find(TradeId tradeId) {
         tradeId.valid();
         Contract contract = contractService.find(tradeId);
 
@@ -49,7 +49,7 @@ public class LoanRepository extends AbstractRepository implements Repository {
             return null;
         }
 
-        LoanEntity entity = new LoanEntity(contract, false);
+        LoanContractEntity entity = new LoanContractEntity(contract, false);
         return entity;
     }
 }

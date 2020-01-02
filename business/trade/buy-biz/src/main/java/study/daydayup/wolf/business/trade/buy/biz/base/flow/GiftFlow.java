@@ -1,10 +1,10 @@
-package study.daydayup.wolf.business.trade.buy.biz.common.flow;
+package study.daydayup.wolf.business.trade.buy.biz.base.flow;
 
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.buy.biz.common.AbstractTradeFlow;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeFlow;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.AbstractTradeFlow;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlow;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 
 import java.util.List;
 
@@ -15,7 +15,8 @@ import java.util.List;
  * @since 2019/10/5 10:57 AM
  **/
 @Component
-public class GroupParticipateFlow extends AbstractTradeFlow implements TradeFlow {
+public class GiftFlow extends AbstractTradeFlow implements TradeFlow {
+
 
     @Override
     public List<TradeNode> buildConfirmFlow() {

@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.GoodsNotFoundException;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.node.AbstractTradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
 
 import javax.annotation.Resource;

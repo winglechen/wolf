@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2019/12/13 4:41 下午
  **/
+@Deprecated
 public class AbstractOrder extends AbstractEntity<Order> implements Entity  {
     protected Contract contract;
 

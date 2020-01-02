@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyRes
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
-import study.daydayup.wolf.business.trade.buy.biz.service.TradeFlowService;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlowService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 

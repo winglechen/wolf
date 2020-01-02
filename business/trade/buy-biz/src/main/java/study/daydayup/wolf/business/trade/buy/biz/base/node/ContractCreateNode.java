@@ -1,11 +1,8 @@
-package study.daydayup.wolf.business.trade.buy.biz.common.node;
+package study.daydayup.wolf.business.trade.buy.biz.base.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
-
-import java.util.EnumSet;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.node

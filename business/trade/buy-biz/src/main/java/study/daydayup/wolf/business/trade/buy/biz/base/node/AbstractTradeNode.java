@@ -1,9 +1,9 @@
-package study.daydayup.wolf.business.trade.buy.biz.common.node;
+package study.daydayup.wolf.business.trade.buy.biz.base.node;
 
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.GoodsNotFoundException;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.buy.biz.common.TradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.common.context.BuyContext;
+import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 
 import java.util.List;
 
