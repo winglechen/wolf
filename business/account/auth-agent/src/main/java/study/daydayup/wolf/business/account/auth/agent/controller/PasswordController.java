@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.Result;
 
@@ -25,6 +26,8 @@ public class PasswordController extends AuthController {
     @Reference
     private PasswordAuthService passwordService;
     @Resource
+    private AuthConfig authConfig;
+    @Resource
     private Session session;
 
     @GetMapping("/auth/password/login")
@@ -38,14 +41,24 @@ public class PasswordController extends AuthController {
 
         String scope = formatScope(request.getScope(), request.getOrgId());
         request.setScope(scope);
+        request.setExpiredIn(authConfig.getExpiredIn());
+        request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
         Result<OauthLicense> result = passwordService.login(request);
         OauthLicense license = result.getNotNullData();
+
+        System.out.println("accountId: "  + license.getAccountId());
+        System.out.println("orgId: "  + license.getScope());
+        System.out.println("token: " + license.getAccessToken());
+        System.out.println("expire: " + license.getExpiredAt());
+
         saveLicenseToSession(license);
 
         return Result.ok();
     }
 
+    @GetMapping("/auth/password/registerAndLogin")
+    // TODO CHECK
     public Result registerAndLogin(@Valid PasswordRequest request) {
         if(isLogin()) {
             return Result.ok();
@@ -53,6 +66,8 @@ public class PasswordController extends AuthController {
 
         request.setEnv(null);
         request.setToken(session.getSessionId());
+        request.setExpiredIn(authConfig.getExpiredIn());
+        request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
         String scope = formatScope(request.getScope(), request.getOrgId());
         request.setScope(scope);

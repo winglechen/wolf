@@ -22,6 +22,7 @@ import java.util.Map;
 public class Session {
     private String sessionId;
     private Map<String, Object> data;
+    private SessionIdCreator sessionIdCreator;
 
     @Resource
     private AuthConfig config;
@@ -34,7 +35,7 @@ public class Session {
         }
         data = new HashMap<String, Object>();
 
-        SessionIdCreator sessionIdCreator = new SessionIdCreator(request, response, config);
+        sessionIdCreator = new SessionIdCreator(request, response, config);
         String token = sessionIdCreator.getExistedId();
         if(null != token) {
             sessionId = token;
@@ -47,6 +48,19 @@ public class Session {
 
     public String getSessionId() {
         return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        if (sessionId == null) {
+            return;
+        }
+
+        if (this.sessionId.equals(sessionId)) {
+            return;
+        }
+
+        this.sessionId = sessionId;
+        sessionIdCreator.changeId(sessionId);
     }
 
     public void set(String key, Object value) {

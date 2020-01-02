@@ -29,7 +29,7 @@ public final class Result<T> implements Serializable {
     }
 
     public static Result fail(long code, String message) {
-        return new Result(code, message, "");
+        return new Result(code, message, null);
     }
 
     Result() {
@@ -60,6 +60,10 @@ public final class Result<T> implements Serializable {
     }
 
     public T getNotNullData() {
+        if (!isSuccess()) {
+            throw new NullReturnedException(message);
+        }
+
         if (null == data) {
             throw new NullReturnedException("Result.getNotNullData return null");
         }

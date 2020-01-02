@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 public class PasswordRequest implements Request {
     @NotBlank
     private String account;
+    private long orgId;
+
     @NotBlank
     private String password;
     private String newPassword;
@@ -26,7 +28,6 @@ public class PasswordRequest implements Request {
     private String token;
     private String scope;
 
-    private long orgId;
 
     private long expiredIn;
     private long refreshExpiredIn;

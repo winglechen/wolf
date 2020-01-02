@@ -42,7 +42,7 @@ public class SessionIdCreator {
             return sId;
         }
 
-        return sId;
+        return null;
     }
 
     public String create() {
@@ -50,6 +50,13 @@ public class SessionIdCreator {
         CookieUtil.set(response, sessionKey, sId, true);
 
         return sId;
+    }
+
+    public void changeId(String sessionId) {
+        if (sessionId == null) {
+            return;
+        }
+        CookieUtil.set(response, sessionKey, sessionId, true);
     }
 
 }

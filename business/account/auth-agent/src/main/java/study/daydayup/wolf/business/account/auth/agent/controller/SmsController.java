@@ -49,6 +49,8 @@ public class SmsController extends AuthController {
         request.setExpiredIn(authConfig.getExpiredIn());
         request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
+        System.out.println("controller sms request: " + request);
+
         Result<OauthLicense> result = smsService.registerAndLogin(request);
         OauthLicense license = result.getNotNullData();
 

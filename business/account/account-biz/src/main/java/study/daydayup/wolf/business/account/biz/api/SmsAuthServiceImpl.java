@@ -16,6 +16,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -51,6 +52,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
         //checkAccountExist
         long accountId = accountService.existByAccount(request.getMobile());
+        System.out.println("service check account: "  + request.getMobile() + "; accountId: " + accountId);
 
         //create account if needed
         if (0 == accountId) {
@@ -62,6 +64,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         BeanUtils.copyProperties(request, licenseRequest);
         licenseRequest.setAccountId(accountId);
 
+        System.out.println("service license request: "  + licenseRequest);
         OauthLicense license = licenseService.grant(licenseRequest);
         return Result.ok(license);
     }

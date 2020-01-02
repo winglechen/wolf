@@ -36,6 +36,7 @@ public class StatusController extends BaseController {
 
         agent.set(TradeTagEnum.FIRST_TRADE);
         agent.set(TradeTagEnum.LOAN_LOANING);
+        agent.save();
 
         Map<String, Boolean> tradeStatus = agent.getGroup(CustomerStatusGroupEnum.TRADE_TAG);
         return tradeStatus;

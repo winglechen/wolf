@@ -14,13 +14,13 @@ import java.util.Date;
  **/
 @Data
 public class License implements Serializable {
-    private Long accountId;
-    private String clientId;
-    private String scope;
+    protected Long accountId;
+    protected String clientId;
+    protected String scope;
 
-    private String accessToken;
-    private Date expiredAt;
-    private String refreshToken;
-    private Date refreshExpiredAt;
+    protected String accessToken;
+    protected Date expiredAt;
+    protected String refreshToken;
+    protected Date refreshExpiredAt;
 
 }
