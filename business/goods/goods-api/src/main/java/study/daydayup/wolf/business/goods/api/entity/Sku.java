@@ -12,8 +12,8 @@ import study.daydayup.wolf.common.model.annotation.column.ParentKey;
  **/
 @Data
 public class Sku implements Entity  {
-    private long skuId;
+    private Long skuId;
     @ParentKey
-    private long goodsId;
+    private Long goodsId;
 
 }

@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.goods.api.entity;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;

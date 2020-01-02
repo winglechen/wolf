@@ -38,7 +38,7 @@ public class LoanGoodsRepository implements  Repository {
         if (entity == null) {
             return 0;
         }
-        entity.setId(0);
+        entity.setId(null);
 
         long goodsId = saveGoodsDO(entity);
         saveLoanDO(goodsId, entity);
@@ -74,7 +74,7 @@ public class LoanGoodsRepository implements  Repository {
     public List<LoanEntity> findByOrgId(long orgId) {
         List<GoodsDO> goodsDOList = goodsDAO.selectByOrgId(orgId);
         if (goodsDOList.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
 
         Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
@@ -132,7 +132,9 @@ public class LoanGoodsRepository implements  Repository {
         List<Long> goodsIds = goodsDOList.stream()
                 .map(GoodsDO::getId)
                 .collect(Collectors.toList());
+
         List<GoodsLoanDO> loanDOList = loanDAO.selectByGoodsIdIn(goodsIds, orgId);
+
         Map<Long, GoodsLoanDO> loanMap = new HashMap<>();
         if (loanDOList != null) {
             loanMap = loanDOList.stream().collect(
@@ -147,7 +149,9 @@ public class LoanGoodsRepository implements  Repository {
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
 
-        Long id = goodsDAO.insertSelective(goodsDO);
+        goodsDAO.insertSelective(goodsDO);
+        Long id = goodsDO.getId();
+        System.out.println("last goodsId: " + id);
         if (id == null) {
             throw new FailedCreateLoanException();
         }

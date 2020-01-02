@@ -12,6 +12,7 @@ import study.daydayup.wolf.common.model.annotation.column.PrimaryKey;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
@@ -22,35 +23,34 @@ import javax.validation.constraints.NotBlank;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder(toBuilder = true)
-public class BaseGoods {
+public class BaseGoods implements Serializable {
     public BaseGoods() {}
     @BusinessKey @PrimaryKey
-    protected long id;
-    @ForeignKey @Min(1)
-    protected long orgId;
+    protected Long id;
     @ForeignKey
-    protected long categoryId;
+    protected Long orgId;
+    @ForeignKey
+    protected Long categoryId;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum
      */
-    protected int goodsType;
+    protected Integer goodsType;
     @NotBlank
     protected String name;
     @Min(1)
-    protected long price;
-    @Min(1)
-    protected int currency;
-    protected int chargeUnit;
+    protected Long price;
+    protected Integer currency;
+    protected Integer chargeUnit;
 
 
     /**
      * @see GoodsStateEnum
      */
-    protected int state;
+    protected Integer state;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.StockTypeEnum
      */
-    protected int stockType;
+    protected Integer stockType;
 
 
     protected String vsPrice;
@@ -60,7 +60,7 @@ public class BaseGoods {
     protected String code;
     protected String tags;
 
-    protected long creator;
+    protected Long creator;
 
-    protected int version;
+    protected Integer version;
 }

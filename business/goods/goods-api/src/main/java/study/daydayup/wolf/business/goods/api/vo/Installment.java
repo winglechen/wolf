@@ -15,14 +15,14 @@ import javax.validation.constraints.Min;
 @Data
 public class Installment implements Entity  {
     @Min(1)
-    private int period;
+    private Integer period;
     @Min(1)
-    private int percentage;
+    private Integer percentage;
     @Min(1)
-    private int feePercentage;
+    private Integer feePercentage;
 
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum
      */
-    private int type = InstallmentTypeEnum.DEFAULT.getCode();
+    private Integer type = InstallmentTypeEnum.DEFAULT.getCode();
 }

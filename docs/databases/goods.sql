@@ -60,7 +60,7 @@ COMMENT = '产品详情';
 DROP TABLE IF EXISTS `sku`;
 CREATE TABLE IF NOT EXISTS `sku`
 (
-    `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
@@ -84,7 +84,7 @@ DROP TABLE IF EXISTS `loan_detail`;
 DROP TABLE IF EXISTS `goods_loan`;
 CREATE TABLE IF NOT EXISTS `goods_loan`
 (
-    `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
@@ -117,7 +117,7 @@ DROP TABLE IF EXISTS `installment_detail`;
 DROP TABLE IF EXISTS `goods_installment`;
 CREATE TABLE IF NOT EXISTS `goods_installment`
 (
-    `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `goods_id`      BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 

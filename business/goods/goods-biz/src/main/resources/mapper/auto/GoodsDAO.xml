@@ -37,13 +37,14 @@
     from goods
     where id = #{id,jdbcType=BIGINT}
     and org_id = #{orgId,jdbcType=BIGINT}
+    and delete_flag = 0
     limit 1
   </select>
   <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods (org_id, category_id, goods_type, 
+    insert into goods (org_id, category_id, goods_type,
       `name`, price, currency, 
       charge_unit, `state`, stock_type, 
       sku_type, vs_price, feature, 

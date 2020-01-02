@@ -44,7 +44,7 @@ public class GoodsController extends BaseController {
         BeanUtils.copyProperties(loanConfig, loan);
         goods.setLoan(loan);
 
-        goods.setId(0);
+        goods.setId(null);
         goods.setOrgId(getFromSession("orgId", Long.class));
 
         loanGoodsService.create(goods);
@@ -52,8 +52,8 @@ public class GoodsController extends BaseController {
     }
 
     @GetMapping("/goods/{goodsId}")
-    public Result<LoanGoods> findById(@RequestParam("goodsId") long goodsId) {
-        if (goodsId <= 0) {
+    public Result<LoanGoods> findById(@PathVariable("goodsId") Long goodsId) {
+        if (null == goodsId || goodsId <= 0) {
             throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
         }
 
@@ -94,14 +94,22 @@ public class GoodsController extends BaseController {
     }
 
     @DeleteMapping("/goods/{goodsId}")
-    public Result remove(@RequestParam("goodsId") long goodsId) {
+    public Result remove(@PathVariable("goodsId") Long goodsId) {
+        if (null == goodsId || goodsId <= 0) {
+            throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
+        }
+
         Long orgId = getFromSession("orgId", Long.class);
         goodsService.remove(goodsId, orgId);
         return Result.ok();
     }
 
     @PutMapping("/goods/listing/{goodsId}")
-    public Result listing(@RequestParam("goodsId") long goodsId) {
+    public Result listing(@PathVariable("goodsId") Long goodsId) {
+        if (null == goodsId || goodsId <= 0) {
+            throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
+        }
+
         Long orgId = getFromSession("orgId", Long.class);
 
         goodsService.delistingAll(orgId);
@@ -111,7 +119,11 @@ public class GoodsController extends BaseController {
     }
 
     @PutMapping("/goods/delisting/{goodsId}")
-    public Result delisting(@RequestParam("goodsId") long goodsId) {
+    public Result delisting(@PathVariable("goodsId") Long goodsId) {
+        if (null == goodsId || goodsId <= 0) {
+            throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
+        }
+
         Long orgId = getFromSession("orgId", Long.class);
         goodsService.delisting(goodsId, orgId);
 

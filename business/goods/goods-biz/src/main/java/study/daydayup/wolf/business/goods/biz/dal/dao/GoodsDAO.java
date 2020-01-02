@@ -9,9 +9,9 @@ import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 
 @Mapper
 public interface GoodsDAO {
-    Long insert(GoodsDO record);
+    int insert(GoodsDO record);
 
-    Long insertSelective(GoodsDO record);
+    int insertSelective(GoodsDO record);
 
     GoodsDO selectById(@Param("id") Long id, @Param("orgId") Long orgId);
 

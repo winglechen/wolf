@@ -11,8 +11,8 @@ import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
  **/
 @Getter
 public enum CustomerTagEnum implements StatusEnum {
-
-    BLOCK_LIST(50, "customer.tag.blockList")
+    IS_STAFF(51, "customer.tag.isStaff"),
+    IN_BLOCK_LIST(50, "customer.tag.blockList")
     ;
 
     private int code;

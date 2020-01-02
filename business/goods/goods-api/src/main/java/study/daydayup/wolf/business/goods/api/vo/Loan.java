@@ -13,16 +13,16 @@ import javax.validation.constraints.Min;
  **/
 @Data
 public class Loan implements Entity  {
-    private long goodsId;
+    private Long goodsId;
     //loan add by user
     @Min(1)
-    private int handlingFeeRate;
+    private Integer handlingFeeRate;
     @Min(1)
-    private int period;
+    private Integer period;
     @Min(1)
-    private int interest;
+    private Integer interest;
     @Min(1)
-    private int penalty;
+    private Integer penalty;
 
     //loan defined in the config
     private int interestUnit;
