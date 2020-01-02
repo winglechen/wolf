@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.business.uc</groupId>
-    <artifactId>mc-biz</artifactId>
+    <artifactId>feed-biz</artifactId>
 
 
 </project>

@@ -11,7 +11,7 @@
         <module>profile-biz</module>
         <module>acl-biz</module>
         <module>crm-biz</module>
-        <module>mc-biz</module>
+        <module>feed-biz</module>
         <module>assets-biz</module>
         <module>uc-deploy-dubbo</module>
         <module>uc-deploy-web</module>

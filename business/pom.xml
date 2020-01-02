@@ -20,6 +20,7 @@
         <module>uc</module>
         <module>ump</module>
         <module>union</module>
+        <module>workflow</module>
     </modules>
 
     <properties>
