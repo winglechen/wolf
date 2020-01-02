@@ -30,9 +30,7 @@ public class AccountController {
         Account a = new Account();
         a.setAccount("wingle");
 
-        System.out.println("Account: " + a);
         long result = accountService.create(a);
-        System.out.println("result:" + result);
 
         return  "generic result: " + result;
     }

@@ -22,9 +22,9 @@ public class SmsRequest implements Request {
 
     private long orgId;
 
+    private String source;
     private String token;
     private String scope;
-    private String source;
 
     private int expiredIn;
     private int refreshExpiredIn;

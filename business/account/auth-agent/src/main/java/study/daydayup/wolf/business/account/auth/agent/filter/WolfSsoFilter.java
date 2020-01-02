@@ -31,7 +31,6 @@ public class WolfSsoFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("wolf filter init");
     }
 
 

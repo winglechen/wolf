@@ -28,9 +28,8 @@ public class PasswordRequest implements Request {
     private String token;
     private String scope;
 
-
-    private long expiredIn;
-    private long refreshExpiredIn;
+    private int expiredIn;
+    private int refreshExpiredIn;
 
     private AuthEnv env;
 }

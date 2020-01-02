@@ -46,12 +46,6 @@ public class PasswordController extends AuthController {
 
         Result<OauthLicense> result = passwordService.login(request);
         OauthLicense license = result.getNotNullData();
-
-        System.out.println("accountId: "  + license.getAccountId());
-        System.out.println("orgId: "  + license.getScope());
-        System.out.println("token: " + license.getAccessToken());
-        System.out.println("expire: " + license.getExpiredAt());
-
         saveLicenseToSession(license);
 
         return Result.ok();
