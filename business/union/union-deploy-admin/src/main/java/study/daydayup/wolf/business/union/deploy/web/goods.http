@@ -1,0 +1,107 @@
+
+
+
+
+### goods create
+POST http://localhost:9100/api/v1/goods
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name": "loan test1",
+  "price": 1000,
+  "loan" : {
+     "handlingFeeRate": 10,
+     "period": 15,
+     "interest":1,
+     "penalty": 2
+  },
+  "installmentList": [
+     {
+       "period": 5,
+       "percentage":33,
+       "feePercentage":33,
+       "type":10
+     }, {
+       "period": 5,
+       "percentage":33,
+       "feePercentage":33,
+       "type":10
+     }, {
+       "period": 5,
+       "percentage":33,
+       "feePercentage":33,
+       "type":10
+     }
+  ]
+}
+
+### goods edit
+PUT http://localhost:9100/api/v1/goods
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "name": "loan changed name",
+  "price": 2000,
+  "loan" : {
+    "handlingFeeRate": 10,
+    "period": 15,
+    "interest":1,
+    "penalty": 2
+  },
+  "installmentList": [
+    {
+      "period": 5,
+      "percentage":33,
+      "feePercentage":33,
+      "type":10
+    }, {
+      "period": 5,
+      "percentage":33,
+      "feePercentage":33,
+      "type":10
+    }, {
+      "period": 5,
+      "percentage":33,
+      "feePercentage":33,
+      "type":10
+    }
+  ]
+}
+
+###
+DELETE http://localhost:9100/api/v1/goods/2
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9100/api/v1/goods/one
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9100/api/v1/goods/1
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+PUT http://localhost:9100/api/v1/goods/listing/1
+Accept: */*
+Cache-Control: no-cache
+
+###
+PUT http://localhost:9100/api/v1/goods/delisting/1
+Accept: */*
+Cache-Control: no-cache
+
+### TODO: bugFix
+GET http://localhost:9100/api/v1/goods
+Accept: */*
+Cache-Control: no-cache
+
+###
