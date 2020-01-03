@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 public class Fast {
     public static void main(String[] args) throws Exception {
-        Result result = Result.ok();
+        Result result = Result.fail(200, "xx");
 
         String jsonResult = JSON.toJSONString(result);
         System.out.println("fast json: " +jsonResult);

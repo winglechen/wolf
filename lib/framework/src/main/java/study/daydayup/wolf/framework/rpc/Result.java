@@ -56,11 +56,7 @@ public final class Result<T> implements Serializable {
         return 0 == code && null != data;
     }
 
-    public boolean isNull() {
-        return null == data;
-    }
-
-    public T getNotNullData() {
+    public T notNullData() {
         if (!isSuccess()) {
             throw new NullReturnedException(message);
         }

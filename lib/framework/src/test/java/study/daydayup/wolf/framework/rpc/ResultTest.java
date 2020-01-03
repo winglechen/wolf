@@ -18,7 +18,7 @@ public class ResultTest {
         Result<String> r1 = new Result<>("hello");
 
         String expect = "hello";
-        String actual = r1.getNotNullData();
+        String actual = r1.notNullData();
 
         assertEquals("getNotNullData fail", expect, actual);
     }
@@ -27,7 +27,7 @@ public class ResultTest {
     public void test_get_not_null_data_exception() {
         Result<String> r1 = new Result<>();
         r1.setData(null);
-        r1.getNotNullData();
+        r1.notNullData();
     }
 
     @Test
@@ -45,19 +45,10 @@ public class ResultTest {
     }
 
     public void demo() {
-        Account account = Rpc.getAccount().getNotNullData();
+        Account account = Rpc.getAccount().notNullData();
 
         Result<Goods> rGoods = Rpc.getGoods();
-        if ( rGoods.isNull() ) {
-            //do something
-        } else {
-            //do other things
-        }
 
-        Result<Order> rOrder = Rpc.getOrder();
-        if ( rOrder.isNull() ) {
-            rOrder.toBusinessException();
-        }
     }
 
     static class Parent{}

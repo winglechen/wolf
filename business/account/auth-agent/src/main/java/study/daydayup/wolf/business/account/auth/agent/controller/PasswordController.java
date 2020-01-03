@@ -9,7 +9,6 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
-import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
@@ -45,7 +44,7 @@ public class PasswordController extends AuthController {
         request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
 
         Result<OauthLicense> result = passwordService.login(request);
-        OauthLicense license = result.getNotNullData();
+        OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
         return Result.ok();
@@ -67,7 +66,7 @@ public class PasswordController extends AuthController {
         request.setScope(scope);
 
         Result<OauthLicense> result = passwordService.registerAndLogin(request);
-        OauthLicense license = result.getNotNullData();
+        OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
         return Result.ok();
