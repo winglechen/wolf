@@ -18,13 +18,11 @@ import java.util.Set;
  **/
 @Data
 public class OrderEntity extends AbstractEntity<Order> implements Entity {
-    private boolean isNew = false;
-
     private Set<Event> eventSet;
 
     private Order model;
     private Order changes;
-    private Order locker;
+    private Order key;
 
     public OrderEntity() {
         this(true);
@@ -41,7 +39,7 @@ public class OrderEntity extends AbstractEntity<Order> implements Entity {
             return;
         }
 
-        locker.setOrderNo(orderNo);
+        key.setOrderNo(orderNo);
     }
 
     public void setBuyerId(long buyerId) {
@@ -50,7 +48,7 @@ public class OrderEntity extends AbstractEntity<Order> implements Entity {
             return;
         }
 
-        locker.setBuyerId(buyerId);
+        key.setBuyerId(buyerId);
     }
 
     public void setAddress(OrderAddress address) {
@@ -73,7 +71,7 @@ public class OrderEntity extends AbstractEntity<Order> implements Entity {
 
     public void setState(int state) {
         if (!isNew) {
-            locker.setState(model.getState());
+            key.setState(model.getState());
             changes.setState(state);
         }
 
