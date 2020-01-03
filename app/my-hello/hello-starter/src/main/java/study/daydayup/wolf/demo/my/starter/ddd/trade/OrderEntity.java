@@ -17,7 +17,7 @@ import java.util.Set;
  * @since 2019/12/25 4:15 下午
  **/
 @Data
-public class OrderEntity extends AbstractEntity implements Entity {
+public class OrderEntity extends AbstractEntity<Order> implements Entity {
     private boolean isNew = false;
 
     private Set<Event> eventSet;

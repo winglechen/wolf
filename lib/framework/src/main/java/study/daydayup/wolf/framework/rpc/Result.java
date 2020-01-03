@@ -18,8 +18,6 @@ public final class Result<T> implements Serializable {
     private String message;
     private T data;
 
-    private String exception;
-
     public static Result ok(){
         return Result.ok("");
     }
@@ -52,7 +50,6 @@ public final class Result<T> implements Serializable {
         this.code = code;
         this.message = message;
         this.data = data;
-        this.exception = null;
     }
 
     public boolean isSuccess() {

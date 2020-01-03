@@ -1,7 +1,9 @@
 package study.daydayup.wolf.business.trade.api.service.buy;
 
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
+import study.daydayup.wolf.framework.rpc.Result;
 
 /**
  * study.daydayup.wolf.business.trade.api.service.buy
@@ -10,6 +12,8 @@ import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
  * @since 2019/12/13 3:41 下午
  **/
 public interface LoanService {
+    Result<Contract> find(TradeId tradeId);
+
     void approve(TradeId tradeId);
     void refuse(TradeId tradeId);
 
