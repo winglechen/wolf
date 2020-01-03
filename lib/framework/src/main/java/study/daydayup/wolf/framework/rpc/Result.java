@@ -2,7 +2,7 @@ package study.daydayup.wolf.framework.rpc;
 
 import lombok.Data;
 import study.daydayup.wolf.common.lang.exception.BusinessException;
-import study.daydayup.wolf.common.lang.exception.NullReturnedException;
+import study.daydayup.wolf.common.lang.exception.api.NullReturnedException;
 
 import java.io.Serializable;
 

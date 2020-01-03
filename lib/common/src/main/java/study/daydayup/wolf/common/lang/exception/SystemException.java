@@ -2,6 +2,10 @@ package study.daydayup.wolf.common.lang.exception;
 
 import lombok.Getter;
 
+/**
+ * SystemException
+ *  code < 10000
+ */
 @Getter
 public class SystemException extends BaseException {
     public SystemException() {

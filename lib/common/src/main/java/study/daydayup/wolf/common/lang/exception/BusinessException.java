@@ -1,11 +1,15 @@
 package study.daydayup.wolf.common.lang.exception;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+/**
+ * BusinessException
+ * code >= 10000
+ */
+@Getter
 public class BusinessException extends BaseException {
     public BusinessException(String message) {
-        super(1000, message);
+        super(10000, message);
     }
 
     public BusinessException(long code, String message) {

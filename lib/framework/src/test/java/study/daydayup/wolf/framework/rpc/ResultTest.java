@@ -1,7 +1,7 @@
 package study.daydayup.wolf.framework.rpc;
 
 import org.junit.Test;
-import study.daydayup.wolf.common.lang.exception.NullReturnedException;
+import study.daydayup.wolf.common.lang.exception.api.NullReturnedException;
 
 import static org.junit.Assert.*;
 
