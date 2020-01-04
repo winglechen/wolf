@@ -1,6 +1,7 @@
 package study.daydayup.wolf.framework.rpc.page;
 
 import lombok.Data;
+import study.daydayup.wolf.common.io.enums.OrderEnum;
 
 import java.io.Serializable;
 
@@ -12,4 +13,7 @@ import java.io.Serializable;
  **/
 @Data
 public class PageOrder implements Serializable {
+    private OrderEnum order;
+    private String orderBy;
+    private Long orderValue;
 }

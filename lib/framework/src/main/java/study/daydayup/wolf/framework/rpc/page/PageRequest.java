@@ -3,6 +3,9 @@ package study.daydayup.wolf.framework.rpc.page;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * study.daydayup.wolf.framework.rpc.page
  *
@@ -11,8 +14,13 @@ import study.daydayup.wolf.framework.layer.api.Request;
  **/
 @Data
 public class PageRequest implements Request {
+    @NotNull @Min(1)
     private Integer pageSize;
-    private Integer currentPage;
+    // prePage: -1; nextPage: 1;
+    @NotNull
+    private Integer pageNum;
 
-    private PageOrder pageOrder;
+    private Integer order;
+    private String orderBy;
+    private Long orderValue;
 }
