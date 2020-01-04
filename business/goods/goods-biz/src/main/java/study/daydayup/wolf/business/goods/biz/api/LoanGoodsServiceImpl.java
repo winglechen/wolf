@@ -1,12 +1,15 @@
 package study.daydayup.wolf.business.goods.biz.api;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.biz.loan.LoanEntity;
 import study.daydayup.wolf.business.goods.biz.loan.LoanGoodsRepository;
 import study.daydayup.wolf.framework.rpc.RpcService;
+import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -55,13 +58,14 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     }
 
     @Override
-    public List<LoanGoods> findByOrgId(long orgId) {
-        List<LoanEntity> entityList = repository.findByOrgId(orgId);
-        if (entityList.isEmpty()) {
-            return new ArrayList<LoanGoods>();
+    public Page<LoanGoods> findByOrgId(long orgId, @Validated PageRequest pageRequest) {
+        Page<LoanEntity> entityList = repository.findByOrgId(orgId, pageRequest);
+        if (entityList.getList().isEmpty()) {
+            return Page.empty();
         }
 
-        return new ArrayList<LoanGoods>(entityList);
+        List<LoanGoods> loanList = new  ArrayList<LoanGoods>(entityList.getList());
+        return entityList.to(loanList);
     }
 
     @Override

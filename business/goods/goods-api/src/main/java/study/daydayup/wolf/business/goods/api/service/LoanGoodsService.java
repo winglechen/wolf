@@ -2,8 +2,8 @@ package study.daydayup.wolf.business.goods.api.service;
 
 import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
-
-import java.util.List;
+import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 /**
  * study.daydayup.wolf.business.goods.api.service
@@ -15,7 +15,7 @@ public interface LoanGoodsService {
     long create(LoanGoods goods);
     LoanGoods findById(long goodsId, long orgId);
     LoanGoods findById(long goodsId, long orgId, GoodsOption option);
-    List<LoanGoods> findByOrgId(long orgId);
+    Page<LoanGoods> findByOrgId(long orgId, PageRequest pageRequest);
     LoanGoods findOneByOrgId(long orgId);
 
     int modify(LoanGoods goods);

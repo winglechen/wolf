@@ -12,9 +12,10 @@ import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.union.deploy.web.config.GoodsConfig;
 import study.daydayup.wolf.business.union.deploy.web.config.LoanConfig;
 import study.daydayup.wolf.framework.rpc.Result;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
+import study.daydayup.wolf.framework.rpc.page.Page;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.union.api.controller
@@ -72,10 +73,14 @@ public class GoodsController extends BaseController {
     }
 
     @GetMapping("/goods")
-    public Result<List<LoanGoods>> findByOrgId() {
+    public Result<Page<LoanGoods>> findByOrgId(@RequestParam("page") Integer page) {
         Long orgId = getFromSession("orgId", Long.class);
-        List<LoanGoods> goods = loanGoodsService.findByOrgId(orgId);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == page ? 1 : page)
+                .pageNum(10)
+                .build();
 
+        Page<LoanGoods> goods = loanGoodsService.findByOrgId(orgId, pageRequest);
         return Result.ok(goods);
     }
 

@@ -12,6 +12,9 @@ import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
+import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
+import study.daydayup.wolf.framework.rpc.page.PageUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -71,11 +74,13 @@ public class LoanGoodsRepository implements  Repository {
         return getLoanByGoodsDO(goodsDO);
     }
 
-    public List<LoanEntity> findByOrgId(long orgId) {
+    public Page<LoanEntity> findByOrgId(long orgId, PageRequest pageReq) {
+        PageUtil<LoanEntity> pageUtil = PageUtil.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<GoodsDO> goodsDOList = goodsDAO.selectByOrgId(orgId);
         if (goodsDOList.isEmpty()) {
-            return new ArrayList<>();
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
+        Page<LoanEntity> page = pageUtil.getPage();
 
         Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
         List<LoanEntity> entityList = new ArrayList<>();
@@ -87,7 +92,8 @@ public class LoanGoodsRepository implements  Repository {
             }
         }
 
-        return entityList;
+        page.setList(entityList);
+        return page;
     }
 
     // private methods stat
