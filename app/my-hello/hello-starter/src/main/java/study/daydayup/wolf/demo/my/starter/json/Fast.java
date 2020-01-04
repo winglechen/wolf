@@ -20,5 +20,7 @@ public class Fast {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(System.out, result);
 
+        Result newResult = JSON.parseObject(jsonResult, Result.class);
+
     }
 }

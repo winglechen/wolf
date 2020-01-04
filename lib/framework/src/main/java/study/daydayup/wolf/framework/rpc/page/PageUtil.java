@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
  * @author Wingle
  * @since 2020/1/5 12:23 上午
  **/
+@Deprecated
 public class PageUtil<T> {
     private com.github.pagehelper.Page<T> hPage;
 

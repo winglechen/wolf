@@ -18,8 +18,13 @@ public class BaseController implements Controller {
     @Resource
     protected Session session;
 
-    protected  <T> T getFromSession(String key, Class<T> clazz) {
-        return (T)getFromSession(key);
+    protected <T> T getFromSession(String key, Class<T> type) {
+        Object value = getFromSession(key);
+        if(type.equals(value.getClass())) {
+            return type.cast(value);
+        }
+
+        throw new SessionNotFoundException(key + " - Invalid value type");
     }
 
     protected Object getFromSession(String key) {

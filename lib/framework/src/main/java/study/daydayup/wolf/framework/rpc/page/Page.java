@@ -1,6 +1,8 @@
 package study.daydayup.wolf.framework.rpc.page;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
  **/
 @Data
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Page<T> implements Serializable {
     private List<T> list;
@@ -34,6 +37,28 @@ public class Page<T> implements Serializable {
     private OrderEnum order;
     private String orderBy;
     private Long orderValue;
+
+    public static void startPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+    }
+
+    public static void offsetPage(int offset, int limit) {
+        PageHelper.offsetPage(offset, limit);
+    }
+
+    public static <T> Page<T> of(List<T> list) {
+        if (list == null) {
+            return empty(1, null);
+        }
+
+        if (list instanceof com.github.pagehelper.Page) {
+            Page<T> newPage = of( (com.github.pagehelper.Page<T>)list);
+            newPage.setList(list);
+            return newPage;
+        }
+
+        throw new IllegalArgumentException("Invalid Page");
+    }
 
     public static <T> Page<T> of(PageInfo<T> pageInfo) {
         if (pageInfo == null) {
@@ -60,20 +85,16 @@ public class Page<T> implements Serializable {
                 .total(pageInfo.getTotal())
                 .pageSize(pageInfo.getPageSize())
                 .pages(pageInfo.getPages())
+                .hasNextPage(pageInfo.getPages() > pageInfo.getPageNum())
+                .hasPrePage(pageInfo.getPages() > 0 && pageInfo.getPageNum() > 1)
                 .pageNum(pageInfo.getPageNum())
                 .build();
 
-        if (pageInfo.getPages() > pageInfo.getPageNum()) {
-            page.setHasNextPage(true);
-        } else {
-            page.setHasNextPage(false);
-        }
-        if (pageInfo.getPages() > 0 && pageInfo.getPageNum() > 1) {
-            page.setHasPrePage(true);
-        } else {
-            page.setHasPrePage(false);
-        }
         return page;
+    }
+
+    public static <T> Page<T> empty() {
+        return empty(null, null);
     }
 
     public static <T> Page<T> empty(Integer pageNum, Integer pageSize) {

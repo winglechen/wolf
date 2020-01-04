@@ -14,7 +14,6 @@ import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
-import study.daydayup.wolf.framework.rpc.page.PageUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -75,16 +74,15 @@ public class LoanGoodsRepository implements  Repository {
     }
 
     public Page<LoanEntity> findByOrgId(long orgId, PageRequest pageReq) {
-        PageUtil<LoanEntity> pageUtil = PageUtil.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+        Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<GoodsDO> goodsDOList = goodsDAO.selectByOrgId(orgId);
         if (goodsDOList.isEmpty()) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
-        Page<LoanEntity> page = pageUtil.getPage();
+        Page<GoodsDO> page = Page.of(goodsDOList);
 
         Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
         List<LoanEntity> entityList = new ArrayList<>();
-
         for (GoodsDO goodsDO : goodsDOList ) {
             LoanEntity entity = mergeGoodsAndLoan(goodsDO, loanMap.get(goodsDO.getId()));
             if (entity != null) {
@@ -92,8 +90,7 @@ public class LoanGoodsRepository implements  Repository {
             }
         }
 
-        page.setList(entityList);
-        return page;
+        return page.to(entityList);
     }
 
     // private methods stat
@@ -162,10 +159,10 @@ public class LoanGoodsRepository implements  Repository {
             throw new FailedCreateLoanException();
         }
 
-        return (long)id;
+        return id;
     }
 
-    private int modifyGoodsDO(LoanEntity entity) {
+    private void modifyGoodsDO(LoanEntity entity) {
         long id = entity.getId();
         if (id <= 0) {
             throw new GoodsNotFoundException();
@@ -173,7 +170,7 @@ public class LoanGoodsRepository implements  Repository {
 
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
-        return goodsDAO.updateByIdSelective(goodsDO);
+        goodsDAO.updateByIdSelective(goodsDO);
     }
 
     private void saveLoanDO(long goodsId, LoanEntity entity) {
@@ -192,7 +189,7 @@ public class LoanGoodsRepository implements  Repository {
         loanDAO.insertSelective(loanDO);
     }
 
-    private int modifyLoanDO(LoanEntity entity) {
+    private void modifyLoanDO(LoanEntity entity) {
         Loan loan = entity.getLoan();
 
         GoodsLoanDO loanDO = new GoodsLoanDO();
@@ -205,15 +202,14 @@ public class LoanGoodsRepository implements  Repository {
         String installments = JSON.toJSONString(entity.getInstallmentList());
         loanDO.setInstallment(installments);
 
-        return loanDAO.updateByGoodsIdSelective(loanDO);
+        loanDAO.updateByGoodsIdSelective(loanDO);
     }
 
     private void saveInstallmentDO(long goodsId, LoanEntity entity) {
 
     }
 
-    private int modifyInstallmentDO(LoanEntity entity) {
-        return 1;
+    private void modifyInstallmentDO(LoanEntity entity) {
     }
 
 }

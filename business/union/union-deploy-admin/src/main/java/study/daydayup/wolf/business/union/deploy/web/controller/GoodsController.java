@@ -73,11 +73,11 @@ public class GoodsController extends BaseController {
     }
 
     @GetMapping("/goods")
-    public Result<Page<LoanGoods>> findByOrgId(@RequestParam("page") Integer page) {
+    public Result<Page<LoanGoods>> findByOrgId(@RequestParam(value = "page", required = false) Integer page) {
         Long orgId = getFromSession("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == page ? 1 : page)
-                .pageNum(10)
+                .pageSize(3)
                 .build();
 
         Page<LoanGoods> goods = loanGoodsService.findByOrgId(orgId, pageRequest);

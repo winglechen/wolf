@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.api;
 
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
@@ -8,6 +9,7 @@ import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanRepository;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanOrderRepository;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -24,6 +26,11 @@ public class LoanServiceImpl implements LoanService {
     private LoanRepository loanRepository;
     @Resource
     private LoanOrderRepository loanOrderRepository;
+
+    @Override
+    public Result<Contract> find(TradeId tradeId) {
+        return null;
+    }
 
     @Override
     public void approve(@Validated TradeId tradeId) {

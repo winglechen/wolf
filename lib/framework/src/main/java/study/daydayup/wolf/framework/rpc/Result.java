@@ -19,19 +19,19 @@ public final class Result<T> implements Serializable {
     private T data;
 
     public static Result ok(){
-        return Result.ok("");
+        return ok("");
     }
 
     public static <T> Result<T> ok(T t){
-        return new Result<T>(0, "ok", t);
+        return new Result<>(0, "ok", t);
     }
 
     public static Result fail(long code, String message) {
-        return new Result(code, message, null);
+        return fail(code, message, null);
     }
 
     public static <T> Result<T> fail(long code, String message, T t) {
-        return new Result(code, message, t);
+        return new Result<>(code, message, t);
     }
 
     Result() {
@@ -57,12 +57,8 @@ public final class Result<T> implements Serializable {
     }
 
     public T notNullData() {
-        if (!isSuccess()) {
+        if (0 != code || null == data) {
             throw new NullReturnedException(message);
-        }
-
-        if (null == data) {
-            throw new NullReturnedException("Result.getNotNullData return null");
         }
 
         return data;

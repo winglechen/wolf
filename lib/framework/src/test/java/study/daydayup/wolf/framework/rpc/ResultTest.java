@@ -34,19 +34,10 @@ public class ResultTest {
     public void test_extend_work_fine() {
         Result r = new Result();
         assertNull("Result data default value is not null", r.getData());
-
-        Result<Parent> r1 = new Result<>();
-        Child child = new Child();
-        r1.setData(child);
-
-        Result<Child> r2 = new Result<>();
-        r2 = r;
-        r.setData(child);
     }
 
     public void demo() {
         Account account = Rpc.getAccount().notNullData();
-
         Result<Goods> rGoods = Rpc.getGoods();
 
     }
