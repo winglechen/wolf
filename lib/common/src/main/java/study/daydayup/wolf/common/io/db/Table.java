@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.io.db;
 
 import lombok.Data;
+import study.daydayup.wolf.common.io.enums.UnionEnum;
 
 import java.util.LinkedList;
 import java.util.List;
