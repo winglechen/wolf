@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=study.daydayup.wolf.business.union.app.config.InitConfig

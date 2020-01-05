@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.depoy.app.controller;
+package study.daydayup.wolf.business.union.app.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
