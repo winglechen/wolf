@@ -18,10 +18,10 @@ public enum GoodsTypeEnum implements CodeBasedEnum {
     NORMAL(10, "普通商品")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
 
-    GoodsTypeEnum(int code, String desc) {
+    GoodsTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

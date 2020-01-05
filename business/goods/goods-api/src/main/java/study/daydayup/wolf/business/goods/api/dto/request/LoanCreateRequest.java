@@ -17,23 +17,23 @@ import java.util.List;
 public class LoanCreateRequest extends GoodsCreateRequest {
     //loan add by user
     @Min(1)
-    private int handlingFeeRate;
+    private Integer handlingFeeRate;
     @Min(1)
-    private int period;
+    private Integer period;
     @Min(1)
-    private int interest;
+    private Integer interest;
     @Min(1)
-    private int penalty;
+    private Integer penalty;
 
     //loan defined in the config
-    private int interestUnit;
-    private int penaltyUnit;
-    private int periodUnit;
-    private int periodStrategy;
-    private int repayStrategy;
-    private int prepayStrategy;
-    private int amountStrategy;
-    private int feePayStrategy;
+    private Integer interestUnit;
+    private Integer penaltyUnit;
+    private Integer periodUnit;
+    private Integer periodStrategy;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
+    private Integer amountStrategy;
+    private Integer feePayStrategy;
 
     private List<Installment> installments;
 

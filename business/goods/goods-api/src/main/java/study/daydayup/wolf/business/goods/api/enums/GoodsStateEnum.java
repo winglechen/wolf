@@ -16,10 +16,10 @@ public enum GoodsStateEnum implements CodeBasedEnum {
     DEFAULT(0, "默认")
     ;
 
-    private int code;
+    private Integer code;
     private String desc;
 
-    GoodsStateEnum(int code, String desc) {
+    GoodsStateEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -13,9 +13,9 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @Data
 @Builder
 public class TradeGoodsRequest implements Request {
-    private long orgId;
-    private long goodsId;
-    private long skuId;
+    private Long orgId;
+    private Long goodsId;
+    private Long skuId;
 
-    private int quantity;
+    private Integer quantity;
 }

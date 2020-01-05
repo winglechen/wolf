@@ -25,12 +25,12 @@ public class Loan implements Entity  {
     private Integer penalty;
 
     //loan defined in the config
-    private int interestUnit;
-    private int penaltyUnit;
-    private int periodUnit;
-    private int periodStrategy;
-    private int repayStrategy;
-    private int prepayStrategy;
-    private int amountStrategy;
-    private int feePayStrategy;
+    private Integer interestUnit;
+    private Integer penaltyUnit;
+    private Integer periodUnit;
+    private Integer periodStrategy;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
+    private Integer amountStrategy;
+    private Integer feePayStrategy;
 }

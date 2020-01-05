@@ -20,23 +20,23 @@ import java.util.List;
 @Deprecated
 public class GoodsCreateRequest implements Request {
     @Null
-    private long id;
+    private Long id;
     @Min(1)
-    private long orgId;
+    private Long orgId;
     @NotBlank
     private String name;
     @Min(1)
-    private long price;
+    private Long price;
 
     //goods defined in the config
-    private int categoryId;
-    private int goodsType;
+    private Integer categoryId;
+    private Integer goodsType;
     private byte state;
 
-    private int currency;
-    private int chargeUnit;
+    private Integer currency;
+    private Integer chargeUnit;
 
-    private int stockType;
+    private Integer stockType;
     private String vsPrice;
     private String feature;
     private String mainPic;
@@ -44,7 +44,7 @@ public class GoodsCreateRequest implements Request {
     private String code;
     private String tags;
 
-    private long creator;
+    private Long creator;
 
     private Loan loan;
     private List<Installment> installments;

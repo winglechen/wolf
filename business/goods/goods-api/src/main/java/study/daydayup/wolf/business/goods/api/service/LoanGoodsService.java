@@ -12,12 +12,12 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  * @since 2019/12/10 8:47 下午
  **/
 public interface LoanGoodsService {
-    long create(LoanGoods goods);
-    LoanGoods findById(long goodsId, long orgId);
-    LoanGoods findById(long goodsId, long orgId, GoodsOption option);
-    Page<LoanGoods> findByOrgId(long orgId, PageRequest pageRequest);
-    LoanGoods findOneByOrgId(long orgId);
+    Long create(LoanGoods goods);
+    LoanGoods findById(Long goodsId, Long orgId);
+    LoanGoods findById(Long goodsId, Long orgId, GoodsOption option);
+    Page<LoanGoods> findByOrgId(Long orgId, PageRequest pageRequest);
+    LoanGoods findOneByOrgId(Long orgId);
 
     int modify(LoanGoods goods);
-    int remove(long goodsId, long orgId);
+    int remove(Long goodsId, Long orgId);
 }

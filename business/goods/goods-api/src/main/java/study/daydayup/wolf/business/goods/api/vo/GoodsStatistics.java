@@ -10,6 +10,6 @@ import lombok.Data;
  **/
 @Data
 public class GoodsStatistics {
-    private int soldNum;
-    private int stockNum;
+    private Integer soldNum;
+    private Integer stockNum;
 }

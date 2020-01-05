@@ -13,14 +13,14 @@ import java.util.List;
  * @since 2019/10/29 12:12 上午
  **/
 public interface GoodsService {
-    Goods findById(long goodsId, long orgId, GoodsOption option);
-    List<Goods> findByOrgId(long orgId, GoodsOption option);
+    Goods findById(Long goodsId, Long orgId, GoodsOption option);
+    List<Goods> findByOrgId(Long orgId, GoodsOption option);
 
-    long create(Goods goods);
+    Long create(Goods goods);
     int modify(Goods goods);
-    int remove(long goodsId, long orgId);
+    int remove(Long goodsId, Long orgId);
 
-    int listing(long goodsId, long orgId);
-    int delisting(long goodsId, long orgId);
-    int delistingAll(long orgId);
+    int listing(Long goodsId, Long orgId);
+    int delisting(Long goodsId, Long orgId);
+    int delistingAll(Long orgId);
 }

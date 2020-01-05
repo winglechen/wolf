@@ -19,41 +19,41 @@ import java.util.List;
  **/
 @Data
 public class TradeGoodsResponse implements Response {
-    private long id;
+    private Long id;
     @Min(1)
-    private long orgId;
-    private long categoryId;
+    private Long orgId;
+    private Long categoryId;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum
      */
-    private int goodsType;
+    private Integer goodsType;
     @NotBlank
     private String name;
     @Min(1)
-    private long price;
+    private Long price;
     @Min(1)
-    private int currency;
-    private int chargeUnit;
+    private Integer currency;
+    private Integer chargeUnit;
 
 
     /**
      * @see GoodsStateEnum
      */
-    private int state;
+    private Integer state;
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.StockTypeEnum
      */
-    private int stockType;
+    private Integer stockType;
 
     private String mainPic;
     private String code;
 
-    private int version;
+    private Integer version;
 
     private Sku sku;
     private Loan loan;
     private List<Installment> installmentList;
 
-    private long postage = 0;
+    private Long postage = 0L;
 
 }
