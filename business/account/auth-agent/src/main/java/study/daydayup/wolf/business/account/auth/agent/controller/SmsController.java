@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
  * @since 2019/12/4 5:44 下午
  **/
 @RestController
+@RequestMapping("/api/v1")
 public class SmsController extends AuthController {
     @Reference
     private SmsAuthService smsService;

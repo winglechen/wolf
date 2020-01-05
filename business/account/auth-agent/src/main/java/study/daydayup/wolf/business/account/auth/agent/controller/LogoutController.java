@@ -19,6 +19,7 @@ import java.util.Date;
  * @since 2019/12/4 5:49 下午
  **/
 @RestController
+@RequestMapping("/api/v1")
 public class LogoutController extends AuthController {
     @Resource
     private Session session;

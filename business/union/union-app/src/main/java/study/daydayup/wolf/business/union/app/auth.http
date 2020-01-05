@@ -1,51 +1,51 @@
-GET http://localhost:9101/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
+GET http://localhost:9101/api/v1/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
-GET http://localhost:9101/auth/sms/code?mobile=18067966015
+GET http://localhost:9101/api/v1/auth/sms/code?mobile=18067966015
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
-GET http://localhost:9101/auth/logout
+GET http://localhost:9101/api/v1/auth/logout
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/account/show
+GET http://localhost:9101/api/v1/account/show
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/show
+GET http://localhost:9101/api/v1/auth/show
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/password/register?account=18067966016&password=123456
+GET http://localhost:9101/api/v1/auth/password/register?account=18067966016&password=123456
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/password/login?account=18067966016&password=123456
+GET http://localhost:9101/api/v1/auth/password/login?account=18067966016&password=123456
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/password/login?account=18067966016&password=abcdef
+GET http://localhost:9101/api/v1/auth/password/login?account=18067966016&password=abcdef
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/password/registerAndLogin?account=18067966016&password=123456
+GET http://localhost:9101/api/v1/auth/password/registerAndLogin?account=18067966016&password=123456
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/auth/password/change?account=18067966016&password=123456&newPassword=abcdef
+GET http://localhost:9101/api/v1/auth/password/change?account=18067966016&password=123456&newPassword=abcdef
 Accept: */*
 Cache-Control: no-cache
 
