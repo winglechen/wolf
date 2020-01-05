@@ -53,23 +53,4 @@ public class FakeLoanEffectTimeNode extends AbstractTradeNode implements TradeNo
         }
     }
 
-//    public static void main(String[] args) {
-//        List<Integer> arr = Arrays.asList(3, 5, 7, 8);
-//
-//        LocalDate start;
-//        LocalDate end   = PeriodUtil.daysAfter(-1, PeriodStrategyEnum.OPEN_CLOSE);
-//
-//        for (int i = 0; i < arr.size(); i++) {
-//            int no = i + 1;
-//            int days = arr.get(i);
-//
-//            start = PeriodUtil.daysAfter(1, PeriodStrategyEnum.OPEN_CLOSE, end);
-//            end   = PeriodUtil.daysAfter(days, PeriodStrategyEnum.CLOSE_CLOSE, start);
-//
-//            System.out.println("第" + no + "期(" + days +"天)：" +start + " ~ " + end);
-//        }
-//    }
-
-
-
 }

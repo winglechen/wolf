@@ -21,13 +21,11 @@ import java.util.List;
 @Data
 public class BuyRequest implements Request {
     private String tradeNo;
-    @NotNull
     private Buyer buyer;
 
     /**
      * @see TradeTypeEnum
      */
-    @NotNull @Min(1)
     private Integer tradeType;
     private String relatedTradeNo;
 
@@ -40,5 +38,5 @@ public class BuyRequest implements Request {
 
     private UmpRequest umpRequest;
     @NotNull
-    private List<GoodsRequest> goodsRequestList;
+    private List<GoodsRequest> goods;
 }

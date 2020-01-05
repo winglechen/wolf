@@ -40,10 +40,11 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     public PreviewResponse preview(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
 
-        PreviewResponse response = new PreviewResponse();
         List<TradeNode> nodeList = buildPreviewFlow();
         execute(nodeList, context);
 
+        PreviewResponse response = new PreviewResponse();
+        response.setContract(context.getContract());
         return response;
     }
 

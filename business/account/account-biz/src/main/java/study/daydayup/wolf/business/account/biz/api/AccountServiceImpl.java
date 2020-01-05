@@ -172,6 +172,8 @@ public class AccountServiceImpl implements AccountService {
         Account account = new Account();
         BeanUtils.copyProperties(accountDO, account);
 
+        account.setAccountType(account.getAccountType());
+
         return account;
     }
 }

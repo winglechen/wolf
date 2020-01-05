@@ -31,7 +31,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
         init(context);
 
         List<TradeGoods> goodsList = goodsEpi.fetch(
-                context.getRequest().getGoodsRequestList()
+                context.getRequest().getGoods()
         );
         validGoodsList(goodsList);
         mergeRequestToGoods(goodsList);
@@ -44,14 +44,14 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
             throw new GoodsNotFoundException();
         }
 
-        List<GoodsRequest> goodsRequests = context.getRequest().getGoodsRequestList();
+        List<GoodsRequest> goodsRequests = context.getRequest().getGoods();
         if (goodsList.size() != goodsRequests.size()) {
             throw new GoodsNotFoundException();
         }
     }
 
     private void mergeRequestToGoods(List<TradeGoods> goodsList) {
-        List<GoodsRequest> goodsRequests = context.getRequest().getGoodsRequestList();
+        List<GoodsRequest> goodsRequests = context.getRequest().getGoods();
         Map<Long, GoodsRequest> goodsRequestMap = toGoodsRequestMap(goodsRequests);
 
         for (TradeGoods goods : goodsList) {

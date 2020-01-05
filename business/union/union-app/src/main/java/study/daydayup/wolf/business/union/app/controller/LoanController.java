@@ -1,10 +1,14 @@
 package study.daydayup.wolf.business.union.app.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
@@ -26,8 +30,23 @@ public class LoanController extends BaseController {
     private LoanService loanService;
 
     @PostMapping("/loan/preview")
-    public Result<PreviewResponse> preview(@RequestBody BuyRequest request) {
-        // validate
+    public Result<PreviewResponse> preview(@Validated @RequestBody BuyRequest request) {
+        if (null == request || null == request.getGoods()) {
+            throw new IllegalArgumentException("goods info can't be null");
+        }
+
+        Buyer buyer = new Buyer();
+        buyer.setId(getFromSession("accountId", Long.class));
+        buyer.setName(getFromSession("account", String.class));
+        request.setBuyer(buyer);
+
+        request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
+        Long orgId = getFromSession("orgId", Long.class);
+
+        for (GoodsRequest goods : request.getGoods()) {
+            goods.setOrgId(orgId);
+        }
+
         return buyService.preview(request);
     }
 

@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.GoodsMemo;
+import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
 
@@ -12,8 +13,7 @@ import javax.validation.constraints.Min;
  * @since 2019/10/5 1:28 PM
  **/
 @Data
-public class GoodsRequest {
-    @Min(1)
+public class GoodsRequest implements Request {
     private Long  orgId;
     @Min(1)
     private Long  goodsId;

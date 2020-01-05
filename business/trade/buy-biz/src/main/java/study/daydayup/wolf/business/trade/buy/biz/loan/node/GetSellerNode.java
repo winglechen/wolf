@@ -19,9 +19,6 @@ import java.util.List;
  **/
 @Component
 public class GetSellerNode extends AbstractTradeNode implements TradeNode {
-    @Resource
-    private GoodsEpi goodsEpi;
-
 
     @Override
     public void run(BuyContext context) {

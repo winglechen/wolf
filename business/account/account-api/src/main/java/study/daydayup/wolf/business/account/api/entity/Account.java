@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  **/
 @Data
 public class Account implements Entity  {
-    private long id;
+    private Long id;
 
     @NotBlank
     private String account;
@@ -21,7 +21,7 @@ public class Account implements Entity  {
     /**
      * @see study.daydayup.wolf.business.account.api.enums.AccountTypeEnum
      */
-    private int accountType;
+    private Integer accountType;
 
     private String password;
     private String salt;

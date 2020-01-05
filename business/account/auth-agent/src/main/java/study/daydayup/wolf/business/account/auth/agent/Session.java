@@ -115,6 +115,8 @@ public class Session {
         }
 
         set("accountId", license.getAccountId());
+        set("account", license.getAccount());
+        set("accountType", license.getAccountType());
         set("accessToken", license.getAccessToken());
         set("refreshToken", license.getRefreshToken());
         set("expiredAt", license.getExpiredAt());
