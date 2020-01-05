@@ -95,6 +95,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         }
 
         this.goodsIds = goodsIds;
+        this.orgId = requests.get(0).getOrgId();
         List<GoodsDO> goodsDOList = goodsDAO.selectSalableByIdIn(goodsIds, orgId);
         mergeGoodsToResponse(goodsDOList, responses);
     }
@@ -119,7 +120,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
             return;
         }
 
-        Map<Long, GoodsLoanDO> loanMap = new HashMap<>();
+        Map<Long, GoodsLoanDO> loanMap;
         loanMap = loanDOList.stream().collect(
                 Collectors.toMap(GoodsLoanDO::getGoodsId, Function.identity())
         );

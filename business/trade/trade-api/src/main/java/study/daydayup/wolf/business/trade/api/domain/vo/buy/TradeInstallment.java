@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.domain.vo.buy;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import study.daydayup.wolf.framework.layer.domain.VO;
 
 /**
  * study.daydayup.wolf.business.trade.api.domain.vo.buy
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
  **/
 @Data
 @NoArgsConstructor
-public class TradeInstallment {
+public class TradeInstallment implements VO {
     private Integer installmentNo;
 
     private Integer period;

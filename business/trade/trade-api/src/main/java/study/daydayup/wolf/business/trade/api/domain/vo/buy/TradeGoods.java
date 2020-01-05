@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.trade.api.domain.vo.buy;
 
 import lombok.Builder;
 import lombok.Data;
+import study.daydayup.wolf.framework.layer.domain.VO;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  **/
 @Data
 @Builder
-public class TradeGoods {
+public class TradeGoods implements VO {
     private Long  sellId;
     private Long  goodsId;
     protected Long  categoryId;

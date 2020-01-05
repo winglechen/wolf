@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.api.dto.buy.base.response;
 import lombok.Data;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.framework.layer.api.Response;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy.base.response
@@ -11,7 +12,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Order;
  * @since 2019/10/9 1:39 下午
  **/
 @Data
-public class PreviewResponse {
+public class PreviewResponse implements Response {
     private Contract contract;
     private Order order;
 }
