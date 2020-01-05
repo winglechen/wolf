@@ -1,0 +1,20 @@
+
+
+
+
+### goods create
+POST http://localhost:9101/api/v1/loan/preview
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "goods" : [
+    {
+      "goodsId" : 110
+    }
+  ]
+}
+
+###
+

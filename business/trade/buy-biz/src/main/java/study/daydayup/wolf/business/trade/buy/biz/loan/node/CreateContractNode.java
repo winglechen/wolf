@@ -65,7 +65,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .tradePhase(context.getTradePhase())
                 .accountId(context.getBuyer().getId())
                 .build()
-                .toString();
+                .create();
 
         contract.setTradeNo(tradeNo);
     }
