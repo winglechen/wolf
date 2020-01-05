@@ -19,10 +19,10 @@ public enum StockTypeEnum implements CodeBasedEnum {
     NO_STOCK(10, "无库存")
     ;
 
-    private Integer code;
+    private int code;
     private String desc;
 
-    StockTypeEnum(Integer code, String desc) {
+    StockTypeEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

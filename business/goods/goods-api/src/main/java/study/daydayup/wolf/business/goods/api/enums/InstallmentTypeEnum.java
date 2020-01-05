@@ -16,10 +16,10 @@ public enum InstallmentTypeEnum implements CodeBasedEnum {
     DEFAULT(10, "normal")
     ;
 
-    private Integer code;
+    private int code;
     private String desc;
 
-    InstallmentTypeEnum(Integer code, String desc) {
+    InstallmentTypeEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

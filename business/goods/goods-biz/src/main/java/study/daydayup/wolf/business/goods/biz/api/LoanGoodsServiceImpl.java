@@ -27,7 +27,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     private LoanGoodsRepository repository;
 
     @Override
-    public long create(LoanGoods goods) {
+    public Long  create(LoanGoods goods) {
         LoanEntity entity = new LoanEntity();
         BeanUtils.copyProperties(goods, entity);
 
@@ -43,12 +43,12 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     }
 
     @Override
-    public LoanGoods findById(long goodsId, long orgId) {
+    public LoanGoods findById(Long  goodsId, Long  orgId) {
         return findById(goodsId, orgId, null);
     }
 
     @Override
-    public LoanGoods findById(long goodsId, long orgId, GoodsOption option) {
+    public LoanGoods findById(Long  goodsId, Long  orgId, GoodsOption option) {
         LoanEntity entity = repository.findById(goodsId, orgId);
         if (entity == null) {
             return null;
@@ -58,7 +58,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     }
 
     @Override
-    public Page<LoanGoods> findByOrgId(long orgId, @Validated PageRequest pageRequest) {
+    public Page<LoanGoods> findByOrgId(Long  orgId, @Validated PageRequest pageRequest) {
         Page<LoanEntity> entityList = repository.findByOrgId(orgId, pageRequest);
         if (entityList.getList().isEmpty()) {
             return Page.empty();
@@ -69,7 +69,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     }
 
     @Override
-    public LoanGoods findOneByOrgId(long orgId) {
+    public LoanGoods findOneByOrgId(Long  orgId) {
         LoanEntity entity = repository.findOneByOrgId(orgId);
         if (null == entity) {
             return null;
@@ -79,7 +79,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     }
 
     @Override
-    public int remove(long goodsId, long orgId) {
+    public int remove(Long  goodsId, Long  orgId) {
         return 0;
     }
 }

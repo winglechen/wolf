@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RpcService(protocol = "dubbo")
 public class TradeGoodsServiceImpl implements TradeGoodsService {
     private GoodsOption option;
-    private long orgId;
+    private Long  orgId;
     private List<Long> goodsIds;
 
     @Resource

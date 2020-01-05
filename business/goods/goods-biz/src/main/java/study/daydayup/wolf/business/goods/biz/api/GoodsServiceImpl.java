@@ -24,18 +24,18 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsEntity goodsEntity;
     @Override
-    public Goods findById(long goodsId, long orgId, GoodsOption option) {
+    public Goods findById(Long  goodsId, Long  orgId, GoodsOption option) {
         return null;
     }
 
     @Override
-    public List<Goods> findByOrgId(long orgId, GoodsOption option) {
+    public List<Goods> findByOrgId(Long  orgId, GoodsOption option) {
         return null;
     }
 
     @Override
-    public long create(Goods goods) {
-        return 0;
+    public Long  create(Goods goods) {
+        return 0L;
     }
 
     @Override
@@ -44,25 +44,25 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public int remove(long goodsId, long orgId) {
+    public int remove(Long  goodsId, Long  orgId) {
         goodsEntity.init(goodsId, orgId);
         return goodsEntity.trash();
     }
 
     @Override
-    public int listing(long goodsId, long orgId) {
+    public int listing(Long  goodsId, Long  orgId) {
         goodsEntity.init(goodsId, orgId);
         return goodsEntity.listing();
     }
 
     @Override
-    public int delisting(long goodsId, long orgId) {
+    public int delisting(Long  goodsId, Long  orgId) {
         goodsEntity.init(goodsId, orgId);
         return goodsEntity.delisting();
     }
 
     @Override
-    public int delistingAll(long orgId) {
+    public int delistingAll(Long  orgId) {
         if (orgId <= 0) {
             throw new IllegalArgumentException("orgId can't less than 1");
         }

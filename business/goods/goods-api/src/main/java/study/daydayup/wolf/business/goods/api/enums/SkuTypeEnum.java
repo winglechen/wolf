@@ -17,10 +17,10 @@ public enum SkuTypeEnum implements CodeBasedEnum {
     NONE(10, "无库存")
     ;
 
-    private Integer code;
+    private int code;
     private String desc;
 
-    SkuTypeEnum(Integer code, String desc) {
+    SkuTypeEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
