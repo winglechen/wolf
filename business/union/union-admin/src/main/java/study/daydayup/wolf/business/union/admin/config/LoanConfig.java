@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.deploy.web.config;
+package study.daydayup.wolf.business.union.admin.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.enums.unit.PeriodEnum;
 import study.daydayup.wolf.common.lang.enums.unit.InterestEnum;
 
 /**
- * study.daydayup.wolf.business.union.deploy.web.config
+ * study.daydayup.wolf.business.union.admin.config
  *
  * @author Wingle
  * @since 2019/12/11 4:16 下午

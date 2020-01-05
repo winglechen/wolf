@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.deploy.web.controller;
+package study.daydayup.wolf.business.union.admin.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
@@ -9,8 +9,8 @@ import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
-import study.daydayup.wolf.business.union.deploy.web.config.GoodsConfig;
-import study.daydayup.wolf.business.union.deploy.web.config.LoanConfig;
+import study.daydayup.wolf.business.union.admin.config.GoodsConfig;
+import study.daydayup.wolf.business.union.admin.config.LoanConfig;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 import study.daydayup.wolf.framework.rpc.page.Page;

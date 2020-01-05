@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.deploy.web.controller;
+package study.daydayup.wolf.business.union.admin.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.auth.agent.Session;

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.business.union</groupId>
-    <artifactId>union-api</artifactId>
+    <artifactId>union-admin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
 
