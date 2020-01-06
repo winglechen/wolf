@@ -36,6 +36,14 @@ function install_business() {
     echo "install business.uc"
     dir="${PROJECT_DIR}/business/uc/"
     cd ${dir} && mvn clean install
+
+    echo "install business.org"
+    dir="${PROJECT_DIR}/business/organization/"
+    cd ${dir} && mvn clean install
+
+    echo "install business.misc"
+    dir="${PROJECT_DIR}/business/misc/"
+    cd ${dir} && mvn clean install
     
     echo "install business.goods"
     dir="${PROJECT_DIR}/business/goods/"
@@ -45,6 +53,17 @@ function install_business() {
     dir="${PROJECT_DIR}/business/trade/"
     cd ${dir} && mvn clean install
 
+    echo "install business.ump"
+    dir="${PROJECT_DIR}/business/ump/"
+    cd ${dir} && mvn clean install
+
+    echo "install business.pay"
+    dir="${PROJECT_DIR}/business/pay/"
+    cd ${dir} && mvn clean install
+
+    echo "install business.worlflow"
+    dir="${PROJECT_DIR}/business/workflow/"
+    cd ${dir} && mvn clean install
 }
 
 function install_business_starter() {
