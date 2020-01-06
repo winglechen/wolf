@@ -2,13 +2,28 @@
 
 
 
-### goods create
+###
 POST http://localhost:9101/api/v1/loan/preview
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
+  "goods" : [
+    {
+      "goodsId" : 110
+    }
+  ]
+}
+
+###
+POST http://localhost:9101/api/v1/loan/confirm
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo": "20200106004233000129511801339636",
   "goods" : [
     {
       "goodsId" : 110

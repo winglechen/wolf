@@ -51,20 +51,37 @@ public class LoanController extends BaseController {
     }
 
     @PostMapping("/loan/confirm")
-    public Result<ConfirmResponse> confirm(@RequestBody BuyRequest request) {
-        // validate
+    public Result<ConfirmResponse> confirm(@Validated @RequestBody BuyRequest request) {
+        if (null == request || null == request.getGoods()) {
+            throw new IllegalArgumentException("goods info can't be null");
+        }
+
+        Buyer buyer = new Buyer();
+        buyer.setId(getFromSession("accountId", Long.class));
+        buyer.setName(getFromSession("account", String.class));
+        request.setBuyer(buyer);
+
+        request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
+        Long orgId = getFromSession("orgId", Long.class);
+
+        for (GoodsRequest goods : request.getGoods()) {
+            goods.setOrgId(orgId);
+        }
         return buyService.confirm(request);
     }
 
     @GetMapping("/loan/{tradeNo}")
     public Result<Contract> detail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = new TradeId();
+        tradeId.setTradeNo(tradeNo);
+        tradeId.setBuyerId(getFromSession("accountId", Long.class));
+        tradeId.setSellerId(getFromSession("orgId", Long.class));
 
         return loanService.find(tradeId);
     }
 
     @GetMapping("/loan")
-    public Result findByOrgId() {
+    public Result findByBuyer() {
         return null;
     }
 
