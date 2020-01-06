@@ -1,6 +1,7 @@
 package study.daydayup.wolf.framework.rpc.page;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**
  * study.daydayup.wolf.framework.rpc.page
@@ -17,6 +18,23 @@ public class PageUtil<T> {
 
         return new PageUtil<T>(hPage);
     }
+
+    public static <T> Page<T> of(PageInfo<T> pageInfo) {
+        if (pageInfo == null) {
+            return null;
+        }
+
+        return Page.<T>builder()
+                .list(pageInfo.getList())
+                .total(pageInfo.getTotal())
+                .pageSize(pageInfo.getPageSize())
+                .pages(pageInfo.getPages())
+                .pageNum(pageInfo.getPageNum())
+                .hasNextPage(pageInfo.isHasNextPage())
+                .hasPrePage(pageInfo.isHasNextPage())
+                .build();
+    }
+
 
     public PageUtil(com.github.pagehelper.Page<T> hPage) {
         this.hPage = hPage;

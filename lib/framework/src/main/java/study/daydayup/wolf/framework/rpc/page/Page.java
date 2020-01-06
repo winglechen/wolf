@@ -1,7 +1,6 @@
 package study.daydayup.wolf.framework.rpc.page;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +37,10 @@ public class Page<T> implements Serializable {
     private String orderBy;
     private Long orderValue;
 
+    public static void nextPage(PageOrder order, int pageSize) {
+
+    }
+
     public static void startPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
     }
@@ -58,22 +61,6 @@ public class Page<T> implements Serializable {
         }
 
         throw new IllegalArgumentException("Invalid Page");
-    }
-
-    public static <T> Page<T> of(PageInfo<T> pageInfo) {
-        if (pageInfo == null) {
-            return null;
-        }
-
-        return Page.<T>builder()
-                .list(pageInfo.getList())
-                .total(pageInfo.getTotal())
-                .pageSize(pageInfo.getPageSize())
-                .pages(pageInfo.getPages())
-                .pageNum(pageInfo.getPageNum())
-                .hasNextPage(pageInfo.isHasNextPage())
-                .hasPrePage(pageInfo.isHasNextPage())
-                .build();
     }
 
     public static <T> Page<T> of(com.github.pagehelper.Page<T> pageInfo) {
