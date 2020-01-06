@@ -5,12 +5,7 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: true
-  cloud:
-    nacos:
-      discovery:
-        enabled: true
-        register-enabled: true
-        server-addr: 127.0.0.1:8848
+
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/auto/*.xml
@@ -27,7 +22,7 @@ dubbo:
   protocols:
     dubbo:
       name: dubbo
-      port: -1
+      port: 9080
   registry:
     address: spring-cloud://localhost
   application:

@@ -24,6 +24,14 @@ function init() {
     
 }
 
+function deploy_test() {
+    #localJar=/code/github/wolf/business/union/union-deploy-dubbo/target/union-deploy-dubbo-1.0.0-SNAPSHOT.jar
+    #scp  root@47.111.7.95:/root
+    scp /code/github/wolf/business/union/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
+        app@47.111.7.95:/home/app
+    echo "union-deploy-dubbo.tar.gz transporting..."
+}
+
 function clear() {
     echo "wolf clear ..."
     echo $line
@@ -48,5 +56,8 @@ start)
     start ;;
 clear)
     clear ;;
+deploy_test)
+    deploy_test ;;
 esac
+
 

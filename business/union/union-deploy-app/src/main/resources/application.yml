@@ -5,12 +5,6 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: true
-  cloud:
-    nacos:
-      discovery:
-        register-enabled: true
-        enabled: true
-        server-addr: 127.0.0.1:8848
   redis:
     database: 0
     host: localhost
@@ -22,14 +16,6 @@ spring:
         max-wait: 1
         max-idle: 8
         min-idle: 0
-
-dubbo:
-  registry:
-    address: spring-cloud://localhost
-  cloud:
-    subscribed-services: ${provider.application.name}
-  application:
-    qos-enable: false
 
 management:
   endpoints:
