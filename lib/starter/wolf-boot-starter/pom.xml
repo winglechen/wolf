@@ -23,10 +23,10 @@
             <groupId>study.daydayup.wolf</groupId>
             <artifactId>framework</artifactId>
         </dependency>
-        <dependency>
-            <groupId>study.daydayup.wolf</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>study.daydayup.wolf</groupId>-->
+<!--            <artifactId>model</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
