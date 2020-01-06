@@ -24,12 +24,14 @@ function init() {
     
 }
 
-function deploy_test() {
-    #localJar=/code/github/wolf/business/union/union-deploy-dubbo/target/union-deploy-dubbo-1.0.0-SNAPSHOT.jar
-    #scp  root@47.111.7.95:/root
+function deploy_union_test() {
     scp /code/github/wolf/business/union/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
-        app@47.111.7.95:/home/app
+        app@47.111.7.95:/home/app/tmp
     echo "union-deploy-dubbo.tar.gz transporting..."
+}
+
+function conn_test_redis() {
+  redis-cli -h 47.111.7.95 -a estar
 }
 
 function clear() {
@@ -56,8 +58,10 @@ start)
     start ;;
 clear)
     clear ;;
-deploy_test)
-    deploy_test ;;
+deploy-union-test)
+    deploy_union_test ;;
+redis-test)
+    conn_test_redis ;;
 esac
 
 
