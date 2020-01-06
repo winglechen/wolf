@@ -1,0 +1,16 @@
+#!/bin/bash
+CURRENT_DIR=`pwd`
+
+BIN_PATH=`dirname $0`
+cd ${BIN_PATH}
+
+. ${CURRENT_DIR}/common.sh
+
+if [[ ${APP_PID} -gt 0 ]]; then
+    kill ${APP_PID}
+    echo "Stop successful"
+    exit 0
+else
+    echo "应用未启动，不需要执行stop"
+    exit 0
+fi
