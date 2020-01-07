@@ -2,7 +2,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        register-enabled: true
+        register-enabled: false
         enabled: true
         server-addr: 127.0.0.1:8848
 
