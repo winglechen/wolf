@@ -8,9 +8,13 @@ spring:
 
 dubbo:
   registry:
-    address: spring-cloud://localhost
+    address: nacos://127.0.0.1:8848
   cloud:
     subscribed-services: ${provider.application.name}
   application:
     qos-enable: false
+
+provider:
+  application:
+    name: wolf-union
 

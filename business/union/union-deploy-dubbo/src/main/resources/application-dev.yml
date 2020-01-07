@@ -84,6 +84,21 @@ spring:
         account_status.actual-data-nodes: setting.account_status
         customer_status.actual-data-nodes: setting.customer_status
 
+dubbo:
+  scan:
+    base-packages: study.daydayup.wolf.business
+  protocols:
+    dubbo:
+      anyhost: true
+      host: 127.0.0.1
+      name: dubbo
+      port: 9080
+  registry:
+    address: nacos://127.0.0.1:8848
+  application:
+    qos-enable: false
+
+
 logging:
   level:
     root: info

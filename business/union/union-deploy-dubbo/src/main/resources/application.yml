@@ -16,16 +16,6 @@ pagehelper:
   reasonable: true
   helper-dialect: mysql
 
-dubbo:
-  scan:
-    base-packages: study.daydayup.wolf.business
-  protocols:
-    dubbo:
-      name: dubbo
-      port: 9080
-  registry:
-    address: spring-cloud://localhost
-  application:
-    qos-enable: false
+
 
 
