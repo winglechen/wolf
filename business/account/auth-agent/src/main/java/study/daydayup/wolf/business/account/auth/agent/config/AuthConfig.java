@@ -23,8 +23,8 @@ public class AuthConfig {
     private String sessionKey = "WSESSIONID";
 
     private String mode = "exclude";
-    private String authPath = "/api/v1/auth/**/*";
-    private String excludedPaths = "/api/v1/auth/**/*";
+    private String authPath = "/auth/**/*";
+    private String excludedPaths = "/auth/**/*";
 
     private int codeExpiredIn = 5*60;
     private int expiredIn = 60*60*24;

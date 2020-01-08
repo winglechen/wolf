@@ -12,7 +12,6 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2019/12/31 7:17 下午
  **/
 @RestController
-@RequestMapping("/api/v1")
 public class IndexUnionController extends BaseUnionController {
 
     @GetMapping("/index")

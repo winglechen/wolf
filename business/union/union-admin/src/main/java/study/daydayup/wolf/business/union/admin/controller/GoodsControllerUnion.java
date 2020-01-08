@@ -23,7 +23,6 @@ import javax.annotation.Resource;
  * @since 2019/12/11 6:59 下午
  **/
 @RestController
-@RequestMapping("/api/v1")
 public class GoodsControllerUnion extends BaseUnionController {
     @Reference
     private LoanGoodsService loanGoodsService;

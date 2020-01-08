@@ -19,7 +19,6 @@ import java.util.Date;
  * @since 2019/10/11 10:23 上午
  **/
 @RestController
-@RequestMapping("/api/v1")
 public class AccountController {
     @Reference
     private AccountService accountService;

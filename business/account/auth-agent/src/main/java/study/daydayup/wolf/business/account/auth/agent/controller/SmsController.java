@@ -23,7 +23,6 @@ import javax.validation.Valid;
  * @since 2019/12/4 5:44 下午
  **/
 @RestController
-@RequestMapping("/api/v1")
 public class SmsController extends AuthController {
     @Reference
     private SmsAuthService smsService;
