@@ -17,10 +17,10 @@ import javax.validation.constraints.NotBlank;
 public class SmsCodeRequest implements Request {
     @NotBlank
     private String mobile;
-    @Min(1)
-    private int expiredIn;
-    @Min(4)
-    private int numCount;
+    private Long orgId;
+
+    private Integer expiredIn;
+    private Integer numCount;
 
     private AuthEnv env;
 }

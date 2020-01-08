@@ -42,5 +42,4 @@ public class DateUtil {
         LocalDateTime now = LocalDateTime.now();
         return DateUtil.asDate(now.plusSeconds(seconds));
     }
-
 }

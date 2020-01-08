@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,14 +33,14 @@ public class SmsController extends AuthController {
     private AuthConfig authConfig;
 
     @GetMapping("/auth/sms/login")
-    public Result login(@Valid SmsRequest request) {
-        return Result.ok();
+    public Result<OauthLicense> login(@Valid SmsRequest request) {
+        return registerAndLogin(request);
     }
 
     @GetMapping("/auth/sms/registerAndLogin")
-    public Result registerAndLogin(@Valid SmsRequest request) {
+    public Result<OauthLicense> registerAndLogin(@Valid SmsRequest request) {
         if (isLogin()) {
-            return Result.ok();
+            return Result.ok(getLicenseFromSession());
         }
 
         request.setEnv(null);
@@ -54,11 +55,11 @@ public class SmsController extends AuthController {
         OauthLicense license = result.notNullData();
 
         saveLicenseToSession(license);
-        return Result.ok();
+        return Result.ok(filterLicense(license));
     }
 
     @GetMapping("/auth/sms/code")
-    public Result code(SmsCodeRequest request) {
+    public Result code(@Validated SmsCodeRequest request) {
         request.setEnv(null);
         request.setExpiredIn(authConfig.getCodeExpiredIn());
 
@@ -69,7 +70,7 @@ public class SmsController extends AuthController {
     }
 
     @GetMapping("/auth/sms/voice")
-    public Result voice(@RequestParam String mobile) {
+    public Result voice(SmsCodeRequest request) {
         return Result.ok();
     }
 }

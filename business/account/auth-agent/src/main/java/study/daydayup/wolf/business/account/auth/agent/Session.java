@@ -4,6 +4,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
+import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
 
 import javax.annotation.PreDestroy;
@@ -67,6 +68,29 @@ public class Session {
 
     public void set(String key, Object value) {
         data.put(key, value);
+    }
+
+    public <T> T get(String key, Class<T> type) {
+       return get(key, type, true);
+    }
+
+    public <T> T get(String key, Class<T> type, boolean throwException) {
+        Object value = get(key);
+        if (value == null) {
+            if (throwException) {
+                throw new SessionNotFoundException(key);
+            }
+            return null;
+        }
+
+        if(type.equals(value.getClass())) {
+            return type.cast(value);
+        }
+
+        if (throwException) {
+            throw new SessionNotFoundException(key + " - Invalid value type");
+        }
+        return null;
     }
 
     public Object get(String key) {

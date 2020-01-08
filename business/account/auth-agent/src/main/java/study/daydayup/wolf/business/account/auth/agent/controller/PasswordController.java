@@ -31,9 +31,9 @@ public class PasswordController extends AuthController {
     private Session session;
 
     @GetMapping("/auth/password/login")
-    public Result login(@Valid PasswordRequest request) {
+    public Result<OauthLicense> login(@Valid PasswordRequest request) {
         if(isLogin()) {
-            return Result.ok();
+            return Result.ok(getLicenseFromSession());
         }
 
         request.setEnv(null);
@@ -48,14 +48,14 @@ public class PasswordController extends AuthController {
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
-        return Result.ok();
+        return Result.ok(filterLicense(license));
     }
 
     @GetMapping("/auth/password/registerAndLogin")
     // TODO CHECK
-    public Result registerAndLogin(@Valid PasswordRequest request) {
+    public Result<OauthLicense> registerAndLogin(@Valid PasswordRequest request) {
         if(isLogin()) {
-            return Result.ok();
+            return Result.ok(getLicenseFromSession());
         }
 
         request.setEnv(null);
@@ -70,7 +70,7 @@ public class PasswordController extends AuthController {
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
-        return Result.ok();
+        return Result.ok(filterLicense(license));
     }
 
     @GetMapping("/auth/password/register")

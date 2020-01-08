@@ -28,42 +28,72 @@ function install_libs() {
     cd ${dir} && mvn clean install
 }
 
-function install_business() {
+function install_account() {
     echo "install business.account"
     dir="${PROJECT_DIR}/business/account/"
     cd ${dir} && mvn clean install
+}
 
+function install_uc() {
     echo "install business.uc"
     dir="${PROJECT_DIR}/business/uc/"
     cd ${dir} && mvn clean install
+}
 
+function install_org() {
     echo "install business.org"
     dir="${PROJECT_DIR}/business/organization/"
     cd ${dir} && mvn clean install
+}
 
+function install_misc() {
     echo "install business.misc"
     dir="${PROJECT_DIR}/business/misc/"
     cd ${dir} && mvn clean install
-    
+}
+
+function install_goods() {
     echo "install business.goods"
     dir="${PROJECT_DIR}/business/goods/"
     cd ${dir} && mvn clean install
+}
 
+function install_trade() {
     echo "install business.trade"
     dir="${PROJECT_DIR}/business/trade/"
     cd ${dir} && mvn clean install
+}
 
+function install_ump() {
     echo "install business.ump"
     dir="${PROJECT_DIR}/business/ump/"
     cd ${dir} && mvn clean install
+}
 
+function install_pay() {
     echo "install business.pay"
     dir="${PROJECT_DIR}/business/pay/"
     cd ${dir} && mvn clean install
+}
 
+function install_workflow() {
     echo "install business.worlflow"
     dir="${PROJECT_DIR}/business/workflow/"
     cd ${dir} && mvn clean install
+}
+
+function install_business() {
+    install_account
+    install_uc
+    install_org
+    install_misc
+
+    install_goods
+    install_trade
+    install_ump
+    install_pay
+
+    install_workflow
 }
 
 function install_business_starter() {
@@ -73,15 +103,32 @@ function install_business_starter() {
 }
 
 function install_union() {
+    install_business_starter
+
     echo "install business.union"
     dir="${PROJECT_DIR}/business/union/"
     cd ${dir} && mvn clean install
 }
 
+function install_all() {
+    install_boot
+    install_libs
+    install_business
+    install_business_starter
+    install_union
+}
 
-install_boot
-install_libs
-install_business
-install_business_starter
-install_union
+if [ -n "$1" ]; then
+  command=$1
+else
+  command="all"
+fi
+
+case "$command" in
+all)
+  install_all ;;
+esac
+
+
+
 

@@ -3,7 +3,7 @@
 
 
 ### goods create
-POST http://localhost:9100/api/v1/goods
+POST http://localhost:9100/goods
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### goods edit
-PUT http://localhost:9100/api/v1/goods
+PUT http://localhost:9100/goods
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -74,38 +74,38 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:9100/api/v1/goods/2
+DELETE http://localhost:9100/goods/2
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/api/v1/goods/one
+GET http://localhost:9100/goods/one
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/api/v1/goods/1
+GET http://localhost:9100/goods/1
 Accept: */*
 Cache-Control: no-cache
 
 
 ###
-PUT http://localhost:9100/api/v1/goods/listing/1
+PUT http://localhost:9100/goods/listing/1
 Accept: */*
 Cache-Control: no-cache
 
 ###
-PUT http://localhost:9100/api/v1/goods/delisting/1
+PUT http://localhost:9100/goods/delisting/1
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/api/v1/goods
+GET http://localhost:9100/goods
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/api/v1/goods?page=19
+GET http://localhost:9100/goods?page=19
 Accept: */*
 Cache-Control: no-cache
 

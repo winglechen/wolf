@@ -3,7 +3,7 @@
 
 
 ###
-POST http://localhost:9101/api/v1/loan/preview
+POST http://localhost:9101/loan/preview
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9101/api/v1/loan/confirm
+POST http://localhost:9101/loan/confirm
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json

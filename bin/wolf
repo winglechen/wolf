@@ -54,23 +54,49 @@ function start() {
     echo "wolf starting ... "    
 }
 
-function mvn_install() {
-    . ${PROJECT_DIR}/bin/install.sh
-}
+. ${PROJECT_DIR}/bin/install.sh
 
 case "$command" in
-init)
-    init ;;
-start)
-    start ;;
-clear)
-    clear ;;
-deploy-union-test)
-    deploy_union_test ;;
-redis-test)
-    conn_test_redis ;;
-install)
-    mvn_install ;; 
+  init)
+      init ;;
+  start)
+      start ;;
+  clear)
+      clear ;;
+  deploy-union-test)
+      deploy_union_test ;;
+  redis-test)
+      conn_test_redis ;;
+  install)
+      install_all ;;
+  install-boot)
+      install_boot ;;
+  install-lib)
+      install_libs ;;
+  install-business)
+      install_business ;;
+  install-business-stater)
+      install_business_stater ;;
+  install-union)
+      install_union ;;
+
+  install-account)
+    install_account ;;
+  install-uc)
+    install_uc ;;
+  install-org)
+    install_org ;;
+  install-misc)
+    install_misc ;;
+  install-goods)
+    install_goods ;;
+  install-trade)
+    install_trade ;;
+  install-pay)
+    install_pay ;;
+  install-workflow)
+    install_workflow ;;
+
 esac
 
 
