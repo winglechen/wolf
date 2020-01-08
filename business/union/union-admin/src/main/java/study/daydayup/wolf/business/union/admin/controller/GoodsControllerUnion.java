@@ -25,7 +25,7 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping("/api/v1")
-public class GoodsController extends BaseController {
+public class GoodsControllerUnion extends BaseUnionController {
     @Reference
     private LoanGoodsService loanGoodsService;
     @Reference

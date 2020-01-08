@@ -23,7 +23,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @RestController
 @RequestMapping("/api/v1")
-public class LoanController extends BaseController {
+public class LoanUnionController extends BaseUnionController {
     @Reference
     private BuyService buyService;
     @Reference

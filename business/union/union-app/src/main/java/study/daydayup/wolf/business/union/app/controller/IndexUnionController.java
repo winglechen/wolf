@@ -13,7 +13,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @RestController
 @RequestMapping("/api/v1")
-public class IndexController extends BaseController {
+public class IndexUnionController extends BaseUnionController {
 
     @GetMapping("/index")
     public Result index() {

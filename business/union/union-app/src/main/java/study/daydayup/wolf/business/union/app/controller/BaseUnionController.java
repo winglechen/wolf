@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @since 2019/12/12 3:57 下午
  **/
 @RestController
-public class BaseController implements Controller {
+public class BaseUnionController implements Controller {
     @Resource
     protected Session session;
 
