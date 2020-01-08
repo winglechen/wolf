@@ -16,7 +16,7 @@ public class PageUtil<T> {
     public static <T> PageUtil<T> startPage(int pageNum, int pageSize) {
         com.github.pagehelper.Page<T> hPage = PageHelper.startPage(pageNum, pageSize);
 
-        return new PageUtil<T>(hPage);
+        return new PageUtil<>(hPage);
     }
 
     public static <T> Page<T> of(PageInfo<T> pageInfo) {

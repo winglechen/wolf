@@ -4,7 +4,6 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
@@ -34,8 +33,6 @@ public class GoodsControllerUnion extends BaseUnionController {
     private GoodsConfig goodsConfig;
     @Resource
     private LoanConfig loanConfig;
-    @Resource
-    private Session session;
 
     @PostMapping("/goods")
     public Result create(@Validated @RequestBody LoanGoods goods) {

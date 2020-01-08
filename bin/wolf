@@ -69,7 +69,7 @@ deploy-union-test)
     deploy_union_test ;;
 redis-test)
     conn_test_redis ;;
-mvn-install)
+install)
     mvn_install ;; 
 esac
 
