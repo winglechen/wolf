@@ -2,7 +2,6 @@
 
 CURRENT_DIR=$(cd `dirname $0`; pwd)
 PROJECT_DIR=$(cd ${CURRENT_DIR}; cd ../; pwd)
-echo "project root path is: $PROJECT_DIR/"
 
 function install_boot() {
     echo "install boot ..."

@@ -1,10 +1,24 @@
 #!/bin/bash
-CURRENT_DIR=`pwd`
+echo "restart execute ..."
 
-BIN_PATH=`dirname $0`
-cd ${BIN_PATH}
+CURRENT_DIR=$(cd `dirname $0`; pwd)
+
+cd ${CURRENT_DIR}
 . ${CURRENT_DIR}/common.sh
 
-./stop.sh \
-&& sleep 2s \
-&& ./start.sh
+. ${CURRENT_DIR}/stop.sh
+
+stopTimeout=0
+for i in {1..10}
+do
+  sleep 2s
+  . ${CURRENT_DIR}/start.sh
+
+  if [ $stopTimeout == 0 ]
+  then
+      break
+  fi
+
+  echo "retrying ... "
+done
+

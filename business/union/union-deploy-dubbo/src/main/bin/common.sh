@@ -1,14 +1,14 @@
 #!/bin/bash
-
 APPLICATION_NAME="@project.name@"
 
-cd ../
-BASE_PATH=`pwd`
-cd ./bin
+CURRENT_PATH=$(cd `dirname $0`; pwd)
+PROJECT_PATH=$(cd `dirname $0`; cd ../ ; pwd)
+BIN_PATH="${PROJECT_PATH}/bin"
 
-if [ ! -d ${BASE_PATH}/logs ] ; then
-	mkdir -p ${BASE_PATH}/logs
-fi
+
+#if [ ! -d ${BASE_PATH}/logs ] ; then
+#	mkdir -p ${BASE_PATH}/logs
+#fi
 
 ## set java path
 JAVA=$(which java)
@@ -17,5 +17,7 @@ if [ -z "$JAVA" ]; then
     exit 1
 fi
 
-MAIN_JAR=${BASE_PATH}/lib/${APPLICATION_NAME}.jar
+MAIN_JAR=${PROJECT_PATH}/lib/${APPLICATION_NAME}.jar
 APP_PID=`ps -ef | grep "$MAIN_JAR" | grep -v grep | awk '{print $2}'`
+
+echo "pid: ${APP_PID}"
