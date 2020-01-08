@@ -25,7 +25,7 @@ public class PageUtil<T> {
         }
 
         return Page.<T>builder()
-                .list(pageInfo.getList())
+                .data(pageInfo.getList())
                 .total(pageInfo.getTotal())
                 .pageSize(pageInfo.getPageSize())
                 .pages(pageInfo.getPages())

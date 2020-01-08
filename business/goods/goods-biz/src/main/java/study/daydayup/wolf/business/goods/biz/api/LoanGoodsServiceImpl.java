@@ -60,11 +60,11 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
     @Override
     public Page<LoanGoods> findByOrgId(Long  orgId, @Validated PageRequest pageRequest) {
         Page<LoanEntity> entityList = repository.findByOrgId(orgId, pageRequest);
-        if (entityList.getList().isEmpty()) {
+        if (entityList.getData().isEmpty()) {
             return Page.empty();
         }
 
-        List<LoanGoods> loanList = new  ArrayList<LoanGoods>(entityList.getList());
+        List<LoanGoods> loanList = new  ArrayList<LoanGoods>(entityList.getData());
         return entityList.to(loanList);
     }
 

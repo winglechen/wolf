@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Page<T> implements Serializable {
-    private List<T> list;
+    private List<T> data;
 
     private Long total;
     private Integer pageSize;
@@ -56,7 +56,7 @@ public class Page<T> implements Serializable {
 
         if (list instanceof com.github.pagehelper.Page) {
             Page<T> newPage = of( (com.github.pagehelper.Page<T>)list);
-            newPage.setList(list);
+            newPage.setData(list);
             return newPage;
         }
 
@@ -86,7 +86,7 @@ public class Page<T> implements Serializable {
 
     public static <T> Page<T> empty(Integer pageNum, Integer pageSize) {
         return Page.<T>builder()
-                .list(new ArrayList<>())
+                .data(new ArrayList<>())
                 .total(0L)
                 .pageSize(pageSize)
                 .pages(0)
@@ -100,7 +100,7 @@ public class Page<T> implements Serializable {
         Page<M> newPage = new Page<>();
         BeanUtils.copyProperties(this, newPage);
 
-        newPage.setList(list);
+        newPage.setData(list);
         return newPage;
     }
 
