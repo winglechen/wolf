@@ -2,9 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
@@ -32,16 +30,16 @@ public class SmsController extends AuthController {
     @Resource
     private AuthConfig authConfig;
 
-    @GetMapping("/auth/sms/login")
+    @PostMapping("/auth/sms/login")
     public Result<OauthLicense> login(@Valid SmsRequest request) {
         return registerAndLogin(request);
     }
 
-    @GetMapping("/auth/sms/registerAndLogin")
+    @PostMapping("/auth/sms/registerAndLogin")
     public Result<OauthLicense> registerAndLogin(@Valid SmsRequest request) {
-        if (isLogin()) {
-            return Result.ok(getLicenseFromSession());
-        }
+//        if (isLogin()) {
+//            return Result.ok(getLicenseFromSession());
+//        }
 
         request.setEnv(null);
         request.setToken(session.getSessionId());
@@ -58,7 +56,7 @@ public class SmsController extends AuthController {
         return Result.ok(filterLicense(license));
     }
 
-    @GetMapping("/auth/sms/code")
+    @PostMapping("/auth/sms/code")
     public Result code(@Validated SmsCodeRequest request) {
         request.setEnv(null);
         request.setExpiredIn(authConfig.getCodeExpiredIn());
@@ -69,7 +67,7 @@ public class SmsController extends AuthController {
         return Result.ok();
     }
 
-    @GetMapping("/auth/sms/voice")
+    @PostMapping("/auth/sms/voice")
     public Result voice(SmsCodeRequest request) {
         return Result.ok();
     }

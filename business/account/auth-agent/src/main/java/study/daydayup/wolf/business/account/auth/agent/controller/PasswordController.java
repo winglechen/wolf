@@ -2,8 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
@@ -30,11 +29,11 @@ public class PasswordController extends AuthController {
     @Resource
     private Session session;
 
-    @GetMapping("/auth/password/login")
+    @PostMapping("/auth/password/login")
     public Result<OauthLicense> login(@Valid PasswordRequest request) {
-        if(isLogin()) {
-            return Result.ok(getLicenseFromSession());
-        }
+//        if(isLogin()) {
+//            return Result.ok(getLicenseFromSession());
+//        }
 
         request.setEnv(null);
         request.setToken(session.getSessionId());
@@ -51,12 +50,11 @@ public class PasswordController extends AuthController {
         return Result.ok(filterLicense(license));
     }
 
-    @GetMapping("/auth/password/registerAndLogin")
-    // TODO CHECK
+    @PostMapping("/auth/password/registerAndLogin")
     public Result<OauthLicense> registerAndLogin(@Valid PasswordRequest request) {
-        if(isLogin()) {
-            return Result.ok(getLicenseFromSession());
-        }
+//        if(isLogin()) {
+//            return Result.ok(getLicenseFromSession());
+//        }
 
         request.setEnv(null);
         request.setToken(session.getSessionId());
@@ -73,7 +71,7 @@ public class PasswordController extends AuthController {
         return Result.ok(filterLicense(license));
     }
 
-    @GetMapping("/auth/password/register")
+    @PostMapping("/auth/password/register")
     public Result register(@Validated PasswordRequest request) {
         request.setEnv(null);
         passwordService.register(request);
@@ -81,7 +79,7 @@ public class PasswordController extends AuthController {
         return Result.ok();
     }
 
-    @GetMapping("/auth/password/change")
+    @PostMapping("/auth/password/change")
     public Result changePassword(@Validated PasswordRequest request) {
         request.setEnv(null);
         passwordService.changePassword(request);

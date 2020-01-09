@@ -1,21 +1,44 @@
-GET http://localhost:9000/auth/sms/registerAndLogin?mobile=18067966015&code=648858&orgId=1
+POST http://localhost:9000/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
 Accept: */*
 Cache-Control: no-cache
 
 ###
-
-GET http://localhost:9000/auth/sms/code?mobile=18067966015
+POST http://localhost:9000/auth/sms/code?mobile=18067966015
 Accept: */*
 Cache-Control: no-cache
 
 ###
-
-GET http://localhost:9000/auth/logout
+POST http://localhost:9000/auth/logout
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9000/account/show
+POST http://localhost:9000/account/show
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:9000/auth/password/register?account=18067966016&password=123456
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:9000/auth/password/login?account=18067966016&password=123456&orgId=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:9000/auth/password/login?account=18067966016&password=abcdef&orgId=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:9000/auth/password/registerAndLogin?account=18067966016&password=abcdef&orgId=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:9000/auth/password/change?account=18067966016&password=123456&newPassword=abcdef
 Accept: */*
 Cache-Control: no-cache
 
