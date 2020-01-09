@@ -109,15 +109,22 @@ public class AccountServiceImpl implements AccountService {
             throw new AuthFailedException();
         }
 
-        String encryptPassword = Password.encrypt(request.getNewPassword(), salt);
+        String newSalt = Password.createSalt();
+        String encryptPassword = Password.encrypt(request.getNewPassword(), newSalt);
+
         AccountDO newAccountDO = new AccountDO();
         newAccountDO.setId(accountDO.getId());
         newAccountDO.setPassword(encryptPassword);
+        newAccountDO.setSalt(salt);
 
         accountDAO.updateByIdSelective(newAccountDO);
     }
 
     private boolean verifyPassword(String salt, String realPassword, String password) {
+        if (realPassword == null) {
+            return true;
+        }
+
         String encryptPassword = Password.encrypt(password, salt);
         if (encryptPassword.equals(realPassword)) {
             return true;

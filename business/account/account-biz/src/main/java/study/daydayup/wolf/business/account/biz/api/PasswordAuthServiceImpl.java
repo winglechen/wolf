@@ -12,8 +12,6 @@ import study.daydayup.wolf.business.account.api.exception.CreateLicenseFailedExc
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.PasswordAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
-import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
-import study.daydayup.wolf.common.util.encrypt.Password;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
