@@ -11,8 +11,6 @@ import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
  **/
 @Getter
 public enum ActionTypeEnum implements StatusEnum {
-    ACL(4, "acl"),
-    MENU(3, "menu"),
     GROUP(2, "group"),
     ACTION(1, "action")
     ;

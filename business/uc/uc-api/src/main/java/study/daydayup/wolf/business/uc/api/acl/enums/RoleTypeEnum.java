@@ -12,8 +12,8 @@ import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
 @Getter
 public enum RoleTypeEnum implements StatusEnum {
     SUPER(10, "super"),
-    ACCOUNT(3, "private role"),
-    ORGANIZATION_STRUCTURE(2, "organization structure"),
+    ACCOUNT(3, "account"),
+    DEPARTMENT(2, "department"),
     DEFAULT(1, "default")
     ;
 
