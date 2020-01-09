@@ -105,7 +105,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9100/goods?page=19
+GET http://localhost:9100/goods?pageNum=19
 Accept: */*
 Cache-Control: no-cache
 

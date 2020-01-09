@@ -69,11 +69,11 @@ public class GoodsControllerUnion extends BaseUnionController {
     }
 
     @GetMapping("/goods")
-    public Result<Page<LoanGoods>> findByOrgId(@RequestParam(value = "page", required = false) Integer page) {
+    public Result<Page<LoanGoods>> findByOrgId(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = getFromSession("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
-                .pageNum(null == page ? 1 : page)
-                .pageSize(3)
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
                 .build();
 
         Page<LoanGoods> goods = loanGoodsService.findByOrgId(orgId, pageRequest);
