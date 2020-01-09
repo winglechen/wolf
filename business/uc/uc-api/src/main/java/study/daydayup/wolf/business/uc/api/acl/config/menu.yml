@@ -1,0 +1,11 @@
+estar:
+  goods:
+    - add
+    - modify
+    - query
+  trade:
+    - send
+    - close
+  dashboard:
+    - query
+    - somethingElse

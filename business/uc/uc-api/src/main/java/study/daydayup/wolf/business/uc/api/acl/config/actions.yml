@@ -1,0 +1,19 @@
+"estar.goods"                         : [1, 2],
+"estar.goods.add"                     : [2, 1, ""],
+"estar.goods.modify"                  : [3, 1, ""],
+"estar.goods.delete"                  : [4, 1, ""],
+"estar.goods.query"                   : [5, 1, ""],
+"estar.goods.listing"                 : [6, 1, ""],
+
+
+"estar.trade"                         : [10, 2],
+"estar.trade.send"                    : [11, 1, ""],
+"estar.trade.close"                   : [11, 1, ""],
+
+
+
+"estar.dashboard"                     : [30, 3],
+
+
+"estar.setting"                       : [40, 3],
+
