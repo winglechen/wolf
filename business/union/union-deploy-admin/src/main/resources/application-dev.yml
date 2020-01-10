@@ -9,6 +9,7 @@ spring:
 dubbo:
   registry:
     address: nacos://127.0.0.1:8848
+    register: false
   cloud:
     subscribed-services: ${provider.application.name}
   application:

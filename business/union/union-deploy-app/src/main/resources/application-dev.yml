@@ -9,6 +9,7 @@ spring:
 dubbo:
   registry:
     address: spring-cloud://localhost
+    register: false
   cloud:
     subscribed-services: ${provider.application.name}
   application:
