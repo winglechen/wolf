@@ -98,8 +98,7 @@ public class UnionLoanController implements Controller {
     @GetMapping("/loan/contract/due")
     public Result<Page<Contract>> dueList() {
         ContractRequest request = initContractRequest();
-        request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
-
+        //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         //request.setRepayState(new DueState().getCode());
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
         request.setRepayDueAt(requestContext.getRequestTime());
@@ -110,8 +109,7 @@ public class UnionLoanController implements Controller {
     @GetMapping("/loan/contract/overdue")
     public Result<Page<Contract>> overdueList() {
         ContractRequest request = initContractRequest();
-        request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
-
+        //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         //request.setRepayState(new OverdueState().getCode());
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
         request.setRepayDueAt(requestContext.getRequestTime());

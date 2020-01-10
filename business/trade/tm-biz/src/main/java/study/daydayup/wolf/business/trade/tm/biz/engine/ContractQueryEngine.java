@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.tm.biz.engine;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.tm.ContractRequest;
+import study.daydayup.wolf.business.trade.tm.biz.engine.core.AbstractEngine;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 
@@ -19,7 +20,6 @@ public class ContractQueryEngine extends AbstractEngine<ContractRequest> {
 
         return null;
     }
-
 
 
 }

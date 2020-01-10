@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeIdExc
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy
@@ -17,8 +18,8 @@ public class TradeId implements Request {
     @NotBlank
     private String tradeNo;
 
-    private Long buyerId;
-    private Long sellerId;
+    protected Long buyerId;
+    protected Long sellerId;
 
     public void valid() {
         if (tradeNo == null || tradeNo.length() < 20) {

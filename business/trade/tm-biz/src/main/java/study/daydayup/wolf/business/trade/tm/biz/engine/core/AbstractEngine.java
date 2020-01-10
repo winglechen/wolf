@@ -1,6 +1,8 @@
-package study.daydayup.wolf.business.trade.tm.biz.engine;
+package study.daydayup.wolf.business.trade.tm.biz.engine.core;
 
 import study.daydayup.wolf.business.trade.api.dto.tm.TradeRequest;
+import study.daydayup.wolf.business.trade.tm.biz.engine.QueryEngine;
+import study.daydayup.wolf.business.trade.tm.biz.engine.QueryFilter;
 
 import java.util.Stack;
 
@@ -26,7 +28,7 @@ public abstract class AbstractEngine<T extends TradeRequest> implements QueryEng
         filters = new Stack<>();
     }
 
-    protected void addFilter(QueryFilter filter) {
+    public void addFilter(QueryFilter filter) {
         if (filter == null) {
             return;
         }
