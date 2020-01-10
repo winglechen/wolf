@@ -22,7 +22,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2019/12/31 7:17 下午
  **/
 @RestController
-public class LoanUnionController extends BaseUnionController {
+public class LoanController extends BaseUnionController {
     @Reference
     private BuyService buyService;
     @Reference

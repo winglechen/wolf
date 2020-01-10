@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 2020/1/2 9:22 上午
  **/
 @RestController
-public class StatusControllerUnion extends BaseUnionController {
+public class StatusController extends BaseUnionController {
     @Resource
     private CustomerStatusAgent agent;
 

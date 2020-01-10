@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.dto.order;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 /**
@@ -10,12 +12,14 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/16 5:34 下午
  **/
 @Data
+@Builder
+@NoArgsConstructor
 public class OrderOption implements Request {
-    private boolean withOrderLine;
-    private boolean withAddress;
+    private boolean withOrderLine       = true;
+    private boolean withAddress         = true;
 
-    private Integer orderLineNum    = -1;
+    private Integer orderLineNum        = -1;
 
-    private boolean withRelatedOrders;
-    private boolean withStateLog;
+    private boolean withRelatedOrders   = false;
+    private boolean withStateLog        = false;
 }

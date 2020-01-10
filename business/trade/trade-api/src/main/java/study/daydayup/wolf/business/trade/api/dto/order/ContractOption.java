@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.dto.order;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 /**
@@ -10,15 +12,17 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/16 5:33 下午
  **/
 @Data
+@Builder
+@NoArgsConstructor
 public class ContractOption implements Request {
-    private boolean withConsignTerm;
-    private boolean withInstallmentTerm;
-    private boolean withLoanTerm;
-    private boolean withRepaymentTerm;
-    private boolean withObjectsTerm;
-    private boolean withPaymentTerm;
-    private boolean withPostageTerm;
-    private boolean withTaxTerm;
+    private boolean withConsignTerm         = false;
+    private boolean withInstallmentTerm     = false;
+    private boolean withLoanTerm            = false;
+    private boolean withRepaymentTerm       = false;
+    private boolean withObjectsTerm         = false;
+    private boolean withPaymentTerm         = false;
+    private boolean withPostageTerm         = false;
+    private boolean withTaxTerm             = false;
 
-    private boolean withStateLog;
+    private boolean withStateLog            = false;
 }
