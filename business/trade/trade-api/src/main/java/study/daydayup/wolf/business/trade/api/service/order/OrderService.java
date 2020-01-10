@@ -15,8 +15,8 @@ import java.util.List;
  * @since 2019/10/9 6:56 下午
  **/
 public interface OrderService {
-    Result create(Order order);
-    Result modify(Order key, Order changes);
+    Result<String> create(Order order);
+    Result<Integer> modify(Order key, Order changes);
     Result<Order> find(TradeId tradeId);
     Result<Order> find(TradeId tradeId, OrderOption option);
     Result<List<Order>> findRelatedTrade(RelatedTradeRequest request);

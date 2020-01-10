@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 /**
@@ -17,4 +18,5 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = false)
 public class OrderRequest extends TradeRequest implements Request {
+    private OrderOption option;
 }

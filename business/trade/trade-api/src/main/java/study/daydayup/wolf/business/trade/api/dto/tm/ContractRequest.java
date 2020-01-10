@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,8 @@ import java.time.LocalDateTime;
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = false)
 public class ContractRequest extends TradeRequest implements Request {
+    private ContractOption option;
+
     private Integer loanState;
     private Integer loanType;
 

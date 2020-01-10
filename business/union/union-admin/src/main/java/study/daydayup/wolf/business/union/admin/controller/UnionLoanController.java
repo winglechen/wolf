@@ -51,10 +51,7 @@ public class UnionLoanController implements Controller {
     @GetMapping("/loan/contract/{tradeNo}")
     public Result<Contract> contractDetail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = createTradeId(tradeNo);
-        ContractOption option = ContractOption.builder()
-                .withLoanTerm(true)
-                .withInstallmentTerm(true)
-                .build();
+        ContractOption option = initContractOption();
 
         return contractService.find(tradeId, option);
     }
@@ -62,10 +59,7 @@ public class UnionLoanController implements Controller {
     @GetMapping("/loan/order/{tradeNo}")
     public Result<Order> orderDetail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = createTradeId(tradeNo);
-        OrderOption option = OrderOption.builder()
-                .withOrderLine(false)
-                .withAddress(false)
-                .build();
+        OrderOption option = initOrderOption();
 
         return orderService.find(tradeId, option);
     }
@@ -153,6 +147,20 @@ public class UnionLoanController implements Controller {
         return tradeId;
     }
 
+    private ContractOption initContractOption() {
+        return ContractOption.builder()
+                .withLoanTerm(true)
+                .withInstallmentTerm(true)
+                .build();
+    }
+
+    private OrderOption initOrderOption() {
+        return OrderOption.builder()
+                .withOrderLine(false)
+                .withAddress(false)
+                .build();
+    }
+
     private ContractRequest initContractRequest() {
         return initContractRequest(null);
     }
@@ -161,6 +169,8 @@ public class UnionLoanController implements Controller {
         if (request == null) {
             request = new ContractRequest();
         }
+
+        request.setOption(initContractOption());
 
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
@@ -176,6 +186,8 @@ public class UnionLoanController implements Controller {
         if (request == null) {
             request = new OrderRequest();
         }
+
+        request.setOption(initOrderOption());
 
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
