@@ -16,5 +16,5 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = false)
-public class LoanOrderRequest extends TradeRequest implements Request {
+public class OrderRequest extends TradeRequest implements Request {
 }

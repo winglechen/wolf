@@ -14,8 +14,8 @@ import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToA
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
-import study.daydayup.wolf.business.trade.api.dto.tm.LoanContractRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.LoanOrderRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.ContractRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.OrderRequest;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
@@ -48,7 +48,6 @@ public class UnionLoanController implements Controller {
     @Resource
     private RequestContext requestContext;
 
-
     @GetMapping("/loan/contract/{tradeNo}")
     public Result<Contract> contractDetail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = createTradeId(tradeNo);
@@ -72,18 +71,21 @@ public class UnionLoanController implements Controller {
     }
 
     @GetMapping("/loan/contract")
-    public Result<Page<Contract>> contractList(LoanContractRequest request) {
-        return null;
+    public Result<Page<Contract>> contractList(ContractRequest request) {
+        initContractRequest(request);
+        return contractManageService.find(request);
     }
 
     @GetMapping("/loan/order")
-    public Result<Page<Order>> orderList(LoanOrderRequest request) {
-        return null;
+    public Result<Page<Order>> orderList(OrderRequest request) {
+        initOrderRequest(request);
+
+        return orderManageService.find(request);
     }
 
     @GetMapping("/loan/contract/waitToApprove")
     public Result<Page<Contract>> waitToApproveList() {
-        LoanContractRequest request = initContractRequest();
+        ContractRequest request = initContractRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         request.setState(new WaitToApproveState().getCode());
 
@@ -92,7 +94,7 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/contract/approved")
     public Result<Page<Contract>> approvedList() {
-        LoanContractRequest request = initContractRequest();
+        ContractRequest request = initContractRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         request.setState(new ApprovedState().getCode());
 
@@ -101,7 +103,7 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/contract/due")
     public Result<Page<Contract>> dueList() {
-        LoanContractRequest request = initContractRequest();
+        ContractRequest request = initContractRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
 
         //request.setRepayState(new DueState().getCode());
@@ -113,7 +115,7 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/contract/overdue")
     public Result<Page<Contract>> overdueList() {
-        LoanContractRequest request = initContractRequest();
+        ContractRequest request = initContractRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
 
         //request.setRepayState(new OverdueState().getCode());
@@ -125,14 +127,14 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/order/loan")
     public Result<Page<Order>> loanList() {
-        LoanOrderRequest request = initOrderRequest();
+        OrderRequest request = initOrderRequest();
         request.setTradeType(TradeTypeEnum.LOAN_ORDER.getCode());
         return orderList(request);
     }
 
     @GetMapping("/loan/order/repay")
     public Result<Page<Order>> repayList() {
-        LoanOrderRequest request = initOrderRequest();
+        OrderRequest request = initOrderRequest();
         request.setTradeType(TradeTypeEnum.REPAY_ORDER.getCode());
         return orderList(request);
     }
@@ -151,8 +153,14 @@ public class UnionLoanController implements Controller {
         return tradeId;
     }
 
-    private LoanContractRequest initContractRequest() {
-        LoanContractRequest request = new LoanContractRequest();
+    private ContractRequest initContractRequest() {
+        return initContractRequest(null);
+    }
+
+    private ContractRequest initContractRequest(ContractRequest request) {
+        if (request == null) {
+            request = new ContractRequest();
+        }
 
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
@@ -160,8 +168,14 @@ public class UnionLoanController implements Controller {
         return request;
     }
 
-    private LoanOrderRequest initOrderRequest() {
-        LoanOrderRequest request = new LoanOrderRequest();
+    private OrderRequest initOrderRequest() {
+       return initOrderRequest(null);
+    }
+
+    private OrderRequest initOrderRequest(OrderRequest request) {
+        if (request == null) {
+            request = new OrderRequest();
+        }
 
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);

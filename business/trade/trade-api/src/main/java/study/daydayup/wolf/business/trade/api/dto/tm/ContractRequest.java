@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = false)
-public class LoanContractRequest extends TradeRequest implements Request {
+public class ContractRequest extends TradeRequest implements Request {
     private Integer loanState;
     private Integer loanType;
 
