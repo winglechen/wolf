@@ -12,6 +12,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeInstallment;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeLoan;
+import study.daydayup.wolf.framework.layer.epi.Epi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  * @since 2019/12/17 8:29 下午
  **/
 @Component
-public class GoodsEpi {
+public class GoodsEpi implements Epi {
     @Reference
     private TradeGoodsService goodsService;
 

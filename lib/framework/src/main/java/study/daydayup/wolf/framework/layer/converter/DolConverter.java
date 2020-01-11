@@ -9,6 +9,6 @@ import study.daydayup.wolf.framework.layer.dal.DataObject;
  * @author Wingle
  * @since 2020/1/11 2:01 下午
  **/
-public interface DolConverter {
+public interface DolConverter extends Converter {
     DataObject toModel(DataObject dataObject);
 }
