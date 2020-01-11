@@ -1,12 +1,8 @@
 package study.daydayup.wolf.business.goods.biz.loan;
 
-import com.alibaba.fastjson.JSON;
 import lombok.NonNull;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.exception.FailedCreateLoanException;
-import study.daydayup.wolf.business.goods.api.exception.GoodsNotFoundException;
-import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
@@ -49,8 +45,6 @@ public class LoanGoodsRepository implements  Repository {
         entity.setId(goodsId);
 
         saveLoanDO(entity);
-        saveInstallmentDO(goodsId, entity);
-
         return goodsId;
     }
 
@@ -61,7 +55,6 @@ public class LoanGoodsRepository implements  Repository {
 
         modifyGoodsDO(entity);
         modifyLoanDO(entity);
-        modifyInstallmentDO(entity);
     }
 
     public LoanEntity findById(long id, long orgId) {
@@ -86,6 +79,16 @@ public class LoanGoodsRepository implements  Repository {
         return Page.of(goodsDOList).to(entityList);
     }
 
+    private LoanEntity getLoanByGoodsDO(GoodsDO goodsDO) {
+        if (null == goodsDO) {
+            return null;
+        }
+
+        LoanEntity entity = converter.toEntity(goodsDO);
+        GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
+        return converter.toEntity(loanDO, entity);
+    }
+
     private List<LoanEntity> getLoanByGoodsDOList(List<GoodsDO> goodsDOList, Long orgId) {
         List<LoanEntity> entityList = new ArrayList<>();
         Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
@@ -97,17 +100,6 @@ public class LoanGoodsRepository implements  Repository {
         }
 
         return entityList;
-    }
-
-    // private methods stat
-    private LoanEntity getLoanByGoodsDO(GoodsDO goodsDO) {
-        if (null == goodsDO) {
-            return null;
-        }
-
-        LoanEntity entity = converter.toEntity(goodsDO);
-        GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
-        return converter.toEntity(loanDO, entity);
     }
 
     private LoanEntity mergeGoodsAndLoan(GoodsDO goodsDO, GoodsLoanDO loanDO) {
@@ -171,10 +163,4 @@ public class LoanGoodsRepository implements  Repository {
         loanDAO.updateByGoodsIdSelective(loanDO);
     }
 
-    private void saveInstallmentDO(long goodsId, LoanEntity entity) {
-
-    }
-
-    private void modifyInstallmentDO(LoanEntity entity) {
-    }
 }
