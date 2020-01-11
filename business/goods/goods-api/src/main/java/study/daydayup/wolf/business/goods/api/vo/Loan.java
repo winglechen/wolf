@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 @Data
 public class Loan implements Entity  {
     private Long goodsId;
+    private Long orgId;
     //loan add by user
     @Min(1)
     private Integer handlingFeeRate;

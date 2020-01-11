@@ -39,7 +39,8 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
         LoanEntity entity = new LoanEntity();
         BeanUtils.copyProperties(goods, entity);
 
-        return repository.modify(entity);
+        repository.modify(entity);
+        return 1;
     }
 
     @Override
@@ -49,12 +50,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
 
     @Override
     public LoanGoods findById(Long  goodsId, Long  orgId, GoodsOption option) {
-        LoanEntity entity = repository.findById(goodsId, orgId);
-        if (entity == null) {
-            return null;
-        }
-
-        return (LoanGoods) entity;
+        return repository.findById(goodsId, orgId);
     }
 
     @Override
@@ -75,7 +71,7 @@ public class LoanGoodsServiceImpl implements LoanGoodsService {
             return null;
         }
 
-        return (LoanGoods) entity;
+        return entity;
     }
 
     @Override

@@ -12,7 +12,6 @@ import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
-import study.daydayup.wolf.business.goods.biz.goods.GoodsEntity;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -37,6 +36,8 @@ public class LoanGoodsRepository implements  Repository {
     private GoodsDAO goodsDAO;
     @Resource
     private GoodsLoanDAO loanDAO;
+    @Resource
+    private LoanConverter converter;
 
     public long save(LoanEntity entity) {
         if (entity == null) {
@@ -45,46 +46,49 @@ public class LoanGoodsRepository implements  Repository {
         entity.setId(null);
 
         long goodsId = saveGoodsDO(entity);
-        saveLoanDO(goodsId, entity);
+        entity.setId(goodsId);
+
+        saveLoanDO(entity);
         saveInstallmentDO(goodsId, entity);
 
         return goodsId;
     }
 
-    public int modify(LoanEntity entity) {
-        if (entity == null) {
-            return 0;
+    public void modify(LoanEntity entity) {
+        if (entity == null || null == entity.getId()) {
+            return;
         }
 
         modifyGoodsDO(entity);
         modifyLoanDO(entity);
         modifyInstallmentDO(entity);
-
-        return 1;
     }
 
     public LoanEntity findById(long id, long orgId) {
         GoodsDO goodsDO = goodsDAO.selectById(id, orgId);
-
         return getLoanByGoodsDO(goodsDO);
     }
 
     public LoanEntity findOneByOrgId(long orgId) {
         GoodsDO goodsDO = goodsDAO.selectOneByOrgId(orgId);
-
         return getLoanByGoodsDO(goodsDO);
     }
 
     public Page<LoanEntity> findByOrgId(long orgId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<GoodsDO> goodsDOList = goodsDAO.selectByOrgId(orgId);
-        if (goodsDOList.isEmpty()) {
+        if (null == goodsDOList || goodsDOList.isEmpty()) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
-        Page<GoodsDO> page = Page.of(goodsDOList);
 
-        Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
+        List<LoanEntity> entityList = getLoanByGoodsDOList(goodsDOList, orgId);
+
+        return Page.of(goodsDOList).to(entityList);
+    }
+
+    private List<LoanEntity> getLoanByGoodsDOList(List<GoodsDO> goodsDOList, Long orgId) {
         List<LoanEntity> entityList = new ArrayList<>();
+        Map<Long, GoodsLoanDO> loanMap = findLoanByGoodsDOList(goodsDOList, orgId);
         for (GoodsDO goodsDO : goodsDOList ) {
             LoanEntity entity = mergeGoodsAndLoan(goodsDO, loanMap.get(goodsDO.getId()));
             if (entity != null) {
@@ -92,7 +96,7 @@ public class LoanGoodsRepository implements  Repository {
             }
         }
 
-        return page.to(entityList);
+        return entityList;
     }
 
     // private methods stat
@@ -101,36 +105,18 @@ public class LoanGoodsRepository implements  Repository {
             return null;
         }
 
-        LoanEntity entity = new LoanEntity();
-        BeanUtils.copyProperties(goodsDO, entity);
-
+        LoanEntity entity = converter.toEntity(goodsDO);
         GoodsLoanDO loanDO = loanDAO.selectByGoodsId(goodsDO.getId(), goodsDO.getOrgId());
-        return setLoanToEntity(entity, loanDO);
+        return converter.toEntity(loanDO, entity);
     }
 
     private LoanEntity mergeGoodsAndLoan(GoodsDO goodsDO, GoodsLoanDO loanDO) {
+        LoanEntity entity = converter.toEntity(goodsDO);
         if (goodsDO == null) {
-            return null;
-        }
-
-        LoanEntity entity = new LoanEntity();
-        BeanUtils.copyProperties(goodsDO, entity);
-        return setLoanToEntity(entity, loanDO);
-    }
-
-    private LoanEntity setLoanToEntity(LoanEntity entity, GoodsLoanDO loanDO) {
-        if (loanDO == null) {
             return entity;
         }
 
-        Loan loan = new Loan();
-        BeanUtils.copyProperties(loanDO, loan);
-        entity.setLoan(loan);
-
-        List<Installment> installmentList = JSON.parseArray(loanDO.getInstallment(), Installment.class);
-        entity.setInstallmentList(installmentList);
-
-        return entity;
+        return converter.toEntity(loanDO, entity);
     }
 
     private Map<Long, GoodsLoanDO> findLoanByGoodsDOList(List<GoodsDO> goodsDOList, long orgId) {
@@ -151,9 +137,7 @@ public class LoanGoodsRepository implements  Repository {
     }
 
     private long saveGoodsDO(@NonNull LoanEntity entity) {
-        GoodsDO goodsDO = new GoodsDO();
-        BeanUtils.copyProperties(entity, goodsDO);
-        goodsDO.setPrice(10000 * entity.getPrice());
+        GoodsDO goodsDO = converter.toDo(entity);
 
         goodsDAO.insertSelective(goodsDO);
         Long id = goodsDO.getId();
@@ -165,45 +149,25 @@ public class LoanGoodsRepository implements  Repository {
     }
 
     private void modifyGoodsDO(LoanEntity entity) {
-        long id = entity.getId();
-        if (id <= 0) {
-            throw new GoodsNotFoundException();
-        }
-
-        GoodsDO goodsDO = new GoodsDO();
-        BeanUtils.copyProperties(entity, goodsDO);
+        GoodsDO goodsDO = converter.toDo(entity);
         goodsDAO.updateByIdSelective(goodsDO);
     }
 
-    private void saveLoanDO(long goodsId, LoanEntity entity) {
-        GoodsLoanDO loanDO = new GoodsLoanDO();
-        BeanUtils.copyProperties(entity.getLoan(), loanDO);
+    private void saveLoanDO(LoanEntity entity) {
+        Loan loan = entity.getLoan();
+        loan.setGoodsId(entity.getId());
+        loan.setOrgId(entity.getOrgId());
 
-        loanDO.setId(null);
-        loanDO.setGoodsId(goodsId);
-        loanDO.setOrgId(entity.getOrgId());
-        loanDO.setHandlingFeeRate(loanDO.getHandlingFeeRate());
-        loanDO.setInterest(loanDO.getInterest());
-
-        String installments = JSON.toJSONString(entity.getInstallmentList());
-        loanDO.setInstallment(installments);
-
+        GoodsLoanDO loanDO = converter.toDo(loan, entity.getInstallmentList());
         loanDAO.insertSelective(loanDO);
     }
 
     private void modifyLoanDO(LoanEntity entity) {
         Loan loan = entity.getLoan();
+        loan.setGoodsId(entity.getId());
+        loan.setOrgId(entity.getOrgId());
 
-        GoodsLoanDO loanDO = new GoodsLoanDO();
-        BeanUtils.copyProperties(loan, loanDO);
-
-        loanDO.setId(null);
-        loanDO.setOrgId(entity.getOrgId());
-        loanDO.setGoodsId(entity.getId());
-
-        String installments = JSON.toJSONString(entity.getInstallmentList());
-        loanDO.setInstallment(installments);
-
+        GoodsLoanDO loanDO = converter.toDo(loan, entity.getInstallmentList());
         loanDAO.updateByGoodsIdSelective(loanDO);
     }
 
@@ -213,37 +177,4 @@ public class LoanGoodsRepository implements  Repository {
 
     private void modifyInstallmentDO(LoanEntity entity) {
     }
-
-    private LoanEntity doToEntity(GoodsDO goodsDO) {
-        if (goodsDO == null) {
-            return null;
-        }
-        LoanEntity entity = new LoanEntity();
-        BeanUtils.copyProperties(goodsDO, entity);
-
-        return entity;
-    }
-
-    private Loan doToEntity(GoodsLoanDO loanDO) {
-        if (loanDO == null) {
-            return null;
-        }
-
-        return null;
-    }
-
-    private GoodsDO entityToDo(LoanEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        GoodsDO goodsDO = new GoodsDO();
-        BeanUtils.copyProperties(entity, goodsDO);
-        goodsDO.setPrice(10000 * entity.getPrice());
-
-        return goodsDO;
-    }
-
-
-
-
 }
