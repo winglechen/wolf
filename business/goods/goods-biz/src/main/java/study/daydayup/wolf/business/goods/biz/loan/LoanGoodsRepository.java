@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.loan;
 
 import com.alibaba.fastjson.JSON;
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.exception.FailedCreateLoanException;
@@ -11,6 +12,7 @@ import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
+import study.daydayup.wolf.business.goods.biz.goods.GoodsEntity;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -148,13 +150,13 @@ public class LoanGoodsRepository implements  Repository {
         return loanMap;
     }
 
-    private long saveGoodsDO(LoanEntity entity) {
+    private long saveGoodsDO(@NonNull LoanEntity entity) {
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
+        goodsDO.setPrice(10000 * entity.getPrice());
 
         goodsDAO.insertSelective(goodsDO);
         Long id = goodsDO.getId();
-        System.out.println("last goodsId: " + id);
         if (id == null) {
             throw new FailedCreateLoanException();
         }
@@ -180,8 +182,8 @@ public class LoanGoodsRepository implements  Repository {
         loanDO.setId(null);
         loanDO.setGoodsId(goodsId);
         loanDO.setOrgId(entity.getOrgId());
-        loanDO.setHandlingFeeRate(10000 * loanDO.getHandlingFeeRate());
-        loanDO.setInterest(1000000 * loanDO.getInterest());
+        loanDO.setHandlingFeeRate(loanDO.getHandlingFeeRate());
+        loanDO.setInterest(loanDO.getInterest());
 
         String installments = JSON.toJSONString(entity.getInstallmentList());
         loanDO.setInstallment(installments);
@@ -211,5 +213,37 @@ public class LoanGoodsRepository implements  Repository {
 
     private void modifyInstallmentDO(LoanEntity entity) {
     }
+
+    private LoanEntity doToEntity(GoodsDO goodsDO) {
+        if (goodsDO == null) {
+            return null;
+        }
+        LoanEntity entity = new LoanEntity();
+        BeanUtils.copyProperties(goodsDO, entity);
+
+        return entity;
+    }
+
+    private Loan doToEntity(GoodsLoanDO loanDO) {
+        if (loanDO == null) {
+            return null;
+        }
+
+        return null;
+    }
+
+    private GoodsDO entityToDo(LoanEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        GoodsDO goodsDO = new GoodsDO();
+        BeanUtils.copyProperties(entity, goodsDO);
+        goodsDO.setPrice(10000 * entity.getPrice());
+
+        return goodsDO;
+    }
+
+
+
 
 }

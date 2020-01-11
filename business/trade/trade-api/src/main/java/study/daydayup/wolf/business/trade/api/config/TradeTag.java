@@ -14,8 +14,8 @@ public class TradeTag {
     // = repayOrder.tags.add(FIRST_TRADE)
     public static final String FIRST_TRADE              = "firstTrade";
 
-    public static final String INSTALLMENT_PREFIX       = "installment:";
-    public static final String LOAN_EFFECT_PREFIX       = "loanEffectIn:";
+    public static final String INSTALLMENT_PREFIX       = "installment";
+    public static final String LOAN_EFFECT_PREFIX       = "loanEffectIn";
 
     // @range trade state log
     // order.tradeType = repay
