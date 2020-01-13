@@ -9,7 +9,6 @@ import java.math.MathContext;
 
 /**
  * study.daydayup.wolf.model.type.money
- * TODO: add BigDecimal support
  * @author Wingle
  * @since 2019/10/15 12:48 下午
  **/

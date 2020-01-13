@@ -14,8 +14,6 @@ import java.math.MathContext;
  * @since 2019/12/19 3:25 下午
  **/
 public class Rate implements DataType {
-    private static final int SCALE = 2;
-
     private Decimal value;
     private RateEnum unit;
 
@@ -45,7 +43,7 @@ public class Rate implements DataType {
     }
 
     public BigDecimal toBigDecimal() {
-        return value.toBigDecimal();
+        return value.toBigDecimal().divide(unit.getBase(), MathContext.DECIMAL32);
     }
 
     private Decimal convertTo(RateEnum targetUnit) {

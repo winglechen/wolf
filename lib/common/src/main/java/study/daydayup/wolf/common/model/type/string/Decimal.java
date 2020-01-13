@@ -77,7 +77,7 @@ public class Decimal implements DataType {
     }
 
     public String toString(int scale) {
-        if (scale < 1) {
+        if (scale < 0) {
             return toString();
         }
 
