@@ -2,7 +2,7 @@ package study.daydayup.wolf.common.model.type.currency;
 
 import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
 import study.daydayup.wolf.common.model.contract.Currency;
-import study.daydayup.wolf.common.model.contract.DataType;
+import study.daydayup.wolf.common.model.type.string.Decimal;
 
 /**
  * study.daydayup.wolf.model.type.money

@@ -2,7 +2,10 @@ package study.daydayup.wolf.common.model.type.currency;
 
 import study.daydayup.wolf.common.lang.enums.currency.IndianRupeeEnum;
 import study.daydayup.wolf.common.model.contract.Currency;
-import study.daydayup.wolf.common.model.contract.DataType;
+import study.daydayup.wolf.common.model.type.string.Decimal;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * study.daydayup.wolf.model.type.money
@@ -11,50 +14,51 @@ import study.daydayup.wolf.common.model.contract.DataType;
  * @since 2019/10/15 12:48 下午
  **/
 public class IndianRupee implements Currency {
-    private long value;
+    private Decimal value;
     private IndianRupeeEnum unit;
     
     public IndianRupee(long value, IndianRupeeEnum unit) {
-        this.value = value;
+        this.value = Decimal.of(value);
         this.unit = unit;
     } 
     
-    public long toRupee() {
+    public Decimal toRupee() {
         return convertTo(IndianRupeeEnum.RUPEE);
     }
 
-    public long toPaise() {
+    public Decimal toPaise() {
         return convertTo(IndianRupeeEnum.PAISE);
     }
     
-    public long toTenPaise() {
+    public Decimal toTenPaise() {
         return convertTo(IndianRupeeEnum.TEN_PAISE);
     }
     
-    public long toTenthPaise() {
+    public Decimal toTenthPaise() {
         return convertTo(IndianRupeeEnum.TENTH_PAISE);
     }
     
-    public long toHundredthPaise() {
+    public Decimal toHundredthPaise() {
         return convertTo(IndianRupeeEnum.HUNDREDTH_PAISE);
     }
 
-    public long toThousandthPaise() {
+    public Decimal toThousandthPaise() {
         return convertTo(IndianRupeeEnum.THOUSANDTH_PAISE);
     }
     
-    private long convertTo(IndianRupeeEnum targetUnit) {
+    private Decimal convertTo(IndianRupeeEnum targetUnit) {
         if (this.unit.equals(targetUnit)) {
             return this.value;
         }
         
         int sourceCode = this.unit.getCode();
         int targetCode = targetUnit.getCode();
-        long step = targetCode - sourceCode;
+        int step = targetCode - sourceCode;
 
-        double newValue  = Math.pow(10,  step);
-        newValue = value * newValue;
+        BigDecimal newValue = BigDecimal.TEN;
+        newValue = newValue.pow(step, MathContext.DECIMAL32);
+        newValue = value.toBigDecimal().multiply(newValue);
 
-        return (long) newValue;
+        return Decimal.of(newValue);
     }
 }

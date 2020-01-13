@@ -8,6 +8,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Set;
@@ -25,14 +27,17 @@ public class Demo1 {
     private String name;
     @Max(100) @Min(0)
     private int age;
+    @DecimalMax("1.99") @DecimalMin("1.00")
+    private String amount;
 
     public static void main(String[] args) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
 
         Demo1 demo = new Demo1();
-        demo.setName("wingle chen");
+        demo.setName("winglechen");
         demo.setAge(18);
+        demo.setAmount("abc");
 
         Set< ConstraintViolation<Demo1> > constraintViolations = validator.validate(demo);
         for (ConstraintViolation<Demo1> constraintViolation : constraintViolations) {

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.util.finance;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * study.daydayup.wolf.common.util.finance
@@ -24,7 +25,7 @@ public class Interest {
         BigDecimal nperiod = new BigDecimal(period);
 
         BigDecimal nRate   = new BigDecimal(ratePerMillion)
-                .divide(new BigDecimal(1000000));
+                .divide(new BigDecimal(1000000), MathContext.DECIMAL32);
 
         BigDecimal interest = nAmount.multiply(nRate).multiply(nperiod);
 
@@ -32,9 +33,7 @@ public class Interest {
             interest = maxInterestCheck(nAmount, interest);
         }
 
-        interest.setScale(0, BigDecimal.ROUND_HALF_UP);
-
-        return interest.longValue();
+        return interest.setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
     }
 
     public static long compound(long amount, int ratePerMillion, int period) {
@@ -43,23 +42,21 @@ public class Interest {
         }
 
         BigDecimal nAmount = new BigDecimal(amount);
-
         BigDecimal nRate   = new BigDecimal(ratePerMillion)
-                .divide(new BigDecimal(1000000))
+                .divide(new BigDecimal(1000000), MathContext.DECIMAL32)
                 .add(new BigDecimal(1));
+
         BigDecimal interest = nRate.pow(period);
-
         interest = interest.multiply(nAmount);
-        interest = interest.setScale(0, BigDecimal.ROUND_HALF_UP);
 
-        return interest.longValue();
+        return interest.setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
     }
 
     private static BigDecimal maxInterestCheck(BigDecimal amount, BigDecimal interest) {
         BigDecimal maxInterest = amount.multiply(new BigDecimal(Interest.MAX_INTEREST))
-                .divide(new BigDecimal(100));
+                .divide(new BigDecimal(100), BigDecimal.ROUND_HALF_UP);
 
-        if (-1 == interest.compareTo(maxInterest)) {
+        if (interest.compareTo(maxInterest) < 0) {
             return interest;
         }
 

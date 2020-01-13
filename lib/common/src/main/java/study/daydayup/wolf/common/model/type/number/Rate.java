@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.model.type.number;
 
 import study.daydayup.wolf.common.lang.enums.unit.RateEnum;
 import study.daydayup.wolf.common.model.contract.DataType;
+import study.daydayup.wolf.common.model.type.string.Decimal;
 
 import java.math.BigDecimal;
 
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
  * @since 2019/12/19 3:25 下午
  **/
 public class Rate implements DataType {
+    private static final int SCALE = 2;
+
     private int value;
     private RateEnum unit;
 
@@ -41,7 +44,7 @@ public class Rate implements DataType {
     }
 
     public BigDecimal toBigDecimal() {
-        return new BigDecimal(toMillion()).divide(new BigDecimal(1000000));
+        return new BigDecimal(toMillion()).divide(new BigDecimal(1000000), BigDecimal.ROUND_HALF_UP);
     }
 
     private int convertTo(RateEnum targetUnit) {
