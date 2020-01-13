@@ -18,19 +18,19 @@ public class RateTest {
     public void toHundred() {
         Rate r = new Rate(3, RateEnum.PER_HUNDRED);
 
-        int vH = r.toHundred();
+        int vH = r.toHundred().toInt();
         assertEquals("hundred convert fail", 3, vH);
 
-        int vT = r.toThousand();
+        int vT = r.toThousand().toInt();
         assertEquals("thousand convert fail", 30, vT);
 
-        int vTT = r.toTenThousand();
+        int vTT = r.toTenThousand().toInt();
         assertEquals("ten thousand convert fail", 300, vTT);
 
-        int vHT = r.toHundredThousand();
+        int vHT = r.toHundredThousand().toInt();
         assertEquals("hundred thousand convert fail", 3000, vHT);
 
-        int vM = r.toMillion();
+        int vM = r.toMillion().toInt();
         assertEquals("million convert fail", 30000, vM);
     }
 
@@ -38,19 +38,19 @@ public class RateTest {
     public void ToThousand() {
         Rate r = new Rate(30, RateEnum.PER_THOUSAND);
 
-        int vH = r.toHundred();
+        int vH = r.toHundred().toInt();
         assertEquals("hundred convert fail", 3, vH);
 
-        int vT = r.toThousand();
+        int vT = r.toThousand().toInt();
         assertEquals("thousand convert fail", 30, vT);
 
-        int vTT = r.toTenThousand();
+        int vTT = r.toTenThousand().toInt();
         assertEquals("ten thousand convert fail", 300, vTT);
 
-        int vHT = r.toHundredThousand();
+        int vHT = r.toHundredThousand().toInt();
         assertEquals("hundred thousand convert fail", 3000, vHT);
 
-        int vM = r.toMillion();
+        int vM = r.toMillion().toInt();
         assertEquals("million convert fail", 30000, vM);
     }
 
@@ -58,19 +58,19 @@ public class RateTest {
     public void toMillion() {
         Rate r = new Rate(30000, RateEnum.PER_MILLION);
 
-        int vH = r.toHundred();
+        int vH = r.toHundred().toInt();
         assertEquals("hundred convert fail", 3, vH);
 
-        int vT = r.toThousand();
+        int vT = r.toThousand().toInt();
         assertEquals("thousand convert fail", 30, vT);
 
-        int vTT = r.toTenThousand();
+        int vTT = r.toTenThousand().toInt();
         assertEquals("ten thousand convert fail", 300, vTT);
 
-        int vHT = r.toHundredThousand();
+        int vHT = r.toHundredThousand().toInt();
         assertEquals("hundred thousand convert fail", 3000, vHT);
 
-        int vM = r.toMillion();
+        int vM = r.toMillion().toInt();
         assertEquals("million convert fail", 30000, vM);
     }
 

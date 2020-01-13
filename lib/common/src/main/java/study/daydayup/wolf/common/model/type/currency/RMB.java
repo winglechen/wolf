@@ -4,6 +4,9 @@ import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
 import study.daydayup.wolf.common.model.contract.Currency;
 import study.daydayup.wolf.common.model.type.string.Decimal;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 /**
  * study.daydayup.wolf.model.type.money
  * TODO: add BigDecimal support
@@ -11,50 +14,51 @@ import study.daydayup.wolf.common.model.type.string.Decimal;
  * @since 2019/10/15 12:48 下午
  **/
 public class RMB implements Currency {
-    private long value;
+    private Decimal value;
     private RMBEnum unit;
     
     public RMB(long value, RMBEnum unit) {
-        this.value = value;
+        this.value = Decimal.of(value);
         this.unit = unit;
     } 
     
-    public long toYuan() {
+    public Decimal toYuan() {
         return convertTo(RMBEnum.YUAN);
     }
 
-    public long toJiao() {
+    public Decimal toJiao() {
         return convertTo(RMBEnum.JIAO);
     }
     
-    public long toFen() {
+    public Decimal toFen() {
         return convertTo(RMBEnum.FEN);
     }
     
-    public long toLi() {
+    public Decimal toLi() {
         return convertTo(RMBEnum.LI);
     }
     
-    public long toHao() {
+    public Decimal toHao() {
         return convertTo(RMBEnum.HAO);
     }
     
-    public long toSi() {
+    public Decimal toSi() {
         return convertTo(RMBEnum.SI);
     }
 
-    private long convertTo(RMBEnum targetUnit) {
+    private Decimal convertTo(RMBEnum targetUnit) {
         if (this.unit.equals(targetUnit)) {
             return this.value;
         }
         
         int sourceCode = this.unit.getCode();
         int targetCode = targetUnit.getCode();
-        long step = targetCode - sourceCode;
+        int step = targetCode - sourceCode;
 
-        double newValue  = Math.pow(10,  step);
-        newValue = value * newValue;
+        BigDecimal newValue = BigDecimal.TEN;
+        newValue = newValue.pow(step, MathContext.DECIMAL32);
+        newValue = value.toBigDecimal().multiply(newValue);
 
-        return (long) newValue;
+        return Decimal.of(newValue);
     }
 }

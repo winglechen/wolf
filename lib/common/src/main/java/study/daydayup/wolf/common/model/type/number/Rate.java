@@ -5,6 +5,7 @@ import study.daydayup.wolf.common.model.contract.DataType;
 import study.daydayup.wolf.common.model.type.string.Decimal;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * study.daydayup.wolf.model.type.number
@@ -15,39 +16,39 @@ import java.math.BigDecimal;
 public class Rate implements DataType {
     private static final int SCALE = 2;
 
-    private int value;
+    private Decimal value;
     private RateEnum unit;
 
     public Rate(int value, RateEnum unit) {
-        this.value = value;
+        this.value = Decimal.of(value);
         this.unit = unit;
     }
 
-    public int toHundred() {
+    public Decimal toHundred() {
         return convertTo(RateEnum.PER_HUNDRED);
     }
 
-    public int toThousand() {
+    public Decimal toThousand() {
         return convertTo(RateEnum.PER_THOUSAND);
     }
 
-    public int toTenThousand() {
+    public Decimal toTenThousand() {
         return convertTo(RateEnum.PRE_TEN_THOUSAND);
     }
 
-    public int toHundredThousand() {
+    public Decimal toHundredThousand() {
         return convertTo(RateEnum.PRE_HUNDRED_THOUSAND);
     }
 
-    public int toMillion() {
+    public Decimal toMillion() {
         return convertTo(RateEnum.PER_MILLION);
     }
 
     public BigDecimal toBigDecimal() {
-        return new BigDecimal(toMillion()).divide(new BigDecimal(1000000), BigDecimal.ROUND_HALF_UP);
+        return value.toBigDecimal();
     }
 
-    private int convertTo(RateEnum targetUnit) {
+    private Decimal convertTo(RateEnum targetUnit) {
         if (unit.equals(targetUnit)) {
             return value;
         }
@@ -56,10 +57,11 @@ public class Rate implements DataType {
         int targetCode = targetUnit.getCode();
         int step = targetCode - sourceCode;
 
-        double diff  = Math.pow(10,  step);
-        double newValue = value * diff;
+        BigDecimal newValue = BigDecimal.TEN;
+        newValue = newValue.pow(step, MathContext.DECIMAL32);
+        newValue = value.toBigDecimal().multiply(newValue);
 
-        return (int)newValue;
+        return Decimal.of(newValue);
     }
 
 }
