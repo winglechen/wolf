@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.service.tm;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
-import study.daydayup.wolf.business.trade.api.dto.tm.OrderRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
 import study.daydayup.wolf.framework.layer.domain.Service;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;

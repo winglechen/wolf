@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.tm.biz.engine.order;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.dto.tm.TradeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeRequest;
 import study.daydayup.wolf.business.trade.tm.biz.engine.QueryEngine;
 import study.daydayup.wolf.business.trade.tm.biz.engine.QueryFilter;
 import study.daydayup.wolf.business.trade.tm.biz.engine.core.QueryResponse;

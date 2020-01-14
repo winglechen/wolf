@@ -3,10 +3,11 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderRepository;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -24,29 +25,35 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public void create(@Validated Order order) {
+    public Result<Object> create(@Validated Order order) {
         orderRepository.add(order);
+        return Result.ok();
     }
 
     @Override
-    public void modify(@Validated Order key, Order changes) {
+    public Result<Object> modify(@Validated Order key, Order changes) {
         orderRepository.save(key, changes);
+        return Result.ok();
     }
 
     @Override
-    public Order find(@Validated TradeId tradeId) {
+    public Result<Order> find(@Validated TradeId tradeId) {
         return find(tradeId, null);
     }
 
     @Override
-    public Order find(@Validated TradeId tradeId, OrderOption option) {
+    public Result<Order> find(@Validated TradeId tradeId, OrderOption option) {
         tradeId.valid();
-        return orderRepository.find(tradeId, option);
+        Order order = orderRepository.find(tradeId, option);
+
+        return Result.ok(order);
     }
 
     @Override
-    public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
+    public Result<List<Order>> findRelatedTrade(@Validated RelatedTradeRequest request) {
         request.valid();
-        return orderRepository.findRelatedTrade(request);
+        List<Order> orders = orderRepository.findRelatedTrade(request);
+
+        return Result.ok(orders);
     }
 }

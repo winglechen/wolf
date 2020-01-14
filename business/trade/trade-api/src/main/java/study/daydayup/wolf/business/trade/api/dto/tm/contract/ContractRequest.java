@@ -1,10 +1,11 @@
-package study.daydayup.wolf.business.trade.api.dto.tm;
+package study.daydayup.wolf.business.trade.api.dto.tm.contract;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeRequest;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import java.time.LocalDateTime;

@@ -2,7 +2,8 @@ package study.daydayup.wolf.business.trade.tm.biz.engine.contract;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.tm.biz.engine.FilterRegistry;
-import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.BySellerName;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByBuyerId;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByBuyerName;
 import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByState;
 import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByTradeType;
 import study.daydayup.wolf.business.trade.tm.biz.engine.core.AbstractRegistry;
@@ -20,7 +21,9 @@ public class ContractSellerRegistry extends AbstractRegistry implements FilterRe
     @Resource
     private ByTradeNo byTradeNo;
     @Resource
-    private BySellerName bySellerName;
+    private ByBuyerId byBuyerId;
+    @Resource
+    private ByBuyerName byBuyerName;
     @Resource
     private ByTradeType byTradeType;
     @Resource
@@ -28,6 +31,6 @@ public class ContractSellerRegistry extends AbstractRegistry implements FilterRe
 
     @Override
     public void register() {
-        this.addFilter(byTradeNo, bySellerName, byTradeType, byState);
+        this.addFilter(byTradeNo, byBuyerId, byTradeType, byState, byBuyerName);
     }
 }

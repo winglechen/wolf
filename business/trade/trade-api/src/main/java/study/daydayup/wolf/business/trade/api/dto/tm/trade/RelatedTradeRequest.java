@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.tm;
+package study.daydayup.wolf.business.trade.api.dto.tm.trade;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeIdException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
+import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;
@@ -23,12 +24,9 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RelatedTradeRequest implements Request {
+public class RelatedTradeRequest extends TradeOwner implements Request {
     @NotBlank
     private String relatedTradeNo;
-
-    private Long buyerId;
-    private Long sellerId;
 
     private TradeTypeEnum tradeType;
     private TradeState state;
@@ -40,8 +38,6 @@ public class RelatedTradeRequest implements Request {
             throw new IllegalArgumentException("invalid tradeNo:" + relatedTradeNo);
         }
 
-        if (buyerId == null && sellerId == null) {
-            throw new InvalidTradeIdException("BuyerId and SellerId can't both null");
-        }
+        super.valid();
     }
 }

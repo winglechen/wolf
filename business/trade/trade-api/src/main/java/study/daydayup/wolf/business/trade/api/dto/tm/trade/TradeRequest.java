@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.tm;
+package study.daydayup.wolf.business.trade.api.dto.tm.trade;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractRepository;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -22,23 +23,27 @@ public class ContractServiceImpl implements ContractService {
     private ContractRepository contractRepository;
 
     @Override
-    public void create(@Validated Contract contract) {
+    public Result<Object> create(@Validated Contract contract) {
         contractRepository.add(contract);
+        return Result.ok();
     }
 
     @Override
-    public void modify(@Validated Contract key, Contract changes) {
+    public Result<Object> modify(@Validated Contract key, Contract changes) {
         contractRepository.save(key, changes);
+        return Result.ok();
     }
 
     @Override
-    public Contract find(@Validated TradeId tradeId) {
+    public Result<Contract> find(@Validated TradeId tradeId) {
         return find(tradeId, null);
     }
 
     @Override
-    public Contract find(TradeId tradeId, ContractOption option) {
+    public Result<Contract> find(TradeId tradeId, ContractOption option) {
         tradeId.valid();
-        return contractRepository.find(tradeId);
+        Contract contract = contractRepository.find(tradeId);
+
+        return Result.ok(contract);
     }
 }

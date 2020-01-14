@@ -43,13 +43,12 @@ public class LoanRepository extends AbstractRepository implements Repository {
 
     public LoanContractEntity find(TradeId tradeId) {
         tradeId.valid();
-        Contract contract = contractService.find(tradeId);
 
+        Contract contract = contractService.find(tradeId).getData();
         if (contract == null) {
             return null;
         }
 
-        LoanContractEntity entity = new LoanContractEntity(contract, false);
-        return entity;
+        return new LoanContractEntity(contract, false);
     }
 }

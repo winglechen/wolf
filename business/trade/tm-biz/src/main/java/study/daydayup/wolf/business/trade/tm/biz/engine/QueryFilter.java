@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.tm.biz.engine;
 
-import study.daydayup.wolf.business.trade.api.dto.tm.TradeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeRequest;
 import study.daydayup.wolf.business.trade.tm.biz.engine.core.QueryResponse;
 import study.daydayup.wolf.framework.layer.domain.Filter;
 

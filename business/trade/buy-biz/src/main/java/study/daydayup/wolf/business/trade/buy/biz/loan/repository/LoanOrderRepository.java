@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.repository;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.dto.tm.RelatedTradeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
@@ -42,7 +42,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
 
     private Order findExistsOrder(LoanOrderEntity entity) {
         RelatedTradeRequest request = entityToRequest(entity);
-        List<Order> orderList = orderService.findRelatedTrade(request);
+        List<Order> orderList = orderService.findRelatedTrade(request).getData();
         if (orderList == null || orderList.isEmpty()) {
             return null;
         }
@@ -115,15 +115,13 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
             return null;
         }
 
-        Order key = Order.builder()
+        return Order.builder()
                 .tradeNo(order.getTradeNo())
                 .state(order.getState())
                 .buyerId(order.getBuyerId())
                 .sellerId(order.getSellerId())
                 .version(order.getVersion())
                 .build();
-
-        return key;
     }
 
     private Order entityToChanges(LoanOrderEntity entity) {
@@ -132,7 +130,8 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         }
 
         Order order = entity.getModel();
-        Order changes = Order.builder()
+
+        return Order.builder()
                 .tags(order.getTags())
                 .state(order.getState())
                 .amount(order.getAmount())
@@ -143,8 +142,6 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
                 .expiredAt(order.getExpiredAt())
                 .deleteFlag(order.getDeleteFlag())
                 .build();
-
-        return changes;
     }
 
 }
