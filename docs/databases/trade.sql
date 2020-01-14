@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
+    `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '借款金额',
