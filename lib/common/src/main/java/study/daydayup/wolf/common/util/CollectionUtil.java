@@ -1,7 +1,5 @@
 package study.daydayup.wolf.common.util;
 
-import lombok.Data;
-
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -14,15 +12,15 @@ import java.util.stream.Collectors;
  * @since 2020/1/14 3:58 下午
  **/
 public class CollectionUtil {
-    public  static <C, K> List<K> keys(Collection<C> collection, Function<C,K> key) {
+    public  static <C, K> List<K> keys(Collection<C> collection, Function<C,K> getter) {
         return collection.stream()
-                .map(key)
+                .map(getter)
                 .collect(Collectors.toList());
     }
 
-    public static <C, K> Map<K, C> toMap(Collection<C> collection, Function<C,K> key) {
+    public static <C, K> Map<K, C> map(Collection<C> collection, Function<C,K> getter) {
         return collection.stream().collect(
-                Collectors.toMap(key, Function.identity())
+                Collectors.toMap(getter, Function.identity())
         );
     }
 
@@ -78,7 +76,7 @@ public class CollectionUtil {
     }
 
     public static <C1, MERGE_TYPE, C2> void join(Collection<C1> c1, Function<C1, MERGE_TYPE> getter, BiConsumer<C1, C2> setter, Collection<C2> c2, Function<C2, MERGE_TYPE> mGetter) {
-        Map<MERGE_TYPE, C2> map = toMap(c2, mGetter);
+        Map<MERGE_TYPE, C2> map = map(c2, mGetter);
         join(c1, getter, setter, map);
     }
 
