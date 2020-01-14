@@ -114,11 +114,11 @@ public class OrderRepository extends AbstractRepository implements Repository {
     }
 
     private List<Order> batchDoToModel(List<OrderDO> orderDOs) {
+        List<Order> orders = new ArrayList<>();
         if (orderDOs == null || orderDOs.isEmpty()) {
-            return null;
+            return orders;
         }
 
-        List<Order> orders = new ArrayList<>();
         for (OrderDO orderDO: orderDOs) {
             Order order = DOToModel(orderDO);
             if (order == null) {

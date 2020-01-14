@@ -1,23 +1,22 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
-import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
+import study.daydayup.wolf.business.trade.order.biz.converter.ContractConverter;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
+import study.daydayup.wolf.framework.layer.context.RequestContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.domain.repository
@@ -45,6 +44,10 @@ public class ContractRepository extends AbstractRepository implements Repository
     private TaxTermRepository taxTermRepository;
     @Resource
     private ContractDAO contractDAO;
+    @Resource
+    private RequestContext requestContext;
+    @Resource
+    private ContractConverter converter;
 
     public void add(Contract contract) {
         if (contract == null) {
@@ -88,19 +91,15 @@ public class ContractRepository extends AbstractRepository implements Repository
             return null;
         }
 
-        Contract.ContractBuilder builder = Contract.builder()
-                .consignTerm(consignTermRepository.find(tradeId))
-                .installmentTermList(installmentTermRepository.find(tradeId))
-                .loanTerm(loanTermRepository.find(tradeId))
-                .objectsTerm(objectsTermRepository.find(tradeId))
-                .paymentTerm(paymentTermRepository.find(tradeId))
-                .postageTerm(postageTermRepository.find(tradeId))
-                .repaymentTerm(repaymentTermRepository.find(tradeId))
-                .taxTerm(taxTermRepository.find(tradeId))
-                ;
-
-        Contract contract = builder.build();
-        BeanUtils.copyProperties(contractDO, contract);
+        Contract contract = converter.toModel(contractDO);
+        contract.setConsignTerm(consignTermRepository.find(tradeId));
+        contract.setInstallmentTermList(installmentTermRepository.find(tradeId));
+        contract.setLoanTerm(loanTermRepository.find(tradeId));
+        contract.setObjectsTerm(objectsTermRepository.find(tradeId));
+        contract.setPaymentTerm(paymentTermRepository.find(tradeId));
+        contract.setPostageTerm(postageTermRepository.find(tradeId));
+        contract.setRepaymentTerm(repaymentTermRepository.find(tradeId));
+        contract.setTaxTerm(taxTermRepository.find(tradeId));
 
         return contract;
     }
@@ -112,8 +111,8 @@ public class ContractRepository extends AbstractRepository implements Repository
     }
 
     private void insertContract(@Validated Contract contract) {
-        ContractDO contractDO = new ContractDO();
-        BeanUtils.copyProperties(contract, contractDO);
+        ContractDO contractDO = converter.toDo(contract);
+        contractDO.setCreatedAt(requestContext.getRequestTime());
 
         StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contract.getTradeType());
         TradeState initState = stateMachine.getInitState();
@@ -123,32 +122,22 @@ public class ContractRepository extends AbstractRepository implements Repository
     }
 
     private int updateContract(@Validated Contract key, Contract changes) {
-        ContractDO keyDO = modelToDO(key);
-        ContractDO changesDO = modelToDO(changes);
-        changesDO.setUpdatedAt(LocalDateTime.now());
+        if (changes == null || null == key) {
+            return 0;
+        }
 
+        ContractDO keyDO = converter.toDo(key);
+        if (key.getState() != null) {
+            keyDO.setState(key.getState().getCode());
+        }
+
+        ContractDO changesDO = converter.toDo(changes);
+        changesDO.setUpdatedAt(requestContext.getRequestTime());
         TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
         if (state != null) {
             changesDO.setState(state.getCode());
-
-            if (key.getState() != null) {
-                keyDO.setState(key.getState().getCode());
-            }
         }
 
         return contractDAO.updateByKey(changesDO, keyDO);
     }
-
-    private ContractDO modelToDO(Contract contract) {
-        if (contract == null) {
-            throw new InvalidContractException("contract is null");
-        }
-
-        ContractDO contractDO = new ContractDO();
-        BeanUtils.copyProperties(contract, contractDO);
-
-        return contractDO;
-    }
-
-
 }
