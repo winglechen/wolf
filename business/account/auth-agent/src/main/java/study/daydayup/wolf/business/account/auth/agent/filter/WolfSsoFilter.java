@@ -30,7 +30,7 @@ public class WolfSsoFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -59,11 +59,7 @@ public class WolfSsoFilter implements Filter {
 
         Date now = new Date();
         Date expiredAt = (Date) session.get("expiredAt");
-        if(expiredAt.before(now)) {
-            return true;
-        }
-
-        return false;
+        return expiredAt.before(now);
     }
 
     private boolean isExcludedPath(String path) {
@@ -89,7 +85,7 @@ public class WolfSsoFilter implements Filter {
         return false;
     }
 
-    private void accessDeny(HttpServletResponse response) throws IOException, ServletException {
+    private void accessDeny(HttpServletResponse response) throws IOException {
         response.setContentType("application/json;charset=utf-8");
 
         StringBuilder failMessage = new StringBuilder();
