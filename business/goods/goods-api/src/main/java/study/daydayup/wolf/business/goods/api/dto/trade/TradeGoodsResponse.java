@@ -7,8 +7,10 @@ import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.api.Response;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,12 +31,11 @@ public class TradeGoodsResponse implements Response {
     private Integer goodsType;
     @NotBlank
     private String name;
-    @Min(1)
-    private Long price;
+    @DecimalMin("0.0001")
+    private BigDecimal price;
     @Min(1)
     private Integer currency;
     private Integer chargeUnit;
-
 
     /**
      * @see GoodsStateEnum
@@ -54,6 +55,5 @@ public class TradeGoodsResponse implements Response {
     private Loan loan;
     private List<Installment> installmentList;
 
-    private Long postage = 0L;
-
+    private BigDecimal postage = BigDecimal.ZERO;
 }

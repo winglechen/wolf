@@ -7,8 +7,8 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeInstallment;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Installment;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
@@ -32,7 +32,7 @@ import java.util.List;
  **/
 @Component
 public class CreateContractNode extends AbstractTradeNode implements TradeNode {
-    private TradeGoods goods;
+    private Goods goods;
     private Contract contract;
 
     @Override
@@ -126,7 +126,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void initInstallmentTerm() {
-        List<TradeInstallment> installments = goods.getInstallmentList();
+        List<Installment> installments = goods.getInstallmentList();
         int installmentCount = installments.size();
         if (0 == installmentCount) {
             createInstallmentByLoan();
@@ -140,7 +140,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         RateInstallment rateFee = new RateInstallment(loan.getHandlingFee(), installmentCount);
 
         for (int i = 0; i < installmentCount; i++) {
-            TradeInstallment installment = installments.get(i);
+            Installment installment = installments.get(i);
 
             InstallmentTerm term = buildInstallmentTerm(installment, i);
             calculateInstallmentInterest(term);
@@ -153,7 +153,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setInstallmentTermList(terms);
     }
 
-    private InstallmentTerm buildInstallmentTerm(TradeInstallment installment, int i) {
+    private InstallmentTerm buildInstallmentTerm(Installment installment, int i) {
         return InstallmentTerm.builder()
                 .tradeNo(contract.getTradeNo())
                 .buyerId(contract.getBuyerId())

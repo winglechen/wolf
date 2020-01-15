@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.base.node;
 
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.GoodsNotFoundException;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 
@@ -20,8 +20,8 @@ public abstract class AbstractTradeNode implements TradeNode {
         this.context = context;
     }
 
-    protected List<TradeGoods> getGoodsList() {
-        List<TradeGoods> goodsList = context.getGoodsList();
+    protected List<Goods> getGoodsList() {
+        List<Goods> goodsList = context.getGoodsList();
         if (goodsList == null || goodsList.isEmpty()) {
             throw new GoodsNotFoundException();
         }

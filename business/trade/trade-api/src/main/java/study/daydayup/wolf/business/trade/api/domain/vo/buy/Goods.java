@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,14 +15,14 @@ import java.util.List;
  **/
 @Data
 @Builder
-public class TradeGoods implements VO {
+public class Goods implements VO {
     private Long  sellId;
     private Long  goodsId;
     protected Long  categoryId;
     private String goodsName;
     private Integer goodsType;
 
-    private Long  salePrice;
+    private BigDecimal salePrice;
 
     private Integer currency;
     private Integer chargeUnit;
@@ -30,15 +31,15 @@ public class TradeGoods implements VO {
     private Integer goodsVersion;
     private String goodsCode;
 
-    private Long  payPrice;
-    private Long  postage;
+    private BigDecimal  payPrice;
+    private BigDecimal  postage;
 
     private Integer giftFlag;
     private Integer quantity;
     private Long  promotionId;
     private GoodsMemo memo;
 
-    private TradeSku sku;
-    private TradeLoan loan;
-    private List<TradeInstallment> installmentList;
+    private Sku sku;
+    private Loan loan;
+    private List<Installment> installmentList;
 }

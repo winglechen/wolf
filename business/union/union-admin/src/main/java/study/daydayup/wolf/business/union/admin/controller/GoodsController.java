@@ -34,7 +34,7 @@ public class GoodsController extends BaseUnionController {
     private LoanConfig loanConfig;
 
     @PostMapping("/goods")
-    public Result create(@Validated @RequestBody LoanGoods goods) {
+    public Result<Object> create(@Validated @RequestBody LoanGoods goods) {
         BeanUtils.copyProperties(goodsConfig, goods);
 
         Loan loan = goods.getLoan();
@@ -81,12 +81,12 @@ public class GoodsController extends BaseUnionController {
     }
 
     @PostMapping("/goods/search")
-    public Result search() {
+    public Result<Object> search() {
         return Result.ok();
     }
 
     @PutMapping("/goods")
-    public Result modify(@Validated @RequestBody LoanGoods goods) {
+    public Result<Object> modify(@Validated @RequestBody LoanGoods goods) {
         Long orgId = getFromSession("orgId", Long.class);
         goods.setOrgId(orgId);
 
@@ -95,7 +95,7 @@ public class GoodsController extends BaseUnionController {
     }
 
     @DeleteMapping("/goods/{goodsId}")
-    public Result remove(@PathVariable("goodsId") Long goodsId) {
+    public Result<Object> remove(@PathVariable("goodsId") Long goodsId) {
         if (null == goodsId || goodsId <= 0) {
             throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
         }
@@ -106,7 +106,7 @@ public class GoodsController extends BaseUnionController {
     }
 
     @PutMapping("/goods/listing/{goodsId}")
-    public Result listing(@PathVariable("goodsId") Long goodsId) {
+    public Result<Object> listing(@PathVariable("goodsId") Long goodsId) {
         if (null == goodsId || goodsId <= 0) {
             throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
         }
@@ -120,7 +120,7 @@ public class GoodsController extends BaseUnionController {
     }
 
     @PutMapping("/goods/delisting/{goodsId}")
-    public Result delisting(@PathVariable("goodsId") Long goodsId) {
+    public Result<Object> delisting(@PathVariable("goodsId") Long goodsId) {
         if (null == goodsId || goodsId <= 0) {
             throw new IllegalArgumentException("Invalid goodsId: " + goodsId);
         }

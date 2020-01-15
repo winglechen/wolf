@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @author Wingle
  * @since 2019/10/5 1:51 PM
  **/
-public class TradeUmp implements VO {
+public class Ump implements VO {
 }

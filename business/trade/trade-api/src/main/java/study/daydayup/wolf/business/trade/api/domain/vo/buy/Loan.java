@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.trade.api.domain.vo.buy;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
+import java.math.BigDecimal;
+
 /**
  * study.daydayup.wolf.business.trade.api.domain.vo.buy
  *
@@ -10,11 +12,11 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  * @since 2019/12/18 10:53 上午
  **/
 @Data
-public class TradeLoan implements VO  {
+public class Loan implements VO  {
     private Integer handlingFeeRate;
 
-    private Integer interestRate;
-    private Integer penaltyRate;
+    private BigDecimal interestRate;
+    private BigDecimal penaltyRate;
     private Integer interestUnit;
     private Integer penaltyUnit;
 

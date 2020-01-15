@@ -27,7 +27,7 @@ public class LoanConverter implements Converter {
         }
         LoanEntity entity = new LoanEntity();
         BeanUtils.copyProperties(goodsDO, entity);
-        entity.setPrice(goodsDO.getPrice() / 10000);
+        entity.setPrice(goodsDO.getPrice());
 
         return entity;
     }
@@ -39,7 +39,7 @@ public class LoanConverter implements Converter {
         }
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
-        goodsDO.setPrice(10000 * entity.getPrice());
+        goodsDO.setPrice(entity.getPrice());
 
         return goodsDO;
     }

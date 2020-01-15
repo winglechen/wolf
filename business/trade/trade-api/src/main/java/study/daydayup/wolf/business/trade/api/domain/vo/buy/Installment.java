@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
+import java.math.BigDecimal;
+
 /**
  * study.daydayup.wolf.business.trade.api.domain.vo.buy
  *
@@ -12,12 +14,12 @@ import study.daydayup.wolf.framework.layer.domain.VO;
  **/
 @Data
 @NoArgsConstructor
-public class TradeInstallment implements VO {
+public class Installment implements VO {
     private Integer installmentNo;
 
     private Integer period;
 
-    private Integer percentage;
-    private Integer feePercentage;
+    private BigDecimal percentage;
+    private BigDecimal feePercentage;
     private Integer installmentType;
 }

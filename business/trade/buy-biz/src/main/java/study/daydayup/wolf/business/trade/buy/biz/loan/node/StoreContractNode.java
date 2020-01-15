@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
@@ -25,7 +25,7 @@ public class StoreContractNode extends AbstractTradeNode implements TradeNode {
     public void run(BuyContext context) {
         init(context);
 
-        List<TradeGoods> goodsList = context.getGoodsList();
+        List<Goods> goodsList = context.getGoodsList();
     }
 
 }

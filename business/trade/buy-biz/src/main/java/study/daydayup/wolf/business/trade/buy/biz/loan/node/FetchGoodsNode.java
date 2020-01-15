@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.GoodsNotFoundException;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
@@ -30,7 +30,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
     public void run(BuyContext context) {
         init(context);
 
-        List<TradeGoods> goodsList = goodsEpi.fetch(
+        List<Goods> goodsList = goodsEpi.fetch(
                 context.getRequest().getGoods()
         );
         validGoodsList(goodsList);
@@ -39,7 +39,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
         context.setGoodsList(goodsList);
     }
 
-    private void validGoodsList(List<TradeGoods> goodsList) {
+    private void validGoodsList(List<Goods> goodsList) {
         if (goodsList == null || goodsList.isEmpty()) {
             throw new GoodsNotFoundException();
         }
@@ -50,11 +50,11 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
         }
     }
 
-    private void mergeRequestToGoods(List<TradeGoods> goodsList) {
+    private void mergeRequestToGoods(List<Goods> goodsList) {
         List<GoodsRequest> goodsRequests = context.getRequest().getGoods();
         Map<Long, GoodsRequest> goodsRequestMap = toGoodsRequestMap(goodsRequests);
 
-        for (TradeGoods goods : goodsList) {
+        for (Goods goods : goodsList) {
             GoodsRequest goodsRequest =goodsRequestMap.get(goods.getGoodsId());
             goods.setQuantity(goodsRequest.getQuantity());
             goods.setGiftFlag(goodsRequest.getGiftFlag());

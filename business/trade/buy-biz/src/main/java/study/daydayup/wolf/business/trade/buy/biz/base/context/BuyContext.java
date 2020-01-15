@@ -9,8 +9,8 @@ import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeUmp;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Ump;
 
 import java.util.List;
 
@@ -31,8 +31,8 @@ public class BuyContext {
     private Buyer buyer;
     private Seller seller;
 
-    private List<TradeGoods> goodsList;
-    private TradeUmp ump;
+    private List<Goods> goodsList;
+    private Ump ump;
 
     private Contract contract;
     private Order order;

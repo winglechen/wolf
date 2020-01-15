@@ -41,7 +41,6 @@ public class BaseGoods implements Serializable {
     protected Integer currency;
     protected Integer chargeUnit;
 
-
     /**
      * @see GoodsStateEnum
      */
@@ -50,7 +49,6 @@ public class BaseGoods implements Serializable {
      * @see study.daydayup.wolf.business.goods.api.enums.StockTypeEnum
      */
     protected Integer stockType;
-
 
     protected String vsPrice;
     protected String feature;

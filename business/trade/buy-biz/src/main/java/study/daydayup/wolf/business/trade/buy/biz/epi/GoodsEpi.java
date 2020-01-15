@@ -6,12 +6,10 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsResponse;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
-import study.daydayup.wolf.business.goods.api.vo.Installment;
-import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeGoods;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeInstallment;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeLoan;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Installment;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Loan;
 import study.daydayup.wolf.framework.layer.epi.Epi;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class GoodsEpi implements Epi {
     @Reference
     private TradeGoodsService goodsService;
 
-    public List<TradeGoods> fetch(List<GoodsRequest> goodsRequests) {
+    public List<Goods> fetch(List<GoodsRequest> goodsRequests) {
         if (goodsRequests == null || goodsRequests.isEmpty()) {
             return null;
         }
@@ -40,14 +38,14 @@ public class GoodsEpi implements Epi {
         return formatResponse(responses, goodsRequests);
     }
 
-    private List<TradeGoods> formatResponse(List<TradeGoodsResponse> responses, List<GoodsRequest> goodsRequests) {
+    private List<Goods> formatResponse(List<TradeGoodsResponse> responses, List<GoodsRequest> goodsRequests) {
         if (responses == null || responses.isEmpty()) {
             return null;
         }
 
-        List<TradeGoods> goodsList = new ArrayList<>();
+        List<Goods> goodsList = new ArrayList<>();
         for (TradeGoodsResponse response : responses) {
-            TradeGoods goods = formatTradeGoods(response);
+            Goods goods = formatTradeGoods(response);
 
             goods.setSku(null);
             goods.setLoan(formatTradeLoan(response));
@@ -59,28 +57,28 @@ public class GoodsEpi implements Epi {
         return goodsList;
     }
 
-    private List<TradeInstallment> formatTradeInstallment(TradeGoodsResponse response) {
-        List<TradeInstallment> tradeInstallmentList = new ArrayList<>();
+    private List<Installment> formatTradeInstallment(TradeGoodsResponse response) {
+        List<Installment> installmentList = new ArrayList<>();
 
-        List<Installment> installments = response.getInstallmentList();
+        List<study.daydayup.wolf.business.goods.api.vo.Installment> installments = response.getInstallmentList();
         for (int i = 0, len=installments.size(); i < len; i++) {
-            Installment installment = installments.get(i);
+            study.daydayup.wolf.business.goods.api.vo.Installment installment = installments.get(i);
 
-            TradeInstallment tradeInstallment = new TradeInstallment();
+            Installment tradeInstallment = new Installment();
 
             BeanUtils.copyProperties(installment, tradeInstallment);
             tradeInstallment.setInstallmentNo(i+1);
             tradeInstallment.setInstallmentType(installment.getType());
 
-            tradeInstallmentList.add(tradeInstallment);
+            installmentList.add(tradeInstallment);
         }
 
-        return tradeInstallmentList;
+        return installmentList;
     }
 
-    private TradeLoan formatTradeLoan(TradeGoodsResponse response) {
-        TradeLoan loan = new TradeLoan();
-        Loan loanFromGoods = response.getLoan();
+    private Loan formatTradeLoan(TradeGoodsResponse response) {
+        Loan loan = new Loan();
+        study.daydayup.wolf.business.goods.api.vo.Loan loanFromGoods = response.getLoan();
         BeanUtils.copyProperties(loanFromGoods, loan);
 
         loan.setInterestRate(loanFromGoods.getInterest());
@@ -89,8 +87,8 @@ public class GoodsEpi implements Epi {
         return loan;
     }
 
-    private TradeGoods formatTradeGoods(TradeGoodsResponse response) {
-        TradeGoods goods = TradeGoods.builder()
+    private Goods formatTradeGoods(TradeGoodsResponse response) {
+        Goods goods = Goods.builder()
                 .sellId(response.getOrgId())
                 .goodsId(response.getId())
                 .categoryId(response.getCategoryId())
