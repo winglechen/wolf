@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class GoodsDO implements Serializable {
 
     private String name;
 
-    private Long price;
+    private BigDecimal price;
 
     private Integer currency;
 

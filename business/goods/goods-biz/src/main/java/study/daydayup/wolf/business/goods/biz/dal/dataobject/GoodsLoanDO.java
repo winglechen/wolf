@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class GoodsLoanDO implements Serializable {
 
     private Integer amountStrategy;
 
-    private Integer handlingFeeRate;
+    private BigDecimal handlingFeeRate;
 
     private Integer feePayStrategy;
 
@@ -28,11 +29,11 @@ public class GoodsLoanDO implements Serializable {
 
     private Integer periodStrategy;
 
-    private Integer interest;
+    private BigDecimal interest;
 
     private Integer interestUnit;
 
-    private Integer penalty;
+    private BigDecimal penalty;
 
     private Integer penaltyUnit;
 

@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO">
@@ -7,7 +8,7 @@
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="state" jdbcType="TINYINT" property="state" />
@@ -41,9 +42,6 @@
     limit 1
   </select>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into goods (org_id, category_id, goods_type,
       `name`, price, currency, 
       charge_unit, `state`, stock_type, 
@@ -53,7 +51,7 @@
       delete_flag, last_editor, created_at, 
       updated_at)
     values (#{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, #{goodsType,jdbcType=SMALLINT}, 
-      #{name,jdbcType=VARCHAR}, #{price,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
       #{chargeUnit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
       #{skuType,jdbcType=INTEGER}, #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
       #{mainPic,jdbcType=VARCHAR}, #{mainVideo,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
@@ -143,7 +141,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=BIGINT},
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
@@ -212,7 +210,7 @@
         `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=BIGINT},
+        price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
@@ -274,7 +272,7 @@
       category_id = #{categoryId,jdbcType=INTEGER},
       goods_type = #{goodsType,jdbcType=SMALLINT},
       `name` = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=BIGINT},
+      price = #{price,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
       charge_unit = #{chargeUnit,jdbcType=INTEGER},
       `state` = #{state,jdbcType=TINYINT},

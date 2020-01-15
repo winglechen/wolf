@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.goods.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -14,9 +15,9 @@ public class GoodsInstallmentDO implements Serializable {
 
     private Integer period;
 
-    private Integer percentage;
+    private BigDecimal percentage;
 
-    private Integer feePercentage;
+    private BigDecimal feePercentage;
 
     private Integer version;
 

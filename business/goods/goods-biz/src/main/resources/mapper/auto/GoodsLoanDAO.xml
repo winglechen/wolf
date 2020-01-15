@@ -8,14 +8,14 @@
     <result column="repay_strategy" jdbcType="INTEGER" property="repayStrategy" />
     <result column="prepay_strategy" jdbcType="INTEGER" property="prepayStrategy" />
     <result column="amount_strategy" jdbcType="INTEGER" property="amountStrategy" />
-    <result column="handling_fee_rate" jdbcType="INTEGER" property="handlingFeeRate" />
+    <result column="handling_fee_rate" jdbcType="DECIMAL" property="handlingFeeRate" />
     <result column="fee_pay_strategy" jdbcType="INTEGER" property="feePayStrategy" />
     <result column="period" jdbcType="INTEGER" property="period" />
     <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
     <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
-    <result column="interest" jdbcType="INTEGER" property="interest" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
     <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
-    <result column="penalty" jdbcType="INTEGER" property="penalty" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
     <result column="penalty_unit" jdbcType="INTEGER" property="penaltyUnit" />
     <result column="installment" jdbcType="VARCHAR" property="installment" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -26,9 +26,9 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, goods_id, org_id, repay_strategy, prepay_strategy, amount_strategy, handling_fee_rate, 
-    fee_pay_strategy, period, period_unit, period_strategy, interest, interest_unit,
-    penalty, penalty_unit, installment, version, delete_flag, last_editor,
-    created_at, updated_at
+    fee_pay_strategy, period, period_unit, period_strategy, interest, interest_unit, 
+    penalty, penalty_unit, installment, version, delete_flag, last_editor, created_at, 
+    updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -36,29 +36,23 @@
     from goods_loan
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into goods_loan (goods_id, org_id, repay_strategy, 
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
+    insert into goods_loan (goods_id, org_id, repay_strategy,
       prepay_strategy, amount_strategy, handling_fee_rate, 
-      fee_pay_strategy, period, period_unit,
-      period_strategy, interest, interest_unit,
-      penalty, penalty_unit, installment,
+      fee_pay_strategy, period, period_unit, 
+      period_strategy, interest, interest_unit, 
+      penalty, penalty_unit, installment, 
       version, delete_flag, last_editor, 
       created_at, updated_at)
     values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{repayStrategy,jdbcType=INTEGER}, 
-      #{prepayStrategy,jdbcType=INTEGER}, #{amountStrategy,jdbcType=INTEGER}, #{handlingFeeRate,jdbcType=INTEGER}, 
-      #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER},
-      #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=INTEGER}, #{interestUnit,jdbcType=INTEGER},
-      #{penalty,jdbcType=INTEGER}, #{penaltyUnit,jdbcType=INTEGER}, #{installment,jdbcType=VARCHAR},
+      #{prepayStrategy,jdbcType=INTEGER}, #{amountStrategy,jdbcType=INTEGER}, #{handlingFeeRate,jdbcType=DECIMAL}, 
+      #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER}, 
+      #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, 
+      #{penalty,jdbcType=DECIMAL}, #{penaltyUnit,jdbcType=INTEGER}, #{installment,jdbcType=VARCHAR}, 
       #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
     insert into goods_loan
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -137,7 +131,7 @@
         #{amountStrategy,jdbcType=INTEGER},
       </if>
       <if test="handlingFeeRate != null">
-        #{handlingFeeRate,jdbcType=INTEGER},
+        #{handlingFeeRate,jdbcType=DECIMAL},
       </if>
       <if test="feePayStrategy != null">
         #{feePayStrategy,jdbcType=INTEGER},
@@ -152,13 +146,13 @@
         #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="interest != null">
-        #{interest,jdbcType=INTEGER},
+        #{interest,jdbcType=DECIMAL},
       </if>
       <if test="interestUnit != null">
         #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="penalty != null">
-        #{penalty,jdbcType=INTEGER},
+        #{penalty,jdbcType=DECIMAL},
       </if>
       <if test="penaltyUnit != null">
         #{penaltyUnit,jdbcType=INTEGER},
@@ -200,7 +194,7 @@
         amount_strategy = #{amountStrategy,jdbcType=INTEGER},
       </if>
       <if test="handlingFeeRate != null">
-        handling_fee_rate = #{handlingFeeRate,jdbcType=INTEGER},
+        handling_fee_rate = #{handlingFeeRate,jdbcType=DECIMAL},
       </if>
       <if test="feePayStrategy != null">
         fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
@@ -215,13 +209,13 @@
         period_strategy = #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="interest != null">
-        interest = #{interest,jdbcType=INTEGER},
+        interest = #{interest,jdbcType=DECIMAL},
       </if>
       <if test="interestUnit != null">
         interest_unit = #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="penalty != null">
-        penalty = #{penalty,jdbcType=INTEGER},
+        penalty = #{penalty,jdbcType=DECIMAL},
       </if>
       <if test="penaltyUnit != null">
         penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
@@ -254,14 +248,14 @@
       repay_strategy = #{repayStrategy,jdbcType=INTEGER},
       prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
       amount_strategy = #{amountStrategy,jdbcType=INTEGER},
-      handling_fee_rate = #{handlingFeeRate,jdbcType=INTEGER},
+      handling_fee_rate = #{handlingFeeRate,jdbcType=DECIMAL},
       fee_pay_strategy = #{feePayStrategy,jdbcType=INTEGER},
       period = #{period,jdbcType=INTEGER},
       period_unit = #{periodUnit,jdbcType=INTEGER},
       period_strategy = #{periodStrategy,jdbcType=INTEGER},
-      interest = #{interest,jdbcType=INTEGER},
+      interest = #{interest,jdbcType=DECIMAL},
       interest_unit = #{interestUnit,jdbcType=INTEGER},
-      penalty = #{penalty,jdbcType=INTEGER},
+      penalty = #{penalty,jdbcType=DECIMAL},
       penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
       installment = #{installment,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},

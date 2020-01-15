@@ -6,8 +6,8 @@
     <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="period" jdbcType="INTEGER" property="period" />
-    <result column="percentage" jdbcType="INTEGER" property="percentage" />
-    <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
+    <result column="percentage" jdbcType="DECIMAL" property="percentage" />
+    <result column="fee_percentage" jdbcType="DECIMAL" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -24,23 +24,17 @@
     from goods_installment
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsInstallmentDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsInstallmentDO">
     insert into goods_installment (goods_id, org_id, period,
       percentage, fee_percentage, version, 
       delete_flag, last_editor, created_at, 
       updated_at)
-    values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{period,jdbcType=INTEGER},
-      #{percentage,jdbcType=INTEGER}, #{feePercentage,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+    values (#{goodsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{period,jdbcType=INTEGER}, 
+      #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsInstallmentDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsInstallmentDO">
     insert into goods_installment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -83,10 +77,10 @@
         #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
-        #{percentage,jdbcType=INTEGER},
+        #{percentage,jdbcType=DECIMAL},
       </if>
       <if test="feePercentage != null">
-        #{feePercentage,jdbcType=INTEGER},
+        #{feePercentage,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -116,10 +110,10 @@
         period = #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
-        percentage = #{percentage,jdbcType=INTEGER},
+        percentage = #{percentage,jdbcType=DECIMAL},
       </if>
       <if test="feePercentage != null">
-        fee_percentage = #{feePercentage,jdbcType=INTEGER},
+        fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -144,8 +138,8 @@
     set goods_id = #{goodsId,jdbcType=BIGINT},
       org_id = #{orgId,jdbcType=BIGINT},
       period = #{period,jdbcType=INTEGER},
-      percentage = #{percentage,jdbcType=INTEGER},
-      fee_percentage = #{feePercentage,jdbcType=INTEGER},
+      percentage = #{percentage,jdbcType=DECIMAL},
+      fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
