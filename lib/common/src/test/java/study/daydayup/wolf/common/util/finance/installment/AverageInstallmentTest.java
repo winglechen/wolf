@@ -20,15 +20,15 @@ public class AverageInstallmentTest {
         AverageInstallment installment = new AverageInstallment(1000, 3);
 
         expect = 330;
-        actual = installment.split();
+        actual = installment.split().longValue();
         assertEquals("average installment fail", expect, actual);
 
         expect = 330;
-        actual = installment.split();
+        actual = installment.split().longValue();
         assertEquals("average installment fail", expect, actual);
 
         expect = 340;
-        actual = installment.split();
+        actual = installment.split().longValue();
         assertEquals("average installment fail", expect, actual);
     }
 }

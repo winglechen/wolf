@@ -18,6 +18,7 @@ import study.daydayup.wolf.common.util.finance.Interest;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -58,7 +59,7 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         model.setExpiredAt(getExpiredAt());
 
         int period = calculatePeriod(installmentTerm);
-        long amount = calculateAmount(installmentTerm, period);
+        BigDecimal amount = calculateAmount(installmentTerm, period);
         model.setAmount(amount);
 
         setInstallmentTag(installmentNo);
@@ -146,40 +147,33 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         return PeriodUtil.daysBetween(effectAt, today, strategy);
     }
 
-    private long calculateAmount(InstallmentTerm term, int period) {
-        long amount = term.getAmount();
-        long fee = term.getHandlingFee();
-        long interest = calculateInterest(term, period);
-        long penalty = calculatePenalty(term, period);
+    private BigDecimal calculateAmount(InstallmentTerm term, int period) {
+        BigDecimal amount = term.getAmount();
+        BigDecimal fee = term.getHandlingFee();
+        BigDecimal interest = calculateInterest(term, period);
+        BigDecimal penalty = calculatePenalty(term, period);
 
-        long orderAmount = amount + fee + interest + penalty;
-        return orderAmount;
+        return amount.add(fee).add(interest).add(penalty);
     }
 
-    private long calculateInterest(InstallmentTerm term, int period) {
+    private BigDecimal calculateInterest(InstallmentTerm term, int period) {
         int termPeriod = term.getPeriod();
-        int interestPeriod;
-
-        if (period <= termPeriod) {
-            interestPeriod = period;
-        } else {
-            interestPeriod = termPeriod;
-        }
+        int interestPeriod = Math.min(period, termPeriod);
 
         LoanTerm loan = contract.getLoanTerm();
         return Interest.rate(loan.getAmount(), loan.getInterestRate(), interestPeriod);
     }
 
-    private long calculatePenalty(InstallmentTerm term, int period) {
+    private BigDecimal calculatePenalty(InstallmentTerm term, int period) {
         int termPeriod = term.getPeriod();
         if (period <= termPeriod) {
-            return 0;
+            return BigDecimal.ZERO;
         }
 
         int penaltyPeriod = period - termPeriod;
         LoanTerm loan = contract.getLoanTerm();
 
-        return Interest.rate(loan.getAmount(), loan.getPenaltyRate(),penaltyPeriod, true);
+        return Interest.rate(loan.getAmount(), loan.getPenaltyRate(), penaltyPeriod, true);
     }
 
     private Order createOrder(TradeTypeEnum tradeType) {
@@ -193,7 +187,7 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
                 .sellerName(contract.getSellerName())
                 .source(contract.getSource())
                 .createdAt(LocalDateTime.now())
-                .postage(0L)
+                .postage(BigDecimal.ZERO)
                 .currency(contract.getLoanTerm().getCurrency())
                 .build();
     }

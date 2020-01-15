@@ -8,6 +8,7 @@ import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -36,7 +37,7 @@ public class AbstractOrder extends AbstractEntity<Order> implements Entity  {
                 .sellerName(contract.getSellerName())
                 .source(contract.getSource())
                 .createdAt(LocalDateTime.now())
-                .postage(0L)
+                .postage(BigDecimal.ZERO)
                 .currency(contract.getLoanTerm().getCurrency())
                 .build();
     }

@@ -14,6 +14,16 @@ import java.math.MathContext;
  * @since 2019/12/19 3:25 下午
  **/
 public class Rate implements DataType {
+    public static final int TEN             = 10;
+    public static final int HUNDRED         = 100;
+    public static final int THOUSAND        = 1000;
+    public static final int TEN_THOUSAND    = 10000;
+    public static final int HUNDRED_THOUSAND= 100000;
+    public static final int MILLION         = 1000000;
+
+    public static final BigDecimal HUNDRED_PERCENT = BigDecimal.valueOf(100);
+
+
     private Decimal value;
     private RateEnum unit;
 
@@ -22,12 +32,12 @@ public class Rate implements DataType {
         this.unit = unit;
     }
 
-    public Rate(double value, RateEnum unit) {
+    public Rate(BigDecimal value, RateEnum unit) {
         this.value = Decimal.of(value);
         this.unit = unit;
     }
 
-    public Rate(double value, int scale, RateEnum unit) {
+    public Rate(BigDecimal value, int scale, RateEnum unit) {
         this.value = Decimal.of(value, scale);
         this.unit = unit;
     }

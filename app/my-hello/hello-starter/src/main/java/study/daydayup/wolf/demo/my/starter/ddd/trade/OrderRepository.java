@@ -17,7 +17,7 @@ import java.util.Set;
 public class OrderRepository implements Repository {
     public OrderEntity find(String orderNo) {
         OrderEntity entity = new OrderEntity(false);
-        entity.setOrderNo("existOrder");
+        entity.setOrderNo(orderNo);
 
         return entity;
     }

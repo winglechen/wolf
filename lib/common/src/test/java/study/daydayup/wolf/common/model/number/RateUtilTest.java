@@ -102,16 +102,16 @@ public class RateUtilTest {
         assertEquals("hundred convert fail", "34.5678", sH);
 
         BigDecimal vT = r.toThousand().toBigDecimal();
-        assertEquals("thousand convert fail", new BigDecimal("345.678"), vT);
+        assertEquals("thousand convert fail", new BigDecimal("345.6780"), vT);
 
         BigDecimal vTT = r.toTenThousand().toBigDecimal();
-        assertEquals("ten thousand convert fail", new BigDecimal("3456.78"), vTT);
+        assertEquals("ten thousand convert fail", new BigDecimal("3456.7800"), vTT);
 
         BigDecimal vHT = r.toHundredThousand().toBigDecimal();
-        assertEquals("hundred thousand convert fail", new BigDecimal("34567.8"), vHT);
+        assertEquals("hundred thousand convert fail", new BigDecimal("34567.8000"), vHT);
 
         BigDecimal vM = r.toMillion().toBigDecimal();
-        assertEquals("million convert fail", new BigDecimal("345678"), vM);
+        assertEquals("million convert fail", new BigDecimal("345678.0000"), vM);
     }
 
 }

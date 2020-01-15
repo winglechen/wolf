@@ -15,11 +15,14 @@ import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
+import study.daydayup.wolf.common.lang.enums.unit.RateEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.model.type.number.Rate;
 import study.daydayup.wolf.common.util.finance.RateUtil;
 import study.daydayup.wolf.common.util.finance.installment.RateInstallment;
 import study.daydayup.wolf.common.util.finance.Interest;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,10 +99,10 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void calculateLoanAmount(LoanTerm loanTerm) {
-        long fee = RateUtil.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
+        BigDecimal fee = RateUtil.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
         loanTerm.setHandlingFee(fee);
 
-        long interest = Interest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());
+        BigDecimal interest = Interest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());
         loanTerm.setInterest(interest);
     }
 
@@ -113,8 +116,8 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .sellerId(contract.getSellerId())
                 .installmentNo(1)
                 .period(loan.getPeriod())
-                .percentage(1000000)
-                .feePercentage(1000000)
+                .percentage(Rate.HUNDRED_PERCENT)
+                .feePercentage(Rate.HUNDRED_PERCENT)
                 .installmentType(InstallmentTypeEnum.NO_INSTALLMENTS.getCode())
                 .amount(loan.getAmount())
                 .interest(loan.getInterest())
@@ -128,7 +131,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     private void initInstallmentTerm() {
         List<Installment> installments = goods.getInstallmentList();
         int installmentCount = installments.size();
-        if (0 == installmentCount) {
+        if (installmentCount <= 0) {
             createInstallmentByLoan();
             return;
         }
@@ -144,8 +147,8 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
             InstallmentTerm term = buildInstallmentTerm(installment, i);
             calculateInstallmentInterest(term);
-            term.setAmount(rateInstallment.split(term.getPercentage()));
-            setInstallmentFee(term, rateFee.split(term.getFeePercentage()));
+            term.setAmount(rateInstallment.split(term.getPercentage(), RateEnum.PER_HUNDRED));
+            setInstallmentFee(term, rateFee.split(term.getFeePercentage(), RateEnum.PER_HUNDRED));
 
             terms.add(term);
         }
@@ -169,17 +172,17 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     private void calculateInstallmentInterest(InstallmentTerm term) {
         LoanTerm loan = contract.getLoanTerm();
 
-        long interest = Interest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
+        BigDecimal interest = Interest.rate(loan.getAmount(), loan.getInterestRate(), term.getPeriod());
         term.setInterest(interest);
     }
 
-    private void setInstallmentFee(InstallmentTerm term, long fee) {
+    private void setInstallmentFee(InstallmentTerm term, BigDecimal fee) {
         LoanTerm loan = contract.getLoanTerm();
         int feeStrategy = loan.getFeePayStrategy();
-        term.setHandlingFee(0L);
+        term.setHandlingFee(BigDecimal.ZERO);
 
         if (feeStrategy == FeeStrategyEnum.PRE.getCode()) {
-            term.setHandlingFee(0L);
+            term.setHandlingFee(BigDecimal.ZERO);
             return;
         }
 

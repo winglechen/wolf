@@ -20,20 +20,28 @@ public abstract class AbstractInstallment {
     protected int step;
     protected List<Long> splitList;
 
-    public long split(int rate) {
+    public BigDecimal split(int rate) {
         return split(rate, RateEnum.PER_MILLION);
     }
 
-    public long split(int rate, RateEnum unit) {
-        if (0 == rate) {
-            return 0;
+    public BigDecimal split(int rate, RateEnum unit) {
+        if (rate <= 0) {
+            return BigDecimal.ZERO;
         }
         return split(new Rate(rate, unit));
     }
 
-    public long split(Rate rate) {
+    public BigDecimal split(BigDecimal rate, RateEnum unit) {
+        if (rate.compareTo(BigDecimal.ZERO) <= 0) {
+            return BigDecimal.ZERO;
+        }
+        return split(new Rate(rate, unit));
+    }
+
+
+    public BigDecimal split(Rate rate) {
         if (remain.compareTo(BigDecimal.ZERO) <= 0 || null == rate) {
-            return 0;
+            return BigDecimal.ZERO;
         }
 
         step++;
@@ -47,11 +55,11 @@ public abstract class AbstractInstallment {
         }
 
         handleRemain(slice);
-        return slice.longValue();
+        return slice;
     }
 
-    protected long returnRemain() {
-        long result = remain.longValue();
+    protected BigDecimal returnRemain() {
+        BigDecimal result = remain;
         handleRemain(remain);
 
         return result;

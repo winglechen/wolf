@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.lang.enums.unit;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
+import study.daydayup.wolf.common.model.type.number.Rate;
 
 import java.math.BigDecimal;
 
@@ -14,11 +15,12 @@ import java.math.BigDecimal;
  **/
 @Getter
 public enum RateEnum implements CodeBasedEnum {
-    PER_MILLION(124, "百万分比", BigDecimal.valueOf(1000000)),
-    PRE_HUNDRED_THOUSAND(123, "十万分比", BigDecimal.valueOf(100000)),
-    PRE_TEN_THOUSAND(122, "万分比", BigDecimal.valueOf(10000)),
-    PER_THOUSAND(121, "千分比", BigDecimal.valueOf(1000)),
-    PER_HUNDRED(120, "百分比", BigDecimal.valueOf(100))
+    PER_MILLION(125, "百万分比", BigDecimal.valueOf(Rate.MILLION)),
+    PRE_HUNDRED_THOUSAND(124, "十万分比", BigDecimal.valueOf(Rate.HUNDRED_THOUSAND)),
+    PRE_TEN_THOUSAND(123, "万分比", BigDecimal.valueOf(Rate.TEN_THOUSAND)),
+    PER_THOUSAND(122, "千分比", BigDecimal.valueOf(Rate.THOUSAND)),
+    PER_HUNDRED(121, "百分比", BigDecimal.valueOf(Rate.HUNDRED)),
+    PER_TEN(120, "十分比", BigDecimal.TEN)
     ;
 
     private int code;

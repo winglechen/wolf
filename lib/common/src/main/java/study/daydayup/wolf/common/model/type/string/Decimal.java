@@ -15,52 +15,69 @@ import java.util.Objects;
  * @since 2020/1/12 1:03 上午
  **/
 public class Decimal implements DataType {
-    public static final int DEFAULT_DOUBLE_SCALE = 4;
+    public static final int DEFAULT_SCALE   = 4;
+    public static final int ZERO_SCALE      = 0;
     private BigDecimal value;
 
-    public static Decimal of(@NonNull String strNum) {
-        return new Decimal(strNum);
+
+
+    public static Decimal of(int intNum) {
+        return new Decimal(intNum);
     }
 
     public static Decimal of(long longNum) {
         return new Decimal(longNum);
     }
 
-    public static Decimal of(double doubleNum) {
-        return of(doubleNum, DEFAULT_DOUBLE_SCALE);
+    public static Decimal of(@NonNull String strNum) {
+        return of(strNum, DEFAULT_SCALE);
     }
 
-    public static Decimal of(double doubleNum, int scale) {
-        return new Decimal(doubleNum, scale);
+    public static Decimal of(@NonNull String strNum, int scale) {
+        return new Decimal(strNum, scale);
     }
 
-    public static Decimal of(int intNum) {
-        return new Decimal(intNum);
+    public static Decimal of(BigDecimal bigDecimal) {
+        return of(bigDecimal, DEFAULT_SCALE);
     }
 
-    public static Decimal of(BigDecimal big) {
-        return new Decimal(big);
+    public static Decimal of(BigDecimal bigDecimal, int scale) {
+        return new Decimal(bigDecimal, scale);
     }
 
-    public Decimal(String strNum) {
-        value = new BigDecimal(strNum);
+    public static Decimal of(double doubleValue) {
+        return of(doubleValue, DEFAULT_SCALE);
     }
 
-    public Decimal(BigDecimal big) {
-        value = big;
+    public static Decimal of(double doubleValue, int scale) {
+        return new Decimal(doubleValue, scale);
+    }
+
+
+
+    public Decimal(int intNum) {
+        value = BigDecimal.valueOf(intNum);
+        initScale(DEFAULT_SCALE);
     }
 
     public Decimal(long longNum) {
         value = BigDecimal.valueOf(longNum);
+        initScale(DEFAULT_SCALE);
     }
 
-    public Decimal(double longNum, int scale) {
-        value = BigDecimal.valueOf(longNum);
+    public Decimal(String strNum, int scale) {
+        value = new BigDecimal(strNum);
+        initScale(scale);
+    }
 
-        if (scale <= 0) {
-            scale = DEFAULT_DOUBLE_SCALE;
-        }
-        value = value.setScale(scale, RoundingMode.HALF_UP);
+    public Decimal(BigDecimal big, int scale) {
+        value = big;
+        initScale(scale);
+    }
+
+    public Decimal(double doubleValue, int scale) {
+        value = BigDecimal.valueOf(doubleValue);
+        initScale(scale);
     }
 
     public long toLong() {
@@ -114,5 +131,12 @@ public class Decimal implements DataType {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    private void initScale(int scale) {
+        if (scale <= 0) {
+            scale = DEFAULT_SCALE;
+        }
+        value = value.setScale(scale, RoundingMode.HALF_UP);
     }
 }

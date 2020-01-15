@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -62,7 +63,6 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
             goods.setMemo(goodsRequest.getMemo());
 
             goods.setPayPrice(goods.getSalePrice());
-            goods.setPostage(0L);
         }
     }
 

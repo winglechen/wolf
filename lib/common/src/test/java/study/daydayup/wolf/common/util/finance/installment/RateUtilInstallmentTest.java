@@ -20,15 +20,15 @@ public class RateUtilInstallmentTest {
         RateInstallment installment = new RateInstallment(1000, 3);
 
         expect = 330;
-        actual = installment.split(33, RateEnum.PER_HUNDRED);
+        actual = installment.split(33, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 330;
-        actual = installment.split(33, RateEnum.PER_HUNDRED);
+        actual = installment.split(33, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 340;
-        actual = installment.split(34, RateEnum.PER_HUNDRED);
+        actual = installment.split(34, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
     }
 
@@ -39,15 +39,15 @@ public class RateUtilInstallmentTest {
         RateInstallment installment = new RateInstallment(1000, 3);
 
         expect = 500;
-        actual = installment.split(50, RateEnum.PER_HUNDRED);
+        actual = installment.split(50, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 500;
-        actual = installment.split(50, RateEnum.PER_HUNDRED);
+        actual = installment.split(50, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 0;
-        actual = installment.split(30, RateEnum.PER_HUNDRED);
+        actual = installment.split(30, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
     }
 
@@ -58,15 +58,15 @@ public class RateUtilInstallmentTest {
         RateInstallment installment = new RateInstallment(1000, 3);
 
         expect = 200;
-        actual = installment.split(20, RateEnum.PER_HUNDRED);
+        actual = installment.split(20, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 200;
-        actual = installment.split(20, RateEnum.PER_HUNDRED);
+        actual = installment.split(20, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
 
         expect = 600;
-        actual = installment.split(30, RateEnum.PER_HUNDRED);
+        actual = installment.split(30, RateEnum.PER_HUNDRED).longValue();
         assertEquals("installment fail", expect, actual);
     }
 

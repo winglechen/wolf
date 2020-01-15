@@ -34,8 +34,8 @@ public class InstallmentTerm implements VO {
     protected String relatedTradeNo;
 
     protected Integer period;
-    protected Integer percentage;
-    protected Integer feePercentage;
+    protected BigDecimal percentage;
+    protected BigDecimal feePercentage;
 
     protected BigDecimal amount;
     protected BigDecimal  interest;

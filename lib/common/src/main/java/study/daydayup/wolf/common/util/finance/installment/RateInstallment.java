@@ -23,4 +23,15 @@ public class RateInstallment extends AbstractInstallment {
         splitList = new ArrayList<>();
     }
 
+    public RateInstallment(BigDecimal total, int nums) {
+        if (nums <= 0 || total.compareTo(BigDecimal.ZERO) <= 0) {
+            throw  new IllegalArgumentException("installment args can't less than 0");
+        }
+
+        this.total = total;
+        this.remain = total;
+        this.nums = nums;
+        this.splitList = new ArrayList<>();
+    }
+
 }

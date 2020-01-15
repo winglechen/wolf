@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.order;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ContractOption implements Request {
     private boolean withConsignTerm         = false;
     private boolean withInstallmentTerm     = false;
