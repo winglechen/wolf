@@ -3,7 +3,10 @@ package study.daydayup.wolf.business.goods.api.vo;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
@@ -16,14 +19,14 @@ public class Loan implements Entity  {
     private Long goodsId;
     private Long orgId;
     //loan add by user
-    @Min(1)
-    private Integer handlingFeeRate;
+    @DecimalMin("0.0001")
+    private BigDecimal handlingFeeRate;
     @Min(1)
     private Integer period;
-    @Min(1)
-    private Integer interest;
-    @Min(1)
-    private Integer penalty;
+    @DecimalMin("0.0001")
+    private BigDecimal interest;
+    @DecimalMin("0.0001")
+    private BigDecimal penalty;
 
     //loan defined in the config
     private Integer interestUnit;

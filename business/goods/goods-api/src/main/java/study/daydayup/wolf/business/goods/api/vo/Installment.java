@@ -4,7 +4,10 @@ import lombok.Data;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.goods.api.dto.request
@@ -16,10 +19,10 @@ import javax.validation.constraints.Min;
 public class Installment implements Entity  {
     @Min(1)
     private Integer period;
-    @Min(1)
-    private Integer percentage;
-    @Min(1)
-    private Integer feePercentage;
+    @DecimalMin("0.0001") @DecimalMax("100")
+    private BigDecimal percentage;
+    @DecimalMin("0.0001") @DecimalMax("100")
+    private BigDecimal feePercentage;
 
     /**
      * @see study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum

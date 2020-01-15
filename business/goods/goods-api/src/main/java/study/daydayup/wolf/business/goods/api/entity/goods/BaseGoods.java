@@ -1,18 +1,17 @@
 package study.daydayup.wolf.business.goods.api.entity.goods;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
-import study.daydayup.wolf.framework.layer.domain.Entity;
 import study.daydayup.wolf.common.model.annotation.column.BusinessKey;
 import study.daydayup.wolf.common.model.annotation.column.ForeignKey;
 import study.daydayup.wolf.common.model.annotation.column.PrimaryKey;
 
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.goods.api.entity
@@ -37,8 +36,8 @@ public class BaseGoods implements Serializable {
     protected Integer goodsType;
     @NotBlank
     protected String name;
-    @Min(1)
-    protected Long price;
+    @DecimalMin("0.0001")
+    protected BigDecimal price;
     protected Integer currency;
     protected Integer chargeUnit;
 
