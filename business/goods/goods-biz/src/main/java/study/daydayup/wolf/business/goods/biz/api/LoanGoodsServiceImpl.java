@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.goods.biz.api;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
+import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.biz.loan.LoanEntity;

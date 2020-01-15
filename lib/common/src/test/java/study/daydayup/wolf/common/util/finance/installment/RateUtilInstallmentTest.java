@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * @author Wingle
  * @since 2019/12/20 10:56 上午
  **/
-public class RateInstallmentTest {
+public class RateUtilInstallmentTest {
 
     @Test
     public void split() {

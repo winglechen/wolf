@@ -22,6 +22,16 @@ public class Rate implements DataType {
         this.unit = unit;
     }
 
+    public Rate(double value, RateEnum unit) {
+        this.value = Decimal.of(value);
+        this.unit = unit;
+    }
+
+    public Rate(double value, int scale, RateEnum unit) {
+        this.value = Decimal.of(value, scale);
+        this.unit = unit;
+    }
+
     public Decimal toHundred() {
         return convertTo(RateEnum.PER_HUNDRED);
     }

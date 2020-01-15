@@ -19,7 +19,17 @@ public class IndianRupee implements Currency {
     public IndianRupee(long value, IndianRupeeEnum unit) {
         this.value = Decimal.of(value);
         this.unit = unit;
-    } 
+    }
+
+    public IndianRupee(double value, int scale, IndianRupeeEnum unit) {
+        this.value = Decimal.of(value, scale);
+        this.unit = unit;
+    }
+
+    public IndianRupee(double value, IndianRupeeEnum unit) {
+        this.value = Decimal.of(value);
+        this.unit = unit;
+    }
     
     public Decimal toRupee() {
         return convertTo(IndianRupeeEnum.RUPEE);

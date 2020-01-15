@@ -19,8 +19,18 @@ public class RMB implements Currency {
     public RMB(long value, RMBEnum unit) {
         this.value = Decimal.of(value);
         this.unit = unit;
-    } 
-    
+    }
+
+    public RMB(double value, int scale, RMBEnum unit) {
+        this.value = Decimal.of(value, scale);
+        this.unit = unit;
+    }
+
+    public RMB(double value, RMBEnum unit) {
+        this.value = Decimal.of(value);
+        this.unit = unit;
+    }
+
     public Decimal toYuan() {
         return convertTo(RMBEnum.YUAN);
     }

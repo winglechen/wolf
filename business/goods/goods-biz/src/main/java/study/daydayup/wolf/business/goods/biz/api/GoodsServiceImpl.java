@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.biz.api;
 
-import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
+import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;

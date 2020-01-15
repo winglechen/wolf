@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.goods.api.service;
 
-import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
+import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;

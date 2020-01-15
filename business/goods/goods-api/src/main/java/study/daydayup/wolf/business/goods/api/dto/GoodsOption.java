@@ -1,8 +1,8 @@
-package study.daydayup.wolf.business.goods.api.dto.request;
+package study.daydayup.wolf.business.goods.api.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.Request;
+import study.daydayup.wolf.framework.layer.api.Option;
 
 /**
  * study.daydayup.wolf.business.goods.api.dto.request
@@ -11,7 +11,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2019/12/11 7:28 下午
  **/
 @Data
-public class GoodsOption implements Request {
+public class GoodsOption implements Option {
     @Builder
     public GoodsOption(){}
     private boolean withDetail          = false;

@@ -2,9 +2,9 @@ package study.daydayup.wolf.business.goods.biz.api;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.BeanUtils;
-import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
-import study.daydayup.wolf.business.goods.api.dto.request.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.response.TradeGoodsResponse;
+import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsResponse;
 import study.daydayup.wolf.business.goods.api.exception.InvalidTradeGoodsRequestException;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
@@ -15,12 +15,10 @@ import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dao.SkuDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
-import study.daydayup.wolf.business.goods.biz.loan.LoanEntity;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;

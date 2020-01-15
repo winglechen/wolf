@@ -16,7 +16,7 @@ import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
-import study.daydayup.wolf.common.util.finance.Rate;
+import study.daydayup.wolf.common.util.finance.RateUtil;
 import study.daydayup.wolf.common.util.finance.installment.RateInstallment;
 import study.daydayup.wolf.common.util.finance.Interest;
 
@@ -96,7 +96,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void calculateLoanAmount(LoanTerm loanTerm) {
-        long fee = Rate.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
+        long fee = RateUtil.calculate(loanTerm.getAmount(), loanTerm.getHandlingFeeRate());
         loanTerm.setHandlingFee(fee);
 
         long interest = Interest.rate(loanTerm.getAmount(), loanTerm.getInterestRate(), loanTerm.getPeriod());

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.goods.api.dto.response;
+package study.daydayup.wolf.business.goods.api.dto.trade;
 
 import lombok.Data;
 import study.daydayup.wolf.business.goods.api.entity.Sku;

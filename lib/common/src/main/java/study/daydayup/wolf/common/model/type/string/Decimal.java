@@ -4,6 +4,7 @@ import lombok.NonNull;
 import study.daydayup.wolf.common.model.contract.DataType;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @since 2020/1/12 1:03 上午
  **/
 public class Decimal implements DataType {
+    public static final int DEFAULT_DOUBLE_SCALE = 4;
     private BigDecimal value;
 
     public static Decimal of(@NonNull String strNum) {
@@ -22,6 +24,14 @@ public class Decimal implements DataType {
 
     public static Decimal of(long longNum) {
         return new Decimal(longNum);
+    }
+
+    public static Decimal of(double doubleNum) {
+        return of(doubleNum, DEFAULT_DOUBLE_SCALE);
+    }
+
+    public static Decimal of(double doubleNum, int scale) {
+        return new Decimal(doubleNum, scale);
     }
 
     public static Decimal of(int intNum) {
@@ -44,11 +54,20 @@ public class Decimal implements DataType {
         value = BigDecimal.valueOf(longNum);
     }
 
+    public Decimal(double longNum, int scale) {
+        value = BigDecimal.valueOf(longNum);
+
+        if (scale <= 0) {
+            scale = DEFAULT_DOUBLE_SCALE;
+        }
+        value = value.setScale(scale, RoundingMode.HALF_UP);
+    }
+
     public long toLong() {
         if (value.compareTo(BigDecimal.ZERO) > 0) {
             return value.longValue();
         }
-        BigDecimal num = value.setScale(0, BigDecimal.ROUND_HALF_UP);
+        BigDecimal num = value.setScale(0, RoundingMode.HALF_UP);
         return num.longValue();
     }
 

@@ -1,8 +1,8 @@
 package study.daydayup.wolf.business.goods.api.service;
 
-import study.daydayup.wolf.business.goods.api.dto.request.GoodsOption;
-import study.daydayup.wolf.business.goods.api.dto.request.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.response.TradeGoodsResponse;
+import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsResponse;
 
 import java.util.List;
 

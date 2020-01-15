@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * @author Wingle
  * @since 2019/12/19 3:37 下午
  **/
-public class RateTest {
+public class RateUtilTest {
 
     @Test
     public void toHundred() {

@@ -12,13 +12,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PeriodEnum implements CodeBasedEnum {
-    SECONDS(110, "seconds"),
-    MINUTES(111, "minutes"),
-    HOURS(112, "hours"),
-    YEARS(104, "years"),
-    MONTHS(103, "months"),
-    WEEKS(102, "weeks"),
-    DAYS(101, "days")
+    YEARS(114, "years"),
+    MONTHS(113, "months"),
+    WEEKS(112, "weeks"),
+    DAYS(111, "days"),
+
+    HOURS(110, "hours"),
+    MINUTES(109, "minutes"),
+    SECONDS(108, "seconds")
     ;
 
     private int code;
