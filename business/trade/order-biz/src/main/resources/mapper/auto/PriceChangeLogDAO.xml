@@ -9,8 +9,8 @@
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
     <result column="target_version" jdbcType="INTEGER" property="targetVersion" />
-    <result column="source_amount" jdbcType="BIGINT" property="sourceAmount" />
-    <result column="target_amount" jdbcType="BIGINT" property="targetAmount" />
+    <result column="source_amount" jdbcType="DECIMAL" property="sourceAmount" />
+    <result column="target_amount" jdbcType="DECIMAL" property="targetAmount" />
     <result column="editor" jdbcType="BIGINT" property="editor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
@@ -34,7 +34,7 @@
       created_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{lineId,jdbcType=BIGINT}, #{buyerId,jdbcType=BIGINT}, 
       #{sellerId,jdbcType=BIGINT}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
-      #{sourceAmount,jdbcType=BIGINT}, #{targetAmount,jdbcType=BIGINT}, #{editor,jdbcType=BIGINT}, 
+      #{sourceAmount,jdbcType=DECIMAL}, #{targetAmount,jdbcType=DECIMAL}, #{editor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.PriceChangeLogDO">
@@ -94,10 +94,10 @@
         #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="sourceAmount != null">
-        #{sourceAmount,jdbcType=BIGINT},
+        #{sourceAmount,jdbcType=DECIMAL},
       </if>
       <if test="targetAmount != null">
-        #{targetAmount,jdbcType=BIGINT},
+        #{targetAmount,jdbcType=DECIMAL},
       </if>
       <if test="editor != null">
         #{editor,jdbcType=BIGINT},
@@ -129,10 +129,10 @@
         target_version = #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="sourceAmount != null">
-        source_amount = #{sourceAmount,jdbcType=BIGINT},
+        source_amount = #{sourceAmount,jdbcType=DECIMAL},
       </if>
       <if test="targetAmount != null">
-        target_amount = #{targetAmount,jdbcType=BIGINT},
+        target_amount = #{targetAmount,jdbcType=DECIMAL},
       </if>
       <if test="editor != null">
         editor = #{editor,jdbcType=BIGINT},
@@ -151,8 +151,8 @@
       seller_id = #{sellerId,jdbcType=BIGINT},
       source_version = #{sourceVersion,jdbcType=INTEGER},
       target_version = #{targetVersion,jdbcType=INTEGER},
-      source_amount = #{sourceAmount,jdbcType=BIGINT},
-      target_amount = #{targetAmount,jdbcType=BIGINT},
+      source_amount = #{sourceAmount,jdbcType=DECIMAL},
+      target_amount = #{targetAmount,jdbcType=DECIMAL},
       editor = #{editor,jdbcType=BIGINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

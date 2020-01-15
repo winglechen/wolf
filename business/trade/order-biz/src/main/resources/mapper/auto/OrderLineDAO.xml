@@ -15,9 +15,9 @@
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
     <result column="goods_main_pic" jdbcType="VARCHAR" property="goodsMainPic" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
-    <result column="sale_price" jdbcType="BIGINT" property="salePrice" />
-    <result column="pay_price" jdbcType="BIGINT" property="payPrice" />
-    <result column="postage" jdbcType="BIGINT" property="postage" />
+    <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+    <result column="pay_price" jdbcType="DECIMAL" property="payPrice" />
+    <result column="postage" jdbcType="DECIMAL" property="postage" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
@@ -63,7 +63,7 @@
       #{goodsId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, 
       #{goodsType,jdbcType=SMALLINT}, #{goodsVersion,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR}, 
-      #{salePrice,jdbcType=BIGINT}, #{payPrice,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, 
+      #{salePrice,jdbcType=DECIMAL}, #{payPrice,jdbcType=DECIMAL}, #{postage,jdbcType=DECIMAL}, 
       #{currency,jdbcType=INTEGER}, #{chargeUnit,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
       #{buyerMemo,jdbcType=VARCHAR}, #{giftFlag,jdbcType=BIT}, #{consignState,jdbcType=TINYINT}, 
       #{disputeState,jdbcType=TINYINT}, #{consignedAt,jdbcType=TIMESTAMP}, #{disputeAt,jdbcType=TIMESTAMP}, 
@@ -202,13 +202,13 @@
         #{goodsCode,jdbcType=VARCHAR},
       </if>
       <if test="salePrice != null">
-        #{salePrice,jdbcType=BIGINT},
+        #{salePrice,jdbcType=DECIMAL},
       </if>
       <if test="payPrice != null">
-        #{payPrice,jdbcType=BIGINT},
+        #{payPrice,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
-        #{postage,jdbcType=BIGINT},
+        #{postage,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
@@ -294,13 +294,13 @@
         goods_code = #{goodsCode,jdbcType=VARCHAR},
       </if>
       <if test="salePrice != null">
-        sale_price = #{salePrice,jdbcType=BIGINT},
+        sale_price = #{salePrice,jdbcType=DECIMAL},
       </if>
       <if test="payPrice != null">
-        pay_price = #{payPrice,jdbcType=BIGINT},
+        pay_price = #{payPrice,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
-        postage = #{postage,jdbcType=BIGINT},
+        postage = #{postage,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
@@ -361,9 +361,9 @@
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
       goods_code = #{goodsCode,jdbcType=VARCHAR},
-      sale_price = #{salePrice,jdbcType=BIGINT},
-      pay_price = #{payPrice,jdbcType=BIGINT},
-      postage = #{postage,jdbcType=BIGINT},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      pay_price = #{payPrice,jdbcType=DECIMAL},
+      postage = #{postage,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
       charge_unit = #{chargeUnit,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},

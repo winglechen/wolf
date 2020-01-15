@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -32,11 +33,11 @@ public class OrderLineDO implements Serializable {
 
     private String goodsCode;
 
-    private Long salePrice;
+    private BigDecimal salePrice;
 
-    private Long payPrice;
+    private BigDecimal payPrice;
 
-    private Long postage;
+    private BigDecimal postage;
 
     private Integer currency;
 

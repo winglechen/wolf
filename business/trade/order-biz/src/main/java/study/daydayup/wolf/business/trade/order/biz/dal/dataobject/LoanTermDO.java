@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -18,7 +19,11 @@ public class LoanTermDO implements Serializable {
 
     private Integer state;
 
-    private Long amount;
+    private BigDecimal amount;
+
+    private BigDecimal repayAmount;
+
+    private BigDecimal lossAmount;
 
     private Integer currency;
 
@@ -28,7 +33,9 @@ public class LoanTermDO implements Serializable {
 
     private Integer prepayStrategy;
 
-    private Long handlingFee;
+    private BigDecimal handlingFee;
+
+    private BigDecimal handlingFeeRate;
 
     private Integer feePayStrategy;
 
@@ -38,11 +45,11 @@ public class LoanTermDO implements Serializable {
 
     private Integer periodStrategy;
 
-    private Integer interest;
+    private BigDecimal interest;
 
     private Integer interestUnit;
 
-    private Integer penalty;
+    private BigDecimal penalty;
 
     private Integer penaltyUnit;
 
@@ -71,11 +78,14 @@ public class LoanTermDO implements Serializable {
         sb.append(", goodsId=").append(goodsId);
         sb.append(", state=").append(state);
         sb.append(", amount=").append(amount);
+        sb.append(", repayAmount=").append(repayAmount);
+        sb.append(", lossAmount=").append(lossAmount);
         sb.append(", currency=").append(currency);
         sb.append(", installmentNum=").append(installmentNum);
         sb.append(", repayStrategy=").append(repayStrategy);
         sb.append(", prepayStrategy=").append(prepayStrategy);
         sb.append(", handlingFee=").append(handlingFee);
+        sb.append(", handlingFeeRate=").append(handlingFeeRate);
         sb.append(", feePayStrategy=").append(feePayStrategy);
         sb.append(", period=").append(period);
         sb.append(", periodUnit=").append(periodUnit);
@@ -112,11 +122,14 @@ public class LoanTermDO implements Serializable {
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getRepayAmount() == null ? other.getRepayAmount() == null : this.getRepayAmount().equals(other.getRepayAmount()))
+            && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getInstallmentNum() == null ? other.getInstallmentNum() == null : this.getInstallmentNum().equals(other.getInstallmentNum()))
             && (this.getRepayStrategy() == null ? other.getRepayStrategy() == null : this.getRepayStrategy().equals(other.getRepayStrategy()))
             && (this.getPrepayStrategy() == null ? other.getPrepayStrategy() == null : this.getPrepayStrategy().equals(other.getPrepayStrategy()))
             && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
+            && (this.getHandlingFeeRate() == null ? other.getHandlingFeeRate() == null : this.getHandlingFeeRate().equals(other.getHandlingFeeRate()))
             && (this.getFeePayStrategy() == null ? other.getFeePayStrategy() == null : this.getFeePayStrategy().equals(other.getFeePayStrategy()))
             && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
             && (this.getPeriodUnit() == null ? other.getPeriodUnit() == null : this.getPeriodUnit().equals(other.getPeriodUnit()))
@@ -143,11 +156,14 @@ public class LoanTermDO implements Serializable {
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getRepayAmount() == null) ? 0 : getRepayAmount().hashCode());
+        result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getInstallmentNum() == null) ? 0 : getInstallmentNum().hashCode());
         result = prime * result + ((getRepayStrategy() == null) ? 0 : getRepayStrategy().hashCode());
         result = prime * result + ((getPrepayStrategy() == null) ? 0 : getPrepayStrategy().hashCode());
         result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
+        result = prime * result + ((getHandlingFeeRate() == null) ? 0 : getHandlingFeeRate().hashCode());
         result = prime * result + ((getFeePayStrategy() == null) ? 0 : getFeePayStrategy().hashCode());
         result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
         result = prime * result + ((getPeriodUnit() == null) ? 0 : getPeriodUnit().hashCode());

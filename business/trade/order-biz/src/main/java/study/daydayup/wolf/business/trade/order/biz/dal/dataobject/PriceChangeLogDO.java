@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -20,9 +21,9 @@ public class PriceChangeLogDO implements Serializable {
 
     private Integer targetVersion;
 
-    private Long sourceAmount;
+    private BigDecimal sourceAmount;
 
-    private Long targetAmount;
+    private BigDecimal targetAmount;
 
     private Long editor;
 

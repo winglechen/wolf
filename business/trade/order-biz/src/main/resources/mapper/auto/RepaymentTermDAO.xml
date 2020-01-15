@@ -9,10 +9,10 @@
     <result column="repay_strategy" jdbcType="INTEGER" property="repayStrategy" />
     <result column="prepay_strategy" jdbcType="INTEGER" property="prepayStrategy" />
     <result column="state" jdbcType="TINYINT" property="state" />
-    <result column="loan_amount" jdbcType="BIGINT" property="loanAmount" />
+    <result column="loan_amount" jdbcType="DECIMAL" property="loanAmount" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
-    <result column="paid_amount" jdbcType="BIGINT" property="paidAmount" />
-    <result column="loss_amount" jdbcType="BIGINT" property="lossAmount" />
+    <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount" />
+    <result column="loss_amount" jdbcType="DECIMAL" property="lossAmount" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -42,8 +42,8 @@
       )
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
-      #{loanAmount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=BIGINT}, 
-      #{lossAmount,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{loanAmount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL}, 
+      #{lossAmount,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -119,16 +119,16 @@
         #{state,jdbcType=TINYINT},
       </if>
       <if test="loanAmount != null">
-        #{loanAmount,jdbcType=BIGINT},
+        #{loanAmount,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
       </if>
       <if test="paidAmount != null">
-        #{paidAmount,jdbcType=BIGINT},
+        #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="lossAmount != null">
-        #{lossAmount,jdbcType=BIGINT},
+        #{lossAmount,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -169,16 +169,16 @@
         `state` = #{state,jdbcType=TINYINT},
       </if>
       <if test="loanAmount != null">
-        loan_amount = #{loanAmount,jdbcType=BIGINT},
+        loan_amount = #{loanAmount,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
       </if>
       <if test="paidAmount != null">
-        paid_amount = #{paidAmount,jdbcType=BIGINT},
+        paid_amount = #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="lossAmount != null">
-        loss_amount = #{lossAmount,jdbcType=BIGINT},
+        loss_amount = #{lossAmount,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -206,10 +206,10 @@
       repay_strategy = #{repayStrategy,jdbcType=INTEGER},
       prepay_strategy = #{prepayStrategy,jdbcType=INTEGER},
       `state` = #{state,jdbcType=TINYINT},
-      loan_amount = #{loanAmount,jdbcType=BIGINT},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
-      paid_amount = #{paidAmount,jdbcType=BIGINT},
-      loss_amount = #{lossAmount,jdbcType=BIGINT},
+      paid_amount = #{paidAmount,jdbcType=DECIMAL},
+      loss_amount = #{lossAmount,jdbcType=DECIMAL},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

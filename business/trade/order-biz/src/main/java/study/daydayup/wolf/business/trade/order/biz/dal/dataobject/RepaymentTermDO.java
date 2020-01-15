@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -20,13 +21,13 @@ public class RepaymentTermDO implements Serializable {
 
     private Integer state;
 
-    private Long loanAmount;
+    private BigDecimal loanAmount;
 
     private Integer currency;
 
-    private Long paidAmount;
+    private BigDecimal paidAmount;
 
-    private Long lossAmount;
+    private BigDecimal lossAmount;
 
     private Integer version;
 

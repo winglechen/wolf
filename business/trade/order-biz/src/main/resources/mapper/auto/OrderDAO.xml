@@ -13,8 +13,8 @@
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
-    <result column="amount" jdbcType="BIGINT" property="amount" />
-    <result column="postage" jdbcType="BIGINT" property="postage" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="postage" jdbcType="DECIMAL" property="postage" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
     <result column="consign_method" jdbcType="TINYINT" property="consignMethod" />
@@ -52,7 +52,7 @@
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{buyerName,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
-      #{relatedTradeNo,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, #{postage,jdbcType=BIGINT}, 
+      #{relatedTradeNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{postage,jdbcType=DECIMAL}, 
       #{currency,jdbcType=INTEGER}, #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, 
       #{outTradeNo,jdbcType=VARCHAR}, #{expiredAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
@@ -163,10 +163,10 @@
         #{relatedTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=BIGINT},
+        #{amount,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
-        #{postage,jdbcType=BIGINT},
+        #{postage,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
@@ -234,10 +234,10 @@
         related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null">
-        amount = #{amount,jdbcType=BIGINT},
+        amount = #{amount,jdbcType=DECIMAL},
       </if>
       <if test="postage != null">
-        postage = #{postage,jdbcType=BIGINT},
+        postage = #{postage,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
@@ -284,8 +284,8 @@
       trade_type = #{tradeType,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
       related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
-      amount = #{amount,jdbcType=BIGINT},
-      postage = #{postage,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      postage = #{postage,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
       payment_method = #{paymentMethod,jdbcType=TINYINT},
       consign_method = #{consignMethod,jdbcType=TINYINT},

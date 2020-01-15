@@ -16,11 +16,11 @@
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="paid_amount" jdbcType="BIGINT" property="paidAmount" />
     <result column="loss_amount" jdbcType="BIGINT" property="lossAmount" />
-    <result column="interest" jdbcType="BIGINT" property="interest" />
-    <result column="handling_fee" jdbcType="BIGINT" property="handlingFee" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="handling_fee" jdbcType="DECIMAL" property="handlingFee" />
     <result column="period" jdbcType="INTEGER" property="period" />
-    <result column="percentage" jdbcType="INTEGER" property="percentage" />
-    <result column="fee_percentage" jdbcType="INTEGER" property="feePercentage" />
+    <result column="percentage" jdbcType="DECIMAL" property="percentage" />
+    <result column="fee_percentage" jdbcType="DECIMAL" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -55,8 +55,8 @@
       #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
       #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=BIGINT}, 
-      #{lossAmount,jdbcType=BIGINT}, #{interest,jdbcType=BIGINT}, #{handlingFee,jdbcType=BIGINT}, 
-      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=INTEGER}, #{feePercentage,jdbcType=INTEGER}, 
+      #{lossAmount,jdbcType=BIGINT}, #{interest,jdbcType=DECIMAL}, #{handlingFee,jdbcType=DECIMAL}, 
+      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, 
       #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
@@ -177,19 +177,19 @@
         #{lossAmount,jdbcType=BIGINT},
       </if>
       <if test="interest != null">
-        #{interest,jdbcType=BIGINT},
+        #{interest,jdbcType=DECIMAL},
       </if>
       <if test="handlingFee != null">
-        #{handlingFee,jdbcType=BIGINT},
+        #{handlingFee,jdbcType=DECIMAL},
       </if>
       <if test="period != null">
         #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
-        #{percentage,jdbcType=INTEGER},
+        #{percentage,jdbcType=DECIMAL},
       </if>
       <if test="feePercentage != null">
-        #{feePercentage,jdbcType=INTEGER},
+        #{feePercentage,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -251,19 +251,19 @@
         loss_amount = #{lossAmount,jdbcType=BIGINT},
       </if>
       <if test="interest != null">
-        interest = #{interest,jdbcType=BIGINT},
+        interest = #{interest,jdbcType=DECIMAL},
       </if>
       <if test="handlingFee != null">
-        handling_fee = #{handlingFee,jdbcType=BIGINT},
+        handling_fee = #{handlingFee,jdbcType=DECIMAL},
       </if>
       <if test="period != null">
         period = #{period,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
-        percentage = #{percentage,jdbcType=INTEGER},
+        percentage = #{percentage,jdbcType=DECIMAL},
       </if>
       <if test="feePercentage != null">
-        fee_percentage = #{feePercentage,jdbcType=INTEGER},
+        fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -298,11 +298,11 @@
       currency = #{currency,jdbcType=INTEGER},
       paid_amount = #{paidAmount,jdbcType=BIGINT},
       loss_amount = #{lossAmount,jdbcType=BIGINT},
-      interest = #{interest,jdbcType=BIGINT},
-      handling_fee = #{handlingFee,jdbcType=BIGINT},
+      interest = #{interest,jdbcType=DECIMAL},
+      handling_fee = #{handlingFee,jdbcType=DECIMAL},
       period = #{period,jdbcType=INTEGER},
-      percentage = #{percentage,jdbcType=INTEGER},
-      fee_percentage = #{feePercentage,jdbcType=INTEGER},
+      percentage = #{percentage,jdbcType=DECIMAL},
+      fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
