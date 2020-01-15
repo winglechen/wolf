@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `pay`
     `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payee_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
-    `amount`                INT(10) UNSIGNED    NOT NULL DEFAULT 0,
+    `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0,
     `payment_type`          TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
     `payment_method`        TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
     `payment_state`         TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `pay_trade`
     `pay_no`             VARCHAR(30)         NOT NULL,
     `trade_no`           VARCHAR(30)         NOT NULL,
     `payment_type`       TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
-    `trade_amount`       INT(10) UNSIGNED    NOT NULL DEFAULT 0,
+    `trade_amount`       DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0,
     `payer_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payee_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payment_state`      TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
