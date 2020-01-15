@@ -97,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `goods_loan`
     `period`            INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `period_unit`       INT(10) NOT NULL DEFAULT 0 COMMENT '时长单位',
     `period_strategy`   INT(10) NOT NULL DEFAULT 0 COMMENT '时长策略',
-    `interest`          DECIMAL(10, 4) NOT NULL DEFAULT 0 COMMENT '利息',
+    `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
     `interest_unit`     INT(10) NOT NULL DEFAULT 0 COMMENT '利息单位',
-    `penalty`           DECIMAL(10, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
     `penalty_unit`      INT(10) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `installment`       text COMMENT '分期信息',

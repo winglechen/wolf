@@ -43,21 +43,25 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
-    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '借款金额',
+    `amount`            DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '借款金额',
+    `repay_amount`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '实还金额',
+    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
+
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
 
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
-    `handling_fee`      BIGINT(20) NOT NULL DEFAULT 0 COMMENT '手续费',
+    `handling_fee`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
+    `handling_fee_rate` DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
     `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
-    `interest`          INT(11) NOT NULL DEFAULT 0 COMMENT '利息',
+    `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
     `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
-    `penalty`           INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
     `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
@@ -83,10 +87,10 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
 
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
-    `loan_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
+    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '实还金额',
-    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
+    `paid_amount`       DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '实还金额',
+    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -123,12 +127,12 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
     `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
 
-    `interest`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
-    `handling_fee`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
+    `interest`          DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
+    `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `percentage`        INT(11) NOT NULL DEFAULT 0 COMMENT '还款比例',
-    `fee_percentage`    INT(11) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+    `percentage`        DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
+    `fee_percentage`    DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -249,8 +253,8 @@ CREATE TABLE IF NOT EXISTS `order`
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(32) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
-    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
-    `postage`           BIGINT(20) NOT NULL DEFAULT 0 COMMENT '邮费',
+    `amount`            DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '金额',
+    `postage`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '邮费',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
 
     `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
@@ -313,11 +317,11 @@ CREATE TABLE IF NOT EXISTS `order_line`
     `goods_main_pic`    VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品主图',
     `goods_code`        VARCHAR(50) NOT NULL DEFAULT '' COMMENT '产品编码',
 
-    `sale_price`        BIGINT(20) NOT NULL DEFAULT 0 COMMENT '产品原价',
-    `pay_price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '支付价格',
-    `postage`           BIGINT(20) NOT NULL DEFAULT 0 COMMENT '邮费',
+    `sale_price`        DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '产品原价',
+    `pay_price`         DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '支付价格',
+    `postage`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '邮费',
     `currency`          INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
-    `charge_unit`        INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
+    `charge_unit`       INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
     `quantity`          INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
 
     `buyer_memo`        VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '买家留言',
@@ -378,8 +382,8 @@ CREATE TABLE IF NOT EXISTS `price_change_log`
     `source_version`INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `target_version`INT(11) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '更新版本号',
 
-    `source_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
-    `target_amount` BIGINT(20) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
+    `source_amount` DECIMAL(15, 4) unsigned NOT NULL DEFAULT 0 COMMENT '历史金额',
+    `target_amount` DECIMAL(15, 4) unsigned NOT NULL DEFAULT 0 COMMENT '更新金额',
 
     `editor`        BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '编辑人',
     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
