@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.goods.api.dto.loan;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.framework.layer.api.DTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class LoanGoodsDTO extends LoanGoods implements DTO {
      *    method 2:
      *          new RMB(price, RMBEnum.YUAN).toLi().toLong();
      */
-    private Double price;
+    private BigDecimal price;
 
     private LoanDTO loan;
     private List<InstallmentDTO> installmentList;

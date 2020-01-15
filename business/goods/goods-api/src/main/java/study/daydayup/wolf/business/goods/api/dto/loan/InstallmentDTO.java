@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.goods.api.dto.loan;
 
+import java.math.BigDecimal;
+
 /**
  * study.daydayup.wolf.business.goods.api.dto.loan
  *
@@ -8,6 +10,6 @@ package study.daydayup.wolf.business.goods.api.dto.loan;
  **/
 public class InstallmentDTO {
     // 0.0000%
-    private Double percentage;
-    private Double feePercentage;
+    private BigDecimal percentage;
+    private BigDecimal feePercentage;
 }
