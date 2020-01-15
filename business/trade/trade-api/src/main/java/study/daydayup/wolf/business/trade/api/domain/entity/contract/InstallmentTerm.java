@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -36,9 +37,9 @@ public class InstallmentTerm implements VO {
     protected Integer percentage;
     protected Integer feePercentage;
 
-    protected Long  amount;
-    protected Long  interest;
-    protected Long  handlingFee;
+    protected BigDecimal amount;
+    protected BigDecimal  interest;
+    protected BigDecimal  handlingFee;
 
     protected LocalDate effectAt;
     protected LocalDate dueAt;

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -29,7 +30,7 @@ public class TradeStateLog implements Model {
     private Integer sourceState;
     private Integer targetState;
 
-    private Long amount;
+    private BigDecimal amount;
     private Integer paymentMethod;
     private Integer consignMethod;
     private String tags;

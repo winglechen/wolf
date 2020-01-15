@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public class TradeStateLogDO implements Serializable {
 
     private Integer targetState;
 
-    private Long amount;
+    private BigDecimal amount;
 
     private Integer currency;
 

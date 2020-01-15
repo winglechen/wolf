@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.vo.OrderAddress;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -25,8 +26,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Order extends Trade {
     @NotNull @Min(0)
-    protected Long  amount;
-    protected Long  postage;
+    protected BigDecimal amount;
+    protected BigDecimal  postage;
     protected Integer currency;
 
     protected String outTradeNo;

@@ -10,7 +10,7 @@
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="source_state" jdbcType="SMALLINT" property="sourceState" />
     <result column="target_state" jdbcType="SMALLINT" property="targetState" />
-    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
     <result column="consign_method" jdbcType="TINYINT" property="consignMethod" />
@@ -43,7 +43,7 @@
       created_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=TINYINT}, 
       #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, #{sourceState,jdbcType=SMALLINT}, 
-      #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{targetState,jdbcType=SMALLINT}, #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
       #{paymentMethod,jdbcType=TINYINT}, #{consignMethod,jdbcType=TINYINT}, #{tags,jdbcType=VARCHAR}, 
       #{source,jdbcType=VARCHAR}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
       #{createdAt,jdbcType=TIMESTAMP})
@@ -126,7 +126,7 @@
         #{targetState,jdbcType=SMALLINT},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=BIGINT},
+        #{amount,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
@@ -179,7 +179,7 @@
         target_state = #{targetState,jdbcType=SMALLINT},
       </if>
       <if test="amount != null">
-        amount = #{amount,jdbcType=BIGINT},
+        amount = #{amount,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
@@ -217,7 +217,7 @@
       seller_id = #{sellerId,jdbcType=BIGINT},
       source_state = #{sourceState,jdbcType=SMALLINT},
       target_state = #{targetState,jdbcType=SMALLINT},
-      amount = #{amount,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
       payment_method = #{paymentMethod,jdbcType=TINYINT},
       consign_method = #{consignMethod,jdbcType=TINYINT},

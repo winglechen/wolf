@@ -355,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `source_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
     `target_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
 
-    `amount`            BIGINT(20) NOT NULL DEFAULT 0 COMMENT '金额',
+    `amount`            DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '金额',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
     `consign_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交付方式',

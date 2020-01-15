@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
+import javax.validation.constraints.DecimalMin;
+import java.math.BigDecimal;
+
 
 /**
  * study.daydayup.wolf.business.trade.api.domain.entity.contract
@@ -20,23 +23,26 @@ public class LoanTerm implements VO {
     protected Long  buyerId;
     protected Long  sellerId;
 
-    protected Long  amount;
+    @DecimalMin("0.0001")
+    protected BigDecimal  amount;
+    protected BigDecimal  repayAmount;
+    protected BigDecimal  lossAmount;
     protected Integer currency;
 
     protected Integer period;
     protected Integer periodUnit;
     protected Integer periodStrategy;
 
-    protected Long  handlingFee;
-    protected Integer handlingFeeRate;
+    protected BigDecimal handlingFee;
+    protected BigDecimal handlingFeeRate;
     protected Integer feePayStrategy;
 
-    protected Long  interest;
-    protected Integer interestRate;
+    protected BigDecimal  interest;
+    protected BigDecimal interestRate;
     protected Integer interestUnit;
 
-    protected Long  penalty;
-    protected Integer penaltyRate;
+    protected BigDecimal  penalty;
+    protected BigDecimal penaltyRate;
     protected Integer penaltyUnit;
 
     protected Integer repayStrategy;
