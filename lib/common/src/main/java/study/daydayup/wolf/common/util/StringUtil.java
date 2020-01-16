@@ -11,6 +11,17 @@ import javax.annotation.Nullable;
  * @since 2019/12/10 9:51 上午
  **/
 public class StringUtil {
+    public static boolean hasValue(String s, boolean trim) {
+        if (!trim) {
+            return hasValue(s);
+        }
+
+        if (null == s) {
+            return false;
+        }
+        return hasValue(s.trim());
+    }
+
     public static boolean hasValue(String s) {
         return s != null && s.length() > 0;
     }

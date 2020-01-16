@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseSer
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
+import study.daydayup.wolf.common.util.StringUtil;
 
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -146,12 +147,23 @@ public class Session {
         set("expiredAt", license.getExpiredAt());
         set("refreshExpiredAt", license.getRefreshExpiredAt());
 
-        String scope = license.getScope().trim();
-        Long orgId = Long.valueOf(scope);
-        set("orgId", orgId);
+        setOrgId(license);
 
         if (!sessionId.equals(license.getAccessToken())) {
             setSessionId(license.getAccessToken());
+        }
+    }
+
+    private void setOrgId(OauthLicense license) {
+        if (!StringUtil.hasValue(license.getScope(), true)) {
+            return;
+        }
+
+        try {
+            String scope = license.getScope().trim();
+            Long orgId = Long.valueOf(scope);
+            set("orgId", orgId);
+        } catch (Exception e) {
         }
     }
 
