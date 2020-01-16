@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `goods_loan`
     `repay_strategy`    INT(10) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(10) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
     `amount_strategy`   INT(10) NOT NULL DEFAULT 0 COMMENT '金额策略',
-    `handling_fee_rate` DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
+    `handling_fee_rate` DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
     `fee_pay_strategy`  INT(10) NOT NULL DEFAULT 0 COMMENT '手续费策略',
     `period`            INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `period_unit`       INT(10) NOT NULL DEFAULT 0 COMMENT '时长单位',
@@ -123,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `goods_installment`
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `period`        INT(10) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `percentage`    DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
-    `fee_percentage`DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+    `percentage`    DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
+    `fee_percentage`DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

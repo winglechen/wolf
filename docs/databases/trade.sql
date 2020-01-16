@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
     `handling_fee`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
-    `handling_fee_rate` DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+    `handling_fee_rate` DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `percentage`        DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
-    `fee_percentage`    DECIMAL(5, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
+    `percentage`        DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
+    `fee_percentage`    DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

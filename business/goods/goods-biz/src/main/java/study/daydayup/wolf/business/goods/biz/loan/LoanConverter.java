@@ -8,6 +8,8 @@ import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
+import study.daydayup.wolf.common.model.type.string.Decimal;
+import study.daydayup.wolf.common.util.finance.DecimalUtil;
 import study.daydayup.wolf.framework.layer.converter.Converter;
 
 import java.util.List;
@@ -27,7 +29,6 @@ public class LoanConverter implements Converter {
         }
         LoanEntity entity = new LoanEntity();
         BeanUtils.copyProperties(goodsDO, entity);
-        entity.setPrice(goodsDO.getPrice());
 
         return entity;
     }
@@ -39,7 +40,7 @@ public class LoanConverter implements Converter {
         }
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
-        goodsDO.setPrice(entity.getPrice());
+        goodsDO.setPrice(DecimalUtil.scale(entity.getPrice()));
 
         return goodsDO;
     }
@@ -66,12 +67,27 @@ public class LoanConverter implements Converter {
 
         GoodsLoanDO loanDO = new GoodsLoanDO();
         BeanUtils.copyProperties(loan, loanDO);
+        formatLoanDo(loanDO, loan);
 
-        loanDO.setId(null);
+        formatInstallmentList(installmentList);
         String installments = JSON.toJSONString(installmentList);
         loanDO.setInstallment(installments);
 
         return loanDO;
+    }
+
+    private void formatLoanDo(GoodsLoanDO loanDO, Loan loan) {
+        loanDO.setId(null);
+        loanDO.setInterest(DecimalUtil.scale(loan.getInterest()));
+        loanDO.setPenalty(DecimalUtil.scale(loan.getPenalty()));
+        loanDO.setHandlingFeeRate(DecimalUtil.scale(loan.getHandlingFeeRate()));
+    }
+
+    private void formatInstallmentList(List<Installment> installmentList) {
+        for (Installment installment: installmentList) {
+            installment.setPercentage(DecimalUtil.scale(installment.getPercentage()));
+            installment.setFeePercentage(DecimalUtil.scale(installment.getFeePercentage()));
+        }
     }
 
     public LoanGoods toModel(LoanEntity entity) {
