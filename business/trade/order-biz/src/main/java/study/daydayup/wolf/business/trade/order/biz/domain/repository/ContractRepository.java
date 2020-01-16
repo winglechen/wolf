@@ -12,7 +12,7 @@ import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
-import study.daydayup.wolf.framework.layer.context.RequestContext;
+import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -45,7 +45,7 @@ public class ContractRepository extends AbstractRepository implements Repository
     @Resource
     private ContractDAO contractDAO;
     @Resource
-    private RequestContext requestContext;
+    private RpcContext rpcContext;
     @Resource
     private ContractConverter converter;
 
@@ -112,7 +112,7 @@ public class ContractRepository extends AbstractRepository implements Repository
 
     private void insertContract(@Validated Contract contract) {
         ContractDO contractDO = converter.toDo(contract);
-        contractDO.setCreatedAt(requestContext.getRequestTime());
+        contractDO.setCreatedAt(rpcContext.getRequestTime());
 
         StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contract.getTradeType());
         TradeState initState = stateMachine.getInitState();
@@ -121,9 +121,9 @@ public class ContractRepository extends AbstractRepository implements Repository
         contractDAO.insertSelective(contractDO);
     }
 
-    private int updateContract(@Validated Contract key, Contract changes) {
+    private void updateContract(@Validated Contract key, Contract changes) {
         if (changes == null || null == key) {
-            return 0;
+            return ;
         }
 
         ContractDO keyDO = converter.toDo(key);
@@ -132,12 +132,12 @@ public class ContractRepository extends AbstractRepository implements Repository
         }
 
         ContractDO changesDO = converter.toDo(changes);
-        changesDO.setUpdatedAt(requestContext.getRequestTime());
+        changesDO.setUpdatedAt(rpcContext.getRequestTime());
         TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
         if (state != null) {
             changesDO.setState(state.getCode());
         }
 
-        return contractDAO.updateByKey(changesDO, keyDO);
+        contractDAO.updateByKey(changesDO, keyDO);
     }
 }

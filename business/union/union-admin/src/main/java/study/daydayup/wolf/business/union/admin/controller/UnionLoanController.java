@@ -20,7 +20,7 @@ import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.business.trade.api.service.tm.OrderManageService;
-import study.daydayup.wolf.framework.layer.context.RequestContext;
+import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -46,7 +46,7 @@ public class UnionLoanController implements Controller {
     @Resource
     private Session session;
     @Resource
-    private RequestContext requestContext;
+    private RpcContext rpcContext;
 
     @GetMapping("/loan/contract/{tradeNo}")
     public Result<Contract> contractDetail(@PathVariable("tradeNo") String tradeNo) {
@@ -101,7 +101,7 @@ public class UnionLoanController implements Controller {
         //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         //request.setRepayState(new DueState().getCode());
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
-        request.setRepayDueAt(requestContext.getRequestTime());
+        request.setRepayDueAt(rpcContext.getRequestTime());
 
         return contractList(request);
     }
@@ -112,7 +112,7 @@ public class UnionLoanController implements Controller {
         //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         //request.setRepayState(new OverdueState().getCode());
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
-        request.setRepayDueAt(requestContext.getRequestTime());
+        request.setRepayDueAt(rpcContext.getRequestTime());
 
         return contractList(request);
     }

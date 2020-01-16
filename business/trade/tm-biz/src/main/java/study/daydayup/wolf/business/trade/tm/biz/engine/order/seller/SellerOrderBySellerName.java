@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller;
+package study.daydayup.wolf.business.trade.tm.biz.engine.order.seller;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeRequest;
@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.trade.tm.biz.engine.core.QueryResponse;
  * @since 2020/1/10 1:37 下午
  **/
 @Component
-public class ByState implements QueryFilter {
+public class SellerOrderBySellerName implements QueryFilter {
     @Override
     public <T extends TradeRequest> void doFilter(T request, QueryResponse response, QueryEngine engine) {
 

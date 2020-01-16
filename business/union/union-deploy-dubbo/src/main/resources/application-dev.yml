@@ -95,9 +95,10 @@ dubbo:
       port: 9080
   registry:
     address: nacos://127.0.0.1:8848
-    subscribe: false
   application:
     qos-enable: false
+  cloud:
+    subscribed-services: ""
 
 
 logging:

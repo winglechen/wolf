@@ -2,10 +2,10 @@ package study.daydayup.wolf.business.trade.tm.biz.engine.contract;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.tm.biz.engine.FilterRegistry;
-import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByBuyerId;
-import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByBuyerName;
-import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByState;
-import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.ByTradeType;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.SellerContractByBuyerId;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.SellerContractByBuyerName;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.SellerContractByState;
+import study.daydayup.wolf.business.trade.tm.biz.engine.contract.seller.SellertContractByTradeType;
 import study.daydayup.wolf.business.trade.tm.biz.engine.core.AbstractRegistry;
 
 import javax.annotation.Resource;
@@ -19,18 +19,18 @@ import javax.annotation.Resource;
 @Component
 public class ContractSellerRegistry extends AbstractRegistry implements FilterRegistry {
     @Resource
-    private ByTradeNo byTradeNo;
+    private ContractByTradeNo contractByTradeNo;
     @Resource
-    private ByBuyerId byBuyerId;
+    private SellerContractByBuyerId sellerContractByBuyerId;
     @Resource
-    private ByBuyerName byBuyerName;
+    private SellerContractByBuyerName sellerContractByBuyerName;
     @Resource
-    private ByTradeType byTradeType;
+    private SellertContractByTradeType sellertContractByTradeType;
     @Resource
-    private ByState byState;
+    private SellerContractByState sellerContractByState;
 
     @Override
     public void register() {
-        this.addFilter(byTradeNo, byBuyerId, byTradeType, byState, byBuyerName);
+        this.addFilter(contractByTradeNo, sellerContractByBuyerId, sellertContractByTradeType, sellerContractByState, sellerContractByBuyerName);
     }
 }

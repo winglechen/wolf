@@ -87,6 +87,11 @@
         </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>tm-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
             <artifactId>order-biz</artifactId>
             <version>${version.snapshot}</version>
         </dependency>
