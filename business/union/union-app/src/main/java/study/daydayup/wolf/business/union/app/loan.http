@@ -7,13 +7,8 @@ POST http://localhost:9101/loan/preview
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
-
 {
-  "goods" : [
-    {
-      "goodsId" : 1
-    }
-  ]
+  "goodsId" : 1
 }
 
 ###
@@ -21,14 +16,9 @@ POST http://localhost:9101/loan/confirm
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
-
 {
-  "tradeNo": "20200106004233000129511801339636",
-  "goods" : [
-    {
-      "goodsId" : 110
-    }
-  ]
+  "tradeNo": "20200117171012000119100287482556",
+  "goodsId" : 1
 }
 
 ###

@@ -11,9 +11,14 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.framework.rpc.Result;
+import study.daydayup.wolf.framework.rpc.page.Page;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.union.app.controller
@@ -29,10 +34,8 @@ public class LoanController extends BaseUnionController {
     private LoanService loanService;
 
     @PostMapping("/loan/preview")
-    public Result<PreviewResponse> preview(@Validated @RequestBody BuyRequest request) {
-        if (null == request || null == request.getGoodsRequest()) {
-            throw new IllegalArgumentException("goods info can't be null");
-        }
+    public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
+        BuyRequest request = initBuyRequest(loanRequest);
 
         Buyer buyer = new Buyer();
         buyer.setId(getFromSession("accountId", Long.class));
@@ -49,11 +52,25 @@ public class LoanController extends BaseUnionController {
         return buyService.preview(request);
     }
 
-    @PostMapping("/loan/confirm")
-    public Result<ConfirmResponse> confirm(@Validated @RequestBody BuyRequest request) {
-        if (null == request || null == request.getGoodsRequest()) {
-            throw new IllegalArgumentException("goods info can't be null");
+    private BuyRequest initBuyRequest(LoanRequest loanRequest) {
+        BuyRequest request = new BuyRequest();
+
+        GoodsRequest goodsRequest = new GoodsRequest();
+        goodsRequest.setGoodsId(loanRequest.getGoodsId());
+        List<GoodsRequest> goodsRequestList = new ArrayList<>();
+        goodsRequestList.add(goodsRequest);
+        request.setGoodsRequest(goodsRequestList);
+
+        if (null != loanRequest.getTradeNo()) {
+            request.setTradeNo(loanRequest.getTradeNo());
         }
+
+        return request;
+    }
+
+    @PostMapping("/loan/confirm")
+    public Result<ConfirmResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
+        BuyRequest request = initBuyRequest(loanRequest);
 
         Buyer buyer = new Buyer();
         buyer.setId(getFromSession("accountId", Long.class));
@@ -80,17 +97,17 @@ public class LoanController extends BaseUnionController {
     }
 
     @GetMapping("/loan")
-    public Result findByBuyer() {
+    public Result<Page<Contract>> findByBuyer() {
         return null;
     }
 
     @PostMapping("/loan/repay")
-    public Result repay() {
+    public Result<Object> repay() {
         return null;
     }
 
     @PostMapping("/loan/repay/delay")
-    public Result delayRepay() {
+    public Result<Object> delayRepay() {
         return null;
     }
 }
