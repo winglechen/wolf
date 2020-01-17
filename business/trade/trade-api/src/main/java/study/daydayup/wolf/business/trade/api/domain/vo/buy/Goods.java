@@ -19,6 +19,8 @@ import java.util.List;
 @Builder
 public class Goods implements VO {
     private Long  sellId;
+    private Long buyerId;
+
     private Long  goodsId;
     protected Long  categoryId;
     private String goodsName;

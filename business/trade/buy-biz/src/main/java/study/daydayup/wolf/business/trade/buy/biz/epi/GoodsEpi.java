@@ -12,10 +12,12 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
+import study.daydayup.wolf.common.util.CollectionUtil;
 import study.daydayup.wolf.framework.layer.epi.Epi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -37,21 +39,24 @@ public class GoodsEpi implements Epi {
         List<TradeGoodsRequest> requests = formatRequest(goodsRequests);
         List<TradeGoodsDTO> responses = goodsService.find(requests).notNullData();
 
-        return formatResponse(responses);
+        return formatResponse(responses, goodsRequests);
     }
 
-    private List<Goods> formatResponse(List<TradeGoodsDTO> goodsDTOList) {
+    private List<Goods> formatResponse(List<TradeGoodsDTO> goodsDTOList, List<GoodsRequest> goodsRequests) {
         if (goodsDTOList == null || goodsDTOList.isEmpty()) {
             return null;
         }
 
+        Map<Long, GoodsRequest> goodsRequestMap = CollectionUtil.map(goodsRequests, GoodsRequest::getGoodsId);
+
         List<Goods> goodsList = new ArrayList<>();
         for (TradeGoodsDTO goodsDTO : goodsDTOList) {
-            Goods goods = formatTradeGoods(goodsDTO);
+            GoodsRequest goodsRequest = goodsRequestMap.get(goodsDTO.getId());
+            Goods goods = formatTradeGoods(goodsDTO, goodsRequest);
 
             goods.setSku(null);
-            goods.setLoanTerm(formatTradeLoan(goodsDTO));
-            goods.setInstallmentTermList(formatTradeInstallment(goodsDTO));
+            goods.setLoanTerm(formatLoanTerm(goodsDTO));
+            goods.setInstallmentTermList(formatInstallmentTerm(goodsDTO));
 
             goodsList.add(goods);
         }
@@ -59,7 +64,50 @@ public class GoodsEpi implements Epi {
         return goodsList;
     }
 
-    private List<InstallmentTerm> formatTradeInstallment(TradeGoodsDTO goodsDTO) {
+    private Goods formatTradeGoods(TradeGoodsDTO goodsDTO, GoodsRequest goodsRequest) {
+        Goods goods = Goods.builder()
+                .sellId(goodsDTO.getOrgId())
+                .goodsId(goodsDTO.getId())
+                .categoryId(goodsDTO.getCategoryId())
+                .goodsName(goodsDTO.getName())
+                .goodsType(goodsDTO.getGoodsType())
+                .salePrice(goodsDTO.getPrice())
+                .currency(goodsDTO.getCurrency())
+                .chargeUnit(goodsDTO.getChargeUnit())
+                .goodsMainPic(goodsDTO.getMainPic())
+                .goodsVersion(goodsDTO.getVersion())
+                .goodsCode(goodsDTO.getCode())
+                .postage(goodsDTO.getPostage())
+                .build();
+
+        if (goodsRequest != null) {
+            goods.setGiftFlag(goodsRequest.getGiftFlag());
+            goods.setPromotionId(goodsRequest.getPromotionId());
+            goods.setQuantity(goodsRequest.getQuantity());
+            goods.setMemo(goodsRequest.getMemo());
+        }
+
+        return goods;
+    }
+
+    private LoanTerm formatLoanTerm(TradeGoodsDTO goodsDTO) {
+        LoanTerm loanTerm = new LoanTerm();
+        Loan loanFromGoods = goodsDTO.getLoan();
+        BeanUtils.copyProperties(loanFromGoods, loanTerm);
+
+        loanTerm.setSellerId(goodsDTO.getOrgId());
+        loanTerm.setAmount(goodsDTO.getPrice());
+        loanTerm.setCurrency(goodsDTO.getCurrency());
+
+        loanTerm.setInterest(null);
+        loanTerm.setPenalty(null);
+        loanTerm.setInterestRate(loanFromGoods.getInterest());
+        loanTerm.setPenaltyRate(loanFromGoods.getPenalty());
+
+        return loanTerm;
+    }
+
+    private List<InstallmentTerm> formatInstallmentTerm(TradeGoodsDTO goodsDTO) {
         List<InstallmentTerm> installmentList = new ArrayList<>();
 
         List<Installment> installmentDTOList = goodsDTO.getInstallmentList();
@@ -77,40 +125,6 @@ public class GoodsEpi implements Epi {
         }
 
         return installmentList;
-    }
-
-    private LoanTerm formatTradeLoan(TradeGoodsDTO goodsDTO) {
-        LoanTerm loanTerm = new LoanTerm();
-        Loan loanFromGoods = goodsDTO.getLoan();
-        BeanUtils.copyProperties(loanFromGoods, loanTerm);
-
-        loanTerm.setSellerId(goodsDTO.getOrgId());
-        loanTerm.setAmount(goodsDTO.getPrice());
-        loanTerm.setCurrency(goodsDTO.getCurrency());
-
-        loanTerm.setInterest(null);
-        loanTerm.setPenalty(null);
-        loanTerm.setInterestRate(loanFromGoods.getInterest());
-        loanTerm.setPenaltyRate(loanFromGoods.getPenalty());
-
-        return loanTerm;
-    }
-
-    private Goods formatTradeGoods(TradeGoodsDTO response) {
-        return Goods.builder()
-                .sellId(response.getOrgId())
-                .goodsId(response.getId())
-                .categoryId(response.getCategoryId())
-                .goodsName(response.getName())
-                .goodsType(response.getGoodsType())
-                .salePrice(response.getPrice())
-                .currency(response.getCurrency())
-                .chargeUnit(response.getChargeUnit())
-                .goodsMainPic(response.getMainPic())
-                .goodsVersion(response.getVersion())
-                .goodsCode(response.getCode())
-                .postage(response.getPostage())
-                .build();
     }
 
     private List<TradeGoodsRequest> formatRequest(List<GoodsRequest> goodsRequests) {

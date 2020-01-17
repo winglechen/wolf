@@ -7,6 +7,7 @@ import study.daydayup.wolf.framework.layer.domain.VO;
 
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 /**
@@ -47,4 +48,6 @@ public class LoanTerm implements VO {
 
     protected Integer repayStrategy;
     protected Integer prepayStrategy;
+
+    protected LocalDateTime createdAt;
 }
