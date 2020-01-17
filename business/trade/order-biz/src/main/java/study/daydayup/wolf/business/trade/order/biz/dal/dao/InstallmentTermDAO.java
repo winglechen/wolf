@@ -1,4 +1,5 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dao;
+import java.util.Collection;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface InstallmentTermDAO {
 
     int updateByTradeNo(@Param("updated")InstallmentTermDO updated,@Param("key")InstallmentTermDO key);
 
-
+    List<InstallmentTermDO> selectByTradeNoIn(@Param("tradeNoCollection")Collection<String> tradeNoCollection, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
 
 }

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository.contract;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -78,7 +79,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
     }
 
-    public List<InstallmentTerm> find(TradeId tradeId) {
+    public List<InstallmentTerm> find(@NonNull TradeId tradeId) {
         tradeId.valid();
 
         List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByTradeNo(
@@ -88,8 +89,14 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         return batchDOToModel(installmentTermDOList, true);
     }
 
-    public List<InstallmentTerm> find(TradeIds tradeIds) {
-        return null;
+    public List<InstallmentTerm> find(@NonNull TradeIds tradeIds) {
+        tradeIds.valid();
+
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByTradeNoIn(
+                tradeIds.getTradeNoSet(), tradeIds.getBuyerId(), tradeIds.getSellerId()
+        );
+
+        return batchDOToModel(installmentTermDOList, true);
     }
 
     private TradeState getChangedState(InstallmentTerm key, InstallmentTerm change) {
