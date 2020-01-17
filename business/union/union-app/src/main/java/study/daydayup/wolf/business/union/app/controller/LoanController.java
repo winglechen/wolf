@@ -30,7 +30,7 @@ public class LoanController extends BaseUnionController {
 
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody BuyRequest request) {
-        if (null == request || null == request.getGoods()) {
+        if (null == request || null == request.getGoodsRequest()) {
             throw new IllegalArgumentException("goods info can't be null");
         }
 
@@ -42,7 +42,7 @@ public class LoanController extends BaseUnionController {
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
 
-        for (GoodsRequest goods : request.getGoods()) {
+        for (GoodsRequest goods : request.getGoodsRequest()) {
             goods.setOrgId(orgId);
         }
 
@@ -51,7 +51,7 @@ public class LoanController extends BaseUnionController {
 
     @PostMapping("/loan/confirm")
     public Result<ConfirmResponse> confirm(@Validated @RequestBody BuyRequest request) {
-        if (null == request || null == request.getGoods()) {
+        if (null == request || null == request.getGoodsRequest()) {
             throw new IllegalArgumentException("goods info can't be null");
         }
 
@@ -63,7 +63,7 @@ public class LoanController extends BaseUnionController {
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
 
-        for (GoodsRequest goods : request.getGoods()) {
+        for (GoodsRequest goods : request.getGoodsRequest()) {
             goods.setOrgId(orgId);
         }
         return buyService.confirm(request);

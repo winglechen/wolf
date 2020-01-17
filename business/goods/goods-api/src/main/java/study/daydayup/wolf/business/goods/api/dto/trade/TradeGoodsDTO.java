@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.goods.api.entity.Sku;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
+import study.daydayup.wolf.framework.layer.api.DTO;
 import study.daydayup.wolf.framework.layer.api.Response;
 
 import javax.validation.constraints.DecimalMin;
@@ -20,7 +21,7 @@ import java.util.List;
  * @since 2019/12/12 10:09 上午
  **/
 @Data
-public class TradeGoodsResponse implements Response {
+public class TradeGoodsDTO implements DTO {
     private Long id;
     @Min(1)
     private Long orgId;

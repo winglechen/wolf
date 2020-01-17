@@ -10,7 +10,6 @@ import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,7 +31,7 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
         init(context);
 
         List<Goods> goodsList = goodsEpi.fetch(
-                context.getRequest().getGoods()
+                context.getRequest().getGoodsRequest()
         );
         validGoodsList(goodsList);
         mergeRequestToGoods(goodsList);
@@ -45,14 +44,14 @@ public class FetchGoodsNode extends AbstractTradeNode implements TradeNode {
             throw new GoodsNotFoundException();
         }
 
-        List<GoodsRequest> goodsRequests = context.getRequest().getGoods();
+        List<GoodsRequest> goodsRequests = context.getRequest().getGoodsRequest();
         if (goodsList.size() != goodsRequests.size()) {
             throw new GoodsNotFoundException();
         }
     }
 
     private void mergeRequestToGoods(List<Goods> goodsList) {
-        List<GoodsRequest> goodsRequests = context.getRequest().getGoods();
+        List<GoodsRequest> goodsRequests = context.getRequest().getGoodsRequest();
         Map<Long, GoodsRequest> goodsRequestMap = toGoodsRequestMap(goodsRequests);
 
         for (Goods goods : goodsList) {

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsResponse;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsDTO;
 import study.daydayup.wolf.business.goods.api.exception.InvalidTradeGoodsRequestException;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
@@ -15,6 +15,7 @@ import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dao.SkuDAO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -51,23 +52,23 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
      * @return
      */
     @Override
-    public List<TradeGoodsResponse> find(List<TradeGoodsRequest> requests, GoodsOption option) {
+    public Result<List<TradeGoodsDTO>> find(List<TradeGoodsRequest> requests, GoodsOption option) {
         if (requests == null || requests.isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("TradeGoodsRequest can't be null");
         }
 
-        List<TradeGoodsResponse> responses = new ArrayList<>();
+        List<TradeGoodsDTO> responses = new ArrayList<>();
 
         findGoodList(requests, responses);
         findSkuList(requests, responses);
         findLoanList(requests, responses);
         findInstallmentList(requests, responses);
 
-        return responses;
+        return Result.ok(responses);
     }
 
     @Override
-    public List<TradeGoodsResponse> find(List<TradeGoodsRequest> requests) {
+    public Result<List<TradeGoodsDTO>> find(List<TradeGoodsRequest> requests) {
         return find(requests, null);
     }
 
@@ -83,7 +84,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         }
     }
 
-    private void findGoodList(List<TradeGoodsRequest> requests, List<TradeGoodsResponse> responses) {
+    private void findGoodList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
         List<Long> goodsIds = requests.stream()
                 .map(TradeGoodsRequest::getGoodsId)
                 .collect(Collectors.toList());
@@ -98,21 +99,21 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         mergeGoodsToResponse(goodsDOList, responses);
     }
 
-    private void mergeGoodsToResponse(List<GoodsDO> goodsDOList, List<TradeGoodsResponse> responses) {
+    private void mergeGoodsToResponse(List<GoodsDO> goodsDOList, List<TradeGoodsDTO> responses) {
         if (goodsDOList == null || goodsDOList.isEmpty()) {
             return;
         }
 
         for (GoodsDO goodsDO: goodsDOList) {
-            TradeGoodsResponse response = new TradeGoodsResponse();
+            TradeGoodsDTO response = new TradeGoodsDTO();
             BeanUtils.copyProperties(goodsDO, response);
             responses.add(response);
         }
     }
 
-    private void findSkuList(List<TradeGoodsRequest> requests, List<TradeGoodsResponse> responses) {}
+    private void findSkuList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {}
 
-    private void findLoanList(List<TradeGoodsRequest> requests, List<TradeGoodsResponse> responses) {
+    private void findLoanList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
         List<GoodsLoanDO> loanDOList = loanDAO.selectByGoodsIdIn(goodsIds, orgId);
         if (loanDOList == null) {
             return;
@@ -125,14 +126,14 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         mergeLoanToResponse(loanMap, responses);
     }
 
-    private void mergeLoanToResponse(Map<Long, GoodsLoanDO> loanMap, List<TradeGoodsResponse> responses) {
-        for (TradeGoodsResponse response : responses) {
+    private void mergeLoanToResponse(Map<Long, GoodsLoanDO> loanMap, List<TradeGoodsDTO> responses) {
+        for (TradeGoodsDTO response : responses) {
             GoodsLoanDO loanDO = loanMap.get(response.getId());
             setLoanToResponse(response, loanDO);
         }
     }
 
-    private void setLoanToResponse(TradeGoodsResponse response, GoodsLoanDO loanDO) {
+    private void setLoanToResponse(TradeGoodsDTO response, GoodsLoanDO loanDO) {
         if (loanDO == null) {
             return ;
         }
@@ -145,7 +146,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         response.setInstallmentList(installmentList);
     }
 
-    private void findInstallmentList(List<TradeGoodsRequest> requests, List<TradeGoodsResponse> responses) {
+    private void findInstallmentList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
 
     }
 

@@ -38,5 +38,5 @@ public class BuyRequest implements Request {
 
     private UmpRequest umpRequest;
     @NotNull
-    private List<GoodsRequest> goods;
+    private List<GoodsRequest> goodsRequest;
 }

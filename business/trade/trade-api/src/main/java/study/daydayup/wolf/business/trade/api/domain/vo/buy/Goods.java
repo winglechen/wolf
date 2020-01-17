@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.trade.api.domain.vo.buy;
 
 import lombok.Builder;
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
 import java.math.BigDecimal;
@@ -23,6 +25,8 @@ public class Goods implements VO {
     private Integer goodsType;
 
     private BigDecimal salePrice;
+    private BigDecimal  payPrice;
+    private BigDecimal  postage;
 
     private Integer currency;
     private Integer chargeUnit;
@@ -31,8 +35,6 @@ public class Goods implements VO {
     private Integer goodsVersion;
     private String goodsCode;
 
-    private BigDecimal  payPrice;
-    private BigDecimal  postage;
 
     private Integer giftFlag;
     private Integer quantity;
@@ -40,6 +42,6 @@ public class Goods implements VO {
     private GoodsMemo memo;
 
     private Sku sku;
-    private Loan loan;
-    private List<Installment> installmentList;
+    private LoanTerm loanTerm;
+    private List<InstallmentTerm> installmentTermList;
 }

@@ -4,12 +4,14 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsResponse;
+import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsDTO;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.Installment;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.Loan;
+import study.daydayup.wolf.business.goods.api.vo.Installment;
+import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.epi.Epi;
 
 import java.util.ArrayList;
@@ -33,23 +35,23 @@ public class GoodsEpi implements Epi {
         }
 
         List<TradeGoodsRequest> requests = formatRequest(goodsRequests);
-        List<TradeGoodsResponse> responses = goodsService.find(requests);
+        List<TradeGoodsDTO> responses = goodsService.find(requests).notNullData();
 
-        return formatResponse(responses, goodsRequests);
+        return formatResponse(responses);
     }
 
-    private List<Goods> formatResponse(List<TradeGoodsResponse> responses, List<GoodsRequest> goodsRequests) {
-        if (responses == null || responses.isEmpty()) {
+    private List<Goods> formatResponse(List<TradeGoodsDTO> goodsDTOList) {
+        if (goodsDTOList == null || goodsDTOList.isEmpty()) {
             return null;
         }
 
         List<Goods> goodsList = new ArrayList<>();
-        for (TradeGoodsResponse response : responses) {
-            Goods goods = formatTradeGoods(response);
+        for (TradeGoodsDTO goodsDTO : goodsDTOList) {
+            Goods goods = formatTradeGoods(goodsDTO);
 
             goods.setSku(null);
-            goods.setLoan(formatTradeLoan(response));
-            goods.setInstallmentList(formatTradeInstallment(response));
+            goods.setLoanTerm(formatTradeLoan(goodsDTO));
+            goods.setInstallmentTermList(formatTradeInstallment(goodsDTO));
 
             goodsList.add(goods);
         }
@@ -57,38 +59,45 @@ public class GoodsEpi implements Epi {
         return goodsList;
     }
 
-    private List<Installment> formatTradeInstallment(TradeGoodsResponse response) {
-        List<Installment> installmentList = new ArrayList<>();
+    private List<InstallmentTerm> formatTradeInstallment(TradeGoodsDTO goodsDTO) {
+        List<InstallmentTerm> installmentList = new ArrayList<>();
 
-        List<study.daydayup.wolf.business.goods.api.vo.Installment> installments = response.getInstallmentList();
-        for (int i = 0, len=installments.size(); i < len; i++) {
-            study.daydayup.wolf.business.goods.api.vo.Installment installment = installments.get(i);
+        List<Installment> installmentDTOList = goodsDTO.getInstallmentList();
+        for (int i = 0, len=installmentDTOList.size(); i < len; i++) {
+            Installment installmentDTO = installmentDTOList.get(i);
 
-            Installment tradeInstallment = new Installment();
+            InstallmentTerm installmentTerm = new InstallmentTerm();
+            BeanUtils.copyProperties(installmentDTO, installmentTerm);
 
-            BeanUtils.copyProperties(installment, tradeInstallment);
-            tradeInstallment.setInstallmentNo(i+1);
-            tradeInstallment.setInstallmentType(installment.getType());
+            installmentTerm.setSellerId(goodsDTO.getOrgId());
+            installmentTerm.setInstallmentNo(i+1);
+            installmentTerm.setInstallmentType(installmentDTO.getType());
 
-            installmentList.add(tradeInstallment);
+            installmentList.add(installmentTerm);
         }
 
         return installmentList;
     }
 
-    private Loan formatTradeLoan(TradeGoodsResponse response) {
-        Loan loan = new Loan();
-        study.daydayup.wolf.business.goods.api.vo.Loan loanFromGoods = response.getLoan();
-        BeanUtils.copyProperties(loanFromGoods, loan);
+    private LoanTerm formatTradeLoan(TradeGoodsDTO goodsDTO) {
+        LoanTerm loanTerm = new LoanTerm();
+        Loan loanFromGoods = goodsDTO.getLoan();
+        BeanUtils.copyProperties(loanFromGoods, loanTerm);
 
-        loan.setInterestRate(loanFromGoods.getInterest());
-        loan.setPenaltyRate(loanFromGoods.getPenalty());
+        loanTerm.setSellerId(goodsDTO.getOrgId());
+        loanTerm.setAmount(goodsDTO.getPrice());
+        loanTerm.setCurrency(goodsDTO.getCurrency());
 
-        return loan;
+        loanTerm.setInterest(null);
+        loanTerm.setPenalty(null);
+        loanTerm.setInterestRate(loanFromGoods.getInterest());
+        loanTerm.setPenaltyRate(loanFromGoods.getPenalty());
+
+        return loanTerm;
     }
 
-    private Goods formatTradeGoods(TradeGoodsResponse response) {
-        Goods goods = Goods.builder()
+    private Goods formatTradeGoods(TradeGoodsDTO response) {
+        return Goods.builder()
                 .sellId(response.getOrgId())
                 .goodsId(response.getId())
                 .categoryId(response.getCategoryId())
@@ -102,8 +111,6 @@ public class GoodsEpi implements Epi {
                 .goodsCode(response.getCode())
                 .postage(response.getPostage())
                 .build();
-
-        return goods;
     }
 
     private List<TradeGoodsRequest> formatRequest(List<GoodsRequest> goodsRequests) {
@@ -121,12 +128,6 @@ public class GoodsEpi implements Epi {
         }
 
         return requests;
-    }
-
-    private void validResponse(List<TradeGoodsResponse> responses, List<GoodsRequest> requests ) {
-        if (responses == null || responses.isEmpty()) {
-
-        }
     }
 
 }
