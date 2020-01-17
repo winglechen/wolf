@@ -13,6 +13,7 @@ Content-Type: application/json
 }
 
 ###
+###  "tradeNo": "20200117171012000119100287482556",
 POST http://localhost:9101/loan/confirm
 Accept: */*
 Cache-Control: no-cache
@@ -22,6 +23,10 @@ Content-Type: application/json
   "goodsId" : 1
 }
 
-###  "tradeNo": "20200117171012000119100287482556",
 ###
+GET http://localhost:9101/loan/20200117171012000119100287482556
+Accept: */*
+Cache-Control: no-cache
 
+
+###

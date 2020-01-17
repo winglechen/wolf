@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.api;
 
+import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -28,8 +29,14 @@ public class LoanServiceImpl implements LoanService {
     private LoanOrderRepository loanOrderRepository;
 
     @Override
-    public Result<Contract> find(TradeId tradeId) {
-        return null;
+    public Result<Contract> find(@NonNull TradeId tradeId) {
+        tradeId.valid();
+        LoanContractEntity contractEntity = loanContractRepository.find(tradeId);
+        if (contractEntity == null) {
+            return Result.ok(null);
+        }
+
+        return Result.ok(contractEntity.getModel());
     }
 
     @Override

@@ -1,6 +1,5 @@
 package study.daydayup.wolf.framework.layer.context;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
