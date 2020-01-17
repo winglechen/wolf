@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.order.biz.domain.repository;
+package study.daydayup.wolf.business.trade.order.biz.domain.repository.contract;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;

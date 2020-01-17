@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.order.biz.domain.repository;
+package study.daydayup.wolf.business.trade.order.biz.domain.repository.contract;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.api.domain.exception.order.TradeStateN
 import study.daydayup.wolf.business.trade.api.domain.exception.order.UnsupportedStateChangeException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
@@ -20,6 +21,7 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.domain.repository
@@ -84,6 +86,10 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         );
 
         return batchDOToModel(installmentTermDOList, true);
+    }
+
+    public List<InstallmentTerm> find(TradeIds tradeIds) {
+        return null;
     }
 
     private TradeState getChangedState(InstallmentTerm key, InstallmentTerm change) {

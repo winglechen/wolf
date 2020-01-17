@@ -12,6 +12,8 @@ import study.daydayup.wolf.business.trade.api.domain.event.base.CreateEvent;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO;
+import study.daydayup.wolf.business.trade.order.biz.domain.repository.order.OrderAddressRepository;
+import study.daydayup.wolf.business.trade.order.biz.domain.repository.order.OrderLineRepository;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
@@ -31,11 +33,11 @@ import java.util.List;
 @Component
 public class OrderRepository extends AbstractRepository implements Repository {
     @Resource
-    private OrderLineRepository lineRepository;
+    protected OrderLineRepository lineRepository;
     @Resource
-    private OrderAddressRepository addressRepository;
+    protected OrderAddressRepository addressRepository;
     @Resource
-    private OrderDAO orderDAO;
+    protected OrderDAO orderDAO;
 
     public void add(@Validated Order order) {
         insertOrder(order);
@@ -86,7 +88,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         return null;
     }
 
-    private void insertOrder(Order order) {
+    protected void insertOrder(Order order) {
         OrderDO orderDO = new OrderDO();
         BeanUtils.copyProperties(order, orderDO);
 
@@ -97,7 +99,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         orderDAO.insertSelective(orderDO);
     }
 
-    private int updateOrder(Order key, Order changes) {
+    protected int updateOrder(Order key, Order changes) {
         OrderDO keyDO = modelToDO(key);
         OrderDO changesDO = modelToDO(changes);
         changesDO.setUpdatedAt(LocalDateTime.now());
@@ -113,7 +115,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         return orderDAO.updateByKey(keyDO, changesDO);
     }
 
-    private List<Order> batchDoToModel(List<OrderDO> orderDOs) {
+    protected List<Order> batchDoToModel(List<OrderDO> orderDOs) {
         List<Order> orders = new ArrayList<>();
         if (orderDOs == null || orderDOs.isEmpty()) {
             return orders;
@@ -130,7 +132,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         return orders;
     }
 
-    private OrderDO modelToDO(Order order) {
+    protected OrderDO modelToDO(Order order) {
         if (order == null) {
             return null;
         }
@@ -145,7 +147,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         return orderDO;
     }
 
-    private Order DOToModel(OrderDO orderDO) {
+    protected Order DOToModel(OrderDO orderDO) {
         if (orderDO == null) {
             return null;
         }

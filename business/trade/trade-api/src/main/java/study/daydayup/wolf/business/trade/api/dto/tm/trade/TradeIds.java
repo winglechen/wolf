@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,5 +22,12 @@ public class TradeIds extends TradeOwner implements Request {
 
     public void add(@NonNull String tradeNo) {
         tradeNoSet.add(tradeNo);
+    }
+
+    public void addAll(@NonNull List<String> tradeNos) {
+        if (tradeNos.isEmpty()) {
+            return;
+        }
+        tradeNoSet.addAll(tradeNos);
     }
 }

@@ -21,6 +21,15 @@ public interface ContractDAO {
 
     ContractDO selectByTradeNo(@Param("tradeNo")String tradeNo, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
+    ContractDO selectLatestByBuyer(@Param("buyerId")Long buyerId);
+
+    List<ContractDO> selectByBuyerId(@Param("buyerId")Long buyerId);
+
+    List<ContractDO> selectBySellerId(@Param("sellerId")Long sellerId);
+
+
+
+
 
 
 }

@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.converter.ContractConverter;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
+import study.daydayup.wolf.business.trade.order.biz.domain.repository.contract.*;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
@@ -27,27 +28,27 @@ import javax.annotation.Resource;
 @Component
 public class ContractRepository extends AbstractRepository implements Repository {
     @Resource
-    private ConsignTermRepository consignTermRepository;
+    protected ConsignTermRepository consignTermRepository;
     @Resource
-    private InstallmentTermRepository installmentTermRepository;
+    protected InstallmentTermRepository installmentTermRepository;
     @Resource
-    private LoanTermRepository loanTermRepository;
+    protected LoanTermRepository loanTermRepository;
     @Resource
-    private ObjectsTermRepository objectsTermRepository;
+    protected ObjectsTermRepository objectsTermRepository;
     @Resource
-    private PaymentTermRepository paymentTermRepository;
+    protected PaymentTermRepository paymentTermRepository;
     @Resource
-    private PostageTermRepository postageTermRepository;
+    protected PostageTermRepository postageTermRepository;
     @Resource
-    private RepaymentTermRepository repaymentTermRepository;
+    protected RepaymentTermRepository repaymentTermRepository;
     @Resource
-    private TaxTermRepository taxTermRepository;
+    protected TaxTermRepository taxTermRepository;
     @Resource
-    private ContractDAO contractDAO;
+    protected ContractDAO contractDAO;
     @Resource
-    private RpcContext rpcContext;
+    protected RpcContext rpcContext;
     @Resource
-    private ContractConverter converter;
+    protected ContractConverter converter;
 
     public void add(Contract contract) {
         if (contract == null) {
@@ -87,6 +88,17 @@ public class ContractRepository extends AbstractRepository implements Repository
 
     public Contract find(TradeId tradeId, ContractOption option) {
         ContractDO contractDO = findContract(tradeId);
+
+        return findTermsByContract(contractDO, tradeId);
+    }
+
+    private ContractDO findContract(TradeId tradeId) {
+        tradeId.valid();
+
+        return contractDAO.selectByTradeNo(tradeId.getTradeNo(), tradeId.getBuyerId(), tradeId.getSellerId());
+    }
+
+    public Contract findTermsByContract(ContractDO contractDO, TradeId tradeId) {
         if (contractDO == null) {
             return null;
         }
@@ -102,12 +114,6 @@ public class ContractRepository extends AbstractRepository implements Repository
         contract.setTaxTerm(taxTermRepository.find(tradeId));
 
         return contract;
-    }
-
-    private ContractDO findContract(TradeId tradeId) {
-        tradeId.valid();
-
-        return contractDAO.selectByTradeNo(tradeId.getTradeNo(), tradeId.getBuyerId(), tradeId.getSellerId());
     }
 
     private void insertContract(@Validated Contract contract) {

@@ -13,9 +13,11 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmRespo
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
-import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
+import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
+import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,9 @@ public class LoanController extends BaseUnionController {
     @Reference
     private BuyService buyService;
     @Reference
-    private LoanService loanService;
+    private ContractManageService contractService;
+    @Reference
+    private BuyerContractService buyerContractService;
 
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
@@ -78,12 +82,24 @@ public class LoanController extends BaseUnionController {
         tradeId.setBuyerId(getFromSession("accountId", Long.class));
         tradeId.setSellerId(getFromSession("orgId", Long.class));
 
-        return loanService.find(tradeId);
+        return contractService.find(tradeId);
+    }
+
+    @GetMapping("/loan/living")
+    public Result<Contract> livingContract() {
+        Long buyerId = session.get("accountId", Long.class);
+        return buyerContractService.findLatest(buyerId);
     }
 
     @GetMapping("/loan")
-    public Result<Page<Contract>> findByBuyer() {
-        return null;
+    public Result<Page<Contract>> findByBuyer(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long buyerId = session.get("accountId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return buyerContractService.find(buyerId, pageRequest);
     }
 
     @PostMapping("/loan/repay")
