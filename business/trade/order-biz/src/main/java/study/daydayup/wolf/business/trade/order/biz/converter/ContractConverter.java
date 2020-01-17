@@ -54,7 +54,7 @@ public class ContractConverter implements Converter {
 
     public List<Contract> toModel(List<ContractDO> contractDOList) {
         List<Contract> contracts = new ArrayList<>();
-        if (contractDOList == null) {
+        if (contractDOList == null || contractDOList.isEmpty()) {
             return contracts;
         }
 

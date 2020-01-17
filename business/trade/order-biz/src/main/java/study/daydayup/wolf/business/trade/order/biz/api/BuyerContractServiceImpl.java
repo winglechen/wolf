@@ -9,6 +9,8 @@ import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
+import javax.annotation.Resource;
+
 /**
  * study.daydayup.wolf.business.trade.order.biz.api
  *
@@ -17,6 +19,7 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  **/
 @RpcService(protocol = "dubbo")
 public class BuyerContractServiceImpl implements BuyerContractService {
+    @Resource
     private BuyerContractRepository repository;
 
     @Override

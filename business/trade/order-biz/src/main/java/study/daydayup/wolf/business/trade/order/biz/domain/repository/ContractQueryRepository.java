@@ -46,7 +46,7 @@ public class ContractQueryRepository extends ContractRepository {
 
     private TradeIds initTradeIds(@NonNull List<ContractDO> contractDOList,  @NonNull TradeOwner owner) {
         List<String> tradeNos = CollectionUtil.keys(contractDOList, ContractDO::getTradeNo);
-        if (ListUtil.hasValue(tradeNos)) {
+        if (!ListUtil.hasValue(tradeNos)) {
             return null;
         }
 

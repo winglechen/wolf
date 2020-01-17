@@ -24,9 +24,24 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:9101/loan/20200117171012000119100287482556
+GET http://localhost:9101/loan/20200117224124000119344377121279
 Accept: */*
 Cache-Control: no-cache
 
+
+###
+GET http://localhost:9101/loan
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/loan?pageNum=10
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9101/loan/living
+Accept: */*
+Cache-Control: no-cache
 
 ###

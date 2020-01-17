@@ -99,7 +99,7 @@ public class LoanController extends BaseUnionController {
                 .pageSize(10)
                 .build();
 
-        return buyerContractService.find(buyerId, pageRequest);
+        return buyerContractService.findAll(buyerId, pageRequest);
     }
 
     @PostMapping("/loan/repay")

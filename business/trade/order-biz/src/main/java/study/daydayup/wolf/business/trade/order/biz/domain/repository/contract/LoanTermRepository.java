@@ -25,6 +25,7 @@ import java.util.List;
 public class LoanTermRepository extends AbstractRepository implements Repository {
     @Resource
     private LoanTermDAO loanTermDAO;
+    @Resource
     private LoanTermConverter converter;
 
     public void add(@NonNull LoanTerm loanTerm) {
