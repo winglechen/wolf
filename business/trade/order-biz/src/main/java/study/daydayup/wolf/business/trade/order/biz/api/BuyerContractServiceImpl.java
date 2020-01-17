@@ -20,7 +20,7 @@ public class BuyerContractServiceImpl implements BuyerContractService {
     private BuyerContractRepository repository;
 
     @Override
-    public Result<Page<Contract>> find(@NonNull Long buyerId, PageRequest pageRequest) {
+    public Result<Page<Contract>> findAll(@NonNull Long buyerId, PageRequest pageRequest) {
         Page<Contract> contracts = repository.findAll(buyerId, pageRequest);
 
         return Result.ok(contracts);

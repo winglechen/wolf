@@ -12,6 +12,6 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  * @since 2019/10/9 6:56 下午
  **/
 public interface BuyerContractService {
-    Result<Page<Contract>> find(Long buyerId, PageRequest pageRequest);
+    Result<Page<Contract>> findAll(Long buyerId, PageRequest pageRequest);
     Result<Contract> findLatest(Long buyerId);
 }

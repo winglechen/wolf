@@ -11,6 +11,7 @@ import study.daydayup.wolf.common.util.CollectionUtil;
 import study.daydayup.wolf.common.util.ListUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.domain.repository.core
@@ -62,6 +63,8 @@ public class ContractQueryRepository extends ContractRepository {
         if (!ListUtil.hasValue(termList)) {
             return;
         }
+
+        CollectionUtil.join(contractList, Contract::getTradeNo, Contract::setLoanTerm, termList, LoanTerm::getTradeNo);
     }
 
     private void findInstallmentTermsByContractList(List<Contract> contractList, TradeIds tradeIds) {
@@ -69,6 +72,8 @@ public class ContractQueryRepository extends ContractRepository {
         if (!ListUtil.hasValue(termList)) {
             return;
         }
+        Map<String, List<InstallmentTerm>> termListMap = CollectionUtil.group(termList, InstallmentTerm::getTradeNo);
+        CollectionUtil.join(contractList, Contract::getTradeNo, Contract::setInstallmentTermList, termListMap);
     }
 
     private void findConsignTermsByContractList(List<Contract> contractList, TradeIds tradeIds) {
