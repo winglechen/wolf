@@ -5,7 +5,7 @@ USE `wolf_trade`;
 DROP TABLE IF EXISTS `contract`;
 CREATE TABLE IF NOT EXISTS `contract`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
 
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
@@ -27,6 +27,11 @@ CREATE TABLE IF NOT EXISTS `contract`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
+    INDEX idx_buyer(`buyer_id`, `state`),
+    INDEX idx_seller(`seller_id`, `state`, `created_at`),
+    INDEX idx_seller_create(`seller_id`, `created_at`),
+    INDEX idx_seller_buyer(`seller_id`, `buyer_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '合同';
@@ -35,7 +40,7 @@ COMMENT = '合同';
 DROP TABLE IF EXISTS `loan_term`;
 CREATE TABLE IF NOT EXISTS `loan_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -69,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '借款条款';
@@ -77,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `loan_term`
 DROP TABLE IF EXISTS `repayment_term`;
 CREATE TABLE IF NOT EXISTS `repayment_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -97,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '还款条款';
@@ -109,7 +116,7 @@ COMMENT = '还款条款';
 DROP TABLE IF EXISTS `installment_term`;
 CREATE TABLE IF NOT EXISTS `installment_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -139,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX idx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '运费条款';
@@ -146,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `installment_term`
 DROP TABLE IF EXISTS `objects_term`;
 CREATE TABLE IF NOT EXISTS `objects_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -164,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `objects_term`
 DROP TABLE IF EXISTS `payment_term`;
 CREATE TABLE IF NOT EXISTS `payment_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -182,7 +190,7 @@ COMMENT = '支付条款';
 DROP TABLE IF EXISTS `consign_term`;
 CREATE TABLE IF NOT EXISTS `consign_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -201,7 +209,7 @@ DROP TABLE IF EXISTS `assurance_term`;
 DROP TABLE IF EXISTS `postage_term`;
 CREATE TABLE IF NOT EXISTS `postage_term`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -219,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `postage_term`
 DROP TABLE IF EXISTS `trade_memo`;
 CREATE TABLE IF NOT EXISTS `trade_memo`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -230,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `trade_memo`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '交易备注';
@@ -238,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `trade_memo`
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
 
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
@@ -268,6 +277,11 @@ CREATE TABLE IF NOT EXISTS `order`
     `last_editor`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`        DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
+    INDEX idx_buyer(`buyer_id`, `state`),
+    INDEX idx_seller(`seller_id`, `state`, `created_at`),
+    INDEX idx_seller_type(`seller_id`, `trade_type`, `state`, `created_at`),
+    INDEX idx_seller_type_created(`seller_id`, `trade_type`, `created_at`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '订单';
@@ -275,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `order`
 DROP TABLE IF EXISTS `order_address`;
 CREATE TABLE IF NOT EXISTS `order_address`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -295,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `order_address`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '订单地址';
@@ -302,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `order_address`
 DROP TABLE IF EXISTS `order_line`;
 CREATE TABLE IF NOT EXISTS `order_line`
 (
-    `id`                BIGINT(20) UNSIGNED NOT NULL COMMENT 'ID',
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
@@ -337,6 +352,7 @@ CREATE TABLE IF NOT EXISTS `order_line`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX idx_trade_no(`trade_no`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '订单项';
@@ -366,6 +382,7 @@ CREATE TABLE IF NOT EXISTS `trade_state_log`
     `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `target_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '更新版本号',
     `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_trade_no(`trade_no`),
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 
@@ -387,6 +404,7 @@ CREATE TABLE IF NOT EXISTS `price_change_log`
 
     `editor`        BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '编辑人',
     `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_trade_no(`trade_no`),
     primary key (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '交易状态变更记录';
 

@@ -43,25 +43,17 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
 
     @Override
     public List<TradeNode> buildPreviewFlow() {
-        List<TradeNode> nodeList = new ArrayList<>();
+        List<TradeNode> nodeList = initLoanNodes();
 
-        nodeList.add(validationNode);
-        nodeList.add(buyerInfoCheckNode);
-        nodeList.add(blockListCheckNode);
-        nodeList.add(refusedBlockListNode);
-        nodeList.add(ongoingLoanCheckNode);
-        nodeList.add(fetchGoodsNode);
-        nodeList.add(getSellerNode);
-        nodeList.add(createContractNode);
-        nodeList.add(firstLoanCheckNode);
         nodeList.add(fakeLoanEffectTimeNode);
 
         return nodeList;
     }
 
+
     @Override
     public List<TradeNode> buildConfirmFlow() {
-        List<TradeNode> nodeList = buildPreviewFlow();
+        List<TradeNode> nodeList = initLoanNodes();
 
         nodeList.add(storeContractNode);
 
@@ -78,6 +70,23 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
     @Override
     public List<TradeNode> buildPayNotifyFlow() {
         List<TradeNode> nodeList = new ArrayList<>();
+
+        return nodeList;
+    }
+
+    private List<TradeNode> initLoanNodes() {
+        List<TradeNode> nodeList = new ArrayList<>();
+
+        nodeList.add(validationNode);
+        nodeList.add(buyerInfoCheckNode);
+        nodeList.add(blockListCheckNode);
+        nodeList.add(refusedBlockListNode);
+        nodeList.add(ongoingLoanCheckNode);
+        nodeList.add(fetchGoodsNode);
+        nodeList.add(getSellerNode);
+        nodeList.add(createContractNode);
+        nodeList.add(firstLoanCheckNode);
+        nodeList.add(fakeLoanEffectTimeNode);
 
         return nodeList;
     }

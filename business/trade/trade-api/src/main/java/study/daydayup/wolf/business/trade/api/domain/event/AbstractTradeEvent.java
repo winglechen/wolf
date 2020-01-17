@@ -29,20 +29,7 @@ public abstract class AbstractTradeEvent implements TradeEvent{
     protected String source;
     protected String tags;
 
-    @Override
-    public Long  getBuyerId() {
-        checkBuyerAndSeller();
-        return buyerId;
-    }
-
-    @Override
-    public Long  getSellerId() {
-        checkBuyerAndSeller();
-        return sellerId;
-    }
-
-    @Override
-    public Integer getTradeType() {
+    public Integer notNullTradeType() {
         if (tradeType <= 0) {
             throw new InvalidTradeEventException("Can't find tradeType");
         }

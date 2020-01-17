@@ -1,14 +1,15 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
-import study.daydayup.wolf.business.trade.buy.biz.epi.GoodsEpi;
+import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
+import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanContractRepository;
 
 import javax.annotation.Resource;
-import java.util.List;
+
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.node
@@ -19,13 +20,14 @@ import java.util.List;
 @Component
 public class StoreContractNode extends AbstractTradeNode implements TradeNode {
     @Resource
-    private GoodsEpi goodsEpi;
+    private LoanContractRepository repository;
 
     @Override
     public void run(BuyContext context) {
-        init(context);
+        Contract contract = context.getContract();
 
-        List<Goods> goodsList = context.getGoodsList();
+        LoanContractEntity entity = new LoanContractEntity(contract);
+        repository.add(entity);
     }
 
 }

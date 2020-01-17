@@ -63,8 +63,9 @@ spring:
         assurance_term.actual-data-nodes: trade.assurance_term
         consign_term.actual-data-nodes: trade.consign_term
         contract.actual-data-nodes: trade.contract
-        contract_state_log.actual-data-nodes: trade.contract_state_log
+        trade_state_log.actual-data-nodes: trade.trade_state_log
         installment_term.actual-data-nodes: trade.installment_term
+        loan_term.actual-data-nodes: trade.loan_term
         objects_term.actual-data-nodes: trade.objects_term
         order.actual-data-nodes: trade.order
         order_address.actual-data-nodes: trade.order_address

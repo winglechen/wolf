@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
@@ -67,12 +68,17 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
     }
 
     private void createTradeNo() {
+        BuyRequest request = context.getRequest();
+        if (null != request.getTradeNo()) {
+            contract.setTradeNo(request.getTradeNo());
+            return;
+        }
+
         String tradeNo = TradeNo.builder()
                 .tradePhase(context.getTradePhase())
                 .accountId(context.getBuyer().getId())
                 .build()
                 .create();
-
         contract.setTradeNo(tradeNo);
     }
 

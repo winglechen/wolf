@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
-import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanRepository;
+import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanContractRepository;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanOrderRepository;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @RpcService(protocol = "dubbo")
 public class LoanServiceImpl implements LoanService {
     @Resource
-    private LoanRepository loanRepository;
+    private LoanContractRepository loanContractRepository;
     @Resource
     private LoanOrderRepository loanOrderRepository;
 
@@ -35,28 +35,28 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void approve(@Validated TradeId tradeId) {
         tradeId.valid();
-        LoanContractEntity entity = loanRepository.find(tradeId);
+        LoanContractEntity entity = loanContractRepository.find(tradeId);
         entity.approve();
 
-        loanRepository.save(entity);
+        loanContractRepository.save(entity);
     }
 
     @Override
     public void refuse(TradeId tradeId) {
         tradeId.valid();
-        LoanContractEntity entity = loanRepository.find(tradeId);
+        LoanContractEntity entity = loanContractRepository.find(tradeId);
         entity.refuse();
 
-        loanRepository.save(entity);
+        loanContractRepository.save(entity);
     }
 
     @Override
     public void startLoan(TradeId tradeId) {
         tradeId.valid();
 
-        LoanContractEntity contract = loanRepository.find(tradeId);
+        LoanContractEntity contract = loanContractRepository.find(tradeId);
         contract.startLoan();
-        loanRepository.save(contract);
+        loanContractRepository.save(contract);
 
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.loan();
@@ -66,10 +66,10 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void completeLoan(TradeId tradeId) {
         tradeId.valid();
-        LoanContractEntity entity = loanRepository.find(tradeId);
+        LoanContractEntity entity = loanContractRepository.find(tradeId);
         entity.completeLoan();
 
-        loanRepository.save(entity);
+        loanContractRepository.save(entity);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class LoanServiceImpl implements LoanService {
             throw new IllegalArgumentException("installmentNo can't be null");
         }
 
-        LoanContractEntity contract = loanRepository.find(tradeId);
+        LoanContractEntity contract = loanContractRepository.find(tradeId);
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.repay(installmentNo);
         loanOrderRepository.save(order);
@@ -97,7 +97,7 @@ public class LoanServiceImpl implements LoanService {
             throw new IllegalArgumentException("installmentNo can't be null");
         }
 
-        LoanContractEntity contract = loanRepository.find(tradeId);
+        LoanContractEntity contract = loanContractRepository.find(tradeId);
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.repay(installmentNo);
         loanOrderRepository.save(order);

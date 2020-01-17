@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.util.finance.installment;
 
 import study.daydayup.wolf.common.lang.enums.unit.RateEnum;
 import study.daydayup.wolf.common.model.type.number.Rate;
+import study.daydayup.wolf.common.util.finance.DecimalUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -55,14 +56,14 @@ public abstract class AbstractInstallment {
         }
 
         handleRemain(slice);
-        return slice;
+        return DecimalUtil.scale(slice);
     }
 
     protected BigDecimal returnRemain() {
         BigDecimal result = remain;
         handleRemain(remain);
 
-        return result;
+        return DecimalUtil.scale(result);
     }
 
     protected void handleRemain(BigDecimal result) {

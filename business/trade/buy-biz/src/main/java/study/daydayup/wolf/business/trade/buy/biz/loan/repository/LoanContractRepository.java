@@ -17,7 +17,7 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
  * @since 2019/12/26 8:36 下午
  **/
 @Component
-public class LoanRepository extends AbstractRepository implements Repository {
+public class LoanContractRepository extends AbstractRepository implements Repository {
     @Reference
     private ContractService contractService;
 

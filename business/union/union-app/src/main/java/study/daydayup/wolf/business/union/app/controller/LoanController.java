@@ -52,21 +52,6 @@ public class LoanController extends BaseUnionController {
         return buyService.preview(request);
     }
 
-    private BuyRequest initBuyRequest(LoanRequest loanRequest) {
-        BuyRequest request = new BuyRequest();
-
-        GoodsRequest goodsRequest = new GoodsRequest();
-        goodsRequest.setGoodsId(loanRequest.getGoodsId());
-        List<GoodsRequest> goodsRequestList = new ArrayList<>();
-        goodsRequestList.add(goodsRequest);
-        request.setGoodsRequest(goodsRequestList);
-
-        if (null != loanRequest.getTradeNo()) {
-            request.setTradeNo(loanRequest.getTradeNo());
-        }
-
-        return request;
-    }
 
     @PostMapping("/loan/confirm")
     public Result<ConfirmResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
@@ -109,5 +94,21 @@ public class LoanController extends BaseUnionController {
     @PostMapping("/loan/repay/delay")
     public Result<Object> delayRepay() {
         return null;
+    }
+
+    private BuyRequest initBuyRequest(LoanRequest loanRequest) {
+        BuyRequest request = new BuyRequest();
+
+        GoodsRequest goodsRequest = new GoodsRequest();
+        goodsRequest.setGoodsId(loanRequest.getGoodsId());
+        List<GoodsRequest> goodsRequestList = new ArrayList<>();
+        goodsRequestList.add(goodsRequest);
+        request.setGoodsRequest(goodsRequestList);
+
+        if (null != loanRequest.getTradeNo()) {
+            request.setTradeNo(loanRequest.getTradeNo());
+        }
+
+        return request;
     }
 }
