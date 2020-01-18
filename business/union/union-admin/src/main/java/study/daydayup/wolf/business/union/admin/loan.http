@@ -1,0 +1,23 @@
+
+###
+GET http://localhost:9100/loan/20200117224124000119344377121279
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:9100/loan
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9100/loan?pageNum=10
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9100/loan/living
+Accept: */*
+Cache-Control: no-cache
+
+###

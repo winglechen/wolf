@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.union.admin.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
@@ -18,12 +19,14 @@ import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
+import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.business.trade.api.service.tm.OrderManageService;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 
@@ -43,6 +46,8 @@ public class UnionLoanController implements Controller {
     private ContractManageService contractManageService;
     @Reference
     private OrderManageService orderManageService;
+    @Reference
+    private SellerContractService sellerContractService;
     @Resource
     private Session session;
     @Resource
@@ -64,14 +69,24 @@ public class UnionLoanController implements Controller {
         return orderService.find(tradeId, option);
     }
 
-    @GetMapping("/loan/contract")
-    public Result<Page<Contract>> contractList(ContractRequest request) {
+    @GetMapping("/loan/contract/search")
+    public Result<Page<Contract>> contractSearch(ContractRequest request) {
         initContractRequest(request);
         return contractManageService.find(request);
     }
 
-    @GetMapping("/loan/order")
-    public Result<Page<Order>> orderList(OrderRequest request) {
+    @GetMapping("/loan/contract")
+    public Result<Page<Contract>> findBySeller(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long sellerId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+        return sellerContractService.findAll(sellerId, pageRequest);
+    }
+
+    @GetMapping("/loan/order/search")
+    public Result<Page<Order>> orderSearch(OrderRequest request) {
         initOrderRequest(request);
 
         return orderManageService.find(request);
@@ -83,7 +98,7 @@ public class UnionLoanController implements Controller {
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         request.setState(new WaitToApproveState().getCode());
 
-        return contractList(request);
+        return contractSearch(request);
     }
 
     @GetMapping("/loan/contract/approved")
@@ -92,7 +107,7 @@ public class UnionLoanController implements Controller {
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         request.setState(new ApprovedState().getCode());
 
-        return contractList(request);
+        return contractSearch(request);
     }
 
     @GetMapping("/loan/contract/due")
@@ -103,7 +118,7 @@ public class UnionLoanController implements Controller {
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
         request.setRepayDueAt(rpcContext.getRequestTime());
 
-        return contractList(request);
+        return contractSearch(request);
     }
 
     @GetMapping("/loan/contract/overdue")
@@ -114,21 +129,21 @@ public class UnionLoanController implements Controller {
         request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
         request.setRepayDueAt(rpcContext.getRequestTime());
 
-        return contractList(request);
+        return contractSearch(request);
     }
 
     @GetMapping("/loan/order/loan")
     public Result<Page<Order>> loanList() {
         OrderRequest request = initOrderRequest();
         request.setTradeType(TradeTypeEnum.LOAN_ORDER.getCode());
-        return orderList(request);
+        return orderSearch(request);
     }
 
     @GetMapping("/loan/order/repay")
     public Result<Page<Order>> repayList() {
         OrderRequest request = initOrderRequest();
         request.setTradeType(TradeTypeEnum.REPAY_ORDER.getCode());
-        return orderList(request);
+        return orderSearch(request);
     }
 
     private TradeId createTradeId(String tradeNo) {

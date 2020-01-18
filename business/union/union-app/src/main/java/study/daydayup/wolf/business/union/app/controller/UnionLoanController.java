@@ -29,7 +29,7 @@ import java.util.List;
  * @since 2019/12/31 7:17 下午
  **/
 @RestController
-public class LoanController extends BaseUnionController {
+public class UnionLoanController extends BaseUnionController {
     @Reference
     private BuyService buyService;
     @Reference

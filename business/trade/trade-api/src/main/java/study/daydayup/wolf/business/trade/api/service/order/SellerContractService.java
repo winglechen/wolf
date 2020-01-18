@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateReques
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 /**
  * study.daydayup.wolf.business.trade.api.service.tm
@@ -17,12 +18,12 @@ import study.daydayup.wolf.framework.rpc.page.Page;
  * @since 2019/10/9 6:56 下午
  **/
 public interface SellerContractService {
-    Result<Page<Contract>> find(Long sellerId);
-
     Result<Page<Contract>> findByTradeNo(TradeId tradeId);
-    Result<Page<Contract>> findByTradeType(TypeRequest request);
-    Result<Page<Contract>> findByTradeState(StateRequest request);
-    Result<Page<Contract>> findByBuyerId(BuyerRequest request);
 
-    Result<Page<Contract>> search(FulltextRequest request);
+    Result<Page<Contract>> findAll(Long sellerId, PageRequest pageRequest);
+    Result<Page<Contract>> findByTradeType(TypeRequest request, PageRequest pageRequest);
+    Result<Page<Contract>> findByTradeState(StateRequest request, PageRequest pageRequest);
+    Result<Page<Contract>> findByBuyerId(BuyerRequest request, PageRequest pageRequest);
+
+    Result<Page<Contract>> search(FulltextRequest request, PageRequest pageRequest);
 }
