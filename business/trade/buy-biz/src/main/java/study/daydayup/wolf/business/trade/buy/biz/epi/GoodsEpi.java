@@ -4,7 +4,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsDTO;
+import study.daydayup.wolf.business.goods.api.dto.trade.GoodsDTO;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
@@ -37,12 +37,12 @@ public class GoodsEpi implements Epi {
         }
 
         List<TradeGoodsRequest> requests = formatRequest(goodsRequests);
-        List<TradeGoodsDTO> responses = goodsService.find(requests).notNullData();
+        List<GoodsDTO> responses = goodsService.find(requests).notNullData();
 
         return formatResponse(responses, goodsRequests);
     }
 
-    private List<Goods> formatResponse(List<TradeGoodsDTO> goodsDTOList, List<GoodsRequest> goodsRequests) {
+    private List<Goods> formatResponse(List<GoodsDTO> goodsDTOList, List<GoodsRequest> goodsRequests) {
         if (goodsDTOList == null || goodsDTOList.isEmpty()) {
             return null;
         }
@@ -50,7 +50,7 @@ public class GoodsEpi implements Epi {
         Map<Long, GoodsRequest> goodsRequestMap = CollectionUtil.map(goodsRequests, GoodsRequest::getGoodsId);
 
         List<Goods> goodsList = new ArrayList<>();
-        for (TradeGoodsDTO goodsDTO : goodsDTOList) {
+        for (GoodsDTO goodsDTO : goodsDTOList) {
             GoodsRequest goodsRequest = goodsRequestMap.get(goodsDTO.getId());
             Goods goods = formatTradeGoods(goodsDTO, goodsRequest);
 
@@ -64,7 +64,7 @@ public class GoodsEpi implements Epi {
         return goodsList;
     }
 
-    private Goods formatTradeGoods(TradeGoodsDTO goodsDTO, GoodsRequest goodsRequest) {
+    private Goods formatTradeGoods(GoodsDTO goodsDTO, GoodsRequest goodsRequest) {
         Goods goods = Goods.builder()
                 .sellId(goodsDTO.getOrgId())
                 .goodsId(goodsDTO.getId())
@@ -90,7 +90,7 @@ public class GoodsEpi implements Epi {
         return goods;
     }
 
-    private LoanTerm formatLoanTerm(TradeGoodsDTO goodsDTO) {
+    private LoanTerm formatLoanTerm(GoodsDTO goodsDTO) {
         LoanTerm loanTerm = new LoanTerm();
         Loan loanFromGoods = goodsDTO.getLoan();
         BeanUtils.copyProperties(loanFromGoods, loanTerm);
@@ -107,7 +107,7 @@ public class GoodsEpi implements Epi {
         return loanTerm;
     }
 
-    private List<InstallmentTerm> formatInstallmentTerm(TradeGoodsDTO goodsDTO) {
+    private List<InstallmentTerm> formatInstallmentTerm(GoodsDTO goodsDTO) {
         List<InstallmentTerm> installmentList = new ArrayList<>();
 
         List<Installment> installmentDTOList = goodsDTO.getInstallmentList();

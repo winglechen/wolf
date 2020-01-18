@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2019/12/12 10:09 上午
  **/
 @Data
-public class TradeGoodsDTO implements DTO {
+public class GoodsDTO implements DTO {
     private Long id;
     @Min(1)
     private Long orgId;

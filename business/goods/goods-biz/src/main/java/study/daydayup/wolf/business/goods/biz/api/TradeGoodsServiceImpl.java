@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsRequest;
-import study.daydayup.wolf.business.goods.api.dto.trade.TradeGoodsDTO;
+import study.daydayup.wolf.business.goods.api.dto.trade.GoodsDTO;
 import study.daydayup.wolf.business.goods.api.exception.InvalidTradeGoodsRequestException;
 import study.daydayup.wolf.business.goods.api.service.TradeGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
@@ -52,12 +52,12 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
      * @return
      */
     @Override
-    public Result<List<TradeGoodsDTO>> find(List<TradeGoodsRequest> requests, GoodsOption option) {
+    public Result<List<GoodsDTO>> find(List<TradeGoodsRequest> requests, GoodsOption option) {
         if (requests == null || requests.isEmpty()) {
             throw new IllegalArgumentException("TradeGoodsRequest can't be null");
         }
 
-        List<TradeGoodsDTO> responses = new ArrayList<>();
+        List<GoodsDTO> responses = new ArrayList<>();
 
         findGoodList(requests, responses);
         findSkuList(requests, responses);
@@ -68,7 +68,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
     }
 
     @Override
-    public Result<List<TradeGoodsDTO>> find(List<TradeGoodsRequest> requests) {
+    public Result<List<GoodsDTO>> find(List<TradeGoodsRequest> requests) {
         return find(requests, null);
     }
 
@@ -84,7 +84,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         }
     }
 
-    private void findGoodList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
+    private void findGoodList(List<TradeGoodsRequest> requests, List<GoodsDTO> responses) {
         List<Long> goodsIds = requests.stream()
                 .map(TradeGoodsRequest::getGoodsId)
                 .collect(Collectors.toList());
@@ -99,21 +99,21 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         mergeGoodsToResponse(goodsDOList, responses);
     }
 
-    private void mergeGoodsToResponse(List<GoodsDO> goodsDOList, List<TradeGoodsDTO> responses) {
+    private void mergeGoodsToResponse(List<GoodsDO> goodsDOList, List<GoodsDTO> responses) {
         if (goodsDOList == null || goodsDOList.isEmpty()) {
             return;
         }
 
         for (GoodsDO goodsDO: goodsDOList) {
-            TradeGoodsDTO response = new TradeGoodsDTO();
+            GoodsDTO response = new GoodsDTO();
             BeanUtils.copyProperties(goodsDO, response);
             responses.add(response);
         }
     }
 
-    private void findSkuList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {}
+    private void findSkuList(List<TradeGoodsRequest> requests, List<GoodsDTO> responses) {}
 
-    private void findLoanList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
+    private void findLoanList(List<TradeGoodsRequest> requests, List<GoodsDTO> responses) {
         List<GoodsLoanDO> loanDOList = loanDAO.selectByGoodsIdIn(goodsIds, orgId);
         if (loanDOList == null) {
             return;
@@ -126,14 +126,14 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         mergeLoanToResponse(loanMap, responses);
     }
 
-    private void mergeLoanToResponse(Map<Long, GoodsLoanDO> loanMap, List<TradeGoodsDTO> responses) {
-        for (TradeGoodsDTO response : responses) {
+    private void mergeLoanToResponse(Map<Long, GoodsLoanDO> loanMap, List<GoodsDTO> responses) {
+        for (GoodsDTO response : responses) {
             GoodsLoanDO loanDO = loanMap.get(response.getId());
             setLoanToResponse(response, loanDO);
         }
     }
 
-    private void setLoanToResponse(TradeGoodsDTO response, GoodsLoanDO loanDO) {
+    private void setLoanToResponse(GoodsDTO response, GoodsLoanDO loanDO) {
         if (loanDO == null) {
             return ;
         }
@@ -146,7 +146,7 @@ public class TradeGoodsServiceImpl implements TradeGoodsService {
         response.setInstallmentList(installmentList);
     }
 
-    private void findInstallmentList(List<TradeGoodsRequest> requests, List<TradeGoodsDTO> responses) {
+    private void findInstallmentList(List<TradeGoodsRequest> requests, List<GoodsDTO> responses) {
 
     }
 
