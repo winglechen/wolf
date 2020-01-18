@@ -4,6 +4,9 @@ import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractQueryRepository;
@@ -36,4 +39,44 @@ public class SellerContractRepository extends ContractQueryRepository {
         List<Contract> contractList = findTermsByContractList(contractDOList, owner);
         return Page.of(contractDOList).to(contractList);
     }
+
+    public Page<Contract> findByTradeType(TypeRequest request, PageRequest pageReq) {
+        Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+        List<ContractDO> contractDOList = contractDAO.sellerByTradeType(request);
+        if (contractDOList == null || contractDOList.isEmpty()) {
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+        }
+        TradeOwner owner = new TradeOwner();
+        owner.setSellerId(request.getSellerId());
+
+        List<Contract> contractList = findTermsByContractList(contractDOList, owner);
+        return Page.of(contractDOList).to(contractList);
+    }
+
+    public Page<Contract> findByTradeState(StateRequest request, PageRequest pageReq) {
+        Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+        List<ContractDO> contractDOList = contractDAO.sellerByState(request);
+        if (contractDOList == null || contractDOList.isEmpty()) {
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+        }
+        TradeOwner owner = new TradeOwner();
+        owner.setSellerId(request.getSellerId());
+
+        List<Contract> contractList = findTermsByContractList(contractDOList, owner);
+        return Page.of(contractDOList).to(contractList);
+    }
+
+    public Page<Contract> findByBuyerId(BuyerRequest request, PageRequest pageReq) {
+        Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+        List<ContractDO> contractDOList = contractDAO.sellerByBuyerId(request);
+        if (contractDOList == null || contractDOList.isEmpty()) {
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+        }
+        TradeOwner owner = new TradeOwner();
+        owner.setSellerId(request.getSellerId());
+
+        List<Contract> contractList = findTermsByContractList(contractDOList, owner);
+        return Page.of(contractDOList).to(contractList);
+    }
+
 }

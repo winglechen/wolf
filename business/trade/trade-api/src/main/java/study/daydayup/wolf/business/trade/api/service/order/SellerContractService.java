@@ -18,7 +18,7 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  * @since 2019/10/9 6:56 下午
  **/
 public interface SellerContractService {
-    Result<Page<Contract>> findByTradeNo(TradeId tradeId);
+    Result<Contract> findByTradeNo(TradeId tradeId);
 
     Result<Page<Contract>> findAll(Long sellerId, PageRequest pageRequest);
     Result<Page<Contract>> findByTradeType(TypeRequest request, PageRequest pageRequest);

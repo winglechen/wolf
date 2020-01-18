@@ -3,6 +3,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 
 @Mapper
@@ -27,7 +30,11 @@ public interface ContractDAO {
 
     List<ContractDO> selectBySellerId(@Param("sellerId")Long sellerId);
 
+    List<ContractDO> sellerByTradeType(@Param("query")TypeRequest request);
 
+    List<ContractDO> sellerByState(@Param("query") StateRequest request);
+
+    List<ContractDO> sellerByBuyerId(@Param("query") BuyerRequest request);
 
 
 
