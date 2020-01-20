@@ -6,7 +6,6 @@ import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
 import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.framework.layer.api.DTO;
-import study.daydayup.wolf.framework.layer.api.Response;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;

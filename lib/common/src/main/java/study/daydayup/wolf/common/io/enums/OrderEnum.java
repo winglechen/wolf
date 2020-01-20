@@ -11,8 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum OrderEnum implements CodeBasedEnum {
-    ASC(0, "asc"),
-    DESC(1, "desc")
+    ASC(0, "ASC"),
+    DESC(1, "DESC")
     ;
 
     private int code;
