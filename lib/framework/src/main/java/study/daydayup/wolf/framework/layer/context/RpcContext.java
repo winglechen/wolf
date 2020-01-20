@@ -2,6 +2,7 @@ package study.daydayup.wolf.framework.layer.context;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -26,6 +27,10 @@ public class RpcContext implements Context {
         context.set(REQUEST_TIME_KEY, requestTime);
 
         return requestTime;
+    }
+
+    public LocalDate getRequestDate() {
+        return getRequestTime().toLocalDate();
     }
 
     public Object get(String key) {

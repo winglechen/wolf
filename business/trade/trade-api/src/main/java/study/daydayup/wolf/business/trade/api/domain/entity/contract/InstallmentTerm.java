@@ -22,6 +22,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 public class InstallmentTerm implements VO {
+    protected Long id;
     protected String tradeNo;
     protected Long  buyerId;
     protected Long  sellerId;

@@ -20,9 +20,9 @@ import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.domain.repository
@@ -96,6 +96,21 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
                 tradeIds.getTradeNoSet(), tradeIds.getBuyerId(), tradeIds.getSellerId()
         );
 
+        return batchDOToModel(installmentTermDOList, true);
+    }
+
+    public List<InstallmentTerm> findDue(@NonNull LocalDate dueAt) {
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAt(dueAt);
+        return batchDOToModel(installmentTermDOList, true);
+    }
+
+    public List<InstallmentTerm> findDueForBuyer(@NonNull LocalDate dueAt, Long buyerId) {
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndBuyer(dueAt, buyerId);
+        return batchDOToModel(installmentTermDOList, true);
+    }
+
+    public List<InstallmentTerm> findDueForSeller(@NonNull LocalDate dueAt, Long SellerId) {
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndSeller(dueAt, SellerId);
         return batchDOToModel(installmentTermDOList, true);
     }
 

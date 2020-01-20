@@ -2,21 +2,25 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.FulltextRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.*;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
+import study.daydayup.wolf.business.trade.order.biz.domain.repository.contract.InstallmentTermRepository;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.seller.SellerContractRepository;
+import study.daydayup.wolf.common.util.CollectionUtil;
+import study.daydayup.wolf.common.util.ListUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.api
@@ -28,6 +32,8 @@ import javax.annotation.Resource;
 public class SellerContractServiceImpl implements SellerContractService {
     @Resource
     private SellerContractRepository repository;
+    @Resource
+    private InstallmentTermRepository installmentTermRepository;
     @Reference
     private ContractService contractService;
 
@@ -35,6 +41,13 @@ public class SellerContractServiceImpl implements SellerContractService {
     public Result<Contract> findByTradeNo(@NonNull TradeId tradeId) {
         tradeId.valid();
         return contractService.find(tradeId);
+    }
+
+    @Override
+    public Result<List<Contract>> findByTradeNos(@NonNull TradeIds tradeIds) {
+        tradeIds.valid();
+        List<Contract> contractList = repository.findByTradeNos(tradeIds);
+        return Result.ok(contractList);
     }
 
     @Override
@@ -60,6 +73,36 @@ public class SellerContractServiceImpl implements SellerContractService {
     public Result<Page<Contract>> findByBuyerId(BuyerRequest request, PageRequest pageRequest) {
         Page<Contract> contracts = repository.findByBuyerId(request, pageRequest);
         return Result.ok(contracts);
+    }
+
+    @Override
+    public Result<Page<Contract>> findByInstallmentState(InstallmentStateRequest request, PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForBuyer(
+                request.getDueAt(), request.getSellerId()
+        );
+
+        List<String> tradeNos = CollectionUtil.keys(installmentTermList, InstallmentTerm::getTradeNo);
+        if (!ListUtil.hasValue(tradeNos)) {
+            Page<Contract>  contractPage = Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+            return Result.ok(contractPage);
+        }
+
+        TradeIds tradeIds = new TradeIds();
+        tradeIds.setSellerId(request.getSellerId());
+        tradeIds.addAll(tradeNos);
+        List<Contract> contractList = findByTradeNos(tradeIds).getData();
+
+        Page<Contract> contractPage = Page.of(installmentTermList).to(contractList);
+        return Result.ok(contractPage);
+    }
+
+    @Override
+    public Result<List<InstallmentTerm>> findDueInstallmentTerm(@Validated DueInstallmentRequest request) {
+        List<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForBuyer(
+                request.getDueAt(), request.getSellerId()
+        );
+        return Result.ok(installmentTermList);
     }
 
     @Override

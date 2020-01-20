@@ -16,6 +16,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.InstallmentStateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
@@ -30,6 +31,7 @@ import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller
@@ -108,24 +110,34 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/contract/due")
     public Result<Page<Contract>> dueList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
-        ContractRequest request = initContractRequest();
+        InstallmentStateRequest request = initInstallmentStateRequest();
+        request.setDueAt(rpcContext.getRequestDate());
         //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         //request.setRepayState(new DueState().getCode());
-        request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
-        request.setRepayDueAt(rpcContext.getRequestTime());
+        request.setInstallmentType(InstallmentTypeEnum.DEFAULT.getCode());
 
-        return contractSearch(request);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerContractService.findByInstallmentState(request, pageRequest);
     }
 
     @GetMapping("/loan/contract/overdue")
     public Result<Page<Contract>> overdueList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
-        ContractRequest request = initContractRequest();
-        //request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
-        //request.setRepayState(new OverdueState().getCode());
-        request.setRepayType(InstallmentTypeEnum.DEFAULT.getCode());
-        request.setRepayDueAt(rpcContext.getRequestTime());
+        LocalDate yesterday = LocalDate.now().plusDays(-1);
 
-        return contractSearch(request);
+        InstallmentStateRequest request = initInstallmentStateRequest();
+        request.setDueAt(yesterday);
+        request.setInstallmentType(InstallmentTypeEnum.DEFAULT.getCode());
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerContractService.findByInstallmentState(request, pageRequest);
     }
 
     private TradeId createTradeId(String tradeNo) {
@@ -181,4 +193,13 @@ public class UnionLoanController implements Controller {
         return initStateRequest(null);
     }
 
+    private InstallmentStateRequest initInstallmentStateRequest() {
+        InstallmentStateRequest request = new InstallmentStateRequest();
+
+        request.setOption(initContractOption());
+        Long orgId = session.get("orgId", Long.class);
+        request.setSellerId(orgId);
+
+        return request;
+    }
 }

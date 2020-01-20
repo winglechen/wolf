@@ -1,14 +1,15 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.FulltextRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.*;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
+
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.api.service.tm
@@ -18,11 +19,15 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  **/
 public interface SellerContractService {
     Result<Contract> findByTradeNo(TradeId tradeId);
+    Result<List<Contract>> findByTradeNos(TradeIds tradeIds);
 
     Result<Page<Contract>> findAll(Long sellerId, PageRequest pageRequest);
     Result<Page<Contract>> findByTradeType(TypeRequest request, PageRequest pageRequest);
     Result<Page<Contract>> findByTradeState(StateRequest request, PageRequest pageRequest);
     Result<Page<Contract>> findByBuyerId(BuyerRequest request, PageRequest pageRequest);
-
     Result<Page<Contract>> search(FulltextRequest request, PageRequest pageRequest);
+
+    Result<Page<Contract>> findByInstallmentState(InstallmentStateRequest request, PageRequest pageRequest);
+
+    Result<List<InstallmentTerm>> findDueInstallmentTerm(DueInstallmentRequest request);
 }
