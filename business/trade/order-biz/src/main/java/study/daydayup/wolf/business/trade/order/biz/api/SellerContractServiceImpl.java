@@ -82,19 +82,33 @@ public class SellerContractServiceImpl implements SellerContractService {
                 request.getDueAt(), request.getSellerId()
         );
 
-        List<String> tradeNos = CollectionUtil.keys(installmentTermList, InstallmentTerm::getTradeNo);
-        if (!ListUtil.hasValue(tradeNos)) {
+        TradeIds tradeIds = getTradeIdsByInstallmentList(installmentTermList, request.getSellerId());
+        if (null == tradeIds) {
             Page<Contract>  contractPage = Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
             return Result.ok(contractPage);
         }
 
-        TradeIds tradeIds = new TradeIds();
-        tradeIds.setSellerId(request.getSellerId());
-        tradeIds.addAll(tradeNos);
         List<Contract> contractList = findByTradeNos(tradeIds).getData();
-
         Page<Contract> contractPage = Page.of(installmentTermList).to(contractList);
+
         return Result.ok(contractPage);
+    }
+
+    private TradeIds getTradeIdsByInstallmentList(List<InstallmentTerm> installmentTermList, Long sellerId) {
+        if (!ListUtil.hasValue(installmentTermList)) {
+            return null;
+        }
+
+        List<String> tradeNos = CollectionUtil.keys(installmentTermList, InstallmentTerm::getTradeNo);
+        if (!ListUtil.hasValue(tradeNos)) {
+            return null;
+        }
+
+        TradeIds tradeIds = new TradeIds();
+        tradeIds.setSellerId(sellerId);
+        tradeIds.addAll(tradeNos);
+
+        return tradeIds;
     }
 
     @Override

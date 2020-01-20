@@ -121,6 +121,8 @@ public class UnionLoanController implements Controller {
                 .pageSize(10)
                 .build();
 
+        System.out.println("request: " + request);
+
         return sellerContractService.findByInstallmentState(request, pageRequest);
     }
 
