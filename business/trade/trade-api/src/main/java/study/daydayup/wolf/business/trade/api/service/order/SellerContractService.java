@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.FulltextRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;

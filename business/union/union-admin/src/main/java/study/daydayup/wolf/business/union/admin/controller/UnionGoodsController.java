@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  * @since 2019/12/11 6:59 下午
  **/
 @RestController
-public class GoodsController extends BaseUnionController {
+public class UnionGoodsController extends BaseUnionController {
     @Reference
     private LoanGoodsService loanGoodsService;
     @Reference

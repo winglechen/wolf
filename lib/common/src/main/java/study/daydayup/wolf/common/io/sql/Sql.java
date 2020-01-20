@@ -66,7 +66,7 @@ public class Sql {
 
     public static Sql iterator(@NonNull String table, Long from, int steps, OrderEnum order) {
         String clause = order == OrderEnum.DESC ? LESS_THAN : GREATER_THAN;
-        String where = Msg.join(DEFAULT_KEY, clause, from).toString();
+        String where = Msg.join(DEFAULT_KEY, clause, from);
 
         return select()
                 .from(table)

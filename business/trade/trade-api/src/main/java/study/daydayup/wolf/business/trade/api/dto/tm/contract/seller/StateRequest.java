@@ -18,6 +18,7 @@ public class StateRequest extends SellerRequest {
     @NotNull @Min(1)
     private Integer state;
 
+    private Integer tradeType;
     private LocalDateTime createdBefore;
     private LocalDateTime createdAfter;
 }

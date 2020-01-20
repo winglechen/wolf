@@ -1,7 +1,6 @@
 
 
 
-
 ###
 POST http://localhost:9101/loan/preview
 Accept: */*
@@ -13,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-###  "tradeNo": "20200117171012000119100287482556",
+###
 POST http://localhost:9101/loan/confirm
 Accept: */*
 Cache-Control: no-cache
