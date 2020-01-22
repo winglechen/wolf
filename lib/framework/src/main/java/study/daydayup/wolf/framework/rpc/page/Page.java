@@ -50,7 +50,7 @@ public class Page<T> implements Serializable {
     }
 
     public static <T> Page<T> of(List<T> list) {
-        if (list == null) {
+        if (list == null || list.isEmpty()) {
             return empty(1, null);
         }
 

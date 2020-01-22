@@ -77,19 +77,18 @@ public class SellerContractServiceImpl implements SellerContractService {
 
     @Override
     public Result<Page<Contract>> findByInstallmentState(InstallmentStateRequest request, PageRequest pageRequest) {
-        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
-        List<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForBuyer(
-                request.getDueAt(), request.getSellerId()
+        Page<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForSeller(
+                request.getDueAt(), request.getSellerId(), pageRequest
         );
 
-        TradeIds tradeIds = getTradeIdsByInstallmentList(installmentTermList, request.getSellerId());
+        TradeIds tradeIds = getTradeIdsByInstallmentList(installmentTermList.getData(), request.getSellerId());
         if (null == tradeIds) {
             Page<Contract>  contractPage = Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
             return Result.ok(contractPage);
         }
 
         List<Contract> contractList = findByTradeNos(tradeIds).getData();
-        Page<Contract> contractPage = Page.of(installmentTermList).to(contractList);
+        Page<Contract> contractPage = installmentTermList.to(contractList);
 
         return Result.ok(contractPage);
     }
@@ -112,9 +111,9 @@ public class SellerContractServiceImpl implements SellerContractService {
     }
 
     @Override
-    public Result<List<InstallmentTerm>> findDueInstallmentTerm(@Validated DueInstallmentRequest request) {
-        List<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForBuyer(
-                request.getDueAt(), request.getSellerId()
+    public Result<Page<InstallmentTerm>> findDueInstallmentTerm(@Validated DueInstallmentRequest request, PageRequest pageRequest) {
+        Page<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForSeller(
+                request.getDueAt(), request.getSellerId(), pageRequest
         );
         return Result.ok(installmentTermList);
     }

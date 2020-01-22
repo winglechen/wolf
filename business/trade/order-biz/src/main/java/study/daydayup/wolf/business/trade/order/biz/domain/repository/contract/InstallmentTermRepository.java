@@ -16,8 +16,11 @@ import study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
+import study.daydayup.wolf.common.util.ListUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
+import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
@@ -99,19 +102,25 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         return batchDOToModel(installmentTermDOList, true);
     }
 
-    public List<InstallmentTerm> findDue(@NonNull LocalDate dueAt) {
+    public Page<InstallmentTerm> findDue(@NonNull LocalDate dueAt, PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
         List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAt(dueAt);
-        return batchDOToModel(installmentTermDOList, true);
+
+        return pageInstallmentTerm(installmentTermDOList, pageRequest);
     }
 
-    public List<InstallmentTerm> findDueForBuyer(@NonNull LocalDate dueAt, Long buyerId) {
+    public Page<InstallmentTerm> findDueForBuyer(@NonNull LocalDate dueAt, Long buyerId, PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
         List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndBuyer(dueAt, buyerId);
-        return batchDOToModel(installmentTermDOList, true);
+
+        return pageInstallmentTerm(installmentTermDOList, pageRequest);
     }
 
-    public List<InstallmentTerm> findDueForSeller(@NonNull LocalDate dueAt, Long SellerId) {
-        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndSeller(dueAt, SellerId);
-        return batchDOToModel(installmentTermDOList, true);
+    public Page<InstallmentTerm> findDueForSeller(@NonNull LocalDate dueAt, Long sellerId, PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndSeller(dueAt, sellerId);
+
+        return pageInstallmentTerm(installmentTermDOList, pageRequest);
     }
 
     private TradeState getChangedState(InstallmentTerm key, InstallmentTerm change) {
@@ -141,6 +150,15 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
 
         return state;
+    }
+
+    private Page<InstallmentTerm> pageInstallmentTerm(List<InstallmentTermDO> installmentTermDOList, PageRequest pageRequest) {
+        if (!ListUtil.hasValue(installmentTermDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
+
+        List<InstallmentTerm> installmentTermList = batchDOToModel(installmentTermDOList, true);
+        return Page.of(installmentTermDOList).to(installmentTermList);
     }
 
     private InstallmentTerm DOToModel(InstallmentTermDO installmentTermDO) {

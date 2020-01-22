@@ -29,5 +29,5 @@ public interface SellerContractService {
 
     Result<Page<Contract>> findByInstallmentState(InstallmentStateRequest request, PageRequest pageRequest);
 
-    Result<List<InstallmentTerm>> findDueInstallmentTerm(DueInstallmentRequest request);
+    Result<Page<InstallmentTerm>> findDueInstallmentTerm(DueInstallmentRequest request, PageRequest pageRequest);
 }
