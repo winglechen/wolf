@@ -24,7 +24,7 @@ public class LogoutController extends AuthController {
     private Session session;
 
     @RequestMapping("/auth/logout")
-    public Result logout() {
+    public Result<Object> logout() {
         session.destroy();
 
        return Result.ok();

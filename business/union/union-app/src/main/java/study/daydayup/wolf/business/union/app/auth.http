@@ -1,52 +1,100 @@
-POST http://localhost:8100/auth/sms/registerAndLogin?mobile=18067966015&code=123&orgId=1
+POST http://localhost:8100/auth/sms/registerAndLogin
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "18067966015",
+  "code": "123",
+  "orgId": 1
+}
 
 ###
-
-POST http://localhost:8100/auth/sms/code?mobile=18067966015
+POST http://localhost:8100/auth/sms/code
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "18067966015",
+  "orgId": 1
+}
 
 ###
-
 POST http://localhost:8100/auth/logout
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
 
 ###
 POST http://localhost:8100/account/show
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
 
 ###
-POST http://localhost:8100/auth/show
+POST http://localhost:8100/auth/password/register
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "account": "18067966016",
+  "password": "123456",
+  "orgId": 1
+}
+
 
 ###
-POST http://localhost:8100/auth/password/register?account=18067966016&password=123456
+POST http://localhost:8100/auth/password/login
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "account": "18067966016",
+  "password": "123456",
+  "orgId": 1
+}
+
 
 ###
-POST http://localhost:8100/auth/password/login?account=18067966016&password=123456
+POST http://localhost:8100/auth/password/login
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "account": "18067966016",
+  "password": "abcdef",
+  "orgId": 1
+}
 
 ###
-POST http://localhost:8100/auth/password/login?account=18067966016&password=abcdef
+POST http://localhost:8100/auth/password/registerAndLogin
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "account": "18067966016",
+  "password": "abcdef",
+  "orgId": 1
+}
+
 
 ###
-POST http://localhost:8100/auth/password/registerAndLogin?account=18067966016&password=123456
+POST http://localhost:8100/auth/password/change
 Accept: */*
 Cache-Control: no-cache
+Content-Type: application/json
 
-###
-POST http://localhost:8100/auth/password/change?account=18067966016&password=123456&newPassword=abcdef
-Accept: */*
-Cache-Control: no-cache
+{
+  "account": "18067966016",
+  "password": "123456",
+  "newPassword": "abcdef",
+  "orgId": 1
+}
 
 ###

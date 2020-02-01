@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
@@ -31,12 +32,12 @@ public class SmsController extends AuthController {
     private AuthConfig authConfig;
 
     @PostMapping("/auth/sms/login")
-    public Result<OauthLicense> login(@Valid SmsRequest request) {
+    public Result<OauthLicense> login(@Valid @RequestBody SmsRequest request) {
         return registerAndLogin(request);
     }
 
     @PostMapping("/auth/sms/registerAndLogin")
-    public Result<OauthLicense> registerAndLogin(@Valid SmsRequest request) {
+    public Result<OauthLicense> registerAndLogin(@Valid @RequestBody SmsRequest request) {
 //        if (isLogin()) {
 //            return Result.ok(getLicenseFromSession());
 //        }
@@ -57,7 +58,7 @@ public class SmsController extends AuthController {
     }
 
     @PostMapping("/auth/sms/code")
-    public Result code(@Validated SmsCodeRequest request) {
+    public Result code(@Validated @RequestBody SmsCodeRequest request) {
         request.setEnv(null);
         request.setExpiredIn(authConfig.getCodeExpiredIn());
 
@@ -68,7 +69,7 @@ public class SmsController extends AuthController {
     }
 
     @PostMapping("/auth/sms/voice")
-    public Result voice(SmsCodeRequest request) {
+    public Result voice(@RequestBody SmsCodeRequest request) {
         return Result.ok();
     }
 }
