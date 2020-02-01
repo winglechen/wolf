@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.order.biz.domain.repository;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
@@ -66,10 +67,7 @@ public class ContractRepository extends AbstractRepository implements Repository
         taxTermRepository.add(contract.getTaxTerm());
     }
 
-    public void save(Contract key, Contract changes) {
-        if (key == null || null == changes) {
-            return;
-        }
+    public void save(@NonNull Contract key, @NonNull Contract changes) {
         updateContract(key, changes);
 
 //        consignTermRepository.save(key.getConsignTerm(), changes.getConsignTerm());

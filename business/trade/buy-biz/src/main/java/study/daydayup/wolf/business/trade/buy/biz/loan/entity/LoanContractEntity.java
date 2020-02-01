@@ -28,9 +28,13 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         this.model = model;
         this.key = Contract.builder()
                 .tradeNo(model.getTradeNo())
+                .tradeType(model.getTradeType())
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
                 .build();
+
+        this.changes = new Contract();
+        this.isNew = isNew;
     }
 
     public LoanContractEntity(TradeId tradeId) {
@@ -43,6 +47,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
 
         model = contract;
         key = contract;
+        changes = new Contract();
         isNew = false;
     }
 
@@ -53,6 +58,8 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
                 .build();
+
+        key.setState(model.getState());
         changes.setStateEvent(event);
     }
 
@@ -63,6 +70,8 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
                 .build();
+
+        key.setState(model.getState());
         changes.setStateEvent(event);
     }
 
@@ -74,6 +83,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .currency(model.getLoanTerm().getCurrency())
                 .build();
 
+        key.setState(model.getState());
         changes.setStateEvent(event);
 
         //fire loan order create event
@@ -89,6 +99,8 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())
                 .build();
+
+        key.setState(model.getState());
         changes.setStateEvent(event);
 
         //loan.installment.effect

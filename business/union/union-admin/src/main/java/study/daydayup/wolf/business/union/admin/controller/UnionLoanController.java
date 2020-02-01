@@ -1,29 +1,22 @@
 package study.daydayup.wolf.business.union.admin.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
-import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
-import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.InstallmentStateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
+import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
-import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
-import study.daydayup.wolf.business.trade.api.service.tm.OrderManageService;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -44,11 +37,9 @@ public class UnionLoanController implements Controller {
     @Reference
     private ContractService contractService;
     @Reference
-    private OrderService orderService;
+    private LoanService loanService;
     @Reference
     private ContractManageService contractManageService;
-    @Reference
-    private OrderManageService orderManageService;
     @Reference
     private SellerContractService sellerContractService;
     @Resource
@@ -58,7 +49,7 @@ public class UnionLoanController implements Controller {
 
     @GetMapping("/loan/contract/{tradeNo}")
     public Result<Contract> contractDetail(@PathVariable("tradeNo") String tradeNo) {
-        TradeId tradeId = createTradeId(tradeNo);
+        TradeId tradeId = initTradeId(tradeNo);
         ContractOption option = initContractOption();
 
         return contractService.find(tradeId, option);
@@ -78,6 +69,22 @@ public class UnionLoanController implements Controller {
                 .pageSize(10)
                 .build();
         return sellerContractService.findAll(sellerId, pageRequest);
+    }
+
+    @PutMapping("/loan/contract/approve/{tradeNo}")
+    public Result<Object> approve(@PathVariable("tradeNo") String tradeNo) {
+        TradeId tradeId = initTradeId(tradeNo);
+        loanService.approve(tradeId);
+
+        return Result.ok();
+    }
+
+    @PutMapping("/loan/contract/refuse/{tradeNo}")
+    public Result<Object> refuse(@PathVariable("tradeNo") String tradeNo) {
+        TradeId tradeId = initTradeId(tradeNo);
+        loanService.refuse(tradeId);
+
+        return Result.ok();
     }
 
     @GetMapping("/loan/contract/waitToApprove")
@@ -140,7 +147,7 @@ public class UnionLoanController implements Controller {
         return sellerContractService.findByInstallmentState(request, pageRequest);
     }
 
-    private TradeId createTradeId(String tradeNo) {
+    private TradeId initTradeId(String tradeNo) {
         if (tradeNo == null) {
             throw new IllegalArgumentException("tradeNo can't be null");
         }
