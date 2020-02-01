@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.account.auth.agent.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
@@ -30,7 +31,7 @@ public class PasswordController extends AuthController {
     private Session session;
 
     @PostMapping("/auth/password/login")
-    public Result<OauthLicense> login(@Valid PasswordRequest request) {
+    public Result<OauthLicense> login(@Valid @RequestBody PasswordRequest request) {
 //        if(isLogin()) {
 //            return Result.ok(getLicenseFromSession());
 //        }
@@ -51,7 +52,7 @@ public class PasswordController extends AuthController {
     }
 
     @PostMapping("/auth/password/registerAndLogin")
-    public Result<OauthLicense> registerAndLogin(@Valid PasswordRequest request) {
+    public Result<OauthLicense> registerAndLogin(@Valid @RequestBody PasswordRequest request) {
 //        if(isLogin()) {
 //            return Result.ok(getLicenseFromSession());
 //        }
@@ -72,7 +73,7 @@ public class PasswordController extends AuthController {
     }
 
     @PostMapping("/auth/password/register")
-    public Result register(@Validated PasswordRequest request) {
+    public Result register(@Validated @RequestBody PasswordRequest request) {
         request.setEnv(null);
         passwordService.register(request);
 
@@ -80,7 +81,7 @@ public class PasswordController extends AuthController {
     }
 
     @PostMapping("/auth/password/change")
-    public Result changePassword(@Validated PasswordRequest request) {
+    public Result changePassword(@Validated @RequestBody PasswordRequest request) {
         request.setEnv(null);
         passwordService.changePassword(request);
 
