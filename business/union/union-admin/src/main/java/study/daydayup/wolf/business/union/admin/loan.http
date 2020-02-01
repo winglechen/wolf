@@ -1,32 +1,32 @@
 
 ### 借款合同详情
-GET http://localhost:9100/loan/contract/20200117224124000119344377121279
+GET http://localhost:8200/loan/contract/20200117224124000119344377121279
 Accept: */*
 Cache-Control: no-cache
 
 
 ### 商家合同列表
-GET http://localhost:9100/loan/contract?pageNum=2
+GET http://localhost:8200/loan/contract?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
 ### 商家待审核列表
-GET http://localhost:9100/loan/contract/waitToApprove?pageNum=2
+GET http://localhost:8200/loan/contract/waitToApprove?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
-### 商家待审核列表
-GET http://localhost:9100/loan/contract/approved?pageNum=2
+### 商家待放款列表
+GET http://localhost:8200/loan/contract/approved?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
-### 商家待审核列表
-GET http://localhost:9100/loan/contract/due?pageNum=2
+### 商家当天到期列表
+GET http://localhost:8200/loan/contract/due?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
-### 商家待审核列表
-GET http://localhost:9100/loan/contract/overdue?pageNum=2
+### 商家当天逾期列表
+GET http://localhost:8200/loan/contract/overdue?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 

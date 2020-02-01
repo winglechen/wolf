@@ -30,7 +30,7 @@ wolf:
 
 
 server:
-  port: 9101
+  port: 8100
 
 provider:
   application:

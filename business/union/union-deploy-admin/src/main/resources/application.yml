@@ -32,7 +32,7 @@ wolf:
 
 
 server:
-  port: 9100
+  port: 8200
 
 
 

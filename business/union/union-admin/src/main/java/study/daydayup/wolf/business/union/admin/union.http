@@ -1,5 +1,5 @@
 # hello world
-GET http://localhost:9100/show
+GET http://localhost:8200/show
 Accept: */*
 Cache-Control: no-cache
 

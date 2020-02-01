@@ -2,7 +2,7 @@
 
 
 ###
-POST http://localhost:9101/loan/preview
+POST http://localhost:8100/loan/preview
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 ###
-POST http://localhost:9101/loan/confirm
+POST http://localhost:8100/loan/confirm
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -23,23 +23,23 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:9101/loan/20200117224124000119344377121279
+GET http://localhost:8100/loan/20200117224124000119344377121279
 Accept: */*
 Cache-Control: no-cache
 
 
 ###
-GET http://localhost:9101/loan
+GET http://localhost:8100/loan
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/loan?pageNum=10
+GET http://localhost:8100/loan?pageNum=10
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:9101/loan/living
+GET http://localhost:8100/loan/living
 Accept: */*
 Cache-Control: no-cache
 
