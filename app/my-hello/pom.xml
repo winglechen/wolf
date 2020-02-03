@@ -20,6 +20,7 @@
         <module>hello-sharding</module>
         <module>hello-starter</module>
         <module>hello-starter-web</module>
+        <module>big-data</module>
     </modules>
 
     <dependencies>
