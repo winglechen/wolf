@@ -6,10 +6,12 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+server:
+  port: 9100
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/auto/*.xml
-  type-aliases-package: study.daydayup.wolf.business.*.dal.dataobject
+  type-aliases-package: study.daydayup.wolf.business.union.task.dal.dataobject
 
 pagehelper:
   support-methods-arguments: true
