@@ -60,8 +60,8 @@ public class Sql {
         return new Sql(sql);
     }
 
-    public static Sql iterator(@NonNull String table, Long from, int steps) {
-       return iterator(table, from, steps, OrderEnum.ASC);
+    public static Sql iterator(@NonNull String table, Long from, int limit) {
+       return iterator(table, from, limit, OrderEnum.ASC);
     }
 
     public static Sql iterator(@NonNull String table, Long from, int steps, OrderEnum order) {

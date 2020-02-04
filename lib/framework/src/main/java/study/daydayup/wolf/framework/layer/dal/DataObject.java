@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 public class DataObject {
     private long id;
-    private boolean deleted;
+    private boolean deleteFlag;
     private int version;
 
     private long creator;

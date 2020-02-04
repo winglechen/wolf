@@ -49,8 +49,17 @@ public class Table extends LinkedList<Row>{
         }
     }
 
+    public void addRow(Row row) {
+        addLast(row);
+    }
 
+    public void addRow(Map<String,Object> r) {
+        Row row = Row.of(r);
+        addRow(row);
+    }
 
-
+    public Map<Object, Table> group(String column) {
+        return null;
+    }
 }
 

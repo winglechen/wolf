@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
  * @since 2020/1/14 3:58 下午
  **/
 public class CollectionUtil {
+    public static <E> boolean hasValue(Collection<E> list) {
+        return null != list && !list.isEmpty();
+    }
+
     public  static <C, K> List<K> keys(Collection<C> collection, Function<C,K> getter) {
         return collection.stream()
                 .map(getter)
