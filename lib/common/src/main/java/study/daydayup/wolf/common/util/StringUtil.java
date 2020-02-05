@@ -11,6 +11,11 @@ import javax.annotation.Nullable;
  * @since 2019/12/10 9:51 上午
  **/
 public class StringUtil {
+    public static final String DEFAULT_DELIMITER = "";
+    public static final String BLANK = " ";
+    public static final String COMMA = ",";
+    public static final String COLON = ":";
+
     public static boolean hasValue(String s, boolean trim) {
         if (!trim) {
             return hasValue(s);
@@ -39,7 +44,15 @@ public class StringUtil {
     }
 
     public static String join(String f, @Nullable Object s, Object... r) {
-        Joiner joiner = Joiner.on("").skipNulls();
+        return join(DEFAULT_DELIMITER, f, s, r);
+    }
+
+    public static String join(String delimiter, String f, @Nullable Object s, Object... r) {
+        if (delimiter == null) {
+            delimiter = DEFAULT_DELIMITER;
+        }
+
+        Joiner joiner = Joiner.on(delimiter).skipNulls();
         return joiner.join(f, s, r);
     }
 }

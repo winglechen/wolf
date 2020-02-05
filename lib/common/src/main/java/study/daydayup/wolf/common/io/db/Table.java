@@ -28,7 +28,7 @@ public class Table extends LinkedList<Row>{
         union(table);
     }
 
-    public void join(List<Map<String,Object>> table, String byColumn) {
+    public void join(List<Map<String,Object>> data, String byColumn) {
     }
 
     public void union(List<Map<String,Object>> table) {

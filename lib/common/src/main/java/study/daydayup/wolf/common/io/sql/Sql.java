@@ -2,7 +2,7 @@ package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.util.StringUtil;
 
 import java.util.Map;
 
@@ -13,10 +13,14 @@ import java.util.Map;
  * @since 2020/1/19 1:27 下午
  **/
 public class Sql {
-    private static final String SELECT = "SELECT";
-    private static final String INSERT = "INSERT INTO";
-    private static final String UPDATE = "UPDATE";
-    private static final String DELETE = "DELETE FROM";
+    public static final String DEFAULT_KEY = "id";
+    public static final String DEFAULT_COLUMNS = "*";
+    public static final int DEFAULT_LIMIT = 10;
+
+    private static final String SELECT = "SELECT ";
+    private static final String INSERT = "INSERT INTO ";
+    private static final String UPDATE = "UPDATE ";
+    private static final String DELETE = "DELETE FROM ";
 
     private static final String FROM = " FROM ";
     private static final String WHERE = " WHERE ";
@@ -27,9 +31,8 @@ public class Sql {
     private static final String COMMA = ", ";
     private static final String BLANK = " ";
 
-    private static final String DEFAULT_KEY = "id";
-    private static final String GREATER_THAN = " > ";
-    private static final String LESS_THAN = " < ";
+    private static final String GREATER_THAN = ">";
+    private static final String LESS_THAN = "<";
 
     private StringBuilder sql;
 
@@ -37,42 +40,46 @@ public class Sql {
     private boolean isFirstOrder = true;
 
     public static Sql select(){
-        return select("*");
+        return select(DEFAULT_COLUMNS);
     }
 
     public static Sql select(@NonNull String columns){
-        String sql = Msg.join(SELECT, columns);
+        String sql = StringUtil.join(SELECT, columns);
         return new Sql(sql);
     }
 
     public static Sql insert(@NonNull String table){
-        String sql = Msg.join(INSERT, table);
+        String sql = StringUtil.join(INSERT, table);
         return new Sql(sql);
     }
 
     public static Sql update(@NonNull String table){
-        String sql = Msg.join(UPDATE, table);
+        String sql = StringUtil.join(UPDATE, table);
         return new Sql(sql);
     }
 
     public static Sql delete(@NonNull String table){
-        String sql = Msg.join(DELETE, table);
+        String sql = StringUtil.join(DELETE, table);
         return new Sql(sql);
     }
 
-    public static Sql iterator(@NonNull String table, Long from, int limit) {
-       return iterator(table, from, limit, OrderEnum.ASC);
+    public static Sql scan(@NonNull String table, Long id, int limit) {
+       return scan(table, DEFAULT_COLUMNS, id, limit, OrderEnum.ASC);
     }
 
-    public static Sql iterator(@NonNull String table, Long from, int steps, OrderEnum order) {
-        String clause = order == OrderEnum.DESC ? LESS_THAN : GREATER_THAN;
-        String where = Msg.join(DEFAULT_KEY, clause, from);
+    public static Sql scan(@NonNull String table, String columns, Long id) {
+        return scan(table, columns, id, DEFAULT_LIMIT, OrderEnum.ASC);
+    }
 
-        return select()
+    public static Sql scan(@NonNull String table, String columns, Long id, int limit, OrderEnum order) {
+        String clause = order == OrderEnum.DESC ? LESS_THAN : GREATER_THAN;
+        String where = StringUtil.join(StringUtil.BLANK, DEFAULT_KEY, clause, id);
+
+        return select(columns == null ? DEFAULT_COLUMNS : columns)
                 .from(table)
                 .where(where)
                 .orderBy(DEFAULT_KEY, order)
-                .limit(steps)
+                .limit(limit)
                 ;
     }
 
@@ -85,7 +92,7 @@ public class Sql {
     }
 
     public Sql from(@NonNull String table) {
-        sql.append(FROM).append(table).append(" ");
+        sql.append(FROM).append(table);
         return this;
     }
 
@@ -143,6 +150,6 @@ public class Sql {
     }
 
     public static void main(String[] args) {
-        System.out.println(Sql.iterator("order", 10L, 10).toString());
+        System.out.println(Sql.scan("order", 10L, 10).toString());
     }
 }

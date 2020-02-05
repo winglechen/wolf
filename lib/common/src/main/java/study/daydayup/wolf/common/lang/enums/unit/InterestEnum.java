@@ -12,15 +12,15 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum InterestEnum implements CodeBasedEnum {
-    COMPOUND_PER_YEAR(128, "compound interest rate per year"),
-    COMPOUND_PER_MONTH(127, "compound interest rate per month"),
-    COMPOUND_PER_WEEK(126, "compound interest rate per week"),
-    COMPOUND_PER_DAY(125, "compound interest rate per day"),
+    COMPOUND_PER_YEAR(133, "compound interest rate per year"),
+    COMPOUND_PER_MONTH(132, "compound interest rate per month"),
+    COMPOUND_PER_WEEK(131, "compound interest rate per week"),
+    COMPOUND_PER_DAY(130, "compound interest rate per day"),
 
-    RATE_PER_YEAR(124, "rate per year"),
-    RATE_PER_MONTH(123, "rate per month"),
-    RATE_PER_WEEK(122, "rate per week"),
-    RATE_PER_DAY(121, "rate per day"),
+    RATE_PER_YEAR(126, "rate per year"),
+    RATE_PER_MONTH(125, "rate per month"),
+    RATE_PER_WEEK(124, "rate per week"),
+    RATE_PER_DAY(123, "rate per day"),
 
     FIXED_AMOUNT(121, "fixed amount"),
     FIXED_RATE(120, "fixed rate")

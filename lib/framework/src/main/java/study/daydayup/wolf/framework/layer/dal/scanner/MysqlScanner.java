@@ -4,7 +4,8 @@ import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.io.enums.OrderEnum;
+import study.daydayup.wolf.common.io.sql.Sql;
+import study.daydayup.wolf.framework.layer.task.Source;
 
 import javax.annotation.Resource;
 
@@ -15,23 +16,29 @@ import javax.annotation.Resource;
  * @since 2020/2/4 5:31 下午
  **/
 @Component("mysql")
-public class MysqlScanner implements DbScanner {
-    private static int DEFAULT_LIMIT = 10;
-    private static OrderEnum DEFAULT_ORDER = OrderEnum.ASC;
+public class MysqlScanner implements DbScanner, Source {
+    private static final int MAX_ROW_NUM = 200;
+    private static final int SELECT_LIMIT = 30;
 
     @Resource
     private JdbcTemplate jdbc;
 
-    public Table scan(@NonNull String table, @NonNull Long from) {
-        return scan(table, from, DEFAULT_LIMIT);
+    @Override
+    public Table scan(@NonNull String table, @NonNull String shard) {
+        return scan(table, shard, Sql.DEFAULT_COLUMNS);
     }
 
-    public Table scan(@NonNull String table, @NonNull Long from, int limit) {
-        return scan(table, from, limit, DEFAULT_ORDER);
-    }
-
-    public Table scan(@NonNull String table, @NonNull Long from, int limit, OrderEnum order) {
+    /**
+     *
+     * @param table tableName
+     * @param shard dataCenterKey:dbShardKey:tableShardKey
+     * @param columns columns | default "*"
+     * @return Table
+     */
+    @Override
+    public Table scan(@NonNull String table, @NonNull String shard, @NonNull String columns) {
         return null;
     }
+
 
 }
