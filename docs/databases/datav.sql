@@ -133,9 +133,6 @@ CREATE TABLE IF NOT EXISTS `daily_collection`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '催收日报';
 
-
-
-
 -- 6.催收员日报
 DROP TABLE IF EXISTS `daily_collector`;
 CREATE TABLE IF NOT EXISTS `daily_collector`
@@ -184,7 +181,6 @@ CREATE TABLE IF NOT EXISTS `statistics_collector`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '催收员统计';
-
 
 DROP TABLE IF EXISTS `track_collection`;
 CREATE TABLE `track_collection`

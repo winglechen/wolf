@@ -2,7 +2,7 @@ package study.daydayup.wolf.framework.layer.dal.editor;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.framework.dts.Sink;
+import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import javax.annotation.Resource;
 

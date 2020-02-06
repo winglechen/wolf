@@ -1,4 +1,4 @@
-package study.daydayup.wolf.framework.dts;
+package study.daydayup.wolf.framework.dts.sink;
 
 /**
  * study.daydayup.wolf.framework.layer.task

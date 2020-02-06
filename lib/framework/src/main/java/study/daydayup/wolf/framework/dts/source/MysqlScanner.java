@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.io.sql.Sql;
-import study.daydayup.wolf.framework.dts.Source;
 
 import javax.annotation.Resource;
 
