@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.uc.api.setting.exception;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
-import study.daydayup.wolf.common.lang.string.Msg;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.exception

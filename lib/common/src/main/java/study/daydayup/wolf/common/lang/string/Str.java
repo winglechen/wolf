@@ -1,7 +1,6 @@
 package study.daydayup.wolf.common.lang.string;
 
-
-import com.google.common.base.Joiner;
+import study.daydayup.wolf.common.util.StringUtil;
 
 import javax.annotation.Nullable;
 
@@ -11,11 +10,9 @@ import javax.annotation.Nullable;
  * @author Wingle
  * @since 2019/12/12 3:34 下午
  **/
-public class Msg {
+public class Str {
     public static String join(String f, @Nullable Object s, Object... r) {
-        Joiner joiner = Joiner.on(" ").skipNulls();
-        return joiner.join(f, s, r);
+        return StringUtil.join(StringUtil.BLANK, f, s, r);
     }
-
 
 }

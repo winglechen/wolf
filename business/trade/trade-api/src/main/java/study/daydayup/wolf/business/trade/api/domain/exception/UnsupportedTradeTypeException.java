@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.domain.exception;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.lang.string.Str;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.exception
@@ -15,6 +15,6 @@ public class UnsupportedTradeTypeException extends SystemException {
     }
 
     public UnsupportedTradeTypeException(Integer tradeType) {
-        super(160001, Msg.join("unsupported tradeType: ", tradeType));
+        super(160001, Str.join("unsupported tradeType: ", tradeType));
     }
 }

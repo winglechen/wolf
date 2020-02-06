@@ -96,6 +96,10 @@ public class Sql {
         return this;
     }
 
+    public Sql and(@NonNull String where) {
+        return where(where);
+    }
+
     public Sql where(@NonNull String where) {
         if (isFirstWhere) {
             sql.append(WHERE).append(where);

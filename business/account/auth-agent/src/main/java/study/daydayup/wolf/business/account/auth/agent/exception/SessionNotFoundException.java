@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.account.auth.agent.exception;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.lang.string.Str;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.exception
@@ -11,6 +11,6 @@ import study.daydayup.wolf.common.lang.string.Msg;
  **/
 public class SessionNotFoundException extends SystemException {
     public SessionNotFoundException(String field) {
-        super(111000, Msg.join("Couldn't find field:", field, " in session") );
+        super(111000, Str.join("Couldn't find field:", field, " in session") );
     }
 }

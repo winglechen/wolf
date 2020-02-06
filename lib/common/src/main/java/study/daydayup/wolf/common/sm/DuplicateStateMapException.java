@@ -1,7 +1,7 @@
 package study.daydayup.wolf.common.sm;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.lang.string.Str;
 
 /**
  * study.daydayup.wolf.common.sm
@@ -11,7 +11,7 @@ import study.daydayup.wolf.common.lang.string.Msg;
  **/
 public class DuplicateStateMapException extends SystemException {
     public DuplicateStateMapException(String source, String target, String event) {
-        super(1100, Msg.join(
+        super(1100, Str.join(
                 "Duplicate State Map Found: {",
                 "source: " , source,
                 "; target:", target,

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.domain.exception.buy;
 
 import study.daydayup.wolf.common.lang.exception.BusinessException;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.lang.string.Str;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.exception
@@ -11,6 +11,6 @@ import study.daydayup.wolf.common.lang.string.Msg;
  **/
 public class GoodsSoldOutException extends BusinessException {
     public GoodsSoldOutException(Long  goodsId) {
-        super(160502, Msg.join("Goods sold out:", goodsId));
+        super(160502, Str.join("Goods sold out:", goodsId));
     }
 }

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.trade.api.domain.exception;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
-import study.daydayup.wolf.common.lang.string.Msg;
+import study.daydayup.wolf.common.lang.string.Str;
 
 /**
  * study.daydayup.wolf.business.trade.api.domain.exception
@@ -11,6 +11,6 @@ import study.daydayup.wolf.common.lang.string.Msg;
  **/
 public class InvalidTradeStateException extends SystemException {
     public InvalidTradeStateException(Integer state) {
-        super(160003, Msg.join("Invalid trade state: ", state));
+        super(160003, Str.join("Invalid trade state: ", state));
     }
 }
