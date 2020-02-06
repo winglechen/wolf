@@ -2,8 +2,11 @@ package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
+import study.daydayup.wolf.common.util.CollectionUtil;
 import study.daydayup.wolf.common.util.StringUtil;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +27,7 @@ public class Sql {
 
     private static final String FROM = " FROM ";
     private static final String WHERE = " WHERE ";
+    private static final String VALUES = " VALUES ";
     private static final String AND = " AND ";
     private static final String ORDER_BY = " ORDER BY ";
     private static final String LIMIT = " LIMIT ";
@@ -33,11 +37,16 @@ public class Sql {
 
     private static final String GREATER_THAN = ">";
     private static final String LESS_THAN = "<";
+    private static final String EQUAL = "=";
+
+    private static final String LEFT_BRACKET = "(";
+    private static final String RIGHT_BRACKET = ")";
 
     private StringBuilder sql;
 
     private boolean isFirstWhere = true;
     private boolean isFirstOrder = true;
+    private boolean isFirstValue = true;
 
     public static Sql select(){
         return select(DEFAULT_COLUMNS);
@@ -143,7 +152,42 @@ public class Sql {
         return this;
     }
 
-    public Sql set(Map<String, Object> data) {
+    public Sql set(@NonNull Map<String, Object> data) {
+        if (data.isEmpty()) {
+            return this;
+        }
+
+        boolean isFirst = true;
+        for (Map.Entry<String, Object> entry: data.entrySet()) {
+            if (!isFirst) {
+                sql.append(",").append(BLANK);
+            }
+
+            sql.append(entry.getKey())
+                    .append(BLANK).append(EQUAL).append(BLANK)
+                    .append("'")
+                    .append(entry.getValue())
+                    .append("'");
+
+            isFirst = false;
+        }
+
+        return this;
+    }
+
+    public Sql values(@NonNull Map<String, Object> data) {
+        if (data.isEmpty()) {
+            return this;
+        }
+
+        String columns = String.join(", ", data.keySet());
+        String values = CollectionUtil.join("', '", data.values());
+
+        sql.append(LEFT_BRACKET).append(columns).append(RIGHT_BRACKET)
+                .append(VALUES)
+                .append(LEFT_BRACKET)
+                .append("'") .append(values).append("'")
+                .append(RIGHT_BRACKET);
 
         return this;
     }
@@ -155,5 +199,36 @@ public class Sql {
 
     public static void main(String[] args) {
         System.out.println(Sql.scan("order", 10L, 10).toString());
+
+        String select = Sql.select()
+                .from("order")
+                .where("orderNo = 'abc'")
+                .toString();
+        System.out.println("select: " + select);
+
+        Map<String, Object> values = new HashMap<>();
+        values.put("orderNo", "123456");
+        values.put("amount", 123456);
+        values.put("state", 1);
+        
+        String insert = Sql.insert("order")
+                .values(values)
+                .toString();
+        System.out.println("insert: " + insert);
+
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("amount", 123456);
+        data.put("state", 10);
+        String update = Sql.update("order")
+                .set(data)
+                .where("task_name = 'taskxxx'")
+                .and("table_name = 'tableyyy'")
+                .and("sharding_key = 'shard123'")
+                .limit(1)
+                .toString();
+        System.out.println("update: " + update);
+                
+
     }
 }

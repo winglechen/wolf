@@ -1,5 +1,8 @@
 package study.daydayup.wolf.common.util;
 
+import com.google.common.base.Joiner;
+import lombok.NonNull;
+
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -104,6 +107,15 @@ public class CollectionUtil {
         }
 
         return result;
+    }
+
+    public static <C> String join(@NonNull String delimiter, @NonNull Collection<C> collection) {
+        if (collection.isEmpty()) {
+            return "";
+        }
+
+        Joiner joiner = Joiner.on(delimiter).skipNulls();
+        return joiner.join(collection);
     }
 
 }
