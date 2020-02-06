@@ -199,11 +199,14 @@ public class Sql {
             isFirst = false;
 
             sql.append(entry.getKey()).append(BLANK).append(EQUAL).append(BLANK);
+            Object value = entry.getValue();
 
-            if (prepared) {
+            if (value instanceof Statement) {
+                sql.append(value.toString());
+            } else if (prepared) {
                 sql.append(QUESTION_MARK);
             } else {
-                sql.append(formatValue(entry.getValue()));
+                sql.append(formatValue(value));
             }
         }
 
@@ -237,6 +240,10 @@ public class Sql {
     }
 
     private Object formatValue(Object value) {
+        if (value instanceof Statement) {
+            return value.toString();
+        }
+
         if (value instanceof Number) {
             return value;
         }
@@ -312,6 +319,8 @@ public class Sql {
         Map<String, Object> data = new HashMap<>();
         data.put("amount", 123456);
         data.put("state", 10);
+        data.put("version", SqlStatement.of("version + 1"));
+
         String update = Sql.update("order", true)
                 .set(data)
                 .where("task_name = 'task'")
