@@ -2,8 +2,12 @@ package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
+import study.daydayup.wolf.common.util.DateUtil;
 import study.daydayup.wolf.common.util.StringUtil;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -237,6 +241,18 @@ public class Sql {
             return value;
         }
 
+        if (value instanceof Date) {
+            return StringUtil.join("'", DateUtil.asString((Date) value), "'");
+        }
+
+        if (value instanceof LocalDate) {
+            return StringUtil.join("'", DateUtil.asString((LocalDate) value), "'");
+        }
+
+        if (value instanceof LocalDateTime) {
+            return StringUtil.join("'", DateUtil.asString((LocalDateTime) value), "'");
+        }
+
         return StringUtil.join("'", value, "'");
     }
 
@@ -288,7 +304,7 @@ public class Sql {
         values.put("amount", 123456);
         values.put("state", 1);
 
-        String insert = Sql.insert("order")
+        String insert = Sql.insert("order", true)
                 .values(values)
                 .toString();
         System.out.println("insert: " + insert);
@@ -296,7 +312,7 @@ public class Sql {
         Map<String, Object> data = new HashMap<>();
         data.put("amount", 123456);
         data.put("state", 10);
-        String update = Sql.update("order")
+        String update = Sql.update("order", true)
                 .set(data)
                 .where("task_name = 'task'")
                 .and("table_name = 'table'")
