@@ -1,4 +1,4 @@
-package study.daydayup.wolf.framework.layer.dal.scanner;
+package study.daydayup.wolf.framework.dts.source;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Table;

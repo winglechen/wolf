@@ -1,11 +1,11 @@
-package study.daydayup.wolf.framework.layer.dal.scanner;
+package study.daydayup.wolf.framework.dts.source;
 
 import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.io.sql.Sql;
-import study.daydayup.wolf.framework.layer.task.Source;
+import study.daydayup.wolf.framework.dts.Source;
 
 import javax.annotation.Resource;
 
@@ -31,7 +31,7 @@ public class MysqlScanner implements DbScanner, Source {
     /**
      *
      * @param table tableName
-     * @param shard dataCenterKey:dbShardKey:tableShardKey
+     * @param id id
      * @param columns columns | default "*"
      * @return Table
      */

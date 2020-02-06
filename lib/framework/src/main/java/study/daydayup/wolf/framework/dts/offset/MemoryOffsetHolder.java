@@ -1,11 +1,9 @@
-package study.daydayup.wolf.framework.layer.dal.scanner;
+package study.daydayup.wolf.framework.dts.offset;
 
 import lombok.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * study.daydayup.wolf.framework.layer.dal.scanner

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.framework.layer.dal.scanner;
+package study.daydayup.wolf.framework.dts.offset;
 
 
 import lombok.NonNull;
