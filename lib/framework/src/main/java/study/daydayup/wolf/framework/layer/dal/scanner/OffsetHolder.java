@@ -15,6 +15,6 @@ public interface OffsetHolder {
     void set(String task, String table, String shard, Long id);
 
     default String formatKey(@NonNull String task, @NonNull String table, @NonNull String shard) {
-        return StringUtil.join(StringUtil.COLON, task, table, shard);
+        return StringUtil.joinWith(StringUtil.COLON, task, table, shard);
     }
 }

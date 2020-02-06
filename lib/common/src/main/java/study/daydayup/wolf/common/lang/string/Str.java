@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  **/
 public class Str {
     public static String join(String f, @Nullable Object s, Object... r) {
-        return StringUtil.join(StringUtil.BLANK, f, s, r);
+        return StringUtil.joinWith(StringUtil.BLANK, f, s, r);
     }
 
 }

@@ -44,10 +44,10 @@ public class StringUtil {
     }
 
     public static String join(String f, @Nullable Object s, Object... r) {
-        return join(DEFAULT_DELIMITER, f, s, r);
+        return joinWith(DEFAULT_DELIMITER, f, s, r);
     }
 
-    public static String join(String delimiter, String f, @Nullable Object s, Object... r) {
+    public static String joinWith(String delimiter, String f, @Nullable Object s, Object... r) {
         if (delimiter == null) {
             delimiter = DEFAULT_DELIMITER;
         }
