@@ -2,7 +2,6 @@ package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
-import study.daydayup.wolf.common.util.CollectionUtil;
 import study.daydayup.wolf.common.util.StringUtil;
 
 import java.util.HashMap;
@@ -43,33 +42,54 @@ public class Sql {
     private static final String RIGHT_BRACKET = ")";
 
     private StringBuilder sql;
+    private boolean prepared = false;
 
     private boolean isFirstWhere = true;
     private boolean isFirstOrder = true;
     private boolean isFirstValue = true;
 
     public static Sql select(){
-        return select(DEFAULT_COLUMNS);
+        return select(false);
+    }
+
+    public static Sql select(boolean prepared) {
+        return select(DEFAULT_COLUMNS, prepared);
     }
 
     public static Sql select(@NonNull String columns){
+        return select(columns, false);
+    }
+
+    public static Sql select(@NonNull String columns, boolean prepared){
         String sql = StringUtil.join(SELECT, columns);
-        return new Sql(sql);
+        return new Sql(sql, prepared);
     }
 
     public static Sql insert(@NonNull String table){
+        return insert(table, false);
+    }
+
+    public static Sql insert(@NonNull String table, boolean prepared){
         String sql = StringUtil.join(INSERT, table);
-        return new Sql(sql);
+        return new Sql(sql, prepared);
     }
 
     public static Sql update(@NonNull String table){
+        return update(table, false);
+    }
+
+    public static Sql update(@NonNull String table, boolean prepared){
         String sql = StringUtil.join(UPDATE, table);
-        return new Sql(sql);
+        return new Sql(sql, prepared);
     }
 
     public static Sql delete(@NonNull String table){
+        return delete(table, false);
+    }
+
+    public static Sql delete(@NonNull String table, boolean prepared){
         String sql = StringUtil.join(DELETE, table);
-        return new Sql(sql);
+        return new Sql(sql, prepared);
     }
 
     public static Sql scan(@NonNull String table, Long id, int limit) {
@@ -96,8 +116,18 @@ public class Sql {
         sql = new StringBuilder();
     }
 
+    public Sql(boolean prepared) {
+        sql = new StringBuilder();
+        this.prepared = prepared;
+    }
+
     public Sql(String query) {
         sql = new StringBuilder(query);
+    }
+
+    public Sql(String query, boolean prepared) {
+        sql = new StringBuilder(query);
+        this.prepared = prepared;
     }
 
     public Sql from(@NonNull String table) {
@@ -153,10 +183,6 @@ public class Sql {
     }
 
     public Sql set(@NonNull Map<String, Object> data) {
-        return set(data, false);
-    }
-
-    public Sql set(@NonNull Map<String, Object> data, boolean prepared) {
         if (data.isEmpty()) {
             return this;
         }
@@ -173,7 +199,7 @@ public class Sql {
             if (prepared) {
                 sql.append(QUESTION_MARK);
             } else {
-                sql.append(formatValue(entry.getValue().toString()));
+                sql.append(formatValue(entry.getValue()));
             }
         }
 
@@ -181,10 +207,6 @@ public class Sql {
     }
 
     public Sql values(@NonNull Map<String, Object> data) {
-        return values(data, false);
-    }
-
-    public Sql values(@NonNull Map<String, Object> data, boolean prepared) {
         if (data.isEmpty()) {
             return this;
         }
@@ -205,11 +227,39 @@ public class Sql {
         return this;
     }
 
-    private void addInsertValues(@NonNull Map<String, Object> data) {
-        String values = CollectionUtil.join("', '", data.values());
+    @Override
+    public String toString() {
+        return sql.toString();
+    }
+
+    private Object formatValue(Object value) {
+        if (value instanceof Number) {
+            return value;
+        }
+
+        return StringUtil.join("'", value, "'");
+    }
+
+    private void addInsertColumns(@NonNull Map<String, Object> data) {
+        String columns = String.join(", ", data.keySet());
         sql.append(LEFT_BRACKET)
-                .append("'") .append(values).append("'")
-                .append(RIGHT_BRACKET);
+                .append(columns)
+                .append(RIGHT_BRACKET)
+                .append(VALUES);
+    }
+
+    private void addInsertValues(@NonNull Map<String, Object> data) {
+        sql.append(LEFT_BRACKET);
+
+        Object[] values = data.values().toArray();
+        for (int i = 0, len=values.length; i < len; i++) {
+            if (0 != i) {
+                sql.append(COMMA);
+            }
+            sql.append(formatValue(values[i]));
+        }
+
+        sql.append(RIGHT_BRACKET);
     }
 
     private void addPreparedInsertValues(@NonNull Map<String, Object> data) {
@@ -222,23 +272,6 @@ public class Sql {
             sql.append(QUESTION_MARK);
         }
         sql.append(RIGHT_BRACKET);
-    }
-
-    @Override
-    public String toString() {
-        return sql.toString();
-    }
-
-    private String formatValue(String value) {
-        return StringUtil.join("'", value, "'");
-    }
-
-    private void addInsertColumns(@NonNull Map<String, Object> data) {
-        String columns = String.join(", ", data.keySet());
-        sql.append(LEFT_BRACKET)
-                .append(columns)
-                .append(RIGHT_BRACKET)
-                .append(VALUES);
     }
 
     public static void main(String[] args) {
