@@ -24,8 +24,8 @@ public class MysqlScanner implements DbScanner, Source {
     private JdbcTemplate jdbc;
 
     @Override
-    public Table scan(@NonNull String table, @NonNull String shard) {
-        return scan(table, shard, Sql.DEFAULT_COLUMNS);
+    public Table scan(@NonNull String table, @NonNull Long id) {
+        return scan(table, id, Sql.DEFAULT_COLUMNS);
     }
 
     /**
@@ -36,7 +36,7 @@ public class MysqlScanner implements DbScanner, Source {
      * @return Table
      */
     @Override
-    public Table scan(@NonNull String table, @NonNull String shard, @NonNull String columns) {
+    public Table scan(@NonNull String table, @NonNull Long id, @NonNull String columns) {
         return null;
     }
 

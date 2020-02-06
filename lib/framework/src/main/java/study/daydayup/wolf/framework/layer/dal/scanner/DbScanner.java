@@ -10,6 +10,6 @@ import study.daydayup.wolf.common.io.db.Table;
  * @since 2020/2/4 5:59 下午
  **/
 public interface DbScanner {
-    Table scan(@NonNull String table, @NonNull String shard);
-    Table scan(@NonNull String table, @NonNull String shard, @NonNull String columns);
+    Table scan(@NonNull String table, @NonNull Long id);
+    Table scan(@NonNull String table, @NonNull Long id, @NonNull String columns);
 }
