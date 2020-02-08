@@ -9,15 +9,15 @@ import java.util.Collection;
  * @since 2019/11/25 9:09 下午
  **/
 public class Filter {
-    private Table result;
-    private Table table;
+    private Row result;
+    private Row row;
 
-    Filter(Table table){
-        this.table = table;
-        this.result = new Table();
+    public Filter(Row row){
+        this.row = row;
+        this.result = new Row();
     }
 
-    public Table execute() {
+    public Row execute() {
         return result;
     }
 
