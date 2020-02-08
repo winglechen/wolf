@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.dts.sink;
 
+
 /**
  * study.daydayup.wolf.framework.dts.sink
  *
@@ -7,4 +8,6 @@ package study.daydayup.wolf.framework.dts.sink;
  * @since 2020/2/6 11:54 下午
  **/
 public class Datav implements Sink {
+    public static void main(String[] args) {
+    }
 }

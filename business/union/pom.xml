@@ -21,6 +21,7 @@
         <module>union-app</module>
         <module>union-deploy-app</module>
         <module>union-task</module>
+        <module>union-task-api</module>
 
     </modules>
 

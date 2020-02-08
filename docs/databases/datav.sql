@@ -47,16 +47,6 @@ CREATE TABLE IF NOT EXISTS `daily_loan`
     `loan_amount`          DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '放款金额',
     `first_loan_count`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次放款数',
     `first_loan_amount`    DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次放款金额',
-    `due_count`            INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '到期数',
-    `due_amount`           DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '到期金额',
-    `overdue_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '逾期数',
-    `overdue_amount`       DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '逾期金额',
-    `first_overdue_count`  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首逾数',
-    `first_overdue_amount` DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首逾金额',
-    `repay_count`          INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '还款数',
-    `repay_amount`         DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '还款金额',
-    `loss_count`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '资损数',
-    `loss_amount`          DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '资损金额',
 
     `delete_flag`          TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`           DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -67,23 +57,23 @@ CREATE TABLE IF NOT EXISTS `daily_loan`
 
 
 -- 3.还款日报
-DROP TABLE IF EXISTS `daily_repay`;
-CREATE TABLE IF NOT EXISTS `daily_repay`
-(
-    `id`                        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `org_id`                    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `date`                      DATE NOT NULL COMMENT '统计日期',
-
-    `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `created_at`                DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    UNIQUE INDEX udx_date(`org_id`, `date`),
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
-COMMENT = '还款日报';
+# DROP TABLE IF EXISTS `daily_repay`;
+# CREATE TABLE IF NOT EXISTS `daily_repay`
+# (
+#     `id`                        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+#     `org_id`                    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+#     `date`                      DATE NOT NULL COMMENT '统计日期',
+#
+#     `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+#     `created_at`                DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+#     UNIQUE INDEX udx_date(`org_id`, `date`),
+#     PRIMARY KEY (`id`)
+# ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+# COMMENT = '还款日报';
 
 -- 4.分期日报
-DROP TABLE IF EXISTS `daily_installment`;
-CREATE TABLE IF NOT EXISTS `daily_installment`
+DROP TABLE IF EXISTS `daily_repay`;
+CREATE TABLE IF NOT EXISTS `daily_repay`
 (
     `id`                   BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`               BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
@@ -182,31 +172,44 @@ CREATE TABLE IF NOT EXISTS `statistics_collector`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '催收员统计';
 
+
+DROP TABLE IF EXISTS `track_repay`;
+CREATE TABLE `track_repay`
+(
+    `id`                  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `org_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `date`                DATE                NOT NULL COMMENT '放款日期',
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `udx_date` (`org_id`, `date`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4
+    COMMENT ='新催收日报';
+
 DROP TABLE IF EXISTS `track_collection`;
 CREATE TABLE `track_collection`
 (
     `id`                  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `org_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT '组织ID',
-    `date`                DATE                NOT NULL COMMENT '统计日期',
+    `org_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `date`                DATE                NOT NULL COMMENT '催收日期',
 
-    `new_count`           INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '新增案件数',
-    `new_amount`          DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '新增案件金额',
-    `easy_success_count`  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '当日催当日还数',
-    `easy_success_amount` DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '当日催当日还金额',
+    `new_count`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '新增案件数',
+    `new_amount`          DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '新增案件金额',
+    `easy_success_count`  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '当日催当日还数',
+    `easy_success_amount` DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '当日催当日还金额',
 
-    `d2`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第2天逾期订单数',
-    `d3`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第3天逾期订单数',
-    `d4`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第4天逾期订单数',
-    `d5`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第5天逾期订单数',
-    `d6`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第6天逾期订单数',
-    `d7`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第7天逾期订单数',
-    `w2`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第2周逾期订单数',
-    `w3`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第3周逾期订单数',
-    `w4`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '第4周逾期订单数',
-    `m1`                  INT(11) UNSIGNED    NOT NULL DEFAULT '0' COMMENT '30天逾期订单数',
+    `d2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2天逾期订单数',
+    `d3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3天逾期订单数',
+    `d4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4天逾期订单数',
+    `d5`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第5天逾期订单数',
+    `d6`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第6天逾期订单数',
+    `d7`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第7天逾期订单数',
+    `w2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2周逾期订单数',
+    `w3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3周逾期订单数',
+    `w4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4周逾期订单数',
+    `m1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '30天逾期订单数',
 
-    `bad_debt`            DECIMAL(15, 4)      NOT NULL DEFAULT '0.00' COMMENT '坏账率',
-    `delete_flag`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除，1已删除',
+    `bad_debt`            DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '坏账率',
+    `delete_flag`         TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`          DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `udx_date` (`org_id`, `date`)
