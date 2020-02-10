@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.union.task.config.OffsetConfig;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.business.union.task.dts.sink.DailyLoanSink;
@@ -31,14 +32,16 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     @Resource
     private Offset offset;
     @Resource
-    private ShardingConfig config;
+    private OffsetConfig offsetConfig;
+    @Resource
+    private ShardingConfig shardingConfig;
 
 
     @Override
     public void countLoanContract() {
         String task = "countLoanContract";
 
-        Long lastId = offset.get(task, config.getOffsetTable(), config.getShard());
+        Long lastId = offset.get(task, offsetConfig.getTable(), shardingConfig.getShard());
         if (lastId == null) {
             return;
         }
