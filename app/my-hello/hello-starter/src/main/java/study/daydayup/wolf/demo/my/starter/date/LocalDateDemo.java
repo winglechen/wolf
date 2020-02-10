@@ -1,7 +1,7 @@
 package study.daydayup.wolf.demo.my.starter.date;
 
 import lombok.Data;
-import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

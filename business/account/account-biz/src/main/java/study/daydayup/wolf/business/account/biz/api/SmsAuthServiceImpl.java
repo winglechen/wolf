@@ -11,13 +11,12 @@ import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
-import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * study.daydayup.wolf.business.account.biz.api

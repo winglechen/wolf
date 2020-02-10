@@ -6,7 +6,7 @@ import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseSer
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
-import study.daydayup.wolf.common.util.StringUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;

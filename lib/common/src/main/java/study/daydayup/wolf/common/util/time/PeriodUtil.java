@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.time;
 
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
 import study.daydayup.wolf.common.lang.exception.enums.EnumNotFoundException;

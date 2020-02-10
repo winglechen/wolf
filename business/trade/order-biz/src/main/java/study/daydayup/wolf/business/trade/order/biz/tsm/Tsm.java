@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.trade.api.domain.exception.order.TradeStateN
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.tsm.loan.*;
 import study.daydayup.wolf.common.sm.StateMachine;
-import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.tsm

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.common.lang.string;
 
-import study.daydayup.wolf.common.util.StringUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Nullable;
 

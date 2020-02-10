@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.collection;
 
 import com.google.common.base.Joiner;
 import lombok.NonNull;

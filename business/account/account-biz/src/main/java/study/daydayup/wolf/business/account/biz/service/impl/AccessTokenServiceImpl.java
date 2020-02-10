@@ -7,7 +7,7 @@ import study.daydayup.wolf.business.account.api.entity.License;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccessTokenDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 import study.daydayup.wolf.business.account.biz.service.AccessTokenService;
-import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.util;
 
 import org.junit.Test;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import static org.junit.Assert.*;
 

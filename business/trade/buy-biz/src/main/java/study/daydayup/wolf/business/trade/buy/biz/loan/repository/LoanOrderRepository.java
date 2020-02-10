@@ -8,7 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
-import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 

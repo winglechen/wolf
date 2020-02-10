@@ -1,7 +1,7 @@
 package study.daydayup.wolf.common.model.type.id;
 
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 
 /**
  * study.daydayup.wolf.common.model.type.id

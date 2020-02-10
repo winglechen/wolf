@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyRes
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 
 import javax.annotation.Resource;
 

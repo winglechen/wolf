@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.lang;
 
 import com.google.common.base.Joiner;
 

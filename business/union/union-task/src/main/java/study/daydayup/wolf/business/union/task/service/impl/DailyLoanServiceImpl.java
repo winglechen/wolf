@@ -1,10 +1,13 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.union.task.dts.Statistics;
+import study.daydayup.wolf.business.union.task.dts.sink.DailyLoanSink;
 import study.daydayup.wolf.business.union.task.dts.source.ContractSource;
+import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.util.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 
 import javax.annotation.Resource;
 
@@ -18,6 +21,10 @@ import javax.annotation.Resource;
 public class DailyLoanServiceImpl implements DailyLoanService {
     @Resource
     private ContractSource contractSource;
+    @Resource
+    private DailyLoanTransformation dailyLoanTransformation;
+    @Resource
+    private DailyLoanSink dailyLoanSink;
 
     @Override
     public void countLoanContract() {
@@ -27,8 +34,9 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }
-        System.out.println(contracts);
 
+        Statistics statistics = dailyLoanTransformation.transform(task, contracts);
+        dailyLoanSink.save(task, statistics);
     }
 
     @Override

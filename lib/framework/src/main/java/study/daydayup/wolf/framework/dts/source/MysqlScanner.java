@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 import study.daydayup.wolf.common.io.sql.Sql;
-import study.daydayup.wolf.common.util.CollectionUtil;
-import study.daydayup.wolf.common.util.ListUtil;
-import study.daydayup.wolf.common.util.StringUtil;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -11,7 +11,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractQueryRepository;
-import study.daydayup.wolf.common.util.ListUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 

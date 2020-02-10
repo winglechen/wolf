@@ -3,6 +3,7 @@ package study.daydayup.wolf.common.util;
 import org.junit.Test;
 import study.daydayup.wolf.common.lang.enums.GenderEnum;
 import study.daydayup.wolf.common.lang.exception.enums.UnsupportedEnumCodeException;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 
 import static org.junit.Assert.assertTrue;
 

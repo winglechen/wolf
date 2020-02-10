@@ -1,10 +1,12 @@
 package study.daydayup.wolf.business.union.task.dts.transformation;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.union.task.dts.Statistics;
+import study.daydayup.wolf.common.io.db.Mapper;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.util.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.transeformer.Transformation;
 
 /**
@@ -16,18 +18,22 @@ import study.daydayup.wolf.framework.dts.transeformer.Transformation;
 @Component
 public class DailyLoanTransformation implements Transformation {
 
-    public Statistics transform(Table table) {
+    public Statistics transform(@NonNull String taskName, @NonNull Table table) {
         if (!CollectionUtil.hasValue(table)) {
             return null;
         }
 
-
+        map(table);
 
         return null;
     }
 
-    public Table map(Table table) {
-        return table;
+    public void map(Table table) {
+        for (Row row: table) {
+            Mapper mapper = new Mapper(row)
+                    .toLocalDate("created_at", "created_date")
+                    .toTag();
+        }
     }
 
     public Table filter(Table table) {

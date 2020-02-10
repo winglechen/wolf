@@ -12,6 +12,11 @@ import java.util.Map;
  **/
 @Data
 public class Statistics {
+    private String taskName;
+    private String tableName;
+    private String shardingKey;
+    private Long offset;
+
     private Map<String, Object> key;
     private Map<String, Object> value;
 }

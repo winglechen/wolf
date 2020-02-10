@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.lang;
 
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 import study.daydayup.wolf.common.lang.exception.enums.UnsupportedEnumCodeException;

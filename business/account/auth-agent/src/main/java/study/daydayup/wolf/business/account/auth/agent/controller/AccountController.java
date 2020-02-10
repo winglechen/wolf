@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.common.util.DateUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;

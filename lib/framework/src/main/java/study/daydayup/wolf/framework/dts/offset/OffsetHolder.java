@@ -2,7 +2,7 @@ package study.daydayup.wolf.framework.dts.offset;
 
 
 import lombok.NonNull;
-import study.daydayup.wolf.common.util.StringUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 /**
  * study.daydayup.wolf.framework.layer.dal.scanner

@@ -16,7 +16,7 @@ import study.daydayup.wolf.business.trade.order.biz.dal.dao.InstallmentTermDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
-import study.daydayup.wolf.common.util.ListUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 import study.daydayup.wolf.framework.rpc.page.Page;

@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.buy.biz.base.context;
 import lombok.Getter;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.common.util.EnumUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.base.context

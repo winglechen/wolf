@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.collection;
 
 import java.util.ArrayList;
 import java.util.List;
