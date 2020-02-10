@@ -35,6 +35,6 @@ public class ContractSource implements Source {
         }
 
 
-        return mysqlScanner.scan(TABLE_CONTRACT, lastId, "id, buyer_id, seller_id, created_at");
+        return mysqlScanner.scan(TABLE_CONTRACT, lastId, "id, buyer_id, seller_id, tags created_at");
     }
 }
