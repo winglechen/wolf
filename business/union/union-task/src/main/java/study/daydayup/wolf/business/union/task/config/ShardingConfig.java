@@ -9,10 +9,15 @@ import org.springframework.stereotype.Component;
  * @since 2020/2/10 10:14 上午
  **/
 @Component
-public class Shard {
+public class ShardingConfig {
     private static final String DEFAULT_SHARD = "defaultShard";
+    private static final String TABLE_NAME = "offset_holder";
 
-    public String get() {
+    public String getShard() {
         return DEFAULT_SHARD;
+    }
+
+    public String getOffsetTable() {
+        return TABLE_NAME;
     }
 }

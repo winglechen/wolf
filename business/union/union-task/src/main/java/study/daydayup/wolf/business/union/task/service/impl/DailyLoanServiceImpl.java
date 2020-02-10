@@ -1,13 +1,15 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.union.task.dts.Statistics;
+import study.daydayup.wolf.business.union.task.config.ShardingConfig;
+import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.business.union.task.dts.sink.DailyLoanSink;
 import study.daydayup.wolf.business.union.task.dts.source.ContractSource;
 import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.framework.dts.offset.Offset;
 
 import javax.annotation.Resource;
 
@@ -26,11 +28,22 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     @Resource
     private DailyLoanSink dailyLoanSink;
 
+    @Resource
+    private Offset offset;
+    @Resource
+    private ShardingConfig config;
+
+
     @Override
     public void countLoanContract() {
         String task = "countLoanContract";
 
-        Table contracts = contractSource.latest(task);
+        Long lastId = offset.get(task, config.getOffsetTable(), config.getShard());
+        if (lastId == null) {
+            return;
+        }
+
+        Table contracts = contractSource.latest(task, lastId);
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }

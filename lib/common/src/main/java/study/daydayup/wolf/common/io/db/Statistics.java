@@ -1,7 +1,8 @@
-package study.daydayup.wolf.business.union.task.dts;
+package study.daydayup.wolf.common.io.db;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +18,15 @@ public class Statistics {
     private String shardingKey;
     private Long offset;
 
+    private List<String> keyColumns;
+
+    /**
+     * key column map
+     * {
+     *     columnA : columnA.value
+     *     columnB : columnB.value
+     * }
+     */
     private Map<String, Object> key;
     private Map<String, Object> value;
 }

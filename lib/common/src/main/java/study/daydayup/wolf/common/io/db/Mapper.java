@@ -13,8 +13,6 @@ import java.util.Date;
  * @since 2020/2/8 6:25 下午
  **/
 public class Mapper {
-    private static final String DEFAULT_TAG_COLUMN = "tags";
-
     private Row row;
 
     public Mapper(@NonNull Row row) {
@@ -38,7 +36,7 @@ public class Mapper {
     }
 
     public Mapper toTag() {
-        return toTag(DEFAULT_TAG_COLUMN);
+        return toTag(Table.DEFAULT_TAG_COLUMN);
     }
 
     public Mapper toTag(@NonNull String column) {

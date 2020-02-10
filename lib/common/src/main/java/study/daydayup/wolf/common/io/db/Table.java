@@ -15,6 +15,8 @@ import java.util.Map;
  **/
 @Data
 public class Table extends LinkedList<Row>{
+    public static final String DEFAULT_TAG_COLUMN = "tags";
+    public static final String DEFAULT_ID_COLUMN = "id";
 
     public static Table of(List<Map<String,Object>> table) {
         return new Table(table);

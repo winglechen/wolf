@@ -1,5 +1,8 @@
 package study.daydayup.wolf.common.io.db;
 
+import lombok.NonNull;
+import study.daydayup.wolf.common.model.type.string.Tag;
+
 import java.util.Collection;
 
 /**
@@ -60,6 +63,20 @@ public class Matcher {
     }
 
     public Matcher in(String column, Collection<Object> values) {
+        return this;
+    }
+
+
+    public Matcher containsTag(@NonNull String tags) {
+        return containsTag(tags, Table.DEFAULT_TAG_COLUMN);
+    }
+
+    public Matcher containsTag(@NonNull String tags, @NonNull String column) {
+        Object value = row.get(column);
+        if (!(value instanceof Tag)) {
+            return this;
+        }
+
         return this;
     }
 
