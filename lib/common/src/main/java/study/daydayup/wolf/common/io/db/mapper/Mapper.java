@@ -2,8 +2,10 @@ package study.daydayup.wolf.common.io.db.mapper;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.model.type.string.Tag;
+import study.daydayup.wolf.common.util.DateUtil;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * study.daydayup.wolf.common.io.db
@@ -16,7 +18,7 @@ public class Mapper {
 
     private Row row;
 
-    public Mapper(Row row) {
+    public Mapper(@NonNull Row row) {
         this.row = row;
     }
 
@@ -24,7 +26,14 @@ public class Mapper {
         return toLocalDate(column, null);
     }
 
-    public Mapper toLocalDate(@NonNull String column, String newColumn) {
+    public Mapper toLocalDate(@NonNull String column, @NonNull String newColumn) {
+        Date value = (Date) row.get(column);
+        if (value == null) {
+            return this;
+        }
+
+        String key = null != newColumn ? newColumn : column;
+        row.put(key, DateUtil.asLocalDate(value));
 
         return this;
     }
@@ -34,7 +43,12 @@ public class Mapper {
     }
 
     public Mapper toTag(@NonNull String column) {
+        String value = (String) row.get(column);
+        if (value == null) {
+            return this;
+        }
 
+        row.put(column, new Tag(value));
         return this;
     }
 
