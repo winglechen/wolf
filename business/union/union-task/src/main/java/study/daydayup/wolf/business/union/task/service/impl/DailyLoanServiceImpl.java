@@ -27,6 +27,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }
+        System.out.println(contracts);
 
     }
 

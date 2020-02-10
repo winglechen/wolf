@@ -4,12 +4,14 @@ import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.sql.Sql;
+import study.daydayup.wolf.common.util.CollectionUtil;
 import study.daydayup.wolf.common.util.DateUtil;
 import study.daydayup.wolf.common.util.StringUtil;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -86,13 +88,13 @@ public class MysqlOffsetHolder implements OffsetHolder {
                 .limit(1)
                 .toString();
 
-        Long offset = jdbc.queryForObject(sql, Long.class);
-        if (offset == null) {
+        List<Long> offsetList = jdbc.queryForList(sql, Long.class);
+        if (!CollectionUtil.hasValue(offsetList)) {
             createOffset(task, table, shard);
-            offset = 0L;
+            return 0L;
         }
 
-        return offset;
+        return offsetList.get(0);
     }
 
 }

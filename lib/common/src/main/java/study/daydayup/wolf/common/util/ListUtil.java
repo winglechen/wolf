@@ -17,4 +17,13 @@ public class ListUtil {
     public static <E> boolean hasValue(List<E> list) {
         return null != list && !list.isEmpty();
     }
+
+    public static <E> E last(List<E> list) {
+        if (!hasValue(list)) {
+            return null;
+        }
+
+        int lastIndex = list.size() - 1;
+        return list.get(lastIndex);
+    }
 }

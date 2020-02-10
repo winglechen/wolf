@@ -20,11 +20,11 @@ public class Table extends LinkedList<Row>{
         return new Table(table);
     }
 
-    Table() {
+    public Table() {
         super();
     }
 
-    Table(List<Map<String,Object>> table) {
+    public Table(List<Map<String,Object>> table) {
         union(table);
     }
 
