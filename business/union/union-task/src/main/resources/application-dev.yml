@@ -91,9 +91,10 @@ spring:
         daily_repay.actual-data-nodes: datav.daily_repay
         daily_collection.actual-data-nodes: datav.daily_collection
         daily_collector.actual-data-nodes: datav.daily_collector
+        model_collector.actual-data-nodes: datav.model_collector
         tract_repay.actual-data-nodes: datav.tract_repay
-        tract_collection.actual-data-nodes: datav.tract_collection
         offset_holder.actual-data-nodes: datav.offset_holder
+
     props:
       sql:
         show: true

@@ -213,6 +213,7 @@ CREATE TABLE `track_repay`
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4
 COMMENT ='新催收日报';
 
+-- offsetHolder
 DROP TABLE IF EXISTS `offset_holder`;
 CREATE TABLE IF NOT EXISTS `offset_holder`
 (
