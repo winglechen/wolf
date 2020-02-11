@@ -5,7 +5,9 @@ import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.model.type.string.Tag;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.common.io.db
@@ -13,21 +15,33 @@ import java.util.Collection;
  * @author Wingle
  * @since 2019/11/25 9:09 下午
  **/
-public class MatcherGateway implements Matcher {
-    private Row row;
+public class MatcherGateway extends AbstractMatcher implements Matcher {
+    private List<Matcher> matcherList;
 
     public MatcherGateway(){
+        matcherList = new ArrayList<>();
     }
 
+    @Override
     public boolean match(Row row) {
         return false;
     }
 
-    public MatcherGateway equal(String column, Object value) {
+    public MatcherGateway equal(String column) {
+        Matcher matcher = new EqualMatcher();
+
+        matcher.init(column);
+        matcherList.add(matcher);
+
         return this;
     }
 
-    public MatcherGateway notEqual(String column, Object value) {
+    public MatcherGateway notEqual(String column) {
+        Matcher matcher = new NotEqualMatcher();
+
+        matcher.init(column);
+        matcherList.add(matcher);
+
         return this;
     }
 
