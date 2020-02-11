@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.io.db;
+package study.daydayup.wolf.common.io.db.aggregator;
 
 
 import java.math.BigDecimal;
@@ -9,15 +9,12 @@ import java.math.BigDecimal;
  * @author Wingle
  * @since 2020/2/4 5:19 下午
  **/
-public class Aggregator {
-    private Table table;
-
-    Aggregator(Table table) {
-        this.table = table;
+public class AggregatorGateway {
+    public AggregatorGateway() {
     }
 
     public int count() {
-        return table.size();
+        return 0;
     }
 
     public Long minId() {

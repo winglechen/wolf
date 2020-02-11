@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.mq.broker.dal.dao.TaskDAO">
+<!DOCTYPE mapperGateway PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapperGateway.dtd">
+<mapperGateway namespace="study.daydayup.wolf.mq.broker.dal.dao.TaskDAO">
     <update id="updateStateById" parameterType="study.daydayup.wolf.mq.broker.dal.dataobject.TaskDO">
         UPDATE wmq_task
         SET
@@ -9,4 +9,4 @@
         WHERE
         id = #{id}
     </update>
-</mapper>
+</mapperGateway>

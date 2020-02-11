@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO">
+<!DOCTYPE mapperGateway PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapperGateway.dtd">
+<mapperGateway namespace="study.daydayup.wolf.business.goods.biz.dal.dao.GoodsLoanDAO">
 
 
     <update id="updateByGoodsIdSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO">
@@ -83,4 +83,4 @@
         and org_id = #{orgId, jdbcType=BIGINT}
         limit 1
     </select>
-</mapper>
+</mapperGateway>

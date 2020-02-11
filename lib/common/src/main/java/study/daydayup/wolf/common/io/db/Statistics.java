@@ -64,6 +64,14 @@ public class Statistics {
         currentData.put(key, value);
     }
 
+    public Object get(@NonNull String key) {
+        if (null == currentData) {
+            throw new IllegalArgumentException("Please addRow first!");
+        }
+
+        return currentData.get(key);
+    }
+
     public boolean setCurrentKey(@NonNull String key) {
         Row row = data.get(key);
         if (row == null) {

@@ -22,6 +22,6 @@
 
 
     <mappers>
-        <mapper resource="sqlmap/MessageDAO.xml"/>
+        <mapperGateway resource="sqlmap/MessageDAO.xml"/>
     </mappers>
 </configuration>

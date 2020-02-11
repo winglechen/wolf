@@ -1,6 +1,8 @@
-package study.daydayup.wolf.common.io.db;
+package study.daydayup.wolf.common.io.db.mapper;
 
 import lombok.NonNull;
+import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.common.util.time.DateUtil;
 
@@ -12,18 +14,18 @@ import java.util.Date;
  * @author Wingle
  * @since 2020/2/8 6:25 下午
  **/
-public class Mapper {
+public class MapperGateway {
     private Row row;
 
-    public Mapper(@NonNull Row row) {
+    public MapperGateway(@NonNull Row row) {
         this.row = row;
     }
 
-    public Mapper toLocalDate(@NonNull String column) {
+    public MapperGateway toLocalDate(@NonNull String column) {
         return toLocalDate(column, null);
     }
 
-    public Mapper toLocalDate(@NonNull String column, @NonNull String newColumn) {
+    public MapperGateway toLocalDate(@NonNull String column, @NonNull String newColumn) {
         Date value = (Date) row.get(column);
         if (value == null) {
             return this;
@@ -35,11 +37,22 @@ public class Mapper {
         return this;
     }
 
-    public Mapper toTag() {
+    public MapperGateway rename(@NonNull String column, @NonNull String newColumn) {
+        Object value = row.get(column);
+        if (value == null) {
+            return this;
+        }
+
+        row.remove(column);
+        row.put(newColumn, value);
+        return this;
+    }
+
+    public MapperGateway toTag() {
         return toTag(Table.DEFAULT_TAG_COLUMN);
     }
 
-    public Mapper toTag(@NonNull String column) {
+    public MapperGateway toTag(@NonNull String column) {
         String value = (String) row.get(column);
         if (value == null) {
             return this;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.business.account.biz.dal.dao.VerifyCodeDAO">
+<!DOCTYPE mapperGateway PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapperGateway.dtd">
+<mapperGateway namespace="study.daydayup.wolf.business.account.biz.dal.dao.VerifyCodeDAO">
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
@@ -141,4 +141,4 @@
   </update>
 
 
-</mapper>
+</mapperGateway>
