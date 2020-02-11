@@ -1,6 +1,8 @@
 package study.daydayup.wolf.common.io.db.aggregator;
 
 
+import study.daydayup.wolf.common.io.db.Row;
+
 import java.math.BigDecimal;
 
 /**
@@ -9,8 +11,13 @@ import java.math.BigDecimal;
  * @author Wingle
  * @since 2020/2/4 5:19 下午
  **/
-public class AggregatorGateway {
+public class AggregatorGateway implements Aggregator {
     public AggregatorGateway() {
+    }
+
+    @Override
+    public void aggregate(Row row) {
+
     }
 
     public int count() {

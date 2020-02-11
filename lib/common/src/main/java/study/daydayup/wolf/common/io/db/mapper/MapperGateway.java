@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Wingle
  * @since 2020/2/8 6:25 下午
  **/
-public class MapperGateway {
+public class MapperGateway implements Mapper {
     private Row row;
 
     public MapperGateway() {
@@ -22,6 +22,12 @@ public class MapperGateway {
 
     public MapperGateway(@NonNull Row row) {
         this.row = row;
+    }
+
+
+    @Override
+    public void map(Row row) {
+
     }
 
     public MapperGateway toLocalDate(@NonNull String column) {

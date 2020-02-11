@@ -18,10 +18,18 @@ public class Operator {
 
     public void operate(Row row) {
         if (mapper != null) {
-
+            mapper.map(row);
         }
 
+        if (null != matcher) {
+            if (!matcher.match(row)) {
+                return;
+            }
+        }
 
+        if (null != aggregator) {
+            aggregator.aggregate(row);
+        }
     }
 
     public MatcherGateway match() {
