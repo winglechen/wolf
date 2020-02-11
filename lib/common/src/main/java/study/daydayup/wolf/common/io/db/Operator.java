@@ -17,6 +17,10 @@ public class Operator {
     private Statistics statistics;
 
     public void operate(Row row) {
+        if (mapper != null) {
+
+        }
+
 
     }
 
@@ -34,5 +38,13 @@ public class Operator {
         }
 
         return aggregator;
+    }
+
+    public MapperGateway map() {
+        if (mapper == null) {
+            mapper = new MapperGateway();
+        }
+
+        return mapper;
     }
 }

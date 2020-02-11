@@ -17,6 +17,9 @@ import java.util.Date;
 public class MapperGateway {
     private Row row;
 
+    public MapperGateway() {
+    }
+
     public MapperGateway(@NonNull Row row) {
         this.row = row;
     }
