@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.io.db;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import study.daydayup.wolf.common.io.enums.UnionEnum;
 
 import java.util.LinkedList;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @author Wingle
  * @since 2019/7/12 10:30 AM
  **/
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class Table extends LinkedList<Row>{
     public static final String DEFAULT_TAG_COLUMN = "tags";

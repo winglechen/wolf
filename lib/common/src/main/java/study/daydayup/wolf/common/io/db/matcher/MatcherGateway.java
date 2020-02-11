@@ -45,31 +45,66 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return this;
     }
 
-    public MatcherGateway isNull(String column, Object value) {
+    public MatcherGateway isNull(String column) {
+        Matcher matcher = new NullMatcher();
+
+        matcher.init(column);
+        matcherList.add(matcher);
+
         return this;
     }
 
-    public MatcherGateway notNull(String column, Object value) {
+    public MatcherGateway notNull(String column) {
+        Matcher matcher = new NotNullMatcher();
+
+        matcher.init(column);
+        matcherList.add(matcher);
+
         return this;
     }
 
     public MatcherGateway greaterThan(String column, Object value) {
+        Matcher matcher = new GreaterMatcher();
+
+        matcher.init(column, value);
+        matcherList.add(matcher);
+
         return this;
     }
 
     public MatcherGateway greaterOrEqual(String column, Object value) {
+        Matcher matcher = new GreaterOrEqualMatcher();
+
+        matcher.init(column, value);
+        matcherList.add(matcher);
+
         return this;
     }
 
     public MatcherGateway lessThan(String column, Object value) {
+        Matcher matcher = new LessMatcher();
+
+        matcher.init(column, value);
+        matcherList.add(matcher);
+
         return this;
     }
 
     public MatcherGateway lessOrEqual(String column, Object value) {
+        Matcher matcher = new LessOrEqualMatcher();
+
+        matcher.init(column, value);
+        matcherList.add(matcher);
+
         return this;
     }
 
     public MatcherGateway between(String column, Object start, Object end) {
+        BetweenMatcher matcher = new BetweenMatcher();
+
+        matcher.init(column, start, end);
+        matcherList.add(matcher);
+
         return this;
     }
 
@@ -87,10 +122,6 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     }
 
     public MatcherGateway hasTag(@NonNull String tags, @NonNull String column) {
-        Object value = row.get(column);
-        if (!(value instanceof Tag)) {
-            return this;
-        }
 
         return this;
     }
