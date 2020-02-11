@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.io.db.aggregator;
 
 
 import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.io.db.Statistics;
 
 import java.math.BigDecimal;
 
@@ -12,7 +13,10 @@ import java.math.BigDecimal;
  * @since 2020/2/4 5:19 下午
  **/
 public class AggregatorGateway implements Aggregator {
-    public AggregatorGateway() {
+    private Statistics statistics;
+
+    public AggregatorGateway(Statistics statistics) {
+        this.statistics = statistics;
     }
 
     @Override

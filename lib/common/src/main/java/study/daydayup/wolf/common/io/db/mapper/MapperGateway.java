@@ -6,7 +6,9 @@ import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.common.util.time.DateUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.common.io.db
@@ -14,20 +16,24 @@ import java.util.Date;
  * @author Wingle
  * @since 2020/2/8 6:25 下午
  **/
-public class MapperGateway implements Mapper {
+public class MapperGateway extends AbstractMapper implements Mapper {
     private Row row;
+    private List<Mapper> mapperList;
 
     public MapperGateway() {
+        mapperList = new ArrayList<>();
     }
-
-    public MapperGateway(@NonNull Row row) {
-        this.row = row;
-    }
-
 
     @Override
-    public void map(Row row) {
+    public void map(@NonNull Row row) {
+        if (mapperList.isEmpty()) {
+            return;
+        }
 
+        this.row = row;
+        for (Mapper mapper : mapperList) {
+            mapper.map(row);
+        }
     }
 
     public MapperGateway toLocalDate(@NonNull String column) {
@@ -35,25 +41,20 @@ public class MapperGateway implements Mapper {
     }
 
     public MapperGateway toLocalDate(@NonNull String column, @NonNull String newColumn) {
-        Date value = (Date) row.get(column);
-        if (value == null) {
-            return this;
-        }
+        Mapper mapper = new LocalDateMapper();
 
-        String key = null != newColumn ? newColumn : column;
-        row.put(key, DateUtil.asLocalDate(value));
+        mapper.init(column, newColumn);
+        mapperList.add(mapper);
 
         return this;
     }
 
     public MapperGateway rename(@NonNull String column, @NonNull String newColumn) {
-        Object value = row.get(column);
-        if (value == null) {
-            return this;
-        }
+        Mapper mapper = new RenameMapper();
 
-        row.remove(column);
-        row.put(newColumn, value);
+        mapper.init(column, newColumn);
+        mapperList.add(mapper);
+
         return this;
     }
 
@@ -62,12 +63,11 @@ public class MapperGateway implements Mapper {
     }
 
     public MapperGateway toTag(@NonNull String column) {
-        String value = (String) row.get(column);
-        if (value == null) {
-            return this;
-        }
+        Mapper mapper = new TagMapper();
 
-        row.put(column, new Tag(value));
+        mapper.init(column, newColumn);
+        mapperList.add(mapper);
+
         return this;
     }
 

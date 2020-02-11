@@ -9,7 +9,7 @@ import study.daydayup.wolf.common.io.db.Statistics;
  * @author Wingle
  * @since 2020/2/11 5:28 下午
  **/
-public class AbstractAggregator {
+public abstract class AbstractAggregator {
     protected String rowColumn;
     protected String statisticsColumn;
     protected Row row;

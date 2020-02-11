@@ -16,6 +16,10 @@ public class Operator {
     private AggregatorGateway aggregator;
     private Statistics statistics;
 
+    public Operator(Statistics statistics) {
+        this.statistics = statistics;
+    }
+
     public void operate(Row row) {
         if (mapper != null) {
             mapper.map(row);
@@ -42,7 +46,7 @@ public class Operator {
 
     public AggregatorGateway aggregate() {
         if (aggregator == null) {
-            aggregator = new AggregatorGateway();
+            aggregator = new AggregatorGateway(statistics);
         }
 
         return aggregator;

@@ -30,7 +30,7 @@ public class DailyLoanTransformation implements Transformation {
         statistics = new Statistics();
         statistics.addKeyColumn("org_id", "date");
 
-        Operator countOperator = new Operator();
+        Operator countOperator = new Operator(statistics);
         countOperator.match()
                 .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
         countOperator.aggregate();
