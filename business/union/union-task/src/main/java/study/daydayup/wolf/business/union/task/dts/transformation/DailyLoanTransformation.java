@@ -25,35 +25,25 @@ public class DailyLoanTransformation implements Transformation {
         if (!CollectionUtil.hasValue(table)) {
             return null;
         }
-        map(table);
 
         statistics = new Statistics();
         statistics.addKeyColumn("org_id", "date");
 
         Operator countOperator = new Operator(statistics);
+        countOperator.map()
+                .rename("seller_id", "org_id")
+                .toLocalDate("created_at", "date")
+                .toTag();
+
         countOperator.match()
                 .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
         countOperator.aggregate();
 
-        calculate(table);
 
         return statistics;
     }
 
-    private void map(Table table) {
-        for (Row row: table) {
-            MapperGateway mapperGateway = new MapperGateway(row)
-                    .rename("seller_id", "org_id")
-                    .toLocalDate("created_at", "date")
-                    .toTag();
-        }
-    }
 
-    private void calculate(Table table) {
-        for (Row row : table) {
-            statistics.addRow(row);
-        }
-    }
 
 
 
