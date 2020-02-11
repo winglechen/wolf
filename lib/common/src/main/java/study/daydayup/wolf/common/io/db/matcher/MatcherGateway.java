@@ -68,11 +68,11 @@ public class MatcherGateway implements Matcher {
     }
 
 
-    public MatcherGateway containsTag(@NonNull String tags) {
-        return containsTag(tags, Table.DEFAULT_TAG_COLUMN);
+    public MatcherGateway hasTag(@NonNull String tags) {
+        return hasTag(tags, Table.DEFAULT_TAG_COLUMN);
     }
 
-    public MatcherGateway containsTag(@NonNull String tags, @NonNull String column) {
+    public MatcherGateway hasTag(@NonNull String tags, @NonNull String column) {
         Object value = row.get(column);
         if (!(value instanceof Tag)) {
             return this;
