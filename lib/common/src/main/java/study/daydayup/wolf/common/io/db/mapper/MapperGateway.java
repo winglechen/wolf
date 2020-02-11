@@ -3,11 +3,8 @@ package study.daydayup.wolf.common.io.db.mapper;
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.model.type.string.Tag;
-import study.daydayup.wolf.common.util.time.DateUtil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +14,6 @@ import java.util.List;
  * @since 2020/2/8 6:25 下午
  **/
 public class MapperGateway extends AbstractMapper implements Mapper {
-    private Row row;
     private List<Mapper> mapperList;
 
     public MapperGateway() {
@@ -30,7 +26,6 @@ public class MapperGateway extends AbstractMapper implements Mapper {
             return;
         }
 
-        this.row = row;
         for (Mapper mapper : mapperList) {
             mapper.map(row);
         }
