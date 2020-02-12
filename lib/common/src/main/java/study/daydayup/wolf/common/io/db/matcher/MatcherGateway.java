@@ -23,7 +23,17 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
 
     @Override
     public boolean match(Row row) {
-        return false;
+        if (matcherList.isEmpty()) {
+            return true;
+        }
+
+        for (Matcher matcher : matcherList) {
+            if (!matcher.match(row)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public MatcherGateway equal(String column) {
