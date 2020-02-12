@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.io.db.matcher;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.model.type.string.Tag;
 
 /**
  * study.daydayup.wolf.common.io.db.matcher
@@ -19,6 +20,20 @@ public class TagMatcher extends AbstractMatcher implements Matcher {
 
     @Override
     public boolean match(Row row) {
-        return false;
+        Object value = row.get(column);
+        if (value == null) {
+            return false;
+        }
+
+        Tag obj;
+        if (value instanceof String) {
+            obj = new Tag((String)value);
+        } else if (value instanceof Tag) {
+            obj = (Tag)value;
+        } else {
+            return false;
+        }
+
+        return obj.contains(tag);
     }
 }

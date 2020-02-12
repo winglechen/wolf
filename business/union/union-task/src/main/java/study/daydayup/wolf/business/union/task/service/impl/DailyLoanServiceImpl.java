@@ -46,7 +46,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
             return;
         }
 
-        Table contracts = contractSource.latest(task, lastId);
+        Table contracts = contractSource.latest(lastId);
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }

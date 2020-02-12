@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.union.task.dts.source;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.framework.dts.offset.Offset;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
 import study.daydayup.wolf.framework.dts.source.Source;
 
@@ -22,7 +21,7 @@ public class ContractSource implements Source {
     @Resource
     private MysqlScanner mysqlScanner;
 
-    public Table latest(String task, long lastId) {
+    public Table latest(long lastId) {
         return mysqlScanner.scan(TABLE_CONTRACT, lastId, "id, buyer_id, seller_id, tags created_at");
     }
 }

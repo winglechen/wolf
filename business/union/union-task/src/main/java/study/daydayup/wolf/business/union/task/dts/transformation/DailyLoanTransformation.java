@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.common.io.db.Operator;
-import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
@@ -19,14 +18,13 @@ import study.daydayup.wolf.framework.dts.transeformer.Transformation;
  **/
 @Component
 public class DailyLoanTransformation implements Transformation {
-    private Statistics statistics;
 
     public Statistics transform(@NonNull Table table) {
         if (!CollectionUtil.hasValue(table)) {
             return null;
         }
 
-        statistics = new Statistics();
+        Statistics statistics = new Statistics();
         statistics.addKeyColumn("org_id", "date");
 
         initOperator(statistics);
