@@ -3,6 +3,7 @@ package study.daydayup.wolf.common.io.db;
 import study.daydayup.wolf.common.io.db.aggregator.AggregatorGateway;
 import study.daydayup.wolf.common.io.db.mapper.MapperGateway;
 import study.daydayup.wolf.common.io.db.matcher.MatcherGateway;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,16 @@ public class Operator {
         operatorList.add(operator);
 
         return operator;
+    }
+
+    public static void execute(Table table) {
+        if (!CollectionUtil.hasValue(table)) {
+            return;
+        }
+
+        for (Row row : table) {
+            execute(row);
+        }
     }
 
     public static void execute(Row row) {

@@ -28,8 +28,9 @@ public class DailyLoanTransformation implements Transformation {
 
         statistics = new Statistics();
         statistics.addKeyColumn("org_id", "date");
-        initOperator(statistics);
 
+        initOperator(statistics);
+        Operator.execute(table);
 
         return statistics;
     }
@@ -53,11 +54,5 @@ public class DailyLoanTransformation implements Transformation {
                 .hasTag(TradeTag.FIRST_TRADE);
         operator.aggregate()
                 .count("first_request_count");
-    }
-
-    private void transformTable(Table table) {
-        for (Row row : table) {
-            Operator.execute(row);
-        }
     }
 }
