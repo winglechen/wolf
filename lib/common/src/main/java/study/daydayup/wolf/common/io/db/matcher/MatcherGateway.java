@@ -75,8 +75,7 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     public MatcherGateway greaterThan(String column, Object value) {
         Matcher matcher = new GreaterMatcher();
 
-        matcher.init(column, value);
-        matcherList.add(matcher);
+        initMatcher(matcher, column, value);
 
         return this;
     }
@@ -84,8 +83,7 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     public MatcherGateway greaterOrEqual(String column, Object value) {
         Matcher matcher = new GreaterOrEqualMatcher();
 
-        matcher.init(column, value);
-        matcherList.add(matcher);
+        initMatcher(matcher, column, value);
 
         return this;
     }
@@ -93,8 +91,7 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     public MatcherGateway lessThan(String column, Object value) {
         Matcher matcher = new LessMatcher();
 
-        matcher.init(column, value);
-        matcherList.add(matcher);
+        initMatcher(matcher, column, value);
 
         return this;
     }
@@ -102,8 +99,7 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     public MatcherGateway lessOrEqual(String column, Object value) {
         Matcher matcher = new LessOrEqualMatcher();
 
-        matcher.init(column, value);
-        matcherList.add(matcher);
+        initMatcher(matcher, column, value);
 
         return this;
     }
@@ -135,7 +131,6 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return this;
     }
 
-
     public MatcherGateway hasTag(@NonNull String tags) {
         return hasTag(Table.DEFAULT_TAG_COLUMN, tags);
     }
@@ -147,6 +142,11 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         matcherList.add(matcher);
 
         return this;
+    }
+
+    private void initMatcher(@NonNull Matcher matcher, @NonNull String column, @NonNull Object value) {
+        matcher.init(column, value);
+        matcherList.add(matcher);
     }
 
 }
