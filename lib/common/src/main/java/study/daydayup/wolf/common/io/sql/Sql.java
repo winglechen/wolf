@@ -1,7 +1,6 @@
 package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
-import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -46,7 +45,7 @@ public class Sql {
     private static final String RIGHT_BRACKET = ")";
 
     private StringBuilder sql;
-    private boolean prepared = false;
+    private boolean prepared;
 
     private List<Object> preparedValues;
     private boolean isFirstWhere = true;
@@ -157,10 +156,7 @@ public class Sql {
         }
         isFirstWhere = false;
 
-        for (Object o : ps) {
-            preparedValues.add(o);
-        }
-
+        preparedValues.addAll(Arrays.asList(ps));
         return this;
     }
 
