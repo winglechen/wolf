@@ -29,6 +29,7 @@ public class Sql {
 
     private static final String FROM = " FROM ";
     private static final String WHERE = " WHERE ";
+    private static final String SET = " SET ";
     private static final String VALUES = " VALUES ";
     private static final String AND = " AND ";
     private static final String ORDER_BY = " ORDER BY ";
@@ -65,7 +66,7 @@ public class Sql {
     }
 
     public static Sql select(@NonNull String columns, boolean prepared){
-        String sql = StringUtil.join(SELECT, columns);
+        String sql = StringUtil.join(SELECT, StringUtil.quote(columns, true));
         return new Sql(sql, prepared);
     }
 
@@ -74,7 +75,7 @@ public class Sql {
     }
 
     public static Sql insert(@NonNull String table, boolean prepared){
-        String sql = StringUtil.join(INSERT, table);
+        String sql = StringUtil.join(INSERT, StringUtil.quote(table));
         return new Sql(sql, prepared);
     }
 
@@ -83,7 +84,7 @@ public class Sql {
     }
 
     public static Sql update(@NonNull String table, boolean prepared){
-        String sql = StringUtil.join(UPDATE, table);
+        String sql = StringUtil.join(UPDATE, StringUtil.quote(table));
         return new Sql(sql, prepared);
     }
 
@@ -92,7 +93,7 @@ public class Sql {
     }
 
     public static Sql delete(@NonNull String table, boolean prepared){
-        String sql = StringUtil.join(DELETE, table);
+        String sql = StringUtil.join(DELETE, StringUtil.quote(table));
         return new Sql(sql, prepared);
     }
 
@@ -135,7 +136,7 @@ public class Sql {
     }
 
     public Sql from(@NonNull String table) {
-        sql.append(FROM).append(table);
+        sql.append(FROM).append(StringUtil.quote(table));
         return this;
     }
 
@@ -195,12 +196,15 @@ public class Sql {
         for (Map.Entry<String, Object> entry: data.entrySet()) {
             if (!isFirst) {
                 sql.append(",").append(BLANK);
+            }else {
+                sql.append(SET);
             }
             isFirst = false;
 
-            sql.append(entry.getKey()).append(BLANK).append(EQUAL).append(BLANK);
-            Object value = entry.getValue();
+            sql.append(StringUtil.quote(entry.getKey()))
+                    .append(BLANK).append(EQUAL).append(BLANK);
 
+            Object value = entry.getValue();
             if (value instanceof Statement) {
                 sql.append(value.toString());
             } else if (prepared) {
@@ -264,9 +268,12 @@ public class Sql {
     }
 
     private void addInsertColumns(@NonNull Map<String, Object> data) {
-        String columns = String.join(", ", data.keySet());
+        String columns = String.join("`, `", data.keySet());
+
         sql.append(LEFT_BRACKET)
+                .append("`")
                 .append(columns)
+                .append("`")
                 .append(RIGHT_BRACKET)
                 .append(VALUES);
     }

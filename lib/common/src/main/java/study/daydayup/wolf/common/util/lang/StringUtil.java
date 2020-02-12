@@ -15,6 +15,8 @@ public class StringUtil {
     public static final String BLANK = " ";
     public static final String COMMA = ",";
     public static final String COLON = ":";
+    public static final String QUOTE = "`";
+
 
     public static boolean hasValue(String s, boolean trim) {
         if (!trim) {
@@ -55,4 +57,34 @@ public class StringUtil {
         Joiner joiner = Joiner.on(delimiter).skipNulls();
         return joiner.join(f, s, r);
     }
+
+    public static String quote(String keyword) {
+        return quote(keyword, false);
+    }
+
+    public static String quote(String keyword, boolean multi) {
+        if ("*".equals(keyword.trim())) {
+            return keyword;
+        }
+
+        if (!multi) {
+            return join(QUOTE, keyword.trim(), QUOTE);
+        }
+
+        String[] keywords = keyword.split(COMMA);
+        StringBuilder result = new StringBuilder();
+
+        boolean isFirst = true;
+        for (String s : keywords) {
+            if (!isFirst) {
+                result.append(COMMA);
+            }
+            isFirst = false;
+
+            result.append(QUOTE).append(s.trim()).append(QUOTE);
+        }
+
+        return result.toString();
+    }
+
 }
