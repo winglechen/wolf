@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.io.db.aggregator;
 
+import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Statistics;
 
@@ -9,13 +10,14 @@ import study.daydayup.wolf.common.io.db.Statistics;
  * @author Wingle
  * @since 2020/2/11 5:28 下午
  **/
-public abstract class AbstractAggregator {
+public abstract class AbstractAggregator implements Aggregator {
     protected String rowColumn;
     protected String statisticsColumn;
     protected Row row;
     protected Statistics statistics;
 
-    public void init(Statistics statistics, String rowColumn, String statisticsColumn) {
+    @Override
+    public void init(@NonNull Statistics statistics, @NonNull String rowColumn, @NonNull String statisticsColumn) {
         this.statistics = statistics;
         this.rowColumn = rowColumn;
         this.statisticsColumn = statisticsColumn;

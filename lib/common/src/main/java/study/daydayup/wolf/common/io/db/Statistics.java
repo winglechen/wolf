@@ -18,7 +18,8 @@ public class Statistics {
 
     private List<String> keyColumns;
 
-    private Row currentData;
+    private String currentKey;
+    private Row currentRow;
     /**
      * key column map
      * {
@@ -58,18 +59,22 @@ public class Statistics {
     }
 
     public void set(@NonNull String key,@NonNull Object value) {
-        if (null == currentData) {
+        if (null == currentRow) {
             throw new IllegalArgumentException("Please addRow first!");
         }
-        currentData.put(key, value);
+        currentRow.put(key, value);
     }
 
     public Object get(@NonNull String key) {
-        if (null == currentData) {
+        if (null == currentRow) {
             throw new IllegalArgumentException("Please addRow first!");
         }
 
-        return currentData.get(key);
+        return currentRow.get(key);
+    }
+
+    public String getCurrentKey() {
+        return currentKey;
     }
 
     public boolean setCurrentKey(@NonNull String key) {
@@ -78,7 +83,7 @@ public class Statistics {
             return false;
         }
 
-        currentData = row;
+        initCurrent(key, row);
         return true;
     }
 
@@ -106,8 +111,13 @@ public class Statistics {
             data.put(key, row);
         }
 
-        currentData = row;
+        initCurrent(key, row);
         return row;
+    }
+
+    private void initCurrent(String key, Row row) {
+        currentKey = key;
+        currentRow = row;
     }
 
     private void setKeyColumns(Row data, Row row) {

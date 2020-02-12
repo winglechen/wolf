@@ -70,8 +70,6 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return this;
     }
 
-
-
     public MatcherGateway greaterThan(String column, Object value) {
         Matcher matcher = new GreaterMatcher();
 

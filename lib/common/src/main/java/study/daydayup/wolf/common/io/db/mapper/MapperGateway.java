@@ -17,7 +17,7 @@ public class MapperGateway extends AbstractMapper implements Mapper {
     private List<Mapper> mapperList;
 
     public MapperGateway() {
-        mapperList = new ArrayList<>();
+        mapperList = new ArrayList<>(5);
     }
 
     @Override
