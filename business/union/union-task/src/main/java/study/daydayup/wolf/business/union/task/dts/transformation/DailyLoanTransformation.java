@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.union.task.dts.transformation;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.db.Statistics;
@@ -36,8 +37,16 @@ public class DailyLoanTransformation implements Transformation {
 
         countOperator.match()
                 .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
-        countOperator.aggregate();
+        countOperator.aggregate()
+                .count("*", "request_count");
 
+
+        Operator firstCountOperator = new Operator(statistics);
+        firstCountOperator.match()
+                .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode())
+                .hasTag(TradeTag.FIRST_TRADE);
+        firstCountOperator.aggregate()
+                .count("first_request_count");
 
         return statistics;
     }

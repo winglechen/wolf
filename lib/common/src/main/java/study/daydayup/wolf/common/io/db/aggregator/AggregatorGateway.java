@@ -53,6 +53,10 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
         return this;
     }
 
+    public AggregatorGateway count(@NonNull String statisticsColumn) {
+        return count(Table.DEFAULT_COUNT_COLUMN, statisticsColumn);
+    }
+
     public AggregatorGateway count(@NonNull String rowColumn, @NonNull String statisticsColumn) {
         Aggregator aggregator = new CountAggregator();
 

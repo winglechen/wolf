@@ -129,8 +129,8 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return this;
     }
 
-    public MatcherGateway hasTag(@NonNull String tags) {
-        return hasTag(Table.DEFAULT_TAG_COLUMN, tags);
+    public MatcherGateway hasTag(@NonNull String tag) {
+        return hasTag(Table.DEFAULT_TAG_COLUMN, tag);
     }
 
     public MatcherGateway hasTag(@NonNull String column, @NonNull String tag) {
