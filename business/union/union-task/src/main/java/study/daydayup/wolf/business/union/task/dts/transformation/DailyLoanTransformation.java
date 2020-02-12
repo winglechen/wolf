@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.db.Statistics;
-import study.daydayup.wolf.common.io.db.mapper.MapperGateway;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;

@@ -36,24 +36,6 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return true;
     }
 
-    public MatcherGateway equal(String column) {
-        Matcher matcher = new EqualMatcher();
-
-        matcher.init(column);
-        matcherList.add(matcher);
-
-        return this;
-    }
-
-    public MatcherGateway notEqual(String column) {
-        Matcher matcher = new NotEqualMatcher();
-
-        matcher.init(column);
-        matcherList.add(matcher);
-
-        return this;
-    }
-
     public MatcherGateway isNull(String column) {
         Matcher matcher = new NullMatcher();
 
@@ -71,6 +53,24 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
 
         return this;
     }
+
+    public MatcherGateway equal(String column, Object value) {
+        Matcher matcher = new EqualMatcher();
+
+        initMatcher(matcher, column, value);
+
+        return this;
+    }
+
+    public MatcherGateway notEqual(String column, Object value) {
+        Matcher matcher = new NotEqualMatcher();
+
+        initMatcher(matcher, column, value);
+
+        return this;
+    }
+
+
 
     public MatcherGateway greaterThan(String column, Object value) {
         Matcher matcher = new GreaterMatcher();
