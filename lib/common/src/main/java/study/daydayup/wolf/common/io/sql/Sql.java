@@ -1,19 +1,18 @@
 package study.daydayup.wolf.common.io.sql;
 
 import lombok.NonNull;
+import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * study.daydayup.wolf.common.io.sql
- * @TODO add keyword quote support
+ *
  * @author Wingle
  * @since 2020/1/19 1:27 下午
  **/
@@ -49,12 +48,13 @@ public class Sql {
     private StringBuilder sql;
     private boolean prepared = false;
 
+    private List<Object> preparedValues;
     private boolean isFirstWhere = true;
     private boolean isFirstOrder = true;
     private boolean isFirstValue = true;
 
     public static Sql select(){
-        return select(false);
+        return select(true);
     }
 
     public static Sql select(boolean prepared) {
@@ -62,7 +62,7 @@ public class Sql {
     }
 
     public static Sql select(@NonNull String columns){
-        return select(columns, false);
+        return select(columns, true);
     }
 
     public static Sql select(@NonNull String columns, boolean prepared){
@@ -71,16 +71,16 @@ public class Sql {
     }
 
     public static Sql insert(@NonNull String table){
-        return insert(table, false);
+        return insert(table, true);
     }
 
     public static Sql insert(@NonNull String table, boolean prepared){
-        String sql = StringUtil.join(INSERT, StringUtil.quote(table));
+        String sql = StringUtil.join(INSERT, StringUtil.quote(table), StringUtil.BLANK);
         return new Sql(sql, prepared);
     }
 
     public static Sql update(@NonNull String table){
-        return update(table, false);
+        return update(table, true);
     }
 
     public static Sql update(@NonNull String table, boolean prepared){
@@ -89,7 +89,7 @@ public class Sql {
     }
 
     public static Sql delete(@NonNull String table){
-        return delete(table, false);
+        return delete(table, true);
     }
 
     public static Sql delete(@NonNull String table, boolean prepared){
@@ -118,21 +118,22 @@ public class Sql {
     }
 
     public Sql() {
-        sql = new StringBuilder();
+        this(StringUtil.EMPTY, true);
     }
 
     public Sql(boolean prepared) {
-        sql = new StringBuilder();
-        this.prepared = prepared;
+        this(StringUtil.EMPTY, prepared);
     }
 
     public Sql(String query) {
-        sql = new StringBuilder(query);
+        this(query, true);
     }
 
     public Sql(String query, boolean prepared) {
         sql = new StringBuilder(query);
         this.prepared = prepared;
+
+        this.preparedValues = new LinkedList<>();
     }
 
     public Sql from(@NonNull String table) {
@@ -140,19 +141,31 @@ public class Sql {
         return this;
     }
 
+    public Sql and(@NonNull String where, Object... ps) {
+        return where(where, ps);
+    }
+
     public Sql and(@NonNull String where) {
         return where(where);
     }
 
-    public Sql where(@NonNull String where) {
+    public Sql where(@NonNull String where, Object... ps) {
         if (isFirstWhere) {
             sql.append(WHERE).append(where);
         } else {
             sql.append(AND).append(where);
         }
-
         isFirstWhere = false;
+
+        for (Object o : ps) {
+            preparedValues.add(o);
+        }
+
         return this;
+    }
+
+    public Object[] getPreparedValues() {
+        return preparedValues.toArray();
     }
 
     public Sql orderBy(@NonNull String column, OrderEnum order) {
@@ -208,6 +221,7 @@ public class Sql {
             if (value instanceof Statement) {
                 sql.append(value.toString());
             } else if (prepared) {
+                preparedValues.add(value);
                 sql.append(QUESTION_MARK);
             } else {
                 sql.append(formatValue(value));
@@ -287,6 +301,10 @@ public class Sql {
                 sql.append(COMMA);
             }
             sql.append(formatValue(values[i]));
+
+            if (prepared) {
+                preparedValues.add(values[i]);
+            }
         }
 
         sql.append(RIGHT_BRACKET);
@@ -318,7 +336,7 @@ public class Sql {
         values.put("amount", 123456);
         values.put("state", 1);
 
-        String insert = Sql.insert("order", true)
+        String insert = Sql.insert("order")
                 .values(values)
                 .toString();
         System.out.println("insert: " + insert);
@@ -328,14 +346,17 @@ public class Sql {
         data.put("state", 10);
         data.put("version", SqlStatement.of("version + 1"));
 
-        String update = Sql.update("order", true)
+        Sql update = Sql.update("order")
                 .set(data)
-                .where("task_name = 'task'")
-                .and("table_name = 'table'")
-                .and("sharding_key = 'shard123'")
-                .limit(1)
-                .toString();
+                .where("task_name = ?", "taskName")
+                .and("table_name = ?", "tableName")
+                .and("sharding_key = ?", "shardingKey")
+                .limit(1);
         System.out.println("update: " + update);
+
+        for (Object o : update.getPreparedValues()) {
+            System.out.println("prepared: " + o);
+        }
 
     }
 

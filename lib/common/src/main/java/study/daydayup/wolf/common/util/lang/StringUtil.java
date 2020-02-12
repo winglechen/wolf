@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
  **/
 public class StringUtil {
     public static final String DEFAULT_DELIMITER = "";
+    public static final String EMPTY = "";
     public static final String BLANK = " ";
     public static final String COMMA = ",";
     public static final String COLON = ":";

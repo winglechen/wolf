@@ -19,6 +19,7 @@ public class MysqlEditor implements Sink {
     private JdbcTemplate jdbc;
 
     public int update(@NonNull String table, @NonNull Map<String, Object> key, @NonNull Map<String, Object> value) {
+
         return 0;
     }
 }
