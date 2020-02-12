@@ -3,7 +3,6 @@ package study.daydayup.wolf.common.io.db.matcher;
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.model.type.string.Tag;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -109,19 +108,33 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
     }
 
     public MatcherGateway notBetween(String column, Object start, Object end) {
+        NotBetweenMatcher matcher = new NotBetweenMatcher();
+
+        matcher.init(column, start, end);
+        matcherList.add(matcher);
+
         return this;
     }
 
-    public MatcherGateway in(String column, Collection<Object> values) {
+    public MatcherGateway in(@NonNull String column, @NonNull Collection<Object> values) {
+        InMatcher matcher = new InMatcher();
+
+        matcher.init(column, values);
+        matcherList.add(matcher);
+
         return this;
     }
 
 
     public MatcherGateway hasTag(@NonNull String tags) {
-        return hasTag(tags, Table.DEFAULT_TAG_COLUMN);
+        return hasTag(Table.DEFAULT_TAG_COLUMN, tags);
     }
 
-    public MatcherGateway hasTag(@NonNull String tags, @NonNull String column) {
+    public MatcherGateway hasTag(@NonNull String column, @NonNull String tag) {
+        TagMatcher matcher = new TagMatcher();
+
+        matcher.init(column, tag);
+        matcherList.add(matcher);
 
         return this;
     }
