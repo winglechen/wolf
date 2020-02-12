@@ -51,7 +51,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
             return;
         }
 
-        Statistics statistics = dailyLoanTransformation.transform(task, contracts);
+        Statistics statistics = dailyLoanTransformation.transform(contracts);
         dailyLoanSink.save(task, statistics);
     }
 
