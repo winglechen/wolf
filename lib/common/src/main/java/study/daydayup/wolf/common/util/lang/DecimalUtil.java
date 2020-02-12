@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util.finance;
+package study.daydayup.wolf.common.util.lang;
 
 import study.daydayup.wolf.common.model.type.string.Decimal;
 

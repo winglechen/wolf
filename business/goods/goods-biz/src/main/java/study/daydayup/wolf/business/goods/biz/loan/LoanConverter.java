@@ -8,8 +8,7 @@ import study.daydayup.wolf.business.goods.api.vo.Installment;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
-import study.daydayup.wolf.common.model.type.string.Decimal;
-import study.daydayup.wolf.common.util.finance.DecimalUtil;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.converter.Converter;
 
 import java.util.List;
