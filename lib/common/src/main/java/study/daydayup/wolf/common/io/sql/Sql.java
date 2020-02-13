@@ -177,7 +177,7 @@ public class Sql {
         if (0 == ps.size()) {
             return this;
         }
-        
+
         addWherePrefix();
         for (Map.Entry<String, Object> entry: ps.entrySet()) {
             String column = StringUtil.quote(entry.getKey());
