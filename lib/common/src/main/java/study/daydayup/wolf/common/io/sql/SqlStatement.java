@@ -21,4 +21,14 @@ public class SqlStatement implements Statement {
     public String toString() {
         return value;
     }
+
+    @Override
+    public String getSql() {
+        return value;
+    }
+
+    @Override
+    public Object getValue() {
+        return null;
+    }
 }

@@ -7,4 +7,6 @@ package study.daydayup.wolf.common.io.sql;
  * @since 2020/2/6 11:12 下午
  **/
 public interface Statement {
+    String getSql();
+    Object getValue();
 }

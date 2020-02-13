@@ -173,20 +173,20 @@ public class Sql {
         return where(where);
     }
 
-    /**
-     * TODO: Statement support
-     */
     public Sql where(@NonNull Map<String, Object> ps) {
         if (0 == ps.size()) {
             return this;
         }
+        
         addWherePrefix();
         for (Map.Entry<String, Object> entry: ps.entrySet()) {
             String column = StringUtil.quote(entry.getKey());
             sql.append(column).append(BLANK).append(EQUAL).append(BLANK);
 
             Object value = entry.getValue();
-            if (prepared) {
+            if (value instanceof Statement) {
+                addValueStatement((Statement)value);
+            } else if (prepared) {
                 sql.append(QUESTION_MARK).append(BLANK);
                 data.add(value);
             } else {
@@ -258,7 +258,7 @@ public class Sql {
 
             Object value = entry.getValue();
             if (value instanceof Statement) {
-                sql.append(value.toString());
+                addValueStatement((Statement)value);
             } else if (prepared) {
                 this.data.add(value);
                 sql.append(QUESTION_MARK);
@@ -268,6 +268,13 @@ public class Sql {
         }
 
         return this;
+    }
+
+    private void addValueStatement(Statement s) {
+        sql.append(s.getSql());
+        if (prepared && null != s.getValue()) {
+            this.data.add(s.getValue());
+        }
     }
 
     public Sql values(@NonNull Map<String, Object> data) {
