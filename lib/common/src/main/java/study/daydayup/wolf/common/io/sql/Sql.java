@@ -18,6 +18,7 @@ import java.util.*;
 public class Sql {
     public static final String DEFAULT_KEY = "id";
     public static final String DEFAULT_COLUMNS = "*";
+    public static final String DEFAULT_COUNT = " count(*) as count ";
     public static final int DEFAULT_LIMIT = 10;
 
     private static final String SELECT = "SELECT ";
@@ -46,11 +47,27 @@ public class Sql {
 
     private StringBuilder sql;
     private boolean prepared;
+    private List<Object> data;
 
-    private List<Object> preparedValues;
     private boolean isFirstWhere = true;
     private boolean isFirstOrder = true;
     private boolean isFirstValue = true;
+
+    public static Sql count() {
+        return count(true);
+    }
+
+    public static Sql count(boolean prepared) {
+        return select(DEFAULT_COUNT, prepared);
+    }
+
+    public static Sql exists() {
+        return exists(true);
+    }
+
+    public static Sql exists(boolean prepared) {
+        return select(DEFAULT_KEY, prepared);
+    }
 
     public static Sql select(){
         return select(true);
@@ -132,7 +149,15 @@ public class Sql {
         sql = new StringBuilder(query);
         this.prepared = prepared;
 
-        this.preparedValues = new LinkedList<>();
+        this.data = new LinkedList<>();
+    }
+
+    public Object[] getData() {
+        return data.toArray();
+    }
+
+    public String getSql() {
+        return sql.toString();
     }
 
     public Sql from(@NonNull String table) {
@@ -148,20 +173,38 @@ public class Sql {
         return where(where);
     }
 
-    public Sql where(@NonNull String where, Object... ps) {
-        if (isFirstWhere) {
-            sql.append(WHERE).append(where);
-        } else {
-            sql.append(AND).append(where);
+    /**
+     * TODO: Statement support
+     */
+    public Sql where(@NonNull Map<String, Object> ps) {
+        if (0 == ps.size()) {
+            return this;
         }
-        isFirstWhere = false;
+        addWherePrefix();
+        for (Map.Entry<String, Object> entry: ps.entrySet()) {
+            String column = StringUtil.quote(entry.getKey());
+            sql.append(column).append(BLANK).append(EQUAL).append(BLANK);
 
-        preparedValues.addAll(Arrays.asList(ps));
+            Object value = entry.getValue();
+            if (prepared) {
+                sql.append(QUESTION_MARK).append(BLANK);
+                data.add(value);
+            } else {
+                sql.append(formatValue(value));
+            }
+        }
+
         return this;
     }
 
-    public Object[] getPreparedValues() {
-        return preparedValues.toArray();
+    public Sql where(@NonNull String where, Object... ps) {
+        addWherePrefix();
+
+        sql.append(where);
+        if (prepared) {
+            data.addAll(Arrays.asList(ps));
+        }
+        return this;
     }
 
     public Sql orderBy(@NonNull String column, OrderEnum order) {
@@ -217,7 +260,7 @@ public class Sql {
             if (value instanceof Statement) {
                 sql.append(value.toString());
             } else if (prepared) {
-                preparedValues.add(value);
+                this.data.add(value);
                 sql.append(QUESTION_MARK);
             } else {
                 sql.append(formatValue(value));
@@ -251,6 +294,15 @@ public class Sql {
     @Override
     public String toString() {
         return sql.toString();
+    }
+
+    private void addWherePrefix() {
+        if (isFirstWhere) {
+            sql.append(WHERE);
+        } else {
+            sql.append(AND);
+        }
+        isFirstWhere = false;
     }
 
     private Object formatValue(Object value) {
@@ -299,7 +351,7 @@ public class Sql {
             sql.append(formatValue(values[i]));
 
             if (prepared) {
-                preparedValues.add(values[i]);
+                this.data.add(values[i]);
             }
         }
 
@@ -350,7 +402,7 @@ public class Sql {
                 .limit(1);
         System.out.println("update: " + update);
 
-        for (Object o : update.getPreparedValues()) {
+        for (Object o : update.getData()) {
             System.out.println("prepared: " + o);
         }
 
