@@ -13,4 +13,9 @@ public class DistinctCountAggregator extends AbstractAggregator implements Aggre
     public void aggregate(Row row) {
 
     }
+
+    @Override
+    public void merge(Row row) {
+
+    }
 }

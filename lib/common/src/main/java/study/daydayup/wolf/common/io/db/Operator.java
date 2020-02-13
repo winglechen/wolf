@@ -64,6 +64,13 @@ public class Operator {
         this.statistics = statistics;
     }
 
+    public void merge(Row row) {
+        if (null != aggregator) {
+            aggregator.merge(row);
+        }
+
+    }
+
     public void operate(Row row) {
         if (mapper != null) {
             mapper.map(row);

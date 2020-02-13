@@ -13,4 +13,9 @@ public class MaxAggregator extends AbstractAggregator implements Aggregator {
     public void aggregate(Row row) {
 
     }
+
+    @Override
+    public void merge(Row row) {
+
+    }
 }

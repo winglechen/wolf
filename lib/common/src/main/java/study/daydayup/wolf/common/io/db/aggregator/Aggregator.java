@@ -12,4 +12,5 @@ import study.daydayup.wolf.common.io.db.Statistics;
 public interface Aggregator {
     void init(Statistics statistics, String rowColumn, String statisticsColumn);
     void aggregate(Row row);
+    void merge(Row row);
 }

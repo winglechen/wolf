@@ -13,7 +13,7 @@ public class SumAggregator extends AbstractAggregator implements Aggregator {
     @Override
     public void aggregate(Row row) {
         Object rowValue = row.get(rowColumn);
-        if ( !(rowValue instanceof Number) || null == rowValue) {
+        if (!(rowValue instanceof Number)) {
             return;
         }
 
@@ -23,5 +23,10 @@ public class SumAggregator extends AbstractAggregator implements Aggregator {
         }
 
         statistics.set(statisticsColumn, NumberUtil.add((Number)rowValue, (Number)statValue));
+    }
+
+    @Override
+    public void merge(Row row) {
+        aggregate(row);
     }
 }

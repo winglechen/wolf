@@ -20,4 +20,20 @@ public class CountAggregator extends AbstractAggregator implements Aggregator {
         count++;
         statistics.set(statisticsColumn, count);
     }
+
+    @Override
+    public void merge(Row row) {
+        Integer rowCount  = (Integer) row.get(statisticsColumn);
+        if (rowCount == null) {
+            rowCount = 0;
+        }
+
+        Integer statCount = (Integer) statistics.get(statisticsColumn);
+        if (statCount == null) {
+            statCount = 0;
+        }
+
+        Integer count = rowCount + statCount;
+        statistics.set(statisticsColumn, count);
+    }
 }

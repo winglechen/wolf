@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.offset.Offset;
+import study.daydayup.wolf.framework.dts.source.MysqlScanner;
 
 import javax.annotation.Resource;
 
@@ -22,8 +23,6 @@ import javax.annotation.Resource;
  **/
 @Component
 public class DailyLoanServiceImpl implements DailyLoanService {
-    @Resource
-    private ContractSource contractSource;
     @Resource
     private DailyLoanTransformation dailyLoanTransformation;
     @Resource
@@ -37,6 +36,10 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     private ShardingConfig shardingConfig;
 
 
+    @Resource
+    private MysqlScanner mysqlScanner;
+
+
     @Override
     public void countLoanContract() {
         String task = "countLoanContract";
@@ -46,7 +49,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
             return;
         }
 
-        Table contracts = contractSource.latest(lastId);
+        Table contracts = mysqlScanner.scan("contract", lastId, "id, buyer_id, seller_id, tags created_at");
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }

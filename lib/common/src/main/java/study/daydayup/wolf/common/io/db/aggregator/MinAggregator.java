@@ -13,4 +13,9 @@ public class MinAggregator extends AbstractAggregator implements Aggregator {
     public void aggregate(Row row) {
 
     }
+
+    @Override
+    public void merge(Row row) {
+
+    }
 }
