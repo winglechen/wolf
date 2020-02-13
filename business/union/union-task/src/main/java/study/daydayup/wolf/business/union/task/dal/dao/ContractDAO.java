@@ -2,9 +2,7 @@ package study.daydayup.wolf.business.union.task.dal.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import javax.validation.constraints.Max;
 import java.util.List;
 import java.util.Map;
 
