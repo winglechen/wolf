@@ -15,7 +15,11 @@ public class TradeTag {
     public static final String FIRST_TRADE              = "firstTrade";
 
     public static final String INSTALLMENT_PREFIX       = "ist";
-    public static final String LOAN_EFFECT_PREFIX       = "lei";
+    public static final String LOAN_ID_PREFIX           = "lid";
+
+    public static final String LOAN_REQUEST_PREFIX      = "lrd";
+    public static final String LOAN_EFFECT_PREFIX       = "led";
+    public static final String LOAN_DUE_PREFIX          = "ldd";
 
     public static final String PHONE_PREFIX             = "pho";
     public static final String SELLER_ID_PREFIX         = "sid";

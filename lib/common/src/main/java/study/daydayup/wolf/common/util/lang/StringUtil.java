@@ -88,4 +88,33 @@ public class StringUtil {
         return result.toString();
     }
 
+    public static String ltrim(String s, String prefix) {
+        int prefixLen = prefix.length();
+        if (0 == prefixLen) {
+            return s;
+        }
+
+        String sPrefix = s.substring(0, prefixLen);
+        if (!sPrefix.equals(prefix)) {
+            return s;
+        }
+
+        return s.substring(prefixLen);
+    }
+
+    public static String rtrim(String s, String suffix) {
+        int suffixLen = suffix.length();
+        if (0 == suffixLen) {
+            return s;
+        }
+
+        int sLen = s.length();
+        String sSuffix = s.substring(suffixLen, sLen);
+        if (!sSuffix.equals(suffix)) {
+            return s;
+        }
+
+        return s.substring(0, sLen-suffixLen);
+    }
+
 }

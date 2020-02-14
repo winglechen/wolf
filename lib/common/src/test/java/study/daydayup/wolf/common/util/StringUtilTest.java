@@ -32,4 +32,27 @@ public class StringUtilTest {
     @Test
     public void containsSpace() {
     }
+
+    @Test
+    public void ltrim() {
+        String a = "abcdef";
+        String prefix = "abc";
+
+        a = StringUtil.ltrim(a, prefix);
+        String expected = "def";
+
+        assertEquals("StringUtil.ltrim fail", expected, a);
+    }
+
+    @Test
+    public void rtrim() {
+        String a = "abcdef";
+        String suffix = "def";
+        String expected = "abc";
+
+        a = StringUtil.rtrim(a, suffix);
+        assertEquals("StringUtil.rtrim fail", expected, a);
+
+    }
+
 }

@@ -180,7 +180,10 @@ CREATE TABLE `track_repay`
 (
     `id`                  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `date`                DATE                NOT NULL COMMENT '催收日期',
+    `request_date`        DATE                NOT NULL COMMENT '申请日期',
+    `loan_date`           DATE                NOT NULL COMMENT '放款日期',
+    `due_date`            DATE                NOT NULL COMMENT '到期日期',
+    `goods_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
     `installment_no`      INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '分期数：0代表合计',
 
     `prepay_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '逾期数',
@@ -190,26 +193,27 @@ CREATE TABLE `track_repay`
     `overdue_count`       INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '逾期数',
     `overdue_amount`      DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '逾期金额',
     `loss_count`          INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '资损数',
-    `partly_loss_count`   INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '部分资损数',
     `loss_amount`         DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '资损金额',
+    `partly_loss_count`   INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '部分资损数',
     `partly_loss_amount`  DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '部分资损金额',
 
     `d1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '当日催当日还数',
-    `d2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2天逾期订单数',
-    `d3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3天逾期订单数',
-    `d4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4天逾期订单数',
-    `d5`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第5天逾期订单数',
-    `d6`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第6天逾期订单数',
-    `d7`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第7天逾期订单数',
-    `w2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2周逾期订单数',
-    `w3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3周逾期订单数',
-    `w4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4周逾期订单数',
-    `m1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '30天逾期订单数',
+    `d2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2天还款订单数',
+    `d3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3天还款订单数',
+    `d4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4天还款订单数',
+    `d5`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第5天还款订单数',
+    `d6`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第6天还款订单数',
+    `d7`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第7天还款订单数',
+    `w2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2周还款订单数',
+    `w3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3周还款订单数',
+    `w4`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第4周还款订单数',
+    `m1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '30天还款订单数',
+    `mn`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '30天后还款订单数',
 
     `delete_flag`         TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`          DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_date` (`org_id`, `date`)
+    UNIQUE KEY `udx_date` (`org_id`, `due_date`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4
 COMMENT ='新催收日报';
 
