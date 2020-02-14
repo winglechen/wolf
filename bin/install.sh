@@ -81,6 +81,13 @@ function install_workflow() {
     cd ${dir} && mvn clean install
 }
 
+function install_onion() {
+    echo "install onion"
+    dir="/code/work/onion/onion-api/"
+    cd ${dir} && mvn clean install
+}
+
+
 function install_business() {
     install_account
     install_uc

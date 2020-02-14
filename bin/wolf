@@ -33,6 +33,23 @@ function deploy_union_test() {
     echo "union-deploy-dubbo.tar.gz transporting..."
 }
 
+function deploy_onion_test() {
+    dir="/code/work/onion/onion-api/onion-admin/"
+    cd ${dir} && mvn clean package -Ptest
+
+    scp /code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
+        app@47.111.7.95:/home/app/tmp
+    echo "onion-admin.tar.gz transporting..."
+
+
+    dir="/code/work/onion/onion-api/onion-user/"
+    cd ${dir} && mvn clean package -Ptest
+
+    scp /code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
+        app@47.111.7.95:/home/app/tmp
+    echo "onion-user.tar.gz transporting..."
+}
+
 function conn_test_redis() {
   redis-cli -h 47.111.7.95 -a estar
 }
@@ -65,6 +82,9 @@ case "$command" in
       clear ;;
   deploy-union-test)
       deploy_union_test ;;
+  deploy-onion-test)
+      deploy_onion_test ;;
+
   redis-test)
       conn_test_redis ;;
   install)
@@ -96,7 +116,8 @@ case "$command" in
     install_pay ;;
   install-workflow)
     install_workflow ;;
-
+  install-onion)
+    install_onion ;;
 esac
 
 
