@@ -20,6 +20,9 @@ public class Statistics {
 
     private List<String> keyColumns;
 
+    private Long minId;
+    private Long maxId;
+
     private String currentKey;
     private Row currentRow;
     /**
@@ -36,7 +39,7 @@ public class Statistics {
         data = new HashMap<>();
     }
 
-    public void addKeyColumn(String... columns) {
+    public void setKeyColumn(String... columns) {
         if (columns == null || 0 == columns.length) {
             return;
         }
@@ -50,6 +53,7 @@ public class Statistics {
             return null;
         }
 
+        setIds(row);
         Row data = getCurrentRow(key);
         setKeyColumns(data, row);
 
@@ -87,6 +91,38 @@ public class Statistics {
 
         initCurrent(key, row);
         return true;
+    }
+
+    private void setIds(@NonNull Row row) {
+        String column = Table.DEFAULT_ID_COLUMN;
+        Object id = row.get(column);
+        if (id == null ) {
+            return;
+        }
+
+        if (!(id instanceof Long) && !(id instanceof Integer) ) {
+            return;
+        }
+
+        Long lId = (Long) id;
+        setMinId(lId);
+        setMaxId(lId);
+    }
+
+    private void setMinId(Long id) {
+        if (null == minId) {
+            minId = id;
+        } else {
+            minId = Math.min(id, minId);
+        }
+    }
+
+    private void setMaxId(Long id) {
+        if (null == maxId) {
+            maxId = id;
+        } else {
+            maxId = Math.max(id, maxId);
+        }
     }
 
     private String getKeyFromRow(@NonNull Row row) {

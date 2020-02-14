@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.dts.offset;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,6 +15,24 @@ import javax.annotation.Resource;
 public class Offset implements OffsetHolder {
     @Resource
     private MysqlOffsetHolder mysqlOffsetHolder;
+
+    private String task;
+    private String table;
+    private String shard;
+
+    public void init(@NonNull String task, @NonNull String table, String shard) {
+        this.task = task;
+        this.table = table;
+        this.shard = shard;
+    }
+
+    public Long get() {
+        return get(task, table, shard);
+    }
+
+    public void set(Long id) {
+        set(task, table, shard, id);
+    }
 
     @Override
     public Long get(String task, String table, String shard) {

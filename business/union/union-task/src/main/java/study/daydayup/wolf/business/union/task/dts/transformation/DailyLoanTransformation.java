@@ -25,7 +25,7 @@ public class DailyLoanTransformation implements Transformation {
         }
 
         Statistics statistics = new Statistics();
-        statistics.addKeyColumn("org_id", "date");
+        statistics.setKeyColumn("org_id", "date");
 
         initOperator(statistics);
         Operator.execute(table);

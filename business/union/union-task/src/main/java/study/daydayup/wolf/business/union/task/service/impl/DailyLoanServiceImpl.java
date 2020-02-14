@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.offset.Offset;
+import study.daydayup.wolf.framework.dts.sink.MysqlEditor;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
 
 import javax.annotation.Resource;
@@ -38,24 +39,30 @@ public class DailyLoanServiceImpl implements DailyLoanService {
 
     @Resource
     private MysqlScanner mysqlScanner;
+    @Resource
+    private MysqlEditor mysqlEditor;
 
 
     @Override
     public void countLoanContract() {
         String task = "countLoanContract";
+        String table = "contract";
+        String shard = shardingConfig.getShard();
+        offset.init(task, table, shard);
 
-        Long lastId = offset.get(task, offsetConfig.getTable(), shardingConfig.getShard());
+        Long lastId = offset.get();
         if (lastId == null) {
             return;
         }
 
-        Table contracts = mysqlScanner.scan("contract", lastId, "id, buyer_id, seller_id, trade_type, tags, created_at");
+        Table contracts = mysqlScanner.scan(table, lastId, "id, buyer_id, seller_id, trade_type, tags, created_at");
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }
 
         Statistics statistics = dailyLoanTransformation.transform(contracts);
-        dailyLoanSink.save(task, statistics);
+        statistics.setTable("daily_loan");
+        mysqlEditor.save(offset, statistics);
     }
 
     @Override

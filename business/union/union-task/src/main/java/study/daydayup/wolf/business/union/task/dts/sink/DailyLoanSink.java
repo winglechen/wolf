@@ -13,7 +13,7 @@ import study.daydayup.wolf.framework.dts.sink.Sink;
  **/
 @Component
 public class DailyLoanSink implements Sink {
-    public void save(@NonNull String taskName, @NonNull Statistics statistics) {
+    public void save(@NonNull Statistics statistics) {
 
     }
 }
