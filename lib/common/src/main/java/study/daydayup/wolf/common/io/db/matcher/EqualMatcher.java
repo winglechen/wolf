@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.io.db.matcher;
 
 import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.util.lang.ObjectUtil;
 
 /**
  * study.daydayup.wolf.common.io.db.matcher
@@ -11,6 +12,7 @@ import study.daydayup.wolf.common.io.db.Row;
 public class EqualMatcher extends AbstractMatcher implements Matcher {
     @Override
     public boolean match(Row row) {
-        return false;
+        Object col = row.get(column);
+        return ObjectUtil.equals(col, value);
     }
 }

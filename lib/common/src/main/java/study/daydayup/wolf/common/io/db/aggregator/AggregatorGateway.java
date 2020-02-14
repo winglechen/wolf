@@ -30,6 +30,7 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
             return;
         }
 
+        statistics.addRow(row);
         for (Aggregator aggregator : aggregatorList) {
             aggregator.aggregate(row);
         }

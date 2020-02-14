@@ -54,7 +54,7 @@ public class Sql {
     private boolean isFirstValue = true;
 
     public static Sql count() {
-        return count(true);
+        return count(false);
     }
 
     public static Sql count(boolean prepared) {
@@ -62,7 +62,7 @@ public class Sql {
     }
 
     public static Sql exists() {
-        return exists(true);
+        return exists(false);
     }
 
     public static Sql exists(boolean prepared) {
@@ -70,7 +70,7 @@ public class Sql {
     }
 
     public static Sql select(){
-        return select(true);
+        return select(false);
     }
 
     public static Sql select(boolean prepared) {
@@ -78,7 +78,7 @@ public class Sql {
     }
 
     public static Sql select(@NonNull String columns){
-        return select(columns, true);
+        return select(columns, false);
     }
 
     public static Sql select(@NonNull String columns, boolean prepared){
@@ -87,7 +87,7 @@ public class Sql {
     }
 
     public static Sql insert(@NonNull String table){
-        return insert(table, true);
+        return insert(table, false);
     }
 
     public static Sql insert(@NonNull String table, boolean prepared){
@@ -96,7 +96,7 @@ public class Sql {
     }
 
     public static Sql update(@NonNull String table){
-        return update(table, true);
+        return update(table, false);
     }
 
     public static Sql update(@NonNull String table, boolean prepared){
@@ -105,7 +105,7 @@ public class Sql {
     }
 
     public static Sql delete(@NonNull String table){
-        return delete(table, true);
+        return delete(table, false);
     }
 
     public static Sql delete(@NonNull String table, boolean prepared){
@@ -125,7 +125,7 @@ public class Sql {
         String clause = order == OrderEnum.DESC ? LESS_THAN : GREATER_THAN;
         String where = StringUtil.joinWith(StringUtil.BLANK, DEFAULT_KEY, clause, id);
 
-        return select(columns == null ? DEFAULT_COLUMNS : columns)
+        return select(columns == null ? DEFAULT_COLUMNS : columns, false)
                 .from(table)
                 .where(where)
                 .orderBy(DEFAULT_KEY, order)
@@ -134,7 +134,7 @@ public class Sql {
     }
 
     public Sql() {
-        this(StringUtil.EMPTY, true);
+        this(StringUtil.EMPTY, false);
     }
 
     public Sql(boolean prepared) {
@@ -142,7 +142,7 @@ public class Sql {
     }
 
     public Sql(String query) {
-        this(query, true);
+        this(query, false);
     }
 
     public Sql(String query, boolean prepared) {

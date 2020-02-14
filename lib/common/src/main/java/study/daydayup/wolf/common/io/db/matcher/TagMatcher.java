@@ -20,16 +20,16 @@ public class TagMatcher extends AbstractMatcher implements Matcher {
 
     @Override
     public boolean match(Row row) {
-        Object value = row.get(column);
-        if (value == null) {
+        Object col = row.get(column);
+        if (col == null) {
             return false;
         }
 
         Tag obj;
-        if (value instanceof String) {
-            obj = new Tag((String)value);
-        } else if (value instanceof Tag) {
-            obj = (Tag)value;
+        if (col instanceof String) {
+            obj = new Tag((String)col);
+        } else if (col instanceof Tag) {
+            obj = (Tag)col;
         } else {
             return false;
         }

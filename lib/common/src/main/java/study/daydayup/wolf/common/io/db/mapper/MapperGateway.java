@@ -35,7 +35,7 @@ public class MapperGateway extends AbstractMapper implements Mapper {
         return toLocalDate(column, null);
     }
 
-    public MapperGateway toLocalDate(@NonNull String column, @NonNull String newColumn) {
+    public MapperGateway toLocalDate(@NonNull String column, String newColumn) {
         Mapper mapper = new LocalDateMapper();
 
         mapper.init(column, newColumn);

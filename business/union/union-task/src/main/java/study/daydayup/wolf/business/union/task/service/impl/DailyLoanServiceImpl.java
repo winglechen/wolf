@@ -49,7 +49,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
             return;
         }
 
-        Table contracts = mysqlScanner.scan("contract", lastId, "id, buyer_id, seller_id, tags created_at");
+        Table contracts = mysqlScanner.scan("contract", lastId, "id, buyer_id, seller_id, trade_type, tags, created_at");
         if (!CollectionUtil.hasValue(contracts)) {
             return;
         }

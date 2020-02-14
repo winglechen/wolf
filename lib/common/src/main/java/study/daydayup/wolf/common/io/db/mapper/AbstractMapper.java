@@ -18,7 +18,7 @@ public abstract class AbstractMapper implements Mapper {
     }
 
     @Override
-    public void init(@NonNull String column, @NonNull String newColumn) {
+    public void init(@NonNull String column, String newColumn) {
         this.column = column;
         this.newColumn = newColumn;
     }
