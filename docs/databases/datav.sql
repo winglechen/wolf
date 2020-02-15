@@ -223,19 +223,24 @@ CREATE TABLE IF NOT EXISTS `offset_holder`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 
-    `task_name`         VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '任务名',
     `table_name`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '表名',
     `sharding_key`      VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'shardingKey',
-    `offset`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'offset',
+    `source`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'source',
+    `sink`              VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'sink',
+
+    `offset`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0  COMMENT 'offset',
+
+    `locker`            TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'locker',
+    `lock_at`           DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
 
     `version`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`       TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`        DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX  udx_task(`table_name`, `sharding_key`, `source`, `sink`),
     PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARACTER SET = utf8mb4
-    COMMENT = 'offsetHolder';
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+COMMENT = 'offsetHolder';
 
 
 
