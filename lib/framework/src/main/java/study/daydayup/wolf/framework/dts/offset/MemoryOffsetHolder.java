@@ -27,8 +27,8 @@ public class MemoryOffsetHolder implements OffsetHolder {
     }
 
     @Override
-    public Long get(@NonNull String task, @NonNull String table, @NonNull String shard) {
-        String key = formatKey(task, table, shard);
+    public Long get(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
+        String key = formatKey(source, table, shard, sink);
         if (!OffsetLocker.lock(key)) {
             return null;
         }
@@ -40,8 +40,8 @@ public class MemoryOffsetHolder implements OffsetHolder {
     }
 
     @Override
-    public void set(@NonNull String task, @NonNull String table, @NonNull String shard, @NonNull Long id) {
-        String key = formatKey(task, table, shard);
+    public void set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+        String key = formatKey(source, table, shard, sink);
         if (!OffsetLocker.lock(key)) {
             return;
         }

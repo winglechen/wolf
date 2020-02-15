@@ -16,37 +16,39 @@ public class Offset implements OffsetHolder {
     @Resource
     private MysqlOffsetHolder mysqlOffsetHolder;
 
-    private String task;
+    private String source;
+    private String sink;
     private String table;
     private String shard;
 
-    public void init(@NonNull String task, @NonNull String table, String shard) {
-        this.task = task;
+    public void init(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
+        this.source = source;
         this.table = table;
         this.shard = shard;
+        this.sink = sink;
     }
 
     public Long get() {
-        return get(task, table, shard);
+        return get(source, table, shard, sink);
     }
 
     public void set(Long id) {
-        set(task, table, shard, id);
+        set(source, table, shard, sink, id);
     }
 
     @Override
-    public Long get(String task, String table, String shard) {
-        Long id = MemoryOffsetHolder.getInstance().get(task, table, shard);
+    public Long get(String source, String table, String shard, String sink) {
+        Long id = MemoryOffsetHolder.getInstance().get(source, table, shard, sink);
         if (id != null) {
             return id;
         }
 
-        return mysqlOffsetHolder.get(task, table, shard);
+        return mysqlOffsetHolder.get(source, table, shard, sink);
     }
 
     @Override
-    public void set(String task, String table, String shard, Long id) {
-        mysqlOffsetHolder.set(task, table, shard, id);
-        MemoryOffsetHolder.getInstance().set(task, table, shard, id);
+    public void set(String source, String table, String shard, String sink, Long id) {
+        mysqlOffsetHolder.set(source, table, shard, sink, id);
+        MemoryOffsetHolder.getInstance().set(source, table, shard, sink, id);
     }
 }
