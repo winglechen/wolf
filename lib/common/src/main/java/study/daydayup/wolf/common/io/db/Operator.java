@@ -60,6 +60,8 @@ public class Operator {
         }
     }
 
+    public Operator() {}
+
     public Operator(Statistics statistics) {
         this.statistics = statistics;
     }

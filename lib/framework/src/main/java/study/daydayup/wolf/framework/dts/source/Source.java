@@ -16,5 +16,5 @@ public interface Source {
 
     void init(SourceConfig config);
     Table getStream();
-    void saveOffset(String sinkName);
+    void saveOffset(String sinkName, long offset);
 }

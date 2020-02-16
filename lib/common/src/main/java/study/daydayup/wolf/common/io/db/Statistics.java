@@ -15,9 +15,6 @@ import java.util.*;
 @Data
 public class Statistics {
     private static final String KEY_DELIMITER = ":";
-
-    private String table;
-
     private List<String> keyColumns;
 
     private Long minId;

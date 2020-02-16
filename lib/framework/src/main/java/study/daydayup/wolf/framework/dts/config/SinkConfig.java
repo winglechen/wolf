@@ -2,6 +2,8 @@ package study.daydayup.wolf.framework.dts.config;
 
 import lombok.Data;
 
+import java.util.Set;
+
 /**
  * study.daydayup.wolf.business.union.task.config
  *
@@ -11,4 +13,6 @@ import lombok.Data;
 @Data
 public class SinkConfig {
     private String sinkName;
+    private String tableName;
+    private Set<String> keyColumns;
 }
