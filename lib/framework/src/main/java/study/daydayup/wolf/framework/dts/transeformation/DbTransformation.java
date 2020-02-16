@@ -3,8 +3,10 @@ package study.daydayup.wolf.framework.dts.transeformation;
 import lombok.Getter;
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Operator;
+import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.db.Table;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class DbTransformation implements Transformation {
         this.sink = sink;
 
         statistics = new Statistics();
-        statistics.setKeyColumns(sink.getKeyColumns());
+        statistics.setKeyColumns(this.sink.getKeyColumns());
 
         operatorList = new ArrayList<>(5);
         currentOperator = new Operator(statistics);
@@ -50,7 +52,43 @@ public class DbTransformation implements Transformation {
 
 
     public Statistics transform(Table table) {
+        if (!CollectionUtil.hasValue(table)) {
+            return statistics;
+        }
+
+        for (Row row : table) {
+            transform(row);
+        }
+
         return statistics;
+    }
+
+    private void transform(Row row) {
+        if (null == row || operatorList.isEmpty()) {
+            return;
+        }
+
+        if (isTransformed(row)) {
+            return;
+        }
+
+        for (Operator operator : operatorList) {
+            operator.operate(row);
+        }
+    }
+
+    private boolean isTransformed(@NonNull Row row) {
+        Long offset = sink.getOffset();
+        if (offset == null) {
+            return false;
+        }
+
+        Long id = (Long) row.get(Table.DEFAULT_ID_COLUMN);
+        if (id == null) {
+            return true;
+        }
+
+        return id <= offset;
     }
 
 }

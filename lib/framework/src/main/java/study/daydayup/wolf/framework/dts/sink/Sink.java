@@ -16,5 +16,6 @@ public interface Sink {
 
     Sink init(SinkConfig config);
     Set<String> getKeyColumns();
+    Long getOffset();
     void save(Statistics statistics);
 }

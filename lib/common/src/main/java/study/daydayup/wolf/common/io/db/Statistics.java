@@ -105,7 +105,7 @@ public class Statistics {
             return;
         }
 
-        Long lId = (Long) id;
+        Long lId = ((Number) id).longValue();
         setMinId(lId);
         setMaxId(lId);
     }

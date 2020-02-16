@@ -19,6 +19,7 @@ public abstract class AbstractSource implements Source {
     protected String columns;
     protected OrderEnum order;
 
+    @Override
     public void init(SourceConfig config) {
         sourceName = config.getSourceName();
         tableName = config.getTableName();
@@ -35,5 +36,10 @@ public abstract class AbstractSource implements Source {
                 ? config.getOrder()
                 : Source.DEFAULT_ORDER;
 
+    }
+
+    @Override
+    public Long getOffset(String sinkName) {
+        return null;
     }
 }
