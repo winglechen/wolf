@@ -2,6 +2,8 @@ package study.daydayup.wolf.framework.dts.sink;
 
 import study.daydayup.wolf.framework.dts.config.SinkConfig;
 
+import java.util.Set;
+
 /**
  * study.daydayup.wolf.framework.dts.sink
  *
@@ -10,6 +12,11 @@ import study.daydayup.wolf.framework.dts.config.SinkConfig;
  **/
 public abstract class AbstractSink implements Sink {
     protected SinkConfig config;
+
+    @Override
+    public Set<String> getKeyColumns() {
+        return config.getKeyColumns();
+    }
 
     @Override
     public Sink init(SinkConfig config) {

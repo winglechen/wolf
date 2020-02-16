@@ -15,7 +15,7 @@ import java.util.*;
 @Data
 public class Statistics {
     private static final String KEY_DELIMITER = ":";
-    private List<String> keyColumns;
+    private Set<String> keyColumns;
 
     private Long minId;
     private Long maxId;
@@ -32,11 +32,15 @@ public class Statistics {
     private Map<String, Row> data;
 
     public Statistics() {
-        keyColumns = new ArrayList<>();
+        keyColumns = new TreeSet<>();
         data = new HashMap<>();
     }
 
-    public void setKeyColumn(String... columns) {
+    public void setKeyColumns(@NonNull Set<String> columns) {
+        keyColumns = columns;
+    }
+
+    public void setKeyColumns(String... columns) {
         if (columns == null || 0 == columns.length) {
             return;
         }

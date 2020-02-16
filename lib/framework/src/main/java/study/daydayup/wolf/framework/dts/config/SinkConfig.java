@@ -35,4 +35,5 @@ public class SinkConfig {
         keyColumns.addAll(Arrays.asList(columns));
         return this;
     }
+
 }

@@ -5,7 +5,6 @@ import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.framework.dts.config.SinkConfig;
 import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import java.util.ArrayList;
@@ -19,27 +18,39 @@ import java.util.List;
  **/
 public class DbTransformation implements Transformation {
     private Sink sink;
+    private Statistics statistics;
 
     @Getter
     private Operator currentOperator;
     private List<Operator> operatorList;
 
-    public static DbTransformation newTask(@NonNull Sink sink) {
-        return new DbTransformation(sink);
+    public static Operator newTask(@NonNull Sink sink) {
+        return new DbTransformation(sink).getCurrentOperator();
     }
 
     private DbTransformation(Sink sink) {
         this.sink = sink;
-        this.operatorList = new ArrayList<>(5);
+
+        statistics = new Statistics();
+        statistics.setKeyColumns(sink.getKeyColumns());
+
+        operatorList = new ArrayList<>(5);
+        currentOperator = new Operator(statistics);
+        operatorList.add(currentOperator);
     }
 
-    public void addJob() {
+    public Operator addJob() {
+        Operator operator = new Operator(statistics);
 
+        operatorList.add(operator);
+        currentOperator = operator;
+
+        return currentOperator;
     }
 
 
     public Statistics transform(Table table) {
-        return null;
+        return statistics;
     }
 
 }
