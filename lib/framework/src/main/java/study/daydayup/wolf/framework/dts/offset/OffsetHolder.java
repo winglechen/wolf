@@ -11,6 +11,8 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
  * @since 2020/2/5 5:27 下午
  **/
 public interface OffsetHolder {
+    String DEFAULT_TABLE_NAME = "offset_holder";
+
     Long get(String source, String table, String shard, String sink);
     void set(String source, String table, String shard, String sink, Long id);
 

@@ -2,6 +2,7 @@ package study.daydayup.wolf.framework.dts.offset;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.framework.dts.config.SourceConfig;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,16 @@ public class Offset implements OffsetHolder {
     private String sink;
     private String table;
     private String shard;
+
+    public Offset init(SourceConfig source) {
+
+        return this;
+    }
+
+    public Offset load() {
+
+        return this;
+    }
 
     public void init(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
         this.source = source;

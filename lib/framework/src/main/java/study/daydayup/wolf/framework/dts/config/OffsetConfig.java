@@ -1,6 +1,6 @@
-package study.daydayup.wolf.business.union.task.config;
+package study.daydayup.wolf.framework.dts.config;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
 /**
  * study.daydayup.wolf.business.union.task.config
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
  * @author Wingle
  * @since 2020/2/10 10:14 上午
  **/
-@Component
+@Data
 public class OffsetConfig {
-    private static final String TABLE_NAME = "offset_holder";
+    public static final String TABLE_NAME = "offset_holder";
 
     public String getTable() {
         return TABLE_NAME;

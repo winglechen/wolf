@@ -19,6 +19,7 @@ import java.util.Map;
 public class Table extends LinkedList<Row>{
     public static final String DEFAULT_TAG_COLUMN = "tags";
     public static final String DEFAULT_ID_COLUMN = "id";
+    public static final String ALL_COLUMNS = "*";
     public static final String DEFAULT_COUNT_COLUMN = "*";
 
     public static Table of(List<Map<String,Object>> table) {

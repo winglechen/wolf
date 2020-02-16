@@ -1,18 +1,19 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.union.task.config.OffsetConfig;
+import study.daydayup.wolf.framework.dts.config.OffsetConfig;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.business.union.task.dts.sink.DailyLoanSink;
-import study.daydayup.wolf.business.union.task.dts.source.ContractSource;
 import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.framework.dts.config.SourceConfig;
 import study.daydayup.wolf.framework.dts.offset.Offset;
 import study.daydayup.wolf.framework.dts.sink.MysqlEditor;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
+import study.daydayup.wolf.framework.dts.source.MysqlSource;
 
 import javax.annotation.Resource;
 
@@ -40,15 +41,18 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     @Resource
     private MysqlScanner mysqlScanner;
     @Resource
+    private MysqlSource mysqlSource;
+    @Resource
     private MysqlEditor mysqlEditor;
 
 
     @Override
     public void countLoanContract() {
-        String task = "countLoanContract";
+        String source = "latestContract";
+        String sink = "newRequest";
         String table = "contract";
         String shard = shardingConfig.getShard();
-        offset.init(task, table, shard);
+        offset.init(source, table, shard, sink);
 
         Long lastId = offset.get();
         if (lastId == null) {
@@ -67,6 +71,16 @@ public class DailyLoanServiceImpl implements DailyLoanService {
 
     @Override
     public void countLoanContractState() {
+        SourceConfig sourceConfig = SourceConfig.builder()
+                .sourceName("latestContract")
+                .tableName("contract")
+                .shardingKey(shardingConfig.getShard())
+                .build();
+
+        mysqlSource.init(sourceConfig);
+        Table stream = mysqlSource.getStream();
+
+
 
     }
 
