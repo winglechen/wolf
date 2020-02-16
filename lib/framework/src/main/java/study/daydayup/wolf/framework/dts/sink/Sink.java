@@ -1,7 +1,7 @@
 package study.daydayup.wolf.framework.dts.sink;
 
 import study.daydayup.wolf.common.io.db.Statistics;
-import study.daydayup.wolf.framework.dts.source.Source;
+import study.daydayup.wolf.framework.dts.config.SinkConfig;
 
 /**
  * study.daydayup.wolf.framework.layer.task
@@ -12,5 +12,6 @@ import study.daydayup.wolf.framework.dts.source.Source;
 public interface Sink {
     String DEFAULT_SINK_NAME = "root";
 
-    void save(Statistics statistics, Source source);
+    Sink init(SinkConfig config);
+    void save(Statistics statistics);
 }

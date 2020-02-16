@@ -11,9 +11,11 @@ import study.daydayup.wolf.framework.dts.source.Source;
  * @since 2020/2/16 6:59 下午
  **/
 @Component
-public class MysqlSink implements Sink {
+public class MysqlSink extends AbstractSink  implements Sink {
+
+
     @Override
-    public void save(Statistics statistics, Source source) {
+    public void save(Statistics statistics) {
 
     }
 }

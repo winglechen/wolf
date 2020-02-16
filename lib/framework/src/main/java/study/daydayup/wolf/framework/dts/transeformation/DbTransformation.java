@@ -6,6 +6,7 @@ import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.framework.dts.config.SinkConfig;
+import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +18,18 @@ import java.util.List;
  * @since 2020/2/16 6:54 下午
  **/
 public class DbTransformation implements Transformation {
-    private SinkConfig config;
+    private Sink sink;
 
     @Getter
     private Operator currentOperator;
     private List<Operator> operatorList;
 
-    public static DbTransformation newTask(@NonNull SinkConfig config) {
-        return new DbTransformation(config);
+    public static DbTransformation newTask(@NonNull Sink sink) {
+        return new DbTransformation(sink);
     }
 
-    private DbTransformation(SinkConfig config) {
-        this.config = config;
+    private DbTransformation(Sink sink) {
+        this.sink = sink;
         this.operatorList = new ArrayList<>(5);
     }
 

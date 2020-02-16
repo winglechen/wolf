@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTrans
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.framework.dts.config.SinkConfig;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
 import study.daydayup.wolf.framework.dts.offset.Offset;
 import study.daydayup.wolf.framework.dts.sink.MysqlEditor;
@@ -29,16 +30,11 @@ import javax.annotation.Resource;
 public class DailyLoanServiceImpl implements DailyLoanService {
     @Resource
     private DailyLoanTransformation dailyLoanTransformation;
-    @Resource
-    private DailyLoanSink dailyLoanSink;
 
     @Resource
     private Offset offset;
     @Resource
-    private OffsetConfig offsetConfig;
-    @Resource
     private ShardingConfig shardingConfig;
-
 
     @Resource
     private MysqlScanner mysqlScanner;
@@ -46,8 +42,6 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     private MysqlSource mysqlSource;
     @Resource
     private MysqlEditor mysqlEditor;
-    @Resource
-    private DbTransformation transformation;
     @Resource
     private MysqlSink mysqlSink;
 
@@ -71,7 +65,6 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         }
 
         Statistics statistics = dailyLoanTransformation.transform(contracts);
-        statistics.setTable("daily_loan");
         mysqlEditor.save(offset, statistics);
     }
 
@@ -86,8 +79,18 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         mysqlSource.init(sourceConfig);
         Table stream = mysqlSource.getStream();
 
+        SinkConfig sinkConfig = SinkConfig.builder()
+                .sinkName("requestCount")
+                .tableName("daily_loan")
+                .source(mysqlSource)
+                .build()
+                .setKeyColumns("org_id", "create_date")
+                ;
+        mysqlSink.init(sinkConfig);
+
+        DbTransformation transformation = DbTransformation.newTask(mysqlSink);
         Statistics statistics = transformation.transform(stream);
-        mysqlSink.save(statistics, mysqlSource);
+        mysqlSink.save(statistics);
     }
 
     @Override
