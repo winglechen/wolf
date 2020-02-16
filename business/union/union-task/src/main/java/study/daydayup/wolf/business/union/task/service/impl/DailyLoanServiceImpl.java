@@ -12,8 +12,10 @@ import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
 import study.daydayup.wolf.framework.dts.offset.Offset;
 import study.daydayup.wolf.framework.dts.sink.MysqlEditor;
+import study.daydayup.wolf.framework.dts.sink.MysqlSink;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
 import study.daydayup.wolf.framework.dts.source.MysqlSource;
+import study.daydayup.wolf.framework.dts.transeformation.DbTransformation;
 
 import javax.annotation.Resource;
 
@@ -44,6 +46,10 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     private MysqlSource mysqlSource;
     @Resource
     private MysqlEditor mysqlEditor;
+    @Resource
+    private DbTransformation transformation;
+    @Resource
+    private MysqlSink mysqlSink;
 
 
     @Override
@@ -80,8 +86,8 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         mysqlSource.init(sourceConfig);
         Table stream = mysqlSource.getStream();
 
-
-
+        Statistics statistics = transformation.transform(stream);
+        mysqlSink.save(statistics, mysqlSource);
     }
 
     @Override

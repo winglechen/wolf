@@ -11,7 +11,5 @@ import study.daydayup.wolf.framework.dts.source.Source;
  **/
 public interface Sink {
     String DEFAULT_SINK_NAME = "root";
-
-    void init(Source source);
-    void save(Statistics statistics);
+    void save(Statistics statistics, Source source);
 }
