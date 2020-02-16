@@ -78,17 +78,8 @@ public class DbTransformation implements Transformation {
     }
 
     private boolean isTransformed(@NonNull Row row) {
-        Long offset = sink.getOffset();
-        if (offset == null) {
-            return false;
-        }
-
         Long id = (Long) row.get(Table.DEFAULT_ID_COLUMN);
-        if (id == null) {
-            return true;
-        }
-
-        return id <= offset;
+        return sink.isDuplicated(id);
     }
 
 }

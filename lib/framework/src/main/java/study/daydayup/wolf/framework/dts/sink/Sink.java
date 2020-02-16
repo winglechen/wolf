@@ -16,6 +16,7 @@ public interface Sink {
 
     Sink init(SinkConfig config);
     Set<String> getKeyColumns();
+    boolean isDuplicated(Long id);
     Long getOffset();
     void save(Statistics statistics);
 }

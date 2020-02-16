@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.dts.sink;
 
+import lombok.NonNull;
 import study.daydayup.wolf.framework.dts.config.SinkConfig;
 
 import java.util.Set;
@@ -35,5 +36,15 @@ public abstract class AbstractSink implements Sink {
 
         offset = config.getSource().getOffset(config.getSinkName());
         return offset;
+    }
+
+    @Override
+    public boolean isDuplicated(Long id) {
+        if (id == null) {
+            return true;
+        }
+
+        offset = getOffset();
+        return id <= offset;
     }
 }
