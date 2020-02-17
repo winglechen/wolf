@@ -85,7 +85,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
                 .tableName("daily_loan")
                 .source(mysqlSource)
                 .build()
-                .setKeyColumns("org_id", "create_date")
+                .setKeyColumns("org_id", "date")
                 ;
         mysqlSink.init(sinkConfig);
 
@@ -95,7 +95,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         operator = transformation.addJob();
         operator.map()
                 .rename("seller_id", "org_id")
-                .toLocalDate("created_at", "create_date")
+                .toLocalDate("created_at", "date")
                 .toTag();
         operator.match()
                 .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
