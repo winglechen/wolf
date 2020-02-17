@@ -2,7 +2,9 @@ package study.daydayup.wolf.framework.dts.source;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
+import study.daydayup.wolf.framework.dts.config.SourceConfig;
 import study.daydayup.wolf.framework.dts.offset.Offset;
+import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import javax.annotation.Resource;
 
@@ -16,10 +18,27 @@ import javax.annotation.Resource;
 public class MysqlSource extends AbstractSource implements Source {
     @Resource
     private Offset offset;
+    @Resource
+    private MysqlScanner mysqlScanner;
+
+    @Override
+    public Source init(SourceConfig config) {
+        super.init(config);
+
+        offset.init(sourceName, tableName, shardingKey);
+        offset.load();
+
+        return this;
+    }
 
     @Override
     public Table getStream() {
-        return null;
+        Long lastId = offset.get(Sink.DEFAULT_SINK_NAME);
+        if (lastId == null) {
+            return null;
+        }
+
+        return mysqlScanner.scan(tableName, lastId, columns);
     }
 
     @Override

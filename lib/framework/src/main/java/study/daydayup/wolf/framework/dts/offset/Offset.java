@@ -3,7 +3,6 @@ package study.daydayup.wolf.framework.dts.offset;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.util.collection.MapUtil;
-import study.daydayup.wolf.framework.dts.config.SourceConfig;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -52,7 +51,6 @@ public class Offset implements OffsetHolder {
         init(source, table, shard);
         return load();
     }
-
 
     public Long get(@NonNull String sink) {
         return get(source, table, shard, sink);

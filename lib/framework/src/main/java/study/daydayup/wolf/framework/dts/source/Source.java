@@ -14,7 +14,7 @@ public interface Source {
     String DEFAULT_SHARDING_KEY = "root";
     OrderEnum DEFAULT_ORDER = OrderEnum.ASC;
 
-    void init(SourceConfig config);
+    Source init(SourceConfig config);
     Table getStream();
     Long getOffset();
     Long getOffset(String sinkName);

@@ -20,8 +20,15 @@ public abstract class AbstractSource implements Source {
     protected String columns;
     protected OrderEnum order;
 
+    protected boolean isInit = false;
+
     @Override
-    public void init(SourceConfig config) {
+    public Source init(SourceConfig config) {
+        if (isInit) {
+            return this;
+        }
+        isInit = true;
+
         sourceName = config.getSourceName();
         tableName = config.getTableName();
 
@@ -37,6 +44,7 @@ public abstract class AbstractSource implements Source {
                 ? config.getOrder()
                 : Source.DEFAULT_ORDER;
 
+        return this;
     }
 
     @Override
