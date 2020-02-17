@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.dts.source;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
@@ -24,9 +25,7 @@ public class MysqlSource extends AbstractSource implements Source {
     @Override
     public Source init(SourceConfig config) {
         super.init(config);
-
-        offset.init(sourceName, tableName, shardingKey);
-        offset.load();
+        offset.load(sourceName, tableName, shardingKey);
 
         return this;
     }
@@ -42,7 +41,12 @@ public class MysqlSource extends AbstractSource implements Source {
     }
 
     @Override
-    public void saveOffset(String sinkName, Long offset) {
+    public Long getOffset(@NonNull String sinkName) {
+        return offset.get(sourceName, tableName, shardingKey, sinkName);
+    }
 
+    @Override
+    public void saveOffset(@NonNull String sinkName, @NonNull Long newOffset) {
+        offset.set(sourceName, tableName, shardingKey, sinkName, newOffset);
     }
 }

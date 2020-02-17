@@ -1,6 +1,5 @@
 package study.daydayup.wolf.framework.dts.sink;
 
-import lombok.NonNull;
 import study.daydayup.wolf.framework.dts.config.SinkConfig;
 
 import java.util.Set;
@@ -14,7 +13,6 @@ import java.util.Set;
 public abstract class AbstractSink implements Sink {
     protected SinkConfig config;
     protected Long offset;
-    protected Long newOffset;
 
     @Override
     public Set<String> getKeyColumns() {
@@ -45,6 +43,10 @@ public abstract class AbstractSink implements Sink {
         }
 
         offset = getOffset();
+        if (offset == null) {
+            return false;
+        }
+
         return id <= offset;
     }
 }

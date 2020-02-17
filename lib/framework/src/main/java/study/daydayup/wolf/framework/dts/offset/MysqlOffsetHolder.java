@@ -3,6 +3,7 @@ package study.daydayup.wolf.framework.dts.offset;
 import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.common.io.db.jdbc.JdbcMapper;
 import study.daydayup.wolf.common.io.sql.Sql;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.time.DateUtil;
@@ -37,12 +38,9 @@ public class MysqlOffsetHolder implements OffsetHolder {
         Map<String, Long> result = new HashMap<>();
         if (CollectionUtil.hasValue(data)) {
             String tmpKey;
-            BigInteger tmpOffset;
             for (Map<String, Object> row : data) {
                 tmpKey = formatKey(source, table, shard, (String) row.get("sink"));
-                tmpOffset = (BigInteger)row.get("offset");
-
-                result.put(tmpKey, tmpOffset.longValue());
+                result.put(tmpKey, (Long)row.get("offset"));
             }
         }
 
@@ -134,7 +132,8 @@ public class MysqlOffsetHolder implements OffsetHolder {
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
                 .toString();
 
-        return jdbc.queryForList(sql);
+        List<Map<String, Object>> result = jdbc.queryForList(sql);
+        return JdbcMapper.map(result);
     }
 
 }
