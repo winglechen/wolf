@@ -18,7 +18,7 @@ public class MysqlSource extends AbstractSource implements Source {
     }
 
     @Override
-    public void saveOffset(String sinkName, long offset) {
+    public void saveOffset(String sinkName, Long offset) {
 
     }
 }

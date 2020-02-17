@@ -2,7 +2,6 @@ package study.daydayup.wolf.framework.dts.sink;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Statistics;
-import study.daydayup.wolf.framework.dts.source.Source;
 
 /**
  * study.daydayup.wolf.framework.dts.sink

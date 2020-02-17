@@ -1,4 +1,4 @@
-package study.daydayup.wolf.framework.dts.transeformation;
+package study.daydayup.wolf.framework.dts.transformation;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -26,8 +26,8 @@ public class DbTransformation implements Transformation {
     private Operator currentOperator;
     private List<Operator> operatorList;
 
-    public static Operator newTask(@NonNull Sink sink) {
-        return new DbTransformation(sink).getCurrentOperator();
+    public static DbTransformation newTask(@NonNull Sink sink) {
+        return new DbTransformation(sink);
     }
 
     private DbTransformation(Sink sink) {
@@ -37,8 +37,6 @@ public class DbTransformation implements Transformation {
         statistics.setKeyColumns(this.sink.getKeyColumns());
 
         operatorList = new ArrayList<>(5);
-        currentOperator = new Operator(statistics);
-        operatorList.add(currentOperator);
     }
 
     public Operator addJob() {

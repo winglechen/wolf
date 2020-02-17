@@ -3,6 +3,7 @@ package study.daydayup.wolf.framework.dts.source;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
+import study.daydayup.wolf.framework.dts.sink.Sink;
 
 /**
  * study.daydayup.wolf.framework.dts.source
@@ -39,7 +40,18 @@ public abstract class AbstractSource implements Source {
     }
 
     @Override
+    public Long getOffset() {
+        return getOffset(Sink.DEFAULT_SINK_NAME);
+    }
+
+    @Override
     public Long getOffset(String sinkName) {
         return null;
     }
+
+    @Override
+    public void saveOffset(Long offset) {
+        saveOffset(Sink.DEFAULT_SINK_NAME, offset);
+    }
+
 }

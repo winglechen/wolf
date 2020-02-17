@@ -21,7 +21,7 @@ import java.util.Map;
  * @since 2020/2/4 5:31 下午
  **/
 @Component
-public class MysqlScanner implements DbScanner, Source {
+public class MysqlScanner implements DbScanner {
     private static final int MAX_ROW_NUM = 200;
     private static final int SELECT_LIMIT = 40;
 
@@ -84,7 +84,6 @@ public class MysqlScanner implements DbScanner, Source {
         return (Long)last.get("id");
     }
 
-
     private List<Map<String, Object>> select(@NonNull String table, @NonNull String columns, @NonNull Long id) {
         String sql = Sql.select(columns)
                 .from(table)
@@ -95,6 +94,5 @@ public class MysqlScanner implements DbScanner, Source {
 
         return jdbc.queryForList(sql);
     }
-
 
 }

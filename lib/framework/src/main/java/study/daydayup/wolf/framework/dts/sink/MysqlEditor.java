@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2020/2/8 6:07 下午
  **/
 @Component
-public class MysqlEditor implements Sink {
+public class MysqlEditor {
     @Resource
     private JdbcTemplate jdbc;
 
@@ -28,7 +28,6 @@ public class MysqlEditor implements Sink {
 
     @Transactional
     public void save(Offset offset, Statistics statistics) {
-        offset.set(statistics.getMaxId());
 
     }
 }

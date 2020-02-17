@@ -1,10 +1,11 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.framework.dts.config.OffsetConfig;
+import study.daydayup.wolf.business.trade.api.config.TradeTag;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.common.io.db.Statistics;
-import study.daydayup.wolf.business.union.task.dts.sink.DailyLoanSink;
 import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
@@ -16,7 +17,7 @@ import study.daydayup.wolf.framework.dts.sink.MysqlEditor;
 import study.daydayup.wolf.framework.dts.sink.MysqlSink;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
 import study.daydayup.wolf.framework.dts.source.MysqlSource;
-import study.daydayup.wolf.framework.dts.transeformation.DbTransformation;
+import study.daydayup.wolf.framework.dts.transformation.DbTransformation;
 
 import javax.annotation.Resource;
 
@@ -89,8 +90,29 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         mysqlSink.init(sinkConfig);
 
         DbTransformation transformation = DbTransformation.newTask(mysqlSink);
+        Operator operator;
+
+        operator = transformation.addJob();
+        operator.map()
+                .rename("seller_id", "org_id")
+                .toLocalDate("created_at", "create_date")
+                .toTag();
+        operator.match()
+                .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
+        operator.aggregate()
+                .count("request_count");
+
+        operator = transformation.addJob();
+        operator.match()
+                .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode())
+                .hasTag(TradeTag.FIRST_TRADE);
+        operator.aggregate()
+                .count("first_request_count");
+
         Statistics statistics = transformation.transform(stream);
         mysqlSink.save(statistics);
+
+        mysqlSource.saveOffset(statistics.getMaxId());
     }
 
     @Override

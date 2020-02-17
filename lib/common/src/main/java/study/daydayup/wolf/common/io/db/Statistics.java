@@ -54,7 +54,7 @@ public class Statistics {
             return null;
         }
 
-        setIds(row);
+        setMinAndMaxIds(row);
         Row data = getCurrentRow(key);
         setKeyColumns(data, row);
 
@@ -80,10 +80,6 @@ public class Statistics {
         return currentRow.get(key);
     }
 
-    public String getCurrentKey() {
-        return currentKey;
-    }
-
     public boolean setCurrentKey(@NonNull String key) {
         Row row = data.get(key);
         if (row == null) {
@@ -94,7 +90,7 @@ public class Statistics {
         return true;
     }
 
-    private void setIds(@NonNull Row row) {
+    private void setMinAndMaxIds(@NonNull Row row) {
         String column = Table.DEFAULT_ID_COLUMN;
         Object id = row.get(column);
         if (id == null ) {
