@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @since 2020/2/8 8:27 下午
  **/
 @Component
-public class ContractSource implements Source {
+public class ContractSource {
     private static final String TABLE_CONTRACT = "contract";
     private static final String TABLE_STATE_LOG = "trade_state_log";
 

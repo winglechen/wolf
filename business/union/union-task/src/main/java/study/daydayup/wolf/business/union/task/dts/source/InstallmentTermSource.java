@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.dts.source.Source;
  * @since 2020/2/8 8:28 下午
  **/
 @Component
-public class InstallmentTermSource implements Source {
+public class InstallmentTermSource {
 }

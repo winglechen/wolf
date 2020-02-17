@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.dts.sink.Sink;
  * @since 2020/2/8 8:26 下午
  **/
 @Component
-public class DailyLoanSink implements Sink {
+public class DailyLoanSink {
     public void save(@NonNull Statistics statistics) {
 
     }

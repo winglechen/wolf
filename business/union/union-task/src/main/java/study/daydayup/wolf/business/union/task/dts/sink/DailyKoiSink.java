@@ -8,5 +8,5 @@ import study.daydayup.wolf.framework.dts.sink.Sink;
  * @author Wingle
  * @since 2020/2/8 6:05 下午
  **/
-public class DailyKoiSink implements Sink {
+public class DailyKoiSink {
 }
