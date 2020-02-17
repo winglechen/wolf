@@ -18,11 +18,13 @@ public class Offset implements OffsetHolder {
     private MysqlOffsetHolder mysqlOffsetHolder;
 
     private String source;
-    private String sink;
     private String table;
     private String shard;
 
-    public Offset init(SourceConfig source) {
+    public Offset init(@NonNull String source, @NonNull String table, @NonNull String shard) {
+        this.source = source;
+        this.table = table;
+        this.shard = shard;
 
         return this;
     }
@@ -32,18 +34,17 @@ public class Offset implements OffsetHolder {
         return this;
     }
 
-    public void init(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
-        this.source = source;
-        this.table = table;
-        this.shard = shard;
-        this.sink = sink;
+    public Offset load(@NonNull String source, @NonNull String table, @NonNull String shard) {
+        init(source, table, shard);
+        return load();
     }
 
-    public Long get() {
+
+    public Long get(@NonNull String sink) {
         return get(source, table, shard, sink);
     }
 
-    public void set(Long id) {
+    public void set(@NonNull String sink, @NonNull Long id) {
         set(source, table, shard, sink, id);
     }
 
@@ -62,4 +63,5 @@ public class Offset implements OffsetHolder {
         mysqlOffsetHolder.set(source, table, shard, sink, id);
         MemoryOffsetHolder.getInstance().set(source, table, shard, sink, id);
     }
+
 }

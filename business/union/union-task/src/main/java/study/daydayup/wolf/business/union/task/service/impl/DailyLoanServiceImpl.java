@@ -53,9 +53,9 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         String sink = "newRequest";
         String table = "contract";
         String shard = shardingConfig.getShard();
-        offset.init(source, table, shard, sink);
+        offset.init(source, table, shard);
 
-        Long lastId = offset.get();
+        Long lastId = offset.get(sink);
         if (lastId == null) {
             return;
         }
