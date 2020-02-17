@@ -74,11 +74,15 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         SourceConfig sourceConfig = SourceConfig.builder()
                 .sourceName("latestContract")
                 .tableName("contract")
+                .columns("id, buyer_id, seller_id, trade_type, tags, created_at")
                 .shardingKey(shardingConfig.getShard())
                 .build();
 
         mysqlSource.init(sourceConfig);
         Table stream = mysqlSource.getStream();
+        if (stream == null) {
+            return;
+        }
 
         SinkConfig sinkConfig = SinkConfig.builder()
                 .sinkName("requestCount")

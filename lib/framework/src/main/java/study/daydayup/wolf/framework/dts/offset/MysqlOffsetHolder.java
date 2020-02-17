@@ -9,6 +9,7 @@ import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -36,9 +37,12 @@ public class MysqlOffsetHolder implements OffsetHolder {
         Map<String, Long> result = new HashMap<>();
         if (CollectionUtil.hasValue(data)) {
             String tmpKey;
+            BigInteger tmpOffset;
             for (Map<String, Object> row : data) {
                 tmpKey = formatKey(source, table, shard, (String) row.get("sink"));
-                result.put(tmpKey, (Long)row.get("offset"));
+                tmpOffset = (BigInteger)row.get("offset");
+
+                result.put(tmpKey, tmpOffset.longValue());
             }
         }
 
