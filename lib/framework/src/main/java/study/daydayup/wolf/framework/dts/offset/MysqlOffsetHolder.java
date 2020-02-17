@@ -26,6 +26,26 @@ public class MysqlOffsetHolder implements OffsetHolder {
     @Resource
     private JdbcTemplate jdbc;
 
+    public Map<String, Long> getAll(@NonNull String source, @NonNull String table, @NonNull String shard) {
+        String key = formatKey(source, table, shard);
+        if (!OffsetLocker.lock(key)) {
+            return null;
+        }
+
+        List<Map<String, Object>> data = getAllFromDb(source, table, shard);
+        Map<String, Long> result = new HashMap<>();
+        if (CollectionUtil.hasValue(data)) {
+            String tmpKey;
+            for (Map<String, Object> row : data) {
+                tmpKey = formatKey(source, table, shard, (String) row.get("sink"));
+                result.put(tmpKey, (Long)row.get("offset"));
+            }
+        }
+
+        OffsetLocker.unlock(key);
+        return result;
+    }
+
     @Override
     public Long get(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
         String key = formatKey(source, table, shard, sink);
@@ -100,6 +120,17 @@ public class MysqlOffsetHolder implements OffsetHolder {
         }
 
         return offsetList.get(0);
+    }
+
+    private List<Map<String, Object>> getAllFromDb(@NonNull String source, @NonNull String table, @NonNull String shard) {
+        String sql = Sql.select("sink, offset")
+                .from(HOLDER_TABLE)
+                .where(StringUtil.join( "source = '", source, "'"))
+                .and(StringUtil.join( "table_name = '", table, "'"))
+                .and(StringUtil.join( "sharding_key = '", shard, "'"))
+                .toString();
+
+        return jdbc.queryForList(sql);
     }
 
 }

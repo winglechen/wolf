@@ -2,9 +2,11 @@ package study.daydayup.wolf.framework.dts.offset;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.framework.layer.dal.scanner
@@ -21,16 +23,28 @@ public class Offset implements OffsetHolder {
     private String table;
     private String shard;
 
+    private boolean isInit = false;
+
     public Offset init(@NonNull String source, @NonNull String table, @NonNull String shard) {
         this.source = source;
         this.table = table;
         this.shard = shard;
 
+        isInit = true;
         return this;
     }
 
     public Offset load() {
+        if (!isInit) {
+            return this;
+        }
 
+        Map<String, Long> data = mysqlOffsetHolder.getAll(source, table, shard);
+        if (MapUtil.isEmpty(data)) {
+            return this;
+        }
+
+        MemoryOffsetHolder.getInstance().setAll(source, table, shard, data);
         return this;
     }
 

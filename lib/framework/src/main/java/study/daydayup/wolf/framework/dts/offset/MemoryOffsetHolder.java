@@ -1,6 +1,7 @@
 package study.daydayup.wolf.framework.dts.offset;
 
 import lombok.NonNull;
+import study.daydayup.wolf.common.util.collection.MapUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,21 @@ public class MemoryOffsetHolder implements OffsetHolder {
 
         OffsetLocker.unlock(key);
         return offset;
+    }
+
+    public void setAll(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull Map<String, Long> data) {
+        if (MapUtil.isEmpty(data)) {
+            return;
+        }
+
+        String key = formatKey(source, table, shard);
+        if (!OffsetLocker.lock(key)) {
+            return;
+        }
+
+        offsetMap.putAll(data);
+
+        OffsetLocker.unlock(key);
     }
 
     @Override

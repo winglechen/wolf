@@ -18,6 +18,10 @@ public class ListUtil {
         return null != list && !list.isEmpty();
     }
 
+    public static <E> boolean isEmpty(List<E> list) {
+        return ! hasValue(list);
+    }
+
     public static <E> E last(List<E> list) {
         if (!hasValue(list)) {
             return null;
