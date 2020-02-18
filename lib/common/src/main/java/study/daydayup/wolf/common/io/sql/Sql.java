@@ -29,6 +29,7 @@ public class Sql {
     private static final String FROM = " FROM ";
     private static final String WHERE = " WHERE ";
     private static final String SET = " SET ";
+    private static final String DUPLICATE_UPDATE = " ON DUPLICATE KEY UPDATE ";
     private static final String VALUES = " VALUES ";
     private static final String AND = " AND ";
     private static final String ORDER_BY = " ORDER BY ";
@@ -53,19 +54,19 @@ public class Sql {
     private boolean isFirstOrder = true;
     private boolean isFirstValue = true;
 
-    public static Sql count() {
-        return count(false);
+    public static Sql count(@NonNull String table) {
+        return count(table, false);
     }
 
-    public static Sql count(boolean prepared) {
-        return select(DEFAULT_COUNT, prepared);
+    public static Sql count(@NonNull String table, boolean prepared) {
+        return select(DEFAULT_COUNT, prepared).from(table);
     }
 
-    public static Sql exists(String table) {
+    public static Sql exists(@NonNull String table) {
         return exists(table, false);
     }
 
-    public static Sql exists(String table, boolean prepared) {
+    public static Sql exists(@NonNull String table, boolean prepared) {
         return select(DEFAULT_KEY, prepared).from(table);
     }
 
@@ -239,7 +240,15 @@ public class Sql {
         return this;
     }
 
+    public Sql duplicateUpdate(@NonNull Map<String, Object> data) {
+        return set(data, true);
+    }
+
     public Sql set(@NonNull Map<String, Object> data) {
+        return set(data, false);
+    }
+
+    public Sql set(@NonNull Map<String, Object> data, boolean onDuplicateKey) {
         if (data.isEmpty()) {
             return this;
         }
@@ -249,7 +258,11 @@ public class Sql {
             if (!isFirst) {
                 sql.append(",").append(BLANK);
             }else {
-                sql.append(SET);
+                if (onDuplicateKey) {
+                    sql.append(DUPLICATE_UPDATE);
+                } else {
+                    sql.append(SET);
+                }
             }
             isFirst = false;
 
@@ -416,6 +429,14 @@ public class Sql {
         for (Object o : update.getData()) {
             System.out.println("prepared: " + o);
         }
+
+
+        String duplicateUpdate = Sql.insert("order")
+                .values(values)
+                .duplicateUpdate(data)
+                .toString();
+
+        System.out.println("duplicate: " + duplicateUpdate);
 
     }
 
