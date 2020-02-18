@@ -3,6 +3,7 @@ package study.daydayup.wolf.framework.dts.sink;
 import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.sql.Sql;
@@ -30,6 +31,7 @@ public class MysqlSink extends AbstractSink  implements Sink {
     private JdbcTemplate jdbc;
 
     @Override
+    @Transactional
     public void save(Statistics statistics) {
         if (null == statistics) {
             return;
@@ -86,14 +88,18 @@ public class MysqlSink extends AbstractSink  implements Sink {
     }
 
     private void saveToDb() {
+        int count = saveOffset();
+        if (count <= 0) {
+            return;
+        }
+
         for (Row row : statistics.getRows()) {
             saveToDb(row);
         }
-        saveOffset();
     }
 
-    private void saveOffset() {
-        config.getSource().saveOffset(config.getSinkName(), statistics.getMaxId());
+    private int saveOffset() {
+        return config.getSource().saveOffset(config.getSinkName(), statistics.getMaxId());
     }
 
     private void saveToDb(Row row) {
@@ -107,6 +113,19 @@ public class MysqlSink extends AbstractSink  implements Sink {
             return;
         }
 
+        insertOrUpdate(keyMap, row);
+    }
+
+    private void insertOrUpdate(Map<String, Object> keyMap, Row row) {
+        Map<String, Object> update = MapUtil.difference(row, keyMap);
+        Sql sql = Sql.insert(config.getTableName(), true)
+                .values(row)
+                .duplicateUpdate(update);
+
+        jdbc.update(sql.getSql(), sql.getData());
+    }
+
+    private void checkAndSave(Map<String, Object> keyMap, Row row) {
         Long id = isRowExists(keyMap);
         if (id == null) {
             addRow(row);

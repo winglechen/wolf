@@ -1,5 +1,7 @@
 package study.daydayup.wolf.common.util.collection;
 
+import com.google.common.collect.Maps;
+
 import java.util.*;
 
 /**
@@ -46,7 +48,6 @@ public class MapUtil {
     public static <K, V> boolean isEmpty(Map<K, V> map) {
         return ! hasValue(map);
     }
-
 
     public static <K, V> boolean containsNull(Map<K, V> map) {
         return containsNullKey(map) || containsNullValue(map);
@@ -109,6 +110,10 @@ public class MapUtil {
     @SafeVarargs
     public static <K, V> void remove(Map<K, V> map, K... keys) {
         remove(map, Arrays.asList(keys));
+    }
+
+    public static <K, V> Map<K, V> difference(Map<K, V> left, Map<K, V> right) {
+        return Maps.difference(left, right).entriesOnlyOnLeft();
     }
 
 }

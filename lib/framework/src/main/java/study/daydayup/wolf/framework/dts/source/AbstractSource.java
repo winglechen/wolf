@@ -54,8 +54,8 @@ public abstract class AbstractSource implements Source {
 
 
     @Override
-    public void saveOffset(Long newOffset) {
-        saveOffset(Sink.DEFAULT_SINK_NAME, newOffset);
+    public int saveOffset(Long newOffset) {
+        return saveOffset(Sink.DEFAULT_SINK_NAME, newOffset);
     }
 
 }

@@ -14,7 +14,7 @@ public interface OffsetHolder {
     String DEFAULT_TABLE_NAME = "offset_holder";
 
     Long get(String source, String table, String shard, String sink);
-    void set(String source, String table, String shard, String sink, Long id);
+    int set(String source, String table, String shard, String sink, Long id);
 
     default String formatKey(@NonNull String source, @NonNull String table, @NonNull String shard) {
         return formatKey(source, table, shard, null);

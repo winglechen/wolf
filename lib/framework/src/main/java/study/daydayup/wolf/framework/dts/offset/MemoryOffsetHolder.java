@@ -56,15 +56,16 @@ public class MemoryOffsetHolder implements OffsetHolder {
     }
 
     @Override
-    public void set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+    public int set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
         String key = formatKey(source, table, shard, sink);
         if (!OffsetLocker.lock(key)) {
-            return;
+            return 0;
         }
 
         offsetMap.put(key, id);
 
         OffsetLocker.unlock(key);
+        return 1;
     }
 
 }

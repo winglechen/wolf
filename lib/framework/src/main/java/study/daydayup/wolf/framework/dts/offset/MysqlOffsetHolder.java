@@ -63,18 +63,19 @@ public class MysqlOffsetHolder implements OffsetHolder {
     }
 
     @Override
-    public void set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+    public int set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
         String key = formatKey(source, table, shard, sink);
         if (!OffsetLocker.lock(key)) {
-            return;
+            return 0;
         }
 
-        updateOffsetToDb(source, table, shard, sink, id);
+        int count = updateOffsetToDb(source, table, shard, sink, id);
 
         OffsetLocker.unlock(key);
+        return count;
     }
 
-    private void updateOffsetToDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+    private int updateOffsetToDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
         Map<String, Object> data = new HashMap<>();
         data.put("offset", id);
         data.put("version", SqlStatement.of(" version + 1 "));
@@ -88,7 +89,7 @@ public class MysqlOffsetHolder implements OffsetHolder {
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
                 .limit(1)
                 .toString();
-        jdbc.update(sql);
+        return jdbc.update(sql);
     }
 
     private void createOffset(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {

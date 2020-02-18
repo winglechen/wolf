@@ -71,9 +71,14 @@ public class Offset implements OffsetHolder {
     }
 
     @Override
-    public void set(String source, String table, String shard, String sink, Long id) {
-        mysqlOffsetHolder.set(source, table, shard, sink, id);
+    public int set(String source, String table, String shard, String sink, Long id) {
+        int count = mysqlOffsetHolder.set(source, table, shard, sink, id);
+        if (count <= 0) {
+            return count;
+        }
+
         MemoryOffsetHolder.getInstance().set(source, table, shard, sink, id);
+        return count;
     }
 
 }

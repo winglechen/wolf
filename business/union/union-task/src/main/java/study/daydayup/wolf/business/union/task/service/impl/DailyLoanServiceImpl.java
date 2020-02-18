@@ -116,7 +116,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         Statistics statistics = transformation.transform(stream);
         mysqlSink.save(statistics);
 
-//        mysqlSource.saveOffset(statistics.getMaxId());
+        mysqlSource.saveOffset(statistics.getMaxId());
     }
 
     @Override

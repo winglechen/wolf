@@ -19,6 +19,6 @@ public interface Source {
     Table getStream(String sinkName);
     Long getOffset();
     Long getOffset(String sinkName);
-    void saveOffset(Long newOffset);
-    void saveOffset(String sinkName, Long newOffset);
+    int saveOffset(Long newOffset);
+    int saveOffset(String sinkName, Long newOffset);
 }
