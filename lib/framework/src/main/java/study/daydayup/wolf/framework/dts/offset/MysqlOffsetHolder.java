@@ -11,7 +11,6 @@ import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -63,21 +62,21 @@ public class MysqlOffsetHolder implements OffsetHolder {
     }
 
     @Override
-    public int set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+    public int set(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long preOffset, @NonNull Long newOffset) {
         String key = formatKey(source, table, shard, sink);
         if (!OffsetLocker.lock(key)) {
             return 0;
         }
 
-        int count = updateOffsetToDb(source, table, shard, sink, id);
+        int count = updateOffsetToDb(source, table, shard, sink, preOffset, newOffset);
 
         OffsetLocker.unlock(key);
         return count;
     }
 
-    private int updateOffsetToDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
+    private int updateOffsetToDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long preOffset, @NonNull Long newOffset) {
         Map<String, Object> data = new HashMap<>();
-        data.put("offset", id);
+        data.put("offset", newOffset);
         data.put("version", SqlStatement.of(" version + 1 "));
         data.put("updated_at", DateUtil.asString(LocalDateTime.now()));
 
@@ -87,6 +86,7 @@ public class MysqlOffsetHolder implements OffsetHolder {
                 .and(StringUtil.join( "sink = '", sink, "'"))
                 .and(StringUtil.join( "table_name = '", table, "'"))
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
+                .and(StringUtil.join( "offset = ", preOffset , ""))
                 .limit(1)
                 .toString();
         return jdbc.update(sql);

@@ -56,8 +56,8 @@ public class Offset implements OffsetHolder {
         return get(source, table, shard, sink);
     }
 
-    public void set(@NonNull String sink, @NonNull Long id) {
-        set(source, table, shard, sink, id);
+    public void set(@NonNull String sink, @NonNull Long preOffset, @NonNull Long newOffset) {
+        set(source, table, shard, sink, preOffset, newOffset);
     }
 
     @Override
@@ -71,13 +71,13 @@ public class Offset implements OffsetHolder {
     }
 
     @Override
-    public int set(String source, String table, String shard, String sink, Long id) {
-        int count = mysqlOffsetHolder.set(source, table, shard, sink, id);
+    public int set(String source, String table, String shard, String sink, Long prefOffset, Long newOffset) {
+        int count = mysqlOffsetHolder.set(source, table, shard, sink, prefOffset, newOffset);
         if (count <= 0) {
             return count;
         }
 
-        MemoryOffsetHolder.getInstance().set(source, table, shard, sink, id);
+        MemoryOffsetHolder.getInstance().set(source, table, shard, sink, prefOffset, newOffset);
         return count;
     }
 
