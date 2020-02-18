@@ -8,6 +8,8 @@ import study.daydayup.wolf.framework.dts.offset.Offset;
 import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.framework.dts.source
@@ -22,11 +24,14 @@ public class MysqlSource extends AbstractSource implements Source {
     @Resource
     private MysqlScanner mysqlScanner;
 
+    private Map<String, Long> offsetMap;
+
     @Override
     public Source init(SourceConfig config) {
         super.init(config);
-        offset.load(sourceName, tableName, shardingKey);
 
+        offset.load(sourceName, tableName, shardingKey);
+        offsetMap = new HashMap<>();
         return this;
     }
 
@@ -37,7 +42,7 @@ public class MysqlSource extends AbstractSource implements Source {
 
     @Override
     public Table getStream(String sinkName) {
-        Long lastId = offset.get(sinkName);
+        Long lastId = getOffset(sinkName);
         if (lastId == null) {
             return null;
         }
@@ -46,12 +51,30 @@ public class MysqlSource extends AbstractSource implements Source {
     }
 
     @Override
+    public Long getOffset() {
+        return getOffset(Sink.DEFAULT_SINK_NAME);
+    }
+
+    @Override
     public Long getOffset(@NonNull String sinkName) {
-        return offset.get(sourceName, tableName, shardingKey, sinkName);
+        if (null != offsetMap.get(sinkName)) {
+            return offsetMap.get(sinkName);
+        }
+
+        Long id = offset.get(sourceName, tableName, shardingKey, sinkName);
+        offsetMap.put(sinkName, id);
+
+        return id;
+    }
+
+    @Override
+    public int saveOffset(Long newOffset) {
+        return saveOffset(Sink.DEFAULT_SINK_NAME, newOffset);
     }
 
     @Override
     public int saveOffset(@NonNull String sinkName, @NonNull Long newOffset) {
-        return offset.set(sourceName, tableName, shardingKey, sinkName, newOffset);
+        Long preOffset = getOffset(sinkName);
+        return offset.set(sourceName, tableName, shardingKey, sinkName, preOffset, newOffset);
     }
 }
