@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.framework.dts.config.SourceConfig;
-import study.daydayup.wolf.framework.dts.offset.Offset;
+import study.daydayup.wolf.framework.dts.source.offset.Offset;
 import study.daydayup.wolf.framework.dts.sink.Sink;
 
 import javax.annotation.Resource;

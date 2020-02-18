@@ -2,9 +2,7 @@ package study.daydayup.wolf.framework.dts.transformation;
 
 import lombok.Getter;
 import lombok.NonNull;
-import study.daydayup.wolf.common.io.db.Operator;
 import study.daydayup.wolf.common.io.db.Row;
-import study.daydayup.wolf.common.io.db.Statistics;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.dts.sink.Sink;

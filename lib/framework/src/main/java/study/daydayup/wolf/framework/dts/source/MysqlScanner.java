@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.common.io.db.jdbc.JdbcMapper;
+import study.daydayup.wolf.common.io.jdbc.JdbcMapper;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 import study.daydayup.wolf.common.io.sql.Sql;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.framework.dts.sink;
 
-import study.daydayup.wolf.common.io.db.Statistics;
+import study.daydayup.wolf.framework.dts.transformation.Statistics;
 import study.daydayup.wolf.framework.dts.config.SinkConfig;
 
 import java.util.Set;

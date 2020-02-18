@@ -4,8 +4,8 @@ import lombok.NonNull;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import study.daydayup.wolf.common.io.db.Statistics;
-import study.daydayup.wolf.framework.dts.offset.Offset;
+import study.daydayup.wolf.framework.dts.transformation.Statistics;
+import study.daydayup.wolf.framework.dts.source.offset.Offset;
 
 import javax.annotation.Resource;
 import java.util.Map;

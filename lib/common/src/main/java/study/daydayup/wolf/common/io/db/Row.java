@@ -11,11 +11,11 @@ import java.util.Map;
  * @since 2019/11/25 9:40 下午
  **/
 public class Row extends HashMap<String, Object> implements Serializable {
-    Row() {
+    public Row() {
         super();
     }
 
-    Row(Map<String, Object> m) {
+    public Row(Map<String, Object> m) {
         super(m);
     }
 
