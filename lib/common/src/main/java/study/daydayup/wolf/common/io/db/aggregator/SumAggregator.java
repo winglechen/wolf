@@ -20,6 +20,7 @@ public class SumAggregator extends AbstractAggregator implements Aggregator {
         Object statValue = statistics.get(statisticsColumn);
         if (statValue == null) {
             statistics.set(statisticsColumn, rowValue);
+            return;
         }
 
         statistics.set(statisticsColumn, NumberUtil.add((Number)rowValue, (Number)statValue));

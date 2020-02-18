@@ -22,4 +22,7 @@ public abstract class AbstractAggregator implements Aggregator {
         this.rowColumn = rowColumn;
         this.statisticsColumn = statisticsColumn;
     }
+
+    @Override
+    public void merge(Row row) { }
 }

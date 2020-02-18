@@ -9,6 +9,7 @@ import study.daydayup.wolf.common.io.db.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.common.io.db
@@ -48,7 +49,7 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
     }
 
     public AggregatorGateway minId(@NonNull String statisticsColumn) {
-        Aggregator aggregator = new MinAggregator();
+        MinAggregator aggregator = new MinAggregator();
 
         aggregator.init(statistics, Table.DEFAULT_ID_COLUMN, statisticsColumn);
         aggregatorList.add(aggregator);
@@ -57,7 +58,7 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
     }
 
     public AggregatorGateway maxId(@NonNull String statisticsColumn) {
-        Aggregator aggregator = new MaxAggregator();
+        MaxAggregator aggregator = new MaxAggregator();
 
         aggregator.init(statistics, Table.DEFAULT_ID_COLUMN, statisticsColumn);
         aggregatorList.add(aggregator);
@@ -70,7 +71,7 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
     }
 
     public AggregatorGateway count(@NonNull String rowColumn, @NonNull String statisticsColumn) {
-        Aggregator aggregator = new CountAggregator();
+        CountAggregator aggregator = new CountAggregator();
 
         aggregator.init(statistics, rowColumn, statisticsColumn);
         aggregatorList.add(aggregator);
@@ -78,10 +79,28 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
         return this;
     }
 
-    public AggregatorGateway DistinctCount(@NonNull String rowColumn, @NonNull String statisticsColumn) {
-        Aggregator aggregator = new DistinctCountAggregator();
+    public AggregatorGateway distinctCount(@NonNull String rowColumn, @NonNull String statisticsColumn) {
+        DistinctCountAggregator aggregator = new DistinctCountAggregator();
 
         aggregator.init(statistics, rowColumn, statisticsColumn);
+        aggregatorList.add(aggregator);
+
+        return this;
+    }
+
+    public AggregatorGateway mapCount(@NonNull String rowColumn, @NonNull Map<Object, String> columnMap) {
+        MapCountAggregator aggregator = new MapCountAggregator();
+
+        aggregator.init(statistics, rowColumn, columnMap);
+        aggregatorList.add(aggregator);
+
+        return this;
+    }
+
+    public AggregatorGateway mapSum(@NonNull String rowColumn, @NonNull Map<Object, String> columnMap) {
+        MapSumAggregator aggregator = new MapSumAggregator();
+
+        aggregator.init(statistics, rowColumn, columnMap);
         aggregatorList.add(aggregator);
 
         return this;
