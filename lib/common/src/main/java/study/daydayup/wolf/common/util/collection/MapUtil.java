@@ -66,7 +66,7 @@ public class MapUtil {
 
     public static <K, V> Map<K, V> subMap(Map<K, V> map, Collection<K> keys, boolean skipNulls) {
         if (CollectionUtil.isEmpty(keys)) {
-            return null;
+            return empty();
         }
 
         Map<K, V> result = new HashMap<>();
@@ -94,21 +94,21 @@ public class MapUtil {
         return subMap(map, Arrays.asList(keys));
     }
 
-    public static <K, V> Map<K, V> remove(Map<K, V> map, Collection<K> keys) {
+    public static <K, V> void remove(Map<K, V> map, Collection<K> keys) {
         if (CollectionUtil.isEmpty(keys)) {
-            return map;
+            return ;
         }
 
         for (K k : keys) {
             map.remove(k);
         }
 
-        return map;
+        return;
     }
 
     @SafeVarargs
-    public static <K, V> Map<K, V> remove(Map<K, V> map, K... keys) {
-        return remove(map, Arrays.asList(keys));
+    public static <K, V> void remove(Map<K, V> map, K... keys) {
+        remove(map, Arrays.asList(keys));
     }
 
 }
