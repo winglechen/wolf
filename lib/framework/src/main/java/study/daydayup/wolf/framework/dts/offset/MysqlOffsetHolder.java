@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.jdbc.JdbcMapper;
 import study.daydayup.wolf.common.io.sql.Sql;
+import study.daydayup.wolf.common.io.sql.SqlStatement;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -76,7 +77,7 @@ public class MysqlOffsetHolder implements OffsetHolder {
     private void updateOffsetToDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink, @NonNull Long id) {
         Map<String, Object> data = new HashMap<>();
         data.put("offset", id);
-        data.put("version", " version + 1 ");
+        data.put("version", SqlStatement.of(" version + 1 "));
         data.put("updated_at", DateUtil.asString(LocalDateTime.now()));
 
         String sql = Sql.update(HOLDER_TABLE)

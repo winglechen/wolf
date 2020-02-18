@@ -13,6 +13,7 @@ import java.util.Set;
 public abstract class AbstractSink implements Sink {
     protected SinkConfig config;
     protected Long offset;
+    protected boolean isInit = false;
 
     @Override
     public Set<String> getKeyColumns() {
@@ -22,7 +23,9 @@ public abstract class AbstractSink implements Sink {
     @Override
     public Sink init(SinkConfig config) {
         this.config = config;
+        offset = config.getSource().getOffset(config.getSinkName());
 
+        isInit = true;
         return  this;
     }
 

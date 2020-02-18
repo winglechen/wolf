@@ -32,7 +32,12 @@ public class MysqlSource extends AbstractSource implements Source {
 
     @Override
     public Table getStream() {
-        Long lastId = offset.get(Sink.DEFAULT_SINK_NAME);
+        return getStream(Sink.DEFAULT_SINK_NAME);
+    }
+
+    @Override
+    public Table getStream(String sinkName) {
+        Long lastId = offset.get(sinkName);
         if (lastId == null) {
             return null;
         }

@@ -61,12 +61,12 @@ public class Sql {
         return select(DEFAULT_COUNT, prepared);
     }
 
-    public static Sql exists() {
-        return exists(false);
+    public static Sql exists(String table) {
+        return exists(table, false);
     }
 
-    public static Sql exists(boolean prepared) {
-        return select(DEFAULT_KEY, prepared);
+    public static Sql exists(String table, boolean prepared) {
+        return select(DEFAULT_KEY, prepared).from(table);
     }
 
     public static Sql select(){
@@ -178,8 +178,8 @@ public class Sql {
             return this;
         }
 
-        addWherePrefix();
         for (Map.Entry<String, Object> entry: ps.entrySet()) {
+            addWherePrefix();
             String column = StringUtil.quote(entry.getKey());
             sql.append(column).append(BLANK).append(EQUAL).append(BLANK);
 
@@ -365,16 +365,20 @@ public class Sql {
         sql.append(RIGHT_BRACKET);
     }
 
-    private void addPreparedInsertValues(@NonNull Map<String, Object> data) {
+    private void addPreparedInsertValues(@NonNull Map<String, Object> map) {
         sql.append(LEFT_BRACKET);
 
-        for (int i = 0, len=data.size(); i < len; i++) {
+        for (int i = 0, len=map.size(); i < len; i++) {
             if (0 != i) {
                 sql.append(COMMA);
             }
             sql.append(QUESTION_MARK);
         }
         sql.append(RIGHT_BRACKET);
+
+        if (prepared) {
+            data.addAll(map.values());
+        }
     }
 
     public static void main(String[] args) {

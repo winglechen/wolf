@@ -49,24 +49,24 @@ public class DailyLoanServiceImpl implements DailyLoanService {
 
     @Override
     public void countLoanContract() {
-        String source = "latestContract";
-        String sink = "newRequest";
-        String table = "contract";
-        String shard = shardingConfig.getShard();
-        offset.init(source, table, shard);
-
-        Long lastId = offset.get(sink);
-        if (lastId == null) {
-            return;
-        }
-
-        Table contracts = mysqlScanner.scan(table, lastId, "id, buyer_id, seller_id, trade_type, tags, created_at");
-        if (!CollectionUtil.hasValue(contracts)) {
-            return;
-        }
-
-        Statistics statistics = dailyLoanTransformation.transform(contracts);
-        mysqlEditor.save(offset, statistics);
+//        String source = "latestContract";
+//        String sink = "newRequest";
+//        String table = "contract";
+//        String shard = shardingConfig.getShard();
+//        offset.init(source, table, shard);
+//
+//        Long lastId = offset.get(sink);
+//        if (lastId == null) {
+//            return;
+//        }
+//
+//        Table contracts = mysqlScanner.scan(table, lastId, "id, buyer_id, seller_id, trade_type, tags, created_at");
+//        if (!CollectionUtil.hasValue(contracts)) {
+//            return;
+//        }
+//
+//        Statistics statistics = dailyLoanTransformation.transform(contracts);
+//        mysqlEditor.save(offset, statistics);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         Statistics statistics = transformation.transform(stream);
         mysqlSink.save(statistics);
 
-        mysqlSource.saveOffset(statistics.getMaxId());
+//        mysqlSource.saveOffset(statistics.getMaxId());
     }
 
     @Override
