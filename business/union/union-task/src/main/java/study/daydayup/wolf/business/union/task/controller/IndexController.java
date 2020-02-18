@@ -40,4 +40,12 @@ public class IndexController {
         return result;
     }
 
+    @RequestMapping("/index/demo")
+    public String demo() {
+        Demo demo = new Demo();
+        demo.show();
+
+        return "demo showing ...";
+    }
+
 }

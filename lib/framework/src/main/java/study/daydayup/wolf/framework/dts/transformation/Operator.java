@@ -22,46 +22,6 @@ public class Operator {
     private AggregatorGateway aggregator;
     private Statistics statistics;
 
-    private static Statistics lastStatistics;
-    private static List<Operator> operatorList;
-
-    public static Operator addJob() {
-        return newTask(null);
-    }
-
-    public static Operator newTask(Statistics statistics) {
-        if (statistics != null) {
-            operatorList = new ArrayList<>(5);
-            lastStatistics = statistics;
-        }
-
-        Operator operator = new Operator(lastStatistics);
-
-        operatorList.add(operator);
-
-        return operator;
-    }
-
-    public static void execute(Table table) {
-        if (!CollectionUtil.hasValue(table)) {
-            return;
-        }
-
-        for (Row row : table) {
-            execute(row);
-        }
-    }
-
-    public static void execute(Row row) {
-        if (operatorList.isEmpty()) {
-            return;
-        }
-
-        for (Operator operator : operatorList) {
-            operator.operate(row);
-        }
-    }
-
     public Operator() {}
 
     public Operator(Statistics statistics) {

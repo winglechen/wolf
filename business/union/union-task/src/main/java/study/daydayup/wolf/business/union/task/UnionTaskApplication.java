@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.union.task;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import study.daydayup.wolf.framework.layer.context.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.union.task
@@ -14,6 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("study.daydayup.wolf.business.union.task.dal.dao")
 public class UnionTaskApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UnionTaskApplication.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(UnionTaskApplication.class, args);
+
+        BeanUtil.init(applicationContext);
     }
 }
