@@ -47,12 +47,20 @@ public class DbTransformation implements Transformation {
     }
 
     public Statistics transform(Table table) {
+        return transform(table, false);
+    }
+
+    public Statistics transform(Table table, boolean sqlFormat) {
         if (!CollectionUtil.hasValue(table)) {
             return statistics;
         }
 
         for (Row row : table) {
             transform(row);
+        }
+
+        if (sqlFormat){
+            return format();
         }
 
         return statistics;

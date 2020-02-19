@@ -202,7 +202,7 @@ public class Sql {
         addWherePrefix();
 
         sql.append(where);
-        if (prepared) {
+        if (prepared && ps.length > 0) {
             data.addAll(Arrays.asList(ps));
         }
         return this;

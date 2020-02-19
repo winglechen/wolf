@@ -77,7 +77,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
         operator.aggregate()
                 .count("first_request_count");
 
-        Statistics statistics = transformation.transform(stream);
+        Statistics statistics = transformation.transform(stream, true);
         mysqlSink.save(statistics);
 
 //        mysqlSource.saveOffset(statistics.getMaxId());

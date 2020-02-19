@@ -78,18 +78,17 @@ public class MysqlOffsetHolder implements OffsetHolder {
         Map<String, Object> data = new HashMap<>();
         data.put("offset", newOffset);
         data.put("version", SqlStatement.of(" version + 1 "));
-        data.put("updated_at", DateUtil.asString(LocalDateTime.now()));
+        data.put("updated_at", LocalDateTime.now());
 
-        String sql = Sql.update(HOLDER_TABLE)
+        Sql sql = Sql.update(HOLDER_TABLE)
                 .set(data)
                 .where(StringUtil.join( "source = '", source, "'"))
                 .and(StringUtil.join( "sink = '", sink, "'"))
                 .and(StringUtil.join( "table_name = '", table, "'"))
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
                 .and(StringUtil.join( "offset = ", preOffset , ""))
-                .limit(1)
-                .toString();
-        return jdbc.update(sql);
+                .limit(1);
+        return jdbc.update(sql.getSql(), sql.getData());
     }
 
     private void createOffset(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
@@ -99,25 +98,23 @@ public class MysqlOffsetHolder implements OffsetHolder {
         data.put("table_name", table);
         data.put("sharding_key", shard);
         data.put("offset", 0);
-        data.put("created_at", DateUtil.asString(LocalDateTime.now()));
+        data.put("created_at", LocalDateTime.now());
 
-        String sql = Sql.insert(HOLDER_TABLE)
-                .values(data)
-                .toString();
-        jdbc.update(sql);
+        Sql sql = Sql.insert(HOLDER_TABLE)
+                .values(data);
+        jdbc.update(sql.getSql(), sql.getData());
     }
 
     private Long getOffsetFromDb(@NonNull String source, @NonNull String table, @NonNull String shard, @NonNull String sink) {
-        String sql = Sql.select("offset")
+        Sql sql = Sql.select("offset")
                 .from(HOLDER_TABLE)
                 .where(StringUtil.join( "source = '", source, "'"))
                 .and(StringUtil.join( "sink = '", sink, "'"))
                 .and(StringUtil.join( "table_name = '", table, "'"))
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
-                .limit(1)
-                .toString();
+                .limit(1);
 
-        List<Long> offsetList = jdbc.queryForList(sql, Long.class);
+        List<Long> offsetList = jdbc.queryForList(sql.getSql(), sql.getData(), Long.class);
         if (!CollectionUtil.hasValue(offsetList)) {
             createOffset(source, table, shard, sink);
             return 0L;
@@ -127,14 +124,14 @@ public class MysqlOffsetHolder implements OffsetHolder {
     }
 
     private List<Map<String, Object>> getAllFromDb(@NonNull String source, @NonNull String table, @NonNull String shard) {
-        String sql = Sql.select("sink, offset")
+        Sql sql = Sql.select("sink, offset")
                 .from(HOLDER_TABLE)
                 .where(StringUtil.join( "source = '", source, "'"))
                 .and(StringUtil.join( "table_name = '", table, "'"))
                 .and(StringUtil.join( "sharding_key = '", shard, "'"))
-                .toString();
+                ;
 
-        List<Map<String, Object>> result = jdbc.queryForList(sql);
+        List<Map<String, Object>> result = jdbc.queryForList(sql.getSql(), sql.getData());
         return JdbcMapper.map(result);
     }
 

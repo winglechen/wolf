@@ -20,7 +20,7 @@ public class Formatter {
         if (value == null) {
             return;
         }
-        String sql = StringUtil.join(column, " + ? ");
+        String sql = StringUtil.join(StringUtil.quote(column), " + ? ");
         statistics.set(column, SqlStatement.of(sql, value));
     }
 

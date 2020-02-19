@@ -23,8 +23,8 @@ import java.util.Map;
  **/
 @Component
 public class MysqlScanner implements DbScanner {
-    private static final int MAX_ROW_NUM = 200;
-    private static final int SELECT_LIMIT = 40;
+    private static final int MAX_ROW_NUM = 5;
+    private static final int SELECT_LIMIT = 5;
 
     private static final String ID = "id";
     private static final String CLAUSE = ">";
@@ -86,7 +86,7 @@ public class MysqlScanner implements DbScanner {
     }
 
     private List<Map<String, Object>> select(@NonNull String table, @NonNull String columns, @NonNull Long id) {
-        String sql = Sql.select(columns)
+        String sql = Sql.select(columns, false)
                 .from(table)
                 .where(StringUtil.joinWith(StringUtil.BLANK, ID, CLAUSE, id))
                 .orderBy(ID, DEFAULT_ORDER)

@@ -113,7 +113,9 @@ public class MysqlSink extends AbstractSink  implements Sink {
             return;
         }
 
-        insertOrUpdate(keyMap, row);
+        //TODO check ON DUPLICATE KEY UPDATE
+        //insertOrUpdate(keyMap, row);
+        checkAndSave(keyMap, row);
     }
 
     private void insertOrUpdate(Map<String, Object> keyMap, Row row) {
