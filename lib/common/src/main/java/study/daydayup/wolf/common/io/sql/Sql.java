@@ -47,7 +47,7 @@ public class Sql {
     private static final String RIGHT_BRACKET = ")";
 
     private StringBuilder sql;
-    private boolean prepared;
+    private boolean prepared = true;
     private List<Object> data;
 
     private boolean isFirstWhere = true;
@@ -430,11 +430,6 @@ public class Sql {
                 .limit(1);
         System.out.println("update: " + update);
 
-        for (Object o : update.getData()) {
-            System.out.println("prepared: " + o);
-        }
-
-
         String duplicateUpdate = Sql.insert("order")
                 .values(values)
                 .duplicateUpdate(data)
@@ -455,9 +450,6 @@ public class Sql {
 
         System.out.println("insertOrUpdate: " +sql.toString());
         System.out.println("insertOrUpdate: " +Arrays.asList(sql.getData()));
-
-
-
 
     }
 
