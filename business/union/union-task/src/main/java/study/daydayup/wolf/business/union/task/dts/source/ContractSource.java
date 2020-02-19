@@ -1,8 +1,11 @@
 package study.daydayup.wolf.business.union.task.dts.source;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.common.io.db.Table;
+import study.daydayup.wolf.framework.dts.config.SourceConfig;
 import study.daydayup.wolf.framework.dts.source.MysqlScanner;
+import study.daydayup.wolf.framework.dts.source.MysqlSource;
 import study.daydayup.wolf.framework.dts.source.Source;
 
 import javax.annotation.Resource;
@@ -15,13 +18,13 @@ import javax.annotation.Resource;
  **/
 @Component
 public class ContractSource {
-    private static final String TABLE_CONTRACT = "contract";
-    private static final String TABLE_STATE_LOG = "trade_state_log";
-
     @Resource
-    private MysqlScanner mysqlScanner;
+    private ShardingConfig shardingConfig;
+    @Resource
+    private MysqlSource mysqlSource;
 
-    public Table latest(long lastId) {
-        return mysqlScanner.scan(TABLE_CONTRACT, lastId, "id, buyer_id, seller_id, tags created_at");
+    public Table latest(String sinkName) {
+
+        return null;
     }
 }
