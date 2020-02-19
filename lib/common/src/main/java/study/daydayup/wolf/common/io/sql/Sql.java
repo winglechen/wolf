@@ -186,7 +186,7 @@ public class Sql {
 
             Object value = entry.getValue();
             if (value instanceof Statement) {
-                addValueStatement((Statement)value);
+                setValueStatement((Statement)value);
             } else if (prepared) {
                 sql.append(QUESTION_MARK).append(BLANK);
                 data.add(value);
@@ -257,10 +257,12 @@ public class Sql {
         for (Map.Entry<String, Object> entry: data.entrySet()) {
             if (!isFirst) {
                 sql.append(",").append(BLANK);
-            }else if (onDuplicateKey) {
-                sql.append(DUPLICATE_UPDATE);
             } else {
-                sql.append(SET);
+                if (onDuplicateKey) {
+                    sql.append(DUPLICATE_UPDATE);
+                } else {
+                    sql.append(SET);
+                }
             }
             isFirst = false;
 
@@ -269,7 +271,7 @@ public class Sql {
 
             Object value = entry.getValue();
             if (value instanceof Statement) {
-                addValueStatement((Statement)value);
+                setValueStatement((Statement)value);
             } else if (prepared) {
                 this.data.add(value);
                 sql.append(QUESTION_MARK);
@@ -281,7 +283,7 @@ public class Sql {
         return this;
     }
 
-    private void addValueStatement(Statement s) {
+    private void setValueStatement(Statement s) {
         sql.append(s.getSql());
         if (prepared && null != s.getValue()) {
             data.add(s.getValue());
@@ -358,15 +360,16 @@ public class Sql {
         sql.append(LEFT_BRACKET);
 
         Object[] values = data.values().toArray();
+        Object v;
         for (int i = 0, len=values.length; i < len; i++) {
             if (0 != i) {
                 sql.append(COMMA);
             }
-            sql.append(formatValue(values[i]));
-
-            if (prepared) {
-                this.data.add(values[i]);
+            v = values[i];
+            if (v instanceof Statement) {
+                v = ((Statement) v).getValue();
             }
+            sql.append(formatValue(v));
         }
 
         sql.append(RIGHT_BRACKET);
@@ -375,17 +378,24 @@ public class Sql {
     private void addPreparedInsertValues(@NonNull Map<String, Object> map) {
         sql.append(LEFT_BRACKET);
 
+        Object[] values = map.values().toArray();
+        Object v;
         for (int i = 0, len=map.size(); i < len; i++) {
             if (0 != i) {
                 sql.append(COMMA);
             }
             sql.append(QUESTION_MARK);
+
+            v = values[i];
+            if (prepared) {
+                if (v instanceof Statement) {
+                    data.add(((Statement) v).getValue());
+                } else {
+                    data.add(v);
+                }
+            }
         }
         sql.append(RIGHT_BRACKET);
-
-        if (prepared) {
-            data.addAll(map.values());
-        }
     }
 
     public static void main(String[] args) {
@@ -402,7 +412,7 @@ public class Sql {
         values.put("amount", 123456);
         values.put("state", 1);
 
-        String insert = Sql.insert("order")
+        String insert = Sql.insert("order", true)
                 .values(values)
                 .toString();
         System.out.println("insert: " + insert);
@@ -431,6 +441,23 @@ public class Sql {
                 .toString();
 
         System.out.println("duplicate: " + duplicateUpdate);
+
+
+        Map<String, Object> insertOrUpdate = new HashMap<>();
+        insertOrUpdate.put("org_id", 1);
+        insertOrUpdate.put("date", LocalDate.now());
+        insertOrUpdate.put("request_count", SqlStatement.of("request_count + ?", 10));
+        insertOrUpdate.put("order_amount", SqlStatement.of("order_amount + ?", 10000));
+
+        Sql sql = Sql.insert("order", true)
+                .values(insertOrUpdate)
+                .duplicateUpdate(insertOrUpdate);
+
+        System.out.println("insertOrUpdate: " +sql.toString());
+        System.out.println("insertOrUpdate: " +Arrays.asList(sql.getData()));
+
+
+
 
     }
 
