@@ -55,7 +55,7 @@ public class Sql {
     private boolean isFirstValue = true;
 
     public static Sql count(@NonNull String table) {
-        return count(table, false);
+        return count(table, true);
     }
 
     public static Sql count(@NonNull String table, boolean prepared) {
@@ -63,7 +63,7 @@ public class Sql {
     }
 
     public static Sql exists(@NonNull String table) {
-        return exists(table, false);
+        return exists(table, true);
     }
 
     public static Sql exists(@NonNull String table, boolean prepared) {
@@ -71,7 +71,7 @@ public class Sql {
     }
 
     public static Sql select(){
-        return select(false);
+        return select(true);
     }
 
     public static Sql select(boolean prepared) {
@@ -79,7 +79,7 @@ public class Sql {
     }
 
     public static Sql select(@NonNull String columns){
-        return select(columns, false);
+        return select(columns, true);
     }
 
     public static Sql select(@NonNull String columns, boolean prepared){
@@ -88,7 +88,7 @@ public class Sql {
     }
 
     public static Sql insert(@NonNull String table){
-        return insert(table, false);
+        return insert(table, true);
     }
 
     public static Sql insert(@NonNull String table, boolean prepared){
@@ -97,7 +97,7 @@ public class Sql {
     }
 
     public static Sql update(@NonNull String table){
-        return update(table, false);
+        return update(table, true);
     }
 
     public static Sql update(@NonNull String table, boolean prepared){
@@ -106,7 +106,7 @@ public class Sql {
     }
 
     public static Sql delete(@NonNull String table){
-        return delete(table, false);
+        return delete(table, true);
     }
 
     public static Sql delete(@NonNull String table, boolean prepared){
@@ -135,7 +135,7 @@ public class Sql {
     }
 
     public Sql() {
-        this(StringUtil.EMPTY, false);
+        this(StringUtil.EMPTY, true);
     }
 
     public Sql(boolean prepared) {
@@ -143,7 +143,7 @@ public class Sql {
     }
 
     public Sql(String query) {
-        this(query, false);
+        this(query, true);
     }
 
     public Sql(String query, boolean prepared) {
@@ -449,7 +449,7 @@ public class Sql {
         insertOrUpdate.put("request_count", SqlStatement.of("request_count + ?", 10));
         insertOrUpdate.put("order_amount", SqlStatement.of("order_amount + ?", 10000));
 
-        Sql sql = Sql.insert("order", true)
+        Sql sql = Sql.insert("order")
                 .values(insertOrUpdate)
                 .duplicateUpdate(insertOrUpdate);
 
