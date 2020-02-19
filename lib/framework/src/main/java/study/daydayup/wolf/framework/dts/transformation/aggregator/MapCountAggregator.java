@@ -37,7 +37,7 @@ public class MapCountAggregator extends AbstractMapAggregator implements Aggrega
     }
 
     @Override
-    public void format(Row row) { }
+    public void format() { }
 
 
 }

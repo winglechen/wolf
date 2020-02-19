@@ -286,7 +286,7 @@ public class Sql {
     private void addValueStatement(Statement s) {
         sql.append(s.getSql());
         if (prepared && null != s.getValue()) {
-            this.data.add(s.getValue());
+            data.add(s.getValue());
         }
     }
 

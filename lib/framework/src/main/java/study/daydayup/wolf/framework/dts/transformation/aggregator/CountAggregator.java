@@ -38,6 +38,8 @@ public class CountAggregator extends AbstractAggregator implements Aggregator {
     }
 
     @Override
-    public void format(Row row) { }
+    public void format() {
+        Formatter.plus(statistics, statisticsColumn);
+    }
 
 }

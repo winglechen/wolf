@@ -30,9 +30,9 @@ public class Operator {
         }
     }
 
-    public void format(Row row) {
+    public void format() {
         if (null != aggregator) {
-            aggregator.format(row);
+            aggregator.format();
         }
     }
 

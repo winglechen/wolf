@@ -48,13 +48,13 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
     }
 
     @Override
-    public void format(Row row) {
+    public void format() {
         if (aggregatorList.isEmpty()) {
             return;
         }
 
         for (Aggregator aggregator : aggregatorList) {
-            aggregator.format(row);
+            aggregator.format();
         }
     }
 

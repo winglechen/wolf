@@ -70,13 +70,13 @@ public class DbTransformation implements Transformation {
         return statistics;
     }
 
-    public Statistics format(@NonNull Row row) {
-        if (null == row || operatorList.isEmpty()) {
+    public Statistics format() {
+        if (operatorList.isEmpty()) {
             return statistics;
         }
 
         for (Operator operator : operatorList) {
-            operator.format(row);
+            operator.format();
         }
 
         return statistics;

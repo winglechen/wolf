@@ -41,7 +41,7 @@ public class MapSumAggregator extends AbstractMapAggregator implements Aggregato
     public void merge(Row row) { }
 
     @Override
-    public void format(Row row) { }
+    public void format() { }
 
 
 }
