@@ -19,7 +19,7 @@ import study.daydayup.wolf.framework.dts.transformation.Transformation;
  * @since 2020/2/8 8:37 下午
  **/
 @Component
-public class DailyLoanTransformation implements Transformation {
+public class LoanTransformation implements Transformation {
 
     public Statistics latest(Table stream, MysqlSink mysqlSink) {
         if (CollectionUtil.isEmpty(stream)) {

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.union.task.dts.transformation.DailyLoanTransformation;
+import study.daydayup.wolf.business.union.task.dts.transformation.LoanTransformation;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.framework.dts.transformation.Statistics;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
@@ -29,7 +29,7 @@ public class DailyLoanServiceImpl implements DailyLoanService {
     private MysqlSink mysqlSink;
 
     @Resource
-    private DailyLoanTransformation dailyLoanTransformation;
+    private LoanTransformation dailyLoanTransformation;
 
     @Override
     public void countLoanContract() {
