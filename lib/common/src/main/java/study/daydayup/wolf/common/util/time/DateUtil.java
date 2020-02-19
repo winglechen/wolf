@@ -15,7 +15,7 @@ import java.util.Date;
  **/
 public class DateUtil {
     private static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+    private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
 
     public static Date asDate(@NonNull LocalDate localDate) {
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
@@ -49,15 +49,37 @@ public class DateUtil {
     }
 
     public static String asString(@NonNull Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATETIME_FORMAT);
+       return asString(date, DEFAULT_DATETIME_FORMAT);
+    }
+
+    public static String asString(@NonNull Date date, @NonNull String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
     }
 
     public static String asString(@NonNull LocalDate localDate) {
+        return asString(localDate, null);
+    }
+
+    public static String asString(@NonNull LocalDate localDate, String format) {
+        if (null == format) {
+            return localDate.format(DEFAULT_FORMATTER);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         return localDate.format(formatter);
     }
 
     public static String asString(@NonNull LocalDateTime localDateTime) {
+        return asString(localDateTime, null);
+    }
+
+    public static String asString(@NonNull LocalDateTime localDateTime, String format) {
+        if (format == null) {
+            return localDateTime.format(DEFAULT_FORMATTER);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         return localDateTime.format(formatter);
     }
 

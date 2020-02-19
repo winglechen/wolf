@@ -1,14 +1,9 @@
 package study.daydayup.wolf.framework.dts.transformation;
 
 import study.daydayup.wolf.common.io.db.Row;
-import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.framework.dts.transformation.aggregator.AggregatorGateway;
 import study.daydayup.wolf.framework.dts.transformation.mapper.MapperGateway;
 import study.daydayup.wolf.framework.dts.transformation.matcher.MatcherGateway;
-import study.daydayup.wolf.common.util.collection.CollectionUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.common.io.db

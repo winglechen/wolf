@@ -33,4 +33,16 @@ public class BeanUtil {
 
         return applicationContext.getBean(className, t);
     }
+
+    public static Object getBean(String className) {
+        if (!isInit) {
+            throw new WolfException("BeanUtil does not init");
+        }
+
+        return applicationContext.getBean(className);
+    }
+
+    public static ConfigurableApplicationContext getContext() {
+        return applicationContext;
+    }
 }
