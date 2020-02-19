@@ -2,8 +2,11 @@ package study.daydayup.wolf.framework.dts.transformation.aggregator;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.io.sql.SqlStatement;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.dts.transformation.Statistics;
+
+import java.util.Collection;
 
 /**
  * study.daydayup.wolf.framework.dts.transformation.aggregator
@@ -19,5 +22,15 @@ public class Formatter {
         }
         String sql = StringUtil.join(column, " + ? ");
         statistics.set(column, SqlStatement.of(sql, value));
+    }
+
+    public static void plus(@NonNull Statistics statistics, @NonNull Collection<String> columns) {
+        if (CollectionUtil.isEmpty(columns)) {
+            return;
+        }
+
+        for (String column : columns) {
+            plus(statistics, column);
+        }
     }
 }

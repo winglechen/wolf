@@ -37,7 +37,9 @@ public class MapCountAggregator extends AbstractMapAggregator implements Aggrega
     }
 
     @Override
-    public void format() { }
+    public void format() {
+        Formatter.plus(statistics, columnMap.values());
+    }
 
 
 }
