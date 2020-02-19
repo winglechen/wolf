@@ -36,4 +36,8 @@ public class CountAggregator extends AbstractAggregator implements Aggregator {
         Integer count = rowCount + statCount;
         statistics.set(statisticsColumn, count);
     }
+
+    @Override
+    public void format(Row row) { }
+
 }

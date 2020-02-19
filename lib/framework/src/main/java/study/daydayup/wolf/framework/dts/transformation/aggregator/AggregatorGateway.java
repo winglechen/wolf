@@ -47,6 +47,17 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
         }
     }
 
+    @Override
+    public void format(Row row) {
+        if (aggregatorList.isEmpty()) {
+            return;
+        }
+
+        for (Aggregator aggregator : aggregatorList) {
+            aggregator.format(row);
+        }
+    }
+
     public AggregatorGateway minId(@NonNull String statisticsColumn) {
         MinAggregator aggregator = new MinAggregator();
 

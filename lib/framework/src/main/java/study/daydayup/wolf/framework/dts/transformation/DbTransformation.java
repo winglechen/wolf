@@ -46,7 +46,6 @@ public class DbTransformation implements Transformation {
         return currentOperator;
     }
 
-
     public Statistics transform(Table table) {
         if (!CollectionUtil.hasValue(table)) {
             return statistics;
@@ -54,6 +53,30 @@ public class DbTransformation implements Transformation {
 
         for (Row row : table) {
             transform(row);
+        }
+
+        return statistics;
+    }
+
+    public Statistics merge(@NonNull Row row) {
+        if (null == row || operatorList.isEmpty()) {
+            return statistics;
+        }
+
+        for (Operator operator : operatorList) {
+            operator.operate(row);
+        }
+
+        return statistics;
+    }
+
+    public Statistics format(@NonNull Row row) {
+        if (null == row || operatorList.isEmpty()) {
+            return statistics;
+        }
+
+        for (Operator operator : operatorList) {
+            operator.format(row);
         }
 
         return statistics;

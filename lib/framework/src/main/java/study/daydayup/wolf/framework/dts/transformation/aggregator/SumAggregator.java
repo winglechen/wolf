@@ -28,6 +28,8 @@ public class SumAggregator extends AbstractAggregator implements Aggregator {
 
     @Override
     public void merge(Row row) {
-        aggregate(row);
     }
+
+    @Override
+    public void format(Row row) { }
 }

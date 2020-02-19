@@ -36,5 +36,8 @@ public class MapCountAggregator extends AbstractMapAggregator implements Aggrega
         statistics.set(sColumn, count);
     }
 
+    @Override
+    public void format(Row row) { }
+
 
 }

@@ -54,6 +54,9 @@ public class DistinctCountAggregator extends AbstractAggregator implements Aggre
 
     }
 
+    @Override
+    public void format(Row row) { }
+
     private void initHashKey() {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         hashKey = StringUtil.join(

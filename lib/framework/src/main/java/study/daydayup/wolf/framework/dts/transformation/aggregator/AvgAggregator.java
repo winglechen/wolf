@@ -18,4 +18,8 @@ public class AvgAggregator extends AbstractAggregator implements Aggregator {
     public void merge(Row row) {
 
     }
+
+    @Override
+    public void format(Row row) { }
+
 }

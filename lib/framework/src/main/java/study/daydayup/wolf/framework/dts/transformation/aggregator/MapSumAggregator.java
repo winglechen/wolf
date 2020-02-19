@@ -37,5 +37,11 @@ public class MapSumAggregator extends AbstractMapAggregator implements Aggregato
         statistics.set(sColumn, NumberUtil.add((Number)value, (Number)sValue));
     }
 
+    @Override
+    public void merge(Row row) { }
+
+    @Override
+    public void format(Row row) { }
+
 
 }

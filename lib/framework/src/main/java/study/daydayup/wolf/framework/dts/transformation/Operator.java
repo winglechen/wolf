@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.dts.transformation;
 
+import lombok.NonNull;
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.framework.dts.transformation.aggregator.AggregatorGateway;
 import study.daydayup.wolf.framework.dts.transformation.mapper.MapperGateway;
@@ -27,7 +28,12 @@ public class Operator {
         if (null != aggregator) {
             aggregator.merge(row);
         }
+    }
 
+    public void format(Row row) {
+        if (null != aggregator) {
+            aggregator.format(row);
+        }
     }
 
     public void operate(Row row) {
