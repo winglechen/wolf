@@ -30,11 +30,11 @@ public class MapSumAggregator extends AbstractMapAggregator implements Aggregato
 
         Object sValue = statistics.get(sColumn);
         if (sValue == null) {
-            statistics.set(sColumn, sValue);
+            statistics.set(sColumn, value);
             return;
         }
 
-        statistics.set(sColumn, NumberUtil.add((Number)value, (Number)sValue));
+        statistics.set(sColumn, NumberUtil.add(value, (Number)sValue));
     }
 
     @Override

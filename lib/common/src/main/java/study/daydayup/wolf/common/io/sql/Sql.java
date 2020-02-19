@@ -257,12 +257,10 @@ public class Sql {
         for (Map.Entry<String, Object> entry: data.entrySet()) {
             if (!isFirst) {
                 sql.append(",").append(BLANK);
-            }else {
-                if (onDuplicateKey) {
-                    sql.append(DUPLICATE_UPDATE);
-                } else {
-                    sql.append(SET);
-                }
+            }else if (onDuplicateKey) {
+                sql.append(DUPLICATE_UPDATE);
+            } else {
+                sql.append(SET);
             }
             isFirst = false;
 
@@ -326,10 +324,6 @@ public class Sql {
     }
 
     private Object formatValue(Object value) {
-        if (value instanceof Statement) {
-            return value.toString();
-        }
-
         if (value instanceof Number) {
             return value;
         }
