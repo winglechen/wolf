@@ -58,7 +58,7 @@
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
-                         targetProject="src/main/resources/mapperGateway/auto">
+                         targetProject="src/main/resources/mapper/auto">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--

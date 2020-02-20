@@ -2,7 +2,7 @@ package study.daydayup.wolf.dts.transformation;
 
 import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.dts.transformation.aggregator.AggregatorGateway;
-import study.daydayup.wolf.dts.transformation.mapper.MapperGateway;
+import study.daydayup.wolf.dts.transformation.mapper.mapper;
 import study.daydayup.wolf.dts.transformation.matcher.MatcherGateway;
 
 /**
@@ -12,7 +12,7 @@ import study.daydayup.wolf.dts.transformation.matcher.MatcherGateway;
  * @since 2020/2/11 11:22 上午
  **/
 public class Operator {
-    private MapperGateway mapper;
+    private mapper mapper;
     private MatcherGateway matcher;
     private AggregatorGateway aggregator;
     private Statistics statistics;
@@ -67,9 +67,9 @@ public class Operator {
         return aggregator;
     }
 
-    public MapperGateway map() {
+    public mapper map() {
         if (mapper == null) {
-            mapper = new MapperGateway();
+            mapper = new mapper();
         }
 
         return mapper;

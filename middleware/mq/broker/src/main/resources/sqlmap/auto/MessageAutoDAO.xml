@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapperGateway PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapperGateway.dtd">
-<mapperGateway namespace="study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.mq.broker.dal.dao.auto.MessageAutoDAO">
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.mq.broker.dal.dataobject.MessageDO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="topic" jdbcType="VARCHAR" property="topic" />
@@ -128,4 +128,4 @@
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-</mapperGateway>
+</mapper>

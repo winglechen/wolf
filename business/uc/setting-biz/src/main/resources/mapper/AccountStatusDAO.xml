@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapperGateway PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapperGateway.dtd">
-<mapperGateway namespace="study.daydayup.wolf.business.uc.setting.biz.dal.dao.AccountStatusDAO">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.setting.biz.dal.dao.AccountStatusDAO">
 
 
 
@@ -96,4 +96,4 @@
         where account_id=#{accountId,jdbcType=BIGINT}
         limit 1
     </update>
-</mapperGateway>
+</mapper>
