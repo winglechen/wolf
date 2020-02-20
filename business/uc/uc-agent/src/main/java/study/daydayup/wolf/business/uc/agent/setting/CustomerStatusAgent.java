@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
+import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
@@ -7,6 +8,7 @@ import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatus
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusProgressEnum;
 import study.daydayup.wolf.business.uc.api.setting.exception.StatusNotFoundException;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
+import study.daydayup.wolf.common.model.type.number.Step;
 
 import java.util.*;
 
@@ -96,6 +98,23 @@ public class CustomerStatusAgent {
         return this;
     }
 
+    public Step getProgress(@NonNull StatusEnum status) {
+        if (null == progressStep.get(status)) {
+            return null;
+        }
+
+
+        int total = 0, current = 0;
+        for (StatusEnum step : progressStep.get(status)) {
+            total++;
+            if (get(step)) {
+                current++;
+            }
+        }
+
+        return Step.of(current, total);
+    }
+
     private void updateProgress(StatusEnum status, boolean state) {
         StatusEnum progress = progressMap.get(status);
         if (null == progress) {
@@ -169,9 +188,7 @@ public class CustomerStatusAgent {
     private long[] formatBitArray(long[] s) {
         long[] sArray = new long[STATUS_LENGTH + 1];
         sArray[0] = 0;
-        for (int i = 0; i < 20; i++) {
-            sArray[i+1] = s[i];
-        }
+        System.arraycopy(s, 0, sArray, 1, 20);
 
         return sArray;
     }
