@@ -3,13 +3,13 @@ package study.daydayup.wolf.business.union.task.service.impl;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.union.task.dts.transformation.LoanTransformation;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
-import study.daydayup.wolf.framework.dts.transformation.Statistics;
+import study.daydayup.wolf.dts.transformation.Statistics;
 import study.daydayup.wolf.business.union.task.service.DailyLoanService;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.framework.dts.config.SinkConfig;
-import study.daydayup.wolf.framework.dts.config.SourceConfig;
-import study.daydayup.wolf.framework.dts.sink.MysqlSink;
-import study.daydayup.wolf.framework.dts.source.MysqlSource;
+import study.daydayup.wolf.dts.config.SinkConfig;
+import study.daydayup.wolf.dts.config.SourceConfig;
+import study.daydayup.wolf.dts.sink.MysqlSink;
+import study.daydayup.wolf.dts.source.MysqlSource;
 
 import javax.annotation.Resource;
 

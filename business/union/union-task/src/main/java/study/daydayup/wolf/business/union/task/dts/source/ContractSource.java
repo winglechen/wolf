@@ -3,10 +3,10 @@ package study.daydayup.wolf.business.union.task.dts.source;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.framework.dts.config.SourceConfig;
-import study.daydayup.wolf.framework.dts.source.MysqlScanner;
-import study.daydayup.wolf.framework.dts.source.MysqlSource;
-import study.daydayup.wolf.framework.dts.source.Source;
+import study.daydayup.wolf.dts.config.SourceConfig;
+import study.daydayup.wolf.dts.source.MysqlScanner;
+import study.daydayup.wolf.dts.source.MysqlSource;
+import study.daydayup.wolf.dts.source.Source;
 
 import javax.annotation.Resource;
 

@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.union.task.dts.sink;
 
-import study.daydayup.wolf.framework.dts.sink.Sink;
+import study.daydayup.wolf.dts.sink.Sink;
 
 /**
  * study.daydayup.wolf.business.union.task.dts.sink

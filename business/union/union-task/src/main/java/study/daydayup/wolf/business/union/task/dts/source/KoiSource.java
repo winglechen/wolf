@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.union.task.dts.source;
 
-import study.daydayup.wolf.framework.dts.source.Source;
+import study.daydayup.wolf.dts.source.Source;
 
 /**
  * study.daydayup.wolf.business.union.task.dts.source

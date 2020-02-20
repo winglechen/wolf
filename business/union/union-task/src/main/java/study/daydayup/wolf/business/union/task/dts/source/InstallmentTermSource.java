@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.union.task.dts.source;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.framework.dts.source.Source;
+import study.daydayup.wolf.dts.source.Source;
 
 /**
  * study.daydayup.wolf.business.union.task.dts.source

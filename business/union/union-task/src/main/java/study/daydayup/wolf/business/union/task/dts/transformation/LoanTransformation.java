@@ -6,11 +6,11 @@ import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
-import study.daydayup.wolf.framework.dts.sink.MysqlSink;
-import study.daydayup.wolf.framework.dts.transformation.DbTransformation;
-import study.daydayup.wolf.framework.dts.transformation.Operator;
-import study.daydayup.wolf.framework.dts.transformation.Statistics;
-import study.daydayup.wolf.framework.dts.transformation.Transformation;
+import study.daydayup.wolf.dts.sink.MysqlSink;
+import study.daydayup.wolf.dts.transformation.DbTransformation;
+import study.daydayup.wolf.dts.transformation.Operator;
+import study.daydayup.wolf.dts.transformation.Statistics;
+import study.daydayup.wolf.dts.transformation.Transformation;
 
 /**
  * study.daydayup.wolf.business.union.task.dts.transformation

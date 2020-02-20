@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.union.task.dts.sink;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.framework.dts.transformation.Statistics;
+import study.daydayup.wolf.dts.transformation.Statistics;
 
 /**
  * study.daydayup.wolf.business.union.task.dts.sink

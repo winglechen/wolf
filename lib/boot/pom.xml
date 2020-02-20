@@ -31,6 +31,7 @@
 
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
+        <wolf-dts.version>1.0.0-SNAPSHOT</wolf-dts.version>
         <wolf-model.version>1.0.0-SNAPSHOT</wolf-model.version>
 
         <lombok.version>1.18.10</lombok.version>
@@ -107,6 +108,11 @@
                 <groupId>study.daydayup.wolf</groupId>
                 <artifactId>framework</artifactId>
                 <version>${wolf-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>dts</artifactId>
+                <version>${wolf-dts.version}</version>
             </dependency>
             <dependency>
                 <groupId>study.daydayup.wolf</groupId>

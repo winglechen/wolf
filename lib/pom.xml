@@ -19,6 +19,7 @@
         <module>load-balancer</module>
         <module>generator</module>
         <module>starter</module>
+        <module>dts</module>
     </modules>
 
     <properties>
