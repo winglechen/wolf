@@ -22,16 +22,6 @@
         <dependency>
             <groupId>study.daydayup.wolf</groupId>
             <artifactId>framework</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-jdbc</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-redis</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>study.daydayup.wolf</groupId>-->
