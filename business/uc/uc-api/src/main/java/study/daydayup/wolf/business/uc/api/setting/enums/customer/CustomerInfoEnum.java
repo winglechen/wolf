@@ -11,14 +11,16 @@ import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
  **/
 @Getter
 public enum CustomerInfoEnum implements StatusEnum {
+    INFO_COMPLETE(19, "customer.info.complete"),
+
     KYC(9, "customer.info.kyc"),
-    VOTER(8, "customer.info.voter"),
-    PASSPORT(7, "customer.info.passport"),
+    BANK_CARD(8, "customer.info.backCard"),
+    VOTER(7, "customer.info.voter"),
     DIVING_LICENSE(6, "customer.info.drivingLicense"),
-    BANK_CARD(5, "customer.info.backCard"),
-    LIVENESS(4, "customer.info.liveness"),
-    PAN(3, "customer.info.pan"),
-    AADHAAR(2, "customer.info.aadhaar"),
+    PASSPORT(5, "customer.info.passport"),
+    PAN(4, "customer.info.pan"),
+    AADHAAR(3, "customer.info.aadhaar"),
+    LIVENESS(2, "customer.info.liveness"),
     BASIC_INFO(1, "customer.info.basicInfo")
     ;
 

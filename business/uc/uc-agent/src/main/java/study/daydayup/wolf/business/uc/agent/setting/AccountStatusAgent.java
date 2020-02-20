@@ -11,7 +11,6 @@ import study.daydayup.wolf.business.uc.api.setting.service.AccountStatusService;
  * @author Wingle
  * @since 2020/1/1 2:47 下午
  **/
-@Component
 public class AccountStatusAgent {
     private boolean isInit = false;
 

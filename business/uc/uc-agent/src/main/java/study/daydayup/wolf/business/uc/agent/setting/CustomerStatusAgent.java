@@ -4,12 +4,11 @@ import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusGroupEnum;
+import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusProgressEnum;
 import study.daydayup.wolf.business.uc.api.setting.exception.StatusNotFoundException;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * study.daydayup.wolf.business.uc.agent.setting
@@ -25,6 +24,8 @@ public class CustomerStatusAgent {
     private long orgId;
 
     private BitSet statusSet;
+    private Map<StatusEnum, StatusEnum> progressMap;
+    private Map<StatusEnum, List<StatusEnum>> progressStep;
 
     @Reference
     private CustomerStatusService service;
@@ -46,6 +47,7 @@ public class CustomerStatusAgent {
         this.accountId = accountId;
         this.orgId = orgId;
         initStatus(status);
+        initStatusMap();
 
         this.isInit = true;
     }
@@ -90,7 +92,23 @@ public class CustomerStatusAgent {
         int code = status.getCode();
         statusSet.set(code, state);
 
+        updateProgress(status, state);
         return this;
+    }
+
+    private void updateProgress(StatusEnum status, boolean state) {
+        StatusEnum progress = progressMap.get(status);
+        if (null == progress) {
+            return;
+        }
+
+        for (StatusEnum step : progressStep.get(progress)) {
+            if (get(step) != state) {
+                return;
+            }
+        }
+
+        set(progress, state);
     }
 
     public void save() {
@@ -98,6 +116,22 @@ public class CustomerStatusAgent {
         CustomerStatus status = arrayToModel(sArray);
 
         service.save(status);
+    }
+
+    private void initStatusMap() {
+        if (progressMap != null) {
+            return;
+        }
+
+        progressMap = new HashMap<>(16);
+        progressStep = new HashMap<>(8);
+        List<StatusEnum> progress;
+        for (CustomerStatusProgressEnum s : CustomerStatusProgressEnum.class.getEnumConstants()) {
+            progressMap.put(s.getStatus(), s.getProgress());
+
+            progress = progressStep.computeIfAbsent(s.getProgress(), k -> new LinkedList<>());
+            progress.add(s.getStatus());
+        }
     }
 
     private void initStatus(CustomerStatus status) {
