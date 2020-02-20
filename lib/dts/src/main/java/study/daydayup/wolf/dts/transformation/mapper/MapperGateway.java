@@ -13,10 +13,10 @@ import java.util.List;
  * @author Wingle
  * @since 2020/2/8 6:25 下午
  **/
-public class mapper extends AbstractMapper implements Mapper {
+public class MapperGateway extends AbstractMapper implements Mapper {
     private List<Mapper> mapperList;
 
-    public mapper() {
+    public MapperGateway() {
         mapperList = new ArrayList<>(5);
     }
 
@@ -31,11 +31,11 @@ public class mapper extends AbstractMapper implements Mapper {
         }
     }
 
-    public mapper toLocalDate(@NonNull String column) {
+    public MapperGateway toLocalDate(@NonNull String column) {
         return toLocalDate(column, null);
     }
 
-    public mapper toLocalDate(@NonNull String column, String newColumn) {
+    public MapperGateway toLocalDate(@NonNull String column, String newColumn) {
         Mapper mapper = new LocalDateMapper();
 
         mapper.init(column, newColumn);
@@ -44,7 +44,7 @@ public class mapper extends AbstractMapper implements Mapper {
         return this;
     }
 
-    public mapper rename(@NonNull String column, @NonNull String newColumn) {
+    public MapperGateway rename(@NonNull String column, @NonNull String newColumn) {
         Mapper mapper = new RenameMapper();
 
         mapper.init(column, newColumn);
@@ -53,11 +53,11 @@ public class mapper extends AbstractMapper implements Mapper {
         return this;
     }
 
-    public mapper toTag() {
+    public MapperGateway toTag() {
         return toTag(Table.DEFAULT_TAG_COLUMN);
     }
 
-    public mapper toTag(@NonNull String column) {
+    public MapperGateway toTag(@NonNull String column) {
         Mapper mapper = new TagMapper();
 
         mapper.init(column, newColumn);
