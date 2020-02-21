@@ -133,4 +133,15 @@ public class StringUtilTest {
         assertEquals("capitalize fail", "tRADE", StringUtil.uncapitalize("TRADE"));
     }
 
+    @Test
+    public void ucWords() {
+        assertEquals("capitalize fail", null, StringUtil.ucWords(null));
+        assertEquals("capitalize fail", "", StringUtil.ucWords(""));
+        assertEquals("capitalize fail", " ", StringUtil.ucWords(" "));
+
+        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("trade.order.line", "\\."));
+        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("Trade.Order.Line", "\\."));
+        assertEquals("capitalize fail", "TRAde.Order.Line", StringUtil.ucWords("TRAde.Order.Line", "\\."));
+    }
+
 }

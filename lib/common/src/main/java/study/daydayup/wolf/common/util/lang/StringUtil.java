@@ -185,7 +185,7 @@ public class StringUtil {
 
     public static String capitalize(String str) {
         if (str == null) {
-            return str;
+            return null;
         }
 
         char[] ch = str.toCharArray();
@@ -226,7 +226,16 @@ public class StringUtil {
     }
 
     public static String ucWords(String s, String separator) {
-        return null;
+        if (isEmpty(s, true)) {
+            return s;
+        }
+
+        String[] sArray = s.split(separator);
+        for (int i = 0, len=sArray.length; i < len; i++) {
+            sArray[i] = capitalize(sArray[i]);
+        }
+
+        return String.join(separator.replace("\\", ""), sArray);
     }
 
     public static String lcWords(String s) {
@@ -234,7 +243,20 @@ public class StringUtil {
     }
 
     public static String lcWords(String s, String separator) {
-        return null;
+        if (isEmpty(s, true)) {
+            return s;
+        }
+
+        String[] sArray = s.split(separator);
+        for (int i = 0, len=sArray.length; i < len; i++) {
+            sArray[i] = uncapitalize(sArray[i]);
+        }
+
+        return String.join(separator, sArray);
+    }
+
+    public static String addSlash(String s) {
+        return s;
     }
 
 }
