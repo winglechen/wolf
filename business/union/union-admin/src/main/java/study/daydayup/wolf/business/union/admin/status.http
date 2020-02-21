@@ -1,5 +1,18 @@
+###
+GET http://localhost:8200/status/all
+Accept: */*
+Cache-Control: no-cache
 
+###
+PUT http://localhost:8200/status/mock
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
 
+{
+  "customer.info.complete": true,
+  "trade.loan.loaning": true
+}
 
 
 ###
