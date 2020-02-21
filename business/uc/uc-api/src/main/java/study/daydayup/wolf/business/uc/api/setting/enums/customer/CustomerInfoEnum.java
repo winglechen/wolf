@@ -14,14 +14,14 @@ public enum CustomerInfoEnum implements StatusEnum {
     INFO_COMPLETE(19, "customer.info.complete"),
 
     KYC(9, "customer.info.kyc"),
-    BANK_CARD(8, "customer.info.bankCard"),
+    BANK_CARD(8, "customer.info.bank.card"),
     VOTER(7, "customer.info.voter"),
-    DIVING_LICENSE(6, "customer.info.drivingLicense"),
+    DIVING_LICENSE(6, "customer.info.driving.license"),
     PASSPORT(5, "customer.info.passport"),
     PAN(4, "customer.info.pan"),
     AADHAAR(3, "customer.info.aadhaar"),
     LIVENESS(2, "customer.info.liveness"),
-    BASIC_INFO(1, "customer.info.basicInfo")
+    BASIC_INFO(1, "customer.info.basic.info")
     ;
 
     private int code;
