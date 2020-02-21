@@ -14,7 +14,7 @@ public enum CustomerInfoEnum implements StatusEnum {
     INFO_COMPLETE(19, "customer.info.complete"),
 
     KYC(9, "customer.info.kyc"),
-    BANK_CARD(8, "customer.info.backCard"),
+    BANK_CARD(8, "customer.info.bankCard"),
     VOTER(7, "customer.info.voter"),
     DIVING_LICENSE(6, "customer.info.drivingLicense"),
     PASSPORT(5, "customer.info.passport"),
