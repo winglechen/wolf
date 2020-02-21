@@ -4,6 +4,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.ConfigurableApplicationContext;
+import study.daydayup.wolf.framework.layer.context.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.account.deploy.web
@@ -21,6 +23,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class DubboUnionApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DubboUnionApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(DubboUnionApplication.class, args);
+
+        BeanUtil.init(context);
     }
 }

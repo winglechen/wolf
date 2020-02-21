@@ -46,8 +46,8 @@ public class ContractConverter implements Converter {
         Contract contract = new Contract();
         BeanUtils.copyProperties(contractDO, contract);
 
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contractDO.getTradeType());
-        contract.setState(stateMachine.getStateByCode(contractDO.getState()));
+        TradeState state = Tsm.getStateByCode(contractDO.getState(), contractDO.getTradeType());
+        contract.setState(state);
 
         return contract;
     }

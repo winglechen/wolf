@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.trade.api.domain.state;
 
-import lombok.Setter;
+import lombok.Data;
 import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeStateException;
 
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2019/10/10 11:26 上午
  **/
-@Setter
+@Data
 public abstract class AbstractTradeState implements TradeState {
     protected final String STATE_NAMESPACE_PREFIX = "study.daydayup.wolf.business.trade.api";
 
@@ -28,13 +28,6 @@ public abstract class AbstractTradeState implements TradeState {
 
         return code;
     }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-
 
     @Override
     public LocalDateTime getUpdatedAt() {

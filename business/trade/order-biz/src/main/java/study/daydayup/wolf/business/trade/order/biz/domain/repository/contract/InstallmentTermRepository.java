@@ -143,8 +143,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
             return null;
         }
 
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
-        TradeState state = stateMachine.getStateByCode(code);
+        TradeState state = Tsm.getStateByCode(code, TradeTypeEnum.INSTALLMENT_TERM);
         if (state == null) {
             throw new TradeStateNotFoundException(code);
         }

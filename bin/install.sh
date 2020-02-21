@@ -14,9 +14,9 @@ function install_libs() {
     dir="${PROJECT_DIR}/lib/common/"
     cd ${dir} && mvn clean install
 
-    echo "install model ..."
-    dir="${PROJECT_DIR}/lib/model/"
-    cd ${dir} && mvn clean install
+#    echo "install model ..."
+#    dir="${PROJECT_DIR}/lib/model/"
+#    cd ${dir} && mvn clean install
 
     echo "install framework ..."
     dir="${PROJECT_DIR}/lib/framework/"

@@ -56,6 +56,17 @@ public class StringUtilTest {
     }
 
     @Test
+    public void rtrim_longstring() {
+        String a = "abcdefghijklmn";
+        String suffix = "lmn";
+        String expected = "abcdefghijk";
+
+        a = StringUtil.rtrim(a, suffix);
+        assertEquals("StringUtil.rtrim fail", expected, a);
+
+    }
+
+    @Test
     public void lowerCamel() {
         String s = "trade_order_name";
         String expect = "tradeOrderName";

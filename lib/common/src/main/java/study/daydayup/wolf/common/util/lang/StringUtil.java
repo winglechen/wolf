@@ -2,7 +2,6 @@ package study.daydayup.wolf.common.util.lang;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
-import com.sun.org.apache.regexp.internal.RE;
 
 import javax.annotation.Nullable;
 
@@ -120,7 +119,7 @@ public class StringUtil {
         }
 
         int sLen = s.length();
-        String sSuffix = s.substring(suffixLen, sLen);
+        String sSuffix = s.substring(sLen-suffixLen);
         if (!sSuffix.equals(suffix)) {
             return s;
         }

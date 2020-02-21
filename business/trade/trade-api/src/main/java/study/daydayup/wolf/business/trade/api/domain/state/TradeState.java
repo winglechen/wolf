@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
  **/
 public interface TradeState extends State {
     int getCode();
+    void setName(String name);
     String getName();
     LocalDateTime getUpdatedAt();
 }

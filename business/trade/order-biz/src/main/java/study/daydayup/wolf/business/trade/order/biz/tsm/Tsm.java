@@ -1,13 +1,17 @@
 package study.daydayup.wolf.business.trade.order.biz.tsm;
 
+import lombok.NonNull;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.TradeStateNotFoundException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
+import study.daydayup.wolf.business.trade.api.util.LocaleUtil;
 import study.daydayup.wolf.business.trade.order.biz.tsm.loan.*;
 import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
+import study.daydayup.wolf.framework.layer.context.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.tsm
@@ -16,6 +20,10 @@ import study.daydayup.wolf.common.util.lang.EnumUtil;
  * @since 2019/12/17 12:09 下午
  **/
 public class Tsm {
+    private static final String STATE_LANG_PREFIX = "trade.";
+    private static final String STATE_NS_PREFIX = "study.daydayup.wolf.business.trade.api.domain.";
+    private static final String STATE_NS_SUFFIX = "State";
+
     public static StateMachine<TradeState, TradeEvent> create(int tradeType) {
         TradeTypeEnum tradeTypeEnum = EnumUtil.codeOf(tradeType, TradeTypeEnum.class);
         return create(tradeTypeEnum);
@@ -24,6 +32,10 @@ public class Tsm {
     public static StateMachine<TradeState, TradeEvent> create(TradeTypeEnum tradeTypeEnum) {
         TradeStateMachineFactory factory = createFactory(tradeTypeEnum);
         return factory.create();
+    }
+
+    public static TradeState getStateByCode(Integer code, TradeTypeEnum tradeType) {
+       return getStateByCode(code, tradeType.getCode());
     }
 
     public static TradeState getStateByCode(Integer code, Integer tradeType) {
@@ -35,6 +47,22 @@ public class Tsm {
         TradeState state = stateMachine.getStateByCode(code);
         if (state == null) {
             throw new TradeStateNotFoundException(code);
+        }
+
+        return addLocaleInfo(state);
+    }
+
+    private static TradeState addLocaleInfo(@NonNull TradeState state) {
+        LocaleUtil localeUtil = BeanUtil.getBean(LocaleUtil.class);
+
+        String stateKey = state.getClass().getName();
+        stateKey = StringUtil.ltrim(stateKey, STATE_NS_PREFIX);
+        stateKey = StringUtil.rtrim(stateKey, STATE_NS_SUFFIX);
+        stateKey = StringUtil.join(STATE_LANG_PREFIX, stateKey);
+
+        String stateName = localeUtil.get(stateKey);
+        if (stateName != null) {
+            state.setName(stateName);
         }
 
         return state;
@@ -77,5 +105,17 @@ public class Tsm {
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }
+    }
+
+
+    public static void main(String[] args) {
+        String stateKey = "study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState";
+
+        stateKey = StringUtil.ltrim(stateKey, STATE_NS_PREFIX);
+        stateKey = StringUtil.rtrim(stateKey, STATE_NS_SUFFIX);
+        stateKey = StringUtil.join(STATE_LANG_PREFIX, stateKey);
+
+        System.out.println(stateKey);
+
     }
 }
