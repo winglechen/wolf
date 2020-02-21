@@ -111,4 +111,26 @@ public class StringUtilTest {
         assertEquals("StringUtil.lowerUnderscore fail", s1, StringUtil.camelTo(expect, "-"));
     }
 
+    @Test
+    public void capitalize() {
+        assertEquals("capitalize fail", null, StringUtil.capitalize(null));
+        assertEquals("capitalize fail", "", StringUtil.capitalize(""));
+        assertEquals("capitalize fail", " ", StringUtil.capitalize(" "));
+
+        assertEquals("capitalize fail", "Trade", StringUtil.capitalize("trade"));
+        assertEquals("capitalize fail", "Trade", StringUtil.capitalize("Trade"));
+        assertEquals("capitalize fail", "TRADE", StringUtil.capitalize("tRADE"));
+    }
+
+    @Test
+    public void uncapitalize() {
+        assertEquals("capitalize fail", null, StringUtil.uncapitalize(null));
+        assertEquals("capitalize fail", "", StringUtil.uncapitalize(""));
+        assertEquals("capitalize fail", " ", StringUtil.uncapitalize(" "));
+
+        assertEquals("capitalize fail", "trade", StringUtil.uncapitalize("trade"));
+        assertEquals("capitalize fail", "trade", StringUtil.uncapitalize("Trade"));
+        assertEquals("capitalize fail", "tRADE", StringUtil.uncapitalize("TRADE"));
+    }
+
 }

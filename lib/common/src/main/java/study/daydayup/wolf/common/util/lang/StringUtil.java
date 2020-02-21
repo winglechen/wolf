@@ -127,7 +127,6 @@ public class StringUtil {
         return s.substring(0, sLen-suffixLen);
     }
 
-
     public static String camel(String s) {
         return lowerCamel(s);
     }
@@ -158,6 +157,10 @@ public class StringUtil {
         return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
     }
 
+    public static String camelTo(String s) {
+        return camelTo(s, null);
+    }
+
     public static String camelTo(String s, String separator) {
         String result = underscore(s);
         if (null == separator || separator.equals(UNDERSCORE)) {
@@ -177,6 +180,61 @@ public class StringUtil {
 
     public static String upperUnderscore(String s) {
         return CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, s);
+    }
+
+
+    public static String capitalize(String str) {
+        if (str == null) {
+            return str;
+        }
+
+        char[] ch = str.toCharArray();
+        if (0 == ch.length) {
+            return str;
+        }
+
+        if (ch[0] >= 'a' && ch[0] <= 'z') {
+            ch[0] = (char) (ch[0] - 32);
+        } else {
+            return str;
+        }
+
+        return new String(ch);
+    }
+
+    public static String uncapitalize(String str) {
+        if (str == null) {
+            return null;
+        }
+
+        char[] ch = str.toCharArray();
+        if (0 == ch.length) {
+            return str;
+        }
+
+        if (ch[0] >= 'A' && ch[0] <= 'Z') {
+            ch[0] = (char) (ch[0] + 32);
+        } else {
+            return str;
+        }
+
+        return new String(ch);
+    }
+
+    public static String ucWords(String s) {
+        return ucWords(s, BLANK);
+    }
+
+    public static String ucWords(String s, String separator) {
+        return null;
+    }
+
+    public static String lcWords(String s) {
+        return lcWords(s, BLANK);
+    }
+
+    public static String lcWords(String s, String separator) {
+        return null;
     }
 
 }
