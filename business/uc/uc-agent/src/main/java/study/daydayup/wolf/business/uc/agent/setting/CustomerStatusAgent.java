@@ -160,13 +160,14 @@ public class CustomerStatusAgent {
 
                 status.getS11(), status.getS12(), status.getS13(), status.getS14(), status.getS15(),
                 status.getS16(), status.getS17(), status.getS18(), status.getS19(), status.getS20(),
+                1
         };
 
         statusSet = BitSet.valueOf(sArray);
     }
 
     private CustomerStatus arrayToModel(long[] s) {
-        if (s.length != STATUS_LENGTH) {
+        if (s.length != STATUS_LENGTH + 1) {
             throw new IllegalArgumentException("invalid status array format");
         }
 
@@ -188,7 +189,7 @@ public class CustomerStatusAgent {
     private long[] formatBitArray(long[] s) {
         long[] sArray = new long[STATUS_LENGTH + 1];
         sArray[0] = 0;
-        System.arraycopy(s, 0, sArray, 1, 20);
+        System.arraycopy(s, 0, sArray, 1, STATUS_LENGTH);
 
         return sArray;
     }
