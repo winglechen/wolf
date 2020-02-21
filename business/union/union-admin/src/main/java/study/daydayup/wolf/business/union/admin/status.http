@@ -14,6 +14,17 @@ Content-Type: application/json
   "trade.loan.loaning": true
 }
 
+###
+PUT http://localhost:8200/status/mock
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeLoanOverdueTimeout": true,
+  "customerAuthSuccess": true
+}
+
 
 ###
 GET http://localhost:8200/status/show

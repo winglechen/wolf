@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.util.lang;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.annotation.Nullable;
 
@@ -156,6 +157,15 @@ public class StringUtil {
 
     public static String upperCamel(String s) {
         return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
+    }
+
+    public static String camelTo(String s, String separator) {
+        String result = underscore(s);
+        if (null == separator || separator.equals(UNDERSCORE)) {
+            return result;
+        }
+
+        return result.replace(UNDERSCORE, separator);
     }
 
     public static String underscore(String s) {

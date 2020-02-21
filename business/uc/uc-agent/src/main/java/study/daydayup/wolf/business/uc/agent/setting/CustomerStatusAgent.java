@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatus
 import study.daydayup.wolf.business.uc.api.setting.exception.StatusNotFoundException;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
 import study.daydayup.wolf.common.model.type.number.Step;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import java.util.*;
 
@@ -80,7 +81,7 @@ public class CustomerStatusAgent {
 
         for(StatusEnum status: clazz.getEnumConstants()) {
             String desc = status.getDesc();
-            map.put(desc, get(status));
+            map.put(StringUtil.camel(desc, "."), get(status));
         }
 
         return map;

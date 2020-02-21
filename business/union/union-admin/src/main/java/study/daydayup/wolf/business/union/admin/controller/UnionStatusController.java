@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.uc.agent.setting.CustomerStatusAgent;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.*;
 import study.daydayup.wolf.common.util.collection.MapUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -79,8 +80,18 @@ public class UnionStatusController extends BaseUnionController {
         agent.init(session.get("accountId", Long.class), session.get("orgId", Long.class));
 
         StatusEnum s;
+        String key;
         for (Map.Entry<String, Object> entry : status.entrySet()) {
-            s = statusMap.get(entry.getKey());
+            key = entry.getKey();
+            if (null == key) {
+                continue;
+            }
+
+            if (!key.contains(".")) {
+                key = StringUtil.camelTo(key, ".");
+            }
+
+            s = statusMap.get(key);
             if (s == null || !(entry.getValue() instanceof Boolean) ) {
                 continue;
             }

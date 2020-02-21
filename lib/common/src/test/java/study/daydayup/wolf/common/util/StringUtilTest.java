@@ -78,6 +78,9 @@ public class StringUtilTest {
 
         assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
         assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
+
+        assertEquals("StringUtil.lowerUnderscore fail", s1, StringUtil.camelTo(expect, "."));
+        assertEquals("StringUtil.lowerUnderscore fail", s1, StringUtil.camelTo(expect, "."));
     }
 
     @Test
@@ -91,6 +94,10 @@ public class StringUtilTest {
 
         assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
         assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
+
+
+        assertEquals("StringUtil.lowerUnderscore fail", s1, StringUtil.camelTo(expect, "-"));
+        assertEquals("StringUtil.lowerUnderscore fail", s1, StringUtil.camelTo(expect, "-"));
     }
 
 }
