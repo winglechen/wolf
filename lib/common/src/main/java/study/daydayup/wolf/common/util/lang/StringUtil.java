@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.util.lang;
 
+import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 
 import javax.annotation.Nullable;
@@ -17,20 +18,29 @@ public class StringUtil {
     public static final String COMMA = ",";
     public static final String COLON = ":";
     public static final String QUOTE = "`";
+    public static final String UNDERSCORE = "_";
 
 
-    public static boolean hasValue(String s, boolean trim) {
+    public static boolean notEmpty(String s, boolean trim) {
         if (!trim) {
-            return hasValue(s);
+            return notEmpty(s);
         }
 
         if (null == s) {
             return false;
         }
-        return hasValue(s.trim());
+        return notEmpty(s.trim());
     }
 
-    public static boolean hasValue(String s) {
+    public static boolean isEmpty(String s, boolean trim) {
+        return ! notEmpty(s, trim);
+    }
+
+    public static boolean isEmpty(String s) {
+        return ! notEmpty(s);
+    }
+
+    public static boolean notEmpty(String s) {
         return s != null && s.length() > 0;
     }
 
@@ -115,6 +125,49 @@ public class StringUtil {
         }
 
         return s.substring(0, sLen-suffixLen);
+    }
+
+
+    public static String camel(String s) {
+        return lowerCamel(s);
+    }
+
+    public static String camel(String s, String separator) {
+        return lowerCamel(s, separator);
+    }
+
+    public static String lowerCamel(String s, String separator) {
+        if (null == separator || separator.equals(UNDERSCORE)) {
+            return lowerCamel(s);
+        }
+        return lowerCamel(s.replace(separator, UNDERSCORE));
+    }
+
+    public static String lowerCamel(String s) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, s);
+    }
+
+    public static String upperCamel(String s, String separator) {
+        if (null == separator || separator.equals(UNDERSCORE)) {
+            return upperCamel(s);
+        }
+        return upperCamel(s.replace(separator, UNDERSCORE));
+    }
+
+    public static String upperCamel(String s) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
+    }
+
+    public static String underscore(String s) {
+        return lowerUnderscore(s);
+    }
+
+    public static String lowerUnderscore(String s) {
+        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, s);
+    }
+
+    public static String upperUnderscore(String s) {
+        return CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, s);
     }
 
 }

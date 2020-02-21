@@ -94,12 +94,12 @@ public class SellerContractServiceImpl implements SellerContractService {
     }
 
     private TradeIds getTradeIdsByInstallmentList(List<InstallmentTerm> installmentTermList, Long sellerId) {
-        if (!ListUtil.hasValue(installmentTermList)) {
+        if (!ListUtil.notEmpty(installmentTermList)) {
             return null;
         }
 
         List<String> tradeNos = CollectionUtil.keys(installmentTermList, InstallmentTerm::getTradeNo);
-        if (!ListUtil.hasValue(tradeNos)) {
+        if (!ListUtil.notEmpty(tradeNos)) {
             return null;
         }
 

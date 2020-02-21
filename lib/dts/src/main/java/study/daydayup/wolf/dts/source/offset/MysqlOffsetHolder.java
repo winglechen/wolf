@@ -35,7 +35,7 @@ public class MysqlOffsetHolder implements OffsetHolder {
 
         List<Map<String, Object>> data = getAllFromDb(source, table, shard);
         Map<String, Long> result = new HashMap<>();
-        if (CollectionUtil.hasValue(data)) {
+        if (CollectionUtil.notEmpty(data)) {
             String tmpKey;
             for (Map<String, Object> row : data) {
                 tmpKey = formatKey(source, table, shard, (String) row.get("sink"));
@@ -114,7 +114,7 @@ public class MysqlOffsetHolder implements OffsetHolder {
                 .limit(1);
 
         List<Long> offsetList = jdbc.queryForList(sql.getSql(), sql.getData(), Long.class);
-        if (!CollectionUtil.hasValue(offsetList)) {
+        if (!CollectionUtil.notEmpty(offsetList)) {
             createOffset(source, table, shard, sink);
             return 0L;
         }

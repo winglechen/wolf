@@ -15,11 +15,11 @@ public class MapUtil {
         return new HashMap<>();
     }
 
-    public static <K, V> boolean hasValue(Map<K, V> map) {
-        return hasValue(map, false);
+    public static <K, V> boolean notEmpty(Map<K, V> map) {
+        return notEmpty(map, false);
     }
 
-    public static <K, V> boolean hasValue(Map<K, V> map, boolean filterNulls) {
+    public static <K, V> boolean notEmpty(Map<K, V> map, boolean filterNulls) {
         if (map == null) {
             return false;
         }
@@ -42,11 +42,11 @@ public class MapUtil {
     }
 
     public static <K, V> boolean isEmpty(Map<K, V> map, boolean filterNulls) {
-        return ! hasValue(map, filterNulls);
+        return ! notEmpty(map, filterNulls);
     }
 
     public static <K, V> boolean isEmpty(Map<K, V> map) {
-        return ! hasValue(map);
+        return ! notEmpty(map);
     }
 
     public static <K, V> boolean containsNull(Map<K, V> map) {

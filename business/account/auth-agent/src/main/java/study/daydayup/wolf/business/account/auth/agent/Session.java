@@ -155,7 +155,7 @@ public class Session {
     }
 
     private void setOrgId(OauthLicense license) {
-        if (!StringUtil.hasValue(license.getScope(), true)) {
+        if (!StringUtil.notEmpty(license.getScope(), true)) {
             return;
         }
 

@@ -153,7 +153,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
     }
 
     private Page<InstallmentTerm> pageInstallmentTerm(List<InstallmentTermDO> installmentTermDOList, PageRequest pageRequest) {
-        if (!ListUtil.hasValue(installmentTermDOList)) {
+        if (!ListUtil.notEmpty(installmentTermDOList)) {
             return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
         }
 

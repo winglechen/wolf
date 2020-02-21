@@ -125,7 +125,7 @@ public class Statistics {
     }
 
     private String getKeyFromRow(@NonNull Row row) {
-        if (!CollectionUtil.hasValue(keyColumns)) {
+        if (!CollectionUtil.notEmpty(keyColumns)) {
             return null;
         }
 
@@ -158,7 +158,7 @@ public class Statistics {
     }
 
     private void setKeyColumns(Row data, Row row) {
-        if (!CollectionUtil.hasValue(keyColumns)) {
+        if (!CollectionUtil.notEmpty(keyColumns)) {
             return;
         }
 

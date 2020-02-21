@@ -13,7 +13,7 @@ public class SetUtil {
         return null == set || set.isEmpty();
     }
 
-    public static <E> boolean hasValue(Set<E> set) {
+    public static <E> boolean notEmpty(Set<E> set) {
         return ! isEmpty(set);
     }
 }

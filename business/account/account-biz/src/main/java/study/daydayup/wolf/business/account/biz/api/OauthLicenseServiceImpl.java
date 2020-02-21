@@ -50,7 +50,7 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
 
     @Override
     public void expire(String accessToken, Date expiredAt) {
-        if (!StringUtil.hasValue(accessToken)) {
+        if (!StringUtil.notEmpty(accessToken)) {
             return;
         }
 

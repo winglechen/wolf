@@ -15,10 +15,10 @@ public class StringUtilTest {
 
     @Test
     public void hasValue() {
-        assertTrue("space hasValue", StringUtil.hasValue(" "));
-        assertFalse("null do not hasValue", StringUtil.hasValue(null));
-        assertFalse("empty string do not hasValue", StringUtil.hasValue(""));
-        assertTrue("common string hasValue", StringUtil.hasValue("abc"));
+        assertTrue("space hasValue", StringUtil.notEmpty(" "));
+        assertFalse("null do not hasValue", StringUtil.notEmpty(null));
+        assertFalse("empty string do not hasValue", StringUtil.notEmpty(""));
+        assertTrue("common string hasValue", StringUtil.notEmpty("abc"));
     }
 
     @Test
@@ -53,6 +53,44 @@ public class StringUtilTest {
         a = StringUtil.rtrim(a, suffix);
         assertEquals("StringUtil.rtrim fail", expected, a);
 
+    }
+
+    @Test
+    public void lowerCamel() {
+        String s = "trade_order_name";
+        String expect = "tradeOrderName";
+
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.lowerCamel(s));
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.camel(s));
+
+        assertEquals("StringUtil.lowerUnderscore fail", s, StringUtil.lowerUnderscore(expect));
+        assertEquals("StringUtil.lowerUnderscore fail", s, StringUtil.lowerUnderscore(expect));
+    }
+
+    @Test
+    public void lowerCamel_dot() {
+        String s1 = "trade.order.name";
+        String s2 = "trade_order_name";
+        String expect = "tradeOrderName";
+
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.lowerCamel(s1, "."));
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.camel(s1, "."));
+
+        assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
+        assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
+    }
+
+    @Test
+    public void lowerCamel_minus() {
+        String s1 = "trade-order-name";
+        String s2 = "trade_order_name";
+        String expect = "tradeOrderName";
+
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.lowerCamel(s1, "-"));
+        assertEquals("StringUtil.lowerCamel fail", expect, StringUtil.camel(s1, "-"));
+
+        assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
+        assertEquals("StringUtil.lowerUnderscore fail", s2, StringUtil.lowerUnderscore(expect));
     }
 
 }

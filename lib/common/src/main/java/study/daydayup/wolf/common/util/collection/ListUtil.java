@@ -14,16 +14,16 @@ public class ListUtil {
         return new ArrayList<>();
     }
 
-    public static <E> boolean hasValue(List<E> list) {
+    public static <E> boolean notEmpty(List<E> list) {
         return null != list && !list.isEmpty();
     }
 
     public static <E> boolean isEmpty(List<E> list) {
-        return ! hasValue(list);
+        return ! notEmpty(list);
     }
 
     public static <E> E last(List<E> list) {
-        if (!hasValue(list)) {
+        if (!notEmpty(list)) {
             return null;
         }
 

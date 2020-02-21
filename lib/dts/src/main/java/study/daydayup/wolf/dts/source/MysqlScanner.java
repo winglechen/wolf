@@ -56,7 +56,7 @@ public class MysqlScanner implements DbScanner {
 
         while (count < MAX_ROW_NUM ) {
             data = select(table, columns, lastId);
-            if (!CollectionUtil.hasValue(data)) {
+            if (!CollectionUtil.notEmpty(data)) {
                 break;
             }
 

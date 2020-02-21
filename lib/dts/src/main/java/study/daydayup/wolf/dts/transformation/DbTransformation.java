@@ -51,7 +51,7 @@ public class DbTransformation implements Transformation {
     }
 
     public Statistics transform(Table table, boolean sqlFormat) {
-        if (!CollectionUtil.hasValue(table)) {
+        if (!CollectionUtil.notEmpty(table)) {
             return statistics;
         }
 

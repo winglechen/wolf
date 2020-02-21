@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
  * @since 2020/1/14 3:58 下午
  **/
 public class CollectionUtil {
-    public static <E> boolean hasValue(Collection<E> collection) {
+    public static <E> boolean notEmpty(Collection<E> collection) {
         return null != collection && !collection.isEmpty();
     }
 
     public static <E> boolean isEmpty(Collection<E> collection) {
-        return ! hasValue(collection);
+        return ! notEmpty(collection);
     }
 
     public  static <C, K> List<K> keys(Collection<C> collection, Function<C,K> getter) {

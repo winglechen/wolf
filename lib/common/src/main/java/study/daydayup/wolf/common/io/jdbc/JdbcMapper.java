@@ -17,7 +17,7 @@ import java.util.Map;
 public class JdbcMapper {
 
     public static List<Map<String, Object>> map(List<Map<String, Object>> list) {
-        if (!CollectionUtil.hasValue(list)) {
+        if (!CollectionUtil.notEmpty(list)) {
             return list;
         }
 
