@@ -33,7 +33,7 @@ public class UnionStatusController extends BaseUnionController {
         agent.init(getFromSession("accountId", Long.class), getFromSession("orgId", Long.class));
 
         agent.set(TradeTagEnum.FIRST_TRADE);
-        agent.set(TradeTagEnum.LOAN_LOANING);
+        agent.set(TradeTagEnum.LOANING);
         agent.save();
 
         Map<String, Boolean> tradeStatus = agent.getGroup(CustomerStatusGroupEnum.TRADE_TAG);
