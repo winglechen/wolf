@@ -26,7 +26,6 @@ import org.apache.dubbo.rpc.*;
 import org.apache.dubbo.rpc.service.GenericService;
 import study.daydayup.wolf.common.lang.exception.BusinessException;
 import study.daydayup.wolf.framework.rpc.exception.WolfExceptionCodec;
-import study.daydayup.wolf.framework.rpc.exception.WolfRpcException;
 
 import java.lang.reflect.Method;
 
