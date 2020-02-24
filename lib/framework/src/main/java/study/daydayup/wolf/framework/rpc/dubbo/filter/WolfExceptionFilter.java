@@ -59,7 +59,6 @@ public class WolfExceptionFilter extends ListenableFilter {
 
         @Override
         public void onResponse(Result appResponse, Invoker<?> invoker, Invocation invocation) {
-            System.out.println("Wolf Exception filter loaded");
             if (appResponse.hasException() && GenericService.class != invoker.getInterface()) {
                 try {
                     Throwable exception = appResponse.getException();

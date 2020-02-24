@@ -103,6 +103,8 @@ dubbo:
     qos-enable: false
   cloud:
     subscribed-services: ""
+  provider:
+    filter:
 
 
 logging:
