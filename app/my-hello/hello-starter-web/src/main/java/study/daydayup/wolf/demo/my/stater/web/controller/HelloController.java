@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.my.stater.web;
+package study.daydayup.wolf.demo.my.stater.web.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -6,12 +6,11 @@ import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.TradeStateNotFoundException;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
-import study.daydayup.wolf.business.trade.api.util.LocaleUtil;
+import study.daydayup.wolf.framework.util.LocaleUtil;
 import study.daydayup.wolf.business.trade.order.biz.tsm.loan.*;
 import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
-import study.daydayup.wolf.framework.util.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.tsm
@@ -53,14 +52,13 @@ public class Tsm {
     }
 
     private static TradeState addLocaleInfo(@NonNull TradeState state) {
-        LocaleUtil localeUtil = BeanUtil.getBean(LocaleUtil.class);
-
         String stateKey = state.getClass().getName();
         stateKey = StringUtil.ltrim(stateKey, STATE_NS_PREFIX);
         stateKey = StringUtil.rtrim(stateKey, STATE_NS_SUFFIX);
         stateKey = StringUtil.join(STATE_LANG_PREFIX, stateKey);
+        stateKey = StringUtil.lcWords(stateKey, ".");
 
-        String stateName = localeUtil.get(stateKey);
+        String stateName = LocaleUtil.get(stateKey);
         if (stateName != null) {
             state.setName(stateName);
         }

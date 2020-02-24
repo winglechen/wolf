@@ -12,12 +12,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlowFactory {
 
-//    @Bean
-//    public TradeFlow create(TradeType tradeType) {
-//        if (1 == tradeType.type) {
-//            return new ContractFlow();
-//        }
-//
-//        return new OrderFlow();
-//    }
+    @Bean
+    public TradeFlow create(TradeType tradeType) {
+        if (1 == tradeType.type) {
+            return new ContractFlow();
+        }
+
+        return new OrderFlow();
+    }
 }

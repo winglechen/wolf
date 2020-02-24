@@ -1,8 +1,17 @@
 spring:
-  application.name: hello-starter-web
-  main.allow-bean-definition-overriding: true
+  application:
+    name: hello-starter-web
+  main:
+    allow-bean-definition-overriding: true
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
 
-hello.msg: Hello Wingle From Config
-hello.show: true
+
+
+hello:
+  msg: Hello Wingle From Config
+  show: true
+
 server:
   port: 8090
