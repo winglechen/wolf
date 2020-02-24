@@ -21,6 +21,7 @@ public class LocaleUtil {
     public LocaleUtil(MessageSource messageSource) {
         LocaleUtil.messageSource = messageSource;
         LocaleUtil.setLocale(Locale.US, true);
+        LocaleUtil.setDefaultLocale(Locale.US);
     }
 
     public static String get(String key) {
@@ -47,6 +48,10 @@ public class LocaleUtil {
         return LocaleContextHolder.getLocale();
     }
 
+    public static void setDefaultLocale(Locale locale) {
+        LocaleContextHolder.setDefaultLocale(locale);
+    }
+
     public static void setLocale(Locale locale) {
         LocaleContextHolder.setLocale(locale);
     }
@@ -54,6 +59,7 @@ public class LocaleUtil {
     public static void setLocale(Locale locale, boolean inheritable) {
         LocaleContextHolder.setLocale(locale, inheritable);
     }
+
 
 
 }

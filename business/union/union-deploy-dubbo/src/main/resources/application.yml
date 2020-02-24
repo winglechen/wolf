@@ -5,6 +5,9 @@ spring:
     active: dev
   main:
     allow-bean-definition-overriding: true
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
 
 
 mybatis:

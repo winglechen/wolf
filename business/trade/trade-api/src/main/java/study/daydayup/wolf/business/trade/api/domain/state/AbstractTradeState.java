@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
  **/
 @Data
 public abstract class AbstractTradeState implements TradeState {
-    protected final String STATE_NAMESPACE_PREFIX = "study.daydayup.wolf.business.trade.api";
-
     protected int code;
     protected String name;
     protected LocalDateTime updatedAt;
@@ -27,15 +25,6 @@ public abstract class AbstractTradeState implements TradeState {
         }
 
         return code;
-    }
-
-    @Override
-    public LocalDateTime getUpdatedAt() {
-        if (updatedAt == null) {
-            updatedAt = LocalDateTime.now();
-        }
-
-        return updatedAt;
     }
 
 }
