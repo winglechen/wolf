@@ -13,6 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * study.daydayup.wolf.common.model.type.id
  *
+ * tradeNo = Datetime       (14位  必选  格式：yyyyMMddHHmmss )
+ *          + TradePhase    (1位   必选  TradePhaseEnum      )
+ *          + shardingKey   (4位         hash(accountId)     )
+ *          + dataCenterKey (4位                             )
+ *          + uuid          (9位   必选                       )
+ *          长度合计         (32位  必选长度  )
+ *
  * @author Wingle
  * @since 2019/12/20 11:43 上午
  **/
