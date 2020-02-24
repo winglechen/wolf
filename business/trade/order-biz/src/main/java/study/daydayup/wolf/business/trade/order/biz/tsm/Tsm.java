@@ -11,7 +11,7 @@ import study.daydayup.wolf.business.trade.order.biz.tsm.loan.*;
 import study.daydayup.wolf.common.sm.StateMachine;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
-import study.daydayup.wolf.framework.layer.context.BeanUtil;
+import study.daydayup.wolf.framework.util.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.trade.order.biz.tsm

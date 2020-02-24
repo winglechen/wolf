@@ -2,8 +2,11 @@ package study.daydayup.wolf.common.util.lang;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterators;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 
 /**
  * study.daydayup.wolf.common.util
@@ -230,12 +233,12 @@ public class StringUtil {
             return s;
         }
 
-        String[] sArray = s.split(separator);
+        String[] sArray = split(s, separator);
         for (int i = 0, len=sArray.length; i < len; i++) {
             sArray[i] = capitalize(sArray[i]);
         }
 
-        return String.join(separator.replace("\\", ""), sArray);
+        return String.join(separator, sArray);
     }
 
     public static String lcWords(String s) {
@@ -247,8 +250,11 @@ public class StringUtil {
             return s;
         }
 
-        String[] sArray = s.split(separator);
+        String[] sArray = split(s, separator);
         for (int i = 0, len=sArray.length; i < len; i++) {
+            if (isEmpty(sArray[i])) {
+                continue;
+            }
             sArray[i] = uncapitalize(sArray[i]);
         }
 
@@ -257,6 +263,15 @@ public class StringUtil {
 
     public static String addSlash(String s) {
         return s;
+    }
+
+    public static String[] split(String s, String separator) {
+        if (isEmpty(separator)) {
+            return new String[]{s};
+        }
+
+        Iterable<String> i = Splitter.on(separator).split(s);
+        return Iterators.toArray(i.iterator(), String.class);
     }
 
 }

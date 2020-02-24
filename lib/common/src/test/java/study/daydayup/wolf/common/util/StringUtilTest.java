@@ -139,9 +139,20 @@ public class StringUtilTest {
         assertEquals("capitalize fail", "", StringUtil.ucWords(""));
         assertEquals("capitalize fail", " ", StringUtil.ucWords(" "));
 
-        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("trade.order.line", "\\."));
-        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("Trade.Order.Line", "\\."));
-        assertEquals("capitalize fail", "TRAde.Order.Line", StringUtil.ucWords("TRAde.Order.Line", "\\."));
+        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("trade.order.line", "."));
+        assertEquals("capitalize fail", "Trade.Order.Line", StringUtil.ucWords("Trade.Order.Line", "."));
+        assertEquals("capitalize fail", "TRAde.Order.Line", StringUtil.ucWords("TRAde.Order.Line", "."));
+    }
+
+    @Test
+    public void lcWords() {
+        assertEquals("capitalize fail", null, StringUtil.lcWords(null));
+        assertEquals("capitalize fail", "", StringUtil.lcWords(""));
+        assertEquals("capitalize fail", " ", StringUtil.lcWords(" "));
+
+        assertEquals("capitalize fail", "trade.order.line", StringUtil.lcWords("Trade.Order.Line", "."));
+        assertEquals("capitalize fail", "trade.order.line", StringUtil.lcWords("Trade.Order.Line", "."));
+        assertEquals("capitalize fail", "tRAde.order.line", StringUtil.lcWords("TRAde.Order.Line", "."));
     }
 
 }

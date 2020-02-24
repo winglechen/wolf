@@ -7,7 +7,7 @@ import study.daydayup.wolf.common.io.db.Row;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.dts.transformation.Statistics;
-import study.daydayup.wolf.framework.layer.context.BeanUtil;
+import study.daydayup.wolf.framework.util.BeanUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

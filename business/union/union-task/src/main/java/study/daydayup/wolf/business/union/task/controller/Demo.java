@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.union.task.controller;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
-import study.daydayup.wolf.framework.layer.context.BeanUtil;
+import study.daydayup.wolf.framework.util.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.union.task.controller

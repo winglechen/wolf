@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
-import study.daydayup.wolf.framework.layer.context.BeanUtil;
+import study.daydayup.wolf.framework.util.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.account.deploy.web

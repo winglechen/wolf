@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import study.daydayup.wolf.framework.layer.context.BeanUtil;
+import study.daydayup.wolf.framework.util.BeanUtil;
 
 /**
  * study.daydayup.wolf.business.union.task
