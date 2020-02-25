@@ -1,0 +1,33 @@
+###
+POST http://localhost:8100/auth/sms/code
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "18067966015",
+  "orgId": 1
+}
+
+###
+POST http://localhost:8100/auth/sms/registerAndLogin
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "18067966015",
+  "code": "123",
+  "orgId": 1
+}
+
+###
+POST http://localhost:8100/account/show
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+
+
+
