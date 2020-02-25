@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
@@ -85,7 +86,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void prepay(TradeId tradeId, Integer installmentNo) {
+    public Result<PayResponse> repay(TradeId tradeId, Integer installmentNo) {
         tradeId.valid();
         if (installmentNo == null || installmentNo < 1) {
             throw new IllegalArgumentException("installmentNo can't be null");
@@ -95,6 +96,8 @@ public class LoanServiceImpl implements LoanService {
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.repay(installmentNo);
         loanOrderRepository.save(order);
+
+        return null;
     }
 
     @Override

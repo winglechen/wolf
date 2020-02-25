@@ -1,7 +1,11 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.base.response;
 
 import lombok.Data;
+import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Response;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy.base.response
@@ -11,4 +15,8 @@ import study.daydayup.wolf.framework.layer.api.Response;
  **/
 @Data
 public class PayResponse implements Response {
+    @NonNull
+    private String tradeNo;
+    private BigDecimal amount;
+    private Map<String, Object> payArgs;
 }

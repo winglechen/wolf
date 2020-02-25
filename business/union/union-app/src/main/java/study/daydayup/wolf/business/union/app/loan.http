@@ -12,7 +12,6 @@ Content-Type: application/json
 }
 
 ###
-###
 POST http://localhost:8100/loan/confirm
 Accept: */*
 Cache-Control: no-cache
@@ -20,6 +19,28 @@ Content-Type: application/json
 
 {
   "goodsId" : 1
+}
+
+###
+PUT http://localhost:8100/loan/repay
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo" : "20200117224124000119344377121279",
+  "installmentNo": 1
+}
+
+###
+PUT http://localhost:8100/loan/repay/installment
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo" : "20200117224124000119344377121279",
+  "installmentNo": 1
 }
 
 ###

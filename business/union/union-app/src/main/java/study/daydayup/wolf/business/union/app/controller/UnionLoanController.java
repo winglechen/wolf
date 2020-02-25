@@ -12,7 +12,9 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.loan.RepayRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
+import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -32,6 +34,8 @@ import java.util.List;
 public class UnionLoanController extends BaseUnionController {
     @Reference
     private BuyService buyService;
+    @Reference
+    private LoanService loanService;
     @Reference
     private ContractManageService contractService;
     @Reference
@@ -88,6 +92,7 @@ public class UnionLoanController extends BaseUnionController {
     @GetMapping("/loan/living")
     public Result<Contract> livingContract() {
         Long buyerId = session.get("accountId", Long.class);
+        //TODO: ADD orgId
         return buyerContractService.findLatest(buyerId);
     }
 
@@ -102,14 +107,42 @@ public class UnionLoanController extends BaseUnionController {
         return buyerContractService.findAll(buyerId, pageRequest);
     }
 
-    @PostMapping("/loan/repay")
-    public Result<Object> repay() {
+    @PutMapping("/loan/repay")
+    public Result<Object> repay(@Validated @RequestBody RepayRequest request) {
+        String tradeNo = request.getTradeNo();
+        Integer installmentNo = request.getInstallmentNo();
+        TradeId tradeId = initTradeId(tradeNo);
+
+        loanService.repay(tradeId, installmentNo);
+
         return null;
     }
 
-    @PostMapping("/loan/repay/delay")
+    @PutMapping("/loan/repay/installment")
+    public Result<Object> repayInstallment(@Validated @RequestBody RepayRequest request) {
+        if (null == request.getInstallmentNo()) {
+            throw new IllegalArgumentException("InstallmentNo can't be null");
+        }
+        return repay(request);
+    }
+
+    @PutMapping("/loan/repay/delay")
     public Result<Object> delayRepay() {
         return null;
+    }
+
+    private TradeId initTradeId(String tradeNo) {
+        if (tradeNo == null) {
+            throw new IllegalArgumentException("tradeNo can't be null");
+        }
+
+        TradeId tradeId = new TradeId();
+        tradeId.setTradeNo(tradeNo);
+
+        Long orgId = session.get("orgId", Long.class);
+        tradeId.setSellerId(orgId);
+
+        return tradeId;
     }
 
     private BuyRequest initBuyRequest(LoanRequest loanRequest) {
