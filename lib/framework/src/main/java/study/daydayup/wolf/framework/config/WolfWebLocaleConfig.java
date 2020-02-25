@@ -19,7 +19,7 @@ import java.util.Locale;
  **/
 @Configuration
 @ConditionalOnWebApplication
-public class WolfLocaleConfig {
+public class WolfWebLocaleConfig {
 
     @Bean
     public LocaleResolver localeResolver() {
