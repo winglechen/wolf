@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailyKoiDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="pv" jdbcType="INTEGER" property="pv" />
+    <result column="uv" jdbcType="INTEGER" property="uv" />
+    <result column="register_count" jdbcType="INTEGER" property="registerCount" />
+    <result column="basic_info_count" jdbcType="INTEGER" property="basicInfoCount" />
+    <result column="liveness_count" jdbcType="INTEGER" property="livenessCount" />
+    <result column="bankcard_count" jdbcType="INTEGER" property="bankcardCount" />
+    <result column="aadhaar_count" jdbcType="INTEGER" property="aadhaarCount" />
+    <result column="pan_card_count" jdbcType="INTEGER" property="panCardCount" />
+    <result column="passport_count" jdbcType="INTEGER" property="passportCount" />
+    <result column="driving_license_count" jdbcType="INTEGER" property="drivingLicenseCount" />
+    <result column="voter_count" jdbcType="INTEGER" property="voterCount" />
+    <result column="kyc_count" jdbcType="INTEGER" property="kycCount" />
+    <result column="credit_promote_count" jdbcType="INTEGER" property="creditPromoteCount" />
+    <result column="auth_success_count" jdbcType="INTEGER" property="authSuccessCount" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, `date`, pv, uv, register_count, basic_info_count, liveness_count, bankcard_count, 
+    aadhaar_count, pan_card_count, passport_count, driving_license_count, voter_count, 
+    kyc_count, credit_promote_count, auth_success_count, delete_flag, created_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from daily_koi
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from daily_koi
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
+    insert into daily_koi (id, org_id, `date`, pv, 
+      uv, register_count, basic_info_count, 
+      liveness_count, bankcard_count, aadhaar_count, 
+      pan_card_count, passport_count, driving_license_count, 
+      voter_count, kyc_count, credit_promote_count, 
+      auth_success_count, delete_flag, created_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{pv,jdbcType=INTEGER}, 
+      #{uv,jdbcType=INTEGER}, #{registerCount,jdbcType=INTEGER}, #{basicInfoCount,jdbcType=INTEGER}, 
+      #{livenessCount,jdbcType=INTEGER}, #{bankcardCount,jdbcType=INTEGER}, #{aadhaarCount,jdbcType=INTEGER}, 
+      #{panCardCount,jdbcType=INTEGER}, #{passportCount,jdbcType=INTEGER}, #{drivingLicenseCount,jdbcType=INTEGER}, 
+      #{voterCount,jdbcType=INTEGER}, #{kycCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, 
+      #{authSuccessCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
+    insert into daily_koi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="pv != null">
+        pv,
+      </if>
+      <if test="uv != null">
+        uv,
+      </if>
+      <if test="registerCount != null">
+        register_count,
+      </if>
+      <if test="basicInfoCount != null">
+        basic_info_count,
+      </if>
+      <if test="livenessCount != null">
+        liveness_count,
+      </if>
+      <if test="bankcardCount != null">
+        bankcard_count,
+      </if>
+      <if test="aadhaarCount != null">
+        aadhaar_count,
+      </if>
+      <if test="panCardCount != null">
+        pan_card_count,
+      </if>
+      <if test="passportCount != null">
+        passport_count,
+      </if>
+      <if test="drivingLicenseCount != null">
+        driving_license_count,
+      </if>
+      <if test="voterCount != null">
+        voter_count,
+      </if>
+      <if test="kycCount != null">
+        kyc_count,
+      </if>
+      <if test="creditPromoteCount != null">
+        credit_promote_count,
+      </if>
+      <if test="authSuccessCount != null">
+        auth_success_count,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="pv != null">
+        #{pv,jdbcType=INTEGER},
+      </if>
+      <if test="uv != null">
+        #{uv,jdbcType=INTEGER},
+      </if>
+      <if test="registerCount != null">
+        #{registerCount,jdbcType=INTEGER},
+      </if>
+      <if test="basicInfoCount != null">
+        #{basicInfoCount,jdbcType=INTEGER},
+      </if>
+      <if test="livenessCount != null">
+        #{livenessCount,jdbcType=INTEGER},
+      </if>
+      <if test="bankcardCount != null">
+        #{bankcardCount,jdbcType=INTEGER},
+      </if>
+      <if test="aadhaarCount != null">
+        #{aadhaarCount,jdbcType=INTEGER},
+      </if>
+      <if test="panCardCount != null">
+        #{panCardCount,jdbcType=INTEGER},
+      </if>
+      <if test="passportCount != null">
+        #{passportCount,jdbcType=INTEGER},
+      </if>
+      <if test="drivingLicenseCount != null">
+        #{drivingLicenseCount,jdbcType=INTEGER},
+      </if>
+      <if test="voterCount != null">
+        #{voterCount,jdbcType=INTEGER},
+      </if>
+      <if test="kycCount != null">
+        #{kycCount,jdbcType=INTEGER},
+      </if>
+      <if test="creditPromoteCount != null">
+        #{creditPromoteCount,jdbcType=INTEGER},
+      </if>
+      <if test="authSuccessCount != null">
+        #{authSuccessCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
+    update daily_koi
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="pv != null">
+        pv = #{pv,jdbcType=INTEGER},
+      </if>
+      <if test="uv != null">
+        uv = #{uv,jdbcType=INTEGER},
+      </if>
+      <if test="registerCount != null">
+        register_count = #{registerCount,jdbcType=INTEGER},
+      </if>
+      <if test="basicInfoCount != null">
+        basic_info_count = #{basicInfoCount,jdbcType=INTEGER},
+      </if>
+      <if test="livenessCount != null">
+        liveness_count = #{livenessCount,jdbcType=INTEGER},
+      </if>
+      <if test="bankcardCount != null">
+        bankcard_count = #{bankcardCount,jdbcType=INTEGER},
+      </if>
+      <if test="aadhaarCount != null">
+        aadhaar_count = #{aadhaarCount,jdbcType=INTEGER},
+      </if>
+      <if test="panCardCount != null">
+        pan_card_count = #{panCardCount,jdbcType=INTEGER},
+      </if>
+      <if test="passportCount != null">
+        passport_count = #{passportCount,jdbcType=INTEGER},
+      </if>
+      <if test="drivingLicenseCount != null">
+        driving_license_count = #{drivingLicenseCount,jdbcType=INTEGER},
+      </if>
+      <if test="voterCount != null">
+        voter_count = #{voterCount,jdbcType=INTEGER},
+      </if>
+      <if test="kycCount != null">
+        kyc_count = #{kycCount,jdbcType=INTEGER},
+      </if>
+      <if test="creditPromoteCount != null">
+        credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
+      </if>
+      <if test="authSuccessCount != null">
+        auth_success_count = #{authSuccessCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
+    update daily_koi
+    set org_id = #{orgId,jdbcType=BIGINT},
+      `date` = #{date,jdbcType=DATE},
+      pv = #{pv,jdbcType=INTEGER},
+      uv = #{uv,jdbcType=INTEGER},
+      register_count = #{registerCount,jdbcType=INTEGER},
+      basic_info_count = #{basicInfoCount,jdbcType=INTEGER},
+      liveness_count = #{livenessCount,jdbcType=INTEGER},
+      bankcard_count = #{bankcardCount,jdbcType=INTEGER},
+      aadhaar_count = #{aadhaarCount,jdbcType=INTEGER},
+      pan_card_count = #{panCardCount,jdbcType=INTEGER},
+      passport_count = #{passportCount,jdbcType=INTEGER},
+      driving_license_count = #{drivingLicenseCount,jdbcType=INTEGER},
+      voter_count = #{voterCount,jdbcType=INTEGER},
+      kyc_count = #{kycCount,jdbcType=INTEGER},
+      credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
+      auth_success_count = #{authSuccessCount,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
