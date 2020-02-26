@@ -3,6 +3,9 @@ package study.daydayup.wolf.business.pay.api.domain.entity;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
  * study.daydayup.wolf.business.pay.api.domain.entity
  *
@@ -11,12 +14,22 @@ import study.daydayup.wolf.framework.layer.api.Model;
  **/
 @Data
 public class Payment implements Model {
+    private String paymentNo;
+
     private Long payerId;
     private String payerName;
     private Long payeeId;
     private String payeeName;
 
     private String tradeNo;
-    private String paymentNo;
     private String outTradeNo;
+
+    private BigDecimal amount;
+    private Integer state;
+    private Integer paymentType;
+    private Integer paymentMethod;
+    private String tags;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updateAt;
 }
