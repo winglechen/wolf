@@ -21,6 +21,16 @@
     <properties>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.pay</groupId>
+                <artifactId>pay-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>study.daydayup.wolf.boot</groupId>

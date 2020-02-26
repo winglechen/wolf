@@ -22,6 +22,9 @@ CREATE TABLE IF NOT EXISTS `payment`
 
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
 
+    `version`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`            DATETIME            ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     INDEX `udx_trade_no` (`trade_no`, `state`) COMMENT '覆盖索引：检查重复支付问题',
@@ -39,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `trade_merge`
     `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0.00,
 
+    `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `udx_pay` ( `payment_no`, `trade_no`)
@@ -64,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `payment_log`
     `data`              TEXT,
     `tags`              VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
 
+    `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付日志';
