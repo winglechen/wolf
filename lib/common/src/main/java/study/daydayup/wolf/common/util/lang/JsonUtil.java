@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.util.lang;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import study.daydayup.wolf.common.util.collection.ArrayUtil;
@@ -12,6 +13,14 @@ import study.daydayup.wolf.common.util.collection.ArrayUtil;
  **/
 public class JsonUtil {
     private static final String KEY_SEPARATOR = ".";
+
+    public static JSONObject parse(@NonNull String str) {
+        return JSON.parseObject(str);
+    }
+
+    public static <T> T parse(@NonNull String str, Class<T> clazz) {
+        return JSON.parseObject(str, clazz);
+    }
 
     public static JSONObject getJSONObject(@NonNull JSONObject obj, @NonNull String keyString) {
         String[] keys = StringUtil.split(keyString, KEY_SEPARATOR);
