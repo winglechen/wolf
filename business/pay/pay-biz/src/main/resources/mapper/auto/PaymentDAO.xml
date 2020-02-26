@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="payment_no" jdbcType="VARCHAR" property="paymentNo" />
+    <result column="payer_id" jdbcType="BIGINT" property="payerId" />
+    <result column="payer_name" jdbcType="VARCHAR" property="payerName" />
+    <result column="payee_id" jdbcType="BIGINT" property="payeeId" />
+    <result column="payee_name" jdbcType="VARCHAR" property="payeeName" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="payment_type" jdbcType="TINYINT" property="paymentType" />
+    <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, `state`, payment_type, 
+    payment_method, trade_no, out_trade_no, tags, version, delete_flag, last_editor, 
+    created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+    insert into payment (id, payment_no, payer_id, 
+      payer_name, payee_id, payee_name, 
+      amount, `state`, payment_type, 
+      payment_method, trade_no, out_trade_no, 
+      tags, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{paymentNo,jdbcType=VARCHAR}, #{payerId,jdbcType=BIGINT}, 
+      #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT}, #{paymentType,jdbcType=TINYINT}, 
+      #{paymentMethod,jdbcType=TINYINT}, #{tradeNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paymentNo != null">
+        payment_no,
+      </if>
+      <if test="payerId != null">
+        payer_id,
+      </if>
+      <if test="payerName != null">
+        payer_name,
+      </if>
+      <if test="payeeId != null">
+        payee_id,
+      </if>
+      <if test="payeeName != null">
+        payee_name,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="paymentType != null">
+        payment_type,
+      </if>
+      <if test="paymentMethod != null">
+        payment_method,
+      </if>
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="paymentNo != null">
+        #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null">
+        #{payerId,jdbcType=BIGINT},
+      </if>
+      <if test="payerName != null">
+        #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeId != null">
+        #{payeeId,jdbcType=BIGINT},
+      </if>
+      <if test="payeeName != null">
+        #{payeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="paymentType != null">
+        #{paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentMethod != null">
+        #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+    update payment
+    <set>
+      <if test="paymentNo != null">
+        payment_no = #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null">
+        payer_id = #{payerId,jdbcType=BIGINT},
+      </if>
+      <if test="payerName != null">
+        payer_name = #{payerName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeId != null">
+        payee_id = #{payeeId,jdbcType=BIGINT},
+      </if>
+      <if test="payeeName != null">
+        payee_name = #{payeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="paymentType != null">
+        payment_type = #{paymentType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentMethod != null">
+        payment_method = #{paymentMethod,jdbcType=TINYINT},
+      </if>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+    update payment
+    set payment_no = #{paymentNo,jdbcType=VARCHAR},
+      payer_id = #{payerId,jdbcType=BIGINT},
+      payer_name = #{payerName,jdbcType=VARCHAR},
+      payee_id = #{payeeId,jdbcType=BIGINT},
+      payee_name = #{payeeName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      `state` = #{state,jdbcType=TINYINT},
+      payment_type = #{paymentType,jdbcType=TINYINT},
+      payment_method = #{paymentMethod,jdbcType=TINYINT},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
