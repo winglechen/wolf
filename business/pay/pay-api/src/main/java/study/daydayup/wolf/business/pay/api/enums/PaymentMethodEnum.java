@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.domain.enums;
+package study.daydayup.wolf.business.pay.api.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
@@ -10,18 +10,18 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum PaymentTypeEnum implements CodeBasedEnum {
+public enum PaymentMethodEnum implements CodeBasedEnum {
 
-    C_TO_B(1, "私对公"),
-    B_TO_B(2, "私对私"),
-    B_TO_C(3, "公对私"),
-    B_TO_BO(4, "公对公"),
+    RAZORPAY(101, "razorpay"),
+
+    WECHAT_PAY(2, "wechat pay"),
+    ALIPAY(1, "alipay")
     ;
 
     private int code;
     private String desc;
 
-    PaymentTypeEnum(int code, String desc) {
+    PaymentMethodEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
