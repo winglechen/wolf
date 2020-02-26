@@ -49,16 +49,16 @@ DROP TABLE IF EXISTS `payment_log`;
 CREATE TABLE IF NOT EXISTS `payment_log`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-
-    `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
-    `log_type`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+    `payment_no`        VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
     `payer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payee_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
 
-    `payment_no`        VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `trade_no`          VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`      VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
+
+    `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+    `log_type`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
 
     `data`              TEXT,
