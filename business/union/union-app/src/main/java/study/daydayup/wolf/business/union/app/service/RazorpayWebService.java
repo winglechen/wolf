@@ -2,8 +2,8 @@ package study.daydayup.wolf.business.union.app.service;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.dto.PaymentCreateRequest;
-import study.daydayup.wolf.business.pay.api.dto.PaymentCreateResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.framework.rpc.Result;

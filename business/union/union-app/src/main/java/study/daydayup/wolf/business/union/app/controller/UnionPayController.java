@@ -4,8 +4,8 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.pay.api.dto.PayRequest;
-import study.daydayup.wolf.business.pay.api.dto.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.PayRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.PayResponse;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
 import study.daydayup.wolf.framework.rpc.Result;
 
