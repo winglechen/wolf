@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
-import study.daydayup.wolf.framework.util.BeanUtil;
+import study.daydayup.wolf.framework.util.ContextUtil;
 
 /**
  * study.daydayup.wolf.business.account.deploy.web
@@ -25,6 +25,6 @@ public class DubboUnionApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(DubboUnionApplication.class, args);
 
-        BeanUtil.init(context);
+        ContextUtil.init(context);
     }
 }

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.union.task.controller;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
-import study.daydayup.wolf.framework.util.BeanUtil;
+import study.daydayup.wolf.framework.util.ContextUtil;
 
 /**
  * study.daydayup.wolf.business.union.task.controller
@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.util.BeanUtil;
 public class Demo {
     public void show() {
 
-        StringRedisTemplate redis = BeanUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
+        StringRedisTemplate redis = ContextUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
         redis.opsForValue().set("abc", "123");
         Object o = redis.opsForValue().get("abc");
 

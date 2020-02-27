@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import study.daydayup.wolf.framework.util.BeanUtil;
+import study.daydayup.wolf.framework.util.ContextUtil;
 
 /**
  * study.daydayup.wolf.business.union.task
@@ -18,6 +18,6 @@ public class UnionTaskApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(UnionTaskApplication.class, args);
 
-        BeanUtil.init(applicationContext);
+        ContextUtil.init(applicationContext);
     }
 }

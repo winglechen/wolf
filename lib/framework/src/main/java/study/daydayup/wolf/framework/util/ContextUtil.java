@@ -9,7 +9,7 @@ import study.daydayup.wolf.framework.exception.WolfException;
  * @author Wingle
  * @since 2020/2/18 10:58 下午
  **/
-public class BeanUtil {
+public class ContextUtil {
     private static boolean isInit = false;
     private static ConfigurableApplicationContext applicationContext;
 
@@ -45,4 +45,5 @@ public class BeanUtil {
     public static ConfigurableApplicationContext getContext() {
         return applicationContext;
     }
+
 }
