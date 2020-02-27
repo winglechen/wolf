@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.api.DTO;
  * @since 2020/2/26 11:12 下午
  **/
 @Data
-public class RazorPayReturn implements DTO {
+public class RazorPayResponse implements DTO {
     private String paymentNo;
     private String razorpayOrderId;
     private String razorpayPaymentId;

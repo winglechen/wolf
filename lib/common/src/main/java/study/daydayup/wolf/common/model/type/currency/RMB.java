@@ -1,7 +1,6 @@
 package study.daydayup.wolf.common.model.type.currency;
 
 import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
-import study.daydayup.wolf.common.model.contract.Currency;
 import study.daydayup.wolf.common.model.type.string.Decimal;
 
 import java.math.BigDecimal;

@@ -1,4 +1,6 @@
-package study.daydayup.wolf.common.model.contract;
+package study.daydayup.wolf.common.model.type.currency;
+
+import study.daydayup.wolf.common.model.contract.DataType;
 
 /**
  * study.daydayup.wolf.model.type.money
