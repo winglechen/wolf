@@ -1,8 +1,10 @@
 package study.daydayup.wolf.business.pay.api.dto;
 
 import lombok.Data;
+import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 /**
@@ -15,13 +17,18 @@ import java.math.BigDecimal;
 public class PaymentCreateRequest implements Request {
     private Integer paymentMethod;
 
+    @NonNull
     private String tradeNo;
+    @NonNull @Min(1)
     private Long payerId;
     private String payerName;
+    @NonNull @Min(1)
     private Long payeeId;
     private String payeeName;
 
+    @NonNull
     private BigDecimal amount;
+    @NonNull
     private Integer currency;
 
     private Long goodsId;

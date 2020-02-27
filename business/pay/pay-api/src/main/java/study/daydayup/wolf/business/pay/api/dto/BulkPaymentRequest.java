@@ -10,5 +10,5 @@ import study.daydayup.wolf.framework.layer.api.Request;
  * @since 2020/2/27 3:53 下午
  **/
 @Data
-public class BatchPaymentRequest implements Request {
+public class BulkPaymentRequest implements Request {
 }
