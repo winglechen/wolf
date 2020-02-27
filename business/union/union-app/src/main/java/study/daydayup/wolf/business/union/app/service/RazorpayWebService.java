@@ -18,7 +18,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 public class RazorpayWebService {
     @Reference
     private LoanService loanService;
-    @Reference
+//    @Reference
     private RazorpayService razorpayService;
 
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {

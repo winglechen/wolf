@@ -17,7 +17,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @RestController
 public class UnionPayController {
-    @Reference
+//    @Reference
     private RazorpayService razorpayService;
 
 
