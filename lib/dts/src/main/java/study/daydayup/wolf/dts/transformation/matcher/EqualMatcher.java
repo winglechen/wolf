@@ -1,7 +1,7 @@
 package study.daydayup.wolf.dts.transformation.matcher;
 
 import study.daydayup.wolf.common.io.db.Row;
-import study.daydayup.wolf.common.util.lang.ObjectUtil;
+import study.daydayup.wolf.common.util.lang.BeanUtil;
 
 /**
  * study.daydayup.wolf.dts.transformation.matcher
@@ -13,6 +13,6 @@ public class EqualMatcher extends AbstractMatcher implements Matcher {
     @Override
     public boolean match(Row row) {
         Object col = row.get(column);
-        return ObjectUtil.equals(col, value);
+        return BeanUtil.equals(col, value);
     }
 }

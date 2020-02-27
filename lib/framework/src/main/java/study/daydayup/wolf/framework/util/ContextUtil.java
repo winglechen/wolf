@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.util;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.ConfigurableApplicationContext;
 import study.daydayup.wolf.framework.exception.WolfException;
 
