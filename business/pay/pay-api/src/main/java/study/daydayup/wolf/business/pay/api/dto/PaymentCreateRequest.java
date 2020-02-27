@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.pay.api.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Request;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
  * @since 2020/2/27 3:53 下午
  **/
 @Data
+@Builder
 public class PaymentCreateRequest implements Request {
     private Integer paymentMethod;
 

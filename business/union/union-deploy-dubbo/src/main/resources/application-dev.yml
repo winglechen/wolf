@@ -108,9 +108,9 @@ dubbo:
 
 pay:
   razorpay:
-    key_id: "rzp_test_AVfB2VIxmnf4v6"
-    key_secret: "pJ8TpvIge88kfBBrAPurUP7p"
-    webhook_secret: ""
+    keyId: "rzp_test_AVfB2VIxmnf4v6"
+    keySecret: "pJ8TpvIge88kfBBrAPurUP7p"
+    webHookSecret: ""
 
 
 logging:
