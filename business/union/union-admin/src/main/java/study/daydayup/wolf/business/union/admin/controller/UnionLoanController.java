@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToA
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.InstallmentStateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
@@ -69,6 +70,18 @@ public class UnionLoanController implements Controller {
                 .pageSize(10)
                 .build();
         return sellerContractService.findAll(sellerId, pageRequest);
+    }
+
+    @GetMapping("/loan/contract/buyer")
+    public Result<Page<Contract>> findByBuyer(@RequestParam("buyerId") Long buyerId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        BuyerRequest request = initBuyerRequest(buyerId);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerContractService.findByBuyerId(request, pageRequest);
     }
 
     @PutMapping("/loan/contract/approve/{tradeNo}")
@@ -192,6 +205,17 @@ public class UnionLoanController implements Controller {
         request.setOption(initContractOption());
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
+
+        return request;
+    }
+
+    private BuyerRequest initBuyerRequest(Long buyerId) {
+        BuyerRequest request = new BuyerRequest();
+
+        request.setOption(initContractOption());
+        Long orgId = session.get("orgId", Long.class);
+        request.setSellerId(orgId);
+        request.setBuyerId(buyerId);
 
         return request;
     }

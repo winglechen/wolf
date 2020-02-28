@@ -13,9 +13,12 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmRespo
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.RepayRequest;
+import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
+import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -40,6 +43,8 @@ public class UnionLoanController extends BaseUnionController {
     private ContractManageService contractService;
     @Reference
     private BuyerContractService buyerContractService;
+    @Reference
+    private SellerContractService sellerContractService;
 
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
@@ -98,13 +103,13 @@ public class UnionLoanController extends BaseUnionController {
 
     @GetMapping("/loan")
     public Result<Page<Contract>> findByBuyer(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
-        Long buyerId = session.get("accountId", Long.class);
+        BuyerRequest request = initBuyerRequest();
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
                 .pageSize(10)
                 .build();
 
-        return buyerContractService.findAll(buyerId, pageRequest);
+        return sellerContractService.findByBuyerId(request, pageRequest);
     }
 
     @PutMapping("/loan/repay")
@@ -143,6 +148,25 @@ public class UnionLoanController extends BaseUnionController {
         tradeId.setSellerId(orgId);
 
         return tradeId;
+    }
+
+    private BuyerRequest initBuyerRequest() {
+        BuyerRequest request = new BuyerRequest();
+
+        request.setOption(initContractOption());
+        Long orgId = session.get("orgId", Long.class);
+        Long buyerId = session.get("accountId", Long.class);
+        request.setSellerId(orgId);
+        request.setBuyerId(buyerId);
+
+        return request;
+    }
+
+    private ContractOption initContractOption() {
+        return ContractOption.builder()
+                .withLoanTerm(true)
+                .withInstallmentTerm(true)
+                .build();
     }
 
     private BuyRequest initBuyRequest(LoanRequest loanRequest) {

@@ -134,6 +134,7 @@
         <include refid="Base_Column_List"/>
         from contract
         where seller_id=#{query.sellerId,jdbcType=BIGINT}
+        and buyer_id=#{query.buyerId,jdbcType=BIGINT}
         <if test="query.tradeType != null">
             and trade_type = #{query.tradeType,jdbcType=TINYINT}
         </if>

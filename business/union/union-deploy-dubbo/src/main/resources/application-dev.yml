@@ -103,14 +103,12 @@ dubbo:
     qos-enable: false
   cloud:
     subscribed-services: ""
-  provider:
-    filter:
 
 pay:
   razorpay:
     keyId: "rzp_test_AVfB2VIxmnf4v6"
     keySecret: "pJ8TpvIge88kfBBrAPurUP7p"
-    webHookSecret: ""
+    webHookSecret: "xxx"
 
 
 logging:

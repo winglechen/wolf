@@ -8,6 +8,11 @@ GET http://localhost:8200/loan/contract?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
+### 买家固定店铺合同列表
+GET http://localhost:8200/loan/contract/buyer?buyerId=11&pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
 ### 商家待审核列表
 GET http://localhost:8200/loan/contract/waitToApprove?pageNum=2
 Accept: */*

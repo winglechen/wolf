@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/2/27 7:37 下午
  **/
-@RpcService(protocol = "dubbo")
+//@RpcService(protocol = "dubbo")
 public class RazorpayServiceImpl implements RazorpayService {
     @Resource
     private RazorConfig config;
