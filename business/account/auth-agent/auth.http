@@ -98,3 +98,11 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:9000/auth/lang?lang=zh-CN
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:9000/auth/lang?lang=en-US
+Accept: */*
+Cache-Control: no-cache

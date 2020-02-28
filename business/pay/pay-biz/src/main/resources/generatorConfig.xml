@@ -84,7 +84,7 @@
             <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
         </table>
 
-        <table tableName="payment_log" domainObjectName="PaymentLogDO" mapperName="PaymentLOgDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        <table tableName="payment_log" domainObjectName="PaymentLogDO" mapperName="PaymentLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="log_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="payment_method" javaType="java.lang.Integer" jdbcType="TINYINT" />

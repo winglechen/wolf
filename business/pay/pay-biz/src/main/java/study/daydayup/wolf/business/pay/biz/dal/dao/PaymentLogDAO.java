@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.pay.biz.dal.dao;
 
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentLogDO;
 
-public interface PaymentLOgDAO {
+public interface PaymentLogDAO {
     int deleteById(Long id);
 
     int insert(PaymentLogDO record);
