@@ -14,7 +14,6 @@ import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
-import study.daydayup.wolf.framework.layer.context.ObjectContext;
 
 import javax.annotation.Resource;
 

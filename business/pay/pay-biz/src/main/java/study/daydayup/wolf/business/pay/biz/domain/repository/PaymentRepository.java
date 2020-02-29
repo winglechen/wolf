@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.entity.Payment;
 import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.pay.biz.domain.repository
@@ -24,6 +26,16 @@ public class PaymentRepository extends AbstractRepository implements Repository 
     private RpcContext context;
     @Resource
     private PaymentDAO dao;
+
+    public Payment find(@NonNull String paymentNo) {
+        PaymentDO paymentDO = dao.selectByPaymentNo(paymentNo);
+        return toModel(paymentDO);
+    }
+
+    public List<Payment> findByTradeNo(@NonNull String tradeNo, Integer state) {
+        List<PaymentDO> paymentDOS = dao.selectByTradeNo(tradeNo, state);
+        return CollectionUtil.to(paymentDOS, this::toModel);
+    }
 
     public int add(@NonNull Payment payment) {
         PaymentDO paymentDO = toDo(payment);
@@ -63,6 +75,17 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         BeanUtils.copyProperties(payment, paymentDO);
 
         return paymentDO;
+    }
+
+    public Payment toModel(PaymentDO paymentDO) {
+        if (paymentDO == null) {
+            return null;
+        }
+
+        Payment payment = new Payment();
+        BeanUtils.copyProperties(paymentDO, payment);
+
+        return payment;
     }
 
 }
