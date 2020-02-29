@@ -195,4 +195,29 @@ public class MapUtilTest {
         assertFalse("MapUtil.remove failed", map.containsKey("b"));
         assertFalse("MapUtil.remove failed", map.containsKey("e"));
     }
+
+    @Test
+    public void contains() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
+        map.put("d", 4);
+        map.put("e", null);
+
+        String[] key1 = new String[]{"a", "b", "e"};
+        List<String> keyList1 = Arrays.asList(key1);
+        assertFalse("MapUtil.contains failed", MapUtil.contains(map, key1));
+        assertFalse("MapUtil.contains failed", MapUtil.contains(map, keyList1));
+
+        String[] key2 = new String[]{"a", "b"};
+        List<String> keyList2 = Arrays.asList(key2);
+        assertTrue("MapUtil.contains failed", MapUtil.contains(map, key2));
+        assertTrue("MapUtil.contains failed", MapUtil.contains(map, keyList2));
+
+
+        assertTrue("MapUtil.contains failed", MapUtil.contains(map, "a", "b", "c"));
+        assertFalse("MapUtil.contains failed", MapUtil.contains(map, "a", "b", "f"));
+        assertFalse("MapUtil.contains failed", MapUtil.contains(map, "n", "h", "f"));
+    }
 }

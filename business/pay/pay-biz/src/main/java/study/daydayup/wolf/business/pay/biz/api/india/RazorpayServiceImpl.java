@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.api.india;
 
 import lombok.NonNull;
-import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
 import study.daydayup.wolf.business.pay.api.dto.base.PayRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.PayResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateRequest;
@@ -9,6 +8,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorCreator;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorPayer;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorSubscriber;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -23,9 +24,11 @@ import javax.annotation.Resource;
 @RpcService(protocol = "dubbo")
 public class RazorpayServiceImpl implements RazorpayService {
     @Resource
-    private RazorConfig config;
-    @Resource
     private RazorCreator creator;
+    @Resource
+    private RazorPayer payer;
+    @Resource
+    private RazorSubscriber subscriber;
 
     @Override
     public Result<PaymentCreateResponse> create(@NonNull PaymentCreateRequest request) {
@@ -36,12 +39,16 @@ public class RazorpayServiceImpl implements RazorpayService {
     }
 
     @Override
-    public Result<PayResponse> pay(PayRequest request) {
-        return null;
+    public Result<PayResponse> pay(@NonNull PayRequest request) {
+        request.setPaymentMethod(PaymentMethodEnum.RAZORPAY.getCode());
+
+        PayResponse response = payer.pay(request);
+        return Result.ok(response);
     }
 
     @Override
-    public Result<String> subscribe(String data) {
-        return null;
+    public Result<String> subscribe(@NonNull String data) {
+        String response = subscriber.subscribe(data);
+        return Result.ok(response);
     }
 }

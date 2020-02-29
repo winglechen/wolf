@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.util.collection;
 
 import com.google.common.collect.Maps;
+import lombok.NonNull;
 
 import java.util.*;
 
@@ -110,6 +111,25 @@ public class MapUtil {
     @SafeVarargs
     public static <K, V> void remove(Map<K, V> map, K... keys) {
         remove(map, Arrays.asList(keys));
+    }
+
+    public static <K, V> boolean contains(@NonNull Map<K, V>map, Collection<K> keys) {
+        if (CollectionUtil.isEmpty(keys)) {
+            return false;
+        }
+
+        for (K k : keys) {
+            if (null == map.get(k)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @SafeVarargs
+    public static <K, V> boolean contains(@NonNull Map<K, V>map, K... keys) {
+        return contains(map, Arrays.asList(keys));
     }
 
     public static <K, V> Map<K, V> difference(Map<K, V> left, Map<K, V> right) {
