@@ -25,6 +25,7 @@ public class Payment implements Model {
     private String outTradeNo;
 
     private BigDecimal amount;
+    private Integer currency;
     private Integer state;
     private Integer paymentType;
     private Integer paymentMethod;

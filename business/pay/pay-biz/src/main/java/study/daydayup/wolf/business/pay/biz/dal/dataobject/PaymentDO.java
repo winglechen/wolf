@@ -21,6 +21,8 @@ public class PaymentDO implements Serializable {
 
     private BigDecimal amount;
 
+    private Integer currency;
+
     private Integer state;
 
     private Integer paymentType;
@@ -60,6 +62,7 @@ public class PaymentDO implements Serializable {
         sb.append(", payeeId=").append(payeeId);
         sb.append(", payeeName=").append(payeeName);
         sb.append(", amount=").append(amount);
+        sb.append(", currency=").append(currency);
         sb.append(", state=").append(state);
         sb.append(", paymentType=").append(paymentType);
         sb.append(", paymentMethod=").append(paymentMethod);
@@ -95,6 +98,7 @@ public class PaymentDO implements Serializable {
             && (this.getPayeeId() == null ? other.getPayeeId() == null : this.getPayeeId().equals(other.getPayeeId()))
             && (this.getPayeeName() == null ? other.getPayeeName() == null : this.getPayeeName().equals(other.getPayeeName()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getPaymentType() == null ? other.getPaymentType() == null : this.getPaymentType().equals(other.getPaymentType()))
             && (this.getPaymentMethod() == null ? other.getPaymentMethod() == null : this.getPaymentMethod().equals(other.getPaymentMethod()))
@@ -120,6 +124,7 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getPayeeId() == null) ? 0 : getPayeeId().hashCode());
         result = prime * result + ((getPayeeName() == null) ? 0 : getPayeeName().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getPaymentType() == null) ? 0 : getPaymentType().hashCode());
         result = prime * result + ((getPaymentMethod() == null) ? 0 : getPaymentMethod().hashCode());

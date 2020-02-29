@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `payee_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0,
+    `currency`              INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `state`                 TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `payment_type`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `payment_method`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,

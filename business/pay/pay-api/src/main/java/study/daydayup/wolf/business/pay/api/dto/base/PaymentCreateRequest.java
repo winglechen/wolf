@@ -21,6 +21,7 @@ public class PaymentCreateRequest implements Request {
 
     @NonNull
     private String tradeNo;
+
     @NonNull @Min(1)
     private Long payerId;
     private String payerName;

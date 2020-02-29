@@ -9,6 +9,7 @@
     <result column="payee_id" jdbcType="BIGINT" property="payeeId" />
     <result column="payee_name" jdbcType="VARCHAR" property="payeeName" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="payment_type" jdbcType="TINYINT" property="paymentType" />
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
@@ -23,9 +24,9 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, `state`, payment_type, 
-    payment_method, trade_no, out_trade_no, attachment, tags, version, delete_flag, last_editor, 
-    created_at, updated_at
+    id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, currency, `state`, 
+    payment_type, payment_method, trade_no, out_trade_no, attachment, tags, version, 
+    delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -40,18 +41,18 @@
   <insert id="insert" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment (id, payment_no, payer_id, 
       payer_name, payee_id, payee_name, 
-      amount, `state`, payment_type, 
-      payment_method, trade_no, out_trade_no, 
-      attachment, tags, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      amount, currency, `state`, 
+      payment_type, payment_method, trade_no, 
+      out_trade_no, attachment, tags, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{id,jdbcType=BIGINT}, #{paymentNo,jdbcType=VARCHAR}, #{payerId,jdbcType=BIGINT}, 
       #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
-      #{amount,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT}, #{paymentType,jdbcType=TINYINT}, 
-      #{paymentMethod,jdbcType=TINYINT}, #{tradeNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
-      #{attachment,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
+      #{paymentType,jdbcType=TINYINT}, #{paymentMethod,jdbcType=TINYINT}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{outTradeNo,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment
@@ -76,6 +77,9 @@
       </if>
       <if test="amount != null">
         amount,
+      </if>
+      <if test="currency != null">
+        currency,
       </if>
       <if test="state != null">
         `state`,
@@ -136,6 +140,9 @@
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
       <if test="state != null">
         #{state,jdbcType=TINYINT},
       </if>
@@ -195,6 +202,9 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
       <if test="state != null">
         `state` = #{state,jdbcType=TINYINT},
       </if>
@@ -242,6 +252,7 @@
       payee_id = #{payeeId,jdbcType=BIGINT},
       payee_name = #{payeeName,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=INTEGER},
       `state` = #{state,jdbcType=TINYINT},
       payment_type = #{paymentType,jdbcType=TINYINT},
       payment_method = #{paymentMethod,jdbcType=TINYINT},
