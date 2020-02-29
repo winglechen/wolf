@@ -31,6 +31,8 @@ public class PaymentDO implements Serializable {
 
     private String outTradeNo;
 
+    private String attachment;
+
     private String tags;
 
     private Integer version;
@@ -63,6 +65,7 @@ public class PaymentDO implements Serializable {
         sb.append(", paymentMethod=").append(paymentMethod);
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", outTradeNo=").append(outTradeNo);
+        sb.append(", attachment=").append(attachment);
         sb.append(", tags=").append(tags);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
@@ -97,6 +100,7 @@ public class PaymentDO implements Serializable {
             && (this.getPaymentMethod() == null ? other.getPaymentMethod() == null : this.getPaymentMethod().equals(other.getPaymentMethod()))
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getOutTradeNo() == null ? other.getOutTradeNo() == null : this.getOutTradeNo().equals(other.getOutTradeNo()))
+            && (this.getAttachment() == null ? other.getAttachment() == null : this.getAttachment().equals(other.getAttachment()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
@@ -121,6 +125,7 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getPaymentMethod() == null) ? 0 : getPaymentMethod().hashCode());
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getOutTradeNo() == null) ? 0 : getOutTradeNo().hashCode());
+        result = prime * result + ((getAttachment() == null) ? 0 : getAttachment().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());

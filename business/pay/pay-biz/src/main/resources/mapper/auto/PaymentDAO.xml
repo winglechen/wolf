@@ -14,6 +14,7 @@
     <result column="payment_method" jdbcType="TINYINT" property="paymentMethod" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="attachment" jdbcType="VARCHAR" property="attachment" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
@@ -23,7 +24,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, `state`, payment_type, 
-    payment_method, trade_no, out_trade_no, tags, version, delete_flag, last_editor, 
+    payment_method, trade_no, out_trade_no, attachment, tags, version, delete_flag, last_editor, 
     created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -41,16 +42,16 @@
       payer_name, payee_id, payee_name, 
       amount, `state`, payment_type, 
       payment_method, trade_no, out_trade_no, 
-      tags, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      attachment, tags, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{id,jdbcType=BIGINT}, #{paymentNo,jdbcType=VARCHAR}, #{payerId,jdbcType=BIGINT}, 
       #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT}, #{paymentType,jdbcType=TINYINT}, 
       #{paymentMethod,jdbcType=TINYINT}, #{tradeNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
-      #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{attachment,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment
@@ -90,6 +91,9 @@
       </if>
       <if test="outTradeNo != null">
         out_trade_no,
+      </if>
+      <if test="attachment != null">
+        attachment,
       </if>
       <if test="tags != null">
         tags,
@@ -147,6 +151,9 @@
       <if test="outTradeNo != null">
         #{outTradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="attachment != null">
+        #{attachment,jdbcType=VARCHAR},
+      </if>
       <if test="tags != null">
         #{tags,jdbcType=VARCHAR},
       </if>
@@ -203,6 +210,9 @@
       <if test="outTradeNo != null">
         out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="attachment != null">
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
       <if test="tags != null">
         tags = #{tags,jdbcType=VARCHAR},
       </if>
@@ -237,6 +247,7 @@
       payment_method = #{paymentMethod,jdbcType=TINYINT},
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
