@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.entity.Payment;
 import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.enums.PaymentStateEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
@@ -22,8 +23,10 @@ import study.daydayup.wolf.framework.layer.context.ObjectContext;
 public abstract class AbstractPaymentCreator implements PaymentCreator {
     protected PaymentCreateRequest request;
     protected Payment payment;
-    protected PaymentLog paymentLog;
     protected ObjectContext attachment;
+    protected String apiResponse;
+
+
 
     @Override
     public PaymentCreateResponse create(@Validated PaymentCreateRequest request) {
@@ -32,7 +35,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
         validateRequest();
         createPayment();
         callPayApi();
-        logPayRequest();
+        logApiResponse();
         savePayment();
 
         return formatResponse();
@@ -60,7 +63,16 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
 
 
     @Override
-    public void logPayRequest() {
+    public void logApiResponse() {
+        PaymentLog log = PaymentLog.builder()
+                .paymentNo(payment.getPaymentNo())
+                .payeeId(payment.getPayeeId())
+                .payerId(payment.getPayerId())
+                .tradeNo(payment.getTradeNo())
+                .paymentMethod(payment.getPaymentMethod())
+                .logType(PaymentLogTypeEnum.PAY_REQUEST.getCode())
+                .data(apiResponse)
+                .build();
 
     }
 

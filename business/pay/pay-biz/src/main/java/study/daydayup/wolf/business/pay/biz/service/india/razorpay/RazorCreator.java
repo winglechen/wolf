@@ -36,6 +36,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     @Resource
     private RazorConfig config;
 
+    private Order order;
     private int amount;
 
     public void callPayApi() {
@@ -47,12 +48,17 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
 
         try {
             RazorpayClient client = new RazorpayClient(config.getKeyId(), config.getKeySecret());
-            Order order = client.Orders.create(options);
-            parseOrder(order);
+            order = client.Orders.create(options);
+            apiResponse = order.toString();
         } catch (RazorpayException e) {
             throw new InvalidPayConfigException("Razorpay init fail");
         }
 
+    }
+
+    @Override
+    public void parseApiResponse() {
+        parseOrder(order);
     }
 
     private void parseOrder(Order order) {

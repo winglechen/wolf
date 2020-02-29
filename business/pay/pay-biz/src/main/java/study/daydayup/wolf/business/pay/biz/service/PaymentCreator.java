@@ -17,8 +17,9 @@ public interface PaymentCreator {
     void createPayment();
 
     void callPayApi();
+    void logApiResponse();
 
-    void logPayRequest();
+    void parseApiResponse();
     void savePayment();
     PaymentCreateResponse formatResponse();
 }

@@ -35,7 +35,7 @@ public class PaymentDO implements Serializable {
 
     private Long goodsId;
 
-    private String goodsname;
+    private String goodsName;
 
     private String tags;
 
@@ -73,7 +73,7 @@ public class PaymentDO implements Serializable {
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", outTradeNo=").append(outTradeNo);
         sb.append(", goodsId=").append(goodsId);
-        sb.append(", goodsname=").append(goodsname);
+        sb.append(", goodsName=").append(goodsName);
         sb.append(", tags=").append(tags);
         sb.append(", attachment=").append(attachment);
         sb.append(", version=").append(version);
@@ -111,7 +111,7 @@ public class PaymentDO implements Serializable {
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getOutTradeNo() == null ? other.getOutTradeNo() == null : this.getOutTradeNo().equals(other.getOutTradeNo()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
-            && (this.getGoodsname() == null ? other.getGoodsname() == null : this.getGoodsname().equals(other.getGoodsname()))
+            && (this.getGoodsName() == null ? other.getGoodsName() == null : this.getGoodsName().equals(other.getGoodsName()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getAttachment() == null ? other.getAttachment() == null : this.getAttachment().equals(other.getAttachment()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -139,7 +139,7 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getOutTradeNo() == null) ? 0 : getOutTradeNo().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
-        result = prime * result + ((getGoodsname() == null) ? 0 : getGoodsname().hashCode());
+        result = prime * result + ((getGoodsName() == null) ? 0 : getGoodsName().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getAttachment() == null) ? 0 : getAttachment().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

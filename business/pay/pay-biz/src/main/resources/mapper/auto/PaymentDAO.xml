@@ -16,7 +16,7 @@
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
     <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
-    <result column="goodsName" jdbcType="VARCHAR" property="goodsname" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="attachment" jdbcType="VARCHAR" property="attachment" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -27,7 +27,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, currency, `state`, 
-    payment_type, payment_method, trade_no, out_trade_no, goods_id, goodsName, tags, 
+    payment_type, payment_method, trade_no, out_trade_no, goods_id, goods_name, tags, 
     attachment, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -45,7 +45,7 @@
       payer_name, payee_id, payee_name, 
       amount, currency, `state`, 
       payment_type, payment_method, trade_no, 
-      out_trade_no, goods_id, goodsName, 
+      out_trade_no, goods_id, goods_name, 
       tags, attachment, version, 
       delete_flag, last_editor, created_at, 
       updated_at)
@@ -53,7 +53,7 @@
       #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
       #{paymentType,jdbcType=TINYINT}, #{paymentMethod,jdbcType=TINYINT}, #{tradeNo,jdbcType=VARCHAR}, 
-      #{outTradeNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsname,jdbcType=VARCHAR}, 
+      #{outTradeNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
@@ -103,8 +103,8 @@
       <if test="goodsId != null">
         goods_id,
       </if>
-      <if test="goodsname != null">
-        goodsName,
+      <if test="goodsName != null">
+        goods_name,
       </if>
       <if test="tags != null">
         tags,
@@ -171,8 +171,8 @@
       <if test="goodsId != null">
         #{goodsId,jdbcType=BIGINT},
       </if>
-      <if test="goodsname != null">
-        #{goodsname,jdbcType=VARCHAR},
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="tags != null">
         #{tags,jdbcType=VARCHAR},
@@ -239,8 +239,8 @@
       <if test="goodsId != null">
         goods_id = #{goodsId,jdbcType=BIGINT},
       </if>
-      <if test="goodsname != null">
-        goodsName = #{goodsname,jdbcType=VARCHAR},
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="tags != null">
         tags = #{tags,jdbcType=VARCHAR},
@@ -281,7 +281,7 @@
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       goods_id = #{goodsId,jdbcType=BIGINT},
-      goodsName = #{goodsname,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
       attachment = #{attachment,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},

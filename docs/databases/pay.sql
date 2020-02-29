@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `out_trade_no`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
     `goods_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
-    `goodsName`             VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `goods_name`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
     `attachment`            VARCHAR(1000)        NOT NULL DEFAULT '' COMMENT '',
 
