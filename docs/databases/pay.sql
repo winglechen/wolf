@@ -4,7 +4,7 @@ USE `wolf_pay`;
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE IF NOT EXISTS `payment`
 (
-    `id`                    BIGINT(20) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `payment_no`            VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
     `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS `payment`
     `trade_no`              VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
-    `attachment`            VARCHAR(1000)        NOT NULL DEFAULT '' COMMENT '',
+    `goods_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `goodsName`             VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `attachment`            VARCHAR(1000)        NOT NULL DEFAULT '' COMMENT '',
 
     `version`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -42,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `trade_merge`
     `trade_no`              VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0.00,
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

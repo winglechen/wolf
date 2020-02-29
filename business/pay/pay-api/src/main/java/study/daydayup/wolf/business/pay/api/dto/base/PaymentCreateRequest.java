@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
@@ -29,14 +30,14 @@ public class PaymentCreateRequest implements Request {
     private Long payeeId;
     private String payeeName;
 
-    @NonNull
+    @NonNull @DecimalMin("0.01")
     private BigDecimal amount;
     @NonNull
     private Integer currency;
 
     private Long goodsId;
-    private Long goodsName;
-    private Long goodsDesc;
+    private String goodsName;
+    private String goodsDesc;
 
     private String tags;
 }

@@ -14,9 +14,10 @@ public enum PaymentStateEnum implements CodeBasedEnum {
 
     PARTIAL_REFUNDED(6, "部分退款"),
     REFUNDED(5, "已退款"),
-    PAID(2, "支付成功"),
-    FAIL(1, "支付失败"),
-    WAIT_TO_PAY(0, "待支付"),
+    PAID(4, "支付成功"),
+    FAIL(3, "支付失败"),
+    PAYING(3, "支付中"),
+    WAIT_TO_PAY(1, "待支付"),
     ;
 
     private int code;

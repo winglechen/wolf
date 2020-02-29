@@ -10,6 +10,6 @@ import study.daydayup.wolf.common.lang.exception.SystemException;
  **/
 public class InvalidPayRequestException extends SystemException {
     public InvalidPayRequestException(String msg) {
-        super(170000, "Invalid pay config: " +  msg);
+        super(170000, "Invalid pay request: " +  msg);
     }
 }

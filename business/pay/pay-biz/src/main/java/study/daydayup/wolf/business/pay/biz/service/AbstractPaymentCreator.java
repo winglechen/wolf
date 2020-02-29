@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.pay.biz.service;
 
-import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -8,6 +7,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.entity.Payment;
 import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.enums.PaymentStateEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.framework.layer.context.ObjectContext;
@@ -23,12 +23,11 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
     protected PaymentCreateRequest request;
     protected Payment payment;
     protected PaymentLog paymentLog;
-    protected ObjectContext context;
+    protected ObjectContext attachment;
 
     @Override
     public PaymentCreateResponse create(@Validated PaymentCreateRequest request) {
         this.request = request;
-        this.context = new ObjectContext();
 
         validateRequest();
         createPayment();
@@ -53,7 +52,10 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
                 .accountId(request.getPayerId())
                 .build()
                 .create();
+
         payment.setPaymentNo(paymentNo);
+        payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
+        attachment = new ObjectContext();
     }
 
 
