@@ -75,9 +75,9 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
             throw new DoublePayingException(payment.getTradeNo());
         }
 
-        if (BeanUtil.equals("attempted", (String)order.get("status"))) {
-            payment.setState(PaymentStateEnum.PAYING.getCode());
-        }
+//        if (BeanUtil.equals("attempted", (String)order.get("status"))) {
+//            payment.setState(PaymentStateEnum.PAYING.getCode());
+//        }
 
         ObjectMap map = new ObjectMap();
         map.set("order_id", order.get("id"))

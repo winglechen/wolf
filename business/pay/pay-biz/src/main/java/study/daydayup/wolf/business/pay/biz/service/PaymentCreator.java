@@ -14,7 +14,7 @@ public interface PaymentCreator {
 
 
     void validateRequest();
-    void createPayment();
+    void initPayment();
 
     void callPayApi();
     void logApiResponse();

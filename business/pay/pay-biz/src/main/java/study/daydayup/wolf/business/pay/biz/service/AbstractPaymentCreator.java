@@ -14,8 +14,10 @@ import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service
@@ -40,7 +42,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
         this.request = request;
 
         validateRequest();
-        createPayment();
+        initPayment();
         callPayApi();
         logApiResponse();
         savePayment();
@@ -53,21 +55,16 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
     }
 
     @Override
-    public void createPayment() {
-        payment = new Payment();
-        BeanUtils.copyProperties(request, payment);
+    public void initPayment() {
+        if (!request.isDoublePayCheck()) {
+            createPayment();
+            return;
+        }
 
-        String paymentNo = TradeNo.builder()
-                .tradePhase(TradePhaseEnum.PAYMENT_PHASE)
-                .accountId(request.getPayerId())
-                .build()
-                .create();
-
-        payment.setPaymentNo(paymentNo);
-        payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
-        attachment = new ObjectMap();
+        if (!checkExistence()) {
+            createPayment();
+        }
     }
-
 
     @Override
     public void logApiResponse() {
@@ -99,4 +96,33 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
 
         return response;
     }
+
+    private boolean checkExistence() {
+        String tradeNo = request.getTradeNo();
+        Integer state = PaymentStateEnum.WAIT_TO_PAY.getCode();
+
+        List<Payment> payments = paymentRepository.findByTradeNo(tradeNo, state);
+        if (CollectionUtil.isEmpty(payments) || null == payments.get(0)) {
+            return false;
+        }
+
+        payment = payments.get(0);
+        return true;
+    }
+
+    private void createPayment() {
+        payment = new Payment();
+        BeanUtils.copyProperties(request, payment);
+
+        String paymentNo = TradeNo.builder()
+                .tradePhase(TradePhaseEnum.PAYMENT_PHASE)
+                .accountId(request.getPayerId())
+                .build()
+                .create();
+
+        payment.setPaymentNo(paymentNo);
+        payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
+        attachment = new ObjectMap();
+    }
+
 }

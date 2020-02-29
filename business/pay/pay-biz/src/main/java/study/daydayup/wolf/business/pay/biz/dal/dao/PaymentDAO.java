@@ -23,5 +23,4 @@ public interface PaymentDAO {
 
     PaymentDO selectByPaymentNo(@Param("paymentNo")String paymentNo);
 
-
 }

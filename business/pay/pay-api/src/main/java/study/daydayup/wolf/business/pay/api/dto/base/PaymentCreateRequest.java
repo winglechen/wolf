@@ -22,6 +22,7 @@ public class PaymentCreateRequest implements Request {
 
     @NonNull
     private String tradeNo;
+    private boolean doublePayCheck;
 
     @NonNull @Min(1)
     private Long payerId;
