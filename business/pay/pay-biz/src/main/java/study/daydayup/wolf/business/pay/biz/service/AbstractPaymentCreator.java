@@ -9,9 +9,14 @@ import study.daydayup.wolf.business.pay.api.entity.Payment;
 import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.enums.PaymentStateEnum;
+import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
+import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.framework.layer.context.ObjectContext;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service
@@ -23,10 +28,13 @@ import study.daydayup.wolf.framework.layer.context.ObjectContext;
 public abstract class AbstractPaymentCreator implements PaymentCreator {
     protected PaymentCreateRequest request;
     protected Payment payment;
-    protected ObjectContext attachment;
+    protected ObjectMap attachment;
     protected String apiResponse;
 
-
+    @Resource
+    private PaymentRepository paymentRepository;
+    @Resource
+    private PaymentLogRepository logRepository;
 
     @Override
     public PaymentCreateResponse create(@Validated PaymentCreateRequest request) {
@@ -58,7 +66,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
 
         payment.setPaymentNo(paymentNo);
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
-        attachment = new ObjectContext();
+        attachment = new ObjectMap();
     }
 
 
@@ -74,15 +82,22 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
                 .data(apiResponse)
                 .build();
 
+        logRepository.add(log);
     }
 
     @Override
     public void savePayment() {
-
+        paymentRepository.add(payment);
     }
 
     @Override
     public PaymentCreateResponse formatResponse() {
-        return null;
+        PaymentCreateResponse response = new PaymentCreateResponse();
+        response.setPaymentNo(payment.getPaymentNo());
+        response.setAmount(payment.getAmount());
+        response.setPaymentMethod(payment.getPaymentMethod());
+        response.setAttachment(attachment);
+
+        return response;
     }
 }
