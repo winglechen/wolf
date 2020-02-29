@@ -1,1 +1,0 @@
-just depend on trade

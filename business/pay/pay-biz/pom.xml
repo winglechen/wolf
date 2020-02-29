@@ -19,6 +19,10 @@
             <groupId>study.daydayup.wolf.business.pay</groupId>
             <artifactId>pay-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.trade</groupId>
+            <artifactId>trade-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.razorpay</groupId>
