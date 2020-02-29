@@ -27,4 +27,8 @@ public class DecimalUtil {
     public static long toLong(BigDecimal num) {
         return num.setScale(0, RoundingMode.HALF_UP).longValue();
     }
+
+    public static int toInt(BigDecimal num) {
+        return num.setScale(0, RoundingMode.HALF_UP).intValue();
+    }
 }

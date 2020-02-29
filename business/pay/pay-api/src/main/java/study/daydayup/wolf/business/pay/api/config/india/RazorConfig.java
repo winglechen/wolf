@@ -34,6 +34,9 @@ public class RazorConfig {
     private String prefillEmail = "";
     private String prefillContact = "";
 
+    private String buttonText = "Pay with Razorpay";
+    private String themeColor = "#F37254";
+
     //card | netbanking | wallet | emi | upi
     private String prefillMethod = "";
     private String currency = "INR";

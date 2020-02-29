@@ -22,8 +22,9 @@ public class ObjectContext implements Context {
         return data.get(key);
     }
 
-    public void set(@NonNull String key, Object value) {
+    public ObjectContext set(@NonNull String key, Object value) {
         data.put(key, value);
+        return this;
     }
 
     public String toJson() {

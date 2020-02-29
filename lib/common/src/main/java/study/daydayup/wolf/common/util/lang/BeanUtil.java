@@ -55,9 +55,6 @@ public class BeanUtil {
                     field.set(object, map.get(field.getName()));
                 }
             }
-        } catch (InstantiationException e) {
-            //log
-            throw e;
         } catch (IllegalAccessException e) {
             return null;
         }
