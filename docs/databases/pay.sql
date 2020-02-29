@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `trade_no`              VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
+    `attachment`            VARCHAR(1000)        NOT NULL DEFAULT '' COMMENT '',
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
 
     `version`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',

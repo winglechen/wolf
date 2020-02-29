@@ -13,7 +13,7 @@ public interface PaymentCreator {
     PaymentCreateResponse create(PaymentCreateRequest request);
 
 
-    boolean validateRequest();
+    void validateRequest();
     void createPayment();
 
     void callPayApi();
