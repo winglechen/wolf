@@ -39,6 +39,8 @@ public class TradeStateLogDO implements Serializable {
 
     private Integer targetVersion;
 
+    private Long editor;
+
     private LocalDateTime createdAt;
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +67,7 @@ public class TradeStateLogDO implements Serializable {
         sb.append(", source=").append(source);
         sb.append(", sourceVersion=").append(sourceVersion);
         sb.append(", targetVersion=").append(targetVersion);
+        sb.append(", editor=").append(editor);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
         return sb.toString();
@@ -98,6 +101,7 @@ public class TradeStateLogDO implements Serializable {
             && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getSourceVersion() == null ? other.getSourceVersion() == null : this.getSourceVersion().equals(other.getSourceVersion()))
             && (this.getTargetVersion() == null ? other.getTargetVersion() == null : this.getTargetVersion().equals(other.getTargetVersion()))
+            && (this.getEditor() == null ? other.getEditor() == null : this.getEditor().equals(other.getEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
@@ -121,6 +125,7 @@ public class TradeStateLogDO implements Serializable {
         result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
         result = prime * result + ((getSourceVersion() == null) ? 0 : getSourceVersion().hashCode());
         result = prime * result + ((getTargetVersion() == null) ? 0 : getTargetVersion().hashCode());
+        result = prime * result + ((getEditor() == null) ? 0 : getEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;
     }

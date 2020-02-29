@@ -32,6 +32,10 @@
     from order_address
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from order_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderAddressDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
