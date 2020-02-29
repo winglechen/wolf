@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.dto.base;
+package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
 import lombok.Builder;
 import lombok.Data;

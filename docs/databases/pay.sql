@@ -36,6 +36,28 @@ CREATE TABLE IF NOT EXISTS `payment`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
 
+DROP TABLE IF EXISTS `payment_state_log`;
+CREATE TABLE IF NOT EXISTS `payment_state_log`
+(
+    `id`                INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `payment_no`        VARCHAR(32)          NOT NULL DEFAULT '' COMMENT '支付号',
+    `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
+
+    `payer_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `payee_id`          BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `source_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
+    `target_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
+
+    `tags`              VARCHAR(200)         NOT NULL DEFAULT '' COMMENT '支付标签',
+
+    `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
+    `target_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '更新版本号',
+    `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_payment_no(`payment_no`),
+    primary key (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付状态变更记录';
+
+
 DROP TABLE IF EXISTS `trade_merge`;
 CREATE TABLE IF NOT EXISTS `trade_merge`
 (

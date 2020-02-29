@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.epi;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.dto.base.TradeNotifyRequest;
+import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
 
 /**
  * study.daydayup.wolf.business.pay.biz.epi

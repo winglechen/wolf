@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.epi;
 
-import study.daydayup.wolf.business.pay.api.dto.base.TradeNotifyRequest;
+import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
 
 /**
  * study.daydayup.wolf.business.pay.biz.epi

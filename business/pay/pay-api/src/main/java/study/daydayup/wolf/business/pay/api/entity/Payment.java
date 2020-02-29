@@ -33,6 +33,7 @@ public class Payment implements Model {
     private String attachment;
     private String tags;
 
+    private Integer version;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
 }

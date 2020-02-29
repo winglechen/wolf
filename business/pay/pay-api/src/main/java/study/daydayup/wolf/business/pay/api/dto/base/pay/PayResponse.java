@@ -1,5 +1,6 @@
-package study.daydayup.wolf.business.pay.api.dto.base;
+package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
+import study.daydayup.wolf.business.pay.api.dto.base.pay.Attachment;
 import study.daydayup.wolf.framework.layer.api.Response;
 
 import java.math.BigDecimal;

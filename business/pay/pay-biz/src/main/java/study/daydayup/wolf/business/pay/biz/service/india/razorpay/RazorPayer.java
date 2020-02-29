@@ -6,8 +6,8 @@ import lombok.NonNull;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
-import study.daydayup.wolf.business.pay.api.dto.base.PayRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayResponse;
 import study.daydayup.wolf.business.pay.api.exception.InvalidEpiResponseException;
 import study.daydayup.wolf.common.util.collection.MapUtil;
 

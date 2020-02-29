@@ -1,9 +1,9 @@
 package study.daydayup.wolf.business.pay.api.service;
 
-import study.daydayup.wolf.business.pay.api.dto.base.PayRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.PayResponse;
-import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.PaymentCreateResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**

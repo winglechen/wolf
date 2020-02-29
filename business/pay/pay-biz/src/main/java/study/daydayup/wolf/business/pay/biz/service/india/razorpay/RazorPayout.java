@@ -3,8 +3,8 @@ package study.daydayup.wolf.business.pay.biz.service.india.razorpay;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
-import study.daydayup.wolf.business.pay.api.dto.base.PayoutRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.PayoutResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 
 import javax.annotation.Resource;
 
