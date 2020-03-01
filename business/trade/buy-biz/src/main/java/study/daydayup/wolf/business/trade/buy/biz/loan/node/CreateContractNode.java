@@ -146,17 +146,22 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         LoanTerm loan = contract.getLoanTerm();
         List<InstallmentTerm> terms = new ArrayList<>();
 
+        //TODO installment state
         InstallmentTerm installmentTerm = InstallmentTerm.builder()
                 .tradeNo(contract.getTradeNo())
                 .buyerId(contract.getBuyerId())
                 .sellerId(contract.getSellerId())
                 .installmentNo(1)
+                .installmentType(InstallmentTypeEnum.NO_INSTALLMENTS.getCode())
+
+                .currency(loan.getCurrency())
+                .loanAmount(loan.getAmount())
+                .handlingFee(loan.getHandlingFee())
+                .interest(loan.getInterest())
+
                 .period(loan.getPeriod())
                 .percentage(Rate.HUNDRED_PERCENT)
                 .feePercentage(Rate.HUNDRED_PERCENT)
-                .installmentType(InstallmentTypeEnum.NO_INSTALLMENTS.getCode())
-                .interest(loan.getInterest())
-                .handlingFee(loan.getHandlingFee())
                 .build();
 
         terms.add(installmentTerm);
