@@ -45,9 +45,13 @@ public class LoanTermDO implements Serializable {
 
     private BigDecimal interest;
 
+    private BigDecimal interestRate;
+
     private Integer interestUnit;
 
     private BigDecimal penalty;
+
+    private BigDecimal penaltyRate;
 
     private Integer penaltyUnit;
 
@@ -88,8 +92,10 @@ public class LoanTermDO implements Serializable {
         sb.append(", periodUnit=").append(periodUnit);
         sb.append(", periodStrategy=").append(periodStrategy);
         sb.append(", interest=").append(interest);
+        sb.append(", interestRate=").append(interestRate);
         sb.append(", interestUnit=").append(interestUnit);
         sb.append(", penalty=").append(penalty);
+        sb.append(", penaltyRate=").append(penaltyRate);
         sb.append(", penaltyUnit=").append(penaltyUnit);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
@@ -131,8 +137,10 @@ public class LoanTermDO implements Serializable {
             && (this.getPeriodUnit() == null ? other.getPeriodUnit() == null : this.getPeriodUnit().equals(other.getPeriodUnit()))
             && (this.getPeriodStrategy() == null ? other.getPeriodStrategy() == null : this.getPeriodStrategy().equals(other.getPeriodStrategy()))
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
+            && (this.getInterestRate() == null ? other.getInterestRate() == null : this.getInterestRate().equals(other.getInterestRate()))
             && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
             && (this.getPenalty() == null ? other.getPenalty() == null : this.getPenalty().equals(other.getPenalty()))
+            && (this.getPenaltyRate() == null ? other.getPenaltyRate() == null : this.getPenaltyRate().equals(other.getPenaltyRate()))
             && (this.getPenaltyUnit() == null ? other.getPenaltyUnit() == null : this.getPenaltyUnit().equals(other.getPenaltyUnit()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
@@ -164,8 +172,10 @@ public class LoanTermDO implements Serializable {
         result = prime * result + ((getPeriodUnit() == null) ? 0 : getPeriodUnit().hashCode());
         result = prime * result + ((getPeriodStrategy() == null) ? 0 : getPeriodStrategy().hashCode());
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
+        result = prime * result + ((getInterestRate() == null) ? 0 : getInterestRate().hashCode());
         result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
         result = prime * result + ((getPenalty() == null) ? 0 : getPenalty().hashCode());
+        result = prime * result + ((getPenaltyRate() == null) ? 0 : getPenaltyRate().hashCode());
         result = prime * result + ((getPenaltyUnit() == null) ? 0 : getPenaltyUnit().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());

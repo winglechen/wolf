@@ -21,8 +21,10 @@
     <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
     <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
     <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="interest_rate" jdbcType="DECIMAL" property="interestRate" />
     <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
     <result column="penalty" jdbcType="DECIMAL" property="penalty" />
+    <result column="penalty_rate" jdbcType="DECIMAL" property="penaltyRate" />
     <result column="penalty_unit" jdbcType="INTEGER" property="penaltyUnit" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
@@ -33,8 +35,9 @@
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, goods_id, goods_version, `state`, amount, currency, 
     installment_num, repay_strategy, prepay_strategy, handling_fee, handling_fee_rate, 
-    fee_pay_strategy, period, period_unit, period_strategy, interest, interest_unit, 
-    penalty, penalty_unit, version, delete_flag, last_editor, created_at, updated_at
+    fee_pay_strategy, period, period_unit, period_strategy, interest, interest_rate, 
+    interest_unit, penalty, penalty_rate, penalty_unit, version, delete_flag, last_editor, 
+    created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -56,18 +59,20 @@
       repay_strategy, prepay_strategy, handling_fee, 
       handling_fee_rate, fee_pay_strategy, period, 
       period_unit, period_strategy, interest, 
-      interest_unit, penalty, penalty_unit, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      interest_rate, interest_unit, penalty, 
+      penalty_rate, penalty_unit, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{goodsId,jdbcType=BIGINT}, #{goodsVersion,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
       #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{installmentNum,jdbcType=TINYINT}, 
       #{repayStrategy,jdbcType=INTEGER}, #{prepayStrategy,jdbcType=INTEGER}, #{handlingFee,jdbcType=DECIMAL}, 
       #{handlingFeeRate,jdbcType=DECIMAL}, #{feePayStrategy,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, 
       #{periodUnit,jdbcType=INTEGER}, #{periodStrategy,jdbcType=INTEGER}, #{interest,jdbcType=DECIMAL}, 
-      #{interestUnit,jdbcType=INTEGER}, #{penalty,jdbcType=DECIMAL}, #{penaltyUnit,jdbcType=INTEGER}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{interestRate,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, #{penalty,jdbcType=DECIMAL}, 
+      #{penaltyRate,jdbcType=DECIMAL}, #{penaltyUnit,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.LoanTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -129,11 +134,17 @@
       <if test="interest != null">
         interest,
       </if>
+      <if test="interestRate != null">
+        interest_rate,
+      </if>
       <if test="interestUnit != null">
         interest_unit,
       </if>
       <if test="penalty != null">
         penalty,
+      </if>
+      <if test="penaltyRate != null">
+        penalty_rate,
       </if>
       <if test="penaltyUnit != null">
         penalty_unit,
@@ -209,11 +220,17 @@
       <if test="interest != null">
         #{interest,jdbcType=DECIMAL},
       </if>
+      <if test="interestRate != null">
+        #{interestRate,jdbcType=DECIMAL},
+      </if>
       <if test="interestUnit != null">
         #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="penalty != null">
         #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="penaltyRate != null">
+        #{penaltyRate,jdbcType=DECIMAL},
       </if>
       <if test="penaltyUnit != null">
         #{penaltyUnit,jdbcType=INTEGER},
@@ -292,11 +309,17 @@
       <if test="interest != null">
         interest = #{interest,jdbcType=DECIMAL},
       </if>
+      <if test="interestRate != null">
+        interest_rate = #{interestRate,jdbcType=DECIMAL},
+      </if>
       <if test="interestUnit != null">
         interest_unit = #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="penalty != null">
         penalty = #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="penaltyRate != null">
+        penalty_rate = #{penaltyRate,jdbcType=DECIMAL},
       </if>
       <if test="penaltyUnit != null">
         penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
@@ -339,8 +362,10 @@
       period_unit = #{periodUnit,jdbcType=INTEGER},
       period_strategy = #{periodStrategy,jdbcType=INTEGER},
       interest = #{interest,jdbcType=DECIMAL},
+      interest_rate = #{interestRate,jdbcType=DECIMAL},
       interest_unit = #{interestUnit,jdbcType=INTEGER},
       penalty = #{penalty,jdbcType=DECIMAL},
+      penalty_rate = #{penaltyRate,jdbcType=DECIMAL},
       penalty_unit = #{penaltyUnit,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
