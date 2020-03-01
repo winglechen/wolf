@@ -95,12 +95,17 @@ public class GoodsEpi implements Epi {
         Loan loanFromGoods = goodsDTO.getLoan();
         BeanUtils.copyProperties(loanFromGoods, loanTerm);
 
+        loanTerm.setGoodsId(goodsDTO.getId());
+        loanTerm.setGoodsVersion(goodsDTO.getVersion());
+
         loanTerm.setSellerId(goodsDTO.getOrgId());
         loanTerm.setAmount(goodsDTO.getPrice());
         loanTerm.setCurrency(goodsDTO.getCurrency());
 
         loanTerm.setInterest(null);
         loanTerm.setPenalty(null);
+        loanTerm.setInterestUnit(loanFromGoods.getInterestUnit());
+        loanTerm.setPenaltyUnit(loanFromGoods.getPenaltyUnit());
         loanTerm.setInterestRate(loanFromGoods.getInterest());
         loanTerm.setPenaltyRate(loanFromGoods.getPenalty());
 

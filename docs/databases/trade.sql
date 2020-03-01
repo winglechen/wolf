@@ -64,9 +64,12 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
     `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
+
     `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
+    `interest_rate`     DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '利息比率',
     `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
     `penalty`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+    `penalty_rate`      DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '罚息比率',
     `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',

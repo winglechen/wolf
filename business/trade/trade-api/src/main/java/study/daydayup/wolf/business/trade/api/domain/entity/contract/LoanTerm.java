@@ -25,6 +25,7 @@ public class LoanTerm implements VO {
     protected Long  sellerId;
 
     protected Long goodsId;
+    protected Integer goodsVersion;
 
     @DecimalMin("0.0001")
     protected BigDecimal  amount;

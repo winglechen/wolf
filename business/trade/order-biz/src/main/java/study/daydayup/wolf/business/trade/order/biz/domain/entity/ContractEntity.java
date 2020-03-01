@@ -13,9 +13,11 @@ import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.OverdueSta
 import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -73,8 +75,8 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
                 .currency(loan.getCurrency())
                 .repayStrategy(loan.getRepayStrategy())
                 .prepayStrategy(loan.getPrepayStrategy())
-                .interestRate(loan.getInterestRate())
-                .penaltyRate(loan.getPenaltyRate())
+//                .interestRate(loan.getInterestRate())
+//                .penaltyRate(loan.getPenaltyRate())
                 .build();
         model.setRepaymentTerm(term);
     }
@@ -109,6 +111,16 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
         }
 
 
+    }
+
+    private void calculateInstallmentAmount(@NonNull InstallmentTerm installment) {
+        BigDecimal amount = DecimalUtil.add(
+                installment.getLoanAmount(),
+                installment.getHandlingFee(),
+                installment.getInterest(),
+                installment.getPenalty()
+        );
+        installment.setAmount(amount);
     }
 
 
