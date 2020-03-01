@@ -90,13 +90,13 @@ public class ContractRepository extends AbstractRepository implements Repository
         return findTermsByContract(contractDO, tradeId);
     }
 
-    private ContractDO findContract(TradeId tradeId) {
-        tradeId.valid();
-
-        return contractDAO.selectByTradeNo(tradeId.getTradeNo(), tradeId.getBuyerId(), tradeId.getSellerId());
-    }
-
-    public Contract findTermsByContract(ContractDO contractDO, TradeId tradeId) {
+    /**
+     *
+     * @param contractDO dataObject
+     * @param tradeId tradeId
+     * @return init(Contract)
+     */
+    protected Contract findTermsByContract(ContractDO contractDO, TradeId tradeId) {
         if (contractDO == null) {
             return null;
         }
@@ -112,6 +112,12 @@ public class ContractRepository extends AbstractRepository implements Repository
         contract.setTaxTerm(taxTermRepository.find(tradeId));
 
         return contract;
+    }
+
+    private ContractDO findContract(TradeId tradeId) {
+        tradeId.valid();
+
+        return contractDAO.selectByTradeNo(tradeId.getTradeNo(), tradeId.getBuyerId(), tradeId.getSellerId());
     }
 
     private void insertContract(@Validated Contract contract) {
