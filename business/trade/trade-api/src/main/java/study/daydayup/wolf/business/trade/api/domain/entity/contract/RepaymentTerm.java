@@ -1,7 +1,13 @@
 package study.daydayup.wolf.business.trade.api.domain.entity.contract;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.business.trade.api.domain.entity.trade.TradeStateLog;
+import study.daydayup.wolf.framework.layer.domain.VO;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 /**
@@ -11,21 +17,38 @@ import study.daydayup.wolf.business.trade.api.domain.entity.trade.TradeStateLog;
  * @since 2019/12/13 3:53 下午
  **/
 @Data
-public class RepaymentTerm {
+@NoArgsConstructor
+@Builder
+public class RepaymentTerm implements VO {
+    private String tradeNo;
+    private Long  buyerId;
+    private Long  sellerId;
 
-    protected String tradeNo;
-    protected Long  buyerId;
-    protected Long  sellerId;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
 
-    protected Integer repayStrategy;
-    protected Integer prepayStrategy;
+    private Integer state;
 
-    protected Integer state;
+    private BigDecimal loanAmount;
+    private BigDecimal  paidAmount;
+    private BigDecimal  lossAmount;
+    private Integer currency;
 
-    protected Long  LoanAmount;
-    protected Long  paidAmount;
-    protected Long  lossAmount;
-    protected Integer currency;
+    /**
+     * 动态生成数据
+     */
+    private BigDecimal dueAmount;
+    private BigDecimal interest;
+    private BigDecimal interestRate;
+    private BigDecimal penalty;
+    private BigDecimal penaltyRate;
+    /**
+     * installmentNo1, installmentNo2, ...
+     */
+    private String tags;
 
-    protected TradeStateLog stateLog;
+    private Integer version;
+    private LocalDateTime createdAt;
+
+    private TradeStateLog stateLog;
 }

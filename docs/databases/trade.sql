@@ -87,14 +87,13 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
+    `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
 
-    `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
-
-    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
+    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
     `paid_amount`       DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '实还金额',
     `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
 
