@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.node;
 
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
@@ -20,6 +21,7 @@ import study.daydayup.wolf.common.model.type.number.Rate;
 import study.daydayup.wolf.common.util.finance.RateUtil;
 import study.daydayup.wolf.common.util.finance.installment.RateInstallment;
 import study.daydayup.wolf.common.util.finance.Interest;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 
 import javax.annotation.Resource;
@@ -129,6 +131,10 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
             calculateInstallmentInterest(term);
             term.setLoanAmount(rateInstallment.split(term.getPercentage(), RateEnum.PER_HUNDRED));
             setInstallmentFee(term, rateFee.split(term.getFeePercentage(), RateEnum.PER_HUNDRED));
+            term.setPenalty(BigDecimal.ZERO);
+
+            calculateInstallmentAmount(term);
+
         }
 
         contract.setInstallmentTermList(terms);
@@ -158,14 +164,26 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .loanAmount(loan.getAmount())
                 .handlingFee(loan.getHandlingFee())
                 .interest(loan.getInterest())
+                .penalty(BigDecimal.ZERO)
 
                 .period(loan.getPeriod())
                 .percentage(Rate.HUNDRED_PERCENT)
                 .feePercentage(Rate.HUNDRED_PERCENT)
                 .build();
 
+        calculateInstallmentAmount(installmentTerm);
         terms.add(installmentTerm);
         contract.setInstallmentTermList(terms);
+    }
+
+    private void calculateInstallmentAmount(@NonNull InstallmentTerm installment) {
+        BigDecimal amount = DecimalUtil.add(
+                installment.getLoanAmount(),
+                installment.getHandlingFee(),
+                installment.getInterest(),
+                installment.getPenalty()
+        );
+        installment.setAmount(amount);
     }
 
     private void calculateInstallmentInterest(InstallmentTerm term) {

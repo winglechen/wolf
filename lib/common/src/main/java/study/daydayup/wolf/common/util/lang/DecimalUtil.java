@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.util.lang;
 
+import lombok.NonNull;
 import study.daydayup.wolf.common.model.type.string.Decimal;
 
 import java.math.BigDecimal;
@@ -17,12 +18,23 @@ public class DecimalUtil {
     }
 
     public static BigDecimal scale(BigDecimal num, int scale) {
-        if (scale <=0 || scale >= 50) {
+        if (scale <=0 || scale >= 100) {
             return num;
         }
 
         return num.setScale(scale, RoundingMode.HALF_UP);
     }
+
+    public static BigDecimal add(@NonNull BigDecimal... nums) {
+        BigDecimal result = BigDecimal.ZERO;
+
+        for (BigDecimal num : nums) {
+            result = result.add(num);
+        }
+
+        return scale(result);
+    }
+
 
     public static long toLong(BigDecimal num) {
         return num.setScale(0, RoundingMode.HALF_UP).longValue();
