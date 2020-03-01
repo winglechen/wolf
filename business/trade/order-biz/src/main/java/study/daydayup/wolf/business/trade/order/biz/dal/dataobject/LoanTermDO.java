@@ -17,13 +17,11 @@ public class LoanTermDO implements Serializable {
 
     private Long goodsId;
 
+    private Integer goodsVersion;
+
     private Integer state;
 
     private BigDecimal amount;
-
-    private BigDecimal repayAmount;
-
-    private BigDecimal lossAmount;
 
     private Integer currency;
 
@@ -76,10 +74,9 @@ public class LoanTermDO implements Serializable {
         sb.append(", buyerId=").append(buyerId);
         sb.append(", sellerId=").append(sellerId);
         sb.append(", goodsId=").append(goodsId);
+        sb.append(", goodsVersion=").append(goodsVersion);
         sb.append(", state=").append(state);
         sb.append(", amount=").append(amount);
-        sb.append(", repayAmount=").append(repayAmount);
-        sb.append(", lossAmount=").append(lossAmount);
         sb.append(", currency=").append(currency);
         sb.append(", installmentNum=").append(installmentNum);
         sb.append(", repayStrategy=").append(repayStrategy);
@@ -120,10 +117,9 @@ public class LoanTermDO implements Serializable {
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
+            && (this.getGoodsVersion() == null ? other.getGoodsVersion() == null : this.getGoodsVersion().equals(other.getGoodsVersion()))
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
-            && (this.getRepayAmount() == null ? other.getRepayAmount() == null : this.getRepayAmount().equals(other.getRepayAmount()))
-            && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getInstallmentNum() == null ? other.getInstallmentNum() == null : this.getInstallmentNum().equals(other.getInstallmentNum()))
             && (this.getRepayStrategy() == null ? other.getRepayStrategy() == null : this.getRepayStrategy().equals(other.getRepayStrategy()))
@@ -154,10 +150,9 @@ public class LoanTermDO implements Serializable {
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
+        result = prime * result + ((getGoodsVersion() == null) ? 0 : getGoodsVersion().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
-        result = prime * result + ((getRepayAmount() == null) ? 0 : getRepayAmount().hashCode());
-        result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getInstallmentNum() == null) ? 0 : getInstallmentNum().hashCode());
         result = prime * result + ((getRepayStrategy() == null) ? 0 : getRepayStrategy().hashCode());

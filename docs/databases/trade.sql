@@ -46,17 +46,17 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
+    `goods_version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '商品版本号',
+
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `amount`            DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '借款金额',
-    `repay_amount`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '实还金额',
-    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
-
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
 
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
+
     `handling_fee`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
     `handling_fee_rate` DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
@@ -87,10 +87,12 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
+
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
 
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',

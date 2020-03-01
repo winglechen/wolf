@@ -15,15 +15,17 @@ public class RepaymentTermDO implements Serializable {
 
     private Long sellerId;
 
+    private Integer state;
+
     private Integer repayStrategy;
 
     private Integer prepayStrategy;
 
-    private Integer state;
-
-    private BigDecimal loanAmount;
+    private Byte installmentNum;
 
     private Integer currency;
+
+    private BigDecimal loanAmount;
 
     private BigDecimal paidAmount;
 
@@ -51,11 +53,12 @@ public class RepaymentTermDO implements Serializable {
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", buyerId=").append(buyerId);
         sb.append(", sellerId=").append(sellerId);
+        sb.append(", state=").append(state);
         sb.append(", repayStrategy=").append(repayStrategy);
         sb.append(", prepayStrategy=").append(prepayStrategy);
-        sb.append(", state=").append(state);
-        sb.append(", loanAmount=").append(loanAmount);
+        sb.append(", installmentNum=").append(installmentNum);
         sb.append(", currency=").append(currency);
+        sb.append(", loanAmount=").append(loanAmount);
         sb.append(", paidAmount=").append(paidAmount);
         sb.append(", lossAmount=").append(lossAmount);
         sb.append(", version=").append(version);
@@ -83,11 +86,12 @@ public class RepaymentTermDO implements Serializable {
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getBuyerId() == null ? other.getBuyerId() == null : this.getBuyerId().equals(other.getBuyerId()))
             && (this.getSellerId() == null ? other.getSellerId() == null : this.getSellerId().equals(other.getSellerId()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getRepayStrategy() == null ? other.getRepayStrategy() == null : this.getRepayStrategy().equals(other.getRepayStrategy()))
             && (this.getPrepayStrategy() == null ? other.getPrepayStrategy() == null : this.getPrepayStrategy().equals(other.getPrepayStrategy()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
+            && (this.getInstallmentNum() == null ? other.getInstallmentNum() == null : this.getInstallmentNum().equals(other.getInstallmentNum()))
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
+            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
             && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
             && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -105,11 +109,12 @@ public class RepaymentTermDO implements Serializable {
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getBuyerId() == null) ? 0 : getBuyerId().hashCode());
         result = prime * result + ((getSellerId() == null) ? 0 : getSellerId().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getRepayStrategy() == null) ? 0 : getRepayStrategy().hashCode());
         result = prime * result + ((getPrepayStrategy() == null) ? 0 : getPrepayStrategy().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
+        result = prime * result + ((getInstallmentNum() == null) ? 0 : getInstallmentNum().hashCode());
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
+        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
         result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
         result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
