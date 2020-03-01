@@ -42,6 +42,10 @@ public class InstallmentTermDO implements Serializable {
 
     private Integer period;
 
+    private Integer periodUnit;
+
+    private Integer periodStrategy;
+
     private BigDecimal percentage;
 
     private BigDecimal feePercentage;
@@ -81,6 +85,8 @@ public class InstallmentTermDO implements Serializable {
         sb.append(", interest=").append(interest);
         sb.append(", handlingFee=").append(handlingFee);
         sb.append(", period=").append(period);
+        sb.append(", periodUnit=").append(periodUnit);
+        sb.append(", periodStrategy=").append(periodStrategy);
         sb.append(", percentage=").append(percentage);
         sb.append(", feePercentage=").append(feePercentage);
         sb.append(", version=").append(version);
@@ -121,6 +127,8 @@ public class InstallmentTermDO implements Serializable {
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
             && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
+            && (this.getPeriodUnit() == null ? other.getPeriodUnit() == null : this.getPeriodUnit().equals(other.getPeriodUnit()))
+            && (this.getPeriodStrategy() == null ? other.getPeriodStrategy() == null : this.getPeriodStrategy().equals(other.getPeriodStrategy()))
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -151,6 +159,8 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
         result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
+        result = prime * result + ((getPeriodUnit() == null) ? 0 : getPeriodUnit().hashCode());
+        result = prime * result + ((getPeriodStrategy() == null) ? 0 : getPeriodStrategy().hashCode());
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

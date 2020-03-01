@@ -19,6 +19,8 @@
     <result column="interest" jdbcType="DECIMAL" property="interest" />
     <result column="handling_fee" jdbcType="DECIMAL" property="handlingFee" />
     <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
+    <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
     <result column="percentage" jdbcType="DECIMAL" property="percentage" />
     <result column="fee_percentage" jdbcType="DECIMAL" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -30,8 +32,8 @@
   <sql id="Base_Column_List">
     id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, related_trade_no, 
     effect_at, due_at, amount, currency, paid_amount, loss_amount, interest, handling_fee, 
-    period, percentage, fee_percentage, version, delete_flag, last_editor, created_at, 
-    updated_at
+    period, period_unit, period_strategy, percentage, fee_percentage, version, delete_flag, 
+    last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -52,17 +54,19 @@
       related_trade_no, effect_at, due_at, 
       amount, currency, paid_amount, 
       loss_amount, interest, handling_fee, 
-      period, percentage, fee_percentage, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      period, period_unit, period_strategy, 
+      percentage, fee_percentage, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
     values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
       #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
       #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=BIGINT}, 
       #{lossAmount,jdbcType=BIGINT}, #{interest,jdbcType=DECIMAL}, #{handlingFee,jdbcType=DECIMAL}, 
-      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER}, #{periodStrategy,jdbcType=INTEGER}, 
+      #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -117,6 +121,12 @@
       </if>
       <if test="period != null">
         period,
+      </if>
+      <if test="periodUnit != null">
+        period_unit,
+      </if>
+      <if test="periodStrategy != null">
+        period_strategy,
       </if>
       <if test="percentage != null">
         percentage,
@@ -188,6 +198,12 @@
       </if>
       <if test="period != null">
         #{period,jdbcType=INTEGER},
+      </if>
+      <if test="periodUnit != null">
+        #{periodUnit,jdbcType=INTEGER},
+      </if>
+      <if test="periodStrategy != null">
+        #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         #{percentage,jdbcType=DECIMAL},
@@ -263,6 +279,12 @@
       <if test="period != null">
         period = #{period,jdbcType=INTEGER},
       </if>
+      <if test="periodUnit != null">
+        period_unit = #{periodUnit,jdbcType=INTEGER},
+      </if>
+      <if test="periodStrategy != null">
+        period_strategy = #{periodStrategy,jdbcType=INTEGER},
+      </if>
       <if test="percentage != null">
         percentage = #{percentage,jdbcType=DECIMAL},
       </if>
@@ -305,6 +327,8 @@
       interest = #{interest,jdbcType=DECIMAL},
       handling_fee = #{handlingFee,jdbcType=DECIMAL},
       period = #{period,jdbcType=INTEGER},
+      period_unit = #{periodUnit,jdbcType=INTEGER},
+      period_strategy = #{periodStrategy,jdbcType=INTEGER},
       percentage = #{percentage,jdbcType=DECIMAL},
       fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       version = #{version,jdbcType=INTEGER},
