@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
@@ -91,14 +92,23 @@ public class UnionLoanController extends BaseUnionController {
         tradeId.setBuyerId(getFromSession("accountId", Long.class));
         tradeId.setSellerId(getFromSession("orgId", Long.class));
 
+        ContractOption option = initContractOption();
+
+        //TODO use ContractService
         return contractService.find(tradeId);
     }
 
     @GetMapping("/loan/living")
     public Result<Contract> livingContract() {
         Long buyerId = session.get("accountId", Long.class);
-        //TODO: ADD orgId
-        return buyerContractService.findLatest(buyerId);
+        Long sellerId = session.get("sellerId", Long.class);
+
+        TradeOwner owner = new TradeOwner();
+        owner.setBuyerId(buyerId);
+        owner.setSellerId( sellerId);
+        ContractOption option = initContractOption();
+
+        return buyerContractService.findLatest(owner, option);
     }
 
     @GetMapping("/loan")

@@ -27,7 +27,7 @@ public interface ContractDAO {
 
     List<ContractDO> selectByTradeNoIn(@Param("tradeNoCollection")Collection<String> tradeNoCollection, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
-    ContractDO selectLatestByBuyer(@Param("buyerId")Long buyerId);
+    ContractDO selectLatestByBuyer(@Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
     List<ContractDO> selectByBuyerId(@Param("buyerId")Long buyerId);
 

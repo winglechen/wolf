@@ -39,8 +39,8 @@ public class BuyerContractRepository extends ContractQueryRepository {
         return Page.of(contractDOList).to(contractList);
     }
 
-    public Contract findLatest(@NonNull Long buyerId) {
-        ContractDO contractDO = contractDAO.selectLatestByBuyer(buyerId);
+    public Contract findLatest(@NonNull Long buyerId, Long sellerId) {
+        ContractDO contractDO = contractDAO.selectLatestByBuyer(buyerId, sellerId);
         if (contractDO == null) {
             return null;
         }

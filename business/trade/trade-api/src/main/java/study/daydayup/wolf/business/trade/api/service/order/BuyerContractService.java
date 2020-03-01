@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
+import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -13,5 +15,5 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  **/
 public interface BuyerContractService {
     Result<Page<Contract>> findAll(Long buyerId, PageRequest pageRequest);
-    Result<Contract> findLatest(Long buyerId);
+    Result<Contract> findLatest(TradeOwner owner, ContractOption option);
 }

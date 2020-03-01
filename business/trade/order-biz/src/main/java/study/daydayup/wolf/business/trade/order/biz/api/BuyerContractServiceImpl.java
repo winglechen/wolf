@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.trade.order.biz.api;
 
 import lombok.NonNull;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
+import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.buyer.BuyerContractRepository;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -30,9 +32,8 @@ public class BuyerContractServiceImpl implements BuyerContractService {
     }
 
     @Override
-    public Result<Contract> findLatest(@NonNull Long buyerId) {
-        Contract contract = repository.findLatest(buyerId);
-
+    public Result<Contract> findLatest(@NonNull TradeOwner owner, ContractOption option) {
+        Contract contract = repository.findLatest(owner.getBuyerId(), owner.getSellerId());
         return Result.ok(contract);
     }
 }

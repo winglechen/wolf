@@ -71,6 +71,9 @@
         <include refid="Base_Column_List"/>
         from contract
         where buyer_id=#{buyerId,jdbcType=BIGINT}
+        <if test="sellerId != null ">
+            and seller_id = #{sellerId,jdbcType=BIGINT}
+        </if>
         order by id desc
         limit 1
     </select>
