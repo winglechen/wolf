@@ -18,7 +18,6 @@ import java.util.List;
  * @since 2019/10/9 6:56 下午
  **/
 public interface SellerContractService {
-    Result<Contract> findByTradeNo(TradeId tradeId);
     Result<List<Contract>> findByTradeNos(TradeIds tradeIds);
 
     Result<Page<Contract>> findAll(Long sellerId, PageRequest pageRequest);

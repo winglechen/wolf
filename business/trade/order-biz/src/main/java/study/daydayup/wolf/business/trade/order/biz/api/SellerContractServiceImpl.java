@@ -1,14 +1,11 @@
 package study.daydayup.wolf.business.trade.order.biz.api;
 
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.*;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
-import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.contract.InstallmentTermRepository;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.seller.SellerContractRepository;
@@ -34,14 +31,7 @@ public class SellerContractServiceImpl implements SellerContractService {
     private SellerContractRepository repository;
     @Resource
     private InstallmentTermRepository installmentTermRepository;
-    @Reference
-    private ContractService contractService;
 
-    @Override
-    public Result<Contract> findByTradeNo(@NonNull TradeId tradeId) {
-        tradeId.valid();
-        return contractService.find(tradeId);
-    }
 
     @Override
     public Result<List<Contract>> findByTradeNos(@NonNull TradeIds tradeIds) {
