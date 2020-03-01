@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `installment_term`
 
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `installment_type`  TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期类型',
+
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
     `related_trade_no`  VARCHAR(32) NOT NULL DEFAULT '' COMMENT '关联交易号',
 
@@ -139,6 +140,8 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
 
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
     `percentage`        DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 

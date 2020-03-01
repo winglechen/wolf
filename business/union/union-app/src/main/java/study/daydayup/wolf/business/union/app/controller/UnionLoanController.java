@@ -175,6 +175,7 @@ public class UnionLoanController extends BaseUnionController {
         return ContractOption.builder()
                 .withLoanTerm(true)
                 .withInstallmentTerm(true)
+                .calculateRepayment(true)
                 .build();
     }
 

@@ -21,6 +21,7 @@ public class ContractOption implements Request {
     private boolean withInstallmentTerm     = false;
     private boolean withLoanTerm            = false;
     private boolean withRepaymentTerm       = false;
+    private boolean calculateRepayment      = false;
     private boolean withObjectsTerm         = false;
     private boolean withPaymentTerm         = false;
     private boolean withPostageTerm         = false;

@@ -22,30 +22,33 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 public class InstallmentTerm implements VO {
-    protected Long id;
-    protected String tradeNo;
-    protected Long  buyerId;
-    protected Long  sellerId;
+    private Long id;
+    private String tradeNo;
+    private Long  buyerId;
+    private Long  sellerId;
 
-    protected Integer installmentNo;
-    protected Integer installmentType;
-    protected TradeState state;
-    protected TradeEvent stateEvent;
+    private Integer installmentNo;
+    private Integer installmentType;
+    private TradeState state;
+    private TradeEvent stateEvent;
 
-    protected String relatedTradeNo;
+    private String relatedTradeNo;
 
-    protected Integer period;
-    protected BigDecimal percentage;
-    protected BigDecimal feePercentage;
+    private Integer period;
+    private Integer periodUnit;
+    private Integer periodStrategy;
+    private BigDecimal percentage;
+    private BigDecimal feePercentage;
 
-    protected BigDecimal amount;
-    protected BigDecimal  interest;
-    protected BigDecimal  handlingFee;
+    private BigDecimal amount;
+    private BigDecimal  interest;
+    private BigDecimal  handlingFee;
 
-    protected LocalDate effectAt;
-    protected LocalDate dueAt;
+    private LocalDate effectAt;
+    private LocalDate dueAt;
+    private Integer overdueDays;
+    
+    private Integer version;
 
-    protected Integer version;
-
-    protected TradeStateLog stateLog;
+    private TradeStateLog stateLog;
 }
