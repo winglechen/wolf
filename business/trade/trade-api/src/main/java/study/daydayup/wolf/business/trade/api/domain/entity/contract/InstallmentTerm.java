@@ -35,6 +35,7 @@ public class InstallmentTerm implements VO {
     private LocalDate effectAt;
     private LocalDate dueAt;
     private Integer overdueDays;
+    private Integer effectDays;
 
     private Integer currency;
     private BigDecimal amount;

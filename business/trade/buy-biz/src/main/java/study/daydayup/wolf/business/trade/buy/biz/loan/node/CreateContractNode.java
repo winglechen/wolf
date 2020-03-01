@@ -128,9 +128,9 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
             term.setTradeNo(contract.getTradeNo());
             term.setBuyerId(contract.getBuyerId());
 
-            calculateInstallmentInterest(term);
             term.setLoanAmount(rateInstallment.split(term.getPercentage(), RateEnum.PER_HUNDRED));
             setInstallmentFee(term, rateFee.split(term.getFeePercentage(), RateEnum.PER_HUNDRED));
+            calculateInstallmentInterest(term);
             term.setPenalty(BigDecimal.ZERO);
 
             calculateInstallmentAmount(term);
