@@ -36,11 +36,13 @@ public class InstallmentTermDO implements Serializable {
 
     private BigDecimal lossAmount;
 
+    private BigDecimal loanAmount;
+
+    private BigDecimal handlingFee;
+
     private BigDecimal interest;
 
     private BigDecimal penalty;
-
-    private BigDecimal handlingFee;
 
     private Integer period;
 
@@ -80,9 +82,10 @@ public class InstallmentTermDO implements Serializable {
         sb.append(", amount=").append(amount);
         sb.append(", paidAmount=").append(paidAmount);
         sb.append(", lossAmount=").append(lossAmount);
+        sb.append(", loanAmount=").append(loanAmount);
+        sb.append(", handlingFee=").append(handlingFee);
         sb.append(", interest=").append(interest);
         sb.append(", penalty=").append(penalty);
-        sb.append(", handlingFee=").append(handlingFee);
         sb.append(", period=").append(period);
         sb.append(", percentage=").append(percentage);
         sb.append(", feePercentage=").append(feePercentage);
@@ -121,9 +124,10 @@ public class InstallmentTermDO implements Serializable {
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
             && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
+            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
+            && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getPenalty() == null ? other.getPenalty() == null : this.getPenalty().equals(other.getPenalty()))
-            && (this.getHandlingFee() == null ? other.getHandlingFee() == null : this.getHandlingFee().equals(other.getHandlingFee()))
             && (this.getPeriod() == null ? other.getPeriod() == null : this.getPeriod().equals(other.getPeriod()))
             && (this.getPercentage() == null ? other.getPercentage() == null : this.getPercentage().equals(other.getPercentage()))
             && (this.getFeePercentage() == null ? other.getFeePercentage() == null : this.getFeePercentage().equals(other.getFeePercentage()))
@@ -152,9 +156,10 @@ public class InstallmentTermDO implements Serializable {
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
         result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
+        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
+        result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getPenalty() == null) ? 0 : getPenalty().hashCode());
-        result = prime * result + ((getHandlingFee() == null) ? 0 : getHandlingFee().hashCode());
         result = prime * result + ((getPeriod() == null) ? 0 : getPeriod().hashCode());
         result = prime * result + ((getPercentage() == null) ? 0 : getPercentage().hashCode());
         result = prime * result + ((getFeePercentage() == null) ? 0 : getFeePercentage().hashCode());
