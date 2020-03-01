@@ -26,6 +26,10 @@ public class DecimalUtil {
     }
 
     public static BigDecimal add(@NonNull BigDecimal... nums) {
+        return add(Decimal.DEFAULT_SCALE, nums);
+    }
+
+    public static BigDecimal add(int scale, @NonNull BigDecimal... nums) {
         BigDecimal result = BigDecimal.ZERO;
 
         for (BigDecimal num : nums) {
