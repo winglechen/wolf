@@ -32,24 +32,24 @@ public class InstallmentTerm implements VO {
     private TradeState state;
     private TradeEvent stateEvent;
 
+    private LocalDate effectAt;
+    private LocalDate dueAt;
+    private Integer overdueDays;
+
     private Integer currency;
     private BigDecimal amount;
     private BigDecimal paidAmount;
     private BigDecimal lossAmount;
 
+    private BigDecimal loanAmount;
+    private BigDecimal handlingFee;
+    private BigDecimal interest;
+    private BigDecimal penalty;
 
     private Integer period;
     private BigDecimal percentage;
     private BigDecimal feePercentage;
-    private BigDecimal interest;
-    private BigDecimal penalty;
-    private BigDecimal handlingFee;
 
-    private LocalDate effectAt;
-    private LocalDate dueAt;
-    private Integer overdueDays;
-    
     private Integer version;
-
     private TradeStateLog stateLog;
 }

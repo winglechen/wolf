@@ -24,24 +24,22 @@ public class RepaymentTerm implements VO {
     private Long  buyerId;
     private Long  sellerId;
 
+    private Integer state;
+    private Integer installmentNum;
     private Integer repayStrategy;
     private Integer prepayStrategy;
 
-    private Integer state;
+    private Integer currency;
+    private BigDecimal amount;
+    private BigDecimal paidAmount;
+    private BigDecimal lossAmount;
+
 
     private BigDecimal loanAmount;
-    private BigDecimal  paidAmount;
-    private BigDecimal  lossAmount;
-    private Integer currency;
-
-    /**
-     * 动态生成数据
-     */
-    private BigDecimal dueAmount;
+    private BigDecimal handlingFee;
     private BigDecimal interest;
-    private BigDecimal interestRate;
     private BigDecimal penalty;
-    private BigDecimal penaltyRate;
+
     /**
      * installmentNo1, installmentNo2, ...
      */

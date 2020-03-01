@@ -110,7 +110,6 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
         contract.setLoanTerm(loanTerm);
     }
 
-
     private void initInstallmentTerm() {
         List<InstallmentTerm> terms = goods.getInstallmentTermList();
         int installmentCount = terms.size();
@@ -128,7 +127,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
             term.setBuyerId(contract.getBuyerId());
 
             calculateInstallmentInterest(term);
-            term.setAmount(rateInstallment.split(term.getPercentage(), RateEnum.PER_HUNDRED));
+            term.setLoanAmount(rateInstallment.split(term.getPercentage(), RateEnum.PER_HUNDRED));
             setInstallmentFee(term, rateFee.split(term.getFeePercentage(), RateEnum.PER_HUNDRED));
         }
 
@@ -156,7 +155,6 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
                 .percentage(Rate.HUNDRED_PERCENT)
                 .feePercentage(Rate.HUNDRED_PERCENT)
                 .installmentType(InstallmentTypeEnum.NO_INSTALLMENTS.getCode())
-                .amount(loan.getAmount())
                 .interest(loan.getInterest())
                 .handlingFee(loan.getHandlingFee())
                 .build();

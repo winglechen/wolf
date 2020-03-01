@@ -89,15 +89,21 @@ CREATE TABLE IF NOT EXISTS `repayment_term`
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
-
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
     `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
-    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
 
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
+    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '应还金额',
     `paid_amount`       DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '实还金额',
     `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
+
+    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '借款金额',
+    `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
+    `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
+    `penalty`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
+
+    `tags`              VARCHAR(100) NOT NULL DEFAULT '' COMMENT '标签',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -126,17 +132,20 @@ CREATE TABLE IF NOT EXISTS `installment_term`
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `installment_type`  TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期类型',
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
+
     `effect_at`         DATE COMMENT '生效时间',
     `due_at`            DATE COMMENT '到期时间',
 
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
-    `paid_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
-    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '总金额',
+    `paid_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已还金额',
+    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '资损金额',
 
+    `loan_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '本金',
+    `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
     `interest`          DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
     `penalty`           DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '罚息金额',
-    `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
+
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
     `percentage`        DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
