@@ -22,8 +22,8 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 public class InstallmentTerm implements VO {
-    private Long id;
     private String tradeNo;
+    private String relatedTradeNo;
     private Long  buyerId;
     private Long  sellerId;
 
@@ -32,17 +32,18 @@ public class InstallmentTerm implements VO {
     private TradeState state;
     private TradeEvent stateEvent;
 
-    private String relatedTradeNo;
+    private Integer currency;
+    private BigDecimal amount;
+    private BigDecimal paidAmount;
+    private BigDecimal lossAmount;
+
 
     private Integer period;
-    private Integer periodUnit;
-    private Integer periodStrategy;
     private BigDecimal percentage;
     private BigDecimal feePercentage;
-
-    private BigDecimal amount;
-    private BigDecimal  interest;
-    private BigDecimal  handlingFee;
+    private BigDecimal interest;
+    private BigDecimal penalty;
+    private BigDecimal handlingFee;
 
     private LocalDate effectAt;
     private LocalDate dueAt;

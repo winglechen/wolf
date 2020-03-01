@@ -119,29 +119,25 @@ CREATE TABLE IF NOT EXISTS `installment_term`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT  COMMENT 'ID',
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易号',
+    `related_trade_no`  VARCHAR(32) NOT NULL DEFAULT '' COMMENT '关联交易号',
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
     `installment_type`  TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期类型',
-
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
-    `related_trade_no`  VARCHAR(32) NOT NULL DEFAULT '' COMMENT '关联交易号',
-
     `effect_at`         DATE COMMENT '生效时间',
     `due_at`            DATE COMMENT '到期时间',
 
-    `amount`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `paid_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
-    `loss_amount`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `paid_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
+    `loss_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额',
 
     `interest`          DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '利息金额',
+    `penalty`           DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '罚息金额',
     `handling_fee`      DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '手续费',
-
     `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
     `percentage`        DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '还款比例',
     `fee_percentage`    DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
 
