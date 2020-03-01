@@ -15,5 +15,5 @@ import study.daydayup.wolf.framework.rpc.page.Page;
  **/
 public interface ContractManageService extends Service {
     Result<Page<Contract>> find(ContractRequest request);
-    Result<Contract> find(TradeId tradeId);
+//    Result<Contract> find(TradeId tradeId);
 }

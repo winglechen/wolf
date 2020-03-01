@@ -19,8 +19,8 @@ import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerReques
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
+import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
-import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -41,7 +41,7 @@ public class UnionLoanController extends BaseUnionController {
     @Reference
     private LoanService loanService;
     @Reference
-    private ContractManageService contractService;
+    private ContractService contractService;
     @Reference
     private BuyerContractService buyerContractService;
     @Reference
@@ -94,8 +94,7 @@ public class UnionLoanController extends BaseUnionController {
 
         ContractOption option = initContractOption();
 
-        //TODO use ContractService
-        return contractService.find(tradeId);
+        return contractService.find(tradeId, option);
     }
 
     @GetMapping("/loan/living")
