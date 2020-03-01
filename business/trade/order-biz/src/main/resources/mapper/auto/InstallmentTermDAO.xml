@@ -4,23 +4,22 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
     <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
     <result column="installment_no" jdbcType="TINYINT" property="installmentNo" />
     <result column="installment_type" jdbcType="TINYINT" property="installmentType" />
     <result column="state" jdbcType="TINYINT" property="state" />
-    <result column="related_trade_no" jdbcType="VARCHAR" property="relatedTradeNo" />
     <result column="effect_at" jdbcType="DATE" property="effectAt" />
     <result column="due_at" jdbcType="DATE" property="dueAt" />
-    <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
-    <result column="paid_amount" jdbcType="BIGINT" property="paidAmount" />
-    <result column="loss_amount" jdbcType="BIGINT" property="lossAmount" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount" />
+    <result column="loss_amount" jdbcType="DECIMAL" property="lossAmount" />
     <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
     <result column="handling_fee" jdbcType="DECIMAL" property="handlingFee" />
     <result column="period" jdbcType="INTEGER" property="period" />
-    <result column="period_unit" jdbcType="INTEGER" property="periodUnit" />
-    <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
     <result column="percentage" jdbcType="DECIMAL" property="percentage" />
     <result column="fee_percentage" jdbcType="DECIMAL" property="feePercentage" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -30,9 +29,9 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, trade_no, buyer_id, seller_id, installment_no, installment_type, `state`, related_trade_no, 
-    effect_at, due_at, amount, currency, paid_amount, loss_amount, interest, handling_fee, 
-    period, period_unit, period_strategy, percentage, fee_percentage, version, delete_flag, 
+    id, trade_no, related_trade_no, buyer_id, seller_id, installment_no, installment_type, 
+    `state`, effect_at, due_at, currency, amount, paid_amount, loss_amount, interest, 
+    penalty, handling_fee, period, percentage, fee_percentage, version, delete_flag, 
     last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -49,24 +48,22 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into installment_term (trade_no, buyer_id, seller_id, 
-      installment_no, installment_type, `state`, 
-      related_trade_no, effect_at, due_at, 
-      amount, currency, paid_amount, 
-      loss_amount, interest, handling_fee, 
-      period, period_unit, period_strategy, 
-      percentage, fee_percentage, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
-    values (#{tradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{sellerId,jdbcType=BIGINT}, 
-      #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
-      #{relatedTradeNo,jdbcType=VARCHAR}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, 
-      #{amount,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=BIGINT}, 
-      #{lossAmount,jdbcType=BIGINT}, #{interest,jdbcType=DECIMAL}, #{handlingFee,jdbcType=DECIMAL}, 
-      #{period,jdbcType=INTEGER}, #{periodUnit,jdbcType=INTEGER}, #{periodStrategy,jdbcType=INTEGER}, 
-      #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+    insert into installment_term (trade_no, related_trade_no, buyer_id, 
+      seller_id, installment_no, installment_type, 
+      `state`, effect_at, due_at, currency, 
+      amount, paid_amount, loss_amount, 
+      interest, penalty, handling_fee, 
+      period, percentage, fee_percentage, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
+    values (#{tradeNo,jdbcType=VARCHAR}, #{relatedTradeNo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, 
+      #{sellerId,jdbcType=BIGINT}, #{installmentNo,jdbcType=TINYINT}, #{installmentType,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{effectAt,jdbcType=DATE}, #{dueAt,jdbcType=DATE}, #{currency,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DECIMAL}, #{paidAmount,jdbcType=DECIMAL}, #{lossAmount,jdbcType=DECIMAL}, 
+      #{interest,jdbcType=DECIMAL}, #{penalty,jdbcType=DECIMAL}, #{handlingFee,jdbcType=DECIMAL}, 
+      #{period,jdbcType=INTEGER}, #{percentage,jdbcType=DECIMAL}, #{feePercentage,jdbcType=DECIMAL}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -76,6 +73,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tradeNo != null">
         trade_no,
+      </if>
+      <if test="relatedTradeNo != null">
+        related_trade_no,
       </if>
       <if test="buyerId != null">
         buyer_id,
@@ -92,20 +92,17 @@
       <if test="state != null">
         `state`,
       </if>
-      <if test="relatedTradeNo != null">
-        related_trade_no,
-      </if>
       <if test="effectAt != null">
         effect_at,
       </if>
       <if test="dueAt != null">
         due_at,
       </if>
-      <if test="amount != null">
-        amount,
-      </if>
       <if test="currency != null">
         currency,
+      </if>
+      <if test="amount != null">
+        amount,
       </if>
       <if test="paidAmount != null">
         paid_amount,
@@ -116,17 +113,14 @@
       <if test="interest != null">
         interest,
       </if>
+      <if test="penalty != null">
+        penalty,
+      </if>
       <if test="handlingFee != null">
         handling_fee,
       </if>
       <if test="period != null">
         period,
-      </if>
-      <if test="periodUnit != null">
-        period_unit,
-      </if>
-      <if test="periodStrategy != null">
-        period_strategy,
       </if>
       <if test="percentage != null">
         percentage,
@@ -154,6 +148,9 @@
       <if test="tradeNo != null">
         #{tradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="relatedTradeNo != null">
+        #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
       <if test="buyerId != null">
         #{buyerId,jdbcType=BIGINT},
       </if>
@@ -169,41 +166,35 @@
       <if test="state != null">
         #{state,jdbcType=TINYINT},
       </if>
-      <if test="relatedTradeNo != null">
-        #{relatedTradeNo,jdbcType=VARCHAR},
-      </if>
       <if test="effectAt != null">
         #{effectAt,jdbcType=DATE},
       </if>
       <if test="dueAt != null">
         #{dueAt,jdbcType=DATE},
       </if>
-      <if test="amount != null">
-        #{amount,jdbcType=BIGINT},
-      </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
       </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
       <if test="paidAmount != null">
-        #{paidAmount,jdbcType=BIGINT},
+        #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="lossAmount != null">
-        #{lossAmount,jdbcType=BIGINT},
+        #{lossAmount,jdbcType=DECIMAL},
       </if>
       <if test="interest != null">
         #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        #{penalty,jdbcType=DECIMAL},
       </if>
       <if test="handlingFee != null">
         #{handlingFee,jdbcType=DECIMAL},
       </if>
       <if test="period != null">
         #{period,jdbcType=INTEGER},
-      </if>
-      <if test="periodUnit != null">
-        #{periodUnit,jdbcType=INTEGER},
-      </if>
-      <if test="periodStrategy != null">
-        #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         #{percentage,jdbcType=DECIMAL},
@@ -234,6 +225,9 @@
       <if test="tradeNo != null">
         trade_no = #{tradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="relatedTradeNo != null">
+        related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
+      </if>
       <if test="buyerId != null">
         buyer_id = #{buyerId,jdbcType=BIGINT},
       </if>
@@ -249,41 +243,35 @@
       <if test="state != null">
         `state` = #{state,jdbcType=TINYINT},
       </if>
-      <if test="relatedTradeNo != null">
-        related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
-      </if>
       <if test="effectAt != null">
         effect_at = #{effectAt,jdbcType=DATE},
       </if>
       <if test="dueAt != null">
         due_at = #{dueAt,jdbcType=DATE},
       </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=BIGINT},
-      </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
       </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
       <if test="paidAmount != null">
-        paid_amount = #{paidAmount,jdbcType=BIGINT},
+        paid_amount = #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="lossAmount != null">
-        loss_amount = #{lossAmount,jdbcType=BIGINT},
+        loss_amount = #{lossAmount,jdbcType=DECIMAL},
       </if>
       <if test="interest != null">
         interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        penalty = #{penalty,jdbcType=DECIMAL},
       </if>
       <if test="handlingFee != null">
         handling_fee = #{handlingFee,jdbcType=DECIMAL},
       </if>
       <if test="period != null">
         period = #{period,jdbcType=INTEGER},
-      </if>
-      <if test="periodUnit != null">
-        period_unit = #{periodUnit,jdbcType=INTEGER},
-      </if>
-      <if test="periodStrategy != null">
-        period_strategy = #{periodStrategy,jdbcType=INTEGER},
       </if>
       <if test="percentage != null">
         percentage = #{percentage,jdbcType=DECIMAL},
@@ -312,23 +300,22 @@
   <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.InstallmentTermDO">
     update installment_term
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
       installment_no = #{installmentNo,jdbcType=TINYINT},
       installment_type = #{installmentType,jdbcType=TINYINT},
       `state` = #{state,jdbcType=TINYINT},
-      related_trade_no = #{relatedTradeNo,jdbcType=VARCHAR},
       effect_at = #{effectAt,jdbcType=DATE},
       due_at = #{dueAt,jdbcType=DATE},
-      amount = #{amount,jdbcType=BIGINT},
       currency = #{currency,jdbcType=INTEGER},
-      paid_amount = #{paidAmount,jdbcType=BIGINT},
-      loss_amount = #{lossAmount,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      paid_amount = #{paidAmount,jdbcType=DECIMAL},
+      loss_amount = #{lossAmount,jdbcType=DECIMAL},
       interest = #{interest,jdbcType=DECIMAL},
+      penalty = #{penalty,jdbcType=DECIMAL},
       handling_fee = #{handlingFee,jdbcType=DECIMAL},
       period = #{period,jdbcType=INTEGER},
-      period_unit = #{periodUnit,jdbcType=INTEGER},
-      period_strategy = #{periodStrategy,jdbcType=INTEGER},
       percentage = #{percentage,jdbcType=DECIMAL},
       fee_percentage = #{feePercentage,jdbcType=DECIMAL},
       version = #{version,jdbcType=INTEGER},
