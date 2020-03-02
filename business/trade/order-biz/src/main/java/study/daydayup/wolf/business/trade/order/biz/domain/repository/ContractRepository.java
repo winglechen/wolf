@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.order.biz.converter.ContractConverter;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
+import study.daydayup.wolf.business.trade.order.biz.domain.factory.ContractFactory;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.contract.*;
 import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.sm.StateMachine;
@@ -111,7 +112,7 @@ public class ContractRepository extends AbstractRepository implements Repository
         contract.setRepaymentTerm(repaymentTermRepository.find(tradeId));
         contract.setTaxTerm(taxTermRepository.find(tradeId));
 
-        return contract;
+        return ContractFactory.create(contract).getModel();
     }
 
     private ContractDO findContract(TradeId tradeId) {

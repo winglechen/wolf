@@ -7,9 +7,12 @@ import study.daydayup.wolf.business.trade.api.domain.entity.contract.*;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
+import study.daydayup.wolf.business.trade.order.biz.domain.entity.ContractEntity;
+import study.daydayup.wolf.business.trade.order.biz.domain.factory.ContractFactory;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +44,18 @@ public class ContractQueryRepository extends ContractRepository {
         findPostageTermsByContractList(contractList, tradeIds);
         findTaxTermsByContractList(contractList, tradeIds);
 
-        return contractList;
+        return formatContractList(contractList);
+    }
+
+    private List<Contract> formatContractList(List<Contract> contractList) {
+        List<ContractEntity> entityList = ContractFactory.create(contractList);
+
+        List<Contract> result = new ArrayList<>(entityList.size());
+        for (ContractEntity entity : entityList) {
+            result.add(entity.getModel());
+        }
+
+        return result;
     }
 
     private TradeIds initTradeIds(@NonNull List<ContractDO> contractDOList,  @NonNull TradeOwner owner) {
