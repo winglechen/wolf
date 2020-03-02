@@ -1,10 +1,10 @@
 package study.daydayup.wolf.business.trade.buy.biz.base;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayNotifyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayNotifyResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 
@@ -26,5 +26,5 @@ public interface TradeFlow {
     PreviewResponse preview(BuyRequest request);
     ConfirmResponse confirm(BuyRequest request);
     PayResponse pay(PayRequest request);
-    PayNotifyResponse payNotify(PayNotifyRequest request);
+    PayResultResponse payNotify(PayResultRequest request);
 }

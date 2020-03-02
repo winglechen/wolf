@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2020/2/27 4:43 下午
  **/
-public class PayResponse extends Attachment implements Response {
+public class PayVerifyResponse extends Attachment implements Response {
     private Integer paymentMethod;
     private BigDecimal amount;
     private Boolean success;

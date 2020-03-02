@@ -6,8 +6,8 @@ import lombok.NonNull;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PayRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.exception.InvalidEpiResponseException;
 import study.daydayup.wolf.common.util.collection.MapUtil;
 
@@ -26,9 +26,9 @@ public class RazorPayer {
     @Resource
     private RazorConfig config;
 
-    private PayRequest request;
+    private PayVerifyRequest request;
 
-    public PayResponse pay(@NonNull PayRequest request) {
+    public PayVerifyResponse pay(@NonNull PayVerifyRequest request) {
         this.request = request;
         validRequest();
 

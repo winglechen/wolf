@@ -20,6 +20,6 @@ public class RepayRequest implements Request {
     @NonNull
     private String tradeNo;
     private Integer installmentNo;
-    private Integer payMethod;
+    private Integer paymentMethod;
 
 }

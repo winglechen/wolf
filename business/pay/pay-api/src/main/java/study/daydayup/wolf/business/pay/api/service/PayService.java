@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.api.service;
 
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PayRequest;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -19,7 +19,7 @@ public interface PayService {
      * pay
      * 一般是前端(H5, app, ...)发起
      */
-    Result<PayResponse> pay(PayRequest request);
+    Result<PayVerifyResponse> pay(PayVerifyRequest request);
 
     /**
      * 订阅异步通知

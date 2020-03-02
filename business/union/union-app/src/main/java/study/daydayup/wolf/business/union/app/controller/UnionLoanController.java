@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
@@ -11,6 +12,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.RepayRequest;
@@ -119,6 +121,21 @@ public class UnionLoanController extends BaseUnionController {
                 .build();
 
         return sellerContractService.findByBuyerId(request, pageRequest);
+    }
+
+    @GetMapping("/loan/repay/result/{tradeNo}")
+    public Result<PayResultResponse> repayResult(@PathVariable("tradeNo") String tradeNo) {
+        return null;
+    }
+
+    /**
+     *
+     * @param tradeNo
+     * @return
+     */
+    @GetMapping("/loan/complete/{tradeNo}")
+    public Result<String> loanComplete(@PathVariable("tradeNo") String tradeNo) {
+        return null;
     }
 
     @PutMapping("/loan/repay")

@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
  * @since 2020/2/27 4:42 下午
  **/
 @Data
-public class PayRequest implements Request {
+public class PayVerifyRequest implements Request {
     private Integer paymentMethod;
     @NonNull @Min(1)
     private Long payeeId;
@@ -24,7 +24,7 @@ public class PayRequest implements Request {
     private ObjectMap attachment;
 
 
-    public PayRequest() {
+    public PayVerifyRequest() {
         attachment = new ObjectMap();
     }
 
