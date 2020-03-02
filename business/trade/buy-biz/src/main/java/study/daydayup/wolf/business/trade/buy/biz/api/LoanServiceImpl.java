@@ -15,6 +15,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.api
@@ -76,6 +77,20 @@ public class LoanServiceImpl implements LoanService {
         tradeId.valid();
         LoanContractEntity entity = loanContractRepository.find(tradeId);
         entity.completeLoan();
+
+        loanContractRepository.save(entity);
+    }
+
+    @Override
+    public void completeLoan(@NonNull TradeId tradeId, LocalDate effectAt) {
+        if (effectAt == null) {
+            completeLoan(tradeId);
+            return;
+        }
+
+        tradeId.valid();
+        LoanContractEntity entity = loanContractRepository.find(tradeId);
+        entity.completeLoan(effectAt);
 
         loanContractRepository.save(entity);
     }

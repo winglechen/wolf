@@ -6,6 +6,8 @@ import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
+import java.time.LocalDate;
+
 /**
  * study.daydayup.wolf.business.trade.api.service.buy
  *
@@ -20,6 +22,13 @@ public interface LoanService {
 
     void startLoan(TradeId tradeId);
     void completeLoan(TradeId tradeId);
+
+    /**
+     * Just For dev
+     * @param tradeId
+     * @param effectAt
+     */
+    void completeLoan(TradeId tradeId, LocalDate effectAt);
 
     void createLoanProxy();
     Result<PayResponse> repay(TradeId tradeId, Integer installmentNo);

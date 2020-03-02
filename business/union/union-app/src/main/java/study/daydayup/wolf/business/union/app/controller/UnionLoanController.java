@@ -23,10 +23,12 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
+import study.daydayup.wolf.business.union.app.dto.LoanCompleteRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,14 +130,13 @@ public class UnionLoanController extends BaseUnionController {
         return null;
     }
 
-    /**
-     *
-     * @param tradeNo
-     * @return
-     */
-    @GetMapping("/loan/complete/{tradeNo}")
-    public Result<String> loanComplete(@PathVariable("tradeNo") String tradeNo) {
-        return null;
+    @PutMapping("/loan/complete")
+    public Result<String> loanComplete(@Validated @RequestBody LoanCompleteRequest request) {
+        TradeId tradeId = initTradeId(request.getTradeNo());
+        LocalDate effectAt = request.getEffectAt();
+
+        loanService.completeLoan(tradeId, effectAt);
+        return Result.ok("ok");
     }
 
     @PutMapping("/loan/repay")
@@ -171,7 +172,9 @@ public class UnionLoanController extends BaseUnionController {
         tradeId.setTradeNo(tradeNo);
 
         Long orgId = session.get("orgId", Long.class);
+        Long accountId = session.get("accountId", Long.class);
         tradeId.setSellerId(orgId);
+        tradeId.setBuyerId(accountId);
 
         return tradeId;
     }

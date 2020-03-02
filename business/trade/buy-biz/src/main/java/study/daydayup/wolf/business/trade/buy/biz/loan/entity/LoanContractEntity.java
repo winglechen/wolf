@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.contract.Installment
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +92,27 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
     }
 
     public void completeLoan() {
+        // pay notify -> order state:paid -> loan order paid
+        // loan.service subscribe(loan order paid)
+        // Loan.finishLoan
+        LoanSuccessEvent event = LoanSuccessEvent.builder()
+                .tradeNo(model.getTradeNo())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        key.setState(model.getState());
+        changes.setStateEvent(event);
+
+        //loan.installment.effect
+        List<InstallmentTerm> installmentTerms = new ArrayList<>();
+    }
+
+    /**
+     * JUST FOR DEV
+     * @param effectAt
+     */
+    public void completeLoan(LocalDate effectAt) {
         // pay notify -> order state:paid -> loan order paid
         // loan.service subscribe(loan order paid)
         // Loan.finishLoan
