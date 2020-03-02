@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.trade.api.domain.entity.contract;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class RepaymentTerm implements VO {
     private String tradeNo;
     private Long  buyerId;
