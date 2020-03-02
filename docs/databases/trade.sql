@@ -45,32 +45,31 @@ CREATE TABLE IF NOT EXISTS `loan_term`
     `buyer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '买家ID',
     `seller_id`         BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
-    `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
-    `goods_version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '商品版本号',
-
     `state`             TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易状态',
 
     `amount`            DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '借款金额',
     `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
 
-    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
-    `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
-    `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
-
     `handling_fee`      DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '手续费',
     `handling_fee_rate` DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '手续费比例',
     `fee_pay_strategy`  INT(11) NOT NULL DEFAULT 0 COMMENT '手续费策略',
 
-    `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
-    `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
-    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
-
     `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
     `interest_rate`     DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '利息比率',
     `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
+
     `penalty`           DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '滞纳金',
     `penalty_rate`      DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '罚息比率',
     `penalty_unit`      INT(11) NOT NULL DEFAULT 0 COMMENT '滞纳金单位',
+
+    `goods_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
+    `goods_version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '商品版本号',
+    `installment_num`   TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
+    `repay_strategy`    INT(11) NOT NULL DEFAULT 0 COMMENT '还款策略',
+    `prepay_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '提前还款策略',
+    `period`            INT(11) NOT NULL DEFAULT 0 COMMENT '借款时长',
+    `period_unit`       INT(11) NOT NULL DEFAULT 0 COMMENT '时长单位',
+    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

@@ -20,37 +20,36 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 public class LoanTerm implements VO {
-    protected String tradeNo;
-    protected Long  buyerId;
-    protected Long  sellerId;
+    private String tradeNo;
+    private Long  buyerId;
+    private Long  sellerId;
 
-    protected Long goodsId;
-    protected Integer goodsVersion;
+    private Integer state;
 
     @DecimalMin("0.0001")
-    protected BigDecimal  amount;
-    protected BigDecimal  repayAmount;
-    protected BigDecimal  lossAmount;
-    protected Integer currency;
+    private BigDecimal  amount;
+    private Integer currency;
 
-    protected Integer period;
-    protected Integer periodUnit;
-    protected Integer periodStrategy;
+    private BigDecimal handlingFee;
+    private BigDecimal handlingFeeRate;
+    private Integer feePayStrategy;
 
-    protected BigDecimal handlingFee;
-    protected BigDecimal handlingFeeRate;
-    protected Integer feePayStrategy;
+    private BigDecimal  interest;
+    private BigDecimal interestRate;
+    private Integer interestUnit;
 
-    protected BigDecimal  interest;
-    protected BigDecimal interestRate;
-    protected Integer interestUnit;
+    private BigDecimal  penalty;
+    private BigDecimal penaltyRate;
+    private Integer penaltyUnit;
 
-    protected BigDecimal  penalty;
-    protected BigDecimal penaltyRate;
-    protected Integer penaltyUnit;
+    private Long goodsId;
+    private Integer goodsVersion;
+    private Integer installmentNum;
+    private Integer repayStrategy;
+    private Integer prepayStrategy;
+    private Integer period;
+    private Integer periodUnit;
+    private Integer periodStrategy;
 
-    protected Integer repayStrategy;
-    protected Integer prepayStrategy;
-
-    protected LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 }
