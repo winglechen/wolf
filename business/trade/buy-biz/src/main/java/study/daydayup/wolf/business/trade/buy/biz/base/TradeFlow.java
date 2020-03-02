@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.buy.domain.entity.flow
- *
+ * TODO refactor
  * @author Wingle
  * @since 2019/10/5 10:54 AM
  **/

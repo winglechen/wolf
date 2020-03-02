@@ -32,6 +32,12 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         List<TradeNode> nodeList = buildConfirmFlow();
         execute(nodeList, context);
 
+        if (null != context.getContract()) {
+            response.setOrderNo(context.getContract().getTradeNo());
+        } else if (null != context.getOrder()) {
+            response.setOrderNo(context.getOrder().getTradeNo());
+        }
+
         return response;
     }
 
