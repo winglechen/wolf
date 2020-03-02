@@ -109,6 +109,12 @@ public class GoodsEpi implements Epi {
         loanTerm.setInterestRate(loanFromGoods.getInterest());
         loanTerm.setPenaltyRate(loanFromGoods.getPenalty());
 
+        int installmentNum = goodsDTO.getInstallmentList().size();
+        if (0 == installmentNum) {
+            installmentNum = 1;
+        }
+        loanTerm.setInstallmentNum(installmentNum);
+
         return loanTerm;
     }
 
