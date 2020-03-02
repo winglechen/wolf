@@ -200,10 +200,7 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
         if (feeStrategy == FeeStrategyEnum.PRE.getCode()) {
             term.setHandlingFee(BigDecimal.ZERO);
-            return;
-        }
-
-        if (feeStrategy == FeeStrategyEnum.POST.getCode()) {
+        } else if (feeStrategy == FeeStrategyEnum.POST.getCode()) {
             term.setHandlingFee(fee);
         }
     }
