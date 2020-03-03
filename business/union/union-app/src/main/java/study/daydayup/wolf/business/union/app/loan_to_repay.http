@@ -15,10 +15,19 @@ Content-Type: application/json
 client.global.set("tradeNo", response.body.data.tradeNo);
 %}
 
+###
+PUT http://localhost:8100/loan/dev/approve/{{tradeNo}}
+Accept: */*
+Cache-Control: no-cache
+
+###
+PUT http://localhost:8100/loan/dev/loaning/{{tradeNo}}
+Accept: */*
+Cache-Control: no-cache
 
 
 ###
-PUT http://localhost:8100/loan/complete
+PUT http://localhost:8100/loan/dev/loaned
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json

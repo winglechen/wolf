@@ -23,10 +23,25 @@ public class UnionDevController extends BaseUnionController {
     private LoanService loanService;
 
 
-    
+
+    @PutMapping("/loan/dev/approve/{tradeNo}")
+    public Result<String> approve(@PathVariable String tradeNo) {
+        TradeId tradeId = initTradeId(tradeNo);
+
+        loanService.approve(tradeId);
+        return Result.ok("ok");
+    }
+
+    @PutMapping("/loan/dev/loaning/{tradeNo}")
+    public Result<String> loaning(@PathVariable String tradeNo) {
+        TradeId tradeId = initTradeId(tradeNo);
+
+        loanService.startLoan(tradeId);
+        return Result.ok("ok");
+    }
 
 
-    @PutMapping("/loan/complete")
+    @PutMapping("/loan/dev/loaned")
     public Result<String> completeLoan(@Validated @RequestBody LoanActionRequest request) {
         TradeId tradeId = initTradeId(request.getTradeNo());
         LocalDate effectAt = request.getEffectAt();
@@ -35,14 +50,6 @@ public class UnionDevController extends BaseUnionController {
         return Result.ok("ok");
     }
 
-    @PutMapping("loan/start")
-    public Result<String> startLoan(@Validated @RequestBody LoanActionRequest request) {
-        TradeId tradeId = initTradeId(request.getTradeNo());
-        LocalDate effectAt = request.getEffectAt();
-
-        loanService.startLoan(tradeId);
-        return Result.ok("ok");
-    }
 
 
     private TradeId initTradeId(String tradeNo) {
