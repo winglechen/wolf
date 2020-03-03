@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * @since 2020/3/2 6:56 下午
  **/
 @Data
-public class LoanCompleteRequest implements Request {
+public class LoanActionRequest implements Request {
     @NotBlank
     private String tradeNo;
     private LocalDate effectAt;

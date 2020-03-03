@@ -33,9 +33,9 @@ public abstract class AbstractTradeFlow implements TradeFlow {
         execute(nodeList, context);
 
         if (null != context.getContract()) {
-            response.setOrderNo(context.getContract().getTradeNo());
+            response.setTradeNo(context.getContract().getTradeNo());
         } else if (null != context.getOrder()) {
-            response.setOrderNo(context.getOrder().getTradeNo());
+            response.setTradeNo(context.getOrder().getTradeNo());
         }
 
         return response;

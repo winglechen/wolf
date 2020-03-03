@@ -64,15 +64,5 @@ GET http://localhost:8100/loan/living
 Accept: */*
 Cache-Control: no-cache
 
-###
-PUT http://localhost:8100/loan/complete
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{
-  "tradeNo": "20200302122014000119963365897769",
-  "effectAt": "2020-03-01"
-}
 
 ###

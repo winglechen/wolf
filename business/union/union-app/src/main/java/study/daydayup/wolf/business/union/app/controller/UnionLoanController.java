@@ -3,7 +3,6 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
@@ -23,7 +22,7 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
-import study.daydayup.wolf.business.union.app.dto.LoanCompleteRequest;
+import study.daydayup.wolf.business.union.app.dto.LoanActionRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -128,15 +127,6 @@ public class UnionLoanController extends BaseUnionController {
     @GetMapping("/loan/repay/result/{tradeNo}")
     public Result<PayResultResponse> repayResult(@PathVariable("tradeNo") String tradeNo) {
         return null;
-    }
-
-    @PutMapping("/loan/complete")
-    public Result<String> loanComplete(@Validated @RequestBody LoanCompleteRequest request) {
-        TradeId tradeId = initTradeId(request.getTradeNo());
-        LocalDate effectAt = request.getEffectAt();
-
-        loanService.completeLoan(tradeId, effectAt);
-        return Result.ok("ok");
     }
 
     @PutMapping("/loan/repay")

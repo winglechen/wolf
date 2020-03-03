@@ -11,5 +11,5 @@ import study.daydayup.wolf.framework.layer.api.Response;
  **/
 @Data
 public class ConfirmResponse implements Response {
-    private String orderNo;
+    private String tradeNo;
 }
