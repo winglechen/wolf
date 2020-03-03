@@ -12,8 +12,6 @@ public class TrackRepayDO implements Serializable {
 
     private Long orgId;
 
-    private LocalDate requestDate;
-
     private LocalDate loanDate;
 
     private LocalDate dueDate;
@@ -41,6 +39,8 @@ public class TrackRepayDO implements Serializable {
     private Integer partlyLossCount;
 
     private BigDecimal partlyLossAmount;
+
+    private BigDecimal d1Amount;
 
     private Integer d1;
 
@@ -80,7 +80,6 @@ public class TrackRepayDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
-        sb.append(", requestDate=").append(requestDate);
         sb.append(", loanDate=").append(loanDate);
         sb.append(", dueDate=").append(dueDate);
         sb.append(", goodsId=").append(goodsId);
@@ -95,6 +94,7 @@ public class TrackRepayDO implements Serializable {
         sb.append(", lossAmount=").append(lossAmount);
         sb.append(", partlyLossCount=").append(partlyLossCount);
         sb.append(", partlyLossAmount=").append(partlyLossAmount);
+        sb.append(", d1Amount=").append(d1Amount);
         sb.append(", d1=").append(d1);
         sb.append(", d2=").append(d2);
         sb.append(", d3=").append(d3);
@@ -127,7 +127,6 @@ public class TrackRepayDO implements Serializable {
         TrackRepayDO other = (TrackRepayDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getRequestDate() == null ? other.getRequestDate() == null : this.getRequestDate().equals(other.getRequestDate()))
             && (this.getLoanDate() == null ? other.getLoanDate() == null : this.getLoanDate().equals(other.getLoanDate()))
             && (this.getDueDate() == null ? other.getDueDate() == null : this.getDueDate().equals(other.getDueDate()))
             && (this.getGoodsId() == null ? other.getGoodsId() == null : this.getGoodsId().equals(other.getGoodsId()))
@@ -142,6 +141,7 @@ public class TrackRepayDO implements Serializable {
             && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getPartlyLossCount() == null ? other.getPartlyLossCount() == null : this.getPartlyLossCount().equals(other.getPartlyLossCount()))
             && (this.getPartlyLossAmount() == null ? other.getPartlyLossAmount() == null : this.getPartlyLossAmount().equals(other.getPartlyLossAmount()))
+            && (this.getD1Amount() == null ? other.getD1Amount() == null : this.getD1Amount().equals(other.getD1Amount()))
             && (this.getD1() == null ? other.getD1() == null : this.getD1().equals(other.getD1()))
             && (this.getD2() == null ? other.getD2() == null : this.getD2().equals(other.getD2()))
             && (this.getD3() == null ? other.getD3() == null : this.getD3().equals(other.getD3()))
@@ -164,7 +164,6 @@ public class TrackRepayDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getRequestDate() == null) ? 0 : getRequestDate().hashCode());
         result = prime * result + ((getLoanDate() == null) ? 0 : getLoanDate().hashCode());
         result = prime * result + ((getDueDate() == null) ? 0 : getDueDate().hashCode());
         result = prime * result + ((getGoodsId() == null) ? 0 : getGoodsId().hashCode());
@@ -179,6 +178,7 @@ public class TrackRepayDO implements Serializable {
         result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getPartlyLossCount() == null) ? 0 : getPartlyLossCount().hashCode());
         result = prime * result + ((getPartlyLossAmount() == null) ? 0 : getPartlyLossAmount().hashCode());
+        result = prime * result + ((getD1Amount() == null) ? 0 : getD1Amount().hashCode());
         result = prime * result + ((getD1() == null) ? 0 : getD1().hashCode());
         result = prime * result + ((getD2() == null) ? 0 : getD2().hashCode());
         result = prime * result + ((getD3() == null) ? 0 : getD3().hashCode());

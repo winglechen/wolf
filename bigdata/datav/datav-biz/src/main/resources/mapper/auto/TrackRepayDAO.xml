@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.TrackRepayDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
-    <result column="request_date" jdbcType="DATE" property="requestDate" />
     <result column="loan_date" jdbcType="DATE" property="loanDate" />
     <result column="due_date" jdbcType="DATE" property="dueDate" />
     <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
@@ -19,6 +18,7 @@
     <result column="loss_amount" jdbcType="DECIMAL" property="lossAmount" />
     <result column="partly_loss_count" jdbcType="INTEGER" property="partlyLossCount" />
     <result column="partly_loss_amount" jdbcType="DECIMAL" property="partlyLossAmount" />
+    <result column="d1_amount" jdbcType="DECIMAL" property="d1Amount" />
     <result column="d1" jdbcType="INTEGER" property="d1" />
     <result column="d2" jdbcType="INTEGER" property="d2" />
     <result column="d3" jdbcType="INTEGER" property="d3" />
@@ -35,9 +35,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, request_date, loan_date, due_date, goods_id, installment_no, prepay_count, 
-    prepay_amount, repay_count, repay_amount, overdue_count, overdue_amount, loss_count, 
-    loss_amount, partly_loss_count, partly_loss_amount, d1, d2, d3, d4, d5, d6, d7, w2, 
+    id, org_id, loan_date, due_date, goods_id, installment_no, prepay_count, prepay_amount, 
+    repay_count, repay_amount, overdue_count, overdue_amount, loss_count, loss_amount, 
+    partly_loss_count, partly_loss_amount, d1_amount, d1, d2, d3, d4, d5, d6, d7, w2, 
     w3, w4, m1, mn, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -51,22 +51,22 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.TrackRepayDO">
-    insert into track_repay (id, org_id, request_date, 
-      loan_date, due_date, goods_id, 
-      installment_no, prepay_count, prepay_amount, 
-      repay_count, repay_amount, overdue_count, 
-      overdue_amount, loss_count, loss_amount, 
-      partly_loss_count, partly_loss_amount, d1, 
+    insert into track_repay (id, org_id, loan_date, 
+      due_date, goods_id, installment_no, 
+      prepay_count, prepay_amount, repay_count, 
+      repay_amount, overdue_count, overdue_amount, 
+      loss_count, loss_amount, partly_loss_count, 
+      partly_loss_amount, d1_amount, d1, 
       d2, d3, d4, d5, 
       d6, d7, w2, w3, 
       w4, m1, mn, delete_flag, 
       created_at)
-    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{requestDate,jdbcType=DATE}, 
-      #{loanDate,jdbcType=DATE}, #{dueDate,jdbcType=DATE}, #{goodsId,jdbcType=BIGINT}, 
-      #{installmentNo,jdbcType=INTEGER}, #{prepayCount,jdbcType=INTEGER}, #{prepayAmount,jdbcType=DECIMAL}, 
-      #{repayCount,jdbcType=INTEGER}, #{repayAmount,jdbcType=DECIMAL}, #{overdueCount,jdbcType=INTEGER}, 
-      #{overdueAmount,jdbcType=DECIMAL}, #{lossCount,jdbcType=INTEGER}, #{lossAmount,jdbcType=DECIMAL}, 
-      #{partlyLossCount,jdbcType=INTEGER}, #{partlyLossAmount,jdbcType=DECIMAL}, #{d1,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{loanDate,jdbcType=DATE}, 
+      #{dueDate,jdbcType=DATE}, #{goodsId,jdbcType=BIGINT}, #{installmentNo,jdbcType=INTEGER}, 
+      #{prepayCount,jdbcType=INTEGER}, #{prepayAmount,jdbcType=DECIMAL}, #{repayCount,jdbcType=INTEGER}, 
+      #{repayAmount,jdbcType=DECIMAL}, #{overdueCount,jdbcType=INTEGER}, #{overdueAmount,jdbcType=DECIMAL}, 
+      #{lossCount,jdbcType=INTEGER}, #{lossAmount,jdbcType=DECIMAL}, #{partlyLossCount,jdbcType=INTEGER}, 
+      #{partlyLossAmount,jdbcType=DECIMAL}, #{d1Amount,jdbcType=DECIMAL}, #{d1,jdbcType=INTEGER}, 
       #{d2,jdbcType=INTEGER}, #{d3,jdbcType=INTEGER}, #{d4,jdbcType=INTEGER}, #{d5,jdbcType=INTEGER}, 
       #{d6,jdbcType=INTEGER}, #{d7,jdbcType=INTEGER}, #{w2,jdbcType=INTEGER}, #{w3,jdbcType=INTEGER}, 
       #{w4,jdbcType=INTEGER}, #{m1,jdbcType=INTEGER}, #{mn,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, 
@@ -80,9 +80,6 @@
       </if>
       <if test="orgId != null">
         org_id,
-      </if>
-      <if test="requestDate != null">
-        request_date,
       </if>
       <if test="loanDate != null">
         loan_date,
@@ -125,6 +122,9 @@
       </if>
       <if test="partlyLossAmount != null">
         partly_loss_amount,
+      </if>
+      <if test="d1Amount != null">
+        d1_amount,
       </if>
       <if test="d1 != null">
         d1,
@@ -176,9 +176,6 @@
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="requestDate != null">
-        #{requestDate,jdbcType=DATE},
-      </if>
       <if test="loanDate != null">
         #{loanDate,jdbcType=DATE},
       </if>
@@ -220,6 +217,9 @@
       </if>
       <if test="partlyLossAmount != null">
         #{partlyLossAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="d1Amount != null">
+        #{d1Amount,jdbcType=DECIMAL},
       </if>
       <if test="d1 != null">
         #{d1,jdbcType=INTEGER},
@@ -271,9 +271,6 @@
       <if test="orgId != null">
         org_id = #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="requestDate != null">
-        request_date = #{requestDate,jdbcType=DATE},
-      </if>
       <if test="loanDate != null">
         loan_date = #{loanDate,jdbcType=DATE},
       </if>
@@ -315,6 +312,9 @@
       </if>
       <if test="partlyLossAmount != null">
         partly_loss_amount = #{partlyLossAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="d1Amount != null">
+        d1_amount = #{d1Amount,jdbcType=DECIMAL},
       </if>
       <if test="d1 != null">
         d1 = #{d1,jdbcType=INTEGER},
@@ -364,7 +364,6 @@
   <update id="updateById" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.TrackRepayDO">
     update track_repay
     set org_id = #{orgId,jdbcType=BIGINT},
-      request_date = #{requestDate,jdbcType=DATE},
       loan_date = #{loanDate,jdbcType=DATE},
       due_date = #{dueDate,jdbcType=DATE},
       goods_id = #{goodsId,jdbcType=BIGINT},
@@ -379,6 +378,7 @@
       loss_amount = #{lossAmount,jdbcType=DECIMAL},
       partly_loss_count = #{partlyLossCount,jdbcType=INTEGER},
       partly_loss_amount = #{partlyLossAmount,jdbcType=DECIMAL},
+      d1_amount = #{d1Amount,jdbcType=DECIMAL},
       d1 = #{d1,jdbcType=INTEGER},
       d2 = #{d2,jdbcType=INTEGER},
       d3 = #{d3,jdbcType=INTEGER},
