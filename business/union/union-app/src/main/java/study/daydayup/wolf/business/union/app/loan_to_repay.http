@@ -41,3 +41,5 @@ Content-Type: application/json
 GET http://localhost:8100/loan/{{tradeNo}}?lang=zh_CN
 Accept: */*
 Cache-Control: no-cache
+
+###

@@ -34,18 +34,15 @@
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
-    delete from order
+    delete from `order`
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into order (trade_no, buyer_id, seller_id, 
+    insert into `order` (trade_no, buyer_id, seller_id,
       buyer_name, seller_name, `source`, 
       tags, trade_type, `state`, 
       related_trade_no, amount, postage, 
@@ -63,10 +60,7 @@
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tradeNo != null">
         trade_no,
@@ -205,7 +199,7 @@
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO">
-    update order
+    update `order`
     <set>
       <if test="tradeNo != null">
         trade_no = #{tradeNo,jdbcType=VARCHAR},
@@ -277,7 +271,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO">
-    update order
+    update `order`
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
       buyer_id = #{buyerId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=BIGINT},
