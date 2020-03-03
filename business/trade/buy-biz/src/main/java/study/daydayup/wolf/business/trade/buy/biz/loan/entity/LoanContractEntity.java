@@ -153,8 +153,8 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         TradeEvent effectEvent = new RepayEffectEvent();
         PeriodStrategyEnum strategy = EnumUtil.codeOf( model.getLoanTerm().getPeriodStrategy(), PeriodStrategyEnum.class );
 
-        List<InstallmentTerm> keys = new ArrayList<>();
-        List<InstallmentTerm> changes = new ArrayList<>();
+        List<InstallmentTerm> ks = new ArrayList<>();
+        List<InstallmentTerm> cs = new ArrayList<>();
         LocalDate start;
         LocalDate end = PeriodUtil.daysAfter(-1, PeriodStrategyEnum.OPEN_CLOSE, effectAt);
 
@@ -165,14 +165,18 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
             InstallmentTerm k = initKeyInstallment(term);
             InstallmentTerm c = getChangedInstallment(start, end, effectEvent);
 
-            keys.add(k);
-            changes.add(c);
+            ks.add(k);
+            cs.add(c);
         }
+
+        key.setInstallmentTermList(ks);
+        changes.setInstallmentTermList(cs);
     }
 
     private InstallmentTerm initKeyInstallment(InstallmentTerm term) {
         return InstallmentTerm.builder()
                 .tradeNo(term.getTradeNo())
+                .installmentNo(term.getInstallmentNo())
                 .state(term.getState())
                 .buyerId(term.getBuyerId())
                 .sellerId(term.getSellerId())

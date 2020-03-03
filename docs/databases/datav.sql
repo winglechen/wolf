@@ -180,7 +180,6 @@ CREATE TABLE `track_repay`
 (
     `id`                  BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `request_date`        DATE                NOT NULL COMMENT '申请日期',
     `loan_date`           DATE                NOT NULL COMMENT '放款日期',
     `due_date`            DATE                NOT NULL COMMENT '到期日期',
     `goods_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品ID',
@@ -197,6 +196,7 @@ CREATE TABLE `track_repay`
     `partly_loss_count`   INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '部分资损数',
     `partly_loss_amount`  DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '部分资损金额',
 
+    `d1_amount`           DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT 'd1金额',
     `d1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '当日催当日还数',
     `d2`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第2天还款订单数',
     `d3`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '第3天还款订单数',

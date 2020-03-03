@@ -123,7 +123,7 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
 
     private Tag tags;
     private void initTags(RepaymentTerm repayment) {
-        if (tags == null) {
+        if (tags != null) {
             return;
         }
 

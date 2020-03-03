@@ -4,11 +4,7 @@ import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.base.CompleteEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.MarkLossEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.collection.ConfirmCollectionEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanSuccessEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.PrepayInstallmentEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayDueEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayOverdueEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepaySuccessEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.*;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.PaidState;
@@ -47,7 +43,7 @@ public class InstallmentTermFactory implements TradeStateMachineFactory {
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
         return new DefaultStateMachine<TradeState, TradeEvent>(waitToEffect)
-                .bind(waitToEffect, effected, new LoanSuccessEvent())
+                .bind(waitToEffect, effected, new RepayEffectEvent())
 
                 .bind(effected, due, new RepayDueEvent())
                 .bind(effected, overdue, new RepayOverdueEvent())
