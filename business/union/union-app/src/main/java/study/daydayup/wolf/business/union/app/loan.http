@@ -28,7 +28,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "tradeNo" : "20200117224124000119344377121279",
+  "tradeNo" : "20200303195344000119344411981847",
   "installmentNo": 1
 }
 
@@ -39,7 +39,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "tradeNo" : "20200117224124000119344377121279",
+  "tradeNo" : "20200303195344000119344411981847",
   "installmentNo": 1
 }
 

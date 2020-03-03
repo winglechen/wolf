@@ -53,6 +53,7 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
     }
 
     public void init() {
+        initToday();
         formatLoanContract();
     }
 
@@ -63,6 +64,10 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
         }
 
         if (!StateUtil.equals(model.getState(), new LoanedState())) {
+            return;
+        }
+
+        if (null == model.getLoanTerm()) {
             return;
         }
 
@@ -100,16 +105,17 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
     private void formatInstallmentTerm() {
         LoanTerm loan = model.getLoanTerm();
         RepaymentTerm repayment = model.getRepaymentTerm();
-        if (null == loan || null == repayment) {
-            return;
-        }
-
-        initToday();
         initTags(repayment);
 
         for (InstallmentTerm installmentTerm : model.getInstallmentTermList()) {
+            TradeState state = installmentTerm.getState();
+            if (!StateUtil.inArray(state, new EffectedState(), new DueState(), new OverdueState())) {
+                break;
+            }
+
             parseInstallment(loan, repayment, installmentTerm);
-            if (StateUtil.equals(installmentTerm.getState(), new EffectedState())) {
+
+            if (StateUtil.equals(state, new EffectedState())) {
                 break;
             }
         }
@@ -136,11 +142,6 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
     }
 
     private void  parseInstallment(@NonNull LoanTerm loan, @NonNull RepaymentTerm repayment, @NonNull InstallmentTerm installment) {
-        TradeState state = installment.getState();
-        if (!StateUtil.inArray(state, new EffectedState(), new DueState(), new OverdueState())) {
-            return;
-        }
-
         calculateInstallmentLoanAmount(repayment, installment);
         calculateInstallmentHandlingFee(repayment, installment);
 
