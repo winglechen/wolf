@@ -47,10 +47,10 @@ public class InstallmentTermFactory implements TradeStateMachineFactory {
 
                 .bind(effected, due, new RepayDueEvent())
                 .bind(effected, overdue, new RepayOverdueEvent())
-                .bind(due, overdue, new RepayOverdueEvent())
-
                 .bind(effected, paid, new RepaySuccessEvent())
                 .bind(effected, prepaid, new PrepayInstallmentEvent())
+
+                .bind(due, overdue, new RepayOverdueEvent())
                 .bind(due, paid, new RepaySuccessEvent())
                 .bind(due, prepaid, new PrepayInstallmentEvent())
 

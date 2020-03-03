@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidCont
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoanedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.DueState;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.EffectedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.OverdueState;
 import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
@@ -83,6 +84,7 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
                 .tradeNo(loan.getTradeNo())
                 .buyerId(loan.getBuyerId())
                 .sellerId(loan.getSellerId())
+                .installmentNum(loan.getInstallmentNum())
                 .amount(BigDecimal.ZERO)
                 .loanAmount(BigDecimal.ZERO)
                 .handlingFee(BigDecimal.ZERO)
@@ -107,6 +109,9 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
 
         for (InstallmentTerm installmentTerm : model.getInstallmentTermList()) {
             parseInstallment(loan, repayment, installmentTerm);
+            if (StateUtil.equals(installmentTerm.getState(), new EffectedState())) {
+                break;
+            }
         }
 
         setRepaymentTags(repayment);
@@ -132,8 +137,7 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
 
     private void  parseInstallment(@NonNull LoanTerm loan, @NonNull RepaymentTerm repayment, @NonNull InstallmentTerm installment) {
         TradeState state = installment.getState();
-        if (!StateUtil.equals(state, new DueState())
-                && !StateUtil.equals(state, new OverdueState())) {
+        if (!StateUtil.inArray(state, new EffectedState(), new DueState(), new OverdueState())) {
             return;
         }
 
