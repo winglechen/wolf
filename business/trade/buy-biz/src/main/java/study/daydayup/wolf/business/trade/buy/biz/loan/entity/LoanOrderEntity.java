@@ -197,6 +197,6 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
                 .accountId(contract.getBuyerId())
                 .tradePhase(TradePhaseEnum.ORDER_PHASE)
                 .build()
-                .toString();
+                .create();
     }
 }
