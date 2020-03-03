@@ -9,9 +9,11 @@ import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.InstallmentNotEffectedException;
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
+import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.model.type.string.Tag;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.common.util.time.PeriodUtil;
 import study.daydayup.wolf.common.util.finance.Interest;
@@ -41,10 +43,21 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         LocalDateTime expiredAt = LocalDateTime.now().plusDays(30);
 
         model = createOrder(TradeTypeEnum.LOAN_ORDER);
-        model.setAmount(contract.getLoanTerm().getAmount());
+        model.setAmount(getLoanAmount());
         model.setExpiredAt(expiredAt);
 
         setLoanTag();
+    }
+
+    private BigDecimal getLoanAmount() {
+        LoanTerm loan = contract.getLoanTerm();
+        if (FeeStrategyEnum.PRE.getCode() == loan.getFeePayStrategy()) {
+            BigDecimal result = loan.getAmount();
+            result = result.subtract(loan.getHandlingFee());
+            return DecimalUtil.scale(result);
+        }
+
+        return loan.getAmount();
     }
 
     public void loanByProxy() {

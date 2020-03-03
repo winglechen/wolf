@@ -1,5 +1,8 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
+import lombok.NonNull;
+import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayEffectEvent;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.ApproveEvent;
@@ -7,6 +10,9 @@ import study.daydayup.wolf.business.trade.api.domain.event.loan.RefuseEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanBeginEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanSuccessEvent;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
+import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
+import study.daydayup.wolf.common.util.time.PeriodUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
@@ -95,38 +101,24 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         // pay notify -> order state:paid -> loan order paid
         // loan.service subscribe(loan order paid)
         // Loan.finishLoan
-        LoanSuccessEvent event = LoanSuccessEvent.builder()
-                .tradeNo(model.getTradeNo())
-                .buyerId(model.getBuyerId())
-                .sellerId(model.getSellerId())
-                .build();
-
-        key.setState(model.getState());
-        changes.setStateEvent(event);
+        markContractLoaned();
 
         //loan.installment.effect
-        List<InstallmentTerm> installmentTerms = new ArrayList<>();
+        activeInstallments(LocalDate.now());
     }
 
     /**
      * JUST FOR DEV
-     * @param effectAt
+     * @param effectAt mocked EffectAt
      */
     public void completeLoan(LocalDate effectAt) {
         // pay notify -> order state:paid -> loan order paid
         // loan.service subscribe(loan order paid)
         // Loan.finishLoan
-        LoanSuccessEvent event = LoanSuccessEvent.builder()
-                .tradeNo(model.getTradeNo())
-                .buyerId(model.getBuyerId())
-                .sellerId(model.getSellerId())
-                .build();
-
-        key.setState(model.getState());
-        changes.setStateEvent(event);
+        markContractLoaned();
 
         //loan.installment.effect
-        List<InstallmentTerm> installmentTerms = new ArrayList<>();
+        activeInstallments(effectAt);
     }
 
     public void due() {
@@ -146,5 +138,54 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
 
     public void markAsLoss() {}
 
+    private void markContractLoaned() {
+        LoanSuccessEvent event = LoanSuccessEvent.builder()
+                .tradeNo(model.getTradeNo())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        key.setState(model.getState());
+        changes.setStateEvent(event);
+    }
+
+    private void activeInstallments(@NonNull LocalDate effectAt) {
+        TradeEvent effectEvent = new RepayEffectEvent();
+        PeriodStrategyEnum strategy = EnumUtil.codeOf( model.getLoanTerm().getPeriodStrategy(), PeriodStrategyEnum.class );
+
+        List<InstallmentTerm> keys = new ArrayList<>();
+        List<InstallmentTerm> changes = new ArrayList<>();
+        LocalDate start;
+        LocalDate end = PeriodUtil.daysAfter(-1, PeriodStrategyEnum.OPEN_CLOSE, effectAt);
+
+        for (InstallmentTerm term: model.getInstallmentTermList() ) {
+            start = PeriodUtil.daysAfter(1, PeriodStrategyEnum.OPEN_CLOSE, end);
+            end   = PeriodUtil.daysAfter(term.getPeriod(), strategy, start);
+
+            InstallmentTerm k = initKeyInstallment(term);
+            InstallmentTerm c = getChangedInstallment(start, end, effectEvent);
+
+            keys.add(k);
+            changes.add(c);
+        }
+    }
+
+    private InstallmentTerm initKeyInstallment(InstallmentTerm term) {
+        return InstallmentTerm.builder()
+                .tradeNo(term.getTradeNo())
+                .state(term.getState())
+                .buyerId(term.getBuyerId())
+                .sellerId(term.getSellerId())
+                .build();
+    }
+
+    private InstallmentTerm getChangedInstallment(LocalDate effectAt, LocalDate dueAt, TradeEvent event) {
+        InstallmentTerm c = new InstallmentTerm();
+        c.setEffectAt(effectAt);
+        c.setDueAt(dueAt);
+        c.setStateEvent(event);
+
+        return c;
+    }
 
 }

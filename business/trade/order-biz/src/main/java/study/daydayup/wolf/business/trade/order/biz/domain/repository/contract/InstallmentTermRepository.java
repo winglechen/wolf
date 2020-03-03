@@ -24,6 +24,7 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
 
         TradeState state = getChangedState(keys.get(0), changes.get(0));
+        LocalDateTime updateAt = LocalDateTime.now();
         for (int i = 0, size=keyDOs.size(); i < size; i++) {
             InstallmentTermDO keyDO = keyDOs.get(i);
             InstallmentTermDO changeDO = changeDOs.get(i);
@@ -78,6 +80,7 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
                 changeDO.setState(state.getCode());
             }
 
+            changeDO.setUpdatedAt(updateAt);
             installmentTermDAO.updateByTradeNo(changeDO, keyDO);
         }
     }
