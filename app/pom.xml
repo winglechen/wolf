@@ -15,6 +15,7 @@
         <module>ali</module>
         <module>my-hello</module>
         <module>onion</module>
+        <module>estar</module>
     </modules>
 
     <properties>

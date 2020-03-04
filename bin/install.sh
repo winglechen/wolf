@@ -115,8 +115,8 @@ function install_business_starter() {
 function install_union() {
     install_business_starter
 
-    echo "install business.union"
-    dir="${PROJECT_DIR}/business/union/"
+    echo "install app.union"
+    dir="${PROJECT_DIR}/app/estar/"
     cd ${dir} && mvn clean install
 }
 

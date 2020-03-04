@@ -25,10 +25,10 @@ function init() {
 }
 
 function deploy_union_test() {
-    dir="${PROJECT_DIR}/business/union/union-deploy-dubbo/"
+    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
     cd ${dir} && mvn clean package -Ptest
 
-    scp /code/github/wolf/business/union/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
+    scp /code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "union-deploy-dubbo.tar.gz transporting..."
 }
