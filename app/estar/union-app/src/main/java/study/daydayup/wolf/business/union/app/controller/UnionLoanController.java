@@ -129,6 +129,9 @@ public class UnionLoanController extends BaseUnionController {
         TradeId tradeId = initTradeId(tradeNo);
 
         PayResultResponse response = unionLoanService.payResult(tradeId);
+        if (response == null) {
+            return Result.fail(10000, "repay fail");
+        }
         return Result.ok(response);
     }
 
@@ -139,6 +142,9 @@ public class UnionLoanController extends BaseUnionController {
         request.setTradeId(tradeId);
 
         PayResponse response = unionLoanService.pay(request);
+        if (response == null) {
+            return Result.fail(10000, "repay fail");
+        }
         return Result.ok(response);
     }
 

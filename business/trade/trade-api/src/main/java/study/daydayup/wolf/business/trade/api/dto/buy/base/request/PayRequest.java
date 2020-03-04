@@ -5,6 +5,8 @@ import study.daydayup.wolf.business.trade.api.domain.enums.order.PaymentMethodEn
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * study.daydayup.wolf.business.trade.api.dto.buy.base.request
  *
@@ -19,6 +21,7 @@ public class PayRequest implements Request {
      * @see PaymentMethodEnum
      */
     private Integer paymentMethod;
+    @NotBlank
     private String tradeNo;
 
     private Integer installmentNo;
