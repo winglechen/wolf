@@ -45,7 +45,7 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public Result<PayResultResponse> payNotify(@Validated PayResultRequest request) {
+    public Result<PayResultResponse> payResult(@Validated PayResultRequest request) {
         PayResultResponse response = flowService.payNotify(request);
         return Result.ok(response);
     }

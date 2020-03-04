@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
  * @since 2019/10/9 1:43 下午
  **/
 @Data
+@Deprecated
 public class RepayRequest implements Request {
 
     @NonNull

@@ -17,6 +17,7 @@ import java.util.Map;
 public class PayResponse implements Response {
     @NonNull
     private String tradeNo;
+    private String paymentNo;
     private BigDecimal amount;
     private Map<String, Object> payArgs;
 }

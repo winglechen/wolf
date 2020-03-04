@@ -10,11 +10,12 @@ import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.loan.RepayRequest;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
@@ -22,12 +23,10 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
-import study.daydayup.wolf.business.union.app.dto.LoanActionRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,18 +129,18 @@ public class UnionLoanController extends BaseUnionController {
     }
 
     @PutMapping("/loan/repay")
-    public Result<Object> repay(@Validated @RequestBody RepayRequest request) {
+    public Result<PayResponse> repay(@Validated @RequestBody PayRequest request) {
         String tradeNo = request.getTradeNo();
         Integer installmentNo = request.getInstallmentNo();
         TradeId tradeId = initTradeId(tradeNo);
 
-        loanService.repay(tradeId, installmentNo);
+//        loanService.repay(tradeId, installmentNo);
 
         return null;
     }
 
     @PutMapping("/loan/repay/installment")
-    public Result<Object> repayInstallment(@Validated @RequestBody RepayRequest request) {
+    public Result<PayResponse> repayInstallment(@Validated @RequestBody PayRequest request) {
         if (null == request.getInstallmentNo()) {
             throw new IllegalArgumentException("InstallmentNo can't be null");
         }
