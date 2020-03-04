@@ -14,6 +14,7 @@ import java.math.BigDecimal;
  * @since 2019/10/9 2:07 下午
  **/
 @Data
+@Deprecated
 public class PayResultRequest implements Request {
     @NonNull
     private String tradeNo;

@@ -23,10 +23,12 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
+import study.daydayup.wolf.business.union.app.service.UnionLoanService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +43,13 @@ public class UnionLoanController extends BaseUnionController {
     @Reference
     private BuyService buyService;
     @Reference
-    private LoanService loanService;
-    @Reference
     private ContractService contractService;
     @Reference
     private BuyerContractService buyerContractService;
     @Reference
     private SellerContractService sellerContractService;
+    @Resource
+    private UnionLoanService unionLoanService;
 
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
@@ -125,18 +127,20 @@ public class UnionLoanController extends BaseUnionController {
 
     @GetMapping("/loan/repay/result/{tradeNo}")
     public Result<PayResultResponse> repayResult(@PathVariable("tradeNo") String tradeNo) {
-        return null;
+        TradeId tradeId = initTradeId(tradeNo);
+
+        PayResultResponse response = unionLoanService.payResult(tradeId);
+        return Result.ok(response);
     }
 
     @PutMapping("/loan/repay")
     public Result<PayResponse> repay(@Validated @RequestBody PayRequest request) {
         String tradeNo = request.getTradeNo();
-        Integer installmentNo = request.getInstallmentNo();
         TradeId tradeId = initTradeId(tradeNo);
+        request.setTradeId(tradeId);
 
-//        loanService.repay(tradeId, installmentNo);
-
-        return null;
+        PayResponse response = unionLoanService.pay(request);
+        return Result.ok(response);
     }
 
     @PutMapping("/loan/repay/installment")
