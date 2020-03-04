@@ -41,7 +41,7 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.0.0-WINGLE</version>
+                <version>1.0.0-WOLF</version>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
