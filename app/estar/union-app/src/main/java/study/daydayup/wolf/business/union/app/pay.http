@@ -11,4 +11,18 @@ Content-Type: application/json
 
 ###
 
+# test
+POST https://onionwallet.net/api/pay/razorpay/subscribe
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name": "ok",
+  "tradeNo" : "20200303195344000119344411981847",
+  "installmentNo": 1
+}
+
+###
+
 
