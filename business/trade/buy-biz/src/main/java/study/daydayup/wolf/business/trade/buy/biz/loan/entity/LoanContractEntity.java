@@ -1,8 +1,13 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import lombok.NonNull;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayEffectEvent;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoaningState;
+import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.ApproveEvent;
@@ -16,6 +21,7 @@ import study.daydayup.wolf.common.util.time.PeriodUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +77,25 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
     }
 
     public boolean isRepayable() {
+        RepaymentTerm repayment = model.getRepaymentTerm();
+        if (model == null || null == repayment) {
+            return false;
+        }
+
+        if (repayment.getAmount().compareTo(BigDecimal.ZERO) < 1) {
+            return false;
+        }
+
         return true;
+    }
+
+    public boolean isLoanable() {
+        LoanTerm loan = model.getLoanTerm();
+        if (null == model || null == loan) {
+            return false;
+        }
+
+        return StateUtil.inArray(model.getState(), new ApprovedState(), new LoaningState());
     }
 
     public void refuse() {

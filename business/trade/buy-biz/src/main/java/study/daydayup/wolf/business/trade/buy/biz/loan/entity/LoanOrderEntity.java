@@ -3,22 +3,16 @@ package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
-import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidContractException;
-import study.daydayup.wolf.business.trade.api.domain.exception.buy.InstallmentNotEffectedException;
-import study.daydayup.wolf.business.trade.api.domain.state.base.WaitToPayState;
-import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
-import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
-import study.daydayup.wolf.common.util.lang.EnumUtil;
-import study.daydayup.wolf.common.util.time.PeriodUtil;
-import study.daydayup.wolf.common.util.finance.Interest;
+import study.daydayup.wolf.common.util.lang.StringUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
@@ -47,8 +41,12 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     public void loan() {
-        LocalDateTime expiredAt = LocalDateTime.now().plusDays(30);
+        if (contract == null) {
+            return;
+        }
+        isNew = true;
 
+        LocalDateTime expiredAt = LocalDateTime.now().plusDays(30);
         model = createOrder(TradeTypeEnum.LOAN_ORDER);
         model.setAmount(getLoanAmount());
         model.setExpiredAt(expiredAt);
@@ -62,10 +60,20 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     public void repay() {
+        RepaymentTerm repayment = contract.getRepaymentTerm();
+        if (contract == null || null == repayment) {
+            return;
+        }
+        isNew = true;
 
         TradeTypeEnum tradeType = TradeTypeEnum.REPAY_ORDER;
         model = createOrder(tradeType);
+        model.setAmount(repayment.getAmount());
 
+        LocalDateTime expireAt = LocalDateTime.of(LocalDate.now(), LocalTime.of(23, 59, 59));
+        model.setExpiredAt(expireAt);
+
+        setRepayTag();
     }
 
     public void prepayAll() {
@@ -89,13 +97,14 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         model.setTags(TradeTag.FIRST_TRADE);
     }
 
-    //TODO CHECK
-    private void setInstallmentTag(int installmentNo) {
-        Tag orderTag = new Tag(TradeTag.INSTALLMENT_PREFIX + installmentNo);
+    private void setRepayTag() {
+        Tag contractTag = new Tag(contract.getTags());
 
-        Tag contractTag = new Tag(model.getTags());
-        if (contractTag.contains(TradeTag.FIRST_TRADE)
-                && 1 == installmentNo) {
+        String repayTags = contract.getRepaymentTerm().getTags();
+        Tag orderTag = new Tag(repayTags);
+
+        String firstInstallment = StringUtil.join(TradeTag.INSTALLMENT_PREFIX, 1);
+        if (contractTag.contains(TradeTag.FIRST_TRADE) && orderTag.contains(firstInstallment)) {
             orderTag.add(TradeTag.FIRST_TRADE);
         }
 

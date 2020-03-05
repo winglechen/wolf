@@ -1,19 +1,12 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.repository;
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
-import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
-import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.repository
@@ -31,12 +24,12 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
             return;
         }
 
-        if (!entity.isNew()) {
-            updateEntity(entity);
+        if (entity.isNew()) {
+            createEntity(entity);
             return;
         }
 
-        createEntity(entity);
+        updateEntity(entity);
     }
 
     private void updateEntity(LoanOrderEntity entity) {

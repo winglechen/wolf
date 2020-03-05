@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.exception.buy.ContractNotLoanableException;
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.ContractNotRepayableException;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
@@ -80,6 +81,10 @@ public class LoanServiceImpl implements LoanService {
     public void completeLoan(TradeId tradeId) {
         tradeId.valid();
         LoanContractEntity entity = loanContractRepository.find(tradeId);
+        if (!entity.isLoanable()) {
+            throw new ContractNotLoanableException();
+        }
+
         entity.completeLoan();
 
         loanContractRepository.save(entity);
@@ -102,18 +107,6 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void createLoanProxy() {
         //TODO
-    }
-
-    public Result<PayResponse> repayBackup(PayRequest request) {
-        request.getTradeId().valid();
-
-
-        LoanContractEntity contract = loanContractRepository.find(request.getTradeId());
-        LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
-        order.repay();
-        loanOrderRepository.save(order);
-
-        return null;
     }
 
     @Override
