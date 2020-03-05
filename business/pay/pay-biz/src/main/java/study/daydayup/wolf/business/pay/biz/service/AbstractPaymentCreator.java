@@ -43,10 +43,12 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
 
         validateRequest();
         initPayment();
+
         callPayApi();
         logApiResponse();
-        savePayment();
+        parseApiResponse();
 
+        savePayment();
         return formatResponse();
     }
 

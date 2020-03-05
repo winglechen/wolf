@@ -65,7 +65,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
             throw new InvalidEpiResponseException("Razorpay fail");
         }
 
-        setResponseAttachment(order);
+        setPaymentAttachment(order);
         setResponseAttachment(order);
     }
 

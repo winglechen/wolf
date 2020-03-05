@@ -2,11 +2,11 @@ package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -20,20 +20,19 @@ import java.math.BigDecimal;
 public class PaymentCreateRequest implements Request {
     private Integer paymentMethod;
 
-    @NonNull
     private String tradeNo;
     private boolean doublePayCheck;
 
-    @NonNull @Min(1)
+    @NotNull @Min(1)
     private Long payerId;
     private String payerName;
-    @NonNull @Min(1)
+    @NotNull @Min(1)
     private Long payeeId;
     private String payeeName;
 
-    @NonNull @DecimalMin("0.01")
+    @NotNull @DecimalMin("0.01")
     private BigDecimal amount;
-    @NonNull
+    @NotNull
     private Integer currency;
 
     private Long goodsId;

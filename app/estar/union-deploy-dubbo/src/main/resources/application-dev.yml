@@ -84,6 +84,11 @@ spring:
         #setting
         account_status.actual-data-nodes: setting.account_status
         customer_status.actual-data-nodes: setting.customer_status
+        #pay
+        payment.actual-data-nodes: pay.payment
+        payment_log.actual-data-nodes: pay.payment_log
+        payment_state_log.actual-data-nodes: pay.payment_state_log
+        trade_merge.actual-data-nodes: pay.trade_merge
     props:
       sql:
         show: true

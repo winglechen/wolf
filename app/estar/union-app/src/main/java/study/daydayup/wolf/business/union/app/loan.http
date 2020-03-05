@@ -21,27 +21,18 @@ Content-Type: application/json
   "goodsId" : 1
 }
 
-###
-PUT http://localhost:8100/loan/repay
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
 
-{
-  "tradeNo" : "20200303195344000119344411981847",
-  "installmentNo": 1
-}
 
 ###
-PUT http://localhost:8100/loan/repay/installment
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{
-  "tradeNo" : "20200303195344000119344411981847",
-  "installmentNo": 1
-}
+#PUT http://localhost:8100/loan/repay/installment
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json
+#
+#{
+#  "tradeNo" : "20200303195344000119344411981847",
+#  "installmentNo": 1
+#}
 
 ###
 GET http://localhost:8100/loan/20200303195344000119344411981847?lang=zh_CN
@@ -64,5 +55,19 @@ GET http://localhost:8100/loan/living
 Accept: */*
 Cache-Control: no-cache
 
+
+###
+
+
+###
+PUT http://localhost:8100/loan/repay
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo" : "20200303204857000119453125198010",
+  "installmentNo": 1
+}
 
 ###
