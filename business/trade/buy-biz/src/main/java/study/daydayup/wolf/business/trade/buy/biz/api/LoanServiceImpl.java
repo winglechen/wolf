@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
+import study.daydayup.wolf.business.trade.buy.biz.converter.OrderConverter;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanContractRepository;
@@ -68,10 +69,12 @@ public class LoanServiceImpl implements LoanService {
         tradeId.valid();
 
         LoanContractEntity contract = loanContractRepository.find(tradeId);
+        if (!contract.isLoanable()) {
+            throw new ContractNotLoanableException();
+        }
         contract.startLoan();
         loanContractRepository.save(contract);
 
-        //TODO fix the bug
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.loan();
         loanOrderRepository.save(order);
@@ -81,9 +84,7 @@ public class LoanServiceImpl implements LoanService {
     public void completeLoan(TradeId tradeId) {
         tradeId.valid();
         LoanContractEntity entity = loanContractRepository.find(tradeId);
-        if (!entity.isLoanable()) {
-            throw new ContractNotLoanableException();
-        }
+
 
         entity.completeLoan();
 
@@ -110,7 +111,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Result<PayResponse> repay(PayRequest request) {
+    public Result<Order> repay(PayRequest request) {
         request.getTradeId().valid();
 
         LoanContractEntity contractEntity = loanContractRepository.find(request.getTradeId());
@@ -122,12 +123,7 @@ public class LoanServiceImpl implements LoanService {
         orderEntity.repay();
         loanOrderRepository.save(orderEntity);
 
-        PayResponse response = orderToPayResponse(orderEntity.getModel());
-        return Result.ok(response);
-    }
-
-    private PayResponse orderToPayResponse(Order order) {
-        return null;
+        return Result.ok(orderEntity.getModel());
     }
 
     @Override

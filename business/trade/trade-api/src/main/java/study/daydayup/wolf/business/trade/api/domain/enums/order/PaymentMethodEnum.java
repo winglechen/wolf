@@ -10,6 +10,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 6:55 PM
  **/
 @Getter
+@Deprecated
 public enum PaymentMethodEnum implements CodeBasedEnum {
     MPURSE(101, "mpurse"),
 

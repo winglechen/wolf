@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @since 2020/2/27 3:54 下午
  **/
 @Data
-public class PaymentCreateResponse extends Attachment implements Response {
+public class PaymentCreateResponse implements Response {
     private Integer paymentMethod;
 
     private String paymentNo;

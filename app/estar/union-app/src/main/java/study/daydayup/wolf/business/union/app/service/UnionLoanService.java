@@ -3,15 +3,17 @@ package study.daydayup.wolf.business.union.app.service;
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
-import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.pay.api.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
-import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 
 /**
  * study.daydayup.wolf.business.union.app.service
@@ -21,49 +23,57 @@ import study.daydayup.wolf.business.trade.api.service.order.ContractService;
  **/
 @Service
 public class UnionLoanService implements study.daydayup.wolf.framework.layer.domain.Service {
+    private static final PaymentMethodEnum PAYMENT_METHOD = PaymentMethodEnum.RAZORPAY;
+
     @Reference
     private LoanService loanService;
     @Reference
-    private ContractService contractService;
+    private RazorpayService razorpayService;
 
     public PayResponse pay(@NonNull PayRequest request) {
         if (null == request.getTradeId()) {
             return null;
         }
 
-        ContractOption option = initContractOption();
-        Contract contract = contractService.find(request.getTradeId(), option).notNullData();
-        if (validRepayment(contract)) {
+        Order order = loanService.repay(request).notNullData();
+
+        PaymentCreateResponse response = callPayApi(order);
+        return formatPaymentCreateResponse(response, order);
+    }
+
+    private PayResponse formatPaymentCreateResponse(PaymentCreateResponse paymentCreateResponse, Order order) {
+        if (paymentCreateResponse == null || null == order) {
             return null;
         }
 
-        createRepayOrder(contract);
-        PaymentCreateResponse response = callPayApi(contract);
-        return formatPaymentCreateResponse(response);
+        return PayResponse.builder()
+                .tradeNo(order.getTradeNo())
+
+                .paymentMethod(paymentCreateResponse.getPaymentMethod())
+                .paymentNo(paymentCreateResponse.getPaymentNo())
+                .amount(paymentCreateResponse.getAmount())
+
+                .payArgs(paymentCreateResponse.getAttachment())
+                .build();
     }
 
-    private PayResponse formatPaymentCreateResponse(PaymentCreateResponse response) {
-        if (response == null) {
-            return null;
-        }
+    private PaymentCreateResponse callPayApi(Order order) {
+        PaymentCreateRequest request = PaymentCreateRequest.builder()
+                .paymentMethod(PAYMENT_METHOD.getCode())
+                .tradeNo(order.getTradeNo())
+                .doublePayCheck(false)
 
-        return null;
-    }
+                .payeeId(order.getSellerId())
+                .payeeName(order.getSellerName())
+                .payerId(order.getBuyerId())
+                .payerName(order.getBuyerName())
 
-    private void createRepayOrder(Contract contract) {
+                .amount(order.getAmount())
+                .currency(order.getCurrency())
 
-    }
+                .build();
 
-    private PaymentCreateResponse callPayApi(Contract contract) {
-        return null;
-    }
-
-    private boolean validRepayment(Contract contract) {
-        if (null == contract.getRepaymentTerm()) {
-            return false;
-        }
-
-        return true;
+        return razorpayService.create(request).notNullData();
     }
 
     public PayResultResponse payResult(TradeId tradeId) {

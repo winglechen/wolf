@@ -14,6 +14,6 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 public interface RazorpayService {
     Result<PaymentCreateResponse> create(PaymentCreateRequest request);
-    Result<PayVerifyResponse> pay(PayVerifyRequest request);
+    Result<PayVerifyResponse> verify(PayVerifyRequest request);
     Result<String> subscribe(String data);
 }

@@ -39,7 +39,7 @@ public class RazorpayServiceImpl implements RazorpayService {
     }
 
     @Override
-    public Result<PayVerifyResponse> pay(@NonNull PayVerifyRequest request) {
+    public Result<PayVerifyResponse> verify(@NonNull PayVerifyRequest request) {
         request.setPaymentMethod(PaymentMethodEnum.RAZORPAY.getCode());
 
         PayVerifyResponse response = payer.pay(request);
