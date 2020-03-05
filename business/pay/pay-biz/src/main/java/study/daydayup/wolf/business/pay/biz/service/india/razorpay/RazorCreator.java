@@ -86,20 +86,17 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     }
 
     private void setResponseAttachment(Order order) {
-        attachment.set("key", config.getKeyId());
-        attachment.set("amount", amount);
-        attachment.set("currency", CURRENCY);
-        attachment.set("order_id", order.get("id"));
-
-        attachment.set("buttontext", config.getButtonText());
-        attachment.set("name", config.getCompanyName());
         attachment.set("description", config.getCompanyDescription());
         attachment.set("image", config.getCompanyLogo());
+        attachment.set("currency", CURRENCY);
 
-        attachment.set("prefill.name", config.getPrefillName());
-        attachment.set("prefill.email", config.getPrefillEmail());
-        attachment.set("prefill.contact", config.getPrefillEmail());
-        attachment.set("theme.color", config.getThemeColor());
+        attachment.set("key", config.getKeyId());
+        attachment.set("amount", String.valueOf(amount));
+        attachment.set("name", config.getCompanyName());
+        attachment.set("order", order.get("id"));
+
+        attachment.set("prefill", config.getPrefill());
+        attachment.set("theme", config.getTheme());
     }
 
     private boolean validOrder(Order order) {

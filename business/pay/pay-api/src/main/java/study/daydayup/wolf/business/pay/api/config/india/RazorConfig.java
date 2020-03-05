@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * study.daydayup.wolf.business.pay.api.config.india
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Validated
 @Configuration
 @ConfigurationProperties(prefix = "pay.razorpay")
-public class RazorConfig {
+public class RazorConfig implements Serializable {
 
     @NotNull
     private String keyId;
@@ -26,16 +27,13 @@ public class RazorConfig {
     @NotNull
     private String webHookSecret;
 
-    private String companyName = "";
-    private String companyDescription = "";
-    private String companyLogo = "";
+    private String companyName = "Acme Corp";
+    private String companyDescription = "Credits towards consultation";
+    private String companyLogo = "https://i.imgur.com/3g7nmJC.png";
 
-    private String prefillName = "";
-    private String prefillEmail = "";
-    private String prefillContact = "";
+    private RazorPrefill prefill = new RazorPrefill();
+    private RazorTheme theme = new RazorTheme();
 
-    private String buttonText = "Pay with Razorpay";
-    private String themeColor = "#F37254";
 
     //card | netbanking | wallet | emi | upi
     private String prefillMethod = "";

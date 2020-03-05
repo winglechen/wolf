@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.union.app.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +17,9 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2020/2/27 5:44 下午
  **/
 @RestController
+@Slf4j
 public class UnionPayController {
-//    @Reference
+    @Reference
     private RazorpayService razorpayService;
 
 
@@ -32,6 +35,8 @@ public class UnionPayController {
 
     @PostMapping("/pay/razorpay/subscribe")
     public Result<String> razorpaySubscribe(@RequestBody String data) {
-        return razorpayService.subscribe(data);
+        log.info("razorpay:{}", data);
+        return null;
+//        return razorpayService.subscribe(data);
     }
 }
