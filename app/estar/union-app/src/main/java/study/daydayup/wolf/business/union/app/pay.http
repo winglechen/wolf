@@ -1,0 +1,14 @@
+# hello world
+POST http://localhost:8100/pay/razorpay/subscribe
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo" : "20200303195344000119344411981847",
+  "installmentNo": 1
+}
+
+###
+
+
