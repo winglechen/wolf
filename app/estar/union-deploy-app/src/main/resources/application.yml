@@ -26,6 +26,7 @@ management:
 wolf:
   auth:
     enable: true
+    excludedPaths: "/auth/**/*,/pay/*/subscribe"
 
 
 

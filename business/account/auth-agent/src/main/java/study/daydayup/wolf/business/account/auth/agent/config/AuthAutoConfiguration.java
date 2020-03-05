@@ -19,7 +19,7 @@ import javax.servlet.DispatcherType;
  * @author Wingle
  * @since 2019/12/5 9:49 上午
  **/
-@EnableConfigurationProperties(AuthConfig.class)
+//@EnableConfigurationProperties(AuthConfig.class)
 @Configuration
 @ConditionalOnWebApplication
 @ComponentScan("study.daydayup.wolf.business.account.auth.agent")

@@ -1,9 +1,6 @@
 package study.daydayup.wolf.business.trade.api.dto.tm.trade;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.exception.InvalidTradeIdException;
@@ -20,6 +17,7 @@ import java.time.LocalDateTime;
  * @author Wingle
  * @since 2019/12/30 11:10 下午
  **/
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Builder
 @NoArgsConstructor

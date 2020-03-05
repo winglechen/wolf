@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @since 2019/12/5 9:42 上午
  **/
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "wolf.auth")
 public class AuthConfig {
     private boolean enable = true;
