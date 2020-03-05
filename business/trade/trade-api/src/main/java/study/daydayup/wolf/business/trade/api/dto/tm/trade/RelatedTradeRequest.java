@@ -32,6 +32,8 @@ public class RelatedTradeRequest extends TradeOwner implements Request {
     private TradeState state;
     private TradeEvent stateEvent;
     private LocalDateTime expiredAfter;
+    private String hasTags;
+
 
     public void valid() {
         if (relatedTradeNo == null || relatedTradeNo.length() < 20) {

@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.trade.api.service.buy;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
@@ -31,7 +32,7 @@ public interface LoanService {
     void completeLoan(TradeId tradeId, LocalDate effectAt);
 
     void createLoanProxy();
-    Result<PayResponse> repay(TradeId tradeId, Integer installmentNo);
+    Result<PayResponse> repay(PayRequest request);
 
     void due(TradeId tradeId, Integer installmentNo);
     void overdue(TradeId tradeId, Integer installmentNo);

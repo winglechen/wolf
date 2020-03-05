@@ -70,6 +70,10 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         changes.setStateEvent(event);
     }
 
+    public boolean isRepayable() {
+        return true;
+    }
+
     public void refuse() {
         //loan.state:refused
         RefuseEvent event = RefuseEvent.builder()

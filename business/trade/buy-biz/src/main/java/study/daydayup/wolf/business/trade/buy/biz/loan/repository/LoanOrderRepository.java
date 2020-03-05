@@ -31,8 +31,7 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
             return;
         }
 
-        if (null != findExistsOrder(entity)) {
-            entity.setKey(findExistsOrder(entity));
+        if (!entity.isNew()) {
             updateEntity(entity);
             return;
         }
@@ -40,55 +39,9 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
         createEntity(entity);
     }
 
-    private Order findExistsOrder(LoanOrderEntity entity) {
-        RelatedTradeRequest request = entityToRequest(entity);
-        List<Order> orderList = orderService.findRelatedTrade(request).getData();
-        if (orderList == null || orderList.isEmpty()) {
-            return null;
-        }
-
-        TradeTypeEnum tradeType = EnumUtil.codeOf(entity.getModel().getTradeType(), TradeTypeEnum.class);
-        switch (tradeType) {
-            case LOAN_ORDER:
-                return orderToKey(orderList.get(0));
-            case OVERDUE_REPAY:
-            case PREPAY_All:
-            case PREPAY_ORDER:
-            case REPAY_ORDER:
-                return findRepayOrder(orderList, entity);
-            case LOAN_PROXY:
-                return findLoanProxyOrder(orderList, entity);
-            case COLLECTION_ORDER:
-                return findCollectionOrder(orderList, entity);
-            default:
-                return null;
-        }
-    }
-
-    private Order findRepayOrder(List<Order> orderList, LoanOrderEntity entity) {
-        String entityTags = entity.getModel().getTags();
-
-        for (Order order: orderList) {
-            if (!entityTags.equals(order.getTags())) {
-                continue;
-            }
-            return orderToKey(order);
-        }
-
-        return null;
-    }
-
-    private Order findLoanProxyOrder(List<Order> orderList, LoanOrderEntity entity) {
-        return null;
-    }
-
-    private Order findCollectionOrder(List<Order> orderList, LoanOrderEntity entity) {
-        return null;
-    }
-
     private void updateEntity(LoanOrderEntity entity) {
         Order key = entity.getKey();
-        Order changes = entityToChanges(entity);
+        Order changes = entity.getChanges();
 
         if (key == null || null == changes) {
             return;
@@ -99,49 +52,6 @@ public class LoanOrderRepository extends AbstractRepository implements Repositor
 
     private void createEntity(LoanOrderEntity entity) {
         orderService.create(entity.getModel());
-    }
-
-    private RelatedTradeRequest entityToRequest(LoanOrderEntity entity) {
-        RelatedTradeRequest request = new RelatedTradeRequest();
-
-        BeanUtils.copyProperties(entity.getModel(), request);
-        request.setExpiredAfter(LocalDateTime.now());
-
-        return request;
-    }
-
-    private Order orderToKey(Order order) {
-        if (order == null) {
-            return null;
-        }
-
-        return Order.builder()
-                .tradeNo(order.getTradeNo())
-                .state(order.getState())
-                .buyerId(order.getBuyerId())
-                .sellerId(order.getSellerId())
-                .version(order.getVersion())
-                .build();
-    }
-
-    private Order entityToChanges(LoanOrderEntity entity) {
-        if (entity == null || null == entity.getModel()) {
-            return null;
-        }
-
-        Order order = entity.getModel();
-
-        return Order.builder()
-                .tags(order.getTags())
-                .state(order.getState())
-                .amount(order.getAmount())
-                .postage(order.getPostage())
-                .paymentMethod(order.getPaymentMethod())
-                .consignMethod(order.getConsignMethod())
-                .outTradeNo(order.getOutTradeNo())
-                .expiredAt(order.getExpiredAt())
-                .deleteFlag(order.getDeleteFlag())
-                .build();
     }
 
 }

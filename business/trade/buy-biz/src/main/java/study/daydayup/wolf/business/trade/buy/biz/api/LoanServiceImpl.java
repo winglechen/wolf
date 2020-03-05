@@ -3,8 +3,11 @@ package study.daydayup.wolf.business.trade.buy.biz.api;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.exception.buy.ContractNotRepayableException;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
@@ -67,6 +70,7 @@ public class LoanServiceImpl implements LoanService {
         contract.startLoan();
         loanContractRepository.save(contract);
 
+        //TODO fix the bug
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.loan();
         loanOrderRepository.save(order);
@@ -100,18 +104,36 @@ public class LoanServiceImpl implements LoanService {
         //TODO
     }
 
-    @Override
-    public Result<PayResponse> repay(TradeId tradeId, Integer installmentNo) {
-        tradeId.valid();
-        if (installmentNo == null || installmentNo < 1) {
-            throw new IllegalArgumentException("installmentNo can't be null");
-        }
+    public Result<PayResponse> repayBackup(PayRequest request) {
+        request.getTradeId().valid();
 
-        LoanContractEntity contract = loanContractRepository.find(tradeId);
+
+        LoanContractEntity contract = loanContractRepository.find(request.getTradeId());
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
-        order.repay(installmentNo);
+        order.repay();
         loanOrderRepository.save(order);
 
+        return null;
+    }
+
+    @Override
+    public Result<PayResponse> repay(PayRequest request) {
+        request.getTradeId().valid();
+
+        LoanContractEntity contractEntity = loanContractRepository.find(request.getTradeId());
+        if (!contractEntity.isRepayable()) {
+            throw new ContractNotRepayableException();
+        }
+
+        LoanOrderEntity orderEntity = new LoanOrderEntity(contractEntity.getModel());
+        orderEntity.repay();
+        loanOrderRepository.save(orderEntity);
+
+        PayResponse response = orderToPayResponse(orderEntity.getModel());
+        return Result.ok(response);
+    }
+
+    private PayResponse orderToPayResponse(Order order) {
         return null;
     }
 
@@ -123,9 +145,7 @@ public class LoanServiceImpl implements LoanService {
         }
 
         LoanContractEntity contract = loanContractRepository.find(tradeId);
-        LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
-        order.repay(installmentNo);
-        loanOrderRepository.save(order);
+
     }
 
     @Override

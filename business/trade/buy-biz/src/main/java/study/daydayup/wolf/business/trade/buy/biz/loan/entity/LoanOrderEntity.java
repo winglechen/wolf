@@ -8,6 +8,8 @@ import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.exception.order.InvalidContractException;
 import study.daydayup.wolf.business.trade.api.domain.exception.buy.InstallmentNotEffectedException;
+import study.daydayup.wolf.business.trade.api.domain.state.base.WaitToPayState;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
@@ -39,6 +41,11 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         this.isNew = true;
     }
 
+    public LoanOrderEntity(Order order) {
+        this.model = order;
+        this.isNew = false;
+    }
+
     public void loan() {
         LocalDateTime expiredAt = LocalDateTime.now().plusDays(30);
 
@@ -49,42 +56,23 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         setLoanTag();
     }
 
-    private BigDecimal getLoanAmount() {
-        LoanTerm loan = contract.getLoanTerm();
-        if (FeeStrategyEnum.PRE.getCode() == loan.getFeePayStrategy()) {
-            BigDecimal result = loan.getAmount();
-            result = result.subtract(loan.getHandlingFee());
-            return DecimalUtil.scale(result);
-        }
-
-        return loan.getAmount();
-    }
 
     public void loanByProxy() {
 
     }
 
-    public void repay(int installmentNo) {
-        InstallmentTerm installmentTerm = getInstallmentTerm(installmentNo);
+    public void repay() {
 
-        TradeTypeEnum tradeType = getRepayType(installmentTerm);
+        TradeTypeEnum tradeType = TradeTypeEnum.REPAY_ORDER;
         model = createOrder(tradeType);
-        model.setExpiredAt(getExpiredAt());
 
-        int period = calculatePeriod(installmentTerm);
-        BigDecimal amount = calculateAmount(installmentTerm, period);
-        model.setAmount(amount);
-
-        setInstallmentTag(installmentNo);
     }
 
     public void prepayAll() {
 
     }
 
-    public void collect(int installmentNo) {
-        repay(installmentNo);
-        model.setTradeType(TradeTypeEnum.COLLECTION_ORDER.getCode());
+    public void collect() {
     }
 
     public void collectPartly() {}
@@ -94,13 +82,14 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     private void setLoanTag() {
-        Tag contractTag = new Tag(model.getTags());
+        Tag contractTag = new Tag(contract.getTags());
         if (!contractTag.contains(TradeTag.FIRST_TRADE)) {
             return;
         }
         model.setTags(TradeTag.FIRST_TRADE);
     }
 
+    //TODO CHECK
     private void setInstallmentTag(int installmentNo) {
         Tag orderTag = new Tag(TradeTag.INSTALLMENT_PREFIX + installmentNo);
 
@@ -111,82 +100,6 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         }
 
         model.setTags(orderTag.toString());
-    }
-
-    private InstallmentTerm getInstallmentTerm(int installmentNo) {
-        InstallmentTerm installmentTerm = contract.getInstallmentTermList().get(installmentNo-1);
-        if (installmentTerm == null) {
-            throw new InvalidContractException("Can't find installment:" + installmentNo);
-        }
-
-        return installmentTerm;
-    }
-
-    private TradeTypeEnum getRepayType(InstallmentTerm term) {
-        LocalDate today = LocalDate.now();
-        LocalDate dueAt = term.getDueAt();
-
-        if (dueAt.equals(today)) {
-            return TradeTypeEnum.REPAY_ORDER;
-        }
-
-        if (dueAt.isBefore(today)) {
-            return TradeTypeEnum.REPAY_ORDER;
-        }
-
-        return TradeTypeEnum.OVERDUE_REPAY;
-    }
-
-    private LocalDateTime getExpiredAt() {
-        LocalDate today = LocalDate.now();
-        LocalTime time = LocalTime.of(23, 59, 59);
-
-        return LocalDateTime.of(today, time);
-    }
-
-    private int calculatePeriod(InstallmentTerm term) {
-        LocalDate effectAt = term.getEffectAt();
-        LocalDate today = LocalDate.now();
-        if (effectAt == null || effectAt.isBefore(today)) {
-            throw new InstallmentNotEffectedException();
-        }
-
-        Integer loanStrategy = contract.getLoanTerm().getPeriodStrategy();
-        if (loanStrategy == null) {
-            throw new InvalidContractException("Period Strategy is null");
-        }
-
-        PeriodStrategyEnum strategy = EnumUtil.codeOf(loanStrategy, PeriodStrategyEnum.class);
-        return PeriodUtil.daysBetween(effectAt, today, strategy);
-    }
-
-    private BigDecimal calculateAmount(InstallmentTerm term, int period) {
-        BigDecimal amount = term.getAmount();
-        BigDecimal fee = term.getHandlingFee();
-        BigDecimal interest = calculateInterest(term, period);
-        BigDecimal penalty = calculatePenalty(term, period);
-
-        return amount.add(fee).add(interest).add(penalty);
-    }
-
-    private BigDecimal calculateInterest(InstallmentTerm term, int period) {
-        int termPeriod = term.getPeriod();
-        int interestPeriod = Math.min(period, termPeriod);
-
-        LoanTerm loan = contract.getLoanTerm();
-        return Interest.rate(loan.getAmount(), loan.getInterestRate(), interestPeriod);
-    }
-
-    private BigDecimal calculatePenalty(InstallmentTerm term, int period) {
-        int termPeriod = term.getPeriod();
-        if (period <= termPeriod) {
-            return BigDecimal.ZERO;
-        }
-
-        int penaltyPeriod = period - termPeriod;
-        LoanTerm loan = contract.getLoanTerm();
-
-        return Interest.rate(loan.getAmount(), loan.getPenaltyRate(), penaltyPeriod, true);
     }
 
     private Order createOrder(TradeTypeEnum tradeType) {
@@ -211,5 +124,16 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
                 .tradePhase(TradePhaseEnum.ORDER_PHASE)
                 .build()
                 .create();
+    }
+
+    private BigDecimal getLoanAmount() {
+        LoanTerm loan = contract.getLoanTerm();
+        if (FeeStrategyEnum.PRE.getCode() == loan.getFeePayStrategy()) {
+            BigDecimal result = loan.getAmount();
+            result = result.subtract(loan.getHandlingFee());
+            return DecimalUtil.scale(result);
+        }
+
+        return loan.getAmount();
     }
 }
