@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.AadhaarDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="aadhaar_no" jdbcType="VARCHAR" property="aadhaarNo" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="dob" jdbcType="VARCHAR" property="dob" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="front_side" jdbcType="VARCHAR" property="frontSide" />
+    <result column="back_side" jdbcType="VARCHAR" property="backSide" />
+    <result column="vid" jdbcType="VARCHAR" property="vid" />
+    <result column="yob" jdbcType="VARCHAR" property="yob" />
+    <result column="co" jdbcType="VARCHAR" property="co" />
+    <result column="loc" jdbcType="VARCHAR" property="loc" />
+    <result column="vtc" jdbcType="VARCHAR" property="vtc" />
+    <result column="po" jdbcType="VARCHAR" property="po" />
+    <result column="dist" jdbcType="VARCHAR" property="dist" />
+    <result column="subdist" jdbcType="VARCHAR" property="subdist" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="pc" jdbcType="VARCHAR" property="pc" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, org_id, aadhaar_no, `uid`, gender, dob, `name`, address, front_side, 
+    back_side, vid, yob, co, loc, vtc, po, dist, subdist, `state`, pc, delete_flag, version, 
+    last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aadhaar
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from aadhaar
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO">
+    insert into aadhaar (id, account_id, org_id, 
+      aadhaar_no, `uid`, gender, 
+      dob, `name`, address, 
+      front_side, back_side, vid, 
+      yob, co, loc, vtc, 
+      po, dist, subdist, 
+      `state`, pc, delete_flag, 
+      version, last_editor, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
+      #{aadhaarNo,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{dob,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{frontSide,jdbcType=VARCHAR}, #{backSide,jdbcType=VARCHAR}, #{vid,jdbcType=VARCHAR}, 
+      #{yob,jdbcType=VARCHAR}, #{co,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR}, #{vtc,jdbcType=VARCHAR}, 
+      #{po,jdbcType=VARCHAR}, #{dist,jdbcType=VARCHAR}, #{subdist,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{pc,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{version,jdbcType=INTEGER}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO">
+    insert into aadhaar
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="aadhaarNo != null">
+        aadhaar_no,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="dob != null">
+        dob,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="frontSide != null">
+        front_side,
+      </if>
+      <if test="backSide != null">
+        back_side,
+      </if>
+      <if test="vid != null">
+        vid,
+      </if>
+      <if test="yob != null">
+        yob,
+      </if>
+      <if test="co != null">
+        co,
+      </if>
+      <if test="loc != null">
+        loc,
+      </if>
+      <if test="vtc != null">
+        vtc,
+      </if>
+      <if test="po != null">
+        po,
+      </if>
+      <if test="dist != null">
+        dist,
+      </if>
+      <if test="subdist != null">
+        subdist,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="pc != null">
+        pc,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="aadhaarNo != null">
+        #{aadhaarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="dob != null">
+        #{dob,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="frontSide != null">
+        #{frontSide,jdbcType=VARCHAR},
+      </if>
+      <if test="backSide != null">
+        #{backSide,jdbcType=VARCHAR},
+      </if>
+      <if test="vid != null">
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="yob != null">
+        #{yob,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null">
+        #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null">
+        #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="vtc != null">
+        #{vtc,jdbcType=VARCHAR},
+      </if>
+      <if test="po != null">
+        #{po,jdbcType=VARCHAR},
+      </if>
+      <if test="dist != null">
+        #{dist,jdbcType=VARCHAR},
+      </if>
+      <if test="subdist != null">
+        #{subdist,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pc != null">
+        #{pc,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO">
+    update aadhaar
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="aadhaarNo != null">
+        aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="dob != null">
+        dob = #{dob,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="frontSide != null">
+        front_side = #{frontSide,jdbcType=VARCHAR},
+      </if>
+      <if test="backSide != null">
+        back_side = #{backSide,jdbcType=VARCHAR},
+      </if>
+      <if test="vid != null">
+        vid = #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="yob != null">
+        yob = #{yob,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null">
+        co = #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="loc != null">
+        loc = #{loc,jdbcType=VARCHAR},
+      </if>
+      <if test="vtc != null">
+        vtc = #{vtc,jdbcType=VARCHAR},
+      </if>
+      <if test="po != null">
+        po = #{po,jdbcType=VARCHAR},
+      </if>
+      <if test="dist != null">
+        dist = #{dist,jdbcType=VARCHAR},
+      </if>
+      <if test="subdist != null">
+        subdist = #{subdist,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="pc != null">
+        pc = #{pc,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO">
+    update aadhaar
+    set account_id = #{accountId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      dob = #{dob,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      front_side = #{frontSide,jdbcType=VARCHAR},
+      back_side = #{backSide,jdbcType=VARCHAR},
+      vid = #{vid,jdbcType=VARCHAR},
+      yob = #{yob,jdbcType=VARCHAR},
+      co = #{co,jdbcType=VARCHAR},
+      loc = #{loc,jdbcType=VARCHAR},
+      vtc = #{vtc,jdbcType=VARCHAR},
+      po = #{po,jdbcType=VARCHAR},
+      dist = #{dist,jdbcType=VARCHAR},
+      subdist = #{subdist,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      pc = #{pc,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.BasicInfoDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="middle_name" jdbcType="VARCHAR" property="middleName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="residence_city" jdbcType="VARCHAR" property="residenceCity" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="aadhaar_no" jdbcType="VARCHAR" property="aadhaarNo" />
+    <result column="pan_no" jdbcType="VARCHAR" property="panNo" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="post_code" jdbcType="VARCHAR" property="postCode" />
+    <result column="marital_status" jdbcType="TINYINT" property="maritalStatus" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, org_id, first_name, middle_name, last_name, address, residence_city, 
+    gender, aadhaar_no, pan_no, email, post_code, marital_status, occupation, company, 
+    industry, delete_flag, version, last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from basic_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from basic_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO">
+    insert into basic_info (id, account_id, org_id, 
+      first_name, middle_name, last_name, 
+      address, residence_city, gender, 
+      aadhaar_no, pan_no, email, 
+      post_code, marital_status, occupation, 
+      company, industry, delete_flag, 
+      version, last_editor, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
+      #{firstName,jdbcType=VARCHAR}, #{middleName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{residenceCity,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{aadhaarNo,jdbcType=VARCHAR}, #{panNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{postCode,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=TINYINT}, #{occupation,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{version,jdbcType=INTEGER}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO">
+    insert into basic_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="middleName != null">
+        middle_name,
+      </if>
+      <if test="lastName != null">
+        last_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="residenceCity != null">
+        residence_city,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="aadhaarNo != null">
+        aadhaar_no,
+      </if>
+      <if test="panNo != null">
+        pan_no,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="postCode != null">
+        post_code,
+      </if>
+      <if test="maritalStatus != null">
+        marital_status,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="middleName != null">
+        #{middleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceCity != null">
+        #{residenceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="aadhaarNo != null">
+        #{aadhaarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="panNo != null">
+        #{panNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=TINYINT},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO">
+    update basic_info
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="middleName != null">
+        middle_name = #{middleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceCity != null">
+        residence_city = #{residenceCity,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="aadhaarNo != null">
+        aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="panNo != null">
+        pan_no = #{panNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        marital_status = #{maritalStatus,jdbcType=TINYINT},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO">
+    update basic_info
+    set account_id = #{accountId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      middle_name = #{middleName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      residence_city = #{residenceCity,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
+      pan_no = #{panNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=TINYINT},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

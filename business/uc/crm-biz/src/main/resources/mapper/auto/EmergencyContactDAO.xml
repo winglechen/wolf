@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.EmergencyContactDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.EmergencyContactDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="contact_person" jdbcType="VARCHAR" property="contactPerson" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="relationship" jdbcType="TINYINT" property="relationship" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, org_id, contact_person, contact_phone, relationship, delete_flag, 
+    version, last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emergency_contact
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from emergency_contact
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.EmergencyContactDO">
+    insert into emergency_contact (id, account_id, org_id, 
+      contact_person, contact_phone, relationship, 
+      delete_flag, version, last_editor, 
+      created_at, updated_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
+      #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{relationship,jdbcType=TINYINT}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.EmergencyContactDO">
+    insert into emergency_contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="contactPerson != null">
+        contact_person,
+      </if>
+      <if test="contactPhone != null">
+        contact_phone,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="contactPerson != null">
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.EmergencyContactDO">
+    update emergency_contact
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="contactPerson != null">
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.EmergencyContactDO">
+    update emergency_contact
+    set account_id = #{accountId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=TINYINT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

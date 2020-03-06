@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.UserCreditDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="credit_amount" jdbcType="BIGINT" property="creditAmount" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="basic_info_auth_status" jdbcType="TINYINT" property="basicInfoAuthStatus" />
+    <result column="liveness_auth_status" jdbcType="TINYINT" property="livenessAuthStatus" />
+    <result column="aadhaar_auth_status" jdbcType="TINYINT" property="aadhaarAuthStatus" />
+    <result column="pan_auth_status" jdbcType="TINYINT" property="panAuthStatus" />
+    <result column="passport_auth_status" jdbcType="TINYINT" property="passportAuthStatus" />
+    <result column="dl_auth_status" jdbcType="TINYINT" property="dlAuthStatus" />
+    <result column="voter_card_auth_status" jdbcType="TINYINT" property="voterCardAuthStatus" />
+    <result column="bank_card_bind_status" jdbcType="TINYINT" property="bankCardBindStatus" />
+    <result column="kyc_status" jdbcType="TINYINT" property="kycStatus" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, org_id, credit_amount, tags, basic_info_auth_status, liveness_auth_status, 
+    aadhaar_auth_status, pan_auth_status, passport_auth_status, dl_auth_status, voter_card_auth_status, 
+    bank_card_bind_status, kyc_status, version, delete_flag, last_editor, created_at, 
+    updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_credit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from user_credit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditDO">
+    insert into user_credit (id, account_id, org_id, 
+      credit_amount, tags, basic_info_auth_status, 
+      liveness_auth_status, aadhaar_auth_status, 
+      pan_auth_status, passport_auth_status, dl_auth_status, 
+      voter_card_auth_status, bank_card_bind_status, 
+      kyc_status, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
+      #{creditAmount,jdbcType=BIGINT}, #{tags,jdbcType=VARCHAR}, #{basicInfoAuthStatus,jdbcType=TINYINT}, 
+      #{livenessAuthStatus,jdbcType=TINYINT}, #{aadhaarAuthStatus,jdbcType=TINYINT}, 
+      #{panAuthStatus,jdbcType=TINYINT}, #{passportAuthStatus,jdbcType=TINYINT}, #{dlAuthStatus,jdbcType=TINYINT}, 
+      #{voterCardAuthStatus,jdbcType=TINYINT}, #{bankCardBindStatus,jdbcType=TINYINT}, 
+      #{kycStatus,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditDO">
+    insert into user_credit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="creditAmount != null">
+        credit_amount,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="basicInfoAuthStatus != null">
+        basic_info_auth_status,
+      </if>
+      <if test="livenessAuthStatus != null">
+        liveness_auth_status,
+      </if>
+      <if test="aadhaarAuthStatus != null">
+        aadhaar_auth_status,
+      </if>
+      <if test="panAuthStatus != null">
+        pan_auth_status,
+      </if>
+      <if test="passportAuthStatus != null">
+        passport_auth_status,
+      </if>
+      <if test="dlAuthStatus != null">
+        dl_auth_status,
+      </if>
+      <if test="voterCardAuthStatus != null">
+        voter_card_auth_status,
+      </if>
+      <if test="bankCardBindStatus != null">
+        bank_card_bind_status,
+      </if>
+      <if test="kycStatus != null">
+        kyc_status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="creditAmount != null">
+        #{creditAmount,jdbcType=BIGINT},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="basicInfoAuthStatus != null">
+        #{basicInfoAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="livenessAuthStatus != null">
+        #{livenessAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="aadhaarAuthStatus != null">
+        #{aadhaarAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="panAuthStatus != null">
+        #{panAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="passportAuthStatus != null">
+        #{passportAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="dlAuthStatus != null">
+        #{dlAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="voterCardAuthStatus != null">
+        #{voterCardAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bankCardBindStatus != null">
+        #{bankCardBindStatus,jdbcType=TINYINT},
+      </if>
+      <if test="kycStatus != null">
+        #{kycStatus,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditDO">
+    update user_credit
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="creditAmount != null">
+        credit_amount = #{creditAmount,jdbcType=BIGINT},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="basicInfoAuthStatus != null">
+        basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="livenessAuthStatus != null">
+        liveness_auth_status = #{livenessAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="aadhaarAuthStatus != null">
+        aadhaar_auth_status = #{aadhaarAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="panAuthStatus != null">
+        pan_auth_status = #{panAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="passportAuthStatus != null">
+        passport_auth_status = #{passportAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="dlAuthStatus != null">
+        dl_auth_status = #{dlAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="voterCardAuthStatus != null">
+        voter_card_auth_status = #{voterCardAuthStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bankCardBindStatus != null">
+        bank_card_bind_status = #{bankCardBindStatus,jdbcType=TINYINT},
+      </if>
+      <if test="kycStatus != null">
+        kyc_status = #{kycStatus,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditDO">
+    update user_credit
+    set account_id = #{accountId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      credit_amount = #{creditAmount,jdbcType=BIGINT},
+      tags = #{tags,jdbcType=VARCHAR},
+      basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
+      liveness_auth_status = #{livenessAuthStatus,jdbcType=TINYINT},
+      aadhaar_auth_status = #{aadhaarAuthStatus,jdbcType=TINYINT},
+      pan_auth_status = #{panAuthStatus,jdbcType=TINYINT},
+      passport_auth_status = #{passportAuthStatus,jdbcType=TINYINT},
+      dl_auth_status = #{dlAuthStatus,jdbcType=TINYINT},
+      voter_card_auth_status = #{voterCardAuthStatus,jdbcType=TINYINT},
+      bank_card_bind_status = #{bankCardBindStatus,jdbcType=TINYINT},
+      kyc_status = #{kycStatus,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

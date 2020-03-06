@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.PanCardDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.PanCardDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="pan_no" jdbcType="VARCHAR" property="panNo" />
+    <result column="dob" jdbcType="VARCHAR" property="dob" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="father_name" jdbcType="VARCHAR" property="fatherName" />
+    <result column="front_side" jdbcType="VARCHAR" property="frontSide" />
+    <result column="back_side" jdbcType="VARCHAR" property="backSide" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, org_id, pan_no, dob, `name`, father_name, front_side, back_side, 
+    delete_flag, version, last_editor, created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pan_card
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from pan_card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.PanCardDO">
+    insert into pan_card (id, account_id, org_id, 
+      pan_no, dob, `name`, father_name, 
+      front_side, back_side, delete_flag, 
+      version, last_editor, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
+      #{panNo,jdbcType=VARCHAR}, #{dob,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{fatherName,jdbcType=VARCHAR}, 
+      #{frontSide,jdbcType=VARCHAR}, #{backSide,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{version,jdbcType=INTEGER}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.PanCardDO">
+    insert into pan_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="panNo != null">
+        pan_no,
+      </if>
+      <if test="dob != null">
+        dob,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="fatherName != null">
+        father_name,
+      </if>
+      <if test="frontSide != null">
+        front_side,
+      </if>
+      <if test="backSide != null">
+        back_side,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="panNo != null">
+        #{panNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dob != null">
+        #{dob,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherName != null">
+        #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="frontSide != null">
+        #{frontSide,jdbcType=VARCHAR},
+      </if>
+      <if test="backSide != null">
+        #{backSide,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.PanCardDO">
+    update pan_card
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="panNo != null">
+        pan_no = #{panNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dob != null">
+        dob = #{dob,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fatherName != null">
+        father_name = #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="frontSide != null">
+        front_side = #{frontSide,jdbcType=VARCHAR},
+      </if>
+      <if test="backSide != null">
+        back_side = #{backSide,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.PanCardDO">
+    update pan_card
+    set account_id = #{accountId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      pan_no = #{panNo,jdbcType=VARCHAR},
+      dob = #{dob,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      father_name = #{fatherName,jdbcType=VARCHAR},
+      front_side = #{frontSide,jdbcType=VARCHAR},
+      back_side = #{backSide,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
