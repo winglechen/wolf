@@ -19,7 +19,7 @@
         <module>trade</module>
         <module>uc</module>
         <module>ump</module>
-        <module>workflow</module>
+        <module>content</module>
     </modules>
 
     <properties>

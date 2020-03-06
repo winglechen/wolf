@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.acl.enums;
+package study.daydayup.wolf.business.org.api.staff.acl.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;

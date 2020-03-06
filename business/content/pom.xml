@@ -11,7 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.business</groupId>
-    <artifactId>workflow</artifactId>
+    <artifactId>content</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>content-api</module>
+        <module>content-biz</module>
+    </modules>
 
 
 </project>
