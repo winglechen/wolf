@@ -91,6 +91,8 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
                 .sellerId(loan.getSellerId())
                 .installmentNum(loan.getInstallmentNum())
                 .amount(BigDecimal.ZERO)
+                .paidAmount(BigDecimal.ZERO)
+                .lossAmount(BigDecimal.ZERO)
                 .loanAmount(BigDecimal.ZERO)
                 .handlingFee(BigDecimal.ZERO)
                 .interest(BigDecimal.ZERO)
