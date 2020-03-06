@@ -93,7 +93,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
         attachment.set("key", config.getKeyId());
         attachment.set("amount", String.valueOf(amount));
         attachment.set("name", config.getCompanyName());
-        attachment.set("order", order.get("id"));
+        attachment.set("order_id", order.get("id"));
 
         attachment.set("prefill", config.getPrefill());
         attachment.set("theme", config.getTheme());

@@ -12,6 +12,6 @@ import java.io.Serializable;
  **/
 @Data
 public class RazorTheme implements Serializable {
-    private String color = "#53a20e";
+    private String color = "#6B3CBB";
 
 }
