@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Ump;
+import study.daydayup.wolf.framework.layer.context.Context;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  **/
 @Data
 @Builder
-public class BuyContext {
+public class BuyContext implements Context {
 
     private TradeTypeEnum tradeType;
     private TradePhaseEnum tradePhase;

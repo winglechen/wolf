@@ -150,7 +150,16 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
         calculateInstallmentPenalty(loan, repayment, installment);
         calculateInstallmentAmount(repayment, installment);
 
+        setRepaymentDueAt(repayment, installment);
         addRepaymentTags(installment);
+    }
+
+    private void setRepaymentDueAt(@NonNull RepaymentTerm repayment, @NonNull InstallmentTerm installment) {
+        if (null != repayment.getDueAt() || null == installment.getDueAt()) {
+            return;
+        }
+
+        repayment.setDueAt(installment.getDueAt());
     }
 
     private void calculateInstallmentLoanAmount(@NonNull RepaymentTerm repayment, @NonNull InstallmentTerm installment) {

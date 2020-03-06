@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.trade.TradeStateLog;
 import study.daydayup.wolf.framework.layer.domain.VO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -41,6 +42,8 @@ public class RepaymentTerm implements VO {
     private BigDecimal handlingFee;
     private BigDecimal interest;
     private BigDecimal penalty;
+
+    private LocalDate dueAt;
 
     /**
      * installmentNo1, installmentNo2, ...
