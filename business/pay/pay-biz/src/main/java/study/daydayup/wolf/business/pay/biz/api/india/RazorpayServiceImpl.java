@@ -47,8 +47,8 @@ public class RazorpayServiceImpl implements RazorpayService {
     }
 
     @Override
-    public Result<String> subscribe(@NonNull String data) {
-        String response = subscriber.subscribe(data);
+    public Result<Integer> subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
+        int response = subscriber.subscribe(eventId, signature, data);
         return Result.ok(response);
     }
 }

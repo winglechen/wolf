@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
@@ -34,9 +35,11 @@ public class UnionPayController {
     }
 
     @PostMapping("/pay/razorpay/subscribe")
-    public Result<String> razorpaySubscribe(@RequestBody String data) {
-        log.info("razorpay:{}", data);
+    public Result<String> razorpaySubscribe(@RequestHeader("X-Razorpay-Event-Id") String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
+        log.info("razorpay:{}, {}, {}", eventId, signature, data);
+        Integer response = razorpayService.subscribe(eventId, signature, data).getData();
         //TODO check response and return code != 200 when response fail
-        return razorpayService.subscribe(data);
+
+        return Result.ok("ok");
     }
 }

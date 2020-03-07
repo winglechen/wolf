@@ -3,6 +3,9 @@ POST http://localhost:8100/pay/razorpay/subscribe
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
+X-Razorpay-Event-Id: idxxx
+X-Razorpay-Signature: signxxx
+
 
 {
   "entity": "event",
