@@ -31,6 +31,9 @@ function deploy_union_test() {
     scp /code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "union-deploy-dubbo.tar.gz transporting..."
+
+    echo "union restart ..."
+    ssh -A smapp "/home/app/bin/wolf release-union"
 }
 
 function deploy_onion_test() {
@@ -48,6 +51,9 @@ function deploy_onion_test() {
     scp /code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "onion-user.tar.gz transporting..."
+
+    echo "onion restart ..."
+    ssh -A smapp "/home/app/bin/wolf release-onion"
 }
 
 function conn_test_redis() {

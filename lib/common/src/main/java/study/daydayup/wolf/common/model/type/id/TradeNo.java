@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *          + shardingKey   (4位         hash(accountId)     )
  *          + dataCenterKey (4位                             )
  *          + uuid          (9位   必选                       )
- *          长度合计         (32位  必选长度  )
+ *          长度合计         (32位  必选长度  14 + 1 + 4 + 5    )
  *
  * @author Wingle
  * @since 2019/12/20 11:43 上午

@@ -116,6 +116,11 @@ public class DefaultStateMachineTest {
         public int getCode() {
             return 1;
         }
+
+        @Override
+        public String getName() {
+            return null;
+        }
     }
 
     static class Paid implements TradeState {
@@ -123,12 +128,21 @@ public class DefaultStateMachineTest {
         public int getCode() {
             return 2;
         }
+        @Override
+        public String getName() {
+            return null;
+        }
     }
 
     static class Consigned implements TradeState {
         @Override
         public int getCode() {
             return 3;
+        }
+
+        @Override
+        public String getName() {
+            return null;
         }
     }
 

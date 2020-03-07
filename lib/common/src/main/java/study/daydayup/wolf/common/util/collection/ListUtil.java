@@ -1,7 +1,6 @@
 package study.daydayup.wolf.common.util.collection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * study.daydayup.wolf.common.util
@@ -29,5 +28,40 @@ public class ListUtil {
 
         int lastIndex = list.size() - 1;
         return list.get(lastIndex);
+    }
+
+
+    public static <E> E random(List<E> list) {
+        if (isEmpty(list)) {
+            return null;
+        }
+
+        int index = new Random().nextInt(list.size());
+        return list.get(index);
+    }
+
+    public static <E> List<E> random(List<E> list, int num) {
+        List<E> result = new ArrayList<>();
+        if (num < 1 || isEmpty(list)) {
+            return result;
+        }
+
+        int index, size = list.size();
+        Map<Integer, Boolean> indexMap = new HashMap<>(size);
+        Random random = new Random();
+
+        while (num > 0) {
+
+            index = random.nextInt(size);
+            if (null  != indexMap.get(index)) {
+                continue;
+            }
+
+            indexMap.put(index, true);
+            result.add(list.get(index));
+            num--;
+        }
+
+        return result;
     }
 }

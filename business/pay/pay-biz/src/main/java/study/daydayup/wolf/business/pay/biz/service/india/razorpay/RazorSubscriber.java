@@ -1,5 +1,9 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.razorpay.RazorpayException;
+import com.razorpay.Utils;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,6 +37,8 @@ public class RazorSubscriber {
     @Resource
     private RazorConfig config;
 
+    private JSONObject notify;
+
     public int subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
         logResponse(eventId, signature, data);
         if (isDuplicate(eventId)) {
@@ -43,10 +49,12 @@ public class RazorSubscriber {
             return NotifyReturnEnum.FAIL.getCode();
         }
 
-        return NotifyReturnEnum.SUCCESS.getCode();
+        if (!validateResponse(data)) {
+            return NotifyReturnEnum.PARSE_ERROR.getCode();
+        }
+
+        return updatePayment(data);
     }
-
-
 
     private void logResponse(String eventId, String signature,String data) {
         PaymentLog log = PaymentLog.builder()
@@ -62,6 +70,33 @@ public class RazorSubscriber {
     }
 
     private boolean verifyResponse(String signature,String data) {
+        if (StringUtil.isEmpty(signature, true) || StringUtil.isEmpty(data, true)) {
+            return false;
+        }
+
+        String secret = config.getWebHookSecret();
+        try {
+            return Utils.verifyWebhookSignature(data, signature, secret);
+        } catch (RazorpayException e) {
+            return false;
+        }
+    }
+
+
+    private boolean validateResponse(String data) {
+        notify = JSON.parseObject(data);
+        if (notify == null) {
+            return false;
+        }
+
+
         return true;
+    }
+
+    private int updatePayment(String data) {
+
+
+
+        return NotifyReturnEnum.SUCCESS.getCode();
     }
 }
