@@ -17,10 +17,10 @@ public enum InstallmentTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    InstallmentTypeEnum(int code, String desc) {
+    InstallmentTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

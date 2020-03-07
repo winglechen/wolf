@@ -21,10 +21,10 @@ public enum AccountTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    AccountTypeEnum(int code, String desc) {
+    AccountTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

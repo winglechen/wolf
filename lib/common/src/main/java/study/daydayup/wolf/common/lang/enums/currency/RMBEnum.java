@@ -20,10 +20,10 @@ public enum RMBEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    RMBEnum(int code, String desc) {
+    RMBEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

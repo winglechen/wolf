@@ -27,10 +27,10 @@ public enum InterestEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    InterestEnum(int code, String desc) {
+    InterestEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

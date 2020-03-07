@@ -85,7 +85,7 @@ public class PeriodUtil {
                 days = 1;
                 break;
             default:
-                throw new EnumNotFoundException("Unsupported PeriodStrategyEnum:" + strategy.getDesc());
+                throw new EnumNotFoundException("Unsupported PeriodStrategyEnum:" + strategy.getName());
         }
 
         return days;

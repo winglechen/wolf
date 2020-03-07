@@ -18,10 +18,10 @@ public enum SkuTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    SkuTypeEnum(int code, String desc) {
+    SkuTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

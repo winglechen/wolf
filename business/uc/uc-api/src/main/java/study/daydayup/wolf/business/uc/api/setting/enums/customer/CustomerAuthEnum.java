@@ -17,9 +17,9 @@ public enum CustomerAuthEnum implements StatusEnum {
     ;
 
     private int code;
-    private String desc;
-    CustomerAuthEnum(int code, String desc) {
+    private String name;
+    CustomerAuthEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

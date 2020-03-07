@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.org.api.staff.acl.enums;
 
 import lombok.Getter;
-import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
+import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 
 /**
  * study.daydayup.wolf.business.trade.api.domain.enums
@@ -10,15 +10,15 @@ import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum ActionTypeEnum implements StatusEnum {
+public enum ActionTypeEnum implements CodeBasedEnum {
     GROUP(2, "group"),
     ACTION(1, "action")
     ;
 
     private int code;
-    private String desc;
-    ActionTypeEnum(int code, String desc) {
+    private String name;
+    ActionTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -24,12 +24,12 @@ public enum RateEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
     private BigDecimal base;
 
-    RateEnum(int code, String desc, BigDecimal base) {
+    RateEnum(int code, String name, BigDecimal base) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
         this.base = base;
     }
 }

@@ -19,10 +19,10 @@ public enum PaymentTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    PaymentTypeEnum(int code, String desc) {
+    PaymentTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

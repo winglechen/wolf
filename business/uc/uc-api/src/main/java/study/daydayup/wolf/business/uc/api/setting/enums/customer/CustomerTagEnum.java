@@ -16,9 +16,9 @@ public enum CustomerTagEnum implements StatusEnum {
     ;
 
     private int code;
-    private String desc;
-    CustomerTagEnum(int code, String desc) {
+    private String name;
+    CustomerTagEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -25,9 +25,9 @@ public enum CustomerInfoEnum implements StatusEnum {
     ;
 
     private int code;
-    private String desc;
-    CustomerInfoEnum(int code, String desc) {
+    private String name;
+    CustomerInfoEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

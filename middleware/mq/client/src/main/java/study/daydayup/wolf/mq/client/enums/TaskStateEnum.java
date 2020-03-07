@@ -21,10 +21,10 @@ public enum TaskStateEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    TaskStateEnum(int code, String desc) {
+    TaskStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

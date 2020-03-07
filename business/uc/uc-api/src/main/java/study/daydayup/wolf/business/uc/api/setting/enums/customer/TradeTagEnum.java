@@ -22,9 +22,9 @@ public enum TradeTagEnum implements StatusEnum {
     ;
 
     private int code;
-    private String desc;
-    TradeTagEnum(int code, String desc) {
+    private String name;
+    TradeTagEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -10,4 +10,5 @@ import java.io.Serializable;
  **/
 public interface State extends Serializable {
     int getCode();
+    String getName();
 }

@@ -80,7 +80,7 @@ public class CustomerStatusAgent {
         Map<String, Boolean> map = new HashMap<>();
 
         for(StatusEnum status: clazz.getEnumConstants()) {
-            String desc = status.getDesc();
+            String desc = status.getName();
             map.put(StringUtil.camel(desc, "."), get(status));
         }
 

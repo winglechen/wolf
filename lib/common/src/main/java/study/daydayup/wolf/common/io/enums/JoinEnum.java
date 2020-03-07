@@ -16,10 +16,10 @@ public enum JoinEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    JoinEnum(int code, String desc) {
+    JoinEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -18,10 +18,10 @@ public enum PeriodStrategyEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    PeriodStrategyEnum(int code, String desc) {
+    PeriodStrategyEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

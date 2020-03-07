@@ -16,10 +16,10 @@ public enum OrgTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    OrgTypeEnum(int code, String desc) {
+    OrgTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -16,10 +16,10 @@ public enum OrderEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    OrderEnum(int code, String desc) {
+    OrderEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

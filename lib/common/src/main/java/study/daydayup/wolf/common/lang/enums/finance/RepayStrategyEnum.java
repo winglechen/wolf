@@ -17,10 +17,10 @@ public enum RepayStrategyEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    RepayStrategyEnum(int code, String desc) {
+    RepayStrategyEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -17,10 +17,10 @@ public enum FeeStrategyEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    FeeStrategyEnum(int code, String desc) {
+    FeeStrategyEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

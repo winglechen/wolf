@@ -20,10 +20,10 @@ public enum StockTypeEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    StockTypeEnum(int code, String desc) {
+    StockTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

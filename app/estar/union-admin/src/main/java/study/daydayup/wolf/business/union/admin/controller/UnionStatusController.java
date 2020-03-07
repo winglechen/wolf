@@ -105,25 +105,25 @@ public class UnionStatusController extends BaseUnionController {
 
     private void initCustomerInfo(@NonNull Map<String, StatusEnum> statusMap) {
         for (CustomerInfoEnum e : CustomerInfoEnum.values()) {
-            statusMap.put(e.getDesc(), e);
+            statusMap.put(e.getName(), e);
         }
     }
 
     private void initCustomerAuth(@NonNull Map<String, StatusEnum> statusMap) {
         for (CustomerAuthEnum e : CustomerAuthEnum.values()) {
-            statusMap.put(e.getDesc(), e);
+            statusMap.put(e.getName(), e);
         }
     }
 
     private void initCustomerTag(@NonNull Map<String, StatusEnum> statusMap) {
         for (CustomerTagEnum e : CustomerTagEnum.values()) {
-            statusMap.put(e.getDesc(), e);
+            statusMap.put(e.getName(), e);
         }
     }
 
     private void initTradeTag(@NonNull Map<String, StatusEnum> statusMap) {
         for (TradeTagEnum e : TradeTagEnum.values()) {
-            statusMap.put(e.getDesc(), e);
+            statusMap.put(e.getName(), e);
         }
     }
 }

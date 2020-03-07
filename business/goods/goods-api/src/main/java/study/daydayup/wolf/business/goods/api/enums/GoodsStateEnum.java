@@ -17,10 +17,10 @@ public enum GoodsStateEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    GoodsStateEnum(int code, String desc) {
+    GoodsStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

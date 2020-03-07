@@ -16,10 +16,10 @@ public enum CountableUnitEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    CountableUnitEnum(int code, String desc) {
+    CountableUnitEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

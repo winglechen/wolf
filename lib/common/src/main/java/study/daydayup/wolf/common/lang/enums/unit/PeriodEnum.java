@@ -23,10 +23,10 @@ public enum PeriodEnum implements CodeBasedEnum {
     ;
 
     private int code;
-    private String desc;
+    private String name;
 
-    PeriodEnum(int code, String desc) {
+    PeriodEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

@@ -215,7 +215,7 @@ public class Sql {
             sql.append(COMMA);
         }
         sql.append(BLANK).append(column);
-        sql.append(BLANK).append(order.getDesc());
+        sql.append(BLANK).append(order.getName());
 
         isFirstOrder = false;
         return this;
