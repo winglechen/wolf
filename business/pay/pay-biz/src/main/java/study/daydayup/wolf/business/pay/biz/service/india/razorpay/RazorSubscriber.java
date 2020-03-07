@@ -14,6 +14,8 @@ import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PaymentHandler;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PayoutHandler;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -30,13 +32,17 @@ import javax.annotation.Resource;
 public class RazorSubscriber {
     private static final PaymentMethodEnum PAYMENT_METHOD = PaymentMethodEnum.RAZORPAY;
     private static final String SEPARATOR = ":";
+    private PayNotification notification;
 
     @Resource
     private PaymentLogRepository logRepository;
     @Resource
     private RazorConfig config;
+    @Resource
+    private PayoutHandler payoutHandler;
+    @Resource
+    private PaymentHandler paymentHandler;
 
-    private PayNotification notification;
 
     public int subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
         logResponse(eventId, signature, data);
@@ -65,6 +71,7 @@ public class RazorSubscriber {
     }
 
     private boolean isDuplicate(String eventId) {
+
         return false;
     }
 
@@ -81,39 +88,28 @@ public class RazorSubscriber {
         }
     }
 
-
     private boolean validateResponse(String data) {
         JSONObject result = JSON.parseObject(data);
         if (result == null) {
             return false;
         }
 
-        String value;
         notification = new PayNotification();
 
-        value = result.getString("event");
-        if (StringUtil.isEmpty(value)) {
-            return false;
-        }
-        notification.setEvent(value);
+        parseEvent(result);
+        parsePayment(result);
+        parsePayout(result);
+        parseOrder(result);
 
         return validateNotify();
     }
 
-    private boolean validateNotify() {
-//        if (StringUtil.isEmpty(notify.getPaymentNo())) {
-//            return false;
-//        }
-
-        if (StringUtil.isEmpty(notification.getOutTradeNo())) {
-            return false;
+    private void parseEvent(JSONObject result) {
+        String value = result.getString("event");
+        if (StringUtil.isEmpty(value)) {
+            return ;
         }
-
-        if (StringUtil.isEmpty(notification.getStatus())) {
-            return false;
-        }
-
-        return notification.getAmount() > 0;
+        notification.setEvent(value);
     }
 
     private void parsePayment(JSONObject result) {
@@ -151,12 +147,35 @@ public class RazorSubscriber {
         notification.setStatus(order.getString("status"));
     }
 
+    private boolean validateNotify() {
+        if (StringUtil.isEmpty(notification.getEvent())) {
+            return false;
+        }
 
+        if (StringUtil.isEmpty(notification.getPaymentNo())) {
+            return false;
+        }
+
+        if (StringUtil.isEmpty(notification.getOutTradeNo())) {
+            return false;
+        }
+
+        if (StringUtil.isEmpty(notification.getStatus())) {
+            return false;
+        }
+
+        return notification.getAmount() > 0;
+    }
 
     private int updatePayment() {
 
-
-
-        return NotifyReturnEnum.SUCCESS.getCode();
+        switch (notification.getEvent()) {
+            case "order.paid":
+                return paymentHandler.handle(notification);
+            case "payout.processed":
+                return payoutHandler.handle(notification);
+            default:
+                return NotifyReturnEnum.SUCCESS.getCode();
+        }
     }
 }

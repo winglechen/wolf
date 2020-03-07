@@ -14,6 +14,6 @@ import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
 public class DefaultTradeNotifier implements TradeNotifier {
     @Override
     public void notify(Payment payment) {
-        
+
     }
 }
