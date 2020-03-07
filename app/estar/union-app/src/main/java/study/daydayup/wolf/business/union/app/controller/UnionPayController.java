@@ -36,6 +36,7 @@ public class UnionPayController {
     @PostMapping("/pay/razorpay/subscribe")
     public Result<String> razorpaySubscribe(@RequestBody String data) {
         log.info("razorpay:{}", data);
+        //TODO check response and return code != 200 when response fail
         return razorpayService.subscribe(data);
     }
 }
