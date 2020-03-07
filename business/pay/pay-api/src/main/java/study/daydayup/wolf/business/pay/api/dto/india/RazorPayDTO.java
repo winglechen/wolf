@@ -11,10 +11,21 @@ import study.daydayup.wolf.framework.layer.api.DTO;
  **/
 @Data
 public class RazorPayDTO implements DTO {
+    /**
+     * order.paid or payout.processed or ...
+     */
     private String event;
 
     private String paymentNo;
+    /**
+     * payment.id or payout.id
+     */
+    private String outTradeNo;
+    /**
+     * paid | processed
+     */
+    private String status;
+    private Long amount;
+
     private String razorpayOrderId;
-    private String razorpayPaymentId;
-    private String razorpaySignature;
 }

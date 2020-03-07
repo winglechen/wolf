@@ -8,12 +8,14 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
+import study.daydayup.wolf.business.pay.api.dto.india.RazorPayDTO;
 import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
@@ -37,7 +39,7 @@ public class RazorSubscriber {
     @Resource
     private RazorConfig config;
 
-    private JSONObject notify;
+    private RazorPayDTO notify;
 
     public int subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
         logResponse(eventId, signature, data);
@@ -84,14 +86,75 @@ public class RazorSubscriber {
 
 
     private boolean validateResponse(String data) {
-        notify = JSON.parseObject(data);
-        if (notify == null) {
+        JSONObject result = JSON.parseObject(data);
+        if (result == null) {
             return false;
         }
 
+        String value;
+        notify = new RazorPayDTO();
 
-        return true;
+        value = result.getString("event");
+        if (StringUtil.isEmpty(value)) {
+            return false;
+        }
+        notify.setEvent(value);
+
+        return validateNotify();
     }
+
+    private boolean validateNotify() {
+//        if (StringUtil.isEmpty(notify.getPaymentNo())) {
+//            return false;
+//        }
+
+        if (StringUtil.isEmpty(notify.getOutTradeNo())) {
+            return false;
+        }
+
+        if (StringUtil.isEmpty(notify.getStatus())) {
+            return false;
+        }
+
+        return notify.getAmount() > 0;
+    }
+
+    private void parsePayment(JSONObject result) {
+        JSONObject payment = JsonUtil.getJSONObject(result, "payload.payment.entity");
+        if (payment == null) {
+            return;
+        }
+
+        notify.setOutTradeNo(payment.getString("id"));
+        notify.setAmount(payment.getLongValue("amount"));
+        notify.setRazorpayOrderId(payment.getString("order_id"));
+    }
+
+    private void parsePayout(JSONObject result) {
+        JSONObject payout = JsonUtil.getJSONObject(result, "payload.payout.entity");
+        if (payout == null) {
+            return;
+        }
+
+        notify.setPaymentNo(payout.getString("reference_id"));
+        notify.setOutTradeNo(payout.getString("id"));
+        notify.setAmount(payout.getLongValue("amount_paid"));
+        notify.setStatus(payout.getString("status"));
+    }
+
+    private void parseOrder(JSONObject result) {
+        JSONObject order = JsonUtil.getJSONObject(result, "payload.order.entity");
+        if (order == null) {
+            return;
+        }
+
+        notify.setPaymentNo(order.getString("receipt"));
+        notify.setRazorpayOrderId(order.getString("id"));
+        notify.setAmount(order.getLongValue("amount_paid"));
+        notify.setStatus(order.getString("status"));
+    }
+
+
 
     private int updatePayment(String data) {
 
