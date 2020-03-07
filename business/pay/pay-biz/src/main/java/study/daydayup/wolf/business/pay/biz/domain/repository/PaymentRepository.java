@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
+import study.daydayup.wolf.business.pay.biz.domain.entity.PaymentEntity;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
@@ -56,6 +58,22 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         paymentDO.setUpdatedAt(context.getRequestTime());
 
         return dao.updateByPaymentNo(paymentDO, paymentNo);
+    }
+
+    public int save(@NonNull PaymentEntity entity) {
+        String paymentNo = entity.getKey().getPaymentNo();
+        Payment changes = entity.getChanges();
+
+        if (StringUtil.isEmpty(paymentNo) || null == changes) {
+            return 0;
+        }
+
+        PaymentDO paymentDO = toDo(changes);
+        clearReadOnlyProperties(paymentDO);
+        paymentDO.setUpdatedAt(context.getRequestTime());
+
+        return dao.updateByPaymentNo(paymentDO, paymentNo);
+
     }
 
     public void clearReadOnlyProperties(PaymentDO paymentDO) {

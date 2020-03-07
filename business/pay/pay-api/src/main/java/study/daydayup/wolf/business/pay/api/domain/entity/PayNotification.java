@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.pay.api.domain.entity;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import java.math.BigDecimal;
+
 /**
  * study.daydayup.wolf.business.pay.api.dto.china
  *
@@ -25,7 +27,7 @@ public class PayNotification implements Model {
      * paid | processed
      */
     private String status;
-    private Long amount;
+    private BigDecimal amount;
 
     private String outOrderNo;
 }

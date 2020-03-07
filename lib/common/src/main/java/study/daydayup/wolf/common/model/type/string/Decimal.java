@@ -15,6 +15,12 @@ import java.util.Objects;
  * @since 2020/1/12 1:03 上午
  **/
 public class Decimal implements DataType {
+    public static final BigDecimal ZERO = BigDecimal.ZERO;
+    public static final BigDecimal ONE = BigDecimal.ONE;
+    public static final BigDecimal TEN = BigDecimal.TEN;
+    public static final BigDecimal HUNDRED = BigDecimal.valueOf(100);
+
+
     public static final int DEFAULT_SCALE   = 4;
     public static final int ZERO_SCALE      = 0;
     private BigDecimal value;

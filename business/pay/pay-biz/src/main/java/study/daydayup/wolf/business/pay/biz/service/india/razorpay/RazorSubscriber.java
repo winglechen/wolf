@@ -16,10 +16,14 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PaymentHandler;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PayoutHandler;
+import study.daydayup.wolf.common.model.type.string.Decimal;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service.india.razorpay
@@ -119,8 +123,23 @@ public class RazorSubscriber {
         }
 
         notification.setOutTradeNo(payment.getString("id"));
-        notification.setAmount(payment.getLongValue("amount"));
+        notification.setAmount(parseAmount(payment.getLongValue("amount")));
         notification.setOutOrderNo(payment.getString("order_id"));
+    }
+
+    private BigDecimal parseAmount(long amount) {
+        if (amount < 0) {
+            return null;
+        }
+
+        if (amount == 0) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal result = BigDecimal.valueOf(amount);
+        result = result.divide(Decimal.HUNDRED, RoundingMode.HALF_UP);
+
+        return DecimalUtil.scale(result);
     }
 
     private void parsePayout(JSONObject result) {
@@ -131,7 +150,7 @@ public class RazorSubscriber {
 
         notification.setPaymentNo(payout.getString("reference_id"));
         notification.setOutTradeNo(payout.getString("id"));
-        notification.setAmount(payout.getLongValue("amount_paid"));
+        notification.setAmount(parseAmount(payout.getLongValue("amount_paid")));
         notification.setStatus(payout.getString("status"));
     }
 
@@ -143,7 +162,7 @@ public class RazorSubscriber {
 
         notification.setPaymentNo(order.getString("receipt"));
         notification.setOutOrderNo(order.getString("id"));
-        notification.setAmount(order.getLongValue("amount_paid"));
+        notification.setAmount(parseAmount(order.getLongValue("amount_paid")));
         notification.setStatus(order.getString("status"));
     }
 
@@ -164,7 +183,15 @@ public class RazorSubscriber {
             return false;
         }
 
-        return notification.getAmount() > 0;
+        if (null == notification.getAmount()) {
+            return false;
+        }
+
+        if (notification.getAmount().compareTo(BigDecimal.ZERO) < 1) {
+            return false;
+        }
+
+        return true;
     }
 
     private int updatePayment() {
