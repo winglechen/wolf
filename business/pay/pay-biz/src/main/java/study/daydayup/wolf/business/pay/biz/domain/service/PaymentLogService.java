@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.service;
+package study.daydayup.wolf.business.pay.biz.domain.service;
 
 /**
  * study.daydayup.wolf.business.pay.api.service

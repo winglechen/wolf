@@ -1,8 +1,8 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
-import study.daydayup.wolf.business.pay.api.service.NotificationHandler;
+import study.daydayup.wolf.business.pay.biz.domain.service.AbstractNotificationHandler;
+import study.daydayup.wolf.business.pay.biz.domain.service.NotificationHandler;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler
@@ -12,9 +12,12 @@ import study.daydayup.wolf.business.pay.api.service.NotificationHandler;
  **/
 
 @Component
-public class PayoutHandler implements NotificationHandler {
+public class PayoutHandler extends AbstractNotificationHandler implements NotificationHandler {
     @Override
-    public int handle(PayNotification notification) {
-        return 0;
+    public boolean isSuccess () {
+        if (!getNotification().getStatus().equals("processed")) {
+            return false;
+        }
+        return true;
     }
 }

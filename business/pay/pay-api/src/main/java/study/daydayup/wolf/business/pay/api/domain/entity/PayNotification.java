@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.api.domain.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.DTO;
+import study.daydayup.wolf.framework.layer.api.Model;
 
 /**
  * study.daydayup.wolf.business.pay.api.dto.china
@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.api.DTO;
  * @since 2020/2/26 11:12 下午
  **/
 @Data
-public class PayNotification implements DTO {
+public class PayNotification implements Model {
     /**
      * order.paid or payout.processed or ...
      */

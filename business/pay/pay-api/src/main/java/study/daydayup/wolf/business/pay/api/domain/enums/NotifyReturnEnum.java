@@ -12,6 +12,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 @Getter
 public enum NotifyReturnEnum implements CodeBasedEnum {
     TIMEOUT(10, "timeout"),
+    USELESS(5, "useless notification"),
     PARSE_ERROR(4, "parse error"),
     DUPLICATE(3, "duplicate"),
     FAIL(2, "fail"),
