@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
-import study.daydayup.wolf.business.pay.api.exception.InvalidEpiResponseException;
+import study.daydayup.wolf.business.pay.api.domain.exception.InvalidEpiResponseException;
 import study.daydayup.wolf.common.util.collection.MapUtil;
 
 import javax.annotation.Resource;

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.epi;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
 
 /**
@@ -12,7 +13,7 @@ import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
 @Component
 public class DefaultTradeNotifier implements TradeNotifier {
     @Override
-    public void notify(TradeNotifyRequest request) {
-
+    public void notify(Payment payment) {
+        
     }
 }

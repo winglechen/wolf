@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.pay.biz.domain.repository;
 import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentLogDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentLogDO;
 import study.daydayup.wolf.framework.layer.context.RpcContext;

@@ -8,13 +8,12 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
-import study.daydayup.wolf.business.pay.api.dto.india.RazorPayDTO;
-import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
-import study.daydayup.wolf.business.pay.api.enums.NotifyReturnEnum;
-import study.daydayup.wolf.business.pay.api.enums.PaymentLogTypeEnum;
-import study.daydayup.wolf.business.pay.api.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
+import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
-import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -33,13 +32,11 @@ public class RazorSubscriber {
     private static final String SEPARATOR = ":";
 
     @Resource
-    private PaymentRepository paymentRepository;
-    @Resource
     private PaymentLogRepository logRepository;
     @Resource
     private RazorConfig config;
 
-    private RazorPayDTO notify;
+    private PayNotification notification;
 
     public int subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
         logResponse(eventId, signature, data);
@@ -55,7 +52,7 @@ public class RazorSubscriber {
             return NotifyReturnEnum.PARSE_ERROR.getCode();
         }
 
-        return updatePayment(data);
+        return updatePayment();
     }
 
     private void logResponse(String eventId, String signature,String data) {
@@ -92,13 +89,13 @@ public class RazorSubscriber {
         }
 
         String value;
-        notify = new RazorPayDTO();
+        notification = new PayNotification();
 
         value = result.getString("event");
         if (StringUtil.isEmpty(value)) {
             return false;
         }
-        notify.setEvent(value);
+        notification.setEvent(value);
 
         return validateNotify();
     }
@@ -108,15 +105,15 @@ public class RazorSubscriber {
 //            return false;
 //        }
 
-        if (StringUtil.isEmpty(notify.getOutTradeNo())) {
+        if (StringUtil.isEmpty(notification.getOutTradeNo())) {
             return false;
         }
 
-        if (StringUtil.isEmpty(notify.getStatus())) {
+        if (StringUtil.isEmpty(notification.getStatus())) {
             return false;
         }
 
-        return notify.getAmount() > 0;
+        return notification.getAmount() > 0;
     }
 
     private void parsePayment(JSONObject result) {
@@ -125,9 +122,9 @@ public class RazorSubscriber {
             return;
         }
 
-        notify.setOutTradeNo(payment.getString("id"));
-        notify.setAmount(payment.getLongValue("amount"));
-        notify.setRazorpayOrderId(payment.getString("order_id"));
+        notification.setOutTradeNo(payment.getString("id"));
+        notification.setAmount(payment.getLongValue("amount"));
+        notification.setOutOrderNo(payment.getString("order_id"));
     }
 
     private void parsePayout(JSONObject result) {
@@ -136,10 +133,10 @@ public class RazorSubscriber {
             return;
         }
 
-        notify.setPaymentNo(payout.getString("reference_id"));
-        notify.setOutTradeNo(payout.getString("id"));
-        notify.setAmount(payout.getLongValue("amount_paid"));
-        notify.setStatus(payout.getString("status"));
+        notification.setPaymentNo(payout.getString("reference_id"));
+        notification.setOutTradeNo(payout.getString("id"));
+        notification.setAmount(payout.getLongValue("amount_paid"));
+        notification.setStatus(payout.getString("status"));
     }
 
     private void parseOrder(JSONObject result) {
@@ -148,15 +145,15 @@ public class RazorSubscriber {
             return;
         }
 
-        notify.setPaymentNo(order.getString("receipt"));
-        notify.setRazorpayOrderId(order.getString("id"));
-        notify.setAmount(order.getLongValue("amount_paid"));
-        notify.setStatus(order.getString("status"));
+        notification.setPaymentNo(order.getString("receipt"));
+        notification.setOutOrderNo(order.getString("id"));
+        notification.setAmount(order.getLongValue("amount_paid"));
+        notification.setStatus(order.getString("status"));
     }
 
 
 
-    private int updatePayment(String data) {
+    private int updatePayment() {
 
 
 

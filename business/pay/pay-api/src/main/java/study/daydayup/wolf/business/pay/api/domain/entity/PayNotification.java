@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.dto.india;
+package study.daydayup.wolf.business.pay.api.domain.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.DTO;
@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.layer.api.DTO;
  * @since 2020/2/26 11:12 下午
  **/
 @Data
-public class RazorPayDTO implements DTO {
+public class PayNotification implements DTO {
     /**
      * order.paid or payout.processed or ...
      */
@@ -27,5 +27,5 @@ public class RazorPayDTO implements DTO {
     private String status;
     private Long amount;
 
-    private String razorpayOrderId;
+    private String outOrderNo;
 }

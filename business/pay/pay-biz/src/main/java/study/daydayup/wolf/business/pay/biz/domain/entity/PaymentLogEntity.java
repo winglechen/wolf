@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.domain.entity;
 
-import study.daydayup.wolf.business.pay.api.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 

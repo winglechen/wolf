@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.api.dto.epi;
 
 import lombok.Data;
-import study.daydayup.wolf.business.pay.api.entity.Payment;
+import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 /**
