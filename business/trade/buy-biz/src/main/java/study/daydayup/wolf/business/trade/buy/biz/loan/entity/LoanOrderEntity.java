@@ -1,11 +1,18 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
+import study.daydayup.wolf.business.trade.api.domain.enums.PaymentReturnEnum;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
+import study.daydayup.wolf.business.trade.api.domain.state.base.PaidState;
+import study.daydayup.wolf.business.trade.api.domain.state.base.WaitToPayState;
+import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.TradeNotification;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
@@ -36,9 +43,49 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
     }
 
     public LoanOrderEntity(Order order) {
-        this.model = order;
-        this.isNew = false;
+        model = order;
+        key = Order.builder()
+                .tradeNo(model.getTradeNo())
+                .tradeType(model.getTradeType())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        isNew = false;
     }
+
+    private void initChanges() {
+        if (changes != null) {
+            return;
+        }
+
+        changes = new Order();
+    }
+
+
+    public int paid(@Validated TradeNotification notification) {
+        if (StateUtil.equals(model.getState(), new PaidState())) {
+            return PaymentReturnEnum.DUPLICATE.getCode();
+        }
+
+        if (!StateUtil.equals(model.getState(), new WaitToPayState())) {
+            return PaymentReturnEnum.ERROR.getCode();
+        }
+
+        PaidEvent event = PaidEvent.builder()
+                .tradeNo(model.getTradeNo())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        key.setState(model.getState());
+        changes.setStateEvent(event);
+        changes.setOutTradeNo(notification.getOutTradeNo());
+        changes.setPaymentMethod(notification.getPaymentMethod());
+
+        return PaymentReturnEnum.SUCCESS.getCode();
+    }
+
 
     public void loan() {
         if (contract == null) {
