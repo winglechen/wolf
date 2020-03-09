@@ -18,7 +18,7 @@ public class DeviceDO implements Serializable {
 
     private String channel;
 
-    private Integer deviceType;
+    private String deviceType;
 
     private String deviceId;
 

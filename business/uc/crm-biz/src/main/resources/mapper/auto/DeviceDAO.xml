@@ -8,7 +8,7 @@
     <result column="app_name" jdbcType="VARCHAR" property="appName" />
     <result column="app_version" jdbcType="VARCHAR" property="appVersion" />
     <result column="channel" jdbcType="VARCHAR" property="channel" />
-    <result column="device_type" jdbcType="INTEGER" property="deviceType" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="mac" jdbcType="VARCHAR" property="mac" />
     <result column="system_version" jdbcType="VARCHAR" property="systemVersion" />
@@ -50,7 +50,7 @@
       )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
       #{appName,jdbcType=VARCHAR}, #{appVersion,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
-      #{deviceType,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
       #{systemVersion,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{deviceOs,jdbcType=VARCHAR}, 
       #{mobile,jdbcType=VARCHAR}, #{deviceBrand,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, 
       #{rootFlag,jdbcType=TINYINT}, #{deleteFlag,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, 
@@ -144,7 +144,7 @@
         #{channel,jdbcType=VARCHAR},
       </if>
       <if test="deviceType != null">
-        #{deviceType,jdbcType=INTEGER},
+        #{deviceType,jdbcType=VARCHAR},
       </if>
       <if test="deviceId != null">
         #{deviceId,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
         channel = #{channel,jdbcType=VARCHAR},
       </if>
       <if test="deviceType != null">
-        device_type = #{deviceType,jdbcType=INTEGER},
+        device_type = #{deviceType,jdbcType=VARCHAR},
       </if>
       <if test="deviceId != null">
         device_id = #{deviceId,jdbcType=VARCHAR},
@@ -263,7 +263,7 @@
       app_name = #{appName,jdbcType=VARCHAR},
       app_version = #{appVersion,jdbcType=VARCHAR},
       channel = #{channel,jdbcType=VARCHAR},
-      device_type = #{deviceType,jdbcType=INTEGER},
+      device_type = #{deviceType,jdbcType=VARCHAR},
       device_id = #{deviceId,jdbcType=VARCHAR},
       mac = #{mac,jdbcType=VARCHAR},
       system_version = #{systemVersion,jdbcType=VARCHAR},

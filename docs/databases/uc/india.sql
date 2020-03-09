@@ -136,7 +136,7 @@ CREATE TABLE `device`
     `app_name`       varchar(100)        NOT NULL DEFAULT '' COMMENT '应用名称',
     `app_version`    varchar(20)         NOT NULL DEFAULT '' COMMENT '应用版本号',
     `channel`        varchar(50)         NOT NULL DEFAULT '' COMMENT '应用下载渠道',
-    `device_type`    int(4) unsigned     NOT NULL DEFAULT '0' COMMENT '区分设备 0-未知；1、iOS；2、安卓',
+    `device_type`    varchar(50)         NOT NULL DEFAULT '' COMMENT '设备类型：unknown, handset, tablet, tv',
     `device_id`      varchar(50)         NOT NULL DEFAULT '' COMMENT '设备唯一标识',
     `mac`            varchar(255)        NOT NULL DEFAULT '' COMMENT '网卡MAC地址',
     `system_version` varchar(20)         NOT NULL DEFAULT '' COMMENT '设备系统版本号',
