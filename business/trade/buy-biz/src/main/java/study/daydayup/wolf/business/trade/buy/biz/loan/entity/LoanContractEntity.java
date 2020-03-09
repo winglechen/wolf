@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import lombok.NonNull;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
@@ -154,7 +155,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         // order.service.subscribe(loan due event)
         // order.create()
     }
-    public void repay() {
+    public void repay(Order order) {
         // order.pay -> order.state:paid -> fire order paid event
         // loan.service.subscribe(order paid event)
         // loan.state:change...
