@@ -16,9 +16,9 @@ public enum ContractStateEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    ContractStateEnum(int   code, String desc) {
+    private String name;
+    ContractStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

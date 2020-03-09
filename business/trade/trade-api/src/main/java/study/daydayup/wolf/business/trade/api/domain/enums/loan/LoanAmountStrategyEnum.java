@@ -18,9 +18,9 @@ public enum LoanAmountStrategyEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    LoanAmountStrategyEnum(int   code, String desc) {
+    private String name;
+    LoanAmountStrategyEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

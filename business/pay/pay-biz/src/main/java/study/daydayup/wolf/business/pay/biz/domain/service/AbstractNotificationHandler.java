@@ -44,7 +44,7 @@ public abstract class AbstractNotificationHandler implements NotificationHandler
             return NotifyReturnEnum.FAIL.getCode();
         }
 
-        if (!notifyTrade()) {
+        if (notifyTrade() <= 0) {
             return NotifyReturnEnum.FAIL.getCode();
         }
 
@@ -56,7 +56,7 @@ public abstract class AbstractNotificationHandler implements NotificationHandler
         return paymentRepository.save(paymentEntity) > 0;
     }
 
-    protected boolean notifyTrade() {
+    protected int notifyTrade() {
         return tradeNotifier.notify(paymentEntity);
     }
 

@@ -17,9 +17,9 @@ public enum AddressTypeEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    AddressTypeEnum(int   code, String desc) {
+    private String name;
+    AddressTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

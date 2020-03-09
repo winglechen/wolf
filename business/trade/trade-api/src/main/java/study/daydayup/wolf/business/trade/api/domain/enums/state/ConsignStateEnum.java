@@ -19,9 +19,9 @@ public enum ConsignStateEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    ConsignStateEnum(int   code, String desc) {
+    private String name;
+    ConsignStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

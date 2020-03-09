@@ -1,8 +1,10 @@
 package study.daydayup.wolf.business.pay.biz.epi;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
-import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
+import study.daydayup.wolf.business.pay.biz.domain.entity.PaymentEntity;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.TradeNotification;
+import study.daydayup.wolf.business.trade.api.service.buy.PaySubscriber;
 
 /**
  * study.daydayup.wolf.business.pay.biz.epi
@@ -12,8 +14,14 @@ import study.daydayup.wolf.business.pay.api.dto.epi.TradeNotifyRequest;
  **/
 @Component
 public class DefaultTradeNotifier implements TradeNotifier {
+    @Reference
+    private PaySubscriber subscriber;
+
     @Override
-    public boolean notify(Payment payment) {
-        return false;
+    public int notify(PaymentEntity paymentEntity) {
+        TradeNotification notification;
+
+
+        return 1;
     }
 }

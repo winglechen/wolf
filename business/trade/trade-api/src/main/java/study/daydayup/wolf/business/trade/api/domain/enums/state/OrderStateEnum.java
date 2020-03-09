@@ -19,9 +19,9 @@ public enum OrderStateEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    OrderStateEnum(int   code, String desc) {
+    private String name;
+    OrderStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

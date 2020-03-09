@@ -9,5 +9,5 @@ import study.daydayup.wolf.business.pay.biz.domain.entity.PaymentEntity;
  * @since 2020/3/1 12:31 上午
  **/
 public interface TradeNotifier {
-    boolean notify(PaymentEntity payment);
+    int notify(PaymentEntity payment);
 }

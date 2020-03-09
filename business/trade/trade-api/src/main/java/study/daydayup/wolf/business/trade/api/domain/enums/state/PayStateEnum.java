@@ -18,9 +18,9 @@ public enum PayStateEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    PayStateEnum(int   code, String desc) {
+    private String name;
+    PayStateEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }

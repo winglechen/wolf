@@ -22,9 +22,9 @@ public enum  OrderTypeEnum implements CodeBasedEnum {
     ;
 
     private int   code;
-    private String desc;
-    OrderTypeEnum(int   code, String desc) {
+    private String name;
+    OrderTypeEnum(int code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 }
