@@ -253,7 +253,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
             }
 
             k = initKeyInstallment(term);
-            c = initChangedInstallment(paidEvent);
+            c = initChangedInstallment(paidEvent, term.getAmount());
 
             ks.add(k);
             cs.add(c);
@@ -304,8 +304,10 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .build();
     }
 
-    private InstallmentTerm initChangedInstallment(TradeEvent event) {
+    private InstallmentTerm initChangedInstallment(TradeEvent event, BigDecimal paidAmount) {
         InstallmentTerm c = new InstallmentTerm();
+        c.setPaidAmount(paidAmount);
+        c.setLossAmount(BigDecimal.ZERO);
         c.setStateEvent(event);
         c.setUpdatedAt(LocalDateTime.now());
 
