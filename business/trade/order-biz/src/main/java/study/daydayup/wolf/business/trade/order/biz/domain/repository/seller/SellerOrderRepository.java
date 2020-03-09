@@ -2,15 +2,19 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository.seller;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.business.trade.api.domain.event.base.CreateEvent;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderQueryRepository;
+import study.daydayup.wolf.business.trade.order.biz.tsm.Tsm;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -42,6 +46,37 @@ public class SellerOrderRepository extends OrderQueryRepository {
         owner.setBuyerId(tradeIds.getBuyerId());
 
         return findExtraByOrderList(orderDOList, owner);
+    }
+
+    public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
+        request.valid();
+        OrderDO query = OrderDO.builder()
+                .relatedTradeNo(request.getRelatedTradeNo())
+                .buyerId(request.getBuyerId())
+                .sellerId(request.getSellerId())
+                .expiredAt(request.getExpiredAfter())
+                .build();
+
+        //set state
+        if (null != request.getState()) {
+            query.setState(request.getState().getCode());
+        }
+        //set tradeType
+        if (null != request.getTradeType()) {
+            query.setTradeType(request.getTradeType().getCode());
+
+            if (null != request.getStateEvent() && request.getStateEvent() instanceof CreateEvent) {
+                query.setState(Tsm.getInitState(request.getTradeType().getCode()).getCode());
+            }
+        }
+
+        List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(query);
+
+        TradeOwner owner = new TradeOwner();
+        owner.setSellerId(request.getSellerId());
+        owner.setBuyerId(request.getBuyerId());
+
+        return findExtraByOrderList(orderDOs, owner);
     }
 
     public Page<Order> findAll(@NonNull Long sellerId, PageRequest pageReq) {

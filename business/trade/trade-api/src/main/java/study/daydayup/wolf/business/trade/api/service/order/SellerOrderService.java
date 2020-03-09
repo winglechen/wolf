@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.FulltextReq
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -19,6 +20,9 @@ import java.util.List;
  * @since 2019/10/9 6:56 下午
  **/
 public interface SellerOrderService {
+    Result<List<Order>> findByTradeNos(TradeIds tradeIds);
+    Result<List<Order>> findByRelatedTradeNo(String tradeNo, Long sellerId);
+
     Result<Page<Order>> findAll(Long sellerId, PageRequest pageRequest);
     Result<Page<Order>> findByTradeType(TypeRequest request, PageRequest pageRequest);
     Result<Page<Order>> findByTradeState(StateRequest request, PageRequest pageRequest);

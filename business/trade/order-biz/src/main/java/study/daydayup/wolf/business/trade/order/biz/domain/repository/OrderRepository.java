@@ -57,31 +57,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
         lineRepository.save(key.getOrderLineList(), changes.getOrderLineList());
     }
 
-    public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
-        request.valid();
-        OrderDO query = OrderDO.builder()
-                .relatedTradeNo(request.getRelatedTradeNo())
-                .buyerId(request.getBuyerId())
-                .sellerId(request.getSellerId())
-                .expiredAt(request.getExpiredAfter())
-                .build();
 
-        //set state
-        if (null != request.getState()) {
-            query.setState(request.getState().getCode());
-        }
-        //set tradeType
-        if (null != request.getTradeType()) {
-            query.setTradeType(request.getTradeType().getCode());
-
-            if (null != request.getStateEvent() && request.getStateEvent() instanceof CreateEvent) {
-                query.setState(Tsm.getInitState(request.getTradeType().getCode()).getCode());
-            }
-        }
-
-        List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(query);
-        return converter.toModel(orderDOs);
-    }
 
     public Order find(TradeId tradeId) {
         return find(tradeId, null);
