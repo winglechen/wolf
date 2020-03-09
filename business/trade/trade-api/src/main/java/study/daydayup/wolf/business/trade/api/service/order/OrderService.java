@@ -20,6 +20,8 @@ public interface OrderService {
     Result<Order> find(TradeId tradeId);
     Result<Order> find(TradeId tradeId, OrderOption option);
 
-    //TODO move to SellerOrderService
+
+
+    @Deprecated
     Result<List<Order>> findRelatedTrade(RelatedTradeRequest request);
 }
