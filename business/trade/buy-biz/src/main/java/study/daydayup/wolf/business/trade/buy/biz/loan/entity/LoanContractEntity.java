@@ -156,9 +156,12 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         // order.create()
     }
     public void repay(Order order) {
+        // TODO handling partial pay
         // order.pay -> order.state:paid -> fire order paid event
         // loan.service.subscribe(order paid event)
         // loan.state:change...
+        
+
     }
 
     public void overdue() {

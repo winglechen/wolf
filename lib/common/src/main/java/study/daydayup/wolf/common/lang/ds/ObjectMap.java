@@ -22,6 +22,7 @@ public class ObjectMap extends JSONObject implements Map<String, Object>,Seriali
 
         return this;
     }
+
     public Map<String, Object> getMap() {
         return getInnerMap();
     }

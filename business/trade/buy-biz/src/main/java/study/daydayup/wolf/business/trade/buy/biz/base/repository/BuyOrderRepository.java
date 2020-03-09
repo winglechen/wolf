@@ -14,7 +14,8 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
  * @author Wingle
  * @since 2019/12/26 8:36 下午
  **/
-public class OrderRepository extends AbstractRepository implements Repository {
+@Component
+public class BuyOrderRepository extends AbstractRepository implements Repository {
     @Reference
     private OrderService orderService;
 
