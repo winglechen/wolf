@@ -180,7 +180,7 @@ public class UnionLoanController extends BaseUnionController {
     private BuyerRequest initBuyerRequest() {
         BuyerRequest request = new BuyerRequest();
 
-        request.setOption(initContractOption());
+        request.setContractOption(initContractOption());
         Long orgId = session.get("orgId", Long.class);
         Long buyerId = session.get("accountId", Long.class);
         request.setSellerId(orgId);

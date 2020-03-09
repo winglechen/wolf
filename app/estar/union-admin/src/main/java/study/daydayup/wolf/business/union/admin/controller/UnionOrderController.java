@@ -3,31 +3,20 @@ package study.daydayup.wolf.business.union.admin.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
-import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
-import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
-import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
-import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
-import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
-import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
-import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
+import study.daydayup.wolf.business.trade.api.service.order.SellerOrderService;
 import study.daydayup.wolf.business.trade.api.service.tm.OrderManageService;
-import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
-import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 
@@ -41,6 +30,8 @@ import javax.annotation.Resource;
 public class UnionOrderController implements Controller {
     @Reference
     private OrderService orderService;
+    @Reference
+    private SellerOrderService sellerOrderService;
     @Reference
     private OrderManageService orderManageService;
     @Resource
@@ -112,5 +103,22 @@ public class UnionOrderController implements Controller {
 
         return request;
     }
+
+    private StateRequest initStateRequest() {
+        return initStateRequest(null);
+    }
+
+    private StateRequest initStateRequest(StateRequest request) {
+        if (request == null) {
+            request = new StateRequest();
+        }
+
+        request.setContractOption(initOrderOption());
+        Long orgId = session.get("orgId", Long.class);
+        request.setSellerId(orgId);
+
+        return request;
+    }
+
 
 }

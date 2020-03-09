@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
+import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
@@ -20,5 +21,6 @@ public class SellerRequest implements Request {
     @NonNull @Min(1)
     private Long sellerId;
 
-    private ContractOption option;
+    private ContractOption contractOption;
+    private OrderOption orderOption;
 }

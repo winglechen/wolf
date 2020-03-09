@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.trade.api.dto.tm.trade;
 
+import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
+import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
@@ -14,4 +16,7 @@ import javax.validation.constraints.NotNull;
 public class BuyerRequest implements Request {
     @NotNull @Min(1)
     private Long buyerId;
+
+    private ContractOption contractOption;
+    private OrderOption orderOption;
 }

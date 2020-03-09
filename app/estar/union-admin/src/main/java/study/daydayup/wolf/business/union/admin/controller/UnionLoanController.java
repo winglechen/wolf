@@ -197,12 +197,16 @@ public class UnionLoanController implements Controller {
         return request;
     }
 
+    private StateRequest initStateRequest() {
+        return initStateRequest(null);
+    }
+
     private StateRequest initStateRequest(StateRequest request) {
         if (request == null) {
             request = new StateRequest();
         }
 
-        request.setOption(initContractOption());
+        request.setContractOption(initContractOption());
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
 
@@ -212,7 +216,7 @@ public class UnionLoanController implements Controller {
     private BuyerRequest initBuyerRequest(Long buyerId) {
         BuyerRequest request = new BuyerRequest();
 
-        request.setOption(initContractOption());
+        request.setContractOption(initContractOption());
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
         request.setBuyerId(buyerId);
@@ -220,14 +224,12 @@ public class UnionLoanController implements Controller {
         return request;
     }
 
-    private StateRequest initStateRequest() {
-        return initStateRequest(null);
-    }
+
 
     private InstallmentStateRequest initInstallmentStateRequest() {
         InstallmentStateRequest request = new InstallmentStateRequest();
 
-        request.setOption(initContractOption());
+        request.setContractOption(initContractOption());
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
 
