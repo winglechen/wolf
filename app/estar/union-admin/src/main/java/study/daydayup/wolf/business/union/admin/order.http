@@ -1,0 +1,19 @@
+### 订单详情
+GET http://localhost:8200/loan/order/20200201182541000039468280351280
+Accept: */*
+Cache-Control: no-cache
+
+### 商家订单列表
+GET http://localhost:8200/loan/order?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+### 商家放款订单列表
+GET http://localhost:8200/loan/order/loan?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+### 商家还款款订单列表
+GET http://localhost:8200/loan/order/repay?pageNum=2
+Accept: */*
+Cache-Control: no-cache
