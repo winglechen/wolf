@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.service.buy;
 
 import study.daydayup.wolf.business.trade.api.dto.buy.base.TradeNotification;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.TradeNotificationResponse;
 import study.daydayup.wolf.framework.layer.domain.Service;
 import study.daydayup.wolf.framework.rpc.Result;
 
@@ -11,5 +12,5 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2020/3/9 11:22 上午
  **/
 public interface PaySubscriber extends Service {
-    Result<Object> subscribe(TradeNotification notification);
+    Result<TradeNotificationResponse> subscribe(TradeNotification notification);
 }

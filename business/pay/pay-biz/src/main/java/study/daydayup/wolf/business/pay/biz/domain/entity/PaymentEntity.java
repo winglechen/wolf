@@ -8,6 +8,8 @@ import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.time.LocalDateTime;
+
 /**
  * study.daydayup.wolf.business.pay.biz.domain.entity
  *
@@ -39,7 +41,16 @@ public class PaymentEntity extends AbstractEntity<Payment> implements Entity {
             return false;
         }
 
+        LocalDateTime now = LocalDateTime.now();
+        key.setState(model.getState());
+
+        model.setState(PaymentStateEnum.PAID.getCode());
+        model.setOutTradeNo(notification.getOutTradeNo());
+        model.setUpdateAt(now);
+
+        changes.setState(PaymentStateEnum.PAID.getCode());
         changes.setOutTradeNo(notification.getOutTradeNo());
+        changes.setUpdateAt(now);
         return true;
     }
 }

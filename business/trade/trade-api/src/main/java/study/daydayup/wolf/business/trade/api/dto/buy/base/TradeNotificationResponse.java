@@ -12,5 +12,5 @@ import study.daydayup.wolf.framework.layer.api.Response;
 @Data
 public class TradeNotificationResponse implements Response {
     private boolean success;
-    private Integer cause;
+    private int cause = 0;
 }
