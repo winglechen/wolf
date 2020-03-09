@@ -18,7 +18,7 @@ import java.util.List;
 @RpcService(protocol = "dubbo")
 public class SellerOrderServiceImpl implements SellerOrderService {
     @Override
-    public Result<Page<Order>> find(Long buyerId) {
+    public Result<Page<Order>> findAll(Long buyerId) {
         return null;
     }
 
@@ -26,4 +26,6 @@ public class SellerOrderServiceImpl implements SellerOrderService {
     public Result<List<Order>> findRelatedTrade(RelatedTradeRequest request) {
         return null;
     }
+
+
 }

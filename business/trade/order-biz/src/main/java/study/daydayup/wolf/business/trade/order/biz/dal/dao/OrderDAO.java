@@ -1,8 +1,12 @@
 package study.daydayup.wolf.business.trade.order.biz.dal.dao;
+import java.util.Collection;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO;
 
 @Mapper
@@ -21,6 +25,21 @@ public interface OrderDAO {
 
     List<OrderDO> selectRelatedTrade(@Param("key")OrderDO key);
 
+    OrderDO selectByTradeNo(@Param("tradeNo")String tradeNo, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
+
+    List<OrderDO> selectByTradeNoIn(@Param("tradeNoCollection")Collection<String> tradeNoCollection, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
+
+    OrderDO selectLatestByBuyer(@Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
+
+    List<OrderDO> selectByBuyerId(@Param("buyerId")Long buyerId);
+
+    List<OrderDO> selectBySellerId(@Param("sellerId")Long sellerId);
+
+    List<OrderDO> sellerByTradeType(@Param("query") TypeRequest request);
+
+    List<OrderDO> sellerByState(@Param("query") StateRequest request);
+
+    List<OrderDO> sellerByBuyerId(@Param("query") BuyerRequest request);
 
 
 }
