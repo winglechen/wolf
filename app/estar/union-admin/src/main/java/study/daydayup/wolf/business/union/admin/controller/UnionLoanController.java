@@ -63,6 +63,7 @@ public class UnionLoanController implements Controller {
 
         Contract contract = contractService.find(tradeId, option).notNullData();
         LoanWithOrder result = new LoanWithOrder();
+        result.setContract(contract);
 
         List<Order> orderList = sellerOrderService.findByRelatedTradeNo(contract.getTradeNo(), contract.getSellerId()).getData();
         mergeLoanAndOrder(result, orderList);

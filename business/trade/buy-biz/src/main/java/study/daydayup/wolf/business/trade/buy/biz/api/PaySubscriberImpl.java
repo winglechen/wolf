@@ -30,9 +30,9 @@ public class PaySubscriberImpl implements PaySubscriber {
     private Order order;
 
     @Resource
-    private LoanOrderRepository orderRepository;
+    private LoanOrderRepository loanOrderRepository;
     @Resource
-    private LoanContractRepository contractRepository;
+    private LoanContractRepository loanContractRepository;
 
     @Override
     public Result<TradeNotificationResponse> subscribe(@Validated TradeNotification notification) {
@@ -73,13 +73,13 @@ public class PaySubscriberImpl implements PaySubscriber {
         orderId.setBuyerId(notification.getPayerId());
         orderId.setSellerId(notification.getPayeeId());
 
-        LoanOrderEntity orderEntity = orderRepository.find(orderId);
+        LoanOrderEntity orderEntity = loanOrderRepository.find(orderId);
         int status = orderEntity.paid(notification);
         if (PaymentReturnEnum.SUCCESS.getCode() != status) {
             return status;
         }
 
-        orderRepository.save(orderEntity);
+        loanOrderRepository.save(orderEntity);
         order = orderEntity.getModel();
 
         return PaymentReturnEnum.SUCCESS.getCode();
@@ -110,7 +110,7 @@ public class PaySubscriberImpl implements PaySubscriber {
         }
 
         contractEntity.completeLoan();
-        contractRepository.save(contractEntity);
+        loanContractRepository.save(contractEntity);
 
         return PaymentReturnEnum.SUCCESS.getCode();
     }
@@ -122,7 +122,7 @@ public class PaySubscriberImpl implements PaySubscriber {
         }
 
         contractEntity.repay(order);
-        contractRepository.save(contractEntity);
+        loanContractRepository.save(contractEntity);
 
         return PaymentReturnEnum.SUCCESS.getCode();
     }
@@ -133,6 +133,6 @@ public class PaySubscriberImpl implements PaySubscriber {
         contractId.setBuyerId(order.getBuyerId());
         contractId.setSellerId(order.getSellerId());
 
-        return contractRepository.find(contractId);
+        return loanContractRepository.find(contractId);
     }
 }

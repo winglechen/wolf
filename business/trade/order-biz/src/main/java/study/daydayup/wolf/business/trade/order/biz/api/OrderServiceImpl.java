@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderRepository;
+import study.daydayup.wolf.business.trade.order.biz.domain.repository.seller.SellerOrderRepository;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -23,6 +24,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderRepository orderRepository;
+    @Resource
+    private SellerOrderRepository sellerOrderRepository;
 
     @Override
     public Result<Object> create(@Validated Order order) {
@@ -52,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Result<List<Order>> findRelatedTrade(@Validated RelatedTradeRequest request) {
         request.valid();
-        List<Order> orders = orderRepository.findRelatedTrade(request);
+        List<Order> orders = sellerOrderRepository.findRelatedTrade(request);
 
         return Result.ok(orders);
     }
