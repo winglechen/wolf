@@ -3,8 +3,10 @@ package study.daydayup.wolf.business.union.admin.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -18,6 +20,7 @@ import study.daydayup.wolf.business.trade.api.service.tm.OrderManageService;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 
@@ -53,18 +56,40 @@ public class UnionOrderController implements Controller {
         return orderManageService.find(request);
     }
 
+    @GetMapping("/loan/order")
+    public Result<Page<Order>> findAll(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long sellerId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+        return sellerOrderService.findAll(sellerId, pageRequest);
+    }
+
     @GetMapping("/loan/order/loan")
-    public Result<Page<Order>> loanList() {
-        OrderRequest request = initOrderRequest();
+    public Result<Page<Order>> loanList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        TypeRequest request = initTypeRequest();
         request.setTradeType(TradeTypeEnum.LOAN_ORDER.getCode());
-        return orderSearch(request);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerOrderService.findByTradeType(request, pageRequest);
     }
 
     @GetMapping("/loan/order/repay")
-    public Result<Page<Order>> repayList() {
-        OrderRequest request = initOrderRequest();
+    public Result<Page<Order>> repayList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        TypeRequest request = initTypeRequest();
         request.setTradeType(TradeTypeEnum.REPAY_ORDER.getCode());
-        return orderSearch(request);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerOrderService.findByTradeType(request, pageRequest);
     }
 
     private TradeId createTradeId(String tradeNo) {

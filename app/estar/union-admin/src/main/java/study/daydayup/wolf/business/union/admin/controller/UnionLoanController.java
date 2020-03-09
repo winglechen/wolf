@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
@@ -17,7 +18,10 @@ import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
+import study.daydayup.wolf.business.trade.api.service.order.SellerOrderService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
+import study.daydayup.wolf.business.union.admin.dto.LoanWithOrder;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -26,6 +30,8 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller
@@ -43,17 +49,35 @@ public class UnionLoanController implements Controller {
     private ContractManageService contractManageService;
     @Reference
     private SellerContractService sellerContractService;
+    @Reference
+    private SellerOrderService sellerOrderService;
     @Resource
     private Session session;
     @Resource
     private RpcContext rpcContext;
 
     @GetMapping("/loan/contract/{tradeNo}")
-    public Result<Contract> contractDetail(@PathVariable("tradeNo") String tradeNo) {
+    public Result<LoanWithOrder> contractDetail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = initTradeId(tradeNo);
         ContractOption option = initContractOption();
 
-        return contractService.find(tradeId, option);
+        Contract contract = contractService.find(tradeId, option).notNullData();
+        LoanWithOrder result = new LoanWithOrder();
+
+        List<Order> orderList = sellerOrderService.findByRelatedTradeNo(contract.getTradeNo(), contract.getSellerId()).getData();
+        mergeLoanAndOrder(result, orderList);
+
+        return Result.ok(result);
+    }
+
+    private void mergeLoanAndOrder(LoanWithOrder result, List<Order> orderList) {
+        if (CollectionUtil.isEmpty(orderList)) {
+            return ;
+        }
+
+        Map<Integer, List<Order>> tradeTypeMap = CollectionUtil.group(orderList, Order::getTradeType);
+        result.setLoanOrderList(tradeTypeMap.get(TradeTypeEnum.LOAN_ORDER.getCode()));
+        result.setRepayOrderList(tradeTypeMap.get(TradeTypeEnum.REPAY_ORDER.getCode()));
     }
 
     @GetMapping("/loan/contract/search")
