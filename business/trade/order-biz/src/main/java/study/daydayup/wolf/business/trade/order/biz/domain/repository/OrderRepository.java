@@ -59,7 +59,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
 
     public List<Order> findRelatedTrade(@Validated RelatedTradeRequest request) {
         request.valid();
-        OrderDO orderDO = OrderDO.builder()
+        OrderDO query = OrderDO.builder()
                 .relatedTradeNo(request.getRelatedTradeNo())
                 .buyerId(request.getBuyerId())
                 .sellerId(request.getSellerId())
@@ -68,18 +68,18 @@ public class OrderRepository extends AbstractRepository implements Repository {
 
         //set state
         if (null != request.getState()) {
-            orderDO.setState(request.getState().getCode());
+            query.setState(request.getState().getCode());
         }
         //set tradeType
         if (null != request.getTradeType()) {
-            orderDO.setTradeType(request.getTradeType().getCode());
+            query.setTradeType(request.getTradeType().getCode());
 
             if (null != request.getStateEvent() && request.getStateEvent() instanceof CreateEvent) {
-                orderDO.setState(Tsm.getInitState(request.getTradeType().getCode()).getCode());
+                query.setState(Tsm.getInitState(request.getTradeType().getCode()).getCode());
             }
         }
 
-        List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(orderDO);
+        List<OrderDO> orderDOs = orderDAO.selectRelatedTrade(query);
         return converter.toModel(orderDOs);
     }
 
@@ -88,7 +88,21 @@ public class OrderRepository extends AbstractRepository implements Repository {
     }
 
     public Order find(TradeId tradeId, OrderOption option) {
-        return null;
+        tradeId.valid();
+        OrderDO orderDO = orderDAO.selectByTradeNo(tradeId.getTradeNo(), tradeId.getBuyerId(), tradeId.getSellerId());
+
+        return findExtraByOrder(orderDO, tradeId);
+    }
+
+    protected Order findExtraByOrder(OrderDO orderDO, TradeId tradeId) {
+        if (orderDO == null) {
+            return null;
+        }
+
+        Order order = converter.toModel(orderDO);
+        order.setOrderLineList(lineRepository.find(tradeId));
+        order.setAddress(addressRepository.find(tradeId));
+        return order;
     }
 
     protected void insertOrder(Order order) {

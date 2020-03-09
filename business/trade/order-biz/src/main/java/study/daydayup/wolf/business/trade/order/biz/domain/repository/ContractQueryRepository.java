@@ -24,7 +24,7 @@ import java.util.Map;
  **/
 @Component
 public class ContractQueryRepository extends ContractRepository {
-    protected List<Contract> findTermsByContractList(@NonNull List<ContractDO> contractDOList, @NonNull TradeOwner owner) {
+    protected List<Contract> findTermsByContractList(List<ContractDO> contractDOList, @NonNull TradeOwner owner) {
         if (contractDOList.isEmpty()) {
             return ListUtil.empty();
         }
