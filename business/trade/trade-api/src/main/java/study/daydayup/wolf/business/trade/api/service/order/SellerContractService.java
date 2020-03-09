@@ -2,9 +2,11 @@ package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
-import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.*;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.TypeRequest;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;

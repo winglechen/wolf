@@ -11,9 +11,9 @@ import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToA
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.ContractRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.InstallmentStateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;

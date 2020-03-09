@@ -4,9 +4,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import org.apache.ibatis.annotations.Mapper;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 
 @Mapper

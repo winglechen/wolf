@@ -9,7 +9,8 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.order.OrderRequest;
 import study.daydayup.wolf.business.trade.api.service.order.OrderService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerOrderService;
@@ -113,7 +114,24 @@ public class UnionOrderController implements Controller {
             request = new StateRequest();
         }
 
-        request.setContractOption(initOrderOption());
+        request.setOrderOption(initOrderOption());
+        Long orgId = session.get("orgId", Long.class);
+        request.setSellerId(orgId);
+
+        return request;
+    }
+
+
+    private TypeRequest initTypeRequest() {
+        return initTypeRequest(null);
+    }
+
+    private TypeRequest initTypeRequest(TypeRequest request) {
+        if (request == null) {
+            request = new TypeRequest();
+        }
+
+        request.setOrderOption(initOrderOption());
         Long orgId = session.get("orgId", Long.class);
         request.setSellerId(orgId);
 

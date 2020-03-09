@@ -1,10 +1,10 @@
 package study.daydayup.wolf.business.trade.api.service.order;
 
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.FulltextRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.RelatedTradeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.framework.rpc.Result;

@@ -17,7 +17,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultRes
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
-import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
+import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.trade.api.dto.tm.contract.buyer;
+package study.daydayup.wolf.business.trade.api.dto.tm.trade.buyer;
 
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.BuyerRequest;
 import study.daydayup.wolf.framework.layer.api.Request;
