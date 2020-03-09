@@ -93,11 +93,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
             return false;
         }
 
-        if (repayment.getAmount().compareTo(BigDecimal.ZERO) < 1) {
-            return false;
-        }
-
-        return true;
+        return repayment.getAmount().compareTo(BigDecimal.ZERO) >= 1;
     }
 
     public boolean isLoanable() {

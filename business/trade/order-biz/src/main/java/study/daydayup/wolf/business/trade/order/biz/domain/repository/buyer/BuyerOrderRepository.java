@@ -2,8 +2,9 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository.buyer;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
+import study.daydayup.wolf.business.trade.api.dto.TradeId;
+import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderQueryRepository;
@@ -25,19 +26,31 @@ public class BuyerOrderRepository extends OrderQueryRepository {
     @Resource
     private OrderDAO orderDAO;
 
-    public Page<Contract> findAll(@NonNull Long buyerId,  PageRequest pageReq) {
+    public Page<Order> findAll(@NonNull Long buyerId,  PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<OrderDO> orderDOList = orderDAO.selectByBuyerId(buyerId);
         if (CollectionUtil.isEmpty(orderDOList)) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
 
+        TradeOwner owner = new TradeOwner();
+        owner.setBuyerId(buyerId);
 
-        return null;
+        List<Order> orderList = findExtraByOrderList(orderDOList, owner);
+        return Page.of(orderDOList).to(orderList);
     }
 
     public Order findLatest(@NonNull Long buyerId, Long sellerId) {
-        return null;
+        OrderDO orderDO = orderDAO.selectLatestByBuyer(buyerId, sellerId);
+        if (orderDO == null) {
+            return null;
+        }
+
+        TradeId tradeId = new TradeId();
+        tradeId.setTradeNo(orderDO.getTradeNo());
+        tradeId.setBuyerId(orderDO.getBuyerId());
+
+        return findExtraByOrder(orderDO, tradeId);
     }
 
 
