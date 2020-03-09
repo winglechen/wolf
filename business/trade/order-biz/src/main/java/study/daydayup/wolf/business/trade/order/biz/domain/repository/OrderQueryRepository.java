@@ -19,6 +19,7 @@ import java.util.List;
  **/
 @Component
 public class OrderQueryRepository extends OrderRepository {
+
     protected List<Order> findExtraByOrderList(List<OrderDO> orderDOList, @NonNull TradeOwner owner) {
         if (CollectionUtil.isEmpty(orderDOList)) {
             return ListUtil.empty();

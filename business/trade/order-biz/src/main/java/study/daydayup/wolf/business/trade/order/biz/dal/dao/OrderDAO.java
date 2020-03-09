@@ -41,5 +41,9 @@ public interface OrderDAO {
 
     List<OrderDO> sellerByBuyerId(@Param("query") BuyerRequest request);
 
+    List<OrderDO> selectByRelatedTradeNo(@Param("relatedTradeNo")String relatedTradeNo, @Param("sellerId")Long sellerId);
+
+
+
 
 }

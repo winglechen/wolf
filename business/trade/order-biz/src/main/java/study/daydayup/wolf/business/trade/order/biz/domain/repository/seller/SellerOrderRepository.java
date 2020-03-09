@@ -2,18 +2,16 @@ package study.daydayup.wolf.business.trade.order.biz.domain.repository.seller;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.BuyerRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.StateRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.contract.seller.TypeRequest;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
-import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.OrderDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.OrderDO;
-import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractQueryRepository;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.OrderQueryRepository;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -52,11 +50,24 @@ public class SellerOrderRepository extends OrderQueryRepository {
         if (orderDOList == null || orderDOList.isEmpty()) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
+
         TradeOwner owner = new TradeOwner();
         owner.setSellerId(sellerId);
 
         List<Order> orderList = findExtraByOrderList(orderDOList, owner);
         return Page.of(orderDOList).to(orderList);
+    }
+
+    public List<Order> findByRelatedTradeNo(@NonNull String relatedTradeNo, @NonNull Long sellerId) {
+        List<OrderDO> orderDOList = orderDAO.selectByRelatedTradeNo(relatedTradeNo, sellerId);
+        if (CollectionUtil.isEmpty(orderDOList)) {
+            return ListUtil.empty();
+        }
+
+        TradeOwner owner = new TradeOwner();
+        owner.setSellerId(sellerId);
+
+        return findExtraByOrderList(orderDOList, owner);
     }
 
     public Page<Order> findByTradeType(TypeRequest request, PageRequest pageReq) {
