@@ -1,11 +1,14 @@
 package study.daydayup.wolf.business.trade.buy.biz.loan.entity;
 
 import lombok.NonNull;
+import study.daydayup.wolf.business.trade.api.config.TradeTag;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayEffectEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepaySuccessEvent;
+import study.daydayup.wolf.business.trade.api.domain.state.base.PaidState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoaningState;
 import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
@@ -17,15 +20,22 @@ import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanBeginEv
 import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanSuccessEvent;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.InstallmentTerm;
 import study.daydayup.wolf.common.lang.enums.PeriodStrategyEnum;
+import study.daydayup.wolf.common.model.type.string.Tag;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
+import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.time.PeriodUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.trade.buy.biz.loan.entity
@@ -160,8 +170,13 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         // order.pay -> order.state:paid -> fire order paid event
         // loan.service.subscribe(order paid event)
         // loan.state:change...
-        
 
+        boolean isAllInstallmentPaid = markInstallmentPaid(order);
+        if (!isAllInstallmentPaid) {
+            return;
+        }
+
+        markContractPaid();
     }
 
     public void overdue() {
@@ -181,10 +196,22 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         changes.setStateEvent(event);
     }
 
+    private void markContractPaid() {
+        RepaySuccessEvent event = RepaySuccessEvent.builder()
+                .tradeNo(model.getTradeNo())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        key.setState(model.getState());
+        changes.setStateEvent(event);
+    }
+
     private void activeInstallments(@NonNull LocalDate effectAt) {
         TradeEvent effectEvent = new RepayEffectEvent();
         PeriodStrategyEnum strategy = EnumUtil.codeOf( model.getLoanTerm().getPeriodStrategy(), PeriodStrategyEnum.class );
 
+        InstallmentTerm k, c;
         List<InstallmentTerm> ks = new ArrayList<>();
         List<InstallmentTerm> cs = new ArrayList<>();
         LocalDate start;
@@ -194,8 +221,8 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
             start = PeriodUtil.daysAfter(1, PeriodStrategyEnum.OPEN_CLOSE, end);
             end   = PeriodUtil.daysAfter(term.getPeriod(), strategy, start);
 
-            InstallmentTerm k = initKeyInstallment(term);
-            InstallmentTerm c = getChangedInstallment(start, end, effectEvent);
+            k = initKeyInstallment(term);
+            c = initChangedInstallment(start, end, effectEvent);
 
             ks.add(k);
             cs.add(c);
@@ -203,6 +230,72 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
 
         key.setInstallmentTermList(ks);
         changes.setInstallmentTermList(cs);
+    }
+
+    private boolean markInstallmentPaid(Order order) {
+        Map<Integer, Boolean> noMap = getPaidInstallmentNoMap(order);
+        if (MapUtil.isEmpty(noMap)) {
+            return false;
+        }
+
+        boolean allPaid = true;
+        PaidState paidState = new PaidState();
+        TradeEvent paidEvent = new RepaySuccessEvent();
+
+        InstallmentTerm k, c;
+        List<InstallmentTerm> ks = new ArrayList<>();
+        List<InstallmentTerm> cs = new ArrayList<>();
+
+        for (InstallmentTerm term: model.getInstallmentTermList() ) {
+            if (StateUtil.equals(term.getState(), paidState)) {
+                continue;
+            }
+
+            if (null != noMap.get(term.getInstallmentNo())) {
+                allPaid = false;
+                continue;
+            }
+
+            k = initKeyInstallment(term);
+            c = initChangedInstallment(paidEvent);
+
+            ks.add(k);
+            cs.add(c);
+        }
+
+        key.setInstallmentTermList(ks);
+        changes.setInstallmentTermList(cs);
+
+        return allPaid;
+    }
+
+    private Map<Integer, Boolean> getPaidInstallmentNoMap(Order order) {
+        List<Integer> installmentNos = getPaidInstallmentNos(order.getTags());
+        if (ListUtil.isEmpty(installmentNos)) {
+            return null;
+        }
+
+        return CollectionUtil.map(installmentNos);
+    }
+
+    private List<Integer> getPaidInstallmentNos(String tags) {
+        List<Integer> result = ListUtil.empty();
+        if (StringUtil.isEmpty(tags, true)) {
+            return result;
+        }
+
+        Tag orderTag = new Tag(tags);
+        String istTag;
+        int installmentNums = model.getInstallmentTermList().size();
+
+        for (int i=1; i <= installmentNums; i++) {
+            istTag = StringUtil.join(TradeTag.INSTALLMENT_PREFIX, i);
+            if (orderTag.contains(istTag)) {
+                result.add(i);
+            }
+        }
+
+        return result;
     }
 
     private InstallmentTerm initKeyInstallment(InstallmentTerm term) {
@@ -215,11 +308,20 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .build();
     }
 
-    private InstallmentTerm getChangedInstallment(LocalDate effectAt, LocalDate dueAt, TradeEvent event) {
+    private InstallmentTerm initChangedInstallment(TradeEvent event) {
+        InstallmentTerm c = new InstallmentTerm();
+        c.setStateEvent(event);
+        c.setUpdatedAt(LocalDateTime.now());
+
+        return c;
+    }
+
+    private InstallmentTerm initChangedInstallment(LocalDate effectAt, LocalDate dueAt, TradeEvent event) {
         InstallmentTerm c = new InstallmentTerm();
         c.setEffectAt(effectAt);
         c.setDueAt(dueAt);
         c.setStateEvent(event);
+        c.setUpdatedAt(LocalDateTime.now());
 
         return c;
     }

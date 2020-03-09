@@ -10,6 +10,7 @@ import study.daydayup.wolf.framework.layer.domain.VO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -53,4 +54,7 @@ public class InstallmentTerm implements VO {
 
     private Integer version;
     private TradeStateLog stateLog;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

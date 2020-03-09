@@ -29,6 +29,19 @@ public class CollectionUtil {
                 .collect(Collectors.toList());
     }
 
+    public static <C> Map<C, Boolean> map(Collection<C> collection) {
+        Map<C, Boolean> map = new HashMap<>();
+        if (isEmpty(collection)) {
+            return map;
+        }
+
+        for (C c : collection) {
+            map.put(c, true);
+        }
+
+        return map;
+    }
+
     public static <C, K> Map<K, C> map(Collection<C> collection, Function<C,K> getter) {
         return collection.stream().collect(
                 Collectors.toMap(getter, Function.identity())
