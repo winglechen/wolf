@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-api</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
