@@ -63,6 +63,18 @@ public class CreditLineRepository extends AbstractRepository implements Reposito
         return new CreditLineEntity(line, config);
     }
 
+    public int add(CreditLineEntity entity) {
+        if (entity == null) {
+            return 0;
+        }
+
+        if (!entity.isNew()) {
+            return 0;
+        }
+        CreditLineDO changesDO = CreditLineConverter.toDO(entity.getModel());
+        return dao.insertSelective(changesDO);
+    }
+
     private CreditLine findCreditLine(@NonNull Long accountId, @NonNull Long orgId) {
         CreditLineDO lineDO = dao.selectByAccountIdAndOrgId(accountId, orgId);
         return CreditLineConverter.toModel(lineDO);
