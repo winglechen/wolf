@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLog;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditLineConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditLogConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLineDAO;
@@ -11,11 +12,13 @@ import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLog
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLineDO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLogDO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity.CreditLineEntity;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity.CreditLineFactory;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.service.CreditConfigDomainService;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.uc.crm.biz.customer.credit.repository
@@ -45,32 +48,33 @@ public class CreditLineRepository extends AbstractRepository implements Reposito
 
         CreditLineDO changesDO = CreditLineConverter.toDO(changes);
         int status = dao.updateByAccountIdAndOrgId(changesDO, key.getAccountId(), key.getOrgId(), key.getVersion());
-        logChanges(entity);
 
+        logChanges(entity);
         return status;
     }
 
-    private void logChanges(CreditLineEntity entity) {
-        if (null == entity.getCreditLog()) {
-            return;
-        }
-
-        CreditLogDO logDO = CreditLogConverter.toDO(entity.getCreditLog());
-        logDAO.insertSelective(logDO);
-    }
-
     public CreditLineEntity find(@NonNull Long accountId, @NonNull Long orgId) {
+        CreditConfig config = configService.find(orgId);
         CreditLine line = findCreditLine(accountId, orgId);
         if (line == null) {
-            return null;
+            return CreditLineFactory.create(accountId, orgId, config);
         }
 
-        CreditConfig config = configService.find(orgId);
         return new CreditLineEntity(line, config);
     }
 
     private CreditLine findCreditLine(@NonNull Long accountId, @NonNull Long orgId) {
         CreditLineDO lineDO = dao.selectByAccountIdAndOrgId(accountId, orgId);
         return CreditLineConverter.toModel(lineDO);
+    }
+
+    private void logChanges(CreditLineEntity entity) {
+        CreditLog creditLog = entity.getChanges().getCreditLog();
+        if (null == creditLog) {
+            return;
+        }
+
+        CreditLogDO logDO = CreditLogConverter.toDO(creditLog);
+        logDAO.insertSelective(logDO);
     }
 }

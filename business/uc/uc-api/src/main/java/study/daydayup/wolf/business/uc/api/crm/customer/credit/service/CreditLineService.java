@@ -23,5 +23,6 @@ public interface CreditLineService extends Service {
     Page<CreditLine> findByOrg(Long orgId, PageRequest request);
 
     int promote(Long accountId, Long orgId, BigDecimal amount);
+    int promote(Long accountId, Long orgId, BigDecimal amount, BigDecimal baseAmount);
     int demote(Long accountId, Long orgId, BigDecimal amount);
 }

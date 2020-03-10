@@ -16,12 +16,13 @@ public class CreditConfig implements Model {
 
     @NotNull
     private Boolean enable              = false;
+    private Integer currency;
 
     private BigDecimal promotePerOrder  = BigDecimal.ZERO;
     private BigDecimal minAmount        = BigDecimal.ZERO;
     private BigDecimal maxAmount        = BigDecimal.ZERO;
-    private Integer minPromotionPeriod  = 0;
 
+    private Integer minPromotionPeriod  = 0;
     private Integer maxTimesPerDay      = 0;
     private Integer maxTimesPerWeek     = 0;
     private Integer maxTimesPerMonth    = 0;

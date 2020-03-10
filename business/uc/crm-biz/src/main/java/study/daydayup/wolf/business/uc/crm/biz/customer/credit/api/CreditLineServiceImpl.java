@@ -69,12 +69,17 @@ public class CreditLineServiceImpl implements CreditLineService {
 
     @Override
     public int promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
+        return promote(accountId, orgId, amount, null);
+    }
+
+    @Override
+    public int promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount, BigDecimal baseAmount) {
         CreditLineEntity entity = repository.find(accountId, orgId);
         if (entity == null) {
             return 0;
         }
 
-        entity.promote(amount);
+        entity.promote(amount, baseAmount);
         return repository.save(entity);
     }
 

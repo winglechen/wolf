@@ -5,10 +5,12 @@ import lombok.NonNull;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLog;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity
@@ -18,10 +20,13 @@ import java.math.BigDecimal;
  **/
 public class CreditLineEntity extends AbstractEntity<CreditLine> implements Entity {
     private CreditConfig config;
-    @Getter
-    private CreditLog creditLog;
+
 
     public CreditLineEntity(@NonNull CreditLine line, @NonNull CreditConfig config) {
+        this(line, config, false);
+    }
+
+    public CreditLineEntity(@NonNull CreditLine line, @NonNull CreditConfig config, boolean isNew) {
         this.config = config;
 
         model = line;
@@ -30,13 +35,43 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
                 .orgId(line.getOrgId())
                 .version(line.getVersion())
                 .build();
-        isNew = false;
+        this.isNew = isNew;
     }
 
-    public void promote(BigDecimal amount) {
+    public void promote(@NonNull BigDecimal amount, BigDecimal baseAmount) {
+        initAmount(baseAmount);
+
+        logChanges();
+    }
+
+    public void initAmount(BigDecimal baseAmount) {
+        if (baseAmount == null) {
+            return;
+        }
+
+        BigDecimal amount = model.getAmount();
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            model.setAmount(baseAmount);
+        } else {
+            amount = amount.add(baseAmount);
+            amount = DecimalUtil.scale(amount);
+            model.setAmount(amount);
+        }
     }
 
     public void demote(BigDecimal amount) {
+        if (isNew) {
+            return;
+        }
+
+        logChanges();
+    }
+
+
+    private void logChanges() {
+        if (isNew) {
+            return;
+        }
     }
 
 
