@@ -22,7 +22,7 @@ public interface CreditLineDAO {
 
     List<CreditLineDO> selectByOrgId(@Param("orgId")Long orgId);
 
-    List<CreditLineDO> selectByAccountIdIn(@Param("accountIdCollection")Collection<Long> accountIdCollection);
+    List<CreditLineDO> selectByAccountIdIn(@Param("accountIdCollection")Collection<Long> accountIdCollection, @Param("orgId")Long orgId);
 
     CreditLineDO selectByAccountIdAndOrgId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
 

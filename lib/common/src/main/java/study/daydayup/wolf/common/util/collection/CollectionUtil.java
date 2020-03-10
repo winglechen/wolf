@@ -114,7 +114,7 @@ public class CollectionUtil {
 
     public static <Source, Target> List<Target> to(List<Source> sources, Function<Source, Target> convert) {
         if (sources == null || null == convert || sources.isEmpty()) {
-            return null;
+            return ListUtil.empty();
         }
 
         List<Target> result = new ArrayList<>();

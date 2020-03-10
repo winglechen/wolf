@@ -3,8 +3,11 @@ package study.daydayup.wolf.business.uc.crm.biz.customer.credit.api;
 import lombok.NonNull;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLineService;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditLineConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLineDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLineDO;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -27,22 +30,36 @@ public class CreditLineServiceImpl implements CreditLineService {
 
     @Override
     public CreditLine find(@NonNull Long accountId, @NonNull Long orgId) {
-        CreditLineDO lineDO;
-        return null;
+        CreditLineDO lineDO = dao.selectByAccountIdAndOrgId(accountId, orgId);
+        return CreditLineConverter.toModel(lineDO);
     }
 
     @Override
-    public List<CreditLine> findByAccounts(Collection<Long> accountIds, Long orgId) {
-        return null;
+    public List<CreditLine> findByAccounts(@NonNull Collection<Long> accountIds, @NonNull Long orgId) {
+        if (CollectionUtil.isEmpty(accountIds)) {
+            return ListUtil.empty();
+        }
+
+        List<CreditLineDO> lineDOList = dao.selectByAccountIdIn(accountIds, orgId);
+        return CreditLineConverter.toModel(lineDOList);
     }
 
     @Override
-    public Page<CreditLine> findByAccount(Long accountId, PageRequest request) {
-        return null;
+    public Page<CreditLine> findByAccount(@NonNull Long accountId, PageRequest pageReq) {
+        Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+
+        List<CreditLineDO> lineDOList = dao.selectByAccountId(accountId);
+        if (CollectionUtil.isEmpty(lineDOList)) {
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+        }
+
+        List<CreditLine> lineList = CreditLineConverter.toModel(lineDOList);
+        return Page.of(lineDOList).to(lineList);
     }
 
     @Override
     public Page<CreditLine> findByOrg(Long orgId, PageRequest request) {
+        //暂不提供
         return null;
     }
 
