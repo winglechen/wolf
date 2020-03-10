@@ -49,6 +49,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changeAmount = checkMaxAmountLimit(changeAmount);
 
         setChangeAmount(changeAmount);
+        addPromotionFreq();
         logChanges(CreditOperationEnum.PROMOTION);
     }
 
@@ -64,9 +65,20 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         logChanges(CreditOperationEnum.DEMOTION);
     }
 
+    private void addPromotionFreq() {
+        initChanges();
+        changes.setTimesLatestDay(model.getTimesLatestDay() + 1);
+
+        //set week's month's and year's freq
+    }
+
     private boolean isPromotable(@NonNull BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
+        }
+
+        if (!config.getEnable()) {
+            return true;
         }
 
         if (checkPromoteFrequencyLimit()) {
@@ -95,11 +107,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
             return false;
         }
 
-        if (hasInvalidAmount()) {
-            return false;
-        }
-
-        return true;
+        return !hasInvalidAmount();
     }
 
     private void initChanges() {
@@ -119,7 +127,25 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     private boolean checkPromoteFrequencyLimit() {
-        return false;
+        if (isNew) {
+            return false;
+        }
+
+        if (!config.getEnable()) {
+            return false;
+        }
+
+        Integer maxDayFreq =config.getMaxTimesPerDay();
+        if (null == maxDayFreq || maxDayFreq <= 0) {
+            return false;
+        }
+
+        Integer timesLatestDay = model.getTimesLatestDay();
+        if (timesLatestDay == null) {
+            return false;
+        }
+
+        return timesLatestDay >= maxDayFreq;
     }
 
     private BigDecimal calculatePromoteAmount(BigDecimal amount) {
@@ -155,6 +181,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     private BigDecimal checkMinAmountLimit(BigDecimal changeAmount) {
+
         BigDecimal minAmount = config.getMinAmount();
         if (null != minAmount && minAmount.compareTo(changeAmount) > 0) {
             changeAmount = minAmount;
