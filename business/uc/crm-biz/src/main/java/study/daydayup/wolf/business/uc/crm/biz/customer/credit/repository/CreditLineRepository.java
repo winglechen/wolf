@@ -18,7 +18,6 @@ import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.uc.crm.biz.customer.credit.repository
@@ -35,9 +34,9 @@ public class CreditLineRepository extends AbstractRepository implements Reposito
     @Resource
     private CreditConfigDomainService configService;
 
-    public int save(CreditLineEntity entity) {
-        if (entity == null) {
-            return 0;
+    public int save(@NonNull CreditLineEntity entity) {
+        if (entity.isNew()) {
+            return add(entity);
         }
 
         CreditLine key = entity.getKey();
@@ -63,11 +62,7 @@ public class CreditLineRepository extends AbstractRepository implements Reposito
         return new CreditLineEntity(line, config);
     }
 
-    public int add(CreditLineEntity entity) {
-        if (entity == null) {
-            return 0;
-        }
-
+    public int add(@NonNull CreditLineEntity entity) {
         if (!entity.isNew()) {
             return 0;
         }
