@@ -1,13 +1,12 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.config;
+package study.daydayup.wolf.business.uc.api.crm.customer.credit.config;
 
 import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
- * study.daydayup.wolf.business.uc.api.crm.customer.config
+ * study.daydayup.wolf.business.uc.api.crm.customer.credit.config
  *
  * @author Wingle
  * @since 2020/3/6 4:59 下午
