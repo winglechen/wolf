@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.uc.api.crm.customer.config;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @since 2020/3/6 4:59 下午
  **/
 @Data
-@Configuration
+@Builder
 public class CreditLineConfig {
     private Integer minPromotionPeriod = 0;
 
