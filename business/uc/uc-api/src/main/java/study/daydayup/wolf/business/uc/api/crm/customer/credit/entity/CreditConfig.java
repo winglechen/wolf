@@ -14,16 +14,18 @@ public class CreditConfig implements Model {
     @NotNull @Min(1)
     private Long orgId;
 
-    private Boolean enable;
-    private BigDecimal promotePerOrder;
-    private BigDecimal minAmount;
-    private BigDecimal maxAmount;
-    private Integer minPromotionPeriod;
+    @NotNull
+    private Boolean enable              = false;
 
-    private Integer maxTimesPerDay;
-    private Integer maxTimesPerWeek;
-    private Integer maxTimesPerMonth;
-    private Integer maxTimesPerYear;
+    private BigDecimal promotePerOrder  = BigDecimal.ZERO;
+    private BigDecimal minAmount        = BigDecimal.ZERO;
+    private BigDecimal maxAmount        = BigDecimal.ZERO;
+    private Integer minPromotionPeriod  = 0;
+
+    private Integer maxTimesPerDay      = 0;
+    private Integer maxTimesPerWeek     = 0;
+    private Integer maxTimesPerMonth    = 0;
+    private Integer maxTimesPerYear     = 0;
 
     private Integer version;
     private Integer deleteFlag;
