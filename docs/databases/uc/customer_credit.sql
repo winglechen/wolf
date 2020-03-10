@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `credit_config`
     `promote_per_order`         DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '最大信用额度',
     `min_amount`                DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '最大信用额度',
     `max_amount`                DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '最小信用额度',
+    `currency`                  INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
 
     `min_promotion_period`      INT(11) NOT NULL DEFAULT 0 COMMENT '提额间隔(单位:秒)',
     `max_times_per_day`         INT(11) NOT NULL DEFAULT 0  NOT NULL COMMENT '提升次数',

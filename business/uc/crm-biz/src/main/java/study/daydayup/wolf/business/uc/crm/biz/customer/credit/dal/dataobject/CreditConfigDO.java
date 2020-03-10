@@ -19,6 +19,8 @@ public class CreditConfigDO implements Serializable {
 
     private BigDecimal maxAmount;
 
+    private Integer currency;
+
     private Integer minPromotionPeriod;
 
     private Integer maxTimesPerDay;
@@ -53,6 +55,7 @@ public class CreditConfigDO implements Serializable {
         sb.append(", promotePerOrder=").append(promotePerOrder);
         sb.append(", minAmount=").append(minAmount);
         sb.append(", maxAmount=").append(maxAmount);
+        sb.append(", currency=").append(currency);
         sb.append(", minPromotionPeriod=").append(minPromotionPeriod);
         sb.append(", maxTimesPerDay=").append(maxTimesPerDay);
         sb.append(", maxTimesPerWeek=").append(maxTimesPerWeek);
@@ -85,6 +88,7 @@ public class CreditConfigDO implements Serializable {
             && (this.getPromotePerOrder() == null ? other.getPromotePerOrder() == null : this.getPromotePerOrder().equals(other.getPromotePerOrder()))
             && (this.getMinAmount() == null ? other.getMinAmount() == null : this.getMinAmount().equals(other.getMinAmount()))
             && (this.getMaxAmount() == null ? other.getMaxAmount() == null : this.getMaxAmount().equals(other.getMaxAmount()))
+            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getMinPromotionPeriod() == null ? other.getMinPromotionPeriod() == null : this.getMinPromotionPeriod().equals(other.getMinPromotionPeriod()))
             && (this.getMaxTimesPerDay() == null ? other.getMaxTimesPerDay() == null : this.getMaxTimesPerDay().equals(other.getMaxTimesPerDay()))
             && (this.getMaxTimesPerWeek() == null ? other.getMaxTimesPerWeek() == null : this.getMaxTimesPerWeek().equals(other.getMaxTimesPerWeek()))
@@ -107,6 +111,7 @@ public class CreditConfigDO implements Serializable {
         result = prime * result + ((getPromotePerOrder() == null) ? 0 : getPromotePerOrder().hashCode());
         result = prime * result + ((getMinAmount() == null) ? 0 : getMinAmount().hashCode());
         result = prime * result + ((getMaxAmount() == null) ? 0 : getMaxAmount().hashCode());
+        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getMinPromotionPeriod() == null) ? 0 : getMinPromotionPeriod().hashCode());
         result = prime * result + ((getMaxTimesPerDay() == null) ? 0 : getMaxTimesPerDay().hashCode());
         result = prime * result + ((getMaxTimesPerWeek() == null) ? 0 : getMaxTimesPerWeek().hashCode());

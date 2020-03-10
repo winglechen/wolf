@@ -8,6 +8,7 @@
     <result column="promote_per_order" jdbcType="DECIMAL" property="promotePerOrder" />
     <result column="min_amount" jdbcType="DECIMAL" property="minAmount" />
     <result column="max_amount" jdbcType="DECIMAL" property="maxAmount" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="min_promotion_period" jdbcType="INTEGER" property="minPromotionPeriod" />
     <result column="max_times_per_day" jdbcType="INTEGER" property="maxTimesPerDay" />
     <result column="max_times_per_week" jdbcType="INTEGER" property="maxTimesPerWeek" />
@@ -20,7 +21,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `enable`, promote_per_order, min_amount, max_amount, min_promotion_period, 
+    id, org_id, `enable`, promote_per_order, min_amount, max_amount, currency, min_promotion_period, 
     max_times_per_day, max_times_per_week, max_times_per_month, max_times_per_year, version, 
     delete_flag, last_editor, created_at, updated_at
   </sql>
@@ -37,16 +38,16 @@
   <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO">
     insert into credit_config (id, org_id, `enable`, 
       promote_per_order, min_amount, max_amount, 
-      min_promotion_period, max_times_per_day, max_times_per_week, 
-      max_times_per_month, max_times_per_year, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      currency, min_promotion_period, max_times_per_day, 
+      max_times_per_week, max_times_per_month, max_times_per_year, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{enable,jdbcType=BIT}, 
       #{promotePerOrder,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, #{maxAmount,jdbcType=DECIMAL}, 
-      #{minPromotionPeriod,jdbcType=INTEGER}, #{maxTimesPerDay,jdbcType=INTEGER}, #{maxTimesPerWeek,jdbcType=INTEGER}, 
-      #{maxTimesPerMonth,jdbcType=INTEGER}, #{maxTimesPerYear,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{currency,jdbcType=INTEGER}, #{minPromotionPeriod,jdbcType=INTEGER}, #{maxTimesPerDay,jdbcType=INTEGER}, 
+      #{maxTimesPerWeek,jdbcType=INTEGER}, #{maxTimesPerMonth,jdbcType=INTEGER}, #{maxTimesPerYear,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO">
     insert into credit_config
@@ -68,6 +69,9 @@
       </if>
       <if test="maxAmount != null">
         max_amount,
+      </if>
+      <if test="currency != null">
+        currency,
       </if>
       <if test="minPromotionPeriod != null">
         min_promotion_period,
@@ -119,6 +123,9 @@
       <if test="maxAmount != null">
         #{maxAmount,jdbcType=DECIMAL},
       </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
       <if test="minPromotionPeriod != null">
         #{minPromotionPeriod,jdbcType=INTEGER},
       </if>
@@ -169,6 +176,9 @@
       <if test="maxAmount != null">
         max_amount = #{maxAmount,jdbcType=DECIMAL},
       </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
       <if test="minPromotionPeriod != null">
         min_promotion_period = #{minPromotionPeriod,jdbcType=INTEGER},
       </if>
@@ -209,6 +219,7 @@
       promote_per_order = #{promotePerOrder,jdbcType=DECIMAL},
       min_amount = #{minAmount,jdbcType=DECIMAL},
       max_amount = #{maxAmount,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=INTEGER},
       min_promotion_period = #{minPromotionPeriod,jdbcType=INTEGER},
       max_times_per_day = #{maxTimesPerDay,jdbcType=INTEGER},
       max_times_per_week = #{maxTimesPerWeek,jdbcType=INTEGER},
