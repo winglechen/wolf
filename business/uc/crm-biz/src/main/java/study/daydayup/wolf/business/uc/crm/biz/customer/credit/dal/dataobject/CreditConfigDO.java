@@ -25,8 +25,6 @@ public class CreditConfigDO implements Serializable {
 
     private Integer maxTimesPerYear;
 
-    private Byte useLastPromotionTime;
-
     private Integer version;
 
     private Integer deleteFlag;
@@ -54,7 +52,6 @@ public class CreditConfigDO implements Serializable {
         sb.append(", maxTimesPerWeek=").append(maxTimesPerWeek);
         sb.append(", maxTimesPerMonth=").append(maxTimesPerMonth);
         sb.append(", maxTimesPerYear=").append(maxTimesPerYear);
-        sb.append(", useLastPromotionTime=").append(useLastPromotionTime);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
@@ -85,7 +82,6 @@ public class CreditConfigDO implements Serializable {
             && (this.getMaxTimesPerWeek() == null ? other.getMaxTimesPerWeek() == null : this.getMaxTimesPerWeek().equals(other.getMaxTimesPerWeek()))
             && (this.getMaxTimesPerMonth() == null ? other.getMaxTimesPerMonth() == null : this.getMaxTimesPerMonth().equals(other.getMaxTimesPerMonth()))
             && (this.getMaxTimesPerYear() == null ? other.getMaxTimesPerYear() == null : this.getMaxTimesPerYear().equals(other.getMaxTimesPerYear()))
-            && (this.getUseLastPromotionTime() == null ? other.getUseLastPromotionTime() == null : this.getUseLastPromotionTime().equals(other.getUseLastPromotionTime()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -106,7 +102,6 @@ public class CreditConfigDO implements Serializable {
         result = prime * result + ((getMaxTimesPerWeek() == null) ? 0 : getMaxTimesPerWeek().hashCode());
         result = prime * result + ((getMaxTimesPerMonth() == null) ? 0 : getMaxTimesPerMonth().hashCode());
         result = prime * result + ((getMaxTimesPerYear() == null) ? 0 : getMaxTimesPerYear().hashCode());
-        result = prime * result + ((getUseLastPromotionTime() == null) ? 0 : getUseLastPromotionTime().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

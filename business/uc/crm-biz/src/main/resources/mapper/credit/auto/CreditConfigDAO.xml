@@ -11,7 +11,6 @@
     <result column="max_times_per_week" jdbcType="INTEGER" property="maxTimesPerWeek" />
     <result column="max_times_per_month" jdbcType="INTEGER" property="maxTimesPerMonth" />
     <result column="max_times_per_year" jdbcType="INTEGER" property="maxTimesPerYear" />
-    <result column="use_last_promotion_time" jdbcType="TINYINT" property="useLastPromotionTime" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -20,8 +19,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, min_amount, max_amount, min_promotion_period, max_times_per_day, max_times_per_week, 
-    max_times_per_month, max_times_per_year, use_last_promotion_time, version, delete_flag, 
-    last_editor, created_at, updated_at
+    max_times_per_month, max_times_per_year, version, delete_flag, last_editor, created_at, 
+    updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -37,15 +36,13 @@
     insert into credit_config (id, org_id, min_amount, 
       max_amount, min_promotion_period, max_times_per_day, 
       max_times_per_week, max_times_per_month, max_times_per_year, 
-      use_last_promotion_time, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{minAmount,jdbcType=DECIMAL}, 
       #{maxAmount,jdbcType=DECIMAL}, #{minPromotionPeriod,jdbcType=INTEGER}, #{maxTimesPerDay,jdbcType=INTEGER}, 
       #{maxTimesPerWeek,jdbcType=INTEGER}, #{maxTimesPerMonth,jdbcType=INTEGER}, #{maxTimesPerYear,jdbcType=INTEGER}, 
-      #{useLastPromotionTime,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO">
     insert into credit_config
@@ -76,9 +73,6 @@
       </if>
       <if test="maxTimesPerYear != null">
         max_times_per_year,
-      </if>
-      <if test="useLastPromotionTime != null">
-        use_last_promotion_time,
       </if>
       <if test="version != null">
         version,
@@ -124,9 +118,6 @@
       <if test="maxTimesPerYear != null">
         #{maxTimesPerYear,jdbcType=INTEGER},
       </if>
-      <if test="useLastPromotionTime != null">
-        #{useLastPromotionTime,jdbcType=TINYINT},
-      </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
@@ -171,9 +162,6 @@
       <if test="maxTimesPerYear != null">
         max_times_per_year = #{maxTimesPerYear,jdbcType=INTEGER},
       </if>
-      <if test="useLastPromotionTime != null">
-        use_last_promotion_time = #{useLastPromotionTime,jdbcType=TINYINT},
-      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -202,7 +190,6 @@
       max_times_per_week = #{maxTimesPerWeek,jdbcType=INTEGER},
       max_times_per_month = #{maxTimesPerMonth,jdbcType=INTEGER},
       max_times_per_year = #{maxTimesPerYear,jdbcType=INTEGER},
-      use_last_promotion_time = #{useLastPromotionTime,jdbcType=TINYINT},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
