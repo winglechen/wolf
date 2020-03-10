@@ -11,6 +11,10 @@ public class CreditConfigDO implements Serializable {
 
     private Long orgId;
 
+    private Boolean enable;
+
+    private BigDecimal promotePerOrder;
+
     private BigDecimal minAmount;
 
     private BigDecimal maxAmount;
@@ -45,6 +49,8 @@ public class CreditConfigDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", enable=").append(enable);
+        sb.append(", promotePerOrder=").append(promotePerOrder);
         sb.append(", minAmount=").append(minAmount);
         sb.append(", maxAmount=").append(maxAmount);
         sb.append(", minPromotionPeriod=").append(minPromotionPeriod);
@@ -75,6 +81,8 @@ public class CreditConfigDO implements Serializable {
         CreditConfigDO other = (CreditConfigDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getEnable() == null ? other.getEnable() == null : this.getEnable().equals(other.getEnable()))
+            && (this.getPromotePerOrder() == null ? other.getPromotePerOrder() == null : this.getPromotePerOrder().equals(other.getPromotePerOrder()))
             && (this.getMinAmount() == null ? other.getMinAmount() == null : this.getMinAmount().equals(other.getMinAmount()))
             && (this.getMaxAmount() == null ? other.getMaxAmount() == null : this.getMaxAmount().equals(other.getMaxAmount()))
             && (this.getMinPromotionPeriod() == null ? other.getMinPromotionPeriod() == null : this.getMinPromotionPeriod().equals(other.getMinPromotionPeriod()))
@@ -95,6 +103,8 @@ public class CreditConfigDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getEnable() == null) ? 0 : getEnable().hashCode());
+        result = prime * result + ((getPromotePerOrder() == null) ? 0 : getPromotePerOrder().hashCode());
         result = prime * result + ((getMinAmount() == null) ? 0 : getMinAmount().hashCode());
         result = prime * result + ((getMaxAmount() == null) ? 0 : getMaxAmount().hashCode());
         result = prime * result + ((getMinPromotionPeriod() == null) ? 0 : getMinPromotionPeriod().hashCode());
