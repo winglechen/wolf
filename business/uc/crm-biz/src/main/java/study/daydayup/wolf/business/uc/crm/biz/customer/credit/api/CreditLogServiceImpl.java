@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.api;
 
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLog;
-import study.daydayup.wolf.business.uc.api.crm.customer.service.CreditLogService;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLogService;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditLogConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLogDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLogDO;

@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.uc.crm.biz.customer.credit.api;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
-import study.daydayup.wolf.business.uc.api.crm.customer.service.CreditConfigService;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditConfigService;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditConfigConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditConfigDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO;

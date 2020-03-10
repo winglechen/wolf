@@ -6,7 +6,7 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class AppInstalledDO implements Model {
+public class AppInstalled implements Model {
     private Long id;
 
     private Long accountId;
@@ -60,7 +60,7 @@ public class AppInstalledDO implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        AppInstalledDO other = (AppInstalledDO) that;
+        AppInstalled other = (AppInstalled) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))

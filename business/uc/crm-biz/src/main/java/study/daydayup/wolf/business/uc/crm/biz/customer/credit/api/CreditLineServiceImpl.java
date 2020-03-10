@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.api;
 
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
-import study.daydayup.wolf.business.uc.api.crm.customer.service.CreditLineService;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLineService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
