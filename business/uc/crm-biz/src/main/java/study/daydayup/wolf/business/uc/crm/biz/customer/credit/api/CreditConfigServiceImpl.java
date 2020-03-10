@@ -46,11 +46,7 @@ public class CreditConfigServiceImpl implements CreditConfigService {
 
     private boolean existConfig(Long orgId) {
         CreditConfigDO configDO = dao.selectByOrgId(orgId);
-        if (configDO == null) {
-            return false;
-        }
-
-        return true;
+        return configDO != null;
     }
 
     private int addConfig(@NonNull CreditConfigDO configDO) {
