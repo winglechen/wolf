@@ -6,6 +6,8 @@ import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLin
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditLineConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLineDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLineDO;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity.CreditLineEntity;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.repository.CreditLineRepository;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -27,6 +29,8 @@ import java.util.List;
 public class CreditLineServiceImpl implements CreditLineService {
     @Resource
     private CreditLineDAO dao;
+    @Resource
+    private CreditLineRepository repository;
 
     @Override
     public CreditLine find(@NonNull Long accountId, @NonNull Long orgId) {
@@ -64,12 +68,24 @@ public class CreditLineServiceImpl implements CreditLineService {
     }
 
     @Override
-    public int promote(Long accountId, Long orgId, BigDecimal amount) {
-        return 0;
+    public int promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
+        CreditLineEntity entity = repository.find(accountId, orgId);
+        if (entity == null) {
+            return 0;
+        }
+
+        entity.promote(amount);
+        return repository.save(entity);
     }
 
     @Override
-    public int demote(Long accountId, Long orgId, BigDecimal amount) {
-        return 0;
+    public int demote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
+        CreditLineEntity entity = repository.find(accountId, orgId);
+        if (entity == null) {
+            return 0;
+        }
+
+        entity.demote(amount);
+        return repository.save(entity);
     }
 }
