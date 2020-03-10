@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity;
 
-import lombok.Getter;
 import lombok.NonNull;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
@@ -11,7 +10,6 @@ import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.time.LocalDateTime;
 
 /**
@@ -41,36 +39,95 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     public void promote(@NonNull BigDecimal amount, BigDecimal baseAmount) {
-        if (checkPromoteFrequencyLimit()) {
+        if (!isPromotable(amount)) {
             return;
         }
 
         initAmount(baseAmount);
 
+        BigDecimal changeAmount = calculatePromoteAmount(amount);
+        changeAmount = checkMaxAmountLimit(changeAmount);
+
+        setChangeAmount(changeAmount);
         logChanges(CreditOperationEnum.PROMOTION);
     }
 
     public void demote(@NonNull BigDecimal amount) {
-        if (!isDemotable()) {
+        if (!isDemotable(amount)) {
             return;
         }
 
         BigDecimal changeAmount = calculateDemoteAmount(amount);
         changeAmount = checkMinAmountLimit(changeAmount);
 
-        changeAmount = DecimalUtil.scale(changeAmount);
-        changes.setAmount(changeAmount);
-
+        setChangeAmount(changeAmount);
         logChanges(CreditOperationEnum.DEMOTION);
     }
 
+    private boolean isPromotable(@NonNull BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+
+        if (checkPromoteFrequencyLimit()) {
+            return false;
+        }
+
+        BigDecimal maxAmount = config.getMaxAmount();
+        if (null == maxAmount) {
+            return true;
+        }
+
+        if (amount.compareTo(maxAmount) > 0) {
+            return false;
+        }
+
+        BigDecimal modelAmount = model.getAmount();
+        if (null == modelAmount) {
+            return true;
+        }
+
+        return modelAmount.compareTo(maxAmount) >= 0;
+    }
+
+    private boolean isDemotable(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+
+        if (hasInvalidAmount()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void initChanges() {
+        if (changes != null) {
+            return;
+        }
+
+        changes = new CreditLine();
+    }
+
+    private void setChangeAmount(BigDecimal changeAmount) {
+        initChanges();
+
+        changeAmount = DecimalUtil.scale(changeAmount);
+        model.setAmount(changeAmount);
+        changes.setAmount(changeAmount);
+    }
 
     private boolean checkPromoteFrequencyLimit() {
         return false;
     }
 
     private BigDecimal calculatePromoteAmount(BigDecimal amount) {
-        return null;
+        if (hasInvalidAmount()) {
+            return amount;
+        }
+
+        return model.getAmount().add(amount);
     }
 
     private BigDecimal calculateDemoteAmount(BigDecimal amount) {
@@ -85,7 +142,16 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     private BigDecimal checkMaxAmountLimit(BigDecimal changeAmount) {
-        return null;
+        BigDecimal maxAmount = config.getMaxAmount();
+        if (null == maxAmount || maxAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return changeAmount;
+        }
+
+        if (changeAmount.compareTo(maxAmount) <= 0) {
+            return changeAmount;
+        }
+
+        return maxAmount;
     }
 
     private BigDecimal checkMinAmountLimit(BigDecimal changeAmount) {
@@ -97,17 +163,13 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return changeAmount;
     }
 
-    private boolean isDemotable() {
+    private boolean hasInvalidAmount() {
         if (isNew) {
-            return false;
+            return true;
         }
 
         BigDecimal modelAmount = model.getAmount();
-        if (modelAmount.compareTo(BigDecimal.ZERO) <= 0) {
-            return false;
-        }
-
-        return true;
+        return modelAmount.compareTo(BigDecimal.ZERO) <= 0;
     }
 
     private void initAmount(BigDecimal baseAmount) {
@@ -126,11 +188,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     private void logChanges(@NonNull CreditOperationEnum operation) {
-        if (isNew) {
-            return;
-        }
-
-        if (null == changes) {
+        if (!isLoggable()) {
             return;
         }
 
@@ -151,5 +209,12 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changes.setCreditLog(creditLog);
     }
 
+    private boolean isLoggable() {
+        if (isNew) {
+            return false;
+        }
+
+        return null != changes;
+    }
 
 }
