@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `credit_line`
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`            DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     UNIQUE INDEX udx_account(`account_id`, `org_id`),
-    INDEX idx_org(`org_id`, `account_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户信用额度';
@@ -77,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `credit_log`
     `editor`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `delete_flag`   TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`    DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    UNIQUE INDEX udx_account(`org_id`, `account_id`),
+    INDEX idx_org(`org_id`, `account_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '信用额度变更记录';

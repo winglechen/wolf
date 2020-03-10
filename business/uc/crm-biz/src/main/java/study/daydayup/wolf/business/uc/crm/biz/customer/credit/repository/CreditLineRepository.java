@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.repository;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity.CreditLineEntity;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -12,4 +13,7 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
  **/
 @Component
 public class CreditLineRepository extends AbstractRepository implements Repository {
+    public int save(CreditLineEntity entity) {
+        return 0;
+    }
 }

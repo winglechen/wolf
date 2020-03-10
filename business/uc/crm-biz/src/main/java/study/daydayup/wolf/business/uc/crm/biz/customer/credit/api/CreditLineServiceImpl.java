@@ -1,12 +1,18 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.api;
 
+import lombok.NonNull;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLineService;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLineDAO;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLineDO;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.uc.crm.biz.customer.credit.api
@@ -16,8 +22,17 @@ import java.math.BigDecimal;
  **/
 @RpcService(protocol = "dubbo")
 public class CreditLineServiceImpl implements CreditLineService {
+    @Resource
+    private CreditLineDAO dao;
+
     @Override
-    public CreditLine find(Long accountId, Long orgId) {
+    public CreditLine find(@NonNull Long accountId, @NonNull Long orgId) {
+        CreditLineDO lineDO;
+        return null;
+    }
+
+    @Override
+    public List<CreditLine> findByAccounts(Collection<Long> accountIds, Long orgId) {
         return null;
     }
 
