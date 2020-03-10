@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.credit.enums;
+package study.daydayup.wolf.business.uc.api.profile.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
@@ -10,14 +10,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum CreditOperationEnum implements CodeBasedEnum {
-    DEMOTION(2, "降额"),
-    PROMOTION(1, "提额")
+public enum CollectionTypeEnum implements CodeBasedEnum {
+    ORG(2, "org"),
+    GOODS(1, "goods"),
     ;
 
     private int code;
     private String name;
-    CreditOperationEnum(int code, String name) {
+    CollectionTypeEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }
