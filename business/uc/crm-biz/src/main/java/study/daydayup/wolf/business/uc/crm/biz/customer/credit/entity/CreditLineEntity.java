@@ -23,16 +23,15 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         key = CreditLine.builder()
                 .accountId(line.getAccountId())
                 .orgId(line.getOrgId())
+                .version(line.getVersion())
                 .build();
         isNew = false;
     }
 
-    public boolean promote(BigDecimal amount) {
-        return true;
+    public void promote(BigDecimal amount) {
     }
 
-    public boolean demote(BigDecimal amount) {
-        return true;
+    public void demote(BigDecimal amount) {
     }
 
 

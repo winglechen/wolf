@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditCon
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditConfigConverter;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditConfigDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO;
+import study.daydayup.wolf.business.uc.crm.biz.customer.credit.service.CreditConfigDomainService;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -21,15 +22,12 @@ import javax.annotation.Resource;
 public class CreditConfigServiceImpl implements CreditConfigService {
     @Resource
     private CreditConfigDAO dao;
+    @Resource
+    private CreditConfigDomainService domainService;
 
     @Override
     public CreditConfig find(@NonNull Long orgId) {
-        CreditConfigDO configDO = dao.selectByOrgId(orgId);
-        if (configDO == null) {
-            return initConfig(orgId);
-        }
-
-        return CreditConfigConverter.toModel(configDO);
+        return domainService.find(orgId);
     }
 
     @Override
@@ -57,10 +55,5 @@ public class CreditConfigServiceImpl implements CreditConfigService {
         return dao.updateByOrgId(configDO, orgId);
     }
 
-    private CreditConfig initConfig(@NonNull Long orgId) {
-        CreditConfig config = new CreditConfig();
-        config.setOrgId(orgId);
 
-        return config;
-    }
 }

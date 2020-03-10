@@ -14,6 +14,8 @@ import study.daydayup.wolf.framework.layer.domain.Repository;
  **/
 @Component
 public class CreditLineRepository extends AbstractRepository implements Repository {
+
+
     public int save(CreditLineEntity entity) {
         return 0;
     }
