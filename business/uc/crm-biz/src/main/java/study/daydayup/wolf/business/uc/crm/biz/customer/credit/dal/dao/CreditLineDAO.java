@@ -26,7 +26,7 @@ public interface CreditLineDAO {
 
     CreditLineDO selectByAccountIdAndOrgId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
 
-    int updateByAccountIdAndOrgId(@Param("updated")CreditLineDO updated,@Param("accountId")Long accountId,@Param("orgId")Long orgId);
+    int updateByAccountIdAndOrgId(@Param("updated")CreditLineDO updated,@Param("accountId")Long accountId,@Param("orgId")Long orgId, @Param("version")Integer version);
 
 
 }

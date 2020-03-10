@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity;
 
+import lombok.Getter;
+import lombok.NonNull;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLog;
@@ -16,9 +18,12 @@ import java.math.BigDecimal;
  **/
 public class CreditLineEntity extends AbstractEntity<CreditLine> implements Entity {
     private CreditConfig config;
+    @Getter
     private CreditLog creditLog;
 
-    public CreditLineEntity(CreditLine line) {
+    public CreditLineEntity(@NonNull CreditLine line, @NonNull CreditConfig config) {
+        this.config = config;
+
         model = line;
         key = CreditLine.builder()
                 .accountId(line.getAccountId())
