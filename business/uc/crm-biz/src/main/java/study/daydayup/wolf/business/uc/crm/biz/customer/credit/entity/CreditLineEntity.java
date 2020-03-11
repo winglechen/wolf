@@ -23,7 +23,6 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     private CreditConfig config;
     private LocalDateTime now;
 
-
     public CreditLineEntity(@NonNull CreditLine line, @NonNull CreditConfig config) {
         this(line, config, false);
     }
@@ -258,8 +257,6 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return minAmount;
     }
 
-
-
     /**
      * Just verify and Can not change the model
      * @return boolean
@@ -297,7 +294,6 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
 
         return isOverYearFreq();
     }
-
 
     /**
      * Will not check config.enable && entity.isNew

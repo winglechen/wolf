@@ -25,7 +25,7 @@ public class CreditConfig implements Model {
     private Integer maxTimesPerMonth    = 0;
     private Integer maxTimesPerYear     = 0;
 
-    private Integer version;
+    private Integer version             = 0;
     private Integer deleteFlag;
     private Long lastEditor;
     private LocalDateTime createdAt;
