@@ -36,7 +36,9 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
                 .orgId(line.getOrgId())
                 .version(line.getVersion())
                 .build();
+
         this.isNew = isNew;
+        initNow();
     }
 
     /**
@@ -270,7 +272,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
             return false;
         }
 
-        initNow();
+
         LocalDateTime promoteAt = model.getPromotedAt();
         if (promoteAt == null) {
             return false;
