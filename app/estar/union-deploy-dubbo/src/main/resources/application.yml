@@ -8,6 +8,65 @@ spring:
   messages:
     basename: i18n/messages
     encoding: UTF-8
+  shardingsphere:
+    sharding:
+      tables:
+        #account
+        access_token.actual-data-nodes: account.access_token
+        account.actual-data-nodes: account.account
+        account_alipay.actual-data-nodes: account.account_alipay
+        account_wechat.actual-data-nodes: account.account_wechat
+        organiztion.actual-data-nodes: account.organiztion
+        verify_code.actual-data-nodes: account.verify_code
+        #goods
+        goods.actual-data-nodes: goods.goods
+        goods_detail.actual-data-nodes: goods.goods_detail
+        goods_loan.actual-data-nodes: goods.goods_loan
+        goods_installment.actual-data-nodes: goods.goods_installment
+        sku.actual-data-nodes: goods.sku
+        #trade
+        assurance_term.actual-data-nodes: trade.assurance_term
+        consign_term.actual-data-nodes: trade.consign_term
+        contract.actual-data-nodes: trade.contract
+        trade_state_log.actual-data-nodes: trade.trade_state_log
+        installment_term.actual-data-nodes: trade.installment_term
+        loan_term.actual-data-nodes: trade.loan_term
+        objects_term.actual-data-nodes: trade.objects_term
+        order.actual-data-nodes: trade.order
+        order_address.actual-data-nodes: trade.order_address
+        order_line.actual-data-nodes: trade.order_line
+        payment_term.actual-data-nodes: trade.payment_term
+        price_change_log.actual-data-nodes: trade.price_change_log
+        repayment_term.actual-data-nodes: trade.repayment_term
+        trade_memo.actual-data-nodes: trade.trade_memo
+        #mq
+        wmq_message.actual-data-nodes: mq.wmq_message
+        wmq_queue.actual-data-nodes: mq.wmq_queue
+        wmq_scheduled_message.actual-data-nodes: mq.wmq_scheduled_message
+        wmq_task.actual-data-nodes: mq.wmq_task
+        wmq_tcc_message.actual-data-nodes: mq.wmq_tcc_message
+        #setting
+        account_status.actual-data-nodes: setting.account_status
+        customer_status.actual-data-nodes: setting.customer_status
+        #pay
+        payment.actual-data-nodes: pay.payment
+        payment_log.actual-data-nodes: pay.payment_log
+        payment_state_log.actual-data-nodes: pay.payment_state_log
+        trade_merge.actual-data-nodes: pay.trade_merge
+        #credit
+        credit_config.actual-data-nodes: credit.credit_config
+        credit_line.actual-data-nodes: credit.credit_line
+        credit_log.actual-data-nodes: credit.credit_log
+        #datav
+        daily_koi.actual-data-nodes: datav.daily_koi
+        daily_loan.actual-data-nodes: datav.daily_loan
+        daily_repay.actual-data-nodes: datav.daily_repay
+        daily_collection.actual-data-nodes: datav.daily_collection
+        daily_collector.actual-data-nodes: datav.daily_collector
+        model_collector.actual-data-nodes: datav.model_collector
+        tract_repay.actual-data-nodes: datav.tract_repay
+        offset_holder.actual-data-nodes: datav.offset_holder
+        #onion
 
 
 mybatis:
@@ -18,7 +77,5 @@ pagehelper:
   support-methods-arguments: true
   reasonable: true
   helper-dialect: mysql
-
-
 
 
