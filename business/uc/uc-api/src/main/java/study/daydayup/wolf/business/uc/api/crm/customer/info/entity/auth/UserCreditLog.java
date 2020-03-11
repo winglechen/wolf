@@ -1,25 +1,25 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.auth;
 
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.Model;
 
+import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class AddressBook implements Model {
+public class UserCreditLog implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private String name;
+    private Integer authType;
 
-    private String mobile;
-
-    private Boolean deleteFlag;
+    private Integer status;
 
     private Integer version;
+
+    private Integer deleteFlag;
 
     private Long lastEditor;
 
@@ -38,10 +38,10 @@ public class AddressBook implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", name=").append(name);
-        sb.append(", mobile=").append(mobile);
-        sb.append(", deleteFlag=").append(deleteFlag);
+        sb.append(", authType=").append(authType);
+        sb.append(", status=").append(status);
         sb.append(", version=").append(version);
+        sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
@@ -60,14 +60,14 @@ public class AddressBook implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        AddressBook other = (AddressBook) that;
+        UserCreditLog other = (UserCreditLog) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
-            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
+            && (this.getAuthType() == null ? other.getAuthType() == null : this.getAuthType().equals(other.getAuthType()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
+            && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
@@ -80,10 +80,10 @@ public class AddressBook implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
-        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
+        result = prime * result + ((getAuthType() == null) ? 0 : getAuthType().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());

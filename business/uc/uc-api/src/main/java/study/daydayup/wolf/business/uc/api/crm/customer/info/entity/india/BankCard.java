@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.india;
 
 import lombok.Data;
 
@@ -6,36 +6,36 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class DrivingLicense implements Model {
+public class BankCard implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private String dlNo;
+    private String bankName;
 
-    private String cov;
+    private String branch;
 
-    private String doi;
-
-    private String dob;
-
-    private String bg;
-
-    private String name;
-
-    private String sdw;
+    private String ifsc;
 
     private String address;
 
-    private String pin;
+    private String bankNo;
+
+    private String relegationBank;
+
+    private Integer type;
+
+    private Boolean isLoan;
+
+    private Boolean isPay;
+
+    private LocalDateTime expirationDate;
 
     private String frontSide;
 
     private String backSide;
-
-    private String issuingAuthority;
 
     private Boolean deleteFlag;
 
@@ -58,18 +58,18 @@ public class DrivingLicense implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", dlNo=").append(dlNo);
-        sb.append(", cov=").append(cov);
-        sb.append(", doi=").append(doi);
-        sb.append(", dob=").append(dob);
-        sb.append(", bg=").append(bg);
-        sb.append(", name=").append(name);
-        sb.append(", sdw=").append(sdw);
+        sb.append(", bankName=").append(bankName);
+        sb.append(", branch=").append(branch);
+        sb.append(", ifsc=").append(ifsc);
         sb.append(", address=").append(address);
-        sb.append(", pin=").append(pin);
+        sb.append(", bankNo=").append(bankNo);
+        sb.append(", relegationBank=").append(relegationBank);
+        sb.append(", type=").append(type);
+        sb.append(", isLoan=").append(isLoan);
+        sb.append(", isPay=").append(isPay);
+        sb.append(", expirationDate=").append(expirationDate);
         sb.append(", frontSide=").append(frontSide);
         sb.append(", backSide=").append(backSide);
-        sb.append(", issuingAuthority=").append(issuingAuthority);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", version=").append(version);
         sb.append(", lastEditor=").append(lastEditor);
@@ -90,22 +90,22 @@ public class DrivingLicense implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        DrivingLicense other = (DrivingLicense) that;
+        BankCard other = (BankCard) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getDlNo() == null ? other.getDlNo() == null : this.getDlNo().equals(other.getDlNo()))
-            && (this.getCov() == null ? other.getCov() == null : this.getCov().equals(other.getCov()))
-            && (this.getDoi() == null ? other.getDoi() == null : this.getDoi().equals(other.getDoi()))
-            && (this.getDob() == null ? other.getDob() == null : this.getDob().equals(other.getDob()))
-            && (this.getBg() == null ? other.getBg() == null : this.getBg().equals(other.getBg()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getSdw() == null ? other.getSdw() == null : this.getSdw().equals(other.getSdw()))
+            && (this.getBankName() == null ? other.getBankName() == null : this.getBankName().equals(other.getBankName()))
+            && (this.getBranch() == null ? other.getBranch() == null : this.getBranch().equals(other.getBranch()))
+            && (this.getIfsc() == null ? other.getIfsc() == null : this.getIfsc().equals(other.getIfsc()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getPin() == null ? other.getPin() == null : this.getPin().equals(other.getPin()))
+            && (this.getBankNo() == null ? other.getBankNo() == null : this.getBankNo().equals(other.getBankNo()))
+            && (this.getRelegationBank() == null ? other.getRelegationBank() == null : this.getRelegationBank().equals(other.getRelegationBank()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getIsLoan() == null ? other.getIsLoan() == null : this.getIsLoan().equals(other.getIsLoan()))
+            && (this.getIsPay() == null ? other.getIsPay() == null : this.getIsPay().equals(other.getIsPay()))
+            && (this.getExpirationDate() == null ? other.getExpirationDate() == null : this.getExpirationDate().equals(other.getExpirationDate()))
             && (this.getFrontSide() == null ? other.getFrontSide() == null : this.getFrontSide().equals(other.getFrontSide()))
             && (this.getBackSide() == null ? other.getBackSide() == null : this.getBackSide().equals(other.getBackSide()))
-            && (this.getIssuingAuthority() == null ? other.getIssuingAuthority() == null : this.getIssuingAuthority().equals(other.getIssuingAuthority()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -120,18 +120,18 @@ public class DrivingLicense implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getDlNo() == null) ? 0 : getDlNo().hashCode());
-        result = prime * result + ((getCov() == null) ? 0 : getCov().hashCode());
-        result = prime * result + ((getDoi() == null) ? 0 : getDoi().hashCode());
-        result = prime * result + ((getDob() == null) ? 0 : getDob().hashCode());
-        result = prime * result + ((getBg() == null) ? 0 : getBg().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getSdw() == null) ? 0 : getSdw().hashCode());
+        result = prime * result + ((getBankName() == null) ? 0 : getBankName().hashCode());
+        result = prime * result + ((getBranch() == null) ? 0 : getBranch().hashCode());
+        result = prime * result + ((getIfsc() == null) ? 0 : getIfsc().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getPin() == null) ? 0 : getPin().hashCode());
+        result = prime * result + ((getBankNo() == null) ? 0 : getBankNo().hashCode());
+        result = prime * result + ((getRelegationBank() == null) ? 0 : getRelegationBank().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getIsLoan() == null) ? 0 : getIsLoan().hashCode());
+        result = prime * result + ((getIsPay() == null) ? 0 : getIsPay().hashCode());
+        result = prime * result + ((getExpirationDate() == null) ? 0 : getExpirationDate().hashCode());
         result = prime * result + ((getFrontSide() == null) ? 0 : getFrontSide().hashCode());
         result = prime * result + ((getBackSide() == null) ? 0 : getBackSide().hashCode());
-        result = prime * result + ((getIssuingAuthority() == null) ? 0 : getIssuingAuthority().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

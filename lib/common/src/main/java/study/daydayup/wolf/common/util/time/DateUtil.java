@@ -7,7 +7,6 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * study.daydayup.wolf.common.util
@@ -85,6 +84,16 @@ public class DateUtil {
         return localDateTime.format(formatter);
     }
 
+    public static int getWeek(@NonNull LocalDateTime time) {
+        WeekFields weekFields = WeekFields.ISO;
+        return time.get(weekFields.weekOfWeekBasedYear());
+    }
+
+    public static int getWeek(@NonNull LocalDate time) {
+        WeekFields weekFields = WeekFields.ISO;
+        return time.get(weekFields.weekOfWeekBasedYear());
+    }
+
     public static boolean isSameDay(@NonNull LocalDateTime time) {
         return isSameDay(time, LocalDateTime.now());
     }
@@ -113,11 +122,6 @@ public class DateUtil {
         return getWeek(time) == getWeek(vsTime);
     }
 
-    public static int getWeek(@NonNull LocalDateTime time) {
-        WeekFields weekFields = WeekFields.ISO;
-        return time.get(weekFields.weekOfWeekBasedYear());
-    }
-
     public static boolean isSameMonth(@NonNull LocalDateTime time) {
         return isSameMonth(time, LocalDateTime.now());
     }
@@ -135,6 +139,54 @@ public class DateUtil {
     }
 
     public static boolean isSameYear(@NonNull LocalDateTime time, @NonNull LocalDateTime vsTime) {
+        return time.getYear() == vsTime.getYear();
+    }
+
+    public static boolean isSameDay(@NonNull LocalDate time) {
+        return isSameDay(time, LocalDate.now());
+    }
+
+    public static boolean isSameDay(@NonNull LocalDate time, @NonNull LocalDate vsTime) {
+        if (time.getYear() != vsTime.getYear()) {
+            return false;
+        }
+
+        if (time.getMonthValue() != vsTime.getMonthValue()) {
+            return false;
+        }
+
+        return time.getDayOfMonth() == vsTime.getDayOfMonth();
+    }
+
+    public static boolean isSameWeek(@NonNull LocalDate time) {
+        return isSameWeek(time, LocalDate.now());
+    }
+
+    public static boolean isSameWeek(@NonNull LocalDate time, @NonNull LocalDate vsTime) {
+        if (time.getYear() != vsTime.getYear()) {
+            return false;
+        }
+
+        return getWeek(time) == getWeek(vsTime);
+    }
+
+    public static boolean isSameMonth(@NonNull LocalDate time) {
+        return isSameMonth(time, LocalDate.now());
+    }
+
+    public static boolean isSameMonth(@NonNull LocalDate time, @NonNull LocalDate vsTime) {
+        if (time.getYear() != vsTime.getYear()) {
+            return false;
+        }
+
+        return time.getMonthValue() == vsTime.getMonthValue();
+    }
+
+    public static boolean isSameYear(@NonNull LocalDate time) {
+        return isSameYear(time, LocalDate.now());
+    }
+
+    public static boolean isSameYear(@NonNull LocalDate time, @NonNull LocalDate vsTime) {
         return time.getYear() == vsTime.getYear();
     }
 

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.org.api.staff.acl.enums;
+package study.daydayup.wolf.business.uc.api.acl.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
@@ -10,14 +10,16 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum ActionTypeEnum implements CodeBasedEnum {
-    GROUP(2, "group"),
-    ACTION(1, "action")
+public enum RoleTypeEnum implements CodeBasedEnum {
+    SUPER(10, "super"),
+    ACCOUNT(3, "account"),
+    DEPARTMENT(2, "department"),
+    DEFAULT(1, "default")
     ;
 
     private int code;
     private String name;
-    ActionTypeEnum(int code, String name) {
+    RoleTypeEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }

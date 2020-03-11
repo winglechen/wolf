@@ -1,27 +1,23 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.india;
 
 import lombok.Data;
-import study.daydayup.wolf.framework.layer.api.Model;
 
+import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class Aadhaar implements Model {
+public class VoterCard implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private String aadhaarNo;
-
-    private String uid;
-
-    private String gender;
-
-    private String dob;
+    private String voterNo;
 
     private String name;
+
+    private String fatherName;
 
     private String address;
 
@@ -29,27 +25,9 @@ public class Aadhaar implements Model {
 
     private String backSide;
 
-    private String vid;
+    private String signDate;
 
-    private String yob;
-
-    private String co;
-
-    private String loc;
-
-    private String vtc;
-
-    private String po;
-
-    private String dist;
-
-    private String subdist;
-
-    private String state;
-
-    private String pc;
-
-    private Boolean deleteFlag;
+    private Integer deleteFlag;
 
     private Integer version;
 
@@ -70,24 +48,13 @@ public class Aadhaar implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", aadhaarNo=").append(aadhaarNo);
-        sb.append(", uid=").append(uid);
-        sb.append(", gender=").append(gender);
-        sb.append(", dob=").append(dob);
+        sb.append(", voterNo=").append(voterNo);
         sb.append(", name=").append(name);
+        sb.append(", fatherName=").append(fatherName);
         sb.append(", address=").append(address);
         sb.append(", frontSide=").append(frontSide);
         sb.append(", backSide=").append(backSide);
-        sb.append(", vid=").append(vid);
-        sb.append(", yob=").append(yob);
-        sb.append(", co=").append(co);
-        sb.append(", loc=").append(loc);
-        sb.append(", vtc=").append(vtc);
-        sb.append(", po=").append(po);
-        sb.append(", dist=").append(dist);
-        sb.append(", subdist=").append(subdist);
-        sb.append(", state=").append(state);
-        sb.append(", pc=").append(pc);
+        sb.append(", signDate=").append(signDate);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", version=").append(version);
         sb.append(", lastEditor=").append(lastEditor);
@@ -108,28 +75,17 @@ public class Aadhaar implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Aadhaar other = (Aadhaar) that;
+        VoterCard other = (VoterCard) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getAadhaarNo() == null ? other.getAadhaarNo() == null : this.getAadhaarNo().equals(other.getAadhaarNo()))
-            && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getDob() == null ? other.getDob() == null : this.getDob().equals(other.getDob()))
+            && (this.getVoterNo() == null ? other.getVoterNo() == null : this.getVoterNo().equals(other.getVoterNo()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getFatherName() == null ? other.getFatherName() == null : this.getFatherName().equals(other.getFatherName()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
             && (this.getFrontSide() == null ? other.getFrontSide() == null : this.getFrontSide().equals(other.getFrontSide()))
             && (this.getBackSide() == null ? other.getBackSide() == null : this.getBackSide().equals(other.getBackSide()))
-            && (this.getVid() == null ? other.getVid() == null : this.getVid().equals(other.getVid()))
-            && (this.getYob() == null ? other.getYob() == null : this.getYob().equals(other.getYob()))
-            && (this.getCo() == null ? other.getCo() == null : this.getCo().equals(other.getCo()))
-            && (this.getLoc() == null ? other.getLoc() == null : this.getLoc().equals(other.getLoc()))
-            && (this.getVtc() == null ? other.getVtc() == null : this.getVtc().equals(other.getVtc()))
-            && (this.getPo() == null ? other.getPo() == null : this.getPo().equals(other.getPo()))
-            && (this.getDist() == null ? other.getDist() == null : this.getDist().equals(other.getDist()))
-            && (this.getSubdist() == null ? other.getSubdist() == null : this.getSubdist().equals(other.getSubdist()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getPc() == null ? other.getPc() == null : this.getPc().equals(other.getPc()))
+            && (this.getSignDate() == null ? other.getSignDate() == null : this.getSignDate().equals(other.getSignDate()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -144,24 +100,13 @@ public class Aadhaar implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getAadhaarNo() == null) ? 0 : getAadhaarNo().hashCode());
-        result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
-        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
-        result = prime * result + ((getDob() == null) ? 0 : getDob().hashCode());
+        result = prime * result + ((getVoterNo() == null) ? 0 : getVoterNo().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getFatherName() == null) ? 0 : getFatherName().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
         result = prime * result + ((getFrontSide() == null) ? 0 : getFrontSide().hashCode());
         result = prime * result + ((getBackSide() == null) ? 0 : getBackSide().hashCode());
-        result = prime * result + ((getVid() == null) ? 0 : getVid().hashCode());
-        result = prime * result + ((getYob() == null) ? 0 : getYob().hashCode());
-        result = prime * result + ((getCo() == null) ? 0 : getCo().hashCode());
-        result = prime * result + ((getLoc() == null) ? 0 : getLoc().hashCode());
-        result = prime * result + ((getVtc() == null) ? 0 : getVtc().hashCode());
-        result = prime * result + ((getPo() == null) ? 0 : getPo().hashCode());
-        result = prime * result + ((getDist() == null) ? 0 : getDist().hashCode());
-        result = prime * result + ((getSubdist() == null) ? 0 : getSubdist().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getPc() == null) ? 0 : getPc().hashCode());
+        result = prime * result + ((getSignDate() == null) ? 0 : getSignDate().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

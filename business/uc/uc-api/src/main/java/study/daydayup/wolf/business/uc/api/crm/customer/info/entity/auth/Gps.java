@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.auth;
 
 import lombok.Data;
 
@@ -6,14 +6,18 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class LivenessAuthInfo implements Model {
+public class Gps implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private Integer status;
+    private Double latitude;
+
+    private Double longitude;
+
+    private Integer type;
 
     private Boolean deleteFlag;
 
@@ -24,8 +28,6 @@ public class LivenessAuthInfo implements Model {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
-    private String base64Img;
 
     private static final long serialVersionUID = 1L;
 
@@ -38,13 +40,14 @@ public class LivenessAuthInfo implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", status=").append(status);
+        sb.append(", latitude=").append(latitude);
+        sb.append(", longitude=").append(longitude);
+        sb.append(", type=").append(type);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", version=").append(version);
         sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", base64Img=").append(base64Img);
         sb.append("]");
         return sb.toString();
     }
@@ -60,17 +63,18 @@ public class LivenessAuthInfo implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        LivenessAuthInfo other = (LivenessAuthInfo) that;
+        Gps other = (Gps) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getLatitude() == null ? other.getLatitude() == null : this.getLatitude().equals(other.getLatitude()))
+            && (this.getLongitude() == null ? other.getLongitude() == null : this.getLongitude().equals(other.getLongitude()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
-            && (this.getBase64Img() == null ? other.getBase64Img() == null : this.getBase64Img().equals(other.getBase64Img()));
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
 
     @Override
@@ -80,13 +84,14 @@ public class LivenessAuthInfo implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getLatitude() == null) ? 0 : getLatitude().hashCode());
+        result = prime * result + ((getLongitude() == null) ? 0 : getLongitude().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
-        result = prime * result + ((getBase64Img() == null) ? 0 : getBase64Img().hashCode());
         return result;
     }
 }

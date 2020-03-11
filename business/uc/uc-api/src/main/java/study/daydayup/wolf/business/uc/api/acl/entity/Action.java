@@ -1,12 +1,12 @@
-package study.daydayup.wolf.business.org.api.staff.acl.entity;
+package study.daydayup.wolf.business.uc.api.acl.entity;
 
-import study.daydayup.wolf.business.org.api.staff.acl.enums.ActionTypeEnum;
+import study.daydayup.wolf.business.uc.api.acl.enums.ActionTypeEnum;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.util.List;
 
 /**
- * study.daydayup.wolf.business.org.api.staff.acl.entity
+ * study.daydayup.wolf.business.uc.api.acl.entity
  *
  * @author Wingle
  * @since 2020/1/9 12:42 下午

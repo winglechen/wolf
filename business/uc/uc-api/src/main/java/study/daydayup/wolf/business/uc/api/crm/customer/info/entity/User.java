@@ -6,6 +6,7 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
+//TODO
 public class User implements Model {
     private Long id;
 

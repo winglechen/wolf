@@ -13,7 +13,7 @@
     <modules>
         <module>account</module>
         <module>goods</module>
-        <module>misc</module>
+        <module>knowledge</module>
         <module>organization</module>
         <module>pay</module>
         <module>trade</module>

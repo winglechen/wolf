@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.auth;
 
 import lombok.Data;
 
@@ -6,6 +6,7 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
+//TODO MERGE TO user(customer)
 public class BasicInfo implements Model {
     private Long id;
 

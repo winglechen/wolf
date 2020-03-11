@@ -1,23 +1,21 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.auth;
 
 import lombok.Data;
-
 import study.daydayup.wolf.framework.layer.api.Model;
+
 import java.time.LocalDateTime;
 
 @Data
-public class Gps implements Model {
+public class AddressBook implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private Double latitude;
+    private String name;
 
-    private Double longitude;
-
-    private Integer type;
+    private String mobile;
 
     private Boolean deleteFlag;
 
@@ -40,9 +38,8 @@ public class Gps implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", latitude=").append(latitude);
-        sb.append(", longitude=").append(longitude);
-        sb.append(", type=").append(type);
+        sb.append(", name=").append(name);
+        sb.append(", mobile=").append(mobile);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", version=").append(version);
         sb.append(", lastEditor=").append(lastEditor);
@@ -63,13 +60,12 @@ public class Gps implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Gps other = (Gps) that;
+        AddressBook other = (AddressBook) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getLatitude() == null ? other.getLatitude() == null : this.getLatitude().equals(other.getLatitude()))
-            && (this.getLongitude() == null ? other.getLongitude() == null : this.getLongitude().equals(other.getLongitude()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -84,9 +80,8 @@ public class Gps implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getLatitude() == null) ? 0 : getLatitude().hashCode());
-        result = prime * result + ((getLongitude() == null) ? 0 : getLongitude().hashCode());
-        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.uc.api.crm.customer.info.entity.india;
 
 import lombok.Data;
 
@@ -6,28 +6,38 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 @Data
-public class VoterCard implements Model {
+public class DrivingLicense implements Model {
     private Long id;
 
     private Long accountId;
 
     private Long orgId;
 
-    private String voterNo;
+    private String dlNo;
+
+    private String cov;
+
+    private String doi;
+
+    private String dob;
+
+    private String bg;
 
     private String name;
 
-    private String fatherName;
+    private String sdw;
 
     private String address;
+
+    private String pin;
 
     private String frontSide;
 
     private String backSide;
 
-    private String signDate;
+    private String issuingAuthority;
 
-    private Integer deleteFlag;
+    private Boolean deleteFlag;
 
     private Integer version;
 
@@ -48,13 +58,18 @@ public class VoterCard implements Model {
         sb.append(", id=").append(id);
         sb.append(", accountId=").append(accountId);
         sb.append(", orgId=").append(orgId);
-        sb.append(", voterNo=").append(voterNo);
+        sb.append(", dlNo=").append(dlNo);
+        sb.append(", cov=").append(cov);
+        sb.append(", doi=").append(doi);
+        sb.append(", dob=").append(dob);
+        sb.append(", bg=").append(bg);
         sb.append(", name=").append(name);
-        sb.append(", fatherName=").append(fatherName);
+        sb.append(", sdw=").append(sdw);
         sb.append(", address=").append(address);
+        sb.append(", pin=").append(pin);
         sb.append(", frontSide=").append(frontSide);
         sb.append(", backSide=").append(backSide);
-        sb.append(", signDate=").append(signDate);
+        sb.append(", issuingAuthority=").append(issuingAuthority);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", version=").append(version);
         sb.append(", lastEditor=").append(lastEditor);
@@ -75,17 +90,22 @@ public class VoterCard implements Model {
         if (getClass() != that.getClass()) {
             return false;
         }
-        VoterCard other = (VoterCard) that;
+        DrivingLicense other = (DrivingLicense) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getAccountId() == null ? other.getAccountId() == null : this.getAccountId().equals(other.getAccountId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getVoterNo() == null ? other.getVoterNo() == null : this.getVoterNo().equals(other.getVoterNo()))
+            && (this.getDlNo() == null ? other.getDlNo() == null : this.getDlNo().equals(other.getDlNo()))
+            && (this.getCov() == null ? other.getCov() == null : this.getCov().equals(other.getCov()))
+            && (this.getDoi() == null ? other.getDoi() == null : this.getDoi().equals(other.getDoi()))
+            && (this.getDob() == null ? other.getDob() == null : this.getDob().equals(other.getDob()))
+            && (this.getBg() == null ? other.getBg() == null : this.getBg().equals(other.getBg()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getFatherName() == null ? other.getFatherName() == null : this.getFatherName().equals(other.getFatherName()))
+            && (this.getSdw() == null ? other.getSdw() == null : this.getSdw().equals(other.getSdw()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+            && (this.getPin() == null ? other.getPin() == null : this.getPin().equals(other.getPin()))
             && (this.getFrontSide() == null ? other.getFrontSide() == null : this.getFrontSide().equals(other.getFrontSide()))
             && (this.getBackSide() == null ? other.getBackSide() == null : this.getBackSide().equals(other.getBackSide()))
-            && (this.getSignDate() == null ? other.getSignDate() == null : this.getSignDate().equals(other.getSignDate()))
+            && (this.getIssuingAuthority() == null ? other.getIssuingAuthority() == null : this.getIssuingAuthority().equals(other.getIssuingAuthority()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
@@ -100,13 +120,18 @@ public class VoterCard implements Model {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getAccountId() == null) ? 0 : getAccountId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getVoterNo() == null) ? 0 : getVoterNo().hashCode());
+        result = prime * result + ((getDlNo() == null) ? 0 : getDlNo().hashCode());
+        result = prime * result + ((getCov() == null) ? 0 : getCov().hashCode());
+        result = prime * result + ((getDoi() == null) ? 0 : getDoi().hashCode());
+        result = prime * result + ((getDob() == null) ? 0 : getDob().hashCode());
+        result = prime * result + ((getBg() == null) ? 0 : getBg().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getFatherName() == null) ? 0 : getFatherName().hashCode());
+        result = prime * result + ((getSdw() == null) ? 0 : getSdw().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
+        result = prime * result + ((getPin() == null) ? 0 : getPin().hashCode());
         result = prime * result + ((getFrontSide() == null) ? 0 : getFrontSide().hashCode());
         result = prime * result + ((getBackSide() == null) ? 0 : getBackSide().hashCode());
-        result = prime * result + ((getSignDate() == null) ? 0 : getSignDate().hashCode());
+        result = prime * result + ((getIssuingAuthority() == null) ? 0 : getIssuingAuthority().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
