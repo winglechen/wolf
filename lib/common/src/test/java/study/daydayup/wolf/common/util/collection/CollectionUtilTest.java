@@ -1,8 +1,7 @@
-package study.daydayup.wolf.common.util;
+package study.daydayup.wolf.common.util.collection;
 
 import lombok.Data;
 import org.junit.Test;
-import study.daydayup.wolf.common.util.collection.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
