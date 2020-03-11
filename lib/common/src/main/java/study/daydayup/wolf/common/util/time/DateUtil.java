@@ -5,7 +5,9 @@ import lombok.NonNull;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * study.daydayup.wolf.common.util
@@ -92,10 +94,48 @@ public class DateUtil {
             return false;
         }
 
-        if (time.getMonth() != vsTime.getMonth()) {
+        if (time.getMonthValue() != vsTime.getMonthValue()) {
             return false;
         }
 
         return time.getDayOfMonth() == vsTime.getDayOfMonth();
     }
+
+    public static boolean isSameWeek(@NonNull LocalDateTime time) {
+        return isSameWeek(time, LocalDateTime.now());
+    }
+
+    public static boolean isSameWeek(@NonNull LocalDateTime time, @NonNull LocalDateTime vsTime) {
+        if (time.getYear() != vsTime.getYear()) {
+            return false;
+        }
+
+        return getWeek(time) == getWeek(vsTime);
+    }
+
+    public static int getWeek(@NonNull LocalDateTime time) {
+        WeekFields weekFields = WeekFields.ISO;
+        return time.get(weekFields.weekOfWeekBasedYear());
+    }
+
+    public static boolean isSameMonth(@NonNull LocalDateTime time) {
+        return isSameMonth(time, LocalDateTime.now());
+    }
+
+    public static boolean isSameMonth(@NonNull LocalDateTime time, @NonNull LocalDateTime vsTime) {
+        if (time.getYear() != vsTime.getYear()) {
+            return false;
+        }
+
+        return time.getMonthValue() == vsTime.getMonthValue();
+    }
+
+    public static boolean isSameYear(@NonNull LocalDateTime time) {
+        return isSameYear(time, LocalDateTime.now());
+    }
+
+    public static boolean isSameYear(@NonNull LocalDateTime time, @NonNull LocalDateTime vsTime) {
+        return time.getYear() == vsTime.getYear();
+    }
+
 }
