@@ -2,17 +2,22 @@ package study.daydayup.wolf.business.union.admin.controller.customer;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConfig;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditConfigService;
+import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLineService;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
+import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller.customer
@@ -24,6 +29,8 @@ import javax.annotation.Resource;
 public class CreditLineController implements Controller {
     @Reference
     private CreditConfigService configService;
+    @Reference
+    private CreditLineService creditService;
     @Resource
     private Session session;
 
@@ -41,5 +48,59 @@ public class CreditLineController implements Controller {
 
         return configService.save(config);
     }
+
+    @PutMapping("/customer/credit/promote/{accountId}")
+    public Result<Integer> promote(@PathVariable("accountId") Long accountId, @RequestParam("amount") BigDecimal amount) {
+
+        Long orgId = session.get("orgId", Long.class);
+        return creditService.promote(accountId, orgId, amount);
+    }
+
+    @PutMapping("/customer/credit/demote/{accountId}")
+    public Result<Integer> demote(@PathVariable("accountId") Long accountId, @RequestParam("amount") BigDecimal amount) {
+        Long orgId = session.get("orgId", Long.class);
+        return creditService.demote(accountId, orgId, amount);
+    }
+
+    @GetMapping("/customer/credit/creditLine/{accountId}")
+    public Result<CreditLine> find(@PathVariable("accountId") Long accountId) {
+        Long orgId = session.get("orgId", Long.class);
+
+        return creditService.find(accountId, orgId);
+    }
+
+    @GetMapping("/customer/credit/accounts")
+    public Result<List<CreditLine>> findAccounts(@RequestParam("accountIds") Collection<Long> accountIds) {
+        if (CollectionUtil.isEmpty(accountIds)) {
+            return Result.fail(10000, "invalid accountIds");
+        }
+
+        Long orgId = session.get("orgId", Long.class);
+        return creditService.findByAccounts(accountIds, orgId);
+    }
+    @GetMapping("/customer/credit/creditLine/account/{accountId}")
+    public Result<Page<CreditLine>> findByAccount(@PathVariable("accountId") Long accountId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return creditService.findByAccount(accountId, pageRequest);
+    }
+
+    @GetMapping("/customer/credit/creditLine/all")
+    public Result<Page<CreditLine>> findByOrg(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return creditService.findByOrg(orgId, pageRequest);
+    }
+
+
+
+
 
 }
