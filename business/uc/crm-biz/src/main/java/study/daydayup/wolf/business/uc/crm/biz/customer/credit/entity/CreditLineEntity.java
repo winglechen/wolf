@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLog;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.enums.CreditOperationEnum;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
+import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
  **/
 public class CreditLineEntity extends AbstractEntity<CreditLine> implements Entity {
     private CreditConfig config;
+    private LocalDateTime now;
 
 
     public CreditLineEntity(@NonNull CreditLine line, @NonNull CreditConfig config) {
@@ -54,7 +56,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changeAmount = checkMaxAmountLimit(changeAmount);
 
         setAmount(changeAmount);
-        addPromotionFreq();
+        setPromotionFreq();
         logChanges(CreditOperationEnum.PROMOTION);
     }
 
@@ -83,6 +85,14 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         }
 
         changes = new CreditLine();
+    }
+
+    private void initNow() {
+        if (now != null) {
+            return;
+        }
+
+        now = LocalDateTime.now();
     }
 
     /**
@@ -248,6 +258,113 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return minAmount;
     }
 
+
+
+    /**
+     * Just verify and Can not change the model
+     * @return boolean
+     */
+    private boolean isOverPromoteFrequencyLimit() {
+        if (!config.getEnable()) {
+            return false;
+        }
+
+        if (isNew) {
+            return false;
+        }
+
+        initNow();
+        LocalDateTime promoteAt = model.getPromotedAt();
+        if (promoteAt == null) {
+            return false;
+        }
+
+        if (isOverMinPromotionPeriod()) {
+            return true;
+        }
+
+        if (isOverDayFreq()) {
+            return true;
+        }
+
+        if (isOverWeekFreq()) {
+            return true;
+        }
+
+        if (isOverMonthFreq()) {
+            return true;
+        }
+
+        return isOverYearFreq();
+    }
+
+
+    /**
+     * Will not check config.enable && entity.isNew
+     * @return boolean
+     */
+    private boolean isOverMinPromotionPeriod() {
+        Integer minPromotionPeriod = config.getMinPromotionPeriod();
+        if (minPromotionPeriod == null || minPromotionPeriod <= 0) {
+            return false;
+        }
+
+        LocalDateTime latestPromoteTime = model.getPromotedAt().plusSeconds(minPromotionPeriod);
+        return now.compareTo(latestPromoteTime) < 0;
+    }
+
+    private boolean isOverDayFreq() {
+        Integer maxTimesPerDay = config.getMaxTimesPerDay();
+        if (maxTimesPerDay == null || maxTimesPerDay <= 0) {
+            return false;
+        }
+
+        if (!DateUtil.isSameDay(model.getPromotedAt(), now)) {
+            return false;
+        }
+
+        return model.getTimesLatestDay() + 1 > maxTimesPerDay;
+    }
+
+    private boolean isOverWeekFreq() {
+        Integer maxTimesPerWeek = config.getMaxTimesPerWeek();
+        if (maxTimesPerWeek == null || maxTimesPerWeek <= 0) {
+            return false;
+        }
+
+        if (!DateUtil.isSameWeek(model.getPromotedAt(), now)) {
+            return false;
+        }
+
+        return model.getTimesLatestWeek() + 1 > maxTimesPerWeek;
+    }
+
+    private boolean isOverMonthFreq() {
+        Integer maxTimesPerMonth = config.getMaxTimesPerMonth();
+        if (maxTimesPerMonth == null || maxTimesPerMonth <= 0) {
+            return false;
+        }
+
+        if (!DateUtil.isSameMonth(model.getPromotedAt(), now)) {
+            return false;
+        }
+
+        return model.getTimesLatestMonth() + 1 > maxTimesPerMonth;
+    }
+
+    private boolean isOverYearFreq() {
+        Integer maxTimesPerYear = config.getMaxTimesPerYear();
+        if (maxTimesPerYear == null || maxTimesPerYear <= 0) {
+            return false;
+        }
+
+        if (!DateUtil.isSameYear(model.getPromotedAt(), now)) {
+            return false;
+        }
+
+        return model.getTimesLatestYear() + 1 > maxTimesPerYear;
+    }
+
     /**
      * initModelAmount if baseAmount != null && entity.isNew
      * @param baseAmount Nullable
@@ -267,7 +384,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
 
     /**
      * Just Change amount of Model and changes
-      * @param changeAmount NotNull
+     * @param changeAmount NotNull
      */
     private void setAmount(BigDecimal changeAmount) {
         initChanges();
@@ -277,35 +394,71 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changes.setAmount(changeAmount);
     }
 
-    //TODO
-    private boolean isOverPromoteFrequencyLimit() {
-        if (isNew) {
-            return false;
-        }
+    private void setPromotionFreq() {
+        initChanges();
 
-        if (!config.getEnable()) {
-            return false;
-        }
+        setMaxTimesPerDay();
+        setMaxTimesPerWeek();
+        setMaxTimesPerMonth();
+        setMaxTimesPerYear();
 
-        Integer maxDayFreq =config.getMaxTimesPerDay();
-        if (null == maxDayFreq || maxDayFreq <= 0) {
-            return false;
-        }
-
-        Integer timesLatestDay = model.getTimesLatestDay();
-        if (timesLatestDay == null) {
-            return false;
-        }
-
-        return timesLatestDay >= maxDayFreq;
+        setPromoteAt();
     }
 
-    //TODO
-    private void addPromotionFreq() {
-        initChanges();
-        changes.setTimesLatestDay(model.getTimesLatestDay() + 1);
+    private void setMaxTimesPerDay() {
+        int times = model.getTimesLatestDay();
+        if (DateUtil.isSameDay(model.getPromotedAt(), now)) {
+            times = times + 1;
+        } else {
+            times = 1;
+        }
 
-        //set week's month's and year's freq
+        model.setTimesLatestDay(times);
+        changes.setTimesLatestDay(times);
+    }
+
+    private void setMaxTimesPerWeek() {
+        int times = model.getTimesLatestWeek();
+        if (DateUtil.isSameWeek(model.getPromotedAt(), now)) {
+            times = times + 1;
+        } else {
+            times = 1;
+        }
+
+        model.setTimesLatestWeek(times);
+        changes.setTimesLatestWeek(times);
+    }
+
+    private void setMaxTimesPerMonth() {
+        int times = model.getTimesLatestMonth();
+        if (DateUtil.isSameMonth(model.getPromotedAt(), now)) {
+            times = times + 1;
+        } else {
+            times = 1;
+        }
+
+        model.setTimesLatestMonth(times);
+        changes.setTimesLatestMonth(times);
+    }
+
+    private void setMaxTimesPerYear() {
+        int times = model.getTimesLatestYear();
+        if (DateUtil.isSameYear(model.getPromotedAt(), now)) {
+            times = times + 1;
+        } else {
+            times = 1;
+        }
+
+        model.setTimesLatestYear(times);
+        changes.setTimesLatestYear(times);
+    }
+
+    private void setPromoteAt() {
+        changes.setPromotedAt(now);
+        changes.setUpdatedAt(now);
+
+        model.setPromotedAt(now);
+        model.setUpdatedAt(now);
     }
 
     private void logChanges(@NonNull CreditOperationEnum operation) {

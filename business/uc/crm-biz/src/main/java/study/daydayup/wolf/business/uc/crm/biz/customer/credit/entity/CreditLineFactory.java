@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConf
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity
@@ -25,6 +26,8 @@ public class CreditLineFactory {
                 .timesLatestWeek(0)
                 .timesLatestMonth(0)
                 .timesLatestYear(0)
+                .promotedAt(LocalDateTime.now())
+
                 .version(0)
 
                 .build();
