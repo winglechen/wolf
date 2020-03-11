@@ -1,0 +1,24 @@
+###
+GET http://localhost:8200/customer/credit/config
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+PUT http://localhost:8200/customer/credit/config
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "enable": true,
+  "minAmount": 1.00,
+  "maxAmount": 10000.00,
+  "maxTimesPerDay": 2,
+  "minPromotionPeriod": 7200
+}
+
+
+
+
+
