@@ -73,6 +73,37 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
     }
 
     private boolean isPromotable(@NonNull BigDecimal amount) {
+        if (!isValidPromoteAmount(amount)) {
+            return false;
+        }
+
+        if (isAlreadyOverMaxAmount()) {
+            return false;
+        }
+
+        return !isOverPromoteFrequencyLimit();
+    }
+
+    private boolean isAlreadyOverMaxAmount() {
+        if (!config.getEnable()) {
+            return false;
+        }
+
+        BigDecimal maxAmount = config.getMaxAmount();
+        if (null == maxAmount || maxAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+
+        BigDecimal modelAmount = model.getAmount();
+        if (null == modelAmount || modelAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+
+
+        return modelAmount.compareTo(maxAmount) >= 0;
+    }
+
+    private boolean isValidPromoteAmount(@NonNull BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
         }
@@ -81,25 +112,12 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
             return true;
         }
 
-        if (checkPromoteFrequencyLimit()) {
-            return false;
-        }
-
         BigDecimal maxAmount = config.getMaxAmount();
-        if (null == maxAmount) {
+        if (null == maxAmount || maxAmount.compareTo(BigDecimal.ZERO) <= 0) {
             return true;
         }
 
-        if (amount.compareTo(maxAmount) > 0) {
-            return false;
-        }
-
-        BigDecimal modelAmount = model.getAmount();
-        if (null == modelAmount) {
-            return true;
-        }
-
-        return modelAmount.compareTo(maxAmount) >= 0;
+        return amount.compareTo(maxAmount) <= 0;
     }
 
     private boolean isDemotable(BigDecimal amount) {
@@ -126,7 +144,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changes.setAmount(changeAmount);
     }
 
-    private boolean checkPromoteFrequencyLimit() {
+    private boolean isOverPromoteFrequencyLimit() {
         if (isNew) {
             return false;
         }
