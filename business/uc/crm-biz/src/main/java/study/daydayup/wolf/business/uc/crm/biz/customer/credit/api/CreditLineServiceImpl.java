@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.uc.crm.biz.customer.credit.entity.CreditLine
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.repository.CreditLineRepository;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -33,64 +34,73 @@ public class CreditLineServiceImpl implements CreditLineService {
     private CreditLineRepository repository;
 
     @Override
-    public CreditLine find(@NonNull Long accountId, @NonNull Long orgId) {
+    public Result<CreditLine> find(@NonNull Long accountId, @NonNull Long orgId) {
         CreditLineDO lineDO = dao.selectByAccountIdAndOrgId(accountId, orgId);
-        return CreditLineConverter.toModel(lineDO);
+        CreditLine line = CreditLineConverter.toModel(lineDO);
+        return Result.ok(line);
     }
 
     @Override
-    public List<CreditLine> findByAccounts(@NonNull Collection<Long> accountIds, @NonNull Long orgId) {
+    public Result<List<CreditLine>> findByAccounts(@NonNull Collection<Long> accountIds, @NonNull Long orgId) {
         if (CollectionUtil.isEmpty(accountIds)) {
-            return ListUtil.empty();
+            return Result.ok(ListUtil.empty());
         }
 
         List<CreditLineDO> lineDOList = dao.selectByAccountIdIn(accountIds, orgId);
-        return CreditLineConverter.toModel(lineDOList);
+        return Result.ok(
+                CreditLineConverter.toModel(lineDOList)
+        );
     }
 
     @Override
-    public Page<CreditLine> findByAccount(@NonNull Long accountId, PageRequest pageReq) {
+    public Result<Page<CreditLine>> findByAccount(@NonNull Long accountId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
 
         List<CreditLineDO> lineDOList = dao.selectByAccountId(accountId);
         if (CollectionUtil.isEmpty(lineDOList)) {
-            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+            return Result.ok(
+                    Page.empty(pageReq.getPageNum(), pageReq.getPageSize())
+            );
         }
 
         List<CreditLine> lineList = CreditLineConverter.toModel(lineDOList);
-        return Page.of(lineDOList).to(lineList);
+        return Result.ok(
+                Page.of(lineDOList).to(lineList)
+        );
     }
 
     @Override
-    public Page<CreditLine> findByOrg(Long orgId, PageRequest request) {
+    public Result<Page<CreditLine>> findByOrg(Long orgId, PageRequest request) {
         //暂不提供
         return null;
     }
 
     @Override
-    public int promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
+    public Result<Integer> promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
         return promote(accountId, orgId, amount, null);
     }
 
     @Override
-    public int promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount, BigDecimal baseAmount) {
+    public Result<Integer> promote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount, BigDecimal baseAmount) {
         CreditLineEntity entity = repository.find(accountId, orgId);
         if (entity == null) {
-            return 0;
+            return Result.ok(0);
         }
 
         entity.promote(amount, baseAmount);
-        return repository.save(entity);
+        int status = repository.save(entity);
+        return Result.ok(status);
     }
 
     @Override
-    public int demote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
+    public Result<Integer> demote(@NonNull Long accountId, @NonNull Long orgId, @NonNull BigDecimal amount) {
         CreditLineEntity entity = repository.find(accountId, orgId);
         if (entity == null) {
-            return 0;
+            return Result.ok(0);
         }
 
         entity.demote(amount);
-        return repository.save(entity);
+        int status = repository.save(entity);
+        return Result.ok(status);
     }
 }

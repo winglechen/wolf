@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditL
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditLogDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditLogDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -25,41 +26,51 @@ public class CreditLogServiceImpl implements CreditLogService {
     private CreditLogDAO dao;
 
     @Override
-    public Page<CreditLog> find(Long accountId, Long orgId, PageRequest pageReq) {
+    public Result<Page<CreditLog>> find(Long accountId, Long orgId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
 
         List<CreditLogDO> logDOList = dao.selectByOrgIdAndAccountId(orgId, accountId);
         if (CollectionUtil.isEmpty(logDOList)) {
-            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+            return Result.ok(Page.empty(pageReq.getPageNum(), pageReq.getPageSize()));
         }
 
         List<CreditLog> logList = CreditLogConverter.toModel(logDOList);
-        return Page.of(logDOList).to(logList);
+        return Result.ok(
+                Page.of(logDOList).to(logList)
+        );
     }
 
     @Override
-    public Page<CreditLog> findByAccount(Long accountId, PageRequest pageReq) {
+    public Result<Page<CreditLog>> findByAccount(Long accountId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
 
         List<CreditLogDO> logDOList = dao.selectByAccountId(accountId);
         if (CollectionUtil.isEmpty(logDOList)) {
-            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+            return Result.ok(
+                    Page.empty(pageReq.getPageNum(), pageReq.getPageSize())
+            );
         }
 
         List<CreditLog> logList = CreditLogConverter.toModel(logDOList);
-        return Page.of(logDOList).to(logList);
+        return Result.ok(
+                Page.of(logDOList).to(logList)
+        );
     }
 
     @Override
-    public Page<CreditLog> findByOrg(Long orgId, PageRequest pageReq) {
+    public Result<Page<CreditLog>> findByOrg(Long orgId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
 
         List<CreditLogDO> logDOList = dao.selectByAccountId(orgId);
         if (CollectionUtil.isEmpty(logDOList)) {
-            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+            return Result.ok(
+                    Page.empty(pageReq.getPageNum(), pageReq.getPageSize())
+            );
         }
 
         List<CreditLog> logList = CreditLogConverter.toModel(logDOList);
-        return Page.of(logDOList).to(logList);
+        return Result.ok(
+                Page.of(logDOList).to(logList)
+        );
     }
 }

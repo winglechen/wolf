@@ -3,15 +3,12 @@ package study.daydayup.wolf.business.uc.api.crm.customer.credit.entity;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 public class CreditConfig implements Model {
-
-    @NotNull @Min(1)
     private Long orgId;
 
     @NotNull

@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.uc.crm.biz.customer.credit.converter.CreditC
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao.CreditConfigDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject.CreditConfigDO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.credit.service.CreditConfigDomainService;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -26,20 +27,24 @@ public class CreditConfigServiceImpl implements CreditConfigService {
     private CreditConfigDomainService domainService;
 
     @Override
-    public CreditConfig find(@NonNull Long orgId) {
-        return domainService.find(orgId);
+    public Result<CreditConfig> find(@NonNull Long orgId) {
+        CreditConfig config = domainService.find(orgId);
+        return Result.ok(config);
     }
 
     @Override
-    public int save(@Validated CreditConfig config) {
+    public Result<Integer> save(@Validated CreditConfig config) {
         CreditConfigDO configDO = CreditConfigConverter.toDO(config);
         Long orgId = config.getOrgId();
 
+        int status;
         if (existConfig(orgId)) {
-            return editConfig(configDO, orgId);
+            status = editConfig(configDO, orgId);
+        } else {
+            status = addConfig(configDO);
         }
 
-        return addConfig(configDO);
+        return Result.ok(status);
     }
 
     private boolean existConfig(Long orgId) {
