@@ -38,21 +38,30 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         this.isNew = isNew;
     }
 
+    /**
+     * promote
+     * @param amount NotNull
+     * @param baseAmount Nullable
+     */
     public void promote(@NonNull BigDecimal amount, BigDecimal baseAmount) {
         if (!isPromotable(amount)) {
             return;
         }
 
-        initAmount(baseAmount);
+        initModelAmount(baseAmount);
 
         BigDecimal changeAmount = calculatePromoteAmount(amount);
         changeAmount = checkMaxAmountLimit(changeAmount);
 
-        setChangeAmount(changeAmount);
+        setAmount(changeAmount);
         addPromotionFreq();
         logChanges(CreditOperationEnum.PROMOTION);
     }
 
+    /**
+     * demote
+     * @param amount NotNull
+     */
     public void demote(@NonNull BigDecimal amount) {
         if (!isDemotable(amount)) {
             return;
@@ -61,17 +70,29 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         BigDecimal changeAmount = calculateDemoteAmount(amount);
         changeAmount = checkMinAmountLimit(changeAmount);
 
-        setChangeAmount(changeAmount);
+        setAmount(changeAmount);
         logChanges(CreditOperationEnum.DEMOTION);
     }
 
-    private void addPromotionFreq() {
-        initChanges();
-        changes.setTimesLatestDay(model.getTimesLatestDay() + 1);
+    /**
+     * leave the changes to null if no changes happen
+     */
+    private void initChanges() {
+        if (changes != null) {
+            return;
+        }
 
-        //set week's month's and year's freq
+        changes = new CreditLine();
     }
 
+    /**
+     * isPromotable =>
+     *      1, amount is valid
+     *      2, modelAmount < maxAmount
+     *      3, not over freq limit
+     * @param amount NotNull
+     * @return boolean
+     */
     private boolean isPromotable(@NonNull BigDecimal amount) {
         if (!isValidPromoteAmount(amount)) {
             return false;
@@ -84,6 +105,30 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return !isOverPromoteFrequencyLimit();
     }
 
+    /**
+     * amount > 0 && modelAmount > 0
+     * @param amount NotNull
+     * @return boolean
+     */
+    private boolean isDemotable(@NonNull BigDecimal amount) {
+        // amount > 0
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            return false;
+        }
+
+        if (isNew) {
+            return false;
+        }
+
+        // modelAmount > 0
+        BigDecimal modelAmount = model.getAmount();
+        return modelAmount.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    /**
+     * modelAmount >= config.maxAmount
+     * @return boolean
+     */
     private boolean isAlreadyOverMaxAmount() {
         if (!config.getEnable()) {
             return false;
@@ -103,6 +148,11 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return modelAmount.compareTo(maxAmount) >= 0;
     }
 
+    /**
+     * amount > 0 && amount < config.maxAmount
+     * @param amount promoteAmount
+     * @return boolean
+     */
     private boolean isValidPromoteAmount(@NonNull BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             return false;
@@ -120,23 +170,106 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return amount.compareTo(maxAmount) <= 0;
     }
 
-    private boolean isDemotable(BigDecimal amount) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            return false;
+    /**
+     * Just ModelAmount + amount (will validate later)
+     * @param amount NotNull
+     * @return newAmount
+     */
+    private BigDecimal calculatePromoteAmount(@NonNull BigDecimal amount) {
+        if (isNew) {
+            return amount;
         }
 
-        return !hasInvalidAmount();
+        BigDecimal modelAmount = model.getAmount();
+        if (null == modelAmount || modelAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return amount;
+        }
+
+        return model.getAmount().add(amount);
     }
 
-    private void initChanges() {
-        if (changes != null) {
+    /**
+     * Min( (modelAmount - amount) , 0 )
+     * @param amount NotNull
+     * @return Min( (modelAmount - amount) , 0 )
+     */
+    private BigDecimal calculateDemoteAmount(@NonNull BigDecimal amount) {
+        BigDecimal modelAmount = model.getAmount();
+        BigDecimal changeAmount = BigDecimal.ZERO;
+
+        if (modelAmount.compareTo(amount) > 0) {
+            changeAmount = modelAmount.subtract(amount);
+        }
+
+        return changeAmount;
+    }
+
+    /**
+     * Min(changeAmount, maxAmount)
+     * @param changeAmount NotNull
+     * @return Min(changeAmount, maxAmount)
+     */
+    private BigDecimal checkMaxAmountLimit(@NonNull BigDecimal changeAmount) {
+        if (!config.getEnable()) {
+            return changeAmount;
+        }
+
+        BigDecimal maxAmount = config.getMaxAmount();
+        if (null == maxAmount || maxAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return changeAmount;
+        }
+
+        if (changeAmount.compareTo(maxAmount) <= 0) {
+            return changeAmount;
+        }
+
+        return maxAmount;
+    }
+
+    /**
+     * Max(changeAmount, minAmount)
+     * @param changeAmount NotNull
+     * @return Max(changeAmount, minAmount)
+     */
+    private BigDecimal checkMinAmountLimit(@NonNull BigDecimal changeAmount) {
+        if (!config.getEnable()) {
+            return changeAmount;
+        }
+
+        BigDecimal minAmount = config.getMinAmount();
+        if (null == minAmount || minAmount.compareTo(BigDecimal.ZERO) > 0) {
+            return changeAmount;
+        }
+
+        if (changeAmount.compareTo(minAmount) >= 0) {
+            return changeAmount;
+        }
+
+        return minAmount;
+    }
+
+    /**
+     * initModelAmount if baseAmount != null && entity.isNew
+     * @param baseAmount Nullable
+     */
+    private void initModelAmount(BigDecimal baseAmount) {
+        if (baseAmount == null) {
             return;
         }
 
-        changes = new CreditLine();
+        BigDecimal modelAmount = model.getAmount();
+        if (null != modelAmount && modelAmount.compareTo(BigDecimal.ZERO) > 0) {
+            return;
+        }
+
+        model.setAmount(DecimalUtil.scale(baseAmount));
     }
 
-    private void setChangeAmount(BigDecimal changeAmount) {
+    /**
+     * Just Change amount of Model and changes
+      * @param changeAmount NotNull
+     */
+    private void setAmount(BigDecimal changeAmount) {
         initChanges();
 
         changeAmount = DecimalUtil.scale(changeAmount);
@@ -144,6 +277,7 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         changes.setAmount(changeAmount);
     }
 
+    //TODO
     private boolean isOverPromoteFrequencyLimit() {
         if (isNew) {
             return false;
@@ -166,70 +300,12 @@ public class CreditLineEntity extends AbstractEntity<CreditLine> implements Enti
         return timesLatestDay >= maxDayFreq;
     }
 
-    private BigDecimal calculatePromoteAmount(BigDecimal amount) {
-        if (hasInvalidAmount()) {
-            return amount;
-        }
+    //TODO
+    private void addPromotionFreq() {
+        initChanges();
+        changes.setTimesLatestDay(model.getTimesLatestDay() + 1);
 
-        return model.getAmount().add(amount);
-    }
-
-    private BigDecimal calculateDemoteAmount(BigDecimal amount) {
-        BigDecimal modelAmount = model.getAmount();
-        BigDecimal changeAmount = BigDecimal.ZERO;
-
-        if (modelAmount.compareTo(amount) > 0) {
-            changeAmount = modelAmount.subtract(amount);
-        }
-
-        return changeAmount;
-    }
-
-    private BigDecimal checkMaxAmountLimit(BigDecimal changeAmount) {
-        BigDecimal maxAmount = config.getMaxAmount();
-        if (null == maxAmount || maxAmount.compareTo(BigDecimal.ZERO) <= 0) {
-            return changeAmount;
-        }
-
-        if (changeAmount.compareTo(maxAmount) <= 0) {
-            return changeAmount;
-        }
-
-        return maxAmount;
-    }
-
-    private BigDecimal checkMinAmountLimit(BigDecimal changeAmount) {
-
-        BigDecimal minAmount = config.getMinAmount();
-        if (null != minAmount && minAmount.compareTo(changeAmount) > 0) {
-            changeAmount = minAmount;
-        }
-
-        return changeAmount;
-    }
-
-    private boolean hasInvalidAmount() {
-        if (isNew) {
-            return true;
-        }
-
-        BigDecimal modelAmount = model.getAmount();
-        return modelAmount.compareTo(BigDecimal.ZERO) <= 0;
-    }
-
-    private void initAmount(BigDecimal baseAmount) {
-        if (baseAmount == null) {
-            return;
-        }
-
-        BigDecimal amount = model.getAmount();
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            model.setAmount(baseAmount);
-        } else {
-            amount = amount.add(baseAmount);
-            amount = DecimalUtil.scale(amount);
-            model.setAmount(amount);
-        }
+        //set week's month's and year's freq
     }
 
     private void logChanges(@NonNull CreditOperationEnum operation) {
