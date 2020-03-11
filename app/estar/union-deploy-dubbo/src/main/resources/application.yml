@@ -2,7 +2,7 @@ spring:
   application:
     name: wolf-union
   profiles:
-    active: test
+    active: dev
   main:
     allow-bean-definition-overriding: true
   messages:
@@ -71,6 +71,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/auto/*.xml
+#  mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/auto/*.xml, classpath*:mapper/**/*.xml
   type-aliases-package: study.daydayup.wolf.business.*.dal.dataobject
 
 pagehelper:

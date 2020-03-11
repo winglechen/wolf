@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditConf
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.entity.CreditLine;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditConfigService;
 import study.daydayup.wolf.business.uc.api.crm.customer.credit.service.CreditLineService;
+import study.daydayup.wolf.business.union.admin.dto.CreditAmount;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -49,16 +50,21 @@ public class CreditLineController implements Controller {
         return configService.save(config);
     }
 
-    @PutMapping("/customer/credit/promote/{accountId}")
-    public Result<Integer> promote(@PathVariable("accountId") Long accountId, @RequestParam("amount") BigDecimal amount) {
-
+    @PutMapping("/customer/credit/promote")
+    public Result<Integer> promote(@Validated @RequestBody CreditAmount creditAmount) {
         Long orgId = session.get("orgId", Long.class);
+        Long accountId = creditAmount.getAccountId();
+        BigDecimal amount = creditAmount.getAmount();
+
         return creditService.promote(accountId, orgId, amount);
     }
 
-    @PutMapping("/customer/credit/demote/{accountId}")
-    public Result<Integer> demote(@PathVariable("accountId") Long accountId, @RequestParam("amount") BigDecimal amount) {
+    @PutMapping("/customer/credit/demote")
+    public Result<Integer> demote(@Validated @RequestBody CreditAmount creditAmount) {
         Long orgId = session.get("orgId", Long.class);
+        Long accountId = creditAmount.getAccountId();
+        BigDecimal amount = creditAmount.getAmount();
+
         return creditService.demote(accountId, orgId, amount);
     }
 

@@ -16,6 +16,8 @@ import study.daydayup.wolf.framework.util.ContextUtil;
 @SpringBootApplication(scanBasePackages = {"study.daydayup.wolf.business"})
 @MapperScan({
          "study.daydayup.wolf.business.account.biz.dal.dao"
+        , "study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao"
+        , "study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao"
         , "study.daydayup.wolf.business.uc.setting.biz.dal.dao"
         , "study.daydayup.wolf.business.goods.biz.dal.dao"
         , "study.daydayup.wolf.business.trade.order.biz.dal.dao"

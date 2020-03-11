@@ -41,24 +41,28 @@ Cache-Control: no-cache
 
 
 ###
-PUT http://localhost:8200/customer/credit/promote/11
+PUT http://localhost:8200/customer/credit/promote
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
+  "accountId": 11,
   "amount": 100.00
 }
 
 ###
-PUT http://localhost:8200/customer/credit/demote/11
+PUT http://localhost:8200/customer/credit/demote
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
+  "accountId": 11,
   "amount": 100.00
 }
+
+###
 
 
 
