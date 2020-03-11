@@ -69,7 +69,7 @@ public class CreditLineController implements Controller {
         return creditService.find(accountId, orgId);
     }
 
-    @GetMapping("/customer/credit/accounts")
+    @GetMapping("/customer/credit/creditLine/list/accountIds")
     public Result<List<CreditLine>> findAccounts(@RequestParam("accountIds") Collection<Long> accountIds) {
         if (CollectionUtil.isEmpty(accountIds)) {
             return Result.fail(10000, "invalid accountIds");
@@ -88,7 +88,7 @@ public class CreditLineController implements Controller {
         return creditService.findByAccount(accountId, pageRequest);
     }
 
-    @GetMapping("/customer/credit/creditLine/all")
+    @GetMapping("/customer/credit/creditLine/list")
     public Result<Page<CreditLine>> findByOrg(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()

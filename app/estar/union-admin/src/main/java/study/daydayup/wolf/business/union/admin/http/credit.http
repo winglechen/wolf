@@ -12,11 +12,60 @@ Content-Type: application/json
 
 {
   "enable": true,
-  "minAmount": 1.00,
+  "minAmount": 100.00,
   "maxAmount": 10000.00,
   "maxTimesPerDay": 2,
   "minPromotionPeriod": 7200
 }
+
+###
+GET http://localhost:8200/customer/credit/creditLine/11
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/customer/credit/creditLine/list/accountIds?accountIds=11,12
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/customer/credit/creditLine/list
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/customer/credit/creditLine/account/11
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+PUT http://localhost:8200/customer/credit/promote/11
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "amount": 100.00
+}
+
+###
+PUT http://localhost:8200/customer/credit/demote/11
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "amount": 100.00
+}
+
+
+
+
+
+
+
 
 
 
