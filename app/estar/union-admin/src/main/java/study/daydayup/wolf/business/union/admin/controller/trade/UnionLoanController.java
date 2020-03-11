@@ -125,6 +125,14 @@ public class UnionLoanController implements Controller {
         return Result.ok();
     }
 
+    @PutMapping("/loan/contract/loan/{tradeNo}")
+    public Result<String> loaning(@PathVariable String tradeNo) {
+        TradeId tradeId = initTradeId(tradeNo);
+
+        loanService.startLoan(tradeId);
+        return Result.ok("ok");
+    }
+
     @GetMapping("/loan/contract/waitToApprove")
     public Result<Page<Contract>> waitToApproveList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         StateRequest request = initStateRequest();
