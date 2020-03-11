@@ -46,18 +46,14 @@ public class TradeNoParser {
 
     private int parseShard(String stringNo) {
         String s = stringNo.substring(15, 19);
-        Integer num = Integer.valueOf(s);
+        int num = Integer.parseInt(s);
 
-        if (null == num || num <= 0) {
-            return 0;
-        }
-
-        return num;
+        return Math.max(num, 0);
     }
 
     private TradePhaseEnum parsePhase(String stringNo) {
         String s = stringNo.substring(14, 15);
-        Integer num = Integer.valueOf(s);
+        int num = Integer.parseInt(s);
 
         if (num <= 0) {
             return null;
@@ -68,13 +64,9 @@ public class TradeNoParser {
 
     private int parseDataCenterId(String stringNo) {
         String s = stringNo.substring(19, 23);
-        Integer num = Integer.valueOf(s);
+        int num = Integer.parseInt(s);
 
-        if (null == num || num <= 0 ) {
-            return 0;
-        }
-
-        return num;
+        return Math.max(num, 0);
     }
 
 }

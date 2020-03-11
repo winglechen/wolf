@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.util.time;
 
 import lombok.NonNull;
+import study.daydayup.wolf.common.lang.string.Str;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -83,4 +84,23 @@ public class DateUtil {
         return localDateTime.format(formatter);
     }
 
+    public static boolean isSameDay(@NonNull LocalDateTime time) {
+        return isSameDay(time, LocalDateTime.now());
+    }
+
+    public static boolean isSameDay(@NonNull LocalDateTime time, @NonNull LocalDateTime vsTime) {
+        return false;
+
+    }
+
+
+    public static void main(String[] args) {
+//        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2011, 01, 15, 13, 30, 40);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+
+        String s = now.format(formatter);
+        System.out.println("now: " + now);
+        System.out.println("string: " + s);
+    }
 }
