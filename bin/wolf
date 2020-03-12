@@ -112,8 +112,8 @@ case "$command" in
     install_uc ;;
   install-org)
     install_org ;;
-  install-misc)
-    install_misc ;;
+  install-knowledge)
+    install_knowledge ;;
   install-goods)
     install_goods ;;
   install-trade)

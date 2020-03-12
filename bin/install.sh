@@ -49,9 +49,9 @@ function install_org() {
     cd ${dir} && mvn clean install
 }
 
-function install_misc() {
-    echo "install business.misc"
-    dir="${PROJECT_DIR}/business/misc/"
+function install_knowledge() {
+    echo "install business.knowledge"
+    dir="${PROJECT_DIR}/business/knowledge/"
     cd ${dir} && mvn clean install
 }
 
@@ -96,7 +96,7 @@ function install_business() {
     install_account
     install_uc
     install_org
-    install_misc
+    install_knowlege
 
     install_goods
     install_trade
