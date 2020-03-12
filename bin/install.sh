@@ -79,9 +79,9 @@ function install_pay() {
     cd ${dir} && mvn clean install
 }
 
-function install_workflow() {
-    echo "install business.worlflow"
-    dir="${PROJECT_DIR}/business/workflow/"
+function install_content() {
+    echo "install business.content"
+    dir="${PROJECT_DIR}/business/content/"
     cd ${dir} && mvn clean install
 }
 
@@ -103,7 +103,7 @@ function install_business() {
     install_ump
     install_pay
 
-    install_workflow
+    install_content
 }
 
 function install_business_starter() {

@@ -120,8 +120,8 @@ case "$command" in
     install_trade ;;
   install-pay)
     install_pay ;;
-  install-workflow)
-    install_workflow ;;
+  install-content)
+    install_content ;;
   install-onion)
     install_onion ;;
 esac
