@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.api.crm.contact.enums;
+package study.daydayup.wolf.business.uc.api.crm.manage.contact.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
