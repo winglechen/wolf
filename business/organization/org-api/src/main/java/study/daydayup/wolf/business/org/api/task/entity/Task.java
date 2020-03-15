@@ -41,7 +41,7 @@ public class Task implements Model {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
+
     private TaskContact contact;
     private TaskScheduler scheduler;
     private TaskTrade trade;
