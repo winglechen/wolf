@@ -30,15 +30,9 @@ public class TaskContactDO implements Serializable {
 
     private LocalDateTime recontactAt;
 
-    private Integer version;
-
     private Integer deleteFlag;
 
-    private Long lastEditor;
-
     private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
 
@@ -60,11 +54,8 @@ public class TaskContactDO implements Serializable {
         sb.append(", contactAttachment=").append(contactAttachment);
         sb.append(", resultAttachment=").append(resultAttachment);
         sb.append(", recontactAt=").append(recontactAt);
-        sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
-        sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
         sb.append("]");
         return sb.toString();
     }
@@ -93,11 +84,8 @@ public class TaskContactDO implements Serializable {
             && (this.getContactAttachment() == null ? other.getContactAttachment() == null : this.getContactAttachment().equals(other.getContactAttachment()))
             && (this.getResultAttachment() == null ? other.getResultAttachment() == null : this.getResultAttachment().equals(other.getResultAttachment()))
             && (this.getRecontactAt() == null ? other.getRecontactAt() == null : this.getRecontactAt().equals(other.getRecontactAt()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-            && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
     @Override
@@ -116,11 +104,8 @@ public class TaskContactDO implements Serializable {
         result = prime * result + ((getContactAttachment() == null) ? 0 : getContactAttachment().hashCode());
         result = prime * result + ((getResultAttachment() == null) ? 0 : getResultAttachment().hashCode());
         result = prime * result + ((getRecontactAt() == null) ? 0 : getRecontactAt().hashCode());
-        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
-        result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
     }
 }

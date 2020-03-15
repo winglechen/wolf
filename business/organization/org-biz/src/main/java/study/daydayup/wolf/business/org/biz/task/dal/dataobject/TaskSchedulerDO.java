@@ -10,17 +10,13 @@ public class TaskSchedulerDO implements Serializable {
 
     private Long orgId;
 
-    private Long taskId;
+    private Long staffId;
 
-    private Integer version;
+    private Long taskId;
 
     private Integer deleteFlag;
 
-    private Long lastEditor;
-
     private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
 
@@ -32,12 +28,10 @@ public class TaskSchedulerDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", staffId=").append(staffId);
         sb.append(", taskId=").append(taskId);
-        sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
-        sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
         sb.append("]");
         return sb.toString();
     }
@@ -56,12 +50,10 @@ public class TaskSchedulerDO implements Serializable {
         TaskSchedulerDO other = (TaskSchedulerDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-            && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
     @Override
@@ -70,12 +62,10 @@ public class TaskSchedulerDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
-        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
-        result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
     }
 }

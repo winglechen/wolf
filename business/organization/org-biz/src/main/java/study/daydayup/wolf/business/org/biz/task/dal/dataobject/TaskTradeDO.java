@@ -23,15 +23,9 @@ public class TaskTradeDO implements Serializable {
 
     private Byte tradeType;
 
-    private Integer version;
-
     private Integer deleteFlag;
 
-    private Long lastEditor;
-
     private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,11 +43,8 @@ public class TaskTradeDO implements Serializable {
         sb.append(", currency=").append(currency);
         sb.append(", amount=").append(amount);
         sb.append(", tradeType=").append(tradeType);
-        sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
-        sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
         sb.append("]");
         return sb.toString();
     }
@@ -78,11 +69,8 @@ public class TaskTradeDO implements Serializable {
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-            && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
     @Override
@@ -97,11 +85,8 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
-        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
-        result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
     }
 }

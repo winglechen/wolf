@@ -10,6 +10,8 @@ public class ProjectDO implements Serializable {
 
     private Long orgId;
 
+    private Long parentId;
+
     private String name;
 
     private String tags;
@@ -34,6 +36,7 @@ public class ProjectDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
         sb.append(", tags=").append(tags);
         sb.append(", version=").append(version);
@@ -59,6 +62,7 @@ public class ProjectDO implements Serializable {
         ProjectDO other = (ProjectDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
@@ -74,6 +78,7 @@ public class ProjectDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());

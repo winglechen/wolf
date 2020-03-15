@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `project`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `parent_id`     BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '项目名',
     `tags`          VARCHAR(200) NOT NULL DEFAULT '' COMMENT 'tags',
