@@ -19,7 +19,21 @@
     </modules>
 
     <properties>
+        <org.version>1.0.0-SNAPSHOT</org.version>
     </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.organization</groupId>
+                <artifactId>org-api</artifactId>
+                <version>{org.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
 
     <dependencies>
         <dependency>
