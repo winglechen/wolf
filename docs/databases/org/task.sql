@@ -73,11 +73,8 @@ CREATE TABLE IF NOT EXISTS `project_detail`
 
     `detail`        TEXT,
 
-    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = 'project';
@@ -87,14 +84,12 @@ CREATE TABLE IF NOT EXISTS `task_scheduler`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `task_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `staff_id`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `task_id`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
 
-    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务调度器';
@@ -118,11 +113,8 @@ CREATE TABLE IF NOT EXISTS `task_contact`
     `result_attachment` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '结果附件',
     `recontact_at`      DATETIME                COMMENT '再次联系时间',
 
-    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务联系信息';
@@ -140,11 +132,8 @@ CREATE TABLE IF NOT EXISTS `task_trade`
     `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '总金额',
     `trade_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易类型',
 
-    `version`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `last_editor`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`        DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';

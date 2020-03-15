@@ -4,6 +4,7 @@ import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.org.api.task.entity
@@ -31,5 +32,11 @@ public class Task implements Model {
 
     private String memo;
     private String tags;
+
+    private LocalDateTime startAt;
+    private LocalDateTime endAt;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }
