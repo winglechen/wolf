@@ -11,6 +11,10 @@ public class TaskDetailDO implements Serializable {
 
     private Long taskId;
 
+    private String memo;
+
+    private String extendFields;
+
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -22,6 +26,8 @@ public class TaskDetailDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
         sb.append(", taskId=").append(taskId);
+        sb.append(", memo=").append(memo);
+        sb.append(", extendFields=").append(extendFields);
         sb.append("]");
         return sb.toString();
     }
@@ -40,7 +46,9 @@ public class TaskDetailDO implements Serializable {
         TaskDetailDO other = (TaskDetailDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
-            && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()));
+            && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
+            && (this.getMemo() == null ? other.getMemo() == null : this.getMemo().equals(other.getMemo()))
+            && (this.getExtendFields() == null ? other.getExtendFields() == null : this.getExtendFields().equals(other.getExtendFields()));
     }
 
     @Override
@@ -50,6 +58,8 @@ public class TaskDetailDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
+        result = prime * result + ((getMemo() == null) ? 0 : getMemo().hashCode());
+        result = prime * result + ((getExtendFields() == null) ? 0 : getExtendFields().hashCode());
         return result;
     }
 }

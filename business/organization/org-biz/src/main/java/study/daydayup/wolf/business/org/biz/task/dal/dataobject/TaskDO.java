@@ -8,30 +8,43 @@ import lombok.Data;
 @Data
 public class TaskDO implements Serializable {
     private Long id;
+
     private Long orgId;
+
     private Long staffId;
 
     private Long projectId;
+
     private Long parentId;
 
     private String name;
+
     private Integer taskType;
+
     private Integer state;
 
-    private BigDecimal progressRate;
     private Integer priority;
+
+    private BigDecimal progressRate;
+
     private Integer workLoad;
+
     private Integer storyPoints;
 
     private LocalDateTime startAt;
+
     private LocalDateTime endAt;
 
     private String tags;
 
     private Integer version;
+
     private Integer deleteFlag;
+
     private Long lastEditor;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;

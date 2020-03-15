@@ -5,22 +5,15 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
-    <result column="memo" jdbcType="LONGVARCHAR" property="memo" />
-    <result column="extendFields" jdbcType="LONGVARCHAR" property="extendfields" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="extend_fields" jdbcType="VARCHAR" property="extendFields" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, task_id
+    id, org_id, task_id, memo, extend_fields
   </sql>
-  <sql id="Blob_Column_List">
-    memo, extendFields
-  </sql>
-  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from task_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -28,13 +21,13 @@
     delete from task_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     insert into task_detail (id, org_id, task_id, 
-      memo, extendFields)
+      memo, extend_fields)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
-      #{memo,jdbcType=LONGVARCHAR}, #{extendfields,jdbcType=LONGVARCHAR})
+      #{memo,jdbcType=VARCHAR}, #{extendFields,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     insert into task_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -49,8 +42,8 @@
       <if test="memo != null">
         memo,
       </if>
-      <if test="extendfields != null">
-        extendFields,
+      <if test="extendFields != null">
+        extend_fields,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -64,14 +57,14 @@
         #{taskId,jdbcType=BIGINT},
       </if>
       <if test="memo != null">
-        #{memo,jdbcType=LONGVARCHAR},
+        #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="extendfields != null">
-        #{extendfields,jdbcType=LONGVARCHAR},
+      <if test="extendFields != null">
+        #{extendFields,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     update task_detail
     <set>
       <if test="orgId != null">
@@ -81,26 +74,20 @@
         task_id = #{taskId,jdbcType=BIGINT},
       </if>
       <if test="memo != null">
-        memo = #{memo,jdbcType=LONGVARCHAR},
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="extendfields != null">
-        extendFields = #{extendfields,jdbcType=LONGVARCHAR},
+      <if test="extendFields != null">
+        extend_fields = #{extendFields,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
-    update task_detail
-    set org_id = #{orgId,jdbcType=BIGINT},
-      task_id = #{taskId,jdbcType=BIGINT},
-      memo = #{memo,jdbcType=LONGVARCHAR},
-      extendFields = #{extendfields,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     update task_detail
     set org_id = #{orgId,jdbcType=BIGINT},
-      task_id = #{taskId,jdbcType=BIGINT}
+      task_id = #{taskId,jdbcType=BIGINT},
+      memo = #{memo,jdbcType=VARCHAR},
+      extend_fields = #{extendFields,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

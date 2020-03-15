@@ -86,6 +86,8 @@
         </table>
 
         <table tableName="task_detail" domainObjectName="TaskDetailDO" mapperName="TaskDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <columnOverride column="extend_fields" javaType="java.lang.String" jdbcType="VARCHAR" />
         </table>
 
         <table tableName="project" domainObjectName="ProjectDO" mapperName="ProjectDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
@@ -93,6 +95,7 @@
         </table>
 
         <table tableName="project_detail" domainObjectName="ProjectDetailDO" mapperName="ProjectDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
         </table>
 
 

@@ -7,7 +7,7 @@ import lombok.Data;
 public class TaskDetailDOWithBLOBs extends TaskDetailDO implements Serializable {
     private String memo;
 
-    private String extendfields;
+    private String extendFields;
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class TaskDetailDOWithBLOBs extends TaskDetailDO implements Serializable 
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", memo=").append(memo);
-        sb.append(", extendfields=").append(extendfields);
+        sb.append(", extendFields=").append(extendFields);
         sb.append("]");
         return sb.toString();
     }
@@ -39,7 +39,7 @@ public class TaskDetailDOWithBLOBs extends TaskDetailDO implements Serializable 
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getMemo() == null ? other.getMemo() == null : this.getMemo().equals(other.getMemo()))
-            && (this.getExtendfields() == null ? other.getExtendfields() == null : this.getExtendfields().equals(other.getExtendfields()));
+            && (this.getExtendFields() == null ? other.getExtendFields() == null : this.getExtendFields().equals(other.getExtendFields()));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TaskDetailDOWithBLOBs extends TaskDetailDO implements Serializable 
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getMemo() == null) ? 0 : getMemo().hashCode());
-        result = prime * result + ((getExtendfields() == null) ? 0 : getExtendfields().hashCode());
+        result = prime * result + ((getExtendFields() == null) ? 0 : getExtendFields().hashCode());
         return result;
     }
 }

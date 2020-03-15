@@ -40,11 +40,11 @@ CREATE TABLE IF NOT EXISTS `task_detail`
     `task_id`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '任务ID',
 
     `memo`          TEXT,
-    `extendFields`  TEXT,
+    `extend_fields` TEXT,
 
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
-    COMMENT = '产品详情';
+    COMMENT = '任务详情';
 
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project`
