@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.org.api.task.entity;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import java.math.BigDecimal;
+
 /**
  * study.daydayup.wolf.business.org.api.task.entity
  *
@@ -15,11 +17,17 @@ public class Task implements Model {
     private Long orgId;
     private Long staffId;
 
-    private String name;
-    private Integer categoryId;
-    private Integer taskType;
+    private Long projectId;
+    private Long parentId;
 
+    private String name;
+    private Integer taskType;
     private Integer state;
+
+    private BigDecimal progressRate;
+    private Integer priority;
+    private Integer workLoad;
+    private Integer storyPoints;
 
     private String memo;
     private String tags;

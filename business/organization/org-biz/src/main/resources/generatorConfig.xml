@@ -81,6 +81,7 @@
             <columnOverride column="task_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="priority" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="story_points" javaType="java.lang.Integer" jdbcType="SMALLINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
         </table>
 
