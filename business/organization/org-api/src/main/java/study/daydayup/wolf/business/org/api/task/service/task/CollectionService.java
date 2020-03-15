@@ -13,4 +13,6 @@ public interface CollectionService extends Service {
 
     Task findCollection(Long taskId, Long orgId);
     Task findContact(Long taskId, Long orgId);
+
+
 }
