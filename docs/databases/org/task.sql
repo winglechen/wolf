@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `wolf_task` DEFAULT CHARACTER SET utf8mb4;
-USE `wolf_task`;
+CREATE DATABASE IF NOT EXISTS `wolf_org` DEFAULT CHARACTER SET utf8mb4;
+USE `wolf_org`;
 
 DROP TABLE IF EXISTS `task`;
 CREATE TABLE IF NOT EXISTS `task`
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `task_detail`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL COMMENT '产品ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `task_id`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '任务ID',
 
     `memo`          TEXT,
     `extendFields`  TEXT,
@@ -52,8 +53,25 @@ CREATE TABLE IF NOT EXISTS `project`
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '项目名',
-    `detail`        VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '项目介绍',
     `tags`          VARCHAR(200) NOT NULL DEFAULT '' COMMENT 'tags',
+
+    `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+    COMMENT = 'project';
+
+DROP TABLE IF EXISTS `project_detail`;
+CREATE TABLE IF NOT EXISTS `project_detail`
+(
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
+    `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `project_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+
+    `detail`        TEXT,
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -101,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `task_contact`
     `recontact_at`      DATETIME                COMMENT '再次联系时间',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
-    `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
