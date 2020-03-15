@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.org.api.task.entity.task;
+package study.daydayup.wolf.business.org.api.task.domain.entity.task;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
@@ -6,7 +6,7 @@ import study.daydayup.wolf.framework.layer.api.Model;
 import java.time.LocalDateTime;
 
 /**
- * study.daydayup.wolf.business.org.api.task.entity.task
+ * study.daydayup.wolf.business.org.api.task.domain.entity.task
  *
  * @author Wingle
  * @since 2020/3/15 10:56 下午

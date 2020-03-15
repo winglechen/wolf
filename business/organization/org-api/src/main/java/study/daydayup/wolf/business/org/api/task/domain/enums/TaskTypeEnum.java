@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.org.api.task.enums.task;
+package study.daydayup.wolf.business.org.api.task.domain.enums;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
@@ -10,14 +10,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/5 11:07 AM
  **/
 @Getter
-public enum ContactStateEnum implements CodeBasedEnum {
-    FAIL(2, "fail"),
-    SUCCEED(1, "succeed"),
+public enum TaskTypeEnum implements CodeBasedEnum {
+    CUSTOMER_CONTACT(2, "customer contact"),
+    COLLECTION(1, "collection"),
     ;
 
     private int code;
     private String name;
-    ContactStateEnum(int code, String name) {
+    TaskTypeEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }

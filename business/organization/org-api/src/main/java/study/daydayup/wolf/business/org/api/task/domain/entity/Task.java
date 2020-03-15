@@ -1,16 +1,16 @@
-package study.daydayup.wolf.business.org.api.task.entity;
+package study.daydayup.wolf.business.org.api.task.domain.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.business.org.api.task.entity.task.TaskContact;
-import study.daydayup.wolf.business.org.api.task.entity.task.TaskScheduler;
-import study.daydayup.wolf.business.org.api.task.entity.task.TaskTrade;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskScheduler;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * study.daydayup.wolf.business.org.api.task.entity
+ * study.daydayup.wolf.business.org.api.task.domain.entity
  *
  * @author Wingle
  * @since 2020/3/13 2:19 下午
