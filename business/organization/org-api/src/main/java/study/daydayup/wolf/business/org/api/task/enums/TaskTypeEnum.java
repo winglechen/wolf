@@ -11,8 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum TaskTypeEnum implements CodeBasedEnum {
-    ORG(2, "org"),
-    GOODS(1, "goods"),
+    CUSTOMER_CONTACT(2, "customer contact"),
+    COLLECTION(1, "collection"),
     ;
 
     private int code;

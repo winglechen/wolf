@@ -1,6 +1,9 @@
 package study.daydayup.wolf.business.org.api.task.entity;
 
 import lombok.Data;
+import study.daydayup.wolf.business.org.api.task.entity.task.TaskContact;
+import study.daydayup.wolf.business.org.api.task.entity.task.TaskScheduler;
+import study.daydayup.wolf.business.org.api.task.entity.task.TaskTrade;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
@@ -38,5 +41,9 @@ public class Task implements Model {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    private TaskContact contact;
+    private TaskScheduler scheduler;
+    private TaskTrade trade;
 
 }
