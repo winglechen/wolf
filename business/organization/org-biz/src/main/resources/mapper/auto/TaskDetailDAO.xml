@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.org.biz.task.dal.dao.TaskDetailDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+    <result column="memo" jdbcType="LONGVARCHAR" property="memo" />
+    <result column="extendFields" jdbcType="LONGVARCHAR" property="extendfields" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, task_id
+  </sql>
+  <sql id="Blob_Column_List">
+    memo, extendFields
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+    insert into task_detail (id, org_id, task_id, 
+      memo, extendFields)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+      #{memo,jdbcType=LONGVARCHAR}, #{extendfields,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+    insert into task_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="extendfields != null">
+        extendFields,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="extendfields != null">
+        #{extendfields,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+    update task_detail
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="extendfields != null">
+        extendFields = #{extendfields,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs">
+    update task_detail
+    set org_id = #{orgId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      memo = #{memo,jdbcType=LONGVARCHAR},
+      extendFields = #{extendfields,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
+    update task_detail
+    set org_id = #{orgId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
