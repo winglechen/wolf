@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.business.org.api.task.domain.exception.TaskNotFoundException;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
+import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
@@ -19,6 +20,7 @@ import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.org.biz.task.api
@@ -39,6 +41,16 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Result<Task> find(@NonNull Long taskId, @NonNull Long orgId, @NonNull TaskOption option) {
         TaskEntity entity = taskRepository.find(taskId, orgId, option);
+        if (entity == null) {
+            throw new TaskNotFoundException();
+        }
+
+        return Result.ok(entity.getModel());
+    }
+
+    @Override
+    public Result<Task> find(@NonNull TaskId taskId) {
+        TaskEntity entity = taskRepository.find(taskId);
         if (entity == null) {
             throw new TaskNotFoundException();
         }
@@ -68,6 +80,11 @@ public class TaskServiceImpl implements TaskService {
         entity.modify(event);
         int status = taskRepository.save(entity);
         return Result.ok(status);
+    }
+
+    @Override
+    public Result<List<Task>> find(TaskIds taskIds) {
+        return null;
     }
 
     @Override
