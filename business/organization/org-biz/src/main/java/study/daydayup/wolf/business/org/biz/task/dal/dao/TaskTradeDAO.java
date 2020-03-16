@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.org.biz.task.dal.dao;
 
 import org.apache.ibatis.annotations.Param;
-import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO;
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO;
 
 import java.util.Collection;
@@ -24,5 +23,5 @@ public interface TaskTradeDAO {
 
     List<TaskTradeDO> selectByTaskIdIn(@Param("taskIdCollection") Collection<Long> taskIdCollection, @Param("orgId")Long orgId);
 
-
+    int updateByKey(@Param("updated")TaskTradeDO updated, @Param("key")TaskTradeDO key);
 }

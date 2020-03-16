@@ -5,8 +5,12 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
+import study.daydayup.wolf.business.org.biz.task.converter.task.TaskTradeConverter;
+import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskTradeDAO;
+import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,20 +21,44 @@ import java.util.List;
  **/
 @Component
 public class TaskTradeRepository implements Repository {
-    public int add(@NonNull TaskTrade contact) {
-        return 0;
+    @Resource
+    private TaskTradeDAO dao;
+
+    public int add(@NonNull TaskTrade taskTrade) {
+        if (taskTrade == null) {
+            return 0;
+        }
+
+        TaskTradeDO tradeDO = TaskTradeConverter.toDo(taskTrade);
+        if (tradeDO == null) {
+            return 0;
+        }
+
+        return dao.insertSelective(tradeDO);
     }
 
     public int save(@NonNull TaskTrade key, @NonNull TaskTrade changes) {
-        return 0;
+        if (null == key || null == changes) {
+            return 0;
+        }
+
+        TaskTradeDO keyDO = TaskTradeConverter.toDo(key);
+        TaskTradeDO changesDO = TaskTradeConverter.toDo(changes);
+        return dao.updateByKey(changesDO, keyDO);
     }
 
     public TaskTrade find(@NonNull TaskId taskId) {
-        return null;
+        taskId.valid();
+
+        TaskTradeDO tradeDO = dao.selectByTaskId(taskId.getTaskId(), taskId.getOrgId());
+        return TaskTradeConverter.toModel(tradeDO);
     }
 
     public List<TaskTrade> find(@NonNull TaskIds taskIds) {
-        return null;
+        taskIds.valid();
+
+        List<TaskTradeDO> tradeDOList = dao.selectByTaskIdIn(taskIds.getTaskIdSet(), taskIds.getOrgId());
+        return TaskTradeConverter.toModel(tradeDOList);
     }
 
 }
