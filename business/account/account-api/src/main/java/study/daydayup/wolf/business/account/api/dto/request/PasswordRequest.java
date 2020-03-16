@@ -23,6 +23,8 @@ public class PasswordRequest implements Request {
     private String password;
     private String newPassword;
     private String repeatedPassword;
+    @NotBlank
+    private String captcha;
 
     private String source;
     private String token;

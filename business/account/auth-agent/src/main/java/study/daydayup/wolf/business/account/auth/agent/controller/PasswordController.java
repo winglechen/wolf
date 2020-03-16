@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.auth.agent.controller;
 
+import com.wf.captcha.utils.CaptchaUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -31,20 +33,25 @@ public class PasswordController extends AuthController {
     private Session session;
 
     @PostMapping("/auth/password/login")
-    public Result<OauthLicense> login(@Valid @RequestBody PasswordRequest request) {
+    public Result<OauthLicense> login(HttpServletRequest httpRequest, @Valid @RequestBody PasswordRequest passwordRequest) {
 //        if(isLogin()) {
 //            return Result.ok(getLicenseFromSession());
 //        }
 
-        request.setEnv(null);
-        request.setToken(session.getSessionId());
+        if (!CaptchaUtil.ver(passwordRequest.getCaptcha(), httpRequest)) {
+            CaptchaUtil.clear(httpRequest);
+            return Result.fail(10000, "invalid captcha");
+        }
 
-        String scope = formatScope(request.getScope(), request.getOrgId());
-        request.setScope(scope);
-        request.setExpiredIn(authConfig.getExpiredIn());
-        request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
+        passwordRequest.setEnv(null);
+        passwordRequest.setToken(session.getSessionId());
 
-        Result<OauthLicense> result = passwordService.login(request);
+        String scope = formatScope(passwordRequest.getScope(), passwordRequest.getOrgId());
+        passwordRequest.setScope(scope);
+        passwordRequest.setExpiredIn(authConfig.getExpiredIn());
+        passwordRequest.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
+
+        Result<OauthLicense> result = passwordService.login(passwordRequest);
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
