@@ -48,6 +48,7 @@ public class Task implements Model {
 
     private String memo;
     private String tags;
+    private String extendFields;
 
     private LocalDateTime startAt;
     private LocalDateTime endAt;

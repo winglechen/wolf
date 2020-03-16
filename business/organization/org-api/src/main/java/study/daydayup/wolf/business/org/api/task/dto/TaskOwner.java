@@ -20,7 +20,11 @@ public class TaskOwner implements DTO {
 
     public void valid() {
        if (null == orgId && null == staffId) {
-           throw new InvalidTaskRequestException("OrgId and staffId can't all null for TaskOwner");
+           throw new InvalidTaskRequestException("OrgId and staffId can't all be null for TaskOwner");
+       }
+
+       if (null == option) {
+           throw new InvalidTaskRequestException("option can't be null for TaskOwner");
        }
     }
 

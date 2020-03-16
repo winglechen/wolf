@@ -6,10 +6,8 @@ import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
 import study.daydayup.wolf.business.org.biz.task.converter.task.TaskContactConverter;
-import study.daydayup.wolf.business.org.biz.task.converter.task.TaskTradeConverter;
 import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskContactDAO;
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskContactDO;
-import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;

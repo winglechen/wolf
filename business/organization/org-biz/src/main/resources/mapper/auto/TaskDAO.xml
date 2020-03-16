@@ -33,6 +33,8 @@
     <include refid="Base_Column_List" />
     from task
     where id = #{id,jdbcType=BIGINT}
+    and org_id=#{orgId,jdbcType=BIGINT}
+    limit 1
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
     delete from task

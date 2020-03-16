@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.org.biz.task.dal.dataobject;
 
 import java.io.Serializable;
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
