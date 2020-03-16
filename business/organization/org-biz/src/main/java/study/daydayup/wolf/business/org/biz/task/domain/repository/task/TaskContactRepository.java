@@ -33,7 +33,16 @@ public class TaskContactRepository implements Repository {
     }
 
     public int save(@NonNull TaskContact key, @NonNull TaskContact changes) {
-        return 0;
+        if (null == key || null == changes) {
+            return 0;
+        }
+        TaskContactDO keyDO = TaskContactConverter.toDo(key);
+        TaskContactDO changesDO = TaskContactConverter.toDo(key);
+        if (null == keyDO || null == changesDO) {
+            return 0;
+        }
+
+        return dao.updateByKey(changesDO, keyDO);
     }
 
     public TaskContact find(@NonNull TaskId taskId) {

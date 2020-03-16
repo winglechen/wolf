@@ -44,6 +44,10 @@ public class TaskTradeRepository implements Repository {
 
         TaskTradeDO keyDO = TaskTradeConverter.toDo(key);
         TaskTradeDO changesDO = TaskTradeConverter.toDo(changes);
+        if (null == keyDO || null == changesDO) {
+            return 0;
+        }
+
         return dao.updateByKey(changesDO, keyDO);
     }
 

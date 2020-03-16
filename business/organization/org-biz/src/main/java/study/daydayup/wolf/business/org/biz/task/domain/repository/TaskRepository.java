@@ -72,7 +72,18 @@ public class TaskRepository implements Repository {
     }
 
     public int save(TaskEntity entity) {
-        return 0;
+        int status = updateTask(entity);
+        if (status == 0) {
+            return 0;
+        }
+
+        Task key = entity.getKey();
+        Task changes = entity.getChanges();
+        detailRepository.save(key, changes);
+        contactRepository.save(key.getContact(), changes.getContact());
+        tradeRepository.save(key.getTrade(), changes.getTrade());
+
+        return status;
     }
 
     private TaskDO selectTask(@NonNull Long taskId, @NonNull Long orgId) {
@@ -90,6 +101,22 @@ public class TaskRepository implements Repository {
         }
 
         return taskDAO.insertSelective(taskDO);
+    }
+
+    private int updateTask(TaskEntity entity) {
+        Task key = entity.getKey();
+        Task changes = entity.getChanges();
+        if (null == key || null == changes) {
+            return 0;
+        }
+
+        TaskDO keyDO = TaskConverter.toDo(key);
+        TaskDO changesDO = TaskConverter.toDo(changes);
+        if (null == keyDO || null == changesDO) {
+            return 0;
+        }
+
+        return taskDAO.updateByKey(changesDO, keyDO);
     }
 
     private TaskEntity findDetailsByTaskDo(TaskDO taskDO, TaskId taskId) {

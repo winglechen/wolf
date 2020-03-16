@@ -36,8 +36,22 @@ public class TaskDetailRepository implements Repository {
         return dao.insertSelective(detailDO);
     }
 
-    public int save(@NonNull Task key, @NonNull Task changes) {
-        return 0;
+    public int save(Task key, Task changes) {
+        if (null == key || null == changes) {
+            return 0;
+        }
+
+        if (null == changes.getMemo() && null == changes.getExtendFields()) {
+            return 0;
+        }
+
+        TaskDetailDO keyDO = TaskDetailConverter.toDo(key);
+        TaskDetailDO changesDO = TaskDetailConverter.toDo(changes);
+        if (null == keyDO || null == changesDO) {
+            return 0;
+        }
+
+        return dao.updateByKey(changesDO, keyDO);
     }
 
     public Task find(@NonNull TaskId taskId, @NonNull Task task) {
