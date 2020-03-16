@@ -13,6 +13,7 @@ import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
+import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskQueryRepository;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskRepository;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -32,6 +33,8 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
     @Resource
     private TaskRepository taskRepository;
+    @Resource
+    private TaskQueryRepository queryRepository;
 
     @Override
     public Result<Task> find(Long taskId, Long orgId) {
@@ -83,32 +86,44 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<List<Task>> find(TaskIds taskIds) {
-        return null;
+    public Result<Page<Task>> findByOrg(Long orgId, PageRequest pageRequest) {
+        return findByOrg(orgId, TaskOption.DEFAULT, pageRequest);
     }
 
     @Override
-    public Result<Page<Task>> findByOrg(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
-        return null;
+    public Result<List<Task>> find(TaskIds taskIds) {
+        taskIds.valid();
+        List<Task> taskList = queryRepository.find(taskIds);
+        return Result.ok(taskList);
+    }
+
+    @Override
+    public Result<Page<Task>> findByOrg(@NonNull Long orgId, TaskOption option, @NonNull PageRequest pageRequest) {
+        Page<Task> taskList = queryRepository.findByOrg(orgId, option, pageRequest);
+        return Result.ok(taskList);
     }
 
     @Override
     public Result<Page<Task>> findSubTasks(@NonNull TaskId taskId, @NonNull PageRequest pageRequest) {
-        return null;
+        Page<Task> taskList = queryRepository.findByParent(taskId, pageRequest);
+        return Result.ok(taskList);
     }
 
     @Override
-    public Result<Page<Task>> findByStaff(@NonNull StaffRequest typeRequest, @NonNull PageRequest pageRequest) {
-        return null;
+    public Result<Page<Task>> findByStaff(@NonNull StaffRequest staffRequest, @NonNull PageRequest pageRequest) {
+        Page<Task> taskList = queryRepository.findByStaff(staffRequest, pageRequest);
+        return Result.ok(taskList);
     }
 
     @Override
     public Result<Page<Task>> findByTaskType(@NonNull TaskTypeRequest typeRequest, @NonNull PageRequest pageRequest) {
-        return null;
+        Page<Task> taskList = queryRepository.findByTaskType(typeRequest, pageRequest);
+        return Result.ok(taskList);
     }
 
     @Override
     public Result<Page<Task>> findByProject(@NonNull ProjectRequest projectRequest, @NonNull PageRequest pageRequest) {
-        return null;
+        Page<Task> taskList = queryRepository.findByProject(projectRequest, pageRequest);
+        return Result.ok(taskList);
     }
 }

@@ -19,7 +19,7 @@ public class TaskOwner implements DTO {
     protected TaskOption option = TaskOption.DEFAULT;
 
     public void valid() {
-       if (null == orgId && null == staffId) {
+       if (null == orgId) {
            throw new InvalidTaskRequestException("OrgId and staffId can't all be null for TaskOwner");
        }
 

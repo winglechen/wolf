@@ -7,13 +7,13 @@ import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
+import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOwner;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.biz.task.converter.TaskConverter;
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO;
-import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -36,27 +36,63 @@ public class TaskQueryRepository extends TaskRepository {
         return findDetailsByTaskList(taskDOList, taskIds);
     }
 
-    public Page<Task> findByOrg(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
+    public Page<Task> findByOrg(@NonNull Long orgId, @NonNull TaskOption option, @NonNull PageRequest pageRequest) {
         Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
-        List<TaskDO> taskDOList ;
+        List<TaskDO> taskDOList = taskDAO.selectByOrgId(orgId);
+        if (CollectionUtil.isEmpty(taskDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
 
-        return null;
+        TaskOwner owner = TaskOwner.builder()
+                .orgId(orgId)
+                .option(option)
+                .build();
+        List<Task> taskList = findDetailsByTaskList(taskDOList, owner);
+        return Page.of(taskDOList).to(taskList);
     }
 
     public Page<Task> findByParent(@NonNull TaskId taskId, @NonNull PageRequest pageRequest) {
-        return null;
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TaskDO> taskDOList = taskDAO.selectByParentId(taskId.getTaskId(), taskId.getOrgId());
+        if (CollectionUtil.isEmpty(taskDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
+
+        List<Task> taskList = findDetailsByTaskList(taskDOList, taskId);
+        return Page.of(taskDOList).to(taskList);
     }
 
-    public Page<Task> findByTaskType(@NonNull TaskTypeRequest typeRequest, @NonNull PageRequest pageRequest) {
-        return null;
+    public Page<Task> findByTaskType(@NonNull TaskTypeRequest request, @NonNull PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TaskDO> taskDOList = taskDAO.selectByTaskType(request);
+        if (CollectionUtil.isEmpty(taskDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
+
+        List<Task> taskList = findDetailsByTaskList(taskDOList, request);
+        return Page.of(taskDOList).to(taskList);
     }
 
-    public Page<Task> findByProject(@NonNull ProjectRequest projectRequest, @NonNull PageRequest pageRequest) {
-        return null;
+    public Page<Task> findByProject(@NonNull ProjectRequest request, @NonNull PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TaskDO> taskDOList = taskDAO.selectByProject(request);
+        if (CollectionUtil.isEmpty(taskDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
+
+        List<Task> taskList = findDetailsByTaskList(taskDOList, request);
+        return Page.of(taskDOList).to(taskList);
     }
 
-    public Page<Task> findByStaff(@NonNull StaffRequest staffRequest, @NonNull PageRequest pageRequest) {
-        return null;
+    public Page<Task> findByStaff(@NonNull StaffRequest request, @NonNull PageRequest pageRequest) {
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TaskDO> taskDOList = taskDAO.selectByStaff(request);
+        if (CollectionUtil.isEmpty(taskDOList)) {
+            return Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+        }
+
+        List<Task> taskList = findDetailsByTaskList(taskDOList, request);
+        return Page.of(taskDOList).to(taskList);
     }
 
 

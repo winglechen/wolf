@@ -34,6 +34,7 @@ public interface TaskService extends Service {
     Result<Integer> modify(TaskEvent event);
 
     Result<Page<Task>> findByOrg(Long orgId, PageRequest pageRequest);
+    Result<Page<Task>> findByOrg(Long orgId, TaskOption option, PageRequest pageRequest);
     Result<Page<Task>> findSubTasks(TaskId taskId, PageRequest pageRequest);
     Result<Page<Task>> findByStaff(StaffRequest typeRequest, PageRequest pageRequest);
     Result<Page<Task>> findByTaskType(TaskTypeRequest typeRequest, PageRequest pageRequest);
