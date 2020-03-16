@@ -24,7 +24,7 @@ public interface TaskService extends Service {
 
     Result<Integer> add(Task task);
     Result<Integer> assign(Long taskId, Long orgId, Long staffId);
-    Result<Integer> modify(Long taskId, Long orgId, TaskEvent event);
+    Result<Integer> modify(TaskEvent event);
 
     Result<Page<Task>> findSubTasks(TaskId taskId, PageRequest pageRequest);
     Result<Page<Task>> findByTaskType(TaskTypeRequest typeRequest, PageRequest pageRequest);

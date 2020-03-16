@@ -9,4 +9,7 @@ import study.daydayup.wolf.common.sm.Event;
  * @since 2020/3/15 11:35 下午
  **/
 public interface TaskEvent extends Event {
+    Long getOrgId();
+    Long getStaffId();
+    Long getTaskId();
 }
