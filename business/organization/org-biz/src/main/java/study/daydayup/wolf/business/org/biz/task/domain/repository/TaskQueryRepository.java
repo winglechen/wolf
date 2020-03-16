@@ -36,7 +36,7 @@ public class TaskQueryRepository extends TaskRepository {
         return findDetailsByTaskList(taskDOList, taskIds);
     }
 
-    public Page<Task> findAll(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
+    public Page<Task> findByOrg(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
         Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
         List<TaskDO> taskDOList ;
 
@@ -51,13 +51,15 @@ public class TaskQueryRepository extends TaskRepository {
         return null;
     }
 
-    public Page<Task> findByProject(@NonNull ProjectRequest typeRequest, @NonNull PageRequest pageRequest) {
+    public Page<Task> findByProject(@NonNull ProjectRequest projectRequest, @NonNull PageRequest pageRequest) {
         return null;
     }
 
     public Page<Task> findByStaff(@NonNull StaffRequest staffRequest, @NonNull PageRequest pageRequest) {
         return null;
     }
+
+
 
     protected TaskIds initTaskIds(List<Task> taskList, TaskOwner owner) {
         if (CollectionUtil.isEmpty(taskList)) {

@@ -88,7 +88,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Page<Task>> findAll(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
+    public Result<Page<Task>> findByOrg(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
         return null;
     }
 
