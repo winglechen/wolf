@@ -24,4 +24,5 @@ public interface TaskContactDAO {
 
     List<TaskContactDO> selectByTaskIdIn(@Param("taskIdCollection") Collection<Long> taskIdCollection, @Param("orgId")Long orgId);
 
+    int updateByKey(@Param("updated") TaskContactDO updated, @Param("key") TaskContactDO key );
 }

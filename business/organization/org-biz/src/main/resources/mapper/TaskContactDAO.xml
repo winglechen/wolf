@@ -23,4 +23,38 @@
         </foreach>
         and org_id=#{orgId,jdbcType=BIGINT}
     </select>
+
+
+    <update id="updateByKey">
+        update task_contact
+        <set>
+            <if test="updated.contactPerson != null">
+                contact_person = #{updated.contactPerson,jdbcType=TINYINT},
+            </if>
+            <if test="updated.contactMethod != null">
+                contact_method = #{updated.contactMethod,jdbcType=TINYINT},
+            </if>
+            <if test="updated.contactState != null">
+                contact_state = #{updated.contactState,jdbcType=TINYINT},
+            </if>
+            <if test="updated.contactResult != null">
+                contact_result = #{updated.contactResult,jdbcType=TINYINT},
+            </if>
+            <if test="updated.contactAttachment != null">
+                contact_attachment = #{updated.contactAttachment,jdbcType=VARCHAR},
+            </if>
+            <if test="updated.resultAttachment != null">
+                result_attachment = #{updated.resultAttachment,jdbcType=VARCHAR},
+            </if>
+            <if test="updated.recontactAt != null">
+                recontact_at = #{updated.recontactAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updated.deleteFlag != null">
+                delete_flag = #{updated.deleteFlag,jdbcType=TINYINT},
+            </if>
+        </set>
+        where task_id = #{key.taskId,jdbcType=BIGINT}
+        and org_id=#{key.orgId,jdbcType=BIGINT}
+        limit 1
+    </update>
 </mapper>

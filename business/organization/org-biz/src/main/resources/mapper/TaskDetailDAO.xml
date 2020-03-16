@@ -26,4 +26,19 @@
         and org_id=#{orgId,jdbcType=BIGINT}
     </select>
 
+    <update id="updateByKey" >
+        update task_detail
+        <set>
+            <if test="updated.memo != null">
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="updated.extendFields != null">
+                extend_fields = #{updated.extendFields,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where task_id = #{key.taskId,jdbcType=BIGINT}
+        and org_id=#{key.orgId,jdbcType=BIGINT}
+        limit 1
+    </update>
+
 </mapper>

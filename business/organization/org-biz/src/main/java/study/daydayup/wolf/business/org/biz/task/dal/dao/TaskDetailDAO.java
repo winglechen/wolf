@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO;
-import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWithBLOBs;
 
 public interface TaskDetailDAO {
     int deleteById(Long id);
@@ -23,6 +22,6 @@ public interface TaskDetailDAO {
 
     List<TaskDetailDO> selectByTaskIdIn(@Param("taskIdCollection")Collection<Long> taskIdCollection, @Param("orgId")Long orgId);
 
-
+    int updateByKey(@Param("updated") TaskDetailDO updated, @Param("key") TaskDetailDO key );
 
 }

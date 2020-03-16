@@ -20,6 +20,6 @@ public interface TaskDAO {
 
     List<TaskDO> selectByIdIn(@Param("idCollection")Collection<Long> idCollection, @Param("orgId")Long orgId);
 
-
+    int updateByKey(@Param("updated") TaskDO updated, @Param("key") TaskDO key );
 
 }
