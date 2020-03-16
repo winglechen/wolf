@@ -25,6 +25,10 @@ public class TaskDetailRepository implements Repository {
     private TaskDetailDAO dao;
 
     public int add(@NonNull Task detail) {
+        if (null == detail.getMemo() && null == detail.getExtendFields()) {
+            return 0;
+        }
+
         TaskDetailDO detailDO = TaskDetailConverter.toDo(detail);
         if (detailDO == null) {
             return 0;

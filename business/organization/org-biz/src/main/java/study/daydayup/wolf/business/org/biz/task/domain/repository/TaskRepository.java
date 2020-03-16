@@ -64,6 +64,7 @@ public class TaskRepository implements Repository {
         }
 
         Task task = entity.getModel();
+        detailRepository.add(task);
         contactRepository.add(task.getContact());
         tradeRepository.add(task.getTrade());
 
@@ -90,7 +91,6 @@ public class TaskRepository implements Repository {
 
         return taskDAO.insertSelective(taskDO);
     }
-
 
     private TaskEntity findDetailsByTaskDo(TaskDO taskDO, TaskId taskId) {
         taskId.valid();
