@@ -5,6 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.business.org.api.task.domain.exception.TaskNotFoundException;
+import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskRepository;
@@ -26,14 +27,15 @@ public class TaskServiceImpl implements TaskService {
     @Resource
     private TaskRepository taskRepository;
 
+
     @Override
     public Result<Task> find(Long taskId, Long orgId) {
-        return find(taskId, orgId, null);
+        return find(taskId, orgId, TaskOption.DEFAULT);
     }
 
     @Override
-    public Result<Task> find(Long taskId, Long orgId, Integer taskType) {
-        TaskEntity entity = taskRepository.find(taskId, orgId, taskType);
+    public Result<Task> find(Long taskId, Long orgId, TaskOption option) {
+        TaskEntity entity = taskRepository.find(taskId, orgId, option);
         if (entity == null) {
             throw new TaskNotFoundException();
         }
