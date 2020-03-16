@@ -107,6 +107,9 @@ public class TaskRepository implements Repository {
         if (option.isWithTrade()) {
             task.setTrade(tradeRepository.find(taskId));
         }
+        if (option.isWithDetail()) {
+            detailRepository.find(taskId, task);
+        }
 
         return new TaskEntity(task, false);
     }
