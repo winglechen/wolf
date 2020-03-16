@@ -14,9 +14,9 @@ import study.daydayup.wolf.framework.layer.api.DTO;
 @Data
 @SuperBuilder
 public class TaskOwner implements DTO {
-    private Long orgId;
-    private Long staffId;
-    private TaskOption option = TaskOption.DEFAULT;
+    protected Long orgId;
+    protected Long staffId;
+    protected TaskOption option = TaskOption.DEFAULT;
 
     public void valid() {
        if (null == orgId && null == staffId) {

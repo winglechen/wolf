@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.org.api.task.domain.exception.TaskNotFoundEx
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
@@ -30,14 +31,13 @@ public class TaskServiceImpl implements TaskService {
     @Resource
     private TaskRepository taskRepository;
 
-
     @Override
     public Result<Task> find(Long taskId, Long orgId) {
         return find(taskId, orgId, TaskOption.DEFAULT);
     }
 
     @Override
-    public Result<Task> find(Long taskId, Long orgId, TaskOption option) {
+    public Result<Task> find(@NonNull Long taskId, @NonNull Long orgId, @NonNull TaskOption option) {
         TaskEntity entity = taskRepository.find(taskId, orgId, option);
         if (entity == null) {
             throw new TaskNotFoundException();
@@ -55,7 +55,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Integer> assign(Long taskId, Long orgId, Long staffId) {
+    public Result<Integer> assign(@NonNull Long taskId, @NonNull Long orgId, @NonNull Long staffId) {
         TaskEntity entity = taskRepository.find(taskId, orgId);
         entity.assign(staffId);
         int status = taskRepository.save(entity);
@@ -63,7 +63,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Integer> modify(TaskEvent event) {
+    public Result<Integer> modify(@NonNull TaskEvent event) {
         TaskEntity entity = taskRepository.find(event.getTaskId(), event.getOrgId());
         entity.modify(event);
         int status = taskRepository.save(entity);
@@ -71,17 +71,27 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Page<Task>> findSubTasks(TaskId taskId, PageRequest pageRequest) {
+    public Result<Page<Task>> findAll(@NonNull Long orgId, @NonNull PageRequest pageRequest) {
         return null;
     }
 
     @Override
-    public Result<Page<Task>> findByTaskType(TaskTypeRequest typeRequest, PageRequest pageRequest) {
+    public Result<Page<Task>> findSubTasks(@NonNull TaskId taskId, @NonNull PageRequest pageRequest) {
         return null;
     }
 
     @Override
-    public Result<Page<Task>> findByProject(ProjectRequest projectRequest, PageRequest pageRequest) {
+    public Result<Page<Task>> findByStaff(@NonNull StaffRequest typeRequest, @NonNull PageRequest pageRequest) {
+        return null;
+    }
+
+    @Override
+    public Result<Page<Task>> findByTaskType(@NonNull TaskTypeRequest typeRequest, @NonNull PageRequest pageRequest) {
+        return null;
+    }
+
+    @Override
+    public Result<Page<Task>> findByProject(@NonNull ProjectRequest projectRequest, @NonNull PageRequest pageRequest) {
         return null;
     }
 }
