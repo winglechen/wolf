@@ -5,7 +5,10 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.business.org.api.task.domain.exception.TaskNotFoundException;
+import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskRepository;
@@ -68,17 +71,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Page<Task>> findSubTasks(Long taskId, Long orgId, PageRequest pageRequest) {
+    public Result<Page<Task>> findSubTasks(TaskId taskId, PageRequest pageRequest) {
         return null;
     }
 
     @Override
-    public Result<Page<Task>> findByTaskType(Long orgId, Integer taskType, PageRequest pageRequest) {
+    public Result<Page<Task>> findByTaskType(TaskTypeRequest typeRequest, PageRequest pageRequest) {
         return null;
     }
 
     @Override
-    public Result<Page<Task>> findByProject(Long projectId, Long orgId, PageRequest pageRequest) {
+    public Result<Page<Task>> findByProject(ProjectRequest projectRequest, PageRequest pageRequest) {
         return null;
     }
 }

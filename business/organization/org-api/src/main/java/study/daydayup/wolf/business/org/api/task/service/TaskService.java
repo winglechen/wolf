@@ -2,7 +2,10 @@ package study.daydayup.wolf.business.org.api.task.service;
 
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
+import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.framework.layer.domain.Service;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -23,7 +26,7 @@ public interface TaskService extends Service {
     Result<Integer> assign(Long taskId, Long orgId, Long staffId);
     Result<Integer> modify(Long taskId, Long orgId, TaskEvent event);
 
-    Result<Page<Task>> findSubTasks(Long taskId, Long orgId, PageRequest pageRequest);
-    Result<Page<Task>> findByTaskType(Long orgId, Integer taskType, PageRequest pageRequest);
-    Result<Page<Task>> findByProject(Long projectId, Long orgId, PageRequest pageRequest);
+    Result<Page<Task>> findSubTasks(TaskId taskId, PageRequest pageRequest);
+    Result<Page<Task>> findByTaskType(TaskTypeRequest typeRequest, PageRequest pageRequest);
+    Result<Page<Task>> findByProject(ProjectRequest projectRequest, PageRequest pageRequest);
 }

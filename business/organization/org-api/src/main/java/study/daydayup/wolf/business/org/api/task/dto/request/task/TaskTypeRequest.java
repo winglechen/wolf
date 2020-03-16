@@ -15,7 +15,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @SuperBuilder(toBuilder = true)
-public class StaffRequest extends TaskOwner implements Request {
+public class TaskTypeRequest extends TaskOwner implements Request {
     private Integer state;
     private Integer taskType;
 }
