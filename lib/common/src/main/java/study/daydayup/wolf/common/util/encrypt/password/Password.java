@@ -1,6 +1,8 @@
-package study.daydayup.wolf.common.util.encrypt;
+package study.daydayup.wolf.common.util.encrypt.password;
 
 import lombok.Data;
+import study.daydayup.wolf.common.util.encrypt.ShaEncrypt;
+import study.daydayup.wolf.common.util.encrypt.exception.ShaEncryptFailedException;
 
 /**
  * study.daydayup.wolf.common.util.encrypt

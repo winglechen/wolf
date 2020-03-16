@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util.encrypt;
+package study.daydayup.wolf.common.util.encrypt.exception;
 
 import lombok.Getter;
 import study.daydayup.wolf.common.lang.exception.SystemException;

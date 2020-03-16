@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.util.encrypt;
+package study.daydayup.wolf.common.util.encrypt.password;
 
 import java.security.SecureRandom;
 
