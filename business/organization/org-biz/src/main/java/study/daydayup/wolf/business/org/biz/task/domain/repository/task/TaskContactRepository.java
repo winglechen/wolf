@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
+import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskContactDAO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +19,8 @@ import java.util.List;
  **/
 @Component
 public class TaskContactRepository implements Repository {
+    @Resource
+    private TaskContactDAO dao;
 
     public int add(@NonNull TaskContact contact) {
         return 0;
