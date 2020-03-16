@@ -12,6 +12,7 @@ import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO;
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskContactRepository;
+import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskDetailRepository;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskTradeRepository;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
@@ -29,11 +30,11 @@ public class TaskRepository implements Repository {
     protected TaskTradeRepository tradeRepository;
     @Resource
     protected TaskContactRepository contactRepository;
+    @Resource
+    protected TaskDetailRepository detailRepository;
 
     @Resource
     protected TaskDAO taskDAO;
-    @Resource
-    protected TaskDetailDAO detailDAO;
 
     public TaskEntity find(Long taskId, Long orgId) {
         return find(taskId, orgId, TaskOption.DEFAULT);

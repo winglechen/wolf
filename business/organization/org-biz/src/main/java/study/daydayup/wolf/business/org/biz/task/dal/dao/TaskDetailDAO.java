@@ -9,18 +9,15 @@ import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDOWith
 public interface TaskDetailDAO {
     int deleteById(Long id);
 
-    int insert(TaskDetailDOWithBLOBs record);
+    int insert(TaskDetailDO record);
 
-    int insertSelective(TaskDetailDOWithBLOBs record);
+    int insertSelective(TaskDetailDO record);
 
-    TaskDetailDOWithBLOBs selectById(Long id);
+    TaskDetailDO selectById(Long id);
 
-    int updateByIdSelective(TaskDetailDOWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(TaskDetailDOWithBLOBs record);
+    int updateByIdSelective(TaskDetailDO record);
 
     int updateById(TaskDetailDO record);
-
 
     TaskDetailDO selectByTaskId(@Param("taskId")Long taskId, @Param("orgId")Long orgId);
 
