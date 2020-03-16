@@ -10,12 +10,14 @@
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
+    <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount" />
+    <result column="paying_amount" jdbcType="DECIMAL" property="payingAmount" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, task_id, trade_no, installment_no, currency, amount, trade_type, delete_flag, 
-    created_at
+    id, org_id, task_id, trade_no, installment_no, currency, amount, trade_type, paid_amount, 
+    paying_amount, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -30,12 +32,14 @@
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade (id, org_id, task_id, 
       trade_no, installment_no, currency, 
-      amount, trade_type, delete_flag, 
-      created_at)
+      amount, trade_type, paid_amount, 
+      paying_amount, delete_flag, created_at
+      )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
       #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, #{currency,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{amount,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{paidAmount,jdbcType=DECIMAL}, 
+      #{payingAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade
@@ -63,6 +67,12 @@
       </if>
       <if test="tradeType != null">
         trade_type,
+      </if>
+      <if test="paidAmount != null">
+        paid_amount,
+      </if>
+      <if test="payingAmount != null">
+        paying_amount,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -96,6 +106,12 @@
       <if test="tradeType != null">
         #{tradeType,jdbcType=TINYINT},
       </if>
+      <if test="paidAmount != null">
+        #{paidAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payingAmount != null">
+        #{payingAmount,jdbcType=DECIMAL},
+      </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -128,6 +144,12 @@
       <if test="tradeType != null">
         trade_type = #{tradeType,jdbcType=TINYINT},
       </if>
+      <if test="paidAmount != null">
+        paid_amount = #{paidAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payingAmount != null">
+        paying_amount = #{payingAmount,jdbcType=DECIMAL},
+      </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -146,6 +168,8 @@
       currency = #{currency,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DECIMAL},
       trade_type = #{tradeType,jdbcType=TINYINT},
+      paid_amount = #{paidAmount,jdbcType=DECIMAL},
+      paying_amount = #{payingAmount,jdbcType=DECIMAL},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

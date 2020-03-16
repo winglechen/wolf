@@ -133,6 +133,9 @@ CREATE TABLE IF NOT EXISTS `task_trade`
     `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '总金额',
     `trade_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易类型',
 
+    `paid_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已还金额',
+    `paying_amount`     DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '待审核金额',
+
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`)

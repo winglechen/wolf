@@ -25,11 +25,17 @@
     </select>
 
 
-    <update id="updateByKey" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
+    <update id="updateByKey" >
         update task_trade
         <set>
             <if test="updated.deleteFlag != null">
                 delete_flag = #{updated.deleteFlag,jdbcType=TINYINT},
+            </if>
+            <if test="updated.paidAmount != null">
+                paid_amount = #{updated.paidAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="updated.payingAmount != null">
+                paying_amount = #{updated.payingAmount,jdbcType=DECIMAL},
             </if>
             version = version + 1,
         </set>

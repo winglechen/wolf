@@ -23,6 +23,10 @@ public class TaskTradeDO implements Serializable {
 
     private Byte tradeType;
 
+    private BigDecimal paidAmount;
+
+    private BigDecimal payingAmount;
+
     private Integer deleteFlag;
 
     private LocalDateTime createdAt;
@@ -43,6 +47,8 @@ public class TaskTradeDO implements Serializable {
         sb.append(", currency=").append(currency);
         sb.append(", amount=").append(amount);
         sb.append(", tradeType=").append(tradeType);
+        sb.append(", paidAmount=").append(paidAmount);
+        sb.append(", payingAmount=").append(payingAmount);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -69,6 +75,8 @@ public class TaskTradeDO implements Serializable {
             && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
+            && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
+            && (this.getPayingAmount() == null ? other.getPayingAmount() == null : this.getPayingAmount().equals(other.getPayingAmount()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -85,6 +93,8 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
+        result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
+        result = prime * result + ((getPayingAmount() == null) ? 0 : getPayingAmount().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;
