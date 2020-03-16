@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
+import study.daydayup.wolf.business.org.biz.task.converter.task.TaskContactConverter;
+import study.daydayup.wolf.business.org.biz.task.converter.task.TaskTradeConverter;
 import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskContactDAO;
+import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskContactDO;
+import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
@@ -23,7 +27,11 @@ public class TaskContactRepository implements Repository {
     private TaskContactDAO dao;
 
     public int add(@NonNull TaskContact contact) {
-        return 0;
+        TaskContactDO contactDO = TaskContactConverter.toDo(contact);
+        if (contactDO == null) {
+            return 0;
+        }
+        return dao.insertSelective(contactDO);
     }
 
     public int save(@NonNull TaskContact key, @NonNull TaskContact changes) {
@@ -31,11 +39,17 @@ public class TaskContactRepository implements Repository {
     }
 
     public TaskContact find(@NonNull TaskId taskId) {
-        return null;
+        taskId.valid();
+
+        TaskContactDO tradeDO = dao.selectByTaskId(taskId.getTaskId(), taskId.getOrgId());
+        return TaskContactConverter.toModel(tradeDO);
     }
 
     public List<TaskContact> find(@NonNull TaskIds taskIds) {
-        return null;
+        taskIds.valid();
+
+        List<TaskContactDO> tradeDOList = dao.selectByTaskIdIn(taskIds.getTaskIdSet(), taskIds.getOrgId());
+        return TaskContactConverter.toModel(tradeDOList);
     }
 
 }
