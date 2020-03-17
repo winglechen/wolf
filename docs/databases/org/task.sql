@@ -157,12 +157,14 @@ CREATE TABLE IF NOT EXISTS `task_state_log`
     `task_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
     `project_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
 
-
     `source_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '历史状态',
     `target_state`      SMALLINT(6) unsigned NOT NULL DEFAULT 0 COMMENT '更新状态',
 
     `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `target_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '更新版本号',
+
+    `memo`              VARCHAR(1000) NOT NULL DEFAULT '' COMMENT 'memo',
+    `tags`              VARCHAR(200) NOT NULL DEFAULT '' COMMENT 'tags',
 
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
@@ -178,12 +180,16 @@ CREATE TABLE IF NOT EXISTS `task_assignment_log`
     `org_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `task_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
     `project_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+    `assigner`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
 
     `source_owner`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
     `target_owner`      BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
 
     `source_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '历史版本号',
     `target_version`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '更新版本号',
+
+    `memo`              VARCHAR(1000) NOT NULL DEFAULT '' COMMENT 'memo',
+    `tags`              VARCHAR(200) NOT NULL DEFAULT '' COMMENT 'tags',
 
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',

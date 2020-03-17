@@ -24,6 +24,10 @@ public class TaskStateLogDO implements Serializable {
 
     private Integer targetVersion;
 
+    private String memo;
+
+    private String tags;
+
     private Integer deleteFlag;
 
     private Long editor;
@@ -47,6 +51,8 @@ public class TaskStateLogDO implements Serializable {
         sb.append(", targetState=").append(targetState);
         sb.append(", sourceVersion=").append(sourceVersion);
         sb.append(", targetVersion=").append(targetVersion);
+        sb.append(", memo=").append(memo);
+        sb.append(", tags=").append(tags);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", editor=").append(editor);
         sb.append(", createdAt=").append(createdAt);
@@ -75,6 +81,8 @@ public class TaskStateLogDO implements Serializable {
             && (this.getTargetState() == null ? other.getTargetState() == null : this.getTargetState().equals(other.getTargetState()))
             && (this.getSourceVersion() == null ? other.getSourceVersion() == null : this.getSourceVersion().equals(other.getSourceVersion()))
             && (this.getTargetVersion() == null ? other.getTargetVersion() == null : this.getTargetVersion().equals(other.getTargetVersion()))
+            && (this.getMemo() == null ? other.getMemo() == null : this.getMemo().equals(other.getMemo()))
+            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getEditor() == null ? other.getEditor() == null : this.getEditor().equals(other.getEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
@@ -93,6 +101,8 @@ public class TaskStateLogDO implements Serializable {
         result = prime * result + ((getTargetState() == null) ? 0 : getTargetState().hashCode());
         result = prime * result + ((getSourceVersion() == null) ? 0 : getSourceVersion().hashCode());
         result = prime * result + ((getTargetVersion() == null) ? 0 : getTargetVersion().hashCode());
+        result = prime * result + ((getMemo() == null) ? 0 : getMemo().hashCode());
+        result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getEditor() == null) ? 0 : getEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());

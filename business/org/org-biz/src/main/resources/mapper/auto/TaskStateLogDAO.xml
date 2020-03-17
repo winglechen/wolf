@@ -11,13 +11,15 @@
     <result column="target_state" jdbcType="SMALLINT" property="targetState" />
     <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
     <result column="target_version" jdbcType="INTEGER" property="targetVersion" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="editor" jdbcType="BIGINT" property="editor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, staff_id, task_id, project_id, source_state, target_state, source_version, 
-    target_version, delete_flag, editor, created_at
+    target_version, memo, tags, delete_flag, editor, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -33,13 +35,13 @@
     insert into task_state_log (id, org_id, staff_id, 
       task_id, project_id, source_state, 
       target_state, source_version, target_version, 
-      delete_flag, editor, created_at
-      )
+      memo, tags, delete_flag, 
+      editor, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, 
       #{taskId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{sourceState,jdbcType=SMALLINT}, 
       #{targetState,jdbcType=SMALLINT}, #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{editor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{memo,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{editor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskStateLogDO">
     insert into task_state_log
@@ -70,6 +72,12 @@
       </if>
       <if test="targetVersion != null">
         target_version,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="tags != null">
+        tags,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -109,6 +117,12 @@
       <if test="targetVersion != null">
         #{targetVersion,jdbcType=INTEGER},
       </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -147,6 +161,12 @@
       <if test="targetVersion != null">
         target_version = #{targetVersion,jdbcType=INTEGER},
       </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -169,6 +189,8 @@
       target_state = #{targetState,jdbcType=SMALLINT},
       source_version = #{sourceVersion,jdbcType=INTEGER},
       target_version = #{targetVersion,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       editor = #{editor,jdbcType=BIGINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
