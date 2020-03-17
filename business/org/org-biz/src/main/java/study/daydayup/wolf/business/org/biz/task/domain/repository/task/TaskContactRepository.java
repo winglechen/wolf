@@ -24,7 +24,11 @@ public class TaskContactRepository implements Repository {
     @Resource
     private TaskContactDAO dao;
 
-    public int add(@NonNull TaskContact contact) {
+    public int add(TaskContact contact) {
+        if (contact == null) {
+            return 0;
+        }
+
         TaskContactDO contactDO = TaskContactConverter.toDo(contact);
         if (contactDO == null) {
             return 0;

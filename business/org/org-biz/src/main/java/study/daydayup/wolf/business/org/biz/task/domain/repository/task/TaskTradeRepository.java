@@ -24,7 +24,7 @@ public class TaskTradeRepository implements Repository {
     @Resource
     private TaskTradeDAO dao;
 
-    public int add(@NonNull TaskTrade taskTrade) {
+    public int add(TaskTrade taskTrade) {
         if (taskTrade == null) {
             return 0;
         }
@@ -37,7 +37,7 @@ public class TaskTradeRepository implements Repository {
         return dao.insertSelective(tradeDO);
     }
 
-    public int save(@NonNull TaskTrade key, @NonNull TaskTrade changes) {
+    public int save(TaskTrade key, TaskTrade changes) {
         if (null == key || null == changes) {
             return 0;
         }
