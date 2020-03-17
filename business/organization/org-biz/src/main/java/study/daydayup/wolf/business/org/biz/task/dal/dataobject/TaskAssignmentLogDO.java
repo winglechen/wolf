@@ -12,15 +12,21 @@ public class TaskAssignmentLogDO implements Serializable {
 
     private Long taskId;
 
-    private Integer version;
+    private Long projectId;
+
+    private Long sourceOwner;
+
+    private Long targetOwner;
+
+    private Integer sourceVersion;
+
+    private Integer targetVersion;
 
     private Integer deleteFlag;
 
-    private Long lastEditor;
+    private Long editor;
 
     private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +39,14 @@ public class TaskAssignmentLogDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
         sb.append(", taskId=").append(taskId);
-        sb.append(", version=").append(version);
+        sb.append(", projectId=").append(projectId);
+        sb.append(", sourceOwner=").append(sourceOwner);
+        sb.append(", targetOwner=").append(targetOwner);
+        sb.append(", sourceVersion=").append(sourceVersion);
+        sb.append(", targetVersion=").append(targetVersion);
         sb.append(", deleteFlag=").append(deleteFlag);
-        sb.append(", lastEditor=").append(lastEditor);
+        sb.append(", editor=").append(editor);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
         sb.append("]");
         return sb.toString();
     }
@@ -57,11 +66,14 @@ public class TaskAssignmentLogDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
+            && (this.getProjectId() == null ? other.getProjectId() == null : this.getProjectId().equals(other.getProjectId()))
+            && (this.getSourceOwner() == null ? other.getSourceOwner() == null : this.getSourceOwner().equals(other.getSourceOwner()))
+            && (this.getTargetOwner() == null ? other.getTargetOwner() == null : this.getTargetOwner().equals(other.getTargetOwner()))
+            && (this.getSourceVersion() == null ? other.getSourceVersion() == null : this.getSourceVersion().equals(other.getSourceVersion()))
+            && (this.getTargetVersion() == null ? other.getTargetVersion() == null : this.getTargetVersion().equals(other.getTargetVersion()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
-            && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getEditor() == null ? other.getEditor() == null : this.getEditor().equals(other.getEditor()))
+            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
     @Override
@@ -71,11 +83,14 @@ public class TaskAssignmentLogDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
-        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
+        result = prime * result + ((getProjectId() == null) ? 0 : getProjectId().hashCode());
+        result = prime * result + ((getSourceOwner() == null) ? 0 : getSourceOwner().hashCode());
+        result = prime * result + ((getTargetOwner() == null) ? 0 : getTargetOwner().hashCode());
+        result = prime * result + ((getSourceVersion() == null) ? 0 : getSourceVersion().hashCode());
+        result = prime * result + ((getTargetVersion() == null) ? 0 : getTargetVersion().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
-        result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
+        result = prime * result + ((getEditor() == null) ? 0 : getEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
     }
 }

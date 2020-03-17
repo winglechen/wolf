@@ -5,14 +5,18 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
-    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="source_owner" jdbcType="BIGINT" property="sourceOwner" />
+    <result column="target_owner" jdbcType="BIGINT" property="targetOwner" />
+    <result column="source_version" jdbcType="INTEGER" property="sourceVersion" />
+    <result column="target_version" jdbcType="INTEGER" property="targetVersion" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
-    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="editor" jdbcType="BIGINT" property="editor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, task_id, version, delete_flag, last_editor, created_at, updated_at
+    id, org_id, task_id, project_id, source_owner, target_owner, source_version, target_version, 
+    delete_flag, editor, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -26,11 +30,13 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskAssignmentLogDO">
     insert into task_assignment_log (id, org_id, task_id, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      project_id, source_owner, target_owner, 
+      source_version, target_version, delete_flag, 
+      editor, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{projectId,jdbcType=BIGINT}, #{sourceOwner,jdbcType=BIGINT}, #{targetOwner,jdbcType=BIGINT}, 
+      #{sourceVersion,jdbcType=INTEGER}, #{targetVersion,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{editor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskAssignmentLogDO">
     insert into task_assignment_log
@@ -44,20 +50,29 @@
       <if test="taskId != null">
         task_id,
       </if>
-      <if test="version != null">
-        version,
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="sourceOwner != null">
+        source_owner,
+      </if>
+      <if test="targetOwner != null">
+        target_owner,
+      </if>
+      <if test="sourceVersion != null">
+        source_version,
+      </if>
+      <if test="targetVersion != null">
+        target_version,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
       </if>
-      <if test="lastEditor != null">
-        last_editor,
+      <if test="editor != null">
+        editor,
       </if>
       <if test="createdAt != null">
         created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -70,20 +85,29 @@
       <if test="taskId != null">
         #{taskId,jdbcType=BIGINT},
       </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceOwner != null">
+        #{sourceOwner,jdbcType=BIGINT},
+      </if>
+      <if test="targetOwner != null">
+        #{targetOwner,jdbcType=BIGINT},
+      </if>
+      <if test="sourceVersion != null">
+        #{sourceVersion,jdbcType=INTEGER},
+      </if>
+      <if test="targetVersion != null">
+        #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
       </if>
-      <if test="lastEditor != null">
-        #{lastEditor,jdbcType=BIGINT},
+      <if test="editor != null">
+        #{editor,jdbcType=BIGINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -96,20 +120,29 @@
       <if test="taskId != null">
         task_id = #{taskId,jdbcType=BIGINT},
       </if>
-      <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceOwner != null">
+        source_owner = #{sourceOwner,jdbcType=BIGINT},
+      </if>
+      <if test="targetOwner != null">
+        target_owner = #{targetOwner,jdbcType=BIGINT},
+      </if>
+      <if test="sourceVersion != null">
+        source_version = #{sourceVersion,jdbcType=INTEGER},
+      </if>
+      <if test="targetVersion != null">
+        target_version = #{targetVersion,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
-      <if test="lastEditor != null">
-        last_editor = #{lastEditor,jdbcType=BIGINT},
+      <if test="editor != null">
+        editor = #{editor,jdbcType=BIGINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -118,11 +151,14 @@
     update task_assignment_log
     set org_id = #{orgId,jdbcType=BIGINT},
       task_id = #{taskId,jdbcType=BIGINT},
-      version = #{version,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=BIGINT},
+      source_owner = #{sourceOwner,jdbcType=BIGINT},
+      target_owner = #{targetOwner,jdbcType=BIGINT},
+      source_version = #{sourceVersion,jdbcType=INTEGER},
+      target_version = #{targetVersion,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
-      last_editor = #{lastEditor,jdbcType=BIGINT},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      editor = #{editor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
