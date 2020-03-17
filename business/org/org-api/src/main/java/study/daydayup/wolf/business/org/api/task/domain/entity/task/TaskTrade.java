@@ -25,4 +25,8 @@ public class TaskTrade implements Model {
 
     private BigDecimal paidAmount;
     private BigDecimal payingAmount;
+
+    private BigDecimal interest;
+    private BigDecimal interestRate;
+    private Integer interestUnit;
 }
