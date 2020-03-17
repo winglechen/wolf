@@ -19,7 +19,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
 public class TaskOption implements Request {
     public static final TaskOption DEFAULT = new TaskOption();
 
-    private boolean withDetail      = false;
+    private boolean withDetail      = true;
     private boolean withContact     = false;
     private boolean withScheduler   = false;
     private boolean withTrade       = false;

@@ -4,6 +4,8 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.org.api.task.dto.TaskId;
+import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.api.task.service.task.CollectionTaskService;
 import study.daydayup.wolf.business.union.admin.dto.TaskAssignRequest;
@@ -11,6 +13,7 @@ import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.framework.rpc.page.Page;
+import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -35,6 +38,26 @@ public class TaskController implements Controller {
         Long orgId = session.get("orgId", Long.class);
 
         return taskService.find(taskId, orgId);
+    }
+
+    @GetMapping("/task/contact/{taskId}")
+    public Result<Task> findContact(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        TaskOption option = TaskOption.builder()
+                .withContact(true)
+                .build();
+
+        return taskService.find(taskId, orgId, option);
+    }
+
+    @GetMapping("/task/collection/{taskId}")
+    public Result<Task> findCollection(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        return taskService.find(taskId, orgId, option);
     }
 
     @PostMapping("/task")
@@ -94,44 +117,81 @@ public class TaskController implements Controller {
     }
 
     @GetMapping("/task/all")
-    public Result<Page<Task>> findAll() {
-        return null;
+    public Result<Page<Task>> findAll(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return taskService.findByOrg(orgId, pageRequest);
     }
 
-    @GetMapping("/task/subTasks")
-    public Result<Page<Task>> findSubTasks() {
-        return null;
+    @GetMapping("/task/subTasks/{taskId}")
+    public Result<Page<Task>> findSubTasks(@PathVariable("taskId") Long id, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withContact(true)
+                .build();
+
+        TaskId taskId = TaskId.builder()
+                .orgId(orgId)
+                .taskId(id)
+                .option(option)
+                .build();
+
+        return taskService.findSubTasks(taskId, pageRequest);
     }
 
     @GetMapping("/task/staff/{staffId}")
-    public Result<Page<Task>> findByStaff() {
+    public Result<Page<Task>> findByStaff(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
         return null;
     }
 
     @GetMapping("/task/project/{projectId}")
-    public Result<Page<Task>> findByProject() {
+    public Result<Page<Task>> findByProject(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
         return null;
     }
 
     @GetMapping("/task/collection")
-    public Result<Page<Task>> findCollections() {
+    public Result<Page<Task>> findCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
         return null;
     }
 
-    @GetMapping("/task/collection/{taskId}")
-    public Result<Page<Task>> findCollection() {
-        return null;
-    }
 
     @GetMapping("/task/contact")
-    public Result<Page<Task>> findContacts() {
+    public Result<Page<Task>> findContacts(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
         return null;
     }
 
-    @GetMapping("/task/contact/{taskId}")
-    public Result<Page<Task>> findContact() {
-        return null;
-    }
 
 
 
