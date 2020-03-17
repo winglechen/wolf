@@ -1,11 +1,8 @@
 package study.daydayup.wolf.business.org.biz.task.api;
 
-import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
-import study.daydayup.wolf.business.org.api.task.service.task.CollectionService;
+import study.daydayup.wolf.business.org.api.task.service.task.CollectionTaskService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
-import study.daydayup.wolf.framework.rpc.page.Page;
-import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import java.math.BigDecimal;
 
@@ -16,7 +13,7 @@ import java.math.BigDecimal;
  * @since 2020/3/16 12:44 上午
  **/
 @RpcService(protocol = "dubbo")
-public class CollectionServiceImpl implements CollectionService {
+public class CollectionTaskServiceImpl implements CollectionTaskService {
     @Override
     public Result<Integer> partlyPay(Long taskId, Long orgId, BigDecimal amount) {
         return null;

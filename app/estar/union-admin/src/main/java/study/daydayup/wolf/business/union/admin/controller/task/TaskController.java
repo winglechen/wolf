@@ -1,10 +1,19 @@
 package study.daydayup.wolf.business.union.admin.controller.task;
 
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.org.api.task.service.TaskService;
+import study.daydayup.wolf.business.org.api.task.service.task.CollectionTaskService;
+import study.daydayup.wolf.business.union.admin.dto.TaskAssignRequest;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.framework.rpc.page.Page;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller.task
@@ -14,73 +23,112 @@ import study.daydayup.wolf.framework.rpc.page.Page;
  **/
 @RestController
 public class TaskController implements Controller {
+    @Reference
+    private TaskService taskService;
+    @Reference
+    private CollectionTaskService collectionService;
+    @Resource
+    private Session session;
 
-    @GetMapping("/task/{taskId}")
+    @GetMapping("/task/task/{taskId}")
     public Result<Task> find(@PathVariable("taskId") Long taskId) {
-        return null;
+        Long orgId = session.get("orgId", Long.class);
+
+        return taskService.find(taskId, orgId);
     }
 
     @PostMapping("/task")
-    public Result<Integer> add() {
-        return null;
+    public Result<Integer> add(@Validated @RequestBody Task task) {
+        Long orgId = session.get("orgId", Long.class);
+        task.setOrgId(orgId);
+
+        return taskService.add(task);
     }
 
     @PutMapping("/task/assign")
-    public Result<Integer> assign() {
-        return null;
+    public Result<Integer> assign(@Validated @RequestBody TaskAssignRequest request) {
+        request.valid();
+
+        Long orgId = session.get("orgId", Long.class);
+        if (null != request.getTaskId()) {
+            return taskService.assign(request.getTaskId(), orgId, request.getStaffId());
+        }
+
+        return taskService.assign(request.getTaskIds(), orgId, request.getStaffId());
     }
 
-    @PutMapping("/task/collection/partlyPay")
-    public Result<Integer> partlyPay() {
-        return null;
+    @PutMapping("/task/collection/partlyPay/{taskId}/{amount}")
+    public Result<Integer> partlyPay(@PathVariable("taskId") Long taskId, @PathVariable("amount") BigDecimal amount ) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.partlyPay(taskId, orgId, amount);
     }
 
-    @PutMapping("/task/collection/confirm/partlyPay")
-    public Result<Integer> confirmPartlyPay() {
-        return null;
+    @PutMapping("/task/collection/confirm/partlyPay/{taskId}")
+    public Result<Integer> confirmPartlyPay(@PathVariable("taskId") Long taskId, @PathVariable("amount") BigDecimal amount) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.confirmPartlyPay(taskId, orgId, amount);
     }
 
-    @PutMapping("/task/collection/pay")
-    public Result<Integer> pay() {
-        return null;
+    @PutMapping("/task/collection/pay/{taskId}")
+    public Result<Integer> pay(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.pay(taskId, orgId);
     }
 
-    @PutMapping("/task/collection/confirm/pay")
-    public Result<Integer> confirmPay() {
-        return null;
+    @PutMapping("/task/collection/confirm/pay/{taskId}")
+    public Result<Integer> confirmPay(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.confirmPay(taskId, orgId);
     }
 
-    @PutMapping("/task/collection/fail")
-    public Result<Integer> fail() {
-        return null;
+    @PutMapping("/task/collection/fail/{taskId}")
+    public Result<Integer> fail(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.fail(taskId, orgId);
     }
 
-    @PutMapping("/task/collection/confirm/asLoss")
-    public Result<Integer> confirmAsLoss() {
-        return null;
+    @PutMapping("/task/collection/confirm/asLoss/{taskId}")
+    public Result<Integer> confirmAsLoss(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.confirmAsLoss(taskId, orgId);
     }
 
-
+    @GetMapping("/task/all")
     public Result<Page<Task>> findAll() {
         return null;
     }
 
+    @GetMapping("/task/subTasks")
     public Result<Page<Task>> findSubTasks() {
         return null;
     }
 
+    @GetMapping("/task/staff/{staffId}")
     public Result<Page<Task>> findByStaff() {
         return null;
     }
 
+    @GetMapping("/task/project/{projectId}")
     public Result<Page<Task>> findByProject() {
         return null;
     }
 
+    @GetMapping("/task/collection")
+    public Result<Page<Task>> findCollections() {
+        return null;
+    }
+
+    @GetMapping("/task/collection/{taskId}")
     public Result<Page<Task>> findCollection() {
         return null;
     }
 
+    @GetMapping("/task/contact")
+    public Result<Page<Task>> findContacts() {
+        return null;
+    }
+
+    @GetMapping("/task/contact/{taskId}")
     public Result<Page<Task>> findContact() {
         return null;
     }

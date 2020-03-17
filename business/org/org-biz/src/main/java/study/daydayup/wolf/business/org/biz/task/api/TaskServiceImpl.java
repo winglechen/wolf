@@ -78,6 +78,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Result<Integer> assign(@NonNull List<Long> taskIds, Long orgId, Long staffId) {
+        return null;
+    }
+
+    @Override
     public Result<Integer> modify(@NonNull TaskEvent event) {
         TaskEntity entity = taskRepository.find(event.getTaskId(), event.getOrgId());
         entity.modify(event);

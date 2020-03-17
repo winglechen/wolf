@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * @author Wingle
  * @since 2020/3/15 11:24 下午
  **/
-public interface CollectionService extends Service {
+public interface CollectionTaskService extends Service {
     Result<Integer> partlyPay(Long taskId, Long orgId, BigDecimal amount);
     Result<Integer> confirmPartlyPay(Long taskId, Long orgId, BigDecimal amount);
     Result<Integer> pay(Long taskId, Long orgId);
