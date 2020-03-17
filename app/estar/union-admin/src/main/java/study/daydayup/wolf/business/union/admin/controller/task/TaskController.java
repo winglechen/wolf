@@ -1,11 +1,16 @@
 package study.daydayup.wolf.business.union.admin.controller.task;
 
+import com.google.gson.internal.$Gson$Types;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.business.org.api.task.domain.enums.TaskTypeEnum;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
+import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.api.task.service.task.CollectionTaskService;
 import study.daydayup.wolf.business.union.admin.dto.TaskAssignRequest;
@@ -149,24 +154,40 @@ public class TaskController implements Controller {
     }
 
     @GetMapping("/task/staff/{staffId}")
-    public Result<Page<Task>> findByStaff(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+    public Result<Page<Task>> findByStaff(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
                 .pageSize(10)
                 .build();
-        return null;
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        StaffRequest request = StaffRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .option(option)
+                .build();
+
+        return taskService.findByStaff(request, pageRequest);
     }
 
     @GetMapping("/task/project/{projectId}")
-    public Result<Page<Task>> findByProject(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+    public Result<Page<Task>> findByProject(@PathVariable("projectId") Long projectId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
                 .pageSize(10)
                 .build();
 
-        return null;
+        ProjectRequest request = ProjectRequest.builder()
+                .orgId(orgId)
+                .projectId(projectId)
+                .build();
+
+        return taskService.findByProject(request, pageRequest);
     }
 
     @GetMapping("/task/collection")
@@ -177,7 +198,39 @@ public class TaskController implements Controller {
                 .pageSize(10)
                 .build();
 
-        return null;
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        TaskTypeRequest request = TaskTypeRequest.builder()
+                .orgId(orgId)
+                .taskType(TaskTypeEnum.COLLECTION.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByTaskType(request, pageRequest);
+    }
+
+    @GetMapping("/task/collection/{staffId}")
+    public Result<Page<Task>> findStaffCollections(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        TaskTypeRequest request = TaskTypeRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .taskType(TaskTypeEnum.COLLECTION.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByTaskType(request, pageRequest);
     }
 
 
@@ -189,7 +242,39 @@ public class TaskController implements Controller {
                 .pageSize(10)
                 .build();
 
-        return null;
+        TaskOption option = TaskOption.builder()
+                .withContact(true)
+                .build();
+
+        TaskTypeRequest request = TaskTypeRequest.builder()
+                .orgId(orgId)
+                .taskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByTaskType(request, pageRequest);
+    }
+
+    @GetMapping("/task/contact/{staffId}")
+    public Result<Page<Task>> findStaffContacts(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withContact(true)
+                .build();
+
+        TaskTypeRequest request = TaskTypeRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .taskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByTaskType(request, pageRequest);
     }
 
 
