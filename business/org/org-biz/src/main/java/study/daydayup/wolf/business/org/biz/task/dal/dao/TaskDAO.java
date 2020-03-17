@@ -34,4 +34,11 @@ public interface TaskDAO {
     List<TaskDO> selectByStaff(@Param("request") StaffRequest request);
 
     List<TaskDO> selectByProject(@Param("request") ProjectRequest request);
+
+    int updateStaffIdByIdIn(@Param("updatedStaffId")Long updatedStaffId, @Param("idCollection")Collection<Long> idCollection, @Param("orgId")Long orgId);
+
+    int updateStaffIdById(@Param("updatedStaffId")Long updatedStaffId,@Param("id")Long id);
+
+
+
 }

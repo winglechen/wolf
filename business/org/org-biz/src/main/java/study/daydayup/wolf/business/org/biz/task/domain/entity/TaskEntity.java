@@ -5,6 +5,9 @@ import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * study.daydayup.wolf.business.org.biz.task.domain.entity
  *
@@ -39,7 +42,7 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
     public void assign(Long staffId) {
     }
 
-    public void modify(TaskEvent event) {
+    public void changeState(TaskEvent event) {
 
     }
 

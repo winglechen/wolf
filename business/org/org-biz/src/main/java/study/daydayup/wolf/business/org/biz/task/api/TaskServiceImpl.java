@@ -12,9 +12,11 @@ import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest
 import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
+import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskDAO;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskQueryRepository;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskRepository;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -35,6 +37,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     @Resource
     private TaskQueryRepository queryRepository;
+    @Resource
+    protected TaskDAO taskDAO;
 
     @Override
     public Result<Task> find(Long taskId, Long orgId) {
@@ -78,14 +82,21 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Result<Integer> assign(@NonNull List<Long> taskIds, Long orgId, Long staffId) {
-        return null;
+    public Result<Integer> assign(@NonNull List<Long> taskIds, @NonNull Long orgId, @NonNull Long staffId) {
+        if (CollectionUtil.isEmpty(taskIds)) {
+            return null;
+        }
+
+        int status = taskDAO.updateStaffIdByIdIn(staffId, taskIds, orgId);
+        //TODO log assignment
+
+        return Result.ok(status);
     }
 
     @Override
     public Result<Integer> modify(@NonNull TaskEvent event) {
         TaskEntity entity = taskRepository.find(event.getTaskId(), event.getOrgId());
-        entity.modify(event);
+        entity.changeState(event);
         int status = taskRepository.save(entity);
         return Result.ok(status);
     }
