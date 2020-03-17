@@ -75,7 +75,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Result<Integer> assign(@NonNull Long taskId, @NonNull Long orgId, @NonNull Long staffId) {
-        TaskEntity entity = taskRepository.find(taskId, orgId);
+        TaskOption option = TaskOption.builder()
+                .withDetail(false)
+                .build();
+
+        TaskEntity entity = taskRepository.find(taskId, orgId, option);
         entity.assign(staffId);
         int status = taskRepository.save(entity);
         return Result.ok(status);

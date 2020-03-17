@@ -114,7 +114,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 ###
-PUT http://localhost:8200/task/collection/confirm/asLoss/{taskId}
+PUT http://localhost:8200/task/collection/confirm/fail/{taskId}
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json

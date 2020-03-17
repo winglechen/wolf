@@ -135,10 +135,10 @@ public class TaskController implements Controller {
         return collectionService.fail(taskId, orgId);
     }
 
-    @PutMapping("/task/collection/confirm/asLoss/{taskId}")
-    public Result<Integer> confirmAsLoss(@PathVariable("taskId") Long taskId) {
+    @PutMapping("/task/collection/confirm/fail/{taskId}")
+    public Result<Integer> confirmFail(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.confirmAsLoss(taskId, orgId);
+        return collectionService.confirmFail(taskId, orgId);
     }
 
     @GetMapping("/task/all")

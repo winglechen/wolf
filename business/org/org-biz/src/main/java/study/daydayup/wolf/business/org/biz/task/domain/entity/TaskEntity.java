@@ -40,11 +40,20 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
     }
 
     public void assign(Long staffId) {
+        initChanges();
+        model.setStaffId(staffId);
+        changes.setStaffId(staffId);
     }
 
+    //TODO add task state machine
     public void changeState(TaskEvent event) {
 
     }
 
+    public void changeState(Integer state) {
+        initChanges();
+        model.setState(state);
+        changes.setState(state);
+    }
 }
 
