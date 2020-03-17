@@ -111,7 +111,7 @@ public class TaskController implements Controller {
         return collectionService.partlyPay(taskId, orgId, amount);
     }
 
-    @PutMapping("/task/collection/confirm/partlyPay/{taskId}")
+    @PutMapping("/task/collection/confirm/partlyPay/{taskId}/{amount}")
     public Result<Integer> confirmPartlyPay(@PathVariable("taskId") Long taskId, @PathVariable("amount") BigDecimal amount) {
         Long orgId = session.get("orgId", Long.class);
         return collectionService.confirmPartlyPay(taskId, orgId, amount);

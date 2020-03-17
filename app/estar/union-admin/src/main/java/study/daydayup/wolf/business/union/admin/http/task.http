@@ -45,3 +45,113 @@ Content-Type: application/json
     "recontactAt" : "2020-03-20 09:30:00"
   }
 }
+
+###
+GET http://localhost:8200/task/task/1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/collection/1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/contact/10
+Accept: */*
+Cache-Control: no-cache
+
+### task assign
+PUT http://localhost:8200/task/assign
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "staffId": 10,
+  "taskId": 1
+}
+
+###  task assign
+PUT http://localhost:8200/task/assign
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "staffId": 10,
+  "taskIds": [1, 3, 5]
+}
+
+###
+PUT http://localhost:8200/task/collection/partlyPay/{taskId}/{amount}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8200/task/collection/confirm/partlyPay/{taskId}/{amount}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8200/task/collection/pay/{taskId}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8200/task/collection/confirm/pay/{taskId}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8200/task/collection/fail/{taskId}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8200/task/collection/confirm/asLoss/{taskId}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+###
+GET http://localhost:8200/task/all?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/subTasks/{taskId}?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/staff/{staffId}?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/collection?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/collection/1?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/task/contact?pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/contact/1?pageNum=1
+Accept: */*
+Cache-Control: no-cache
