@@ -4,6 +4,7 @@ import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * study.daydayup.wolf.business.org.api.task.domain.entity.task
@@ -29,4 +30,7 @@ public class TaskTrade implements Model {
     private BigDecimal interest;
     private BigDecimal interestRate;
     private Integer interestUnit;
+
+    private LocalDate dueAt;
+    private Integer dueDays;
 }

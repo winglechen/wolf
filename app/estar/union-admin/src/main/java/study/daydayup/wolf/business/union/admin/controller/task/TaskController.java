@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.union.admin.controller.task;
 
-import com.google.gson.internal.$Gson$Types;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +68,27 @@ public class TaskController implements Controller {
     public Result<Integer> add(@Validated @RequestBody Task task) {
         Long orgId = session.get("orgId", Long.class);
         task.setOrgId(orgId);
+        task.setId(null);
+
+        return taskService.add(task);
+    }
+
+    @PostMapping("/task/collection")
+    public Result<Integer> addCollection(@Validated @RequestBody Task task) {
+        Long orgId = session.get("orgId", Long.class);
+        task.setOrgId(orgId);
+        task.setId(null);
+        task.setTaskType(TaskTypeEnum.COLLECTION.getCode());
+
+        return taskService.add(task);
+    }
+
+    @PostMapping("/task/contact")
+    public Result<Integer> addContact(@Validated @RequestBody Task task) {
+        Long orgId = session.get("orgId", Long.class);
+        task.setOrgId(orgId);
+        task.setId(null);
+        task.setTaskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode());
 
         return taskService.add(task);
     }
@@ -233,7 +253,6 @@ public class TaskController implements Controller {
         return taskService.findByTaskType(request, pageRequest);
     }
 
-
     @GetMapping("/task/contact")
     public Result<Page<Task>> findContacts(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
@@ -276,10 +295,6 @@ public class TaskController implements Controller {
 
         return taskService.findByTaskType(request, pageRequest);
     }
-
-
-
-
 
 
 }

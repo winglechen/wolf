@@ -1,0 +1,47 @@
+
+###  create collection
+POST http://localhost:8200/task/collection
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name" : "collection task",
+  "memo" : "collection task memo",
+  "tags" : "test, dev",
+  "collection" : {
+    "tradeNo" : "abc123456",
+    "tradeType": 2,
+    "installmentNo": 1,
+    "currency" : 101,
+    "amount" : 1200.00,
+    "interestRate": 0.01,
+    "dueAt" : "2020-02-10"
+  }
+}
+
+
+###  create contact
+POST http://localhost:8200/task/contact
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "parentId" : 1,
+  "name" : "contact customer",
+  "memo" : "customer contact memo",
+  "tags" : "test, dev",
+  "contact" : {
+    "partnerOrgId" : 1,
+    "customerId" : 10,
+    "contactPerson" : 1,
+    "contactMethod" : 1,
+    "contactState" : 1,
+    "contactResult" : 1,
+
+    "contactAttachment" : "/yyy/xxx.jpg",
+    "resultAttachment" : "/result/att.jpg",
+    "recontactAt" : "2020-03-20 09:30:00"
+  }
+}
