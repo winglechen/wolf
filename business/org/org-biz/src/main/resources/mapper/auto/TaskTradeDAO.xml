@@ -7,17 +7,20 @@
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="installment_no" jdbcType="TINYINT" property="installmentNo" />
-    <result column="currency" jdbcType="INTEGER" property="currency" />
-    <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount" />
     <result column="paying_amount" jdbcType="DECIMAL" property="payingAmount" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="interest_rate" jdbcType="DECIMAL" property="interestRate" />
+    <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, task_id, trade_no, installment_no, currency, amount, trade_type, paid_amount, 
-    paying_amount, delete_flag, created_at
+    id, org_id, task_id, trade_no, installment_no, trade_type, amount, currency, paid_amount, 
+    paying_amount, interest, interest_rate, interest_unit, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -31,14 +34,16 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade (id, org_id, task_id, 
-      trade_no, installment_no, currency, 
-      amount, trade_type, paid_amount, 
-      paying_amount, delete_flag, created_at
+      trade_no, installment_no, trade_type, 
+      amount, currency, paid_amount, 
+      paying_amount, interest, interest_rate, 
+      interest_unit, delete_flag, created_at
       )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
-      #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, #{currency,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{paidAmount,jdbcType=DECIMAL}, 
-      #{payingAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
+      #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, #{tradeType,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL}, 
+      #{payingAmount,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{interestRate,jdbcType=DECIMAL}, 
+      #{interestUnit,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
@@ -59,20 +64,29 @@
       <if test="installmentNo != null">
         installment_no,
       </if>
-      <if test="currency != null">
-        currency,
+      <if test="tradeType != null">
+        trade_type,
       </if>
       <if test="amount != null">
         amount,
       </if>
-      <if test="tradeType != null">
-        trade_type,
+      <if test="currency != null">
+        currency,
       </if>
       <if test="paidAmount != null">
         paid_amount,
       </if>
       <if test="payingAmount != null">
         paying_amount,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="interestRate != null">
+        interest_rate,
+      </if>
+      <if test="interestUnit != null">
+        interest_unit,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -97,20 +111,29 @@
       <if test="installmentNo != null">
         #{installmentNo,jdbcType=TINYINT},
       </if>
-      <if test="currency != null">
-        #{currency,jdbcType=INTEGER},
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=TINYINT},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="tradeType != null">
-        #{tradeType,jdbcType=TINYINT},
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
       </if>
       <if test="paidAmount != null">
         #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="payingAmount != null">
         #{payingAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRate != null">
+        #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestUnit != null">
+        #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
@@ -135,20 +158,29 @@
       <if test="installmentNo != null">
         installment_no = #{installmentNo,jdbcType=TINYINT},
       </if>
-      <if test="currency != null">
-        currency = #{currency,jdbcType=INTEGER},
+      <if test="tradeType != null">
+        trade_type = #{tradeType,jdbcType=TINYINT},
       </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="tradeType != null">
-        trade_type = #{tradeType,jdbcType=TINYINT},
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
       </if>
       <if test="paidAmount != null">
         paid_amount = #{paidAmount,jdbcType=DECIMAL},
       </if>
       <if test="payingAmount != null">
         paying_amount = #{payingAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRate != null">
+        interest_rate = #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestUnit != null">
+        interest_unit = #{interestUnit,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
@@ -165,11 +197,14 @@
       task_id = #{taskId,jdbcType=BIGINT},
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       installment_no = #{installmentNo,jdbcType=TINYINT},
-      currency = #{currency,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DECIMAL},
       trade_type = #{tradeType,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=INTEGER},
       paid_amount = #{paidAmount,jdbcType=DECIMAL},
       paying_amount = #{payingAmount,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      interest_rate = #{interestRate,jdbcType=DECIMAL},
+      interest_unit = #{interestUnit,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

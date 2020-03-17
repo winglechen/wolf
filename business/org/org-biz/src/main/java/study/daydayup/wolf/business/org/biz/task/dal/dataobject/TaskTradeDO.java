@@ -17,15 +17,21 @@ public class TaskTradeDO implements Serializable {
 
     private Byte installmentNo;
 
-    private Integer currency;
+    private Byte tradeType;
 
     private BigDecimal amount;
 
-    private Byte tradeType;
+    private Integer currency;
 
     private BigDecimal paidAmount;
 
     private BigDecimal payingAmount;
+
+    private BigDecimal interest;
+
+    private BigDecimal interestRate;
+
+    private Integer interestUnit;
 
     private Integer deleteFlag;
 
@@ -44,11 +50,14 @@ public class TaskTradeDO implements Serializable {
         sb.append(", taskId=").append(taskId);
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", installmentNo=").append(installmentNo);
-        sb.append(", currency=").append(currency);
-        sb.append(", amount=").append(amount);
         sb.append(", tradeType=").append(tradeType);
+        sb.append(", amount=").append(amount);
+        sb.append(", currency=").append(currency);
         sb.append(", paidAmount=").append(paidAmount);
         sb.append(", payingAmount=").append(payingAmount);
+        sb.append(", interest=").append(interest);
+        sb.append(", interestRate=").append(interestRate);
+        sb.append(", interestUnit=").append(interestUnit);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -72,11 +81,14 @@ public class TaskTradeDO implements Serializable {
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getInstallmentNo() == null ? other.getInstallmentNo() == null : this.getInstallmentNo().equals(other.getInstallmentNo()))
-            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
-            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
+            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getCurrency() == null ? other.getCurrency() == null : this.getCurrency().equals(other.getCurrency()))
             && (this.getPaidAmount() == null ? other.getPaidAmount() == null : this.getPaidAmount().equals(other.getPaidAmount()))
             && (this.getPayingAmount() == null ? other.getPayingAmount() == null : this.getPayingAmount().equals(other.getPayingAmount()))
+            && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
+            && (this.getInterestRate() == null ? other.getInterestRate() == null : this.getInterestRate().equals(other.getInterestRate()))
+            && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -90,11 +102,14 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getInstallmentNo() == null) ? 0 : getInstallmentNo().hashCode());
-        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
-        result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
+        result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getCurrency() == null) ? 0 : getCurrency().hashCode());
         result = prime * result + ((getPaidAmount() == null) ? 0 : getPaidAmount().hashCode());
         result = prime * result + ((getPayingAmount() == null) ? 0 : getPayingAmount().hashCode());
+        result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
+        result = prime * result + ((getInterestRate() == null) ? 0 : getInterestRate().hashCode());
+        result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;
