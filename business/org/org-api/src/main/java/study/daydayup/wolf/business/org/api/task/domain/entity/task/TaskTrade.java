@@ -22,4 +22,7 @@ public class TaskTrade implements Model {
 
     private Integer currency;
     private BigDecimal amount;
+
+    private BigDecimal paidAmount;
+    private BigDecimal payingAmount;
 }

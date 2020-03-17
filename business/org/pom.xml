@@ -23,18 +23,6 @@
     </properties>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>study.daydayup.wolf.business.org</groupId>
-                <artifactId>org-api</artifactId>
-                <version>{org.version}</version>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
-
-
     <dependencies>
         <dependency>
             <groupId>study.daydayup.wolf.boot</groupId>

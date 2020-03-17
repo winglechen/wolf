@@ -129,12 +129,16 @@ CREATE TABLE IF NOT EXISTS `task_trade`
 
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易单号',
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
-    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
-    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '总金额',
     `trade_type`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易类型',
 
+    `amount`            DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '本金',
+    `currency`          INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `paid_amount`       DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已还金额',
     `paying_amount`     DECIMAL(15, 4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '待审核金额',
+
+    `interest`          DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '利息',
+    `interest_rate`     DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '利息比率',
+    `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
 
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
