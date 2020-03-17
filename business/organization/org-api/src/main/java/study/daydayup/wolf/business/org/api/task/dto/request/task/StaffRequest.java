@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.org.api.task.dto.request.task;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.org.api.task.domain.exception.InvalidTaskRequestException;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOwner;
@@ -15,6 +16,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
  **/
 @EqualsAndHashCode(callSuper = false)
 @Data
+@NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 public class StaffRequest extends TaskOwner implements Request {
     private Integer state;

@@ -18,21 +18,6 @@ import java.math.BigDecimal;
 @RpcService(protocol = "dubbo")
 public class CollectionServiceImpl implements CollectionService {
     @Override
-    public Result<Task> findCollection(Long taskId, Long orgId) {
-        return null;
-    }
-
-    @Override
-    public Result<Task> findContact(Long taskId, Long orgId) {
-        return null;
-    }
-
-    @Override
-    public Result<Page<Task>> findContactsByCollection(Long taskId, Long orgId, PageRequest pageRequest) {
-        return null;
-    }
-
-    @Override
     public Result<Integer> partlyPay(Long taskId, Long orgId, BigDecimal amount) {
         return null;
     }
@@ -53,7 +38,7 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public Result<Integer> failToPay(Long taskId, Long orgId) {
+    public Result<Integer> fail(Long taskId, Long orgId) {
         return null;
     }
 
