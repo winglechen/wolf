@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.org.biz.task.dal.dataobject;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -33,6 +34,8 @@ public class TaskTradeDO implements Serializable {
 
     private Integer interestUnit;
 
+    private LocalDate dueAt;
+
     private Integer deleteFlag;
 
     private LocalDateTime createdAt;
@@ -58,6 +61,7 @@ public class TaskTradeDO implements Serializable {
         sb.append(", interest=").append(interest);
         sb.append(", interestRate=").append(interestRate);
         sb.append(", interestUnit=").append(interestUnit);
+        sb.append(", dueAt=").append(dueAt);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -89,6 +93,7 @@ public class TaskTradeDO implements Serializable {
             && (this.getInterest() == null ? other.getInterest() == null : this.getInterest().equals(other.getInterest()))
             && (this.getInterestRate() == null ? other.getInterestRate() == null : this.getInterestRate().equals(other.getInterestRate()))
             && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
+            && (this.getDueAt() == null ? other.getDueAt() == null : this.getDueAt().equals(other.getDueAt()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -110,6 +115,7 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getInterest() == null) ? 0 : getInterest().hashCode());
         result = prime * result + ((getInterestRate() == null) ? 0 : getInterestRate().hashCode());
         result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
+        result = prime * result + ((getDueAt() == null) ? 0 : getDueAt().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;
