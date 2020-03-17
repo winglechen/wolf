@@ -36,6 +36,8 @@ public class TaskTradeDO implements Serializable {
 
     private LocalDate dueAt;
 
+    private Integer periodStrategy;
+
     private Integer deleteFlag;
 
     private LocalDateTime createdAt;
@@ -62,6 +64,7 @@ public class TaskTradeDO implements Serializable {
         sb.append(", interestRate=").append(interestRate);
         sb.append(", interestUnit=").append(interestUnit);
         sb.append(", dueAt=").append(dueAt);
+        sb.append(", periodStrategy=").append(periodStrategy);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -94,6 +97,7 @@ public class TaskTradeDO implements Serializable {
             && (this.getInterestRate() == null ? other.getInterestRate() == null : this.getInterestRate().equals(other.getInterestRate()))
             && (this.getInterestUnit() == null ? other.getInterestUnit() == null : this.getInterestUnit().equals(other.getInterestUnit()))
             && (this.getDueAt() == null ? other.getDueAt() == null : this.getDueAt().equals(other.getDueAt()))
+            && (this.getPeriodStrategy() == null ? other.getPeriodStrategy() == null : this.getPeriodStrategy().equals(other.getPeriodStrategy()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -116,6 +120,7 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getInterestRate() == null) ? 0 : getInterestRate().hashCode());
         result = prime * result + ((getInterestUnit() == null) ? 0 : getInterestUnit().hashCode());
         result = prime * result + ((getDueAt() == null) ? 0 : getDueAt().hashCode());
+        result = prime * result + ((getPeriodStrategy() == null) ? 0 : getPeriodStrategy().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;

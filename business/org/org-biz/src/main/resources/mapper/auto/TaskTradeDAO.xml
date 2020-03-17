@@ -16,12 +16,14 @@
     <result column="interest_rate" jdbcType="DECIMAL" property="interestRate" />
     <result column="interest_unit" jdbcType="INTEGER" property="interestUnit" />
     <result column="due_at" jdbcType="DATE" property="dueAt" />
+    <result column="period_strategy" jdbcType="INTEGER" property="periodStrategy" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, task_id, trade_no, installment_no, trade_type, amount, currency, paid_amount, 
-    paying_amount, interest, interest_rate, interest_unit, due_at, delete_flag, created_at
+    paying_amount, interest, interest_rate, interest_unit, due_at, period_strategy, delete_flag, 
+    created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -38,14 +40,14 @@
       trade_no, installment_no, trade_type, 
       amount, currency, paid_amount, 
       paying_amount, interest, interest_rate, 
-      interest_unit, due_at, delete_flag, 
-      created_at)
+      interest_unit, due_at, period_strategy, 
+      delete_flag, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
       #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, #{tradeType,jdbcType=TINYINT}, 
       #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL}, 
       #{payingAmount,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{interestRate,jdbcType=DECIMAL}, 
-      #{interestUnit,jdbcType=INTEGER}, #{dueAt,jdbcType=DATE}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{interestUnit,jdbcType=INTEGER}, #{dueAt,jdbcType=DATE}, #{periodStrategy,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade
@@ -91,6 +93,9 @@
       </if>
       <if test="dueAt != null">
         due_at,
+      </if>
+      <if test="periodStrategy != null">
+        period_strategy,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -142,6 +147,9 @@
       <if test="dueAt != null">
         #{dueAt,jdbcType=DATE},
       </if>
+      <if test="periodStrategy != null">
+        #{periodStrategy,jdbcType=INTEGER},
+      </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -192,6 +200,9 @@
       <if test="dueAt != null">
         due_at = #{dueAt,jdbcType=DATE},
       </if>
+      <if test="periodStrategy != null">
+        period_strategy = #{periodStrategy,jdbcType=INTEGER},
+      </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -216,6 +227,7 @@
       interest_rate = #{interestRate,jdbcType=DECIMAL},
       interest_unit = #{interestUnit,jdbcType=INTEGER},
       due_at = #{dueAt,jdbcType=DATE},
+      period_strategy = #{periodStrategy,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

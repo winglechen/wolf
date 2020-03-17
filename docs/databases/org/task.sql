@@ -140,6 +140,7 @@ CREATE TABLE IF NOT EXISTS `task_trade`
     `interest_rate`     DECIMAL(8, 4) NOT NULL DEFAULT 0 COMMENT '利息比率',
     `interest_unit`     INT(11) NOT NULL DEFAULT 0 COMMENT '利息单位',
     `due_at`            DATE COMMENT '到期时间',
+    `period_strategy`   INT(11) NOT NULL DEFAULT 0 COMMENT '时长策略',
 
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
