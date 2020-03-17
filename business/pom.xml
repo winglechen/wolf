@@ -14,7 +14,7 @@
         <module>account</module>
         <module>goods</module>
         <module>knowledge</module>
-        <module>organization</module>
+        <module>org</module>
         <module>pay</module>
         <module>trade</module>
         <module>uc</module>

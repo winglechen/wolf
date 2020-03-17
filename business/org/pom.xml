@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>study.daydayup.wolf.business</groupId>
-    <artifactId>organization</artifactId>
+    <artifactId>org</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
@@ -26,7 +26,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>study.daydayup.wolf.business.organization</groupId>
+                <groupId>study.daydayup.wolf.business.org</groupId>
                 <artifactId>org-api</artifactId>
                 <version>{org.version}</version>
             </dependency>
