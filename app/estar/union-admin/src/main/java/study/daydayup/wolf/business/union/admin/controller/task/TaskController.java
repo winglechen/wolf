@@ -93,7 +93,10 @@ public class TaskController implements Controller {
     @PostMapping("/task/contact")
     public Result<Integer> addContact(@Validated @RequestBody Task task) {
         Long orgId = session.get("orgId", Long.class);
+        Long accountId = session.get("accountId", Long.class);
+
         task.setOrgId(orgId);
+        task.setStaffId(accountId);
         task.setId(null);
         task.setTaskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode());
 
@@ -181,8 +184,32 @@ public class TaskController implements Controller {
     }
 
     @GetMapping("/task/staff/{staffId}")
-    public Result<Page<Task>> findByStaff(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+    public Result<Page<Task>> findByStaff(@PathVariable(name = "staffId", required = false) Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        StaffRequest request = StaffRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .option(option)
+                .build();
+
+        return taskService.findByStaff(request, pageRequest);
+    }
+
+    @GetMapping("/task/my")
+    public Result<Page<Task>> findMyTasks(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        Long staffId = session.get("accountId", Long.class);
+
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
                 .pageSize(10)
@@ -216,6 +243,28 @@ public class TaskController implements Controller {
                 .build();
 
         return taskService.findByProject(request, pageRequest);
+    }
+
+    @GetMapping("/task/collection/waitToAssign")
+    public Result<Page<Task>> findUnassignedCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        StaffRequest request = StaffRequest.builder()
+                .orgId(orgId)
+                .staffId(0L)
+                .taskType(TaskTypeEnum.COLLECTION.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByStaff(request, pageRequest);
     }
 
     @GetMapping("/task/collection")
