@@ -3,8 +3,6 @@ package study.daydayup.wolf.business.org.biz.task.domain.repository;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.biz.task.converter.TaskConverter;

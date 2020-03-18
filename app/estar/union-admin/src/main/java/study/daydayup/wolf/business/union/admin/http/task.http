@@ -9,7 +9,7 @@ Content-Type: application/json
   "name" : "collection task",
   "memo" : "collection task memo",
   "tags" : "test, dev",
-  "collection" : {
+  "trade" : {
     "tradeNo" : "abc123456",
     "tradeType": 2,
     "installmentNo": 1,
@@ -42,12 +42,12 @@ Content-Type: application/json
 
     "contactAttachment" : "/yyy/xxx.jpg",
     "resultAttachment" : "/result/att.jpg",
-    "recontactAt" : "2020-03-20 09:30:00"
+    "recontactAt" : "2020-03-20T09:30:00"
   }
 }
 
 ###
-GET http://localhost:8200/task/task/1
+GET http://localhost:8200/task/task/21
 Accept: */*
 Cache-Control: no-cache
 
@@ -57,7 +57,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/contact/10
+GET http://localhost:8200/task/contact/11
 Accept: */*
 Cache-Control: no-cache
 

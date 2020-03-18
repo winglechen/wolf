@@ -8,7 +8,7 @@
         select
         <include refid="Base_Column_List"/>
         from task_detail
-        where task_id=#{taskId,jdbcType=BIGINT}
+        where id=#{taskId,jdbcType=BIGINT}
         and org_id=#{orgId,jdbcType=BIGINT}
         limit 1
     </select>
@@ -18,7 +18,7 @@
         select
         <include refid="Base_Column_List"/>
         from task_detail
-        where task_id in
+        where id in
         <foreach item="item" index="index" collection="taskIdCollection"
                  open="(" separator="," close=")">
             #{item,jdbcType=BIGINT}
@@ -36,7 +36,7 @@
                 extend_fields = #{updated.extendFields,jdbcType=VARCHAR},
             </if>
         </set>
-        where task_id = #{key.taskId,jdbcType=BIGINT}
+        where id = #{key.taskId,jdbcType=BIGINT}
         and org_id=#{key.orgId,jdbcType=BIGINT}
         limit 1
     </update>

@@ -40,14 +40,20 @@ public class TaskController implements Controller {
     @GetMapping("/task/task/{taskId}")
     public Result<Task> find(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
+        TaskOption option = TaskOption.builder()
+                .withDetail(true)
+                .withContact(true)
+                .withTrade(true)
+                .build();
 
-        return taskService.find(taskId, orgId);
+        return taskService.find(taskId, orgId, option);
     }
 
     @GetMapping("/task/contact/{taskId}")
     public Result<Task> findContact(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
         TaskOption option = TaskOption.builder()
+                .withDetail(true)
                 .withContact(true)
                 .build();
 
@@ -58,6 +64,7 @@ public class TaskController implements Controller {
     public Result<Task> findCollection(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
         TaskOption option = TaskOption.builder()
+                .withDetail(true)
                 .withTrade(true)
                 .build();
 
@@ -231,7 +238,7 @@ public class TaskController implements Controller {
         return taskService.findByTaskType(request, pageRequest);
     }
 
-    @GetMapping("/task/collection/{staffId}")
+    @GetMapping("/task/collection/staff/{staffId}")
     public Result<Page<Task>> findStaffCollections(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
@@ -274,7 +281,7 @@ public class TaskController implements Controller {
         return taskService.findByTaskType(request, pageRequest);
     }
 
-    @GetMapping("/task/contact/{staffId}")
+    @GetMapping("/task/contact/staff/{staffId}")
     public Result<Page<Task>> findStaffContacts(@PathVariable("staffId") Long staffId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
