@@ -28,7 +28,7 @@ public class TaskSchedulerRepository implements Repository {
         return 0;
     }
 
-    public int save(@NonNull TaskScheduler key, @NonNull TaskScheduler changes) {
+    public int save(TaskScheduler key, TaskScheduler changes) {
         return 0;
     }
 

@@ -34,4 +34,5 @@ public class TaskTrade implements Model {
 
     private LocalDate dueAt;
     private Integer dueDays;
+    private Integer periodStrategy;
 }

@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.union.admin.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.api.Request;
@@ -15,6 +16,7 @@ import java.util.List;
  * @since 2020/3/17 6:56 下午
  **/
 @Data
+@NoArgsConstructor
 public class TaskAssignRequest implements Request {
     @NonNull @Positive
     private Long staffId;

@@ -71,7 +71,7 @@
                 updated_at = #{updated.updatedAt,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{key.id,jdbcType=BIGINT}
         and org_id=#{key.orgId,jdbcType=BIGINT}
         <if test="key.staffId != null">
             and staff_id = #{key.staffId,jdbcType=BIGINT}

@@ -37,7 +37,7 @@ public class TaskContactRepository implements Repository {
         return dao.insertSelective(contactDO);
     }
 
-    public int save(@NonNull TaskContact key, @NonNull TaskContact changes) {
+    public int save(TaskContact key, TaskContact changes) {
         if (null == key || null == changes) {
             return 0;
         }

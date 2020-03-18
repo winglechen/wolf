@@ -19,13 +19,22 @@ import java.util.TreeSet;
 @Data
 @SuperBuilder(toBuilder = true)
 public class TaskIds extends TaskOwner {
-    private Set<Long> taskIdSet = new TreeSet<>();
+    private Set<Long> taskIdSet;
 
     public void add(@NonNull Long taskId) {
+        initIdSet();
         taskIdSet.add(taskId);
     }
 
     public void addAll(@NonNull Collection<Long> taskIds) {
+        initIdSet();
         taskIdSet.addAll(taskIds);
+    }
+
+    private void initIdSet() {
+        if (taskIdSet != null) {
+            return;
+        }
+        taskIdSet = new TreeSet<>();
     }
 }
