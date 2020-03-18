@@ -86,6 +86,29 @@ public class SellerContractServiceImpl implements SellerContractService {
         return Result.ok(contractPage);
     }
 
+    @Override
+    public Result<Page<Contract>> findOverdueContractByBuyer(@Validated InstallmentStateRequest request, PageRequest pageRequest) {
+        if (null == request.getBuyerId()) {
+            Page<Contract>  contractPage = Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+            return Result.ok(contractPage);
+        }
+
+        Page<InstallmentTerm> installmentTermList = installmentTermRepository.findDueForBuyer(
+                request.getDueAt(), request.getBuyerId(), request.getSellerId(), pageRequest
+        );
+
+        TradeIds tradeIds = getTradeIdsByInstallmentList(installmentTermList.getData(), request.getSellerId());
+        if (null == tradeIds) {
+            Page<Contract>  contractPage = Page.empty(pageRequest.getPageNum(), pageRequest.getPageSize());
+            return Result.ok(contractPage);
+        }
+
+        List<Contract> contractList = findByTradeNos(tradeIds).getData();
+        Page<Contract> contractPage = installmentTermList.to(contractList);
+
+        return Result.ok(contractPage);
+    }
+
     private TradeIds getTradeIdsByInstallmentList(List<InstallmentTerm> installmentTermList, Long sellerId) {
         if (!ListUtil.notEmpty(installmentTermList)) {
             return null;

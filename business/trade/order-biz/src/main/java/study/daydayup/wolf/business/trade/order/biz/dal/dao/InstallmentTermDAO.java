@@ -27,7 +27,7 @@ public interface InstallmentTermDAO {
 
     List<InstallmentTermDO> selectByDueAt(@Param("dueAt")LocalDate dueAt);
 
-    List<InstallmentTermDO> selectByDueAtAndBuyer(@Param("dueAt")LocalDate dueAt, @Param("buyerId")Long buyerId);
+    List<InstallmentTermDO> selectByDueAtAndBuyer(@Param("dueAt")LocalDate dueAt, @Param("buyerId")Long buyerId, @Param("sellerId")Long sellerId);
 
     List<InstallmentTermDO> selectByDueAtAndSeller(@Param("dueAt")LocalDate dueAt, @Param("sellerId")Long sellerId);
 

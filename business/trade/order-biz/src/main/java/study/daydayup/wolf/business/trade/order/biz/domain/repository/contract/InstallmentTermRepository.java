@@ -112,9 +112,9 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         return pageInstallmentTerm(installmentTermDOList, pageRequest);
     }
 
-    public Page<InstallmentTerm> findDueForBuyer(@NonNull LocalDate dueAt, Long buyerId, PageRequest pageRequest) {
+    public Page<InstallmentTerm> findDueForBuyer(@NonNull LocalDate dueAt, Long buyerId, Long sellerId, PageRequest pageRequest) {
         Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
-        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndBuyer(dueAt, buyerId);
+        List<InstallmentTermDO> installmentTermDOList = installmentTermDAO.selectByDueAtAndBuyer(dueAt, buyerId, sellerId);
 
         return pageInstallmentTerm(installmentTermDOList, pageRequest);
     }

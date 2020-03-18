@@ -193,6 +193,23 @@ public class UnionLoanController implements Controller {
         return sellerContractService.findByInstallmentState(request, pageRequest);
     }
 
+    @GetMapping("/loan/contract/overdue/{buyerId}")
+    public Result<Page<Contract>> overdueList(@PathVariable("buyerId") Long buyerId, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        LocalDate yesterday = LocalDate.now().plusDays(-1);
+
+        InstallmentStateRequest request = initInstallmentStateRequest();
+        request.setDueAt(yesterday);
+        request.setInstallmentType(InstallmentTypeEnum.DEFAULT.getCode());
+        request.setBuyerId(buyerId);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerContractService.findOverdueContractByBuyer(request, pageRequest);
+    }
+
     private TradeId initTradeId(String tradeNo) {
         if (tradeNo == null) {
             throw new IllegalArgumentException("tradeNo can't be null");

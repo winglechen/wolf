@@ -33,6 +33,11 @@ GET http://localhost:8200/loan/contract/overdue?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
+### 买家在指定店铺逾期列表
+GET http://localhost:8200/loan/contract/overdue/10?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
 ### 通过借款请求
 PUT http://localhost:8200/loan/contract/approve/20200201182541000039468280351280
 Accept: */*

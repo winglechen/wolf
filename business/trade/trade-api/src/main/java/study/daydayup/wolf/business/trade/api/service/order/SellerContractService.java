@@ -29,6 +29,6 @@ public interface SellerContractService {
     Result<Page<Contract>> search(FulltextRequest request, PageRequest pageRequest);
 
     Result<Page<Contract>> findByInstallmentState(InstallmentStateRequest request, PageRequest pageRequest);
-
+    Result<Page<Contract>> findOverdueContractByBuyer(InstallmentStateRequest request, PageRequest pageRequest);
     Result<Page<InstallmentTerm>> findDueInstallmentTerm(DueInstallmentRequest request, PageRequest pageRequest);
 }

@@ -15,6 +15,7 @@ import java.time.LocalDate;
  **/
 @Data
 public class InstallmentStateRequest extends SellerRequest {
+    private Long buyerId;
     private Integer state;
     protected Integer installmentType;
     @NotNull
