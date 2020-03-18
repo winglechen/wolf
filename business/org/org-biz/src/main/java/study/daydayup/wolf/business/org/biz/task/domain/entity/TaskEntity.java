@@ -1,13 +1,12 @@
 package study.daydayup.wolf.business.org.biz.task.domain.entity;
 
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskScheduler;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.*;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +17,8 @@ import java.util.List;
  * @since 2020/3/15 11:42 下午
  **/
 public class TaskEntity extends AbstractEntity<Task> implements Entity {
+    private LocalDateTime now;
+
     public TaskEntity(Task task) {
         this(task, true);
     }
@@ -38,12 +39,16 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         formatContact();
         formatTrade();
         formatScheduler();
+
+        addStateLog();
     }
 
     public void assign(Long staffId) {
         initChanges();
         model.setStaffId(staffId);
         changes.setStaffId(staffId);
+
+        addAssignmentLog();
     }
 
     //TODO add task state machine
@@ -55,6 +60,14 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         initChanges();
         model.setState(state);
         changes.setState(state);
+    }
+
+    private void initNow() {
+        if (now != null) {
+            return;
+        }
+
+        now = LocalDateTime.now();
     }
 
     private void initChanges() {
@@ -97,5 +110,43 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         scheduler.setStaffId(model.getStaffId());
         scheduler.setTaskId(model.getId());
     }
+
+    private void addStateLog() {
+        initNow();
+        TaskStateLog log = TaskStateLog.builder()
+                .orgId(model.getOrgId())
+                .staffId(model.getStaffId())
+                .taskId(model.getId())
+                .projectId(model.getProjectId())
+
+                .sourceState(key.getState())
+                .targetState(changes.getState())
+                .sourceVersion(model.getVersion())
+                .targetVersion(model.getVersion() + 1)
+
+                .createdAt(now)
+                .build();
+
+        changes.setStateLog(log);
+    }
+
+    private void addAssignmentLog() {
+        initNow();
+        TaskAssignmentLog log = TaskAssignmentLog.builder()
+                .orgId(model.getOrgId())
+                .taskId(model.getId())
+                .projectId(model.getProjectId())
+
+                .sourceOwner(key.getStaffId())
+                .targetOwner(changes.getStaffId())
+                .sourceVersion(model.getVersion())
+                .targetVersion(model.getVersion() + 1)
+
+                .createdAt(now)
+                .build();
+
+        changes.setAssignmentLog(log);
+    }
+
 }
 

@@ -9,29 +9,21 @@ public class TaskAssignmentLogDO implements Serializable {
     private Long id;
 
     private Long orgId;
-
     private Long taskId;
-
     private Long projectId;
 
     private Long assigner;
-
     private Long sourceOwner;
-
     private Long targetOwner;
 
     private Integer sourceVersion;
-
     private Integer targetVersion;
 
     private String memo;
-
     private String tags;
 
     private Integer deleteFlag;
-
     private Long editor;
-
     private LocalDateTime createdAt;
 
     private static final long serialVersionUID = 1L;

@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskScheduler;
-import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.*;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.api.Model;
 
@@ -51,11 +49,15 @@ public class Task implements Model {
     private LocalDateTime startAt;
     private LocalDateTime endAt;
 
+    private Integer version;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     private TaskContact contact;
     private TaskScheduler scheduler;
     private TaskTrade trade;
+
+    private TaskStateLog stateLog;
+    private TaskAssignmentLog assignmentLog;
 
 }

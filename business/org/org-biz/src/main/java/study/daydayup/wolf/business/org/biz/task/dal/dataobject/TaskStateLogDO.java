@@ -9,29 +9,22 @@ public class TaskStateLogDO implements Serializable {
     private Long id;
 
     private Long orgId;
-
     private Long staffId;
-
     private Long taskId;
-
     private Long projectId;
 
     private Short sourceState;
-
     private Short targetState;
 
     private Integer sourceVersion;
-
     private Integer targetVersion;
 
     private String memo;
-
     private String tags;
 
     private Integer deleteFlag;
 
     private Long editor;
-
     private LocalDateTime createdAt;
 
     private static final long serialVersionUID = 1L;
