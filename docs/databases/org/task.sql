@@ -28,6 +28,10 @@ CREATE TABLE IF NOT EXISTS `task`
     `last_editor` BIGINT(20) UNSIGNED       NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME                  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX idx_org(`org_id`, `task_type`, `state`),
+    INDEX idx_parent(`parent_id`),
+    INDEX idx_staff(`staff_id`, `org_id`, `task_type`, `state`),
+    INDEX idx_project(`org_id`, `project_id`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';
@@ -60,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `project`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX idx_org(`org_id`, `parent_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = 'project';
@@ -69,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `project_detail`
 (
     `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `org_id`        BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
-    `project_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `detail`        TEXT,
 
@@ -90,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `task_scheduler`
 
     `delete_flag` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    UNIQUE INDEX udx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务调度器';
@@ -116,6 +121,7 @@ CREATE TABLE IF NOT EXISTS `task_contact`
 
     `delete_flag` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    UNIQUE INDEX udx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务联系信息';
@@ -145,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `task_trade`
 
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    UNIQUE INDEX udx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';
@@ -170,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `task_state_log`
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';
@@ -195,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `task_assignment_log`
     `delete_flag`       TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';
@@ -212,6 +221,8 @@ CREATE TABLE IF NOT EXISTS `task_progress`
     `last_editor` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+
+    INDEX idx_task(`task_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '任务';
