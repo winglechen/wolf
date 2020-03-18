@@ -10,6 +10,8 @@ public class TaskContactDO implements Serializable {
 
     private Long orgId;
 
+    private Long staffId;
+
     private Long taskId;
 
     private Long partnerOrgId;
@@ -44,6 +46,7 @@ public class TaskContactDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", staffId=").append(staffId);
         sb.append(", taskId=").append(taskId);
         sb.append(", partnerOrgId=").append(partnerOrgId);
         sb.append(", customerId=").append(customerId);
@@ -74,6 +77,7 @@ public class TaskContactDO implements Serializable {
         TaskContactDO other = (TaskContactDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getPartnerOrgId() == null ? other.getPartnerOrgId() == null : this.getPartnerOrgId().equals(other.getPartnerOrgId()))
             && (this.getCustomerId() == null ? other.getCustomerId() == null : this.getCustomerId().equals(other.getCustomerId()))
@@ -94,6 +98,7 @@ public class TaskContactDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getPartnerOrgId() == null) ? 0 : getPartnerOrgId().hashCode());
         result = prime * result + ((getCustomerId() == null) ? 0 : getCustomerId().hashCode());

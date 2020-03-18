@@ -12,6 +12,8 @@ public class TaskTradeDO implements Serializable {
 
     private Long orgId;
 
+    private Long staffId;
+
     private Long taskId;
 
     private String tradeNo;
@@ -52,6 +54,7 @@ public class TaskTradeDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", staffId=").append(staffId);
         sb.append(", taskId=").append(taskId);
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", installmentNo=").append(installmentNo);
@@ -85,6 +88,7 @@ public class TaskTradeDO implements Serializable {
         TaskTradeDO other = (TaskTradeDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getInstallmentNo() == null ? other.getInstallmentNo() == null : this.getInstallmentNo().equals(other.getInstallmentNo()))
@@ -108,6 +112,7 @@ public class TaskTradeDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getInstallmentNo() == null) ? 0 : getInstallmentNo().hashCode());
