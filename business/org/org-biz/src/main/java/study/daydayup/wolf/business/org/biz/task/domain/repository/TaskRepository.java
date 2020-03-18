@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.org.biz.task.domain.repository;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.biz.task.converter.TaskConverter;
@@ -56,17 +58,24 @@ public class TaskRepository implements Repository {
     }
 
     public int add(TaskEntity entity) {
-        int status = insertTask(entity);
-        if (0 == status) {
+        Long taskId = insertTask(entity);
+        if (0 == taskId) {
             return 0;
         }
 
         Task task = entity.getModel();
+        task.setId(taskId);
         detailRepository.add(task);
-        contactRepository.add(task.getContact());
+
+        TaskContact contact = task.getContact();
+        contact.setTaskId(taskId);
+        contactRepository.add(contact);
+
+        TaskTrade trade = task.getTrade();
+        trade.setTaskId(taskId);
         tradeRepository.add(task.getTrade());
 
-        return status;
+        return 1;
     }
 
     public int save(TaskEntity entity) {
@@ -88,17 +97,21 @@ public class TaskRepository implements Repository {
         return taskDAO.selectById(taskId, orgId);
     }
 
-    private int insertTask(TaskEntity entity) {
+    private Long insertTask(TaskEntity entity) {
         if (entity == null || null == entity.getModel()) {
-            return 0;
+            return 0L;
         }
 
         TaskDO taskDO = TaskConverter.toDo(entity.getModel());
         if (taskDO == null) {
-            return 0;
+            return 0L;
         }
 
-        return taskDAO.insertSelective(taskDO);
+        int status = taskDAO.insertSelective(taskDO);
+        if (status > 0) {
+            return taskDO.getId();
+        }
+        return 0L;
     }
 
     private int updateTask(TaskEntity entity) {
