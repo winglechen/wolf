@@ -9,9 +9,7 @@ import study.daydayup.wolf.business.org.biz.task.converter.TaskConverter;
 import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskDAO;
 import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
-import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskContactRepository;
-import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskDetailRepository;
-import study.daydayup.wolf.business.org.biz.task.domain.repository.task.TaskTradeRepository;
+import study.daydayup.wolf.business.org.biz.task.domain.repository.task.*;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import javax.annotation.Resource;
@@ -30,6 +28,10 @@ public class TaskRepository implements Repository {
     protected TaskContactRepository contactRepository;
     @Resource
     protected TaskDetailRepository detailRepository;
+    @Resource
+    protected TaskStateLogRepository stateLogRepository;
+    @Resource
+    protected TaskAssignmentLogRepository assignmentLogRepository;
 
     @Resource
     protected TaskDAO taskDAO;
@@ -80,6 +82,8 @@ public class TaskRepository implements Repository {
         detailRepository.save(key, changes);
         contactRepository.save(key.getContact(), changes.getContact());
         tradeRepository.save(key.getTrade(), changes.getTrade());
+        stateLogRepository.add(changes.getStateLog());
+        assignmentLogRepository.add(changes.getAssignmentLog());
 
         return status;
     }
