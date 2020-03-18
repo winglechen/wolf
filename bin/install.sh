@@ -45,7 +45,7 @@ function install_uc() {
 
 function install_org() {
     echo "install business.org"
-    dir="${PROJECT_DIR}/business/organization/"
+    dir="${PROJECT_DIR}/business/org/"
     cd ${dir} && mvn clean install
 }
 
