@@ -2,11 +2,9 @@ package study.daydayup.wolf.business.org.biz.task.dal.dataobject;
 
 import java.io.Serializable;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class TaskDetailDO implements Serializable {
     private Long id;
 

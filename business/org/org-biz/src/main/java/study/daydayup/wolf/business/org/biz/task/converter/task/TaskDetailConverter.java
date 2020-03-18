@@ -48,7 +48,7 @@ public class TaskDetailConverter implements Converter {
             return taskList;
         }
 
-        Map<Long, TaskDetailDO> doMap = CollectionUtil.map(taskDOList, TaskDetailDO::getTaskId);
+        Map<Long, TaskDetailDO> doMap = CollectionUtil.map(taskDOList, TaskDetailDO::getId);
         for (Task task : taskList) {
             if (null == doMap.get(task.getId())) {
                 continue;
