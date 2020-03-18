@@ -68,6 +68,7 @@ Content-Type: application/json
 {
   "account": "18067966016",
   "password": "abcdef",
+  "captcha": "1234",
   "orgId": 1
 }
 
@@ -80,6 +81,7 @@ Content-Type: application/json
 {
   "account": "18067966016",
   "password": "abcdef",
+  "captcha": "1234",
   "orgId": 1
 }
 

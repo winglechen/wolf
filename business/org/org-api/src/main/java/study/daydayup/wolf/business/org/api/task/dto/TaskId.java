@@ -1,8 +1,11 @@
 package study.daydayup.wolf.business.org.api.task.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import study.daydayup.wolf.framework.layer.api.DTO;
 
 /**
  * study.daydayup.wolf.business.org.api.task.dto
@@ -13,6 +16,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @SuperBuilder(toBuilder = true)
-public class TaskId extends TaskOwner {
+@NoArgsConstructor
+@AllArgsConstructor
+public class TaskId extends TaskOwner implements DTO {
     private Long taskId;
 }

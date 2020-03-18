@@ -212,6 +212,7 @@ public class TaskController implements Controller {
         ProjectRequest request = ProjectRequest.builder()
                 .orgId(orgId)
                 .projectId(projectId)
+                .option(TaskOption.DEFAULT)
                 .build();
 
         return taskService.findByProject(request, pageRequest);

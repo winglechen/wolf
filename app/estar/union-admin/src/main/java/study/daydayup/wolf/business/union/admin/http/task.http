@@ -9,6 +9,7 @@ Content-Type: application/json
   "name" : "collection task",
   "memo" : "collection task memo",
   "tags" : "test, dev",
+  "projectId" : 1,
   "trade" : {
     "tradeNo" : "abc123456",
     "tradeType": 2,
@@ -29,6 +30,7 @@ Content-Type: application/json
 
 {
   "parentId" : 1,
+  "staffId": 10,
   "name" : "contact customer",
   "memo" : "customer contact memo",
   "tags" : "test, dev",
@@ -126,17 +128,23 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/subTasks/1?pageNum=1
+GET http://localhost:8200/task/subTasks/1?pageNum=3
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/staff/10?pageNum=1
+GET http://localhost:8200/task/staff/10?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/task/project/1?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/collection?pageNum=1
+GET http://localhost:8200/task/collection?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
@@ -145,14 +153,13 @@ GET http://localhost:8200/task/collection/staff/10?pageNum=1
 Accept: */*
 Cache-Control: no-cache
 
-
 ###
-GET http://localhost:8200/task/contact?pageNum=3
+GET http://localhost:8200/task/contact?pageNum=4
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/contact/staff/10?pageNum=1
+GET http://localhost:8200/task/contact/staff/10?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 

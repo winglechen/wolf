@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.org.api.task.dto.request.task;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 public class ProjectRequest extends TaskOwner implements Request {
     private Long projectId;
