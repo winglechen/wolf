@@ -4,12 +4,11 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
-    <result column="task_id" jdbcType="BIGINT" property="taskId" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="extend_fields" jdbcType="VARCHAR" property="extendFields" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, task_id, memo, extend_fields
+    id, org_id, memo, extend_fields
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,10 +21,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
-    insert into task_detail (id, org_id, task_id, 
-      memo, extend_fields)
-    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
-      #{memo,jdbcType=VARCHAR}, #{extendFields,jdbcType=VARCHAR})
+    insert into task_detail (id, org_id, memo, 
+      extend_fields)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{memo,jdbcType=VARCHAR}, 
+      #{extendFields,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     insert into task_detail
@@ -35,9 +34,6 @@
       </if>
       <if test="orgId != null">
         org_id,
-      </if>
-      <if test="taskId != null">
-        task_id,
       </if>
       <if test="memo != null">
         memo,
@@ -53,9 +49,6 @@
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="taskId != null">
-        #{taskId,jdbcType=BIGINT},
-      </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
@@ -70,9 +63,6 @@
       <if test="orgId != null">
         org_id = #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="taskId != null">
-        task_id = #{taskId,jdbcType=BIGINT},
-      </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
       </if>
@@ -85,7 +75,6 @@
   <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDetailDO">
     update task_detail
     set org_id = #{orgId,jdbcType=BIGINT},
-      task_id = #{taskId,jdbcType=BIGINT},
       memo = #{memo,jdbcType=VARCHAR},
       extend_fields = #{extendFields,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
