@@ -96,7 +96,7 @@ function install_business() {
     install_account
     install_uc
     install_org
-    install_knowlege
+    install_knowledge
 
     install_goods
     install_trade
