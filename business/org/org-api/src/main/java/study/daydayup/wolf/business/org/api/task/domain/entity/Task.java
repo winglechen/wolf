@@ -27,7 +27,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Task implements Model {
     private Long id;
-    @NotNull @Min(1)
     private Long orgId;
     private Long staffId;
 
@@ -36,7 +35,6 @@ public class Task implements Model {
 
     private String name;
 
-    @NotNull @Min(1)
     private Integer taskType;
     private Integer state;
     private TaskEvent stateEvent;

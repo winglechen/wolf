@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `task_contact`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
     `org_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `staff_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `task_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `partner_org_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
@@ -125,6 +126,7 @@ CREATE TABLE IF NOT EXISTS `task_trade`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品ID',
     `org_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `staff_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `task_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
 
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易单号',

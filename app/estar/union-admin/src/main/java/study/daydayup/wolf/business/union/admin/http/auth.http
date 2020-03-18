@@ -98,3 +98,8 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:8200/auth/captcha
+Accept: */*
+Cache-Control: no-cache
+
+###

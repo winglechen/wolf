@@ -76,6 +76,11 @@
             <version>${version.snapshot}</version>
         </dependency>
         <dependency>
+            <groupId>study.daydayup.wolf.business.org</groupId>
+            <artifactId>org-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+        <dependency>
             <groupId>study.daydayup.wolf.business.goods</groupId>
             <artifactId>goods-biz</artifactId>
             <version>${version.snapshot}</version>

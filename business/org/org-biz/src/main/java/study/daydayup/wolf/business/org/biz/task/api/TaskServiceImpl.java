@@ -68,8 +68,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Result<Integer> add(@Validated Task task) {
         TaskEntity entity = new TaskEntity(task);
-        int status = taskRepository.add(entity);
+        entity.format();
 
+        int status = taskRepository.add(entity);
         return Result.ok(status);
     }
 

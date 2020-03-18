@@ -1,6 +1,9 @@
 package study.daydayup.wolf.business.org.biz.task.domain.entity;
 
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskContact;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskScheduler;
+import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskTrade;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
@@ -31,12 +34,10 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
                 .build();
     }
 
-    private void initChanges() {
-        if (changes != null) {
-            return;
-        }
-
-        changes = new Task();
+    public void format() {
+        formatContact();
+        formatTrade();
+        formatScheduler();
     }
 
     public void assign(Long staffId) {
@@ -54,6 +55,47 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         initChanges();
         model.setState(state);
         changes.setState(state);
+    }
+
+    private void initChanges() {
+        if (changes != null) {
+            return;
+        }
+
+        changes = new Task();
+    }
+
+    private void formatContact() {
+        TaskContact contact = model.getContact();
+        if (null == contact) {
+            return;
+        }
+
+        contact.setOrgId(model.getOrgId());
+        contact.setStaffId(model.getStaffId());
+        contact.setTaskId(model.getId());
+    }
+
+    private void formatTrade() {
+        TaskTrade trade = model.getTrade();
+        if (null == trade) {
+            return;
+        }
+
+        trade.setOrgId(model.getOrgId());
+        trade.setStaffId(model.getStaffId());
+        trade.setTaskId(model.getId());
+    }
+
+    private void formatScheduler() {
+        TaskScheduler scheduler = model.getScheduler();
+        if (scheduler == null) {
+            return;
+        }
+
+        scheduler.setOrgId(model.getOrgId());
+        scheduler.setStaffId(model.getStaffId());
+        scheduler.setTaskId(model.getId());
     }
 }
 

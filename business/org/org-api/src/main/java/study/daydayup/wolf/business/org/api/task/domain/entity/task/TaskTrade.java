@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Data
 public class TaskTrade implements Model {
     private Long orgId;
+    private Long staffId;
     private Long taskId;
 
     private Integer tradeType;
