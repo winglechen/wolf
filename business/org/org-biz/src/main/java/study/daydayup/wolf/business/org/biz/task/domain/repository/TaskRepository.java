@@ -64,16 +64,9 @@ public class TaskRepository implements Repository {
         }
 
         Task task = entity.getModel();
-        task.setId(taskId);
-        detailRepository.add(task);
-
-        TaskContact contact = task.getContact();
-        contact.setTaskId(taskId);
-        contactRepository.add(contact);
-
-        TaskTrade trade = task.getTrade();
-        trade.setTaskId(taskId);
-        tradeRepository.add(task.getTrade());
+        detailRepository.add(task, taskId);
+        contactRepository.add(task.getContact(), taskId);
+        tradeRepository.add(task.getTrade(), taskId);
 
         return 1;
     }

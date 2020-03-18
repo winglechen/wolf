@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.TaskScheduler;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskIds;
+import study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskSchedulerDO;
 import study.daydayup.wolf.framework.layer.domain.Repository;
 
 import java.util.List;
@@ -17,7 +18,13 @@ import java.util.List;
  **/
 @Component
 public class TaskSchedulerRepository implements Repository {
-    public int add(@NonNull TaskScheduler contact) {
+    public int add(TaskScheduler scheduler, @NonNull Long taskId) {
+        if (scheduler == null) {
+            return 0;
+        }
+
+        TaskSchedulerDO schedulerDO = new TaskSchedulerDO();
+        schedulerDO.setTaskId(taskId);
         return 0;
     }
 

@@ -24,7 +24,7 @@ public class TaskDetailRepository implements Repository {
     @Resource
     private TaskDetailDAO dao;
 
-    public int add(@NonNull Task detail) {
+    public int add(@NonNull Task detail, @NonNull Long taskId) {
         if (null == detail.getMemo() && null == detail.getExtendFields()) {
             return 0;
         }
@@ -33,6 +33,7 @@ public class TaskDetailRepository implements Repository {
         if (detailDO == null) {
             return 0;
         }
+        detailDO.setId(taskId);
         return dao.insertSelective(detailDO);
     }
 

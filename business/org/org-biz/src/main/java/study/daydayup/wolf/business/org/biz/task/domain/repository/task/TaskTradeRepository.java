@@ -24,7 +24,7 @@ public class TaskTradeRepository implements Repository {
     @Resource
     private TaskTradeDAO dao;
 
-    public int add(TaskTrade taskTrade) {
+    public int add(TaskTrade taskTrade, @NonNull Long taskId) {
         if (taskTrade == null) {
             return 0;
         }
@@ -34,6 +34,7 @@ public class TaskTradeRepository implements Repository {
             return 0;
         }
 
+        tradeDO.setTaskId(taskId);
         return dao.insertSelective(tradeDO);
     }
 

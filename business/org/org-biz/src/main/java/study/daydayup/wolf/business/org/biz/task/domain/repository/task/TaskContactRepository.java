@@ -24,7 +24,7 @@ public class TaskContactRepository implements Repository {
     @Resource
     private TaskContactDAO dao;
 
-    public int add(TaskContact contact) {
+    public int add(TaskContact contact, @NonNull Long taskId) {
         if (contact == null) {
             return 0;
         }
@@ -33,6 +33,7 @@ public class TaskContactRepository implements Repository {
         if (contactDO == null) {
             return 0;
         }
+        contactDO.setTaskId(taskId);
         return dao.insertSelective(contactDO);
     }
 
