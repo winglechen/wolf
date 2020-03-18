@@ -23,5 +23,7 @@ public interface TaskAssignmentLogDAO {
 
     List<TaskAssignmentLogDO> selectByTaskIdIn(@Param("taskIdCollection") Collection<Long> taskIdCollection, @Param("orgId")Long orgId);
 
+    int bulkAddLog(@Param("logs") Collection<TaskAssignmentLogDO> logs);
+
 
 }

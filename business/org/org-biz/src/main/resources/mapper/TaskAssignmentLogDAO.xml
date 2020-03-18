@@ -26,4 +26,42 @@
         and org_id=#{orgId,jdbcType=BIGINT}
     </select>
 
+
+    <insert id="bulkAddLog">
+        insert into task_assignment_log(
+            org_id,
+            task_id,
+            project_id,
+
+            assigner,
+            source_owner,
+            target_owner,
+            source_version,
+            target_version,
+
+            memo,
+            tags,
+            editor,
+            created_at
+        )
+        VALUES
+        <foreach collection="logs" item="item" index="index" separator=",">
+            #{orgId,jdbcType=BIGINT}
+            #{taskId,jdbcType=BIGINT}
+            #{projectId,jdbcType=BIGINT}
+
+            #{assigner,jdbcType=BIGINT}
+            #{sourceOwner,jdbcType=BIGINT}
+            #{targetOwner,jdbcType=BIGINT}
+            #{sourceVersion,jdbcType=INTEGER}
+            #{targetVersion,jdbcType=INTEGER}
+
+            #{memo,jdbcType=VARCHAR}
+            #{tags,jdbcType=VARCHAR}
+            #{editor,jdbcType=BIGINT}
+            #{createdAt,jdbcType=TIMESTAMP}
+        </foreach>
+    </insert>
+
+
 </mapper>

@@ -16,6 +16,7 @@ import study.daydayup.wolf.business.org.biz.task.dal.dao.TaskDAO;
 import study.daydayup.wolf.business.org.biz.task.domain.entity.TaskEntity;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskQueryRepository;
 import study.daydayup.wolf.business.org.biz.task.domain.repository.TaskRepository;
+import study.daydayup.wolf.business.org.biz.task.service.TaskAssigner;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -39,6 +40,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskQueryRepository queryRepository;
     @Resource
     protected TaskDAO taskDAO;
+    @Resource
+    protected TaskAssigner taskAssigner;
 
     @Override
     public Result<Task> find(Long taskId, Long orgId) {
@@ -92,9 +95,7 @@ public class TaskServiceImpl implements TaskService {
             return null;
         }
 
-        int status = taskDAO.updateStaffIdByIdIn(staffId, taskIds, orgId);
-        //TODO log assignment
-
+        int status = taskAssigner.bulkAssign(taskIds, staffId, orgId);
         return Result.ok(status);
     }
 
