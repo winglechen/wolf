@@ -45,7 +45,7 @@
             created_at
         )
         VALUES
-        <foreach collection="logs" item="item" index="index" separator=",">
+        <foreach collection="logs" item="item" index="index" open="(" separator="," close=")">
             #{orgId,jdbcType=BIGINT}
             #{taskId,jdbcType=BIGINT}
             #{projectId,jdbcType=BIGINT}
