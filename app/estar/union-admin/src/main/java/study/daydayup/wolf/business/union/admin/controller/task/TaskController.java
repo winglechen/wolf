@@ -270,7 +270,7 @@ public class TaskController implements Controller {
         return taskService.findByProject(request, pageRequest);
     }
 
-    @GetMapping("/task/collection/assign")
+    @GetMapping("/task/collection/assigning")
     public Result<Page<Task>> findUnassignedCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
