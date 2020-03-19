@@ -1,14 +1,14 @@
 package study.daydayup.wolf.business.org.biz.task.domain.entity;
 
+import lombok.NonNull;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.*;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.org.biz.task.domain.entity
@@ -60,6 +60,50 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         initChanges();
         model.setState(state);
         changes.setState(state);
+    }
+
+    public void changePayingAmount(@NonNull BigDecimal amount) {
+        initTradeKey();
+        initTradeChanges();
+        changes.getTrade().setPayingAmount(amount);
+    }
+
+    public void changePaidAmount(@NonNull BigDecimal amount) {
+        if (null == model.getTrade()) {
+            throw new IllegalArgumentException("Can't change paidAmount when model.trade isNull");
+        }
+
+        initTradeKey();
+        initTradeChanges();
+
+        TaskTrade trade = model.getTrade();
+        BigDecimal paidAmount = trade.getPaidAmount();
+        paidAmount = paidAmount.add(amount);
+
+        changes.getTrade().setPaidAmount(paidAmount);
+        changes.getTrade().setPayingAmount(BigDecimal.ZERO);
+    }
+
+    private void initTradeKey() {
+        if (null != key.getTrade()) {
+            return;
+        }
+
+        TaskTrade trade = TaskTrade.builder()
+                .orgId(model.getOrgId())
+                .taskId(model.getId())
+                .build();
+        key.setTrade(trade);
+    }
+
+    private void initTradeChanges() {
+        initChanges();
+        if (null != changes.getTrade()) {
+            return;
+        }
+
+        TaskTrade trade = new TaskTrade();
+        changes.setTrade(trade);
     }
 
     private void initNow() {

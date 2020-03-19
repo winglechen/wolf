@@ -24,7 +24,6 @@ import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeSet;

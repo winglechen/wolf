@@ -1,6 +1,9 @@
 package study.daydayup.wolf.business.org.api.task.domain.entity.task;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
@@ -13,6 +16,9 @@ import java.time.LocalDate;
  * @since 2020/3/15 11:01 下午
  **/
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskTrade implements Model {
     private Long orgId;
     private Long staffId;

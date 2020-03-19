@@ -25,50 +25,50 @@ public class CollectionTaskServiceImpl implements CollectionTaskService {
 
     @Override
     public Result<Integer> partlyPay(@NonNull Long taskId, @NonNull Long orgId, @NonNull BigDecimal amount) {
-        return changeState(taskId, orgId, CollectionStateEnum.PARTLY_PAYING.getCode(), amount);
+        return changePayingState(taskId, orgId, CollectionStateEnum.PARTLY_PAYING.getCode(), amount);
     }
 
     @Override
     public Result<Integer> confirmPartlyPay(@NonNull Long taskId, @NonNull Long orgId, @NonNull BigDecimal amount) {
-        return changeState(taskId, orgId, CollectionStateEnum.PARTLY_PAID.getCode(), amount);
+        return changePaidState(taskId, orgId, CollectionStateEnum.PARTLY_PAID.getCode(), amount);
     }
 
     @Override
     public Result<Integer> pay(@NonNull Long taskId, @NonNull Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.PAYING.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.PAYING.getCode());
     }
 
     @Override
     public Result<Integer> confirmPay(@NonNull Long taskId, @NonNull Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.PAID.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.PAID.getCode());
     }
 
     @Override
     public Result<Integer> fail(@NonNull Long taskId, @NonNull Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.FAILING.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.FAILING.getCode());
     }
 
     @Override
     public Result<Integer> confirmFail(@NonNull Long taskId, @NonNull Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.FAILED.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.FAILED.getCode());
     }
 
     @Override
     public Result<Integer> questionPartlyPay(Long taskId, Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.PARTLY_PAID_QUESTIONED.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.PARTLY_PAID_QUESTIONED.getCode());
     }
 
     @Override
     public Result<Integer> questionPay(Long taskId, Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.PAID_QUESTIONED.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.PAID_QUESTIONED.getCode());
     }
 
     @Override
     public Result<Integer> questionFail(Long taskId, Long orgId) {
-        return changeState(taskId, orgId, CollectionStateEnum.FAILED_QUESTIONED.getCode());
+        return changePayingState(taskId, orgId, CollectionStateEnum.FAILED_QUESTIONED.getCode());
     }
 
-    private Result<Integer> changeState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state) {
+    private Result<Integer> changePayingState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state) {
         TaskOption option = TaskOption.builder()
                 .withDetail(false)
                 .build();
@@ -79,13 +79,28 @@ public class CollectionTaskServiceImpl implements CollectionTaskService {
         return Result.ok(status);
     }
 
-    private Result<Integer> changeState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state, @NonNull BigDecimal amount) {
+    private Result<Integer> changePayingState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state, @NonNull BigDecimal amount) {
         TaskOption option = TaskOption.builder()
                 .withDetail(false)
+                .withTrade(true)
                 .build();
 
         TaskEntity entity = taskRepository.find(taskId, orgId, option);
         entity.changeState(state);
+        entity.changePayingAmount(amount);
+        int status = taskRepository.save(entity);
+        return Result.ok(status);
+    }
+
+    private Result<Integer> changePaidState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state, @NonNull BigDecimal amount) {
+        TaskOption option = TaskOption.builder()
+                .withDetail(false)
+                .withTrade(true)
+                .build();
+
+        TaskEntity entity = taskRepository.find(taskId, orgId, option);
+        entity.changeState(state);
+        entity.changePaidAmount(amount);
         int status = taskRepository.save(entity);
         return Result.ok(status);
     }
