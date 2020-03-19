@@ -15,6 +15,7 @@ import study.daydayup.wolf.business.org.api.task.dto.request.task.StaffRequest;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.TaskTypeRequest;
 import study.daydayup.wolf.business.org.api.task.service.TaskService;
 import study.daydayup.wolf.business.org.api.task.service.task.CollectionTaskService;
+import study.daydayup.wolf.business.union.admin.dto.CollectionAmount;
 import study.daydayup.wolf.business.union.admin.dto.TaskAssignRequest;
 import study.daydayup.wolf.framework.layer.web.Controller;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -121,16 +122,16 @@ public class TaskController implements Controller {
         return taskService.assign(request.getTaskIds(), orgId, request.getStaffId());
     }
 
-    @PutMapping("/task/collection/partlyPay/{taskId}/{amount}")
-    public Result<Integer> partlyPay(@PathVariable("taskId") Long taskId, @PathVariable("amount") BigDecimal amount ) {
+    @PutMapping("/task/collection/partlyPay/{taskId}")
+    public Result<Integer> partlyPay(@PathVariable("taskId") Long taskId, @Validated @RequestBody CollectionAmount collectionAmount) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.partlyPay(taskId, orgId, amount);
+        return collectionService.partlyPay(taskId, orgId, collectionAmount.getAmount());
     }
 
-    @PutMapping("/task/collection/confirm/partlyPay/{taskId}/{amount}")
-    public Result<Integer> confirmPartlyPay(@PathVariable("taskId") Long taskId, @PathVariable("amount") BigDecimal amount) {
+    @PutMapping("/task/collection/confirm/partlyPay/{taskId}")
+    public Result<Integer> confirmPartlyPay(@PathVariable("taskId") Long taskId, @Validated @RequestBody CollectionAmount collectionAmount) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.confirmPartlyPay(taskId, orgId, amount);
+        return collectionService.confirmPartlyPay(taskId, orgId, collectionAmount.getAmount());
     }
 
     @PutMapping("/task/collection/pay/{taskId}")

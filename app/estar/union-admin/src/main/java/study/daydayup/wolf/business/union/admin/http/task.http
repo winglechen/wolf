@@ -86,16 +86,24 @@ Content-Type: application/json
 }
 
 ### TODO update amount
-PUT http://localhost:8200/task/collection/partlyPay/1/100
+PUT http://localhost:8200/task/collection/partlyPay/1
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
+{
+  "amount": 100
+}
+
 ### TODO update amount
-PUT http://localhost:8200/task/collection/confirm/partlyPay/1/100
+PUT http://localhost:8200/task/collection/confirm/partlyPay/1
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
+
+{
+  "amount": 100
+}
 
 ###
 PUT http://localhost:8200/task/collection/pay/1
