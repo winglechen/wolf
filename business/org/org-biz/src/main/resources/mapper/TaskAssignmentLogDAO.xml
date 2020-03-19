@@ -45,21 +45,23 @@
             created_at
         )
         VALUES
-        <foreach collection="logs" item="item" index="index" open="(" separator="," close=")">
-            #{item.orgId,jdbcType=BIGINT}
-            #{item.taskId,jdbcType=BIGINT}
-            #{item.projectId,jdbcType=BIGINT}
+        <foreach collection="logs" item="item" index="index" separator="," >
+        (
+            #{item.orgId,jdbcType=BIGINT},
+            #{item.taskId,jdbcType=BIGINT},
+            #{item.projectId,jdbcType=BIGINT},
 
-            #{item.assigner,jdbcType=BIGINT}
-            #{item.sourceOwner,jdbcType=BIGINT}
-            #{item.targetOwner,jdbcType=BIGINT}
-            #{item.sourceVersion,jdbcType=INTEGER}
-            #{item.targetVersion,jdbcType=INTEGER}
+            #{item.assigner,jdbcType=BIGINT},
+            #{item.sourceOwner,jdbcType=BIGINT},
+            #{item.targetOwner,jdbcType=BIGINT},
+            #{item.sourceVersion,jdbcType=INTEGER},
+            #{item.targetVersion,jdbcType=INTEGER},
 
-            #{item.memo,jdbcType=VARCHAR}
-            #{item.tags,jdbcType=VARCHAR}
-            #{item.editor,jdbcType=BIGINT}
+            #{item.memo,jdbcType=VARCHAR},
+            #{item.tags,jdbcType=VARCHAR},
+            #{item.editor,jdbcType=BIGINT},
             #{item.createdAt,jdbcType=TIMESTAMP}
+        )
         </foreach>
     </insert>
 
