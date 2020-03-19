@@ -112,6 +112,8 @@
         </table>
 
         <table tableName="task_trade" domainObjectName="TaskTradeDO" mapperName="TaskTradeDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="installment_no" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="trade_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
         </table>
 
