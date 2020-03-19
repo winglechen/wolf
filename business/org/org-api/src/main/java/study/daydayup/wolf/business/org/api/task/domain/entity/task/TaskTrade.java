@@ -25,6 +25,9 @@ public class TaskTrade implements Model {
     private Long staffId;
     private Long taskId;
 
+    private Long customerId;
+    private String customerName;
+
     private Integer tradeType;
     private String tradeNo;
     private Integer installmentNo;

@@ -22,6 +22,7 @@ public class TaskContact implements Model {
     private Long partnerOrgId;
     @NotNull @Positive
     private Long customerId;
+    private String customerName;
     @NotNull @Positive
     private Integer contactPerson;
     @NotNull @Positive

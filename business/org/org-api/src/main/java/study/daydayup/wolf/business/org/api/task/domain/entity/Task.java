@@ -27,6 +27,7 @@ public class Task implements Model {
     private Long id;
     private Long orgId;
     private Long staffId;
+    private String staffName;
 
     private Long projectId;
     private Long parentId;
