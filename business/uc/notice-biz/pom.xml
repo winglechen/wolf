@@ -12,5 +12,44 @@
     <artifactId>notice-biz</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-api</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.0.0-WOLF</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.softwareloop</groupId>
+                        <artifactId>mybatis-generator-lombok-plugin</artifactId>
+                        <version>1.0</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <overwrite>true</overwrite>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

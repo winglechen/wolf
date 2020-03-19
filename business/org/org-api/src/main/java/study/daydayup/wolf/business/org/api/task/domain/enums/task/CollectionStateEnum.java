@@ -13,20 +13,18 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 public enum CollectionStateEnum implements CodeBasedEnum {
     FAILED(11, "failed"),
     PARTLY_FAILED(10, "partly failed"),
-    FAILING(9, "failing"),
+    FAILED_QUESTIONED(9, "failing questioned"),
+    FAILING(8, "failing"),
 
-    PAID(8, "paid"),
-    PAYING(7, "paying"),
+    PAID(7, "paid"),
+    PAID_QUESTIONED(6, "paying questioned"),
+    PAYING(5, "paying"),
 
-    FAILED_QUESTIONED(6, "failing questioned"),
-    PAID_QUESTIONED(5, "paying questioned"),
-    PARTLY_PAID_QUESTIONED(4, "partly paying questioned"),
-
-    PARTLY_PAID(3, "partly paid"),
+    PARTLY_PAID(4, "partly paid"),
+    PARTLY_PAID_QUESTIONED(3, "partly paying questioned"),
     PARTLY_PAYING(2, "partly paying"),
 
-
-    WAIT_TO_PAY(1, "partly paying"),
+    WAIT_TO_PAY(1, "wait to pay"),
     ;
 
     private int code;
