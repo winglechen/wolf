@@ -120,9 +120,9 @@
             and state = #{request.state,jdbcType=INTEGER}
         </if>
 
-        <if test="request.states != null" >
+        <if test="request.stateSet != null" >
             and state in
-            <foreach item="item" index="index" collection="request.states"
+            <foreach item="item" index="index" collection="request.stateSet"
                      open="(" separator="," close=")">
                 #{item,jdbcType=BIGINT}
             </foreach>

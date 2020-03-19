@@ -173,7 +173,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/task/collection?state=7&pageNum=2
+GET http://localhost:8200/task/collection?state=1&pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
