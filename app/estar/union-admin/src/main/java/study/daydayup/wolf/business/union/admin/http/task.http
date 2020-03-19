@@ -11,6 +11,9 @@ Content-Type: application/json
   "tags" : "test, dev",
   "projectId" : 1,
   "trade" : {
+    "partnerOrgId": 1,
+    "customerId": 1,
+    "customerName": "testCustomerName",
     "tradeNo" : "abc123456",
     "tradeType": 2,
     "installmentNo": 1,

@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.org.biz.task.domain.entity;
 import lombok.NonNull;
 import study.daydayup.wolf.business.org.api.task.domain.entity.Task;
 import study.daydayup.wolf.business.org.api.task.domain.entity.task.*;
+import study.daydayup.wolf.business.org.api.task.domain.enums.task.CollectionStateEnum;
 import study.daydayup.wolf.business.org.api.task.domain.event.TaskEvent;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
@@ -36,11 +37,10 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
     }
 
     public void format() {
+        formatTask();
         formatContact();
         formatTrade();
         formatScheduler();
-
-        addStateLog();
     }
 
     public void assign(Long staffId) {
@@ -60,6 +60,8 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         initChanges();
         model.setState(state);
         changes.setState(state);
+
+        addStateLog();
     }
 
     public void changePayingAmount(@NonNull BigDecimal amount) {
@@ -122,6 +124,10 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
         changes = new Task();
     }
 
+    private void formatTask() {
+
+    }
+
     private void formatContact() {
         TaskContact contact = model.getContact();
         if (null == contact) {
@@ -156,6 +162,10 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
     }
 
     private void addStateLog() {
+        if (null == changes.getState()) {
+            return;
+        }
+
         initNow();
         TaskStateLog log = TaskStateLog.builder()
                 .orgId(model.getOrgId())
@@ -175,6 +185,10 @@ public class TaskEntity extends AbstractEntity<Task> implements Entity {
     }
 
     private void addAssignmentLog() {
+        if (null == changes.getStaffId()) {
+            return;
+        }
+
         initNow();
         TaskAssignmentLog log = TaskAssignmentLog.builder()
                 .orgId(model.getOrgId())

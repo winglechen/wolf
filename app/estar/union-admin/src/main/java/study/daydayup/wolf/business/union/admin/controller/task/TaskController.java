@@ -91,6 +91,7 @@ public class TaskController implements Controller {
         Long orgId = session.get("orgId", Long.class);
         task.setOrgId(orgId);
         task.setId(null);
+        task.setState(CollectionStateEnum.WAIT_TO_PAY.getCode());
         task.setTaskType(TaskTypeEnum.COLLECTION.getCode());
 
         return taskService.add(task);
@@ -104,6 +105,7 @@ public class TaskController implements Controller {
         task.setOrgId(orgId);
         task.setStaffId(accountId);
         task.setId(null);
+        task.setName("collection log");
         task.setTaskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode());
 
         return taskService.add(task);

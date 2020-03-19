@@ -37,13 +37,9 @@
             <if test="updated.payingAmount != null">
                 paying_amount = #{updated.payingAmount,jdbcType=DECIMAL},
             </if>
-            version = version + 1,
         </set>
         where task_id = #{key.id,jdbcType=BIGINT}
         and org_id=#{key.orgId,jdbcType=BIGINT}
-        <if test="key.version != null" >
-            and version = #{key.version,jdbcType=INTEGER}
-        </if>
         limit 1
     </update>
 
