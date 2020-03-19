@@ -46,20 +46,20 @@
         )
         VALUES
         <foreach collection="logs" item="item" index="index" open="(" separator="," close=")">
-            #{orgId,jdbcType=BIGINT}
-            #{taskId,jdbcType=BIGINT}
-            #{projectId,jdbcType=BIGINT}
+            #{item.orgId,jdbcType=BIGINT}
+            #{item.taskId,jdbcType=BIGINT}
+            #{item.projectId,jdbcType=BIGINT}
 
-            #{assigner,jdbcType=BIGINT}
-            #{sourceOwner,jdbcType=BIGINT}
-            #{targetOwner,jdbcType=BIGINT}
-            #{sourceVersion,jdbcType=INTEGER}
-            #{targetVersion,jdbcType=INTEGER}
+            #{item.assigner,jdbcType=BIGINT}
+            #{item.sourceOwner,jdbcType=BIGINT}
+            #{item.targetOwner,jdbcType=BIGINT}
+            #{item.sourceVersion,jdbcType=INTEGER}
+            #{item.targetVersion,jdbcType=INTEGER}
 
-            #{memo,jdbcType=VARCHAR}
-            #{tags,jdbcType=VARCHAR}
-            #{editor,jdbcType=BIGINT}
-            #{createdAt,jdbcType=TIMESTAMP}
+            #{item.memo,jdbcType=VARCHAR}
+            #{item.tags,jdbcType=VARCHAR}
+            #{item.editor,jdbcType=BIGINT}
+            #{item.createdAt,jdbcType=TIMESTAMP}
         </foreach>
     </insert>
 
