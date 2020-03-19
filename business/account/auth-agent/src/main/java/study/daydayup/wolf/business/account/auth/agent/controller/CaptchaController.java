@@ -17,6 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 public class CaptchaController {
     @GetMapping("/auth/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        CaptchaUtil.out(request, response);
+        CaptchaUtil.out(116, 40, 4, request, response);
     }
 }
