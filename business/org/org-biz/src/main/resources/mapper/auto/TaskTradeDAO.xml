@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="partner_org_id" jdbcType="BIGINT" property="partnerOrgId" />
     <result column="staff_id" jdbcType="BIGINT" property="staffId" />
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
@@ -22,9 +23,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, staff_id, task_id, trade_no, installment_no, trade_type, amount, currency, 
-    paid_amount, paying_amount, interest, interest_rate, interest_unit, due_at, period_strategy, 
-    delete_flag, created_at
+    id, org_id, partner_org_id, staff_id, task_id, trade_no, installment_no, trade_type, 
+    amount, currency, paid_amount, paying_amount, interest, interest_rate, interest_unit, 
+    due_at, period_strategy, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -37,20 +38,20 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
-    insert into task_trade (id, org_id, staff_id, 
-      task_id, trade_no, installment_no, 
-      trade_type, amount, currency, 
-      paid_amount, paying_amount, interest, 
-      interest_rate, interest_unit, due_at, 
-      period_strategy, delete_flag, created_at
-      )
-    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, 
-      #{taskId,jdbcType=BIGINT}, #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, 
-      #{tradeType,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
-      #{paidAmount,jdbcType=DECIMAL}, #{payingAmount,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, 
-      #{interestRate,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, #{dueAt,jdbcType=DATE}, 
-      #{periodStrategy,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+    insert into task_trade (id, org_id, partner_org_id, 
+      staff_id, task_id, trade_no, 
+      installment_no, trade_type, amount, 
+      currency, paid_amount, paying_amount, 
+      interest, interest_rate, interest_unit, 
+      due_at, period_strategy, delete_flag, 
+      created_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{partnerOrgId,jdbcType=BIGINT}, 
+      #{staffId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{installmentNo,jdbcType=TINYINT}, #{tradeType,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, 
+      #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL}, #{payingAmount,jdbcType=DECIMAL}, 
+      #{interest,jdbcType=DECIMAL}, #{interestRate,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, 
+      #{dueAt,jdbcType=DATE}, #{periodStrategy,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade
@@ -60,6 +61,9 @@
       </if>
       <if test="orgId != null">
         org_id,
+      </if>
+      <if test="partnerOrgId != null">
+        partner_org_id,
       </if>
       <if test="staffId != null">
         staff_id,
@@ -117,6 +121,9 @@
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
       </if>
+      <if test="partnerOrgId != null">
+        #{partnerOrgId,jdbcType=BIGINT},
+      </if>
       <if test="staffId != null">
         #{staffId,jdbcType=BIGINT},
       </if>
@@ -173,6 +180,9 @@
       <if test="orgId != null">
         org_id = #{orgId,jdbcType=BIGINT},
       </if>
+      <if test="partnerOrgId != null">
+        partner_org_id = #{partnerOrgId,jdbcType=BIGINT},
+      </if>
       <if test="staffId != null">
         staff_id = #{staffId,jdbcType=BIGINT},
       </if>
@@ -227,6 +237,7 @@
   <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     update task_trade
     set org_id = #{orgId,jdbcType=BIGINT},
+      partner_org_id = #{partnerOrgId,jdbcType=BIGINT},
       staff_id = #{staffId,jdbcType=BIGINT},
       task_id = #{taskId,jdbcType=BIGINT},
       trade_no = #{tradeNo,jdbcType=VARCHAR},

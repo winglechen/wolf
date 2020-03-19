@@ -12,15 +12,17 @@ public class TaskTradeDO implements Serializable {
 
     private Long orgId;
 
+    private Long partnerOrgId;
+
     private Long staffId;
 
     private Long taskId;
 
     private String tradeNo;
 
-    private Byte installmentNo;
+    private Integer installmentNo;
 
-    private Byte tradeType;
+    private Integer tradeType;
 
     private BigDecimal amount;
 
@@ -54,6 +56,7 @@ public class TaskTradeDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
+        sb.append(", partnerOrgId=").append(partnerOrgId);
         sb.append(", staffId=").append(staffId);
         sb.append(", taskId=").append(taskId);
         sb.append(", tradeNo=").append(tradeNo);
@@ -88,6 +91,7 @@ public class TaskTradeDO implements Serializable {
         TaskTradeDO other = (TaskTradeDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
+            && (this.getPartnerOrgId() == null ? other.getPartnerOrgId() == null : this.getPartnerOrgId().equals(other.getPartnerOrgId()))
             && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
@@ -112,6 +116,7 @@ public class TaskTradeDO implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getPartnerOrgId() == null) ? 0 : getPartnerOrgId().hashCode());
         result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
