@@ -21,6 +21,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TaskTrade implements Model {
     private Long orgId;
+    private Long partnerOrgId;
     private Long staffId;
     private Long taskId;
 
