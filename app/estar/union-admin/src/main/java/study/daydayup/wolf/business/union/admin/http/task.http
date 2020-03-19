@@ -148,8 +148,18 @@ GET http://localhost:8200/task/collection?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
+### 待分配
+GET http://localhost:8200/task/collection/assign?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
 ###
-GET http://localhost:8200/task/collection/assign/list?pageNum=2
+GET http://localhost:8200/task/collection/confirm?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/collection/confirmed?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 

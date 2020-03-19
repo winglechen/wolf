@@ -18,4 +18,8 @@ public interface CollectionTaskService extends Service {
     Result<Integer> confirmPay(Long taskId, Long orgId);
     Result<Integer> fail(Long taskId, Long orgId);
     Result<Integer> confirmFail(Long taskId, Long orgId);
+
+    Result<Integer> questionPartlyPay(Long taskId, Long orgId);
+    Result<Integer> questionPay(Long taskId, Long orgId);
+    Result<Integer> questionFail(Long taskId, Long orgId);
 }

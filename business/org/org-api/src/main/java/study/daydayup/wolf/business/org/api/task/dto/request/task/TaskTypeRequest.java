@@ -6,7 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOwner;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.api.Request;
+
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * study.daydayup.wolf.business.org.api.task.dto.request.task
@@ -21,6 +26,31 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @SuperBuilder(toBuilder = true)
 public class TaskTypeRequest extends TaskOwner implements Request {
     private Integer state;
+    private Set<Integer> stateSet;
     private Integer taskType;
     private Integer projectId;
+
+    public void addState(Integer state) {
+        if (state == null) {
+            return;
+        }
+
+        initStateSet();
+        stateSet.add(state);
+    }
+
+    public void addStates(Collection<Integer> states) {
+        if (CollectionUtil.isEmpty(states)) {
+            return;
+        }
+        initStateSet();
+        stateSet.addAll(states);
+    }
+
+    private void initStateSet() {
+        if (stateSet != null) {
+            return;
+        }
+        stateSet = new TreeSet<>();
+    }
 }

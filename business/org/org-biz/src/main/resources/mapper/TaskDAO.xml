@@ -119,6 +119,15 @@
         <if test="request.state != null" >
             and state = #{request.state,jdbcType=INTEGER}
         </if>
+
+        <if test="request.states != null" >
+            and state in
+            <foreach item="item" index="index" collection="request.states"
+                     open="(" separator="," close=")">
+                #{item,jdbcType=BIGINT}
+            </foreach>
+        </if>
+
         <if test="request.projectId != null" >
             and project_id = #{request.projectId,jdbcType=INTEGER}
         </if>

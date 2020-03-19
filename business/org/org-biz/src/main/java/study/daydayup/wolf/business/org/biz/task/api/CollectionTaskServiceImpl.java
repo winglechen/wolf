@@ -53,6 +53,21 @@ public class CollectionTaskServiceImpl implements CollectionTaskService {
         return changeState(taskId, orgId, CollectionStateEnum.FAILED.getCode());
     }
 
+    @Override
+    public Result<Integer> questionPartlyPay(Long taskId, Long orgId) {
+        return changeState(taskId, orgId, CollectionStateEnum.PARTLY_PAID_QUESTIONED.getCode());
+    }
+
+    @Override
+    public Result<Integer> questionPay(Long taskId, Long orgId) {
+        return changeState(taskId, orgId, CollectionStateEnum.PAID_QUESTIONED.getCode());
+    }
+
+    @Override
+    public Result<Integer> questionFail(Long taskId, Long orgId) {
+        return changeState(taskId, orgId, CollectionStateEnum.FAILED_QUESTIONED.getCode());
+    }
+
     private Result<Integer> changeState(@NonNull Long taskId, @NonNull Long orgId, @NonNull Integer state) {
         TaskOption option = TaskOption.builder()
                 .withDetail(false)

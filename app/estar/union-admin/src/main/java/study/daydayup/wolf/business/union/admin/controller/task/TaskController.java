@@ -1,10 +1,13 @@
 package study.daydayup.wolf.business.union.admin.controller.task;
 
+import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.org.api.task.domain.enums.TaskTypeEnum;
+import study.daydayup.wolf.business.org.api.task.domain.enums.task.CollectionStateEnum;
+import study.daydayup.wolf.business.org.api.task.domain.enums.task.CollectionStateGroup;
 import study.daydayup.wolf.business.org.api.task.dto.TaskId;
 import study.daydayup.wolf.business.org.api.task.dto.TaskOption;
 import study.daydayup.wolf.business.org.api.task.dto.request.task.ProjectRequest;
@@ -21,6 +24,9 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller.task
@@ -151,6 +157,24 @@ public class TaskController implements Controller {
         return collectionService.confirmFail(taskId, orgId);
     }
 
+    @PutMapping("/task/collection/question/partlyPay/{taskId}")
+    public Result<Integer> questionPartlyPay(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.questionPartlyPay(taskId, orgId);
+    }
+
+    @PutMapping("/task/collection/question/pay/{taskId}")
+    public Result<Integer> questionPay(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.questionPay(taskId, orgId);
+    }
+
+    @PutMapping("/task/collection/question/fail/{taskId}")
+    public Result<Integer> questionFail(@PathVariable("taskId") Long taskId) {
+        Long orgId = session.get("orgId", Long.class);
+        return collectionService.questionFail(taskId, orgId);
+    }
+
     @GetMapping("/task/all")
     public Result<Page<Task>> findAll(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
@@ -245,7 +269,7 @@ public class TaskController implements Controller {
         return taskService.findByProject(request, pageRequest);
     }
 
-    @GetMapping("/task/collection/assign/list")
+    @GetMapping("/task/collection/assign")
     public Result<Page<Task>> findUnassignedCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
@@ -268,7 +292,7 @@ public class TaskController implements Controller {
     }
 
     @GetMapping("/task/collection")
-    public Result<Page<Task>> findCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+    public Result<Page<Task>> findCollections(@RequestParam(value = "state", required = false) Integer state, @RequestParam(value = "pageNum", required = false) Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
@@ -285,7 +309,31 @@ public class TaskController implements Controller {
                 .option(option)
                 .build();
 
+        if (null != state) {
+            request.addState(state);
+        }
+
         return taskService.findByTaskType(request, pageRequest);
+    }
+
+    @GetMapping("/task/collection/working")
+    public Result<Page<Task>> findWorkingCollections( @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        return findCollectionByStateList(CollectionStateGroup.WORKING, pageNum);
+    }
+
+    @GetMapping("/task/collection/confirming")
+    public Result<Page<Task>> findToConfirmCollections( @RequestParam(value = "pageNum", required = false) Integer pageNum) {
+       return findCollectionByStateList(CollectionStateGroup.CONFIRMING, pageNum);
+    }
+
+    @GetMapping("/task/collection/confirmed")
+    public Result<Page<Task>> findConfirmedCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        return findCollectionByStateList(CollectionStateGroup.CONFIRMED, pageNum);
+    }
+
+    @GetMapping("/task/collection/questioned")
+    public Result<Page<Task>> findQuestionedCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        return findCollectionByStateList(CollectionStateGroup.QUESTIONED, pageNum);
     }
 
     @GetMapping("/task/collection/staff/{staffId}")
@@ -353,5 +401,38 @@ public class TaskController implements Controller {
         return taskService.findByTaskType(request, pageRequest);
     }
 
+    private Result<Page<Task>> findCollectionByStateList(@NonNull EnumSet<CollectionStateEnum> stateSet, Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        TaskTypeRequest request = TaskTypeRequest.builder()
+                .orgId(orgId)
+                .taskType(TaskTypeEnum.COLLECTION.getCode())
+                .option(option)
+                .build();
+        request.addStates(toStateSet(stateSet));
+
+        return taskService.findByTaskType(request, pageRequest);
+    }
+
+    private Set<Integer> toStateSet(@NonNull EnumSet<CollectionStateEnum> stateSet) {
+        if (stateSet.isEmpty()) {
+            throw new IllegalArgumentException("collection state can't be empty");
+        }
+
+        Set<Integer> result = new TreeSet<>();
+        for (CollectionStateEnum state : stateSet) {
+            result.add(state.getCode());
+        }
+
+        return result;
+    }
 
 }
