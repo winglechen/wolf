@@ -18,6 +18,10 @@ public class TaskTradeDO implements Serializable {
 
     private Long taskId;
 
+    private Long customerId;
+
+    private String customerName;
+
     private String tradeNo;
 
     private Integer installmentNo;
@@ -59,6 +63,8 @@ public class TaskTradeDO implements Serializable {
         sb.append(", partnerOrgId=").append(partnerOrgId);
         sb.append(", staffId=").append(staffId);
         sb.append(", taskId=").append(taskId);
+        sb.append(", customerId=").append(customerId);
+        sb.append(", customerName=").append(customerName);
         sb.append(", tradeNo=").append(tradeNo);
         sb.append(", installmentNo=").append(installmentNo);
         sb.append(", tradeType=").append(tradeType);
@@ -94,6 +100,8 @@ public class TaskTradeDO implements Serializable {
             && (this.getPartnerOrgId() == null ? other.getPartnerOrgId() == null : this.getPartnerOrgId().equals(other.getPartnerOrgId()))
             && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
+            && (this.getCustomerId() == null ? other.getCustomerId() == null : this.getCustomerId().equals(other.getCustomerId()))
+            && (this.getCustomerName() == null ? other.getCustomerName() == null : this.getCustomerName().equals(other.getCustomerName()))
             && (this.getTradeNo() == null ? other.getTradeNo() == null : this.getTradeNo().equals(other.getTradeNo()))
             && (this.getInstallmentNo() == null ? other.getInstallmentNo() == null : this.getInstallmentNo().equals(other.getInstallmentNo()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
@@ -119,6 +127,8 @@ public class TaskTradeDO implements Serializable {
         result = prime * result + ((getPartnerOrgId() == null) ? 0 : getPartnerOrgId().hashCode());
         result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
+        result = prime * result + ((getCustomerId() == null) ? 0 : getCustomerId().hashCode());
+        result = prime * result + ((getCustomerName() == null) ? 0 : getCustomerName().hashCode());
         result = prime * result + ((getTradeNo() == null) ? 0 : getTradeNo().hashCode());
         result = prime * result + ((getInstallmentNo() == null) ? 0 : getInstallmentNo().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());

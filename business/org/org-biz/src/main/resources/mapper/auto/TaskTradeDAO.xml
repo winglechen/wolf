@@ -7,6 +7,8 @@
     <result column="partner_org_id" jdbcType="BIGINT" property="partnerOrgId" />
     <result column="staff_id" jdbcType="BIGINT" property="staffId" />
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
     <result column="installment_no" jdbcType="TINYINT" property="installmentNo" />
     <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
@@ -23,9 +25,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, partner_org_id, staff_id, task_id, trade_no, installment_no, trade_type, 
-    amount, currency, paid_amount, paying_amount, interest, interest_rate, interest_unit, 
-    due_at, period_strategy, delete_flag, created_at
+    id, org_id, partner_org_id, staff_id, task_id, customer_id, customer_name, trade_no, 
+    installment_no, trade_type, amount, currency, paid_amount, paying_amount, interest, 
+    interest_rate, interest_unit, due_at, period_strategy, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -39,19 +41,21 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade (id, org_id, partner_org_id, 
-      staff_id, task_id, trade_no, 
-      installment_no, trade_type, amount, 
-      currency, paid_amount, paying_amount, 
-      interest, interest_rate, interest_unit, 
-      due_at, period_strategy, delete_flag, 
-      created_at)
+      staff_id, task_id, customer_id, 
+      customer_name, trade_no, installment_no, 
+      trade_type, amount, currency, 
+      paid_amount, paying_amount, interest, 
+      interest_rate, interest_unit, due_at, 
+      period_strategy, delete_flag, created_at
+      )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{partnerOrgId,jdbcType=BIGINT}, 
-      #{staffId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{tradeNo,jdbcType=VARCHAR}, 
-      #{installmentNo,jdbcType=TINYINT}, #{tradeType,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, 
-      #{currency,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL}, #{payingAmount,jdbcType=DECIMAL}, 
-      #{interest,jdbcType=DECIMAL}, #{interestRate,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, 
-      #{dueAt,jdbcType=DATE}, #{periodStrategy,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{staffId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, 
+      #{customerName,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{installmentNo,jdbcType=TINYINT}, 
+      #{tradeType,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
+      #{paidAmount,jdbcType=DECIMAL}, #{payingAmount,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, 
+      #{interestRate,jdbcType=DECIMAL}, #{interestUnit,jdbcType=INTEGER}, #{dueAt,jdbcType=DATE}, 
+      #{periodStrategy,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskTradeDO">
     insert into task_trade
@@ -70,6 +74,12 @@
       </if>
       <if test="taskId != null">
         task_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
       </if>
       <if test="tradeNo != null">
         trade_no,
@@ -130,6 +140,12 @@
       <if test="taskId != null">
         #{taskId,jdbcType=BIGINT},
       </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
       <if test="tradeNo != null">
         #{tradeNo,jdbcType=VARCHAR},
       </if>
@@ -189,6 +205,12 @@
       <if test="taskId != null">
         task_id = #{taskId,jdbcType=BIGINT},
       </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
       <if test="tradeNo != null">
         trade_no = #{tradeNo,jdbcType=VARCHAR},
       </if>
@@ -240,6 +262,8 @@
       partner_org_id = #{partnerOrgId,jdbcType=BIGINT},
       staff_id = #{staffId,jdbcType=BIGINT},
       task_id = #{taskId,jdbcType=BIGINT},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       installment_no = #{installmentNo,jdbcType=TINYINT},
       trade_type = #{tradeType,jdbcType=TINYINT},

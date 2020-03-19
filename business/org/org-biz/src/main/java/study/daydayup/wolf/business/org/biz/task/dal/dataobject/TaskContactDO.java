@@ -18,6 +18,8 @@ public class TaskContactDO implements Serializable {
 
     private Long customerId;
 
+    private String customerName;
+
     private Integer contactPerson;
 
     private Integer contactMethod;
@@ -50,6 +52,7 @@ public class TaskContactDO implements Serializable {
         sb.append(", taskId=").append(taskId);
         sb.append(", partnerOrgId=").append(partnerOrgId);
         sb.append(", customerId=").append(customerId);
+        sb.append(", customerName=").append(customerName);
         sb.append(", contactPerson=").append(contactPerson);
         sb.append(", contactMethod=").append(contactMethod);
         sb.append(", contactState=").append(contactState);
@@ -81,6 +84,7 @@ public class TaskContactDO implements Serializable {
             && (this.getTaskId() == null ? other.getTaskId() == null : this.getTaskId().equals(other.getTaskId()))
             && (this.getPartnerOrgId() == null ? other.getPartnerOrgId() == null : this.getPartnerOrgId().equals(other.getPartnerOrgId()))
             && (this.getCustomerId() == null ? other.getCustomerId() == null : this.getCustomerId().equals(other.getCustomerId()))
+            && (this.getCustomerName() == null ? other.getCustomerName() == null : this.getCustomerName().equals(other.getCustomerName()))
             && (this.getContactPerson() == null ? other.getContactPerson() == null : this.getContactPerson().equals(other.getContactPerson()))
             && (this.getContactMethod() == null ? other.getContactMethod() == null : this.getContactMethod().equals(other.getContactMethod()))
             && (this.getContactState() == null ? other.getContactState() == null : this.getContactState().equals(other.getContactState()))
@@ -102,6 +106,7 @@ public class TaskContactDO implements Serializable {
         result = prime * result + ((getTaskId() == null) ? 0 : getTaskId().hashCode());
         result = prime * result + ((getPartnerOrgId() == null) ? 0 : getPartnerOrgId().hashCode());
         result = prime * result + ((getCustomerId() == null) ? 0 : getCustomerId().hashCode());
+        result = prime * result + ((getCustomerName() == null) ? 0 : getCustomerName().hashCode());
         result = prime * result + ((getContactPerson() == null) ? 0 : getContactPerson().hashCode());
         result = prime * result + ((getContactMethod() == null) ? 0 : getContactMethod().hashCode());
         result = prime * result + ((getContactState() == null) ? 0 : getContactState().hashCode());

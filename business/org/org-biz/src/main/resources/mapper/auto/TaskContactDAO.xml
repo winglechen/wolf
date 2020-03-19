@@ -8,6 +8,7 @@
     <result column="task_id" jdbcType="BIGINT" property="taskId" />
     <result column="partner_org_id" jdbcType="BIGINT" property="partnerOrgId" />
     <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="contact_person" jdbcType="TINYINT" property="contactPerson" />
     <result column="contact_method" jdbcType="TINYINT" property="contactMethod" />
     <result column="contact_state" jdbcType="TINYINT" property="contactState" />
@@ -19,9 +20,9 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, staff_id, task_id, partner_org_id, customer_id, contact_person, contact_method, 
-    contact_state, contact_result, contact_attachment, result_attachment, recontact_at, 
-    delete_flag, created_at
+    id, org_id, staff_id, task_id, partner_org_id, customer_id, customer_name, contact_person, 
+    contact_method, contact_state, contact_result, contact_attachment, result_attachment, 
+    recontact_at, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -36,16 +37,16 @@
   <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskContactDO">
     insert into task_contact (id, org_id, staff_id, 
       task_id, partner_org_id, customer_id, 
-      contact_person, contact_method, contact_state, 
-      contact_result, contact_attachment, result_attachment, 
-      recontact_at, delete_flag, created_at
-      )
+      customer_name, contact_person, contact_method, 
+      contact_state, contact_result, contact_attachment, 
+      result_attachment, recontact_at, delete_flag, 
+      created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, 
       #{taskId,jdbcType=BIGINT}, #{partnerOrgId,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, 
-      #{contactPerson,jdbcType=TINYINT}, #{contactMethod,jdbcType=TINYINT}, #{contactState,jdbcType=TINYINT}, 
-      #{contactResult,jdbcType=TINYINT}, #{contactAttachment,jdbcType=VARCHAR}, #{resultAttachment,jdbcType=VARCHAR}, 
-      #{recontactAt,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{customerName,jdbcType=VARCHAR}, #{contactPerson,jdbcType=TINYINT}, #{contactMethod,jdbcType=TINYINT}, 
+      #{contactState,jdbcType=TINYINT}, #{contactResult,jdbcType=TINYINT}, #{contactAttachment,jdbcType=VARCHAR}, 
+      #{resultAttachment,jdbcType=VARCHAR}, #{recontactAt,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskContactDO">
     insert into task_contact
@@ -67,6 +68,9 @@
       </if>
       <if test="customerId != null">
         customer_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
       </if>
       <if test="contactPerson != null">
         contact_person,
@@ -115,6 +119,9 @@
       <if test="customerId != null">
         #{customerId,jdbcType=BIGINT},
       </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
       <if test="contactPerson != null">
         #{contactPerson,jdbcType=TINYINT},
       </if>
@@ -162,6 +169,9 @@
       <if test="customerId != null">
         customer_id = #{customerId,jdbcType=BIGINT},
       </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
       <if test="contactPerson != null">
         contact_person = #{contactPerson,jdbcType=TINYINT},
       </if>
@@ -199,6 +209,7 @@
       task_id = #{taskId,jdbcType=BIGINT},
       partner_org_id = #{partnerOrgId,jdbcType=BIGINT},
       customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
       contact_person = #{contactPerson,jdbcType=TINYINT},
       contact_method = #{contactMethod,jdbcType=TINYINT},
       contact_state = #{contactState,jdbcType=TINYINT},

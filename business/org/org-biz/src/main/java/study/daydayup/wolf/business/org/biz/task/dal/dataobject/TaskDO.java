@@ -13,6 +13,8 @@ public class TaskDO implements Serializable {
 
     private Long staffId;
 
+    private String staffName;
+
     private Long projectId;
 
     private Long parentId;
@@ -58,6 +60,7 @@ public class TaskDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
         sb.append(", staffId=").append(staffId);
+        sb.append(", staffName=").append(staffName);
         sb.append(", projectId=").append(projectId);
         sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
@@ -94,6 +97,7 @@ public class TaskDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getStaffId() == null ? other.getStaffId() == null : this.getStaffId().equals(other.getStaffId()))
+            && (this.getStaffName() == null ? other.getStaffName() == null : this.getStaffName().equals(other.getStaffName()))
             && (this.getProjectId() == null ? other.getProjectId() == null : this.getProjectId().equals(other.getProjectId()))
             && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
@@ -120,6 +124,7 @@ public class TaskDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getStaffId() == null) ? 0 : getStaffId().hashCode());
+        result = prime * result + ((getStaffName() == null) ? 0 : getStaffName().hashCode());
         result = prime * result + ((getProjectId() == null) ? 0 : getProjectId().hashCode());
         result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());

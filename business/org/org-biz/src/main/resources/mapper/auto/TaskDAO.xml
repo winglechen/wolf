@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="staff_id" jdbcType="BIGINT" property="staffId" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
     <result column="project_id" jdbcType="BIGINT" property="projectId" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -24,9 +25,9 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, staff_id, project_id, parent_id, `name`, task_type, `state`, priority, 
-    progress_rate, work_load, story_points, start_at, end_at, tags, version, delete_flag, 
-    last_editor, created_at, updated_at
+    id, org_id, staff_id, staff_name, project_id, parent_id, `name`, task_type, `state`, 
+    priority, progress_rate, work_load, story_points, start_at, end_at, tags, version, 
+    delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -40,23 +41,25 @@
     delete from task
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO">
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO">
     insert into task (id, org_id, staff_id, 
-      project_id, parent_id, `name`, 
-      task_type, `state`, priority, 
-      progress_rate, work_load, story_points, 
-      start_at, end_at, tags, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at)
+      staff_name, project_id, parent_id, 
+      `name`, task_type, `state`, 
+      priority, progress_rate, work_load, 
+      story_points, start_at, end_at, 
+      tags, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, 
-      #{projectId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{taskType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{priority,jdbcType=SMALLINT}, 
-      #{progressRate,jdbcType=DECIMAL}, #{workLoad,jdbcType=INTEGER}, #{storyPoints,jdbcType=SMALLINT}, 
-      #{startAt,jdbcType=TIMESTAMP}, #{endAt,jdbcType=TIMESTAMP}, #{tags,jdbcType=VARCHAR}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{staffName,jdbcType=VARCHAR}, #{projectId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{taskType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{priority,jdbcType=SMALLINT}, #{progressRate,jdbcType=DECIMAL}, #{workLoad,jdbcType=INTEGER}, 
+      #{storyPoints,jdbcType=SMALLINT}, #{startAt,jdbcType=TIMESTAMP}, #{endAt,jdbcType=TIMESTAMP}, 
+      #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO">
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.TaskDO">
     insert into task
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -67,6 +70,9 @@
       </if>
       <if test="staffId != null">
         staff_id,
+      </if>
+      <if test="staffName != null">
+        staff_name,
       </if>
       <if test="projectId != null">
         project_id,
@@ -130,6 +136,9 @@
       <if test="staffId != null">
         #{staffId,jdbcType=BIGINT},
       </if>
+      <if test="staffName != null">
+        #{staffName,jdbcType=VARCHAR},
+      </if>
       <if test="projectId != null">
         #{projectId,jdbcType=BIGINT},
       </if>
@@ -192,6 +201,9 @@
       <if test="staffId != null">
         staff_id = #{staffId,jdbcType=BIGINT},
       </if>
+      <if test="staffName != null">
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
       <if test="projectId != null">
         project_id = #{projectId,jdbcType=BIGINT},
       </if>
@@ -250,6 +262,7 @@
     update task
     set org_id = #{orgId,jdbcType=BIGINT},
       staff_id = #{staffId,jdbcType=BIGINT},
+      staff_name = #{staffName,jdbcType=VARCHAR},
       project_id = #{projectId,jdbcType=BIGINT},
       parent_id = #{parentId,jdbcType=BIGINT},
       `name` = #{name,jdbcType=VARCHAR},

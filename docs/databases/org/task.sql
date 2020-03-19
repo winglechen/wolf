@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `task`
     `id`            BIGINT(20) UNSIGNED     NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `org_id`        BIGINT(20) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '组织ID',
     `staff_id`      BIGINT(20) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '员工ID',
+    `staff_name`    VARCHAR(50)             NOT NULL DEFAULT '' COMMENT '员工姓名',
     `project_id`    BIGINT(20) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '项目ID',
     `parent_id`     BIGINT(20) UNSIGNED     NOT NULL DEFAULT 0 COMMENT '父ID',
 
@@ -21,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `task`
     `start_at`      DATETIME,
     `end_at`        DATETIME,
 
-    `tags`          VARCHAR(500) NOT NULL DEFAULT '' COMMENT 'tags',
+    `tags`          VARCHAR(500)            NOT NULL DEFAULT '' COMMENT 'tags',
 
     `version`     INT(11) UNSIGNED          NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag` TINYINT(3) UNSIGNED       NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -109,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `task_contact`
 
     `partner_org_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '合作组织ID',
     `customer_id`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+    `customer_name`     VARCHAR(50) NOT NULL DEFAULT '' COMMENT '联系人姓名',
     `contact_person`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '联系人',
     `contact_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '联系方式',
 
@@ -134,6 +136,9 @@ CREATE TABLE IF NOT EXISTS `task_trade`
     `partner_org_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '合作组织ID',
     `staff_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
     `task_id`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+
+    `customer_id`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+    `customer_name`     VARCHAR(50) NOT NULL DEFAULT '' COMMENT '联系人姓名',
 
     `trade_no`          VARCHAR(32) NOT NULL DEFAULT '' COMMENT '交易单号',
     `installment_no`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分期数',
