@@ -90,11 +90,23 @@ dubbo:
   cloud:
     subscribed-services: ""
 
+wolf:
+  sms:
+    signature: "onion"
+    senderNum: "CASHCR"
+    suppler:
+      skyline:
+        appId: "cs_3wegkt"
+        appSecret: "dwhg27jN"
+        sendUrl: "http://sms.skylinelabs.cc:20003/"
+
 pay:
   razorpay:
     keyId: "rzp_test_AVfB2VIxmnf4v6"
     keySecret: "pJ8TpvIge88kfBBrAPurUP7p"
     webHookSecret: "T2kdT6vwgBcPDY7Qc8"
+
+
 
 
 logging:

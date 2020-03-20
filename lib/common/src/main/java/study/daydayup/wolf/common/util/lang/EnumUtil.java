@@ -19,4 +19,14 @@ public class EnumUtil {
 
         throw new UnsupportedEnumCodeException("code: " + code + "is not supported");
     }
+
+    public static <T extends CodeBasedEnum> T nameOf(String name, Class<T> enumType) {
+        for(T e : enumType.getEnumConstants()) {
+            if (e.getName().equals(name)) {
+                return e;
+            }
+        }
+
+        throw new UnsupportedEnumCodeException( "name: " + name + "is not supported");
+    }
 }
