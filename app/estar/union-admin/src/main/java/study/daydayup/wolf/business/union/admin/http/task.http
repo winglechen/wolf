@@ -157,6 +157,11 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+GET http://localhost:8200/task/my?pageNum=3
+Accept: */*
+Cache-Control: no-cache
+
+###
 GET http://localhost:8200/task/subTasks/1?pageNum=3
 Accept: */*
 Cache-Control: no-cache
@@ -218,3 +223,11 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+GET http://localhost:8200/task/collection/my?pageNum=3
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/task/contact/my?pageNum=3
+Accept: */*
+Cache-Control: no-cache

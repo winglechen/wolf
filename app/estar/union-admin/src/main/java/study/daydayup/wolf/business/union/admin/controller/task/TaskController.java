@@ -403,6 +403,56 @@ public class TaskController implements Controller {
         return taskService.findByTaskType(request, pageRequest);
     }
 
+    @GetMapping("/task/collection/my")
+    public Result<Page<Task>> findMyCollections(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        Long staffId = session.get("accountId", Long.class);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        StaffRequest request = StaffRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .taskType(TaskTypeEnum.COLLECTION.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByStaff(request, pageRequest);
+    }
+
+    @GetMapping("/task/contact/my")
+    public Result<Page<Task>> findMyContacts(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        Long orgId = session.get("orgId", Long.class);
+        Long staffId = session.get("accountId", Long.class);
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        TaskOption option = TaskOption.builder()
+                .withTrade(true)
+                .build();
+
+        StaffRequest request = StaffRequest.builder()
+                .orgId(orgId)
+                .staffId(staffId)
+                .taskType(TaskTypeEnum.CUSTOMER_CONTACT.getCode())
+                .option(option)
+                .build();
+
+        return taskService.findByStaff(request, pageRequest);
+    }
+
+
+
     private Result<Page<Task>> findCollectionByStateList(@NonNull EnumSet<CollectionStateEnum> stateSet, Integer pageNum) {
         Long orgId = session.get("orgId", Long.class);
         PageRequest pageRequest = PageRequest.builder()
