@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.uc.api.notice.config.sms;
 
+import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Config;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import java.util.Map;
  * @author Wingle
  * @since 2020/3/20 3:07 下午
  **/
+@Data
 public class Supplier implements Config {
     @NotBlank
     private String appId;
