@@ -11,7 +11,7 @@
     <description>middleware</description>
 
     <modules>
-        <module>communication</module>
+        <module>notice</module>
         <module>sequence</module>
         <module>mq</module>
     </modules>
