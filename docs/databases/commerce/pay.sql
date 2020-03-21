@@ -100,3 +100,47 @@ CREATE TABLE IF NOT EXISTS `payment_log`
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付日志';
+
+
+DROP TABLE IF EXISTS `razorpay_account`;
+CREATE TABLE IF NOT EXISTS `razorpay_account`
+(
+    `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+    `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `payer_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `payee_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+
+    `state`                 TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+
+    `contact_id`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `contact`               VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `email`                 VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `contact_type`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `contact_active`        TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
+
+    `account_id`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `account_type`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `account_name`          VARCHAR(120)        NOT NULL DEFAULT '' COMMENT '',
+    `bank_name`             VARCHAR(200)        NOT NULL DEFAULT '' COMMENT '',
+    `account_ifsc`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `account_number`        VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `account_active`        TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
+
+    `vpa_address`           VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+
+    `card_name`             VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `card_last4`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `card_network`          VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `card_type`             VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `card_issuer`           VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+
+    `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+
+    `delete_flag`           TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'razorpay_account';
+
+
