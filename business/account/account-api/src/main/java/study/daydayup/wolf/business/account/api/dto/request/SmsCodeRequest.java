@@ -20,6 +20,7 @@ public class SmsCodeRequest implements Request {
     private Long orgId;
 
     private Integer expiredIn;
+    private Integer codeExpiredIn;
     private Integer numCount;
 
     private AuthEnv env;

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.api;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
@@ -12,8 +13,11 @@ import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
 import study.daydayup.wolf.common.util.time.DateUtil;
+import study.daydayup.wolf.framework.exception.LocaleNotFoundException;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
+import study.daydayup.wolf.framework.util.LocaleUtil;
+import study.daydayup.wolf.middleware.notice.agent.service.SMSAgent;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -24,14 +28,18 @@ import java.util.Date;
  * @author Wingle
  * @since 2019/12/5 6:02 下午
  **/
+@Slf4j
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
+    private static final String OTP_KEY = "account.login.otp";
     @Resource
     private AccountService accountService;
     @Reference
     private OauthLicenseService licenseService;
     @Resource
     private VerifyCodeService verifyCodeService;
+    @Resource
+    private SMSAgent smsAgent;
 
     @Override
     public Result<Long> register(SmsRequest request) {
@@ -63,12 +71,25 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     @Override
-    public Result sendCode(SmsCodeRequest request) {
+    public Result<Object> sendCode(SmsCodeRequest request) {
         String mobile = request.getMobile();
+        String code = createCode();
         Date expiredAt = DateUtil.secondsLater(request.getExpiredIn());
 
-        verifyCodeService.send(mobile, createCode(), expiredAt);
+        verifyCodeService.send(mobile, code, expiredAt);
+        sendSms(mobile, code);
+
         return Result.ok();
+    }
+
+    private void sendSms(String mobile, String code) {
+        String[] args = new String[]{code};
+        String msg = LocaleUtil.get(OTP_KEY, args);
+        if (msg == null) {
+            throw new LocaleNotFoundException(OTP_KEY);
+        }
+
+        smsAgent.toIndia(mobile, msg);
     }
 
     private String createCode() {
