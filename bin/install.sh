@@ -31,6 +31,17 @@ function install_libs() {
     cd ${dir} && mvn clean install
 }
 
+
+function install_notice() {
+    echo "install middleware.notice"
+    dir="${PROJECT_DIR}/middleware/notice/"
+    cd ${dir} && mvn clean install
+}
+
+function install_middleware {
+    install_notice
+}
+
 function install_account() {
     echo "install business.account"
     dir="${PROJECT_DIR}/business/account/"
@@ -123,6 +134,7 @@ function install_union() {
 function install_all() {
     install_boot
     install_libs
+    install_middleware
     install_business
     install_business_starter
     install_union
