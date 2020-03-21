@@ -11,12 +11,10 @@
         <module>profile-biz</module>
         <module>acl-biz</module>
         <module>crm-biz</module>
-        <module>feed-biz</module>
         <module>uc-deploy-dubbo</module>
         <module>uc-deploy-web</module>
         <module>uc-agent</module>
         <module>setting-biz</module>
-        <module>notice-biz</module>
     </modules>
 
     <parent>
