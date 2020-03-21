@@ -20,6 +20,11 @@
         </dependency>
 
         <dependency>
+            <groupId>study.daydayup.wolf.middleware.notice</groupId>
+            <artifactId>notice-agent</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>study.daydayup.wolf.business.account</groupId>
             <artifactId>account-biz</artifactId>
         </dependency>

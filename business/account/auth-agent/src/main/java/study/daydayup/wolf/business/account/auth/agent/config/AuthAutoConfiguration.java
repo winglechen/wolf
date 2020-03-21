@@ -2,7 +2,6 @@ package study.daydayup.wolf.business.account.auth.agent.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
@@ -10,7 +9,6 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.filter.WolfSsoFilter;
 
-import javax.annotation.Resource;
 import javax.servlet.DispatcherType;
 
 /**
@@ -19,20 +17,14 @@ import javax.servlet.DispatcherType;
  * @author Wingle
  * @since 2019/12/5 9:49 上午
  **/
-//@EnableConfigurationProperties(AuthConfig.class)
 @Configuration
 @ConditionalOnWebApplication
 @ComponentScan("study.daydayup.wolf.business.account.auth.agent")
 public class AuthAutoConfiguration {
-    @Resource
-    private AuthConfig authConfig;
-
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Session session() {
-        Session session = new Session();
-
-        return session;
+        return new Session();
     }
 
     @Bean(name="wolfSsoFilter")
@@ -41,16 +33,16 @@ public class AuthAutoConfiguration {
     }
 
     @Bean
-    public FilterRegistrationBean disableAutoFilterRegistration(@Qualifier("wolfSsoFilter") WolfSsoFilter filter) {
-        FilterRegistrationBean registration = new FilterRegistrationBean(filter);
+    public FilterRegistrationBean<WolfSsoFilter> disableAutoFilterRegistration(@Qualifier("wolfSsoFilter") WolfSsoFilter filter) {
+        FilterRegistrationBean<WolfSsoFilter> registration = new FilterRegistrationBean<>(filter);
             registration.setEnabled(false);
 
         return registration;
     }
 
     @Bean
-    public FilterRegistrationBean wolfSsoRegistration(){
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    public FilterRegistrationBean<DelegatingFilterProxy> wolfSsoRegistration(){
+        FilterRegistrationBean<DelegatingFilterProxy> registrationBean = new FilterRegistrationBean<>();
 
         DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
         delegatingFilterProxy.setTargetBeanName("wolfSsoFilter");
