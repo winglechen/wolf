@@ -109,7 +109,7 @@ case "$command" in
   install-middleware)
       install_middleware ;;
   install-notice)
-      install-notice ;;
+      install_notice ;;
 
   install-account)
     install_account ;;
