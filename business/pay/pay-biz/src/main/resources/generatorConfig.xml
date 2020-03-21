@@ -98,6 +98,13 @@
             <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
         </table>
 
+        <table tableName="razorpay_account" domainObjectName="RazorpayAccountDO" mapperName="RazorpayAccountDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="contact_active" javaType="java.lang.Boolean"  jdbcType="TINYINT"/>
+            <columnOverride column="account_active" javaType="java.lang.Boolean"  jdbcType="TINYINT"/>
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean"  jdbcType="TINYINT"/>
+        </table>
+
 
 
     </context>
