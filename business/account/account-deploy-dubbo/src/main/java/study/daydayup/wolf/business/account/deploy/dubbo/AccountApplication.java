@@ -11,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author Wingle
  * @since 2019/9/29 2:13 PM
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"study.daydayup.wolf"})
 @MapperScan({"study.daydayup.wolf.business.account.biz.dal.dao"})
 @EnableDiscoveryClient
 public class AccountApplication {

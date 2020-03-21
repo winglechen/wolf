@@ -1,6 +1,9 @@
 spring:
   application:
     name: wolf-account
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -25,7 +28,7 @@ wolf:
   sms:
     signature: "onion"
     senderNum: "ONION"
-    suppler:
+    supplier:
       skyline:
         appId: "cs_3wegkt"
         appSecret: "dwhg27jN"
@@ -33,7 +36,7 @@ wolf:
 
 dubbo:
   scan:
-    base-packages: study.daydayup.wolf.business.account
+    base-packages: study.daydayup.wolf
   protocols:
     dubbo:
       name: dubbo

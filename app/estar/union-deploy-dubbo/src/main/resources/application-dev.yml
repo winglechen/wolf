@@ -76,7 +76,7 @@ spring:
 
 dubbo:
   scan:
-    base-packages: study.daydayup.wolf.business
+    base-packages: study.daydayup.wolf
   protocols:
     dubbo:
       anyhost: true

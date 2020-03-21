@@ -16,7 +16,42 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "18067966015",
+  "mobile": "919532593533",
+  "orgId": 1
+}
+
+
+###
+POST http://localhost:9000/auth/sms/code
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "919532915872",
+  "orgId": 1
+}
+
+###
+POST http://localhost:9000/auth/sms/code
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "918727923596",
+  "orgId": 1
+}
+
+
+###
+POST http://localhost:9000/auth/sms/code
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "mobile": "917589426354",
   "orgId": 1
 }
 
@@ -106,3 +141,5 @@ Cache-Control: no-cache
 GET http://localhost:9000/auth/lang?lang=en-US
 Accept: */*
 Cache-Control: no-cache
+
+###
