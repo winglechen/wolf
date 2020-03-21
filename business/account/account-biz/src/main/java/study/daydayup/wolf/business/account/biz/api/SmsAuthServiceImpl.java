@@ -32,6 +32,8 @@ import java.util.Date;
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
     private static final String OTP_KEY = "account.login.otp";
+    private static final String TEST_OTP = "123";
+
     @Resource
     private AccountService accountService;
     @Reference
@@ -83,6 +85,10 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     private void sendSms(String mobile, String code) {
+        if (TEST_OTP.equals(code)) {
+            return;
+        }
+
         String[] args = new String[]{code};
         String msg = LocaleUtil.get(OTP_KEY, args);
         if (msg == null) {
@@ -93,7 +99,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     private String createCode() {
-        return "123";
+        return TEST_OTP;
         //TODO remove the mock data
 //        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
 //        return Integer.toString(num);
