@@ -27,7 +27,7 @@ mybatis:
 wolf:
   sms:
     signature: "onion"
-    senderNum: "ONION"
+    senderNum: "ONIONW"
     supplier:
       skyline:
         appId: "cs_3wegkt"

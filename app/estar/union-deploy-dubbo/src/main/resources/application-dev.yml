@@ -93,8 +93,8 @@ dubbo:
 wolf:
   sms:
     signature: "onion"
-    senderNum: "CASHCR"
-    suppler:
+    senderNum: "ONIONW"
+    supplier:
       skyline:
         appId: "cs_3wegkt"
         appSecret: "dwhg27jN"

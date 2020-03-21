@@ -21,19 +21,6 @@ Content-Type: application/json
 }
 
 
-###
-POST http://localhost:9000/auth/sms/code?lang=en_US
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{
-  "mobile": "+919740030986",
-  "orgId": 1
-}
-
-
-
 
 
 ###
