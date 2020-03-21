@@ -53,6 +53,13 @@
         </dependency>
         <!-- business api end -->
 
+        <!-- middleware api start -->
+        <dependency>
+            <groupId>study.daydayup.wolf.middleware.notice</groupId>
+            <artifactId>notice-api</artifactId>
+        </dependency>
+        <!-- middleware api end -->
+
     </dependencies>
 
 </project>

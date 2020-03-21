@@ -32,7 +32,23 @@
                 <artifactId>uc-agent</artifactId>
                 <version>${version.snapshot}</version>
             </dependency>
+
+            <dependency>
+                <groupId>study.daydayup.wolf.middleware.notice</groupId>
+                <artifactId>notice-agent</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+
             <!-- business agent end -->
+
+            <!-- middleware api start -->
+            <dependency>
+                <groupId>study.daydayup.wolf.middleware.notice</groupId>
+                <artifactId>notice-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+
+            <!-- middleware agent end -->
 
             <!-- business api start -->
             <dependency>
