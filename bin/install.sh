@@ -10,6 +10,8 @@ function install_boot() {
 }
 
 function install_libs() {
+    install_boot
+
     echo "install common ..."
     dir="${PROJECT_DIR}/lib/common/"
     cd ${dir} && mvn clean install
