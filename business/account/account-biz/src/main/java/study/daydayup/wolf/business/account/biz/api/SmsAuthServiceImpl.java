@@ -86,7 +86,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
     private void sendSms(String mobile, String code) {
         if (TEST_OTP.equals(code)) {
-            return;
+//            return;
         }
 
         String[] args = new String[]{code};
