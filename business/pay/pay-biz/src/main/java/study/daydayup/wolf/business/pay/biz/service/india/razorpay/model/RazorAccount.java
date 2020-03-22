@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RazorAccount implements Model {
+    private Long id;
+
     private Long payerId;
     private String payerName;
     private Long payeeId;

@@ -2,9 +2,16 @@ package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.pay.api.domain.exception.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
+import study.daydayup.wolf.business.pay.biz.dal.dao.RazorpayAccountDAO;
+import study.daydayup.wolf.business.pay.biz.dal.dataobject.RazorpayAccountDO;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccountConverter;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
+
+import javax.annotation.Resource;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout
@@ -15,17 +22,46 @@ import study.daydayup.wolf.framework.layer.domain.Service;
 @Component
 public class RazorAccountService implements Service {
     private PayoutRequest request;
+    private RazorAccount account;
+
+    @Resource
+    private RazorpayAccountDAO accountDAO;
+    @Resource
+    private RazorContactService contactService;
+
     public RazorAccount find(@Validated PayoutRequest request) {
         this.request = request;
 
-        return null;
+        findFromDb();
+        createContact();
+        creatFundAccount();
+
+        return account;
     }
 
-    private RazorAccount findFromDb() {
-        return null;
+    private void findFromDb() {
+        RazorpayAccountDO accountDO = accountDAO.selectByPayerId(request.getPayerId(), request.getPayeeId());
+        if (accountDO == null) {
+            return;
+        }
+
+        account = RazorAccountConverter.toModel(accountDO);
     }
 
     private void createContact() {
+        if (null != account && StringUtil.notEmpty(account.getContactId(), true)) {
+            return;
+        }
+
+        account = contactService.create(account, request);
+        if (account == null) {
+            throw new PayoutFailException("razorpay payout create contact fail");
+        }
+
+        saveContactInfo();
+    }
+
+    private void creatFundAccount() {
 
     }
 
@@ -33,11 +69,7 @@ public class RazorAccountService implements Service {
 
     }
 
-    private void creatFundAccount() {
-
-    }
-
     private void saveFundAccountInfo() {
-        
+
     }
 }
