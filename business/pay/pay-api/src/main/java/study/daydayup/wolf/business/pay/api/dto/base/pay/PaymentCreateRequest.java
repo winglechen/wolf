@@ -21,7 +21,7 @@ public class PaymentCreateRequest implements Request {
     private Integer paymentMethod;
 
     private String tradeNo;
-    private boolean doublePayCheck;
+    private boolean duplicateCheck;
 
     @NotNull @Min(1)
     private Long payerId;

@@ -61,7 +61,7 @@ public class UnionLoanService implements study.daydayup.wolf.framework.layer.dom
         PaymentCreateRequest request = PaymentCreateRequest.builder()
                 .paymentMethod(PAYMENT_METHOD.getCode())
                 .tradeNo(order.getTradeNo())
-                .doublePayCheck(false)
+                .duplicateCheck(false)
 
                 .payeeId(order.getSellerId())
                 .payeeName(order.getSellerName())

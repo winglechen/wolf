@@ -4,6 +4,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
@@ -15,5 +17,6 @@ import study.daydayup.wolf.framework.rpc.Result;
 public interface RazorpayService {
     Result<PaymentCreateResponse> create(PaymentCreateRequest request);
     Result<PayVerifyResponse> verify(PayVerifyRequest request);
+    Result<PayoutResponse> payout(PayoutRequest request);
     Result<Integer> subscribe(String eventId, String signature, String data);
 }

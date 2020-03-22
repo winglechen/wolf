@@ -11,7 +11,6 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
-import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
@@ -59,7 +58,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
 
     @Override
     public void initPayment() {
-        if (!request.isDoublePayCheck()) {
+        if (!request.isDuplicateCheck()) {
             createPayment();
             return;
         }
