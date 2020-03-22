@@ -9,4 +9,5 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  * @since 2020/3/21 7:12 下午
  **/
 public interface CustomerInfoService extends Service {
+
 }
