@@ -23,6 +23,10 @@
             <groupId>study.daydayup.wolf.business.trade</groupId>
             <artifactId>trade-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.razorpay</groupId>
