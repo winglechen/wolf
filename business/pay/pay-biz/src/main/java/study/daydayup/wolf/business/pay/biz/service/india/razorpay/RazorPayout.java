@@ -27,22 +27,27 @@ public class RazorPayout implements PayoutManager {
     public PayoutResponse payout(@Validated PayoutRequest request) {
         this.request = request;
 
+        validRequest();
+        findPayoutAccount();
+        doPayout();
+        logPayoutResponse();
+
         return null;
     }
 
-    private void getBankCard() {
+    private void validRequest() {
 
     }
 
-    private void checkContact() {
-
-    }
-
-    private void checkAccount() {
+    private void findPayoutAccount() {
 
     }
 
     private void doPayout() {
+
+    }
+
+    private void logPayoutResponse() {
 
     }
 
