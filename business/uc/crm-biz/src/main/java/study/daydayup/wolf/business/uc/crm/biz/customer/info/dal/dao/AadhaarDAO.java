@@ -1,4 +1,6 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO;
 
@@ -14,4 +16,8 @@ public interface AadhaarDAO {
     int updateByIdSelective(AadhaarDO record);
 
     int updateById(AadhaarDO record);
+
+    AadhaarDO selectByAccountIdAndOrgId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
+
+
 }

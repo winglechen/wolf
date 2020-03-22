@@ -1,4 +1,6 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BankCardDO;
 
@@ -14,4 +16,8 @@ public interface BankCardDAO {
     int updateByIdSelective(BankCardDO record);
 
     int updateById(BankCardDO record);
+
+    BankCardDO selectByAccountIdAndOrgId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
+
+
 }
