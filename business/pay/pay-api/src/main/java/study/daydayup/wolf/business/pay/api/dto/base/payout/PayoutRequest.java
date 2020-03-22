@@ -23,6 +23,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class PayoutRequest implements Request {
     private Integer paymentMethod;
+    private Integer contactType;
+    private Integer accountType;
 
     private String tradeNo;
 
