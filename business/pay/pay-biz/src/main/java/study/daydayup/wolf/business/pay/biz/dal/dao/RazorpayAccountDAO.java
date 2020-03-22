@@ -1,4 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.dal.dao;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.RazorpayAccountDO;
 
@@ -14,4 +16,9 @@ public interface RazorpayAccountDAO {
     int updateByIdSelective(RazorpayAccountDO record);
 
     int updateById(RazorpayAccountDO record);
+
+    RazorpayAccountDO selectByPayerId(@Param("payerId")Long payerId, @Param("payeeId")Long payeeId);
+
+
+
 }

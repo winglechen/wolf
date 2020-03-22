@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.biz.service.india.razorpay;
+package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 @Builder
-public class RazorpayAccount implements Model {
+public class RazorAccount implements Model {
     private Long payerId;
     private String payerName;
     private Long payeeId;
