@@ -14,7 +14,30 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  **/
 @Component
 public class RazorAccountService implements Service {
+    private PayoutRequest request;
     public RazorAccount find(@Validated PayoutRequest request) {
+        this.request = request;
+
         return null;
+    }
+
+    private RazorAccount findFromDb() {
+        return null;
+    }
+
+    private void createContact() {
+
+    }
+
+    private void saveContactInfo() {
+
+    }
+
+    private void creatFundAccount() {
+
+    }
+
+    private void saveFundAccountInfo() {
+        
     }
 }
