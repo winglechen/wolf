@@ -18,4 +18,18 @@ public class ClientFactory implements Factory {
 
         return new AccountClient(auth);
     }
+
+    public static ContactClient createContactClient(String key, String secret) throws RazorpayException {
+        ApiUtils.createHttpClientInstance(false);
+        String auth = Credentials.basic(key, secret);
+
+        return new ContactClient(auth);
+    }
+
+    public static PayoutClient createPayoutClient(String key, String secret) throws RazorpayException {
+        ApiUtils.createHttpClientInstance(false);
+        String auth = Credentials.basic(key, secret);
+
+        return new PayoutClient(auth);
+    }
 }

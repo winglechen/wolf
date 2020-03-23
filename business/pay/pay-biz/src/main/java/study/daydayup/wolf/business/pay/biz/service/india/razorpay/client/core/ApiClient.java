@@ -191,7 +191,7 @@ public class ApiClient {
 
     private Class getClass(String entity) {
         try {
-            String entityClass = "com.razorpay." + WordUtils.capitalize(entity, '_').replaceAll("_", "");
+            String entityClass = "study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor." + WordUtils.capitalize(entity, '_').replaceAll("_", "");
             return Class.forName(entityClass);
         } catch (ClassNotFoundException e) {
             return null;
