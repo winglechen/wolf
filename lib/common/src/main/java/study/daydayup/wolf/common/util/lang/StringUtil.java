@@ -59,11 +59,11 @@ public class StringUtil {
         return s != null && s.indexOf(' ') != -1;
     }
 
-    public static String join(String f, @Nullable Object s, Object... r) {
+    public static String join(Object f, @Nullable Object s, Object... r) {
         return joinWith(DEFAULT_DELIMITER, f, s, r);
     }
 
-    public static String joinWith(String delimiter, String f, @Nullable Object s, Object... r) {
+    public static String joinWith(String delimiter, Object f, @Nullable Object s, Object... r) {
         if (delimiter == null) {
             delimiter = DEFAULT_DELIMITER;
         }

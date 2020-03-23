@@ -48,13 +48,7 @@ public class ApiUtils {
             }
         }
 
-        Properties properties = new Properties();
-        try {
-            properties.load(ApiUtils.class.getResourceAsStream("/project.properties"));
-            version = (String) properties.get("version");
-        } catch (IOException e) {
-            throw new RazorpayException(e.getMessage());
-        }
+        version = "1.0-WOLF";
     }
 
     private enum Method {

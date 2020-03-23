@@ -16,7 +16,7 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactRequest implements Request {
+public class ContactEpiRequest implements Request {
     private String name;
     private String type;
     private String referenceId;

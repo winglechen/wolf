@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.core;
 
 import com.razorpay.RazorpayException;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 import org.apache.commons.text.WordUtils;
 import org.json.JSONArray;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
  * @author Wingle
  * @since 2020/3/23 11:37 上午
  **/
+@Slf4j
 public class ApiClient {
     String auth;
 
@@ -113,8 +115,10 @@ public class ApiClient {
 
         try {
             responseBody = response.body().string();
+            log.debug("razorpay response:{}", responseBody);
+
             responseJson = new JSONObject(responseBody);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RazorpayException(e.getMessage());
         }
 
