@@ -11,6 +11,8 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PaymentLogTypeEnum implements CodeBasedEnum {
+    PAYOUT_NOTIFY(21, "放款通知"),
+    PAYOUT_REQUEST(20, "放款请求"),
     TRADE_NOTIFY(10, "私对私"),
     REFUND_REQUEST(8, "退款请求"),
     PAY_DUPLICATE(4, "重复支付"),

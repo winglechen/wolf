@@ -1,24 +1,31 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
+import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
+import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayoutAccountException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.PayoutModeEnum;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.PayoutPurposeEnum;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -46,9 +53,12 @@ public class RazorPayoutService implements Service {
 
         this.account = account;
         this.payoutRequest = request;
-        initPayment();
 
-        return null;
+        initPayment();
+        callEpi();
+        savePayment();
+
+        return formatResponse();
     }
 
     private void validAccount(RazorAccount account) {
@@ -71,6 +81,54 @@ public class RazorPayoutService implements Service {
             createPayment();
         }
     }
+
+    public void callEpi() {
+
+    }
+
+    public void savePayment() {
+
+    }
+
+    private PayoutResponse formatResponse() {
+        return null;
+    }
+
+    private JSONObject createPayoutRequest() {
+        JSONObject request = new JSONObject();
+
+        request.put("account_number", account.getAccountNumber());
+        request.put("fund_account_id", account.getContactId());
+        request.put("amount", getAmount(payoutRequest.getAmount()));
+        request.put("currency", "INR");
+        request.put("mode", PayoutModeEnum.IMPS.getName());
+        request.put("purpose", PayoutPurposeEnum.PAYOUT.getName());
+        request.put("queue_if_low_balance", true);
+        request.put("reference_id", payment.getPaymentNo());
+
+        return request;
+    }
+
+    private int getAmount(BigDecimal amount) {
+        amount = amount.multiply(BigDecimal.valueOf(100));
+        return DecimalUtil.toInt(amount);
+    }
+
+    public void logEpiResponse() {
+        PaymentLog log = PaymentLog.builder()
+                .paymentNo(payment.getPaymentNo())
+                .payeeId(payment.getPayeeId())
+                .payerId(payment.getPayerId())
+                .tradeNo(payment.getTradeNo())
+                .paymentMethod(payment.getPaymentMethod())
+                .logType(PaymentLogTypeEnum.PAYOUT_REQUEST.getCode())
+                //TODO
+                .data("")
+                .build();
+
+        logRepository.add(log);
+    }
+
 
     private boolean checkExistence() {
         String tradeNo = payoutRequest.getTradeNo();
