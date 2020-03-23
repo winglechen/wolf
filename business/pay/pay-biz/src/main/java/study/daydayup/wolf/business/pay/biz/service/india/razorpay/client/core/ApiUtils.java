@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  **/
 public class ApiUtils {
     private static OkHttpClient client;
-    private static Map<String, String> headers = new HashMap<String, String>();
+    private static Map<String, String> headers = new HashMap<>();
 
     private static String version = null;
 
@@ -61,7 +61,7 @@ public class ApiUtils {
         HttpUrl.Builder builder = getBuilder(path);
 
         String requestContent = requestObject == null ? "" : requestObject.toString();
-        RequestBody requestBody = RequestBody.create(Constants.MEDIA_TYPE_JSON, requestContent);
+        RequestBody requestBody = RequestBody.create(requestContent, Constants.MEDIA_TYPE_JSON);
 
         Request request =
                 createRequest(ApiUtils.Method.POST.name(), builder.build().toString(), requestBody, auth);
@@ -74,7 +74,7 @@ public class ApiUtils {
         HttpUrl.Builder builder = getBuilder(path);
 
         String requestContent = requestObject == null ? "" : requestObject.toString();
-        RequestBody requestBody = RequestBody.create(Constants.MEDIA_TYPE_JSON, requestContent);
+        RequestBody requestBody = RequestBody.create(requestContent, Constants.MEDIA_TYPE_JSON);
 
         Request request =
                 createRequest(ApiUtils.Method.PUT.name(), builder.build().toString(), requestBody, auth);
@@ -87,7 +87,7 @@ public class ApiUtils {
         HttpUrl.Builder builder = getBuilder(path);
 
         String requestContent = requestObject == null ? "" : requestObject.toString();
-        RequestBody requestBody = RequestBody.create(Constants.MEDIA_TYPE_JSON, requestContent);
+        RequestBody requestBody = RequestBody.create(requestContent, Constants.MEDIA_TYPE_JSON);
 
         Request request =
                 createRequest(ApiUtils.Method.PATCH.name(), builder.build().toString(), requestBody, auth);
@@ -163,7 +163,6 @@ public class ApiUtils {
         if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
             throw new IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers));
         }
-        X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
-        return trustManager;
+        return (X509TrustManager) trustManagers[0];
     }
 }

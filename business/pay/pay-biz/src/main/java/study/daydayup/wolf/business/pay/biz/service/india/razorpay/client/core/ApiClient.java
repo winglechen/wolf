@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.Ent
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service.india.razorpay.client
@@ -23,15 +24,12 @@ public class ApiClient {
 
     private final String ENTITY = "entity";
 
-    private final String COLLECTION = "collection";
+    private static final String COLLECTION = "collection";
+    private static final String ERROR = "error";
+    private static final String DESCRIPTION = "description";
+    private static final String STATUS_CODE = "code";
 
-    private final String ERROR = "error";
-
-    private final String DESCRIPTION = "description";
-
-    private final String STATUS_CODE = "code";
-
-    private final int STATUS_OK = 200;
+    private static final int STATUS_OK = 200;
 
     private final int STATUS_MULTIPLE_CHOICE = 300;
 
@@ -74,6 +72,7 @@ public class ApiClient {
         if (jsonObject.has(ENTITY)) {
             Class<T> cls = getClass(jsonObject.getString(ENTITY));
             try {
+                assert cls != null;
                 return cls.getConstructor(JSONObject.class).newInstance(jsonObject);
             } catch (Exception e) {
                 throw new RazorpayException("Unable to parse response because of " + e.getMessage());
@@ -86,19 +85,15 @@ public class ApiClient {
     private <T extends Entity> ArrayList<T> parseCollectionResponse(JSONObject jsonObject)
             throws RazorpayException {
 
-        ArrayList<T> modelList = new ArrayList<T>();
+        ArrayList<T> modelList = new ArrayList<>();
         if (jsonObject.has(ENTITY) && COLLECTION.equals(jsonObject.getString(ENTITY))) {
             JSONArray jsonArray = jsonObject.getJSONArray("items");
-            try {
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObj = jsonArray.getJSONObject(i);
-                    T t = parseResponse(jsonObj);
-                    modelList.add(t);
-                }
-                return modelList;
-            } catch (RazorpayException e) {
-                throw e;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObj = jsonArray.getJSONObject(i);
+                T t = parseResponse(jsonObj);
+                modelList.add(t);
             }
+            return modelList;
         }
 
         throw new RazorpayException("Unable to parse response");
@@ -110,11 +105,11 @@ public class ApiClient {
         }
 
         int statusCode = response.code();
-        String responseBody = null;
-        JSONObject responseJson = null;
+        String responseBody;
+        JSONObject responseJson;
 
         try {
-            responseBody = response.body().string();
+            responseBody = Objects.requireNonNull(response.body()).string();
             log.debug("razorpay response:{}", responseBody);
 
             responseJson = new JSONObject(responseBody);
@@ -137,11 +132,11 @@ public class ApiClient {
         }
 
         int statusCode = response.code();
-        String responseBody = null;
-        JSONObject responseJson = null;
+        String responseBody;
+        JSONObject responseJson;
 
         try {
-            responseBody = response.body().string();
+            responseBody = Objects.requireNonNull(response.body()).string();
             responseJson = new JSONObject(responseBody);
         } catch (IOException e) {
             throw new RazorpayException(e.getMessage());
@@ -161,11 +156,11 @@ public class ApiClient {
         }
 
         int statusCode = response.code();
-        String responseBody = null;
-        JSONObject responseJson = null;
+        String responseBody;
+        JSONObject responseJson;
 
         try {
-            responseBody = response.body().string();
+            responseBody = Objects.requireNonNull(response.body()).string();
             responseJson = new JSONObject(responseBody);
         } catch (IOException e) {
             throw new RazorpayException(e.getMessage());
@@ -193,6 +188,7 @@ public class ApiClient {
         throw new RazorpayException(sb.toString());
     }
 
+    @SuppressWarnings("rawtypes")
     private Class getClass(String entity) {
         try {
             String entityClass = "study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor." + WordUtils.capitalize(entity, '_').replaceAll("_", "");
