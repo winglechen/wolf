@@ -44,9 +44,9 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
         validateRequest();
         initPayment();
 
-        callPayApi();
-        logApiResponse();
-        parseApiResponse();
+        callPayEpi();
+        logEpiResponse();
+        parseEpiResponse();
 
         savePayment();
         return formatResponse();
@@ -69,7 +69,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
     }
 
     @Override
-    public void logApiResponse() {
+    public void logEpiResponse() {
         PaymentLog log = PaymentLog.builder()
                 .paymentNo(payment.getPaymentNo())
                 .payeeId(payment.getPayeeId())
@@ -123,6 +123,7 @@ public abstract class AbstractPaymentCreator implements PaymentCreator {
                 .create();
 
         payment.setPaymentNo(paymentNo);
+        payment.setPaymentMethod(request.getPaymentMethod());
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
         attachment = new ObjectMap();
     }

@@ -38,7 +38,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     private Order order;
     private int amount;
 
-    public void callPayApi() {
+    public void callPayEpi() {
         JSONObject options = new JSONObject();
         options.put("amount", getAmount());
         options.put("currency", CURRENCY);
@@ -56,7 +56,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     }
 
     @Override
-    public void parseApiResponse() {
+    public void parseEpiResponse() {
         parseOrder(order);
     }
 

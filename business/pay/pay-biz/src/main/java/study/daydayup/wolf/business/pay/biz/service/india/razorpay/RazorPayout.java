@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.pay.biz.service.india.razorpay;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.PayoutAccountNotFoundException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
@@ -35,6 +36,7 @@ public class RazorPayout implements PayoutManager {
     @Override
     public PayoutResponse payout(@Validated PayoutRequest request) {
         this.request = request;
+        this.request.setPaymentMethod(PaymentMethodEnum.RAZOR_PAYOUT.getCode());
 
         validRequest();
         findPayoutAccount();

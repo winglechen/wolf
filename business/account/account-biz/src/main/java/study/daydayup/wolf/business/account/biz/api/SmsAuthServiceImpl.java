@@ -32,7 +32,7 @@ import java.util.Date;
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
     private static final String OTP_KEY = "account.login.otp";
-    private static final String TEST_OTP = "123";
+    private static final String TEST_OTP = "778899";
 
     @Resource
     private AccountService accountService;
@@ -86,7 +86,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
     private void sendSms(String mobile, String code) {
         if (TEST_OTP.equals(code)) {
-//            return;
+            return;
         }
 
         String[] args = new String[]{code};

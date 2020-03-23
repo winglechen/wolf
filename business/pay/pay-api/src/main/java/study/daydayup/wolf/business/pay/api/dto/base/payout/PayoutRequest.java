@@ -27,6 +27,7 @@ public class PayoutRequest implements Request {
     private Integer accountType;
 
     private String tradeNo;
+    private boolean duplicateCheck;
 
     @NotNull @Min(1)
     private Long payerId;

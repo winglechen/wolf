@@ -16,10 +16,10 @@ public interface PaymentCreator {
     void validateRequest();
     void initPayment();
 
-    void callPayApi();
-    void logApiResponse();
+    void callPayEpi();
+    void logEpiResponse();
 
-    void parseApiResponse();
+    void parseEpiResponse();
     void savePayment();
     PaymentCreateResponse formatResponse();
 }
