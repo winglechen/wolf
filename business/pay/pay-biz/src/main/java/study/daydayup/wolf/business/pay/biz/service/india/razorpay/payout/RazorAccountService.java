@@ -109,7 +109,7 @@ public class RazorAccountService implements Service {
             return;
         }
 
-        accountDAO.updateByIdSelective(accountDO);
+        accountDAO.updateByPayerId(accountDO, accountDO.getPayerId(), accountDO.getPayeeId());
     }
 
 

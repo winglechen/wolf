@@ -18,6 +18,8 @@ public interface RazorpayAccountDAO {
 
     RazorpayAccountDO selectByPayerId(@Param("payerId")Long payerId, @Param("payeeId")Long payeeId);
 
+    int updateByPayerId(@Param("updated")RazorpayAccountDO updated,@Param("payerId")Long payerId, @Param("payeeId")Long payeeId);
+
 
 
 }
