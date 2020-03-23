@@ -1,5 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
+import com.razorpay.RazorpayException;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -10,10 +12,14 @@ import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayoutAccountException;
+import study.daydayup.wolf.business.pay.api.domain.exception.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.ClientFactory;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.PayoutClient;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.Payout;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.PayoutModeEnum;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.PayoutPurposeEnum;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
@@ -34,6 +40,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/3/23 4:56 下午
  **/
+@Slf4j
 @Component
 public class RazorPayoutService implements Service {
     private RazorAccount account;
@@ -83,11 +90,33 @@ public class RazorPayoutService implements Service {
     }
 
     public void callEpi() {
+        JSONObject request = createPayoutRequest();
+        log.debug("razorpay contact create request: {}", request);
 
+        try {
+            PayoutClient client = ClientFactory.createPayoutClient(config.getKeyId(), config.getKeySecret());
+            Payout payout = client.create(request);
+            parseResponse(payout);
+        } catch (RazorpayException e) {
+            throw new PayoutFailException("create razorpay contact fail");
+        }
+    }
+
+    private void parseResponse(Payout payout) {
+        log.debug("razorpay contact payout response: {}", payout);
+        if (payout == null || null == payout.get("id")) {
+            throw new PayoutFailException("create razorpay payout fail");
+        }
+
+        logEpiResponse(payout.toString());
+        payment.setOutTradeNo(payout.get("id"));
     }
 
     public void savePayment() {
-
+        if (null == payment || null == payment.getOutTradeNo()) {
+            return;
+        }
+        paymentRepository.add(payment);
     }
 
     private PayoutResponse formatResponse() {
@@ -114,7 +143,7 @@ public class RazorPayoutService implements Service {
         return DecimalUtil.toInt(amount);
     }
 
-    public void logEpiResponse() {
+    public void logEpiResponse(String response) {
         PaymentLog log = PaymentLog.builder()
                 .paymentNo(payment.getPaymentNo())
                 .payeeId(payment.getPayeeId())
@@ -122,8 +151,7 @@ public class RazorPayoutService implements Service {
                 .tradeNo(payment.getTradeNo())
                 .paymentMethod(payment.getPaymentMethod())
                 .logType(PaymentLogTypeEnum.PAYOUT_REQUEST.getCode())
-                //TODO
-                .data("")
+                .data(response)
                 .build();
 
         logRepository.add(log);

@@ -82,6 +82,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
         map.set("order_id", order.get("id"))
                 .set("created_at", order.get("created_at"));
 
+        payment.setOutTradeNo(order.get("id"));
         payment.setAttachment(map.toJson());
     }
 
