@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.union.app.service;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
@@ -14,6 +14,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
+import study.daydayup.wolf.framework.layer.domain.Service;
 
 /**
  * study.daydayup.wolf.business.union.app.service
@@ -21,8 +22,8 @@ import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
  * @author Wingle
  * @since 2020/3/4 12:41 下午
  **/
-@Service
-public class UnionLoanService implements study.daydayup.wolf.framework.layer.domain.Service {
+@Component
+public class UnionLoanService implements Service {
     private static final PaymentMethodEnum PAYMENT_METHOD = PaymentMethodEnum.RAZORPAY;
 
     @Reference

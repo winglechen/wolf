@@ -65,7 +65,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void startLoan(TradeId tradeId) {
+    public Result<Order> startLoan(TradeId tradeId) {
         tradeId.valid();
 
         LoanContractEntity contract = loanContractRepository.find(tradeId);
@@ -78,6 +78,8 @@ public class LoanServiceImpl implements LoanService {
         LoanOrderEntity order = new LoanOrderEntity(contract.getModel());
         order.loan();
         loanOrderRepository.save(order);
+
+        return Result.ok(order.getModel());
     }
 
     @Override

@@ -21,6 +21,7 @@ import study.daydayup.wolf.business.trade.api.service.order.SellerContractServic
 import study.daydayup.wolf.business.trade.api.service.order.SellerOrderService;
 import study.daydayup.wolf.business.trade.api.service.tm.ContractManageService;
 import study.daydayup.wolf.business.union.admin.dto.LoanWithOrder;
+import study.daydayup.wolf.business.union.admin.service.UnionPayoutService;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.web.Controller;
@@ -51,6 +52,8 @@ public class UnionLoanController implements Controller {
     private SellerContractService sellerContractService;
     @Reference
     private SellerOrderService sellerOrderService;
+    @Resource
+    private UnionPayoutService payoutService;
     @Resource
     private Session session;
     @Resource
@@ -129,7 +132,9 @@ public class UnionLoanController implements Controller {
     public Result<String> loaning(@PathVariable String tradeNo) {
         TradeId tradeId = initTradeId(tradeNo);
 
-        loanService.startLoan(tradeId);
+        Order order = loanService.startLoan(tradeId).notNullData();
+        payoutService.payout(order);
+
         return Result.ok("ok");
     }
 

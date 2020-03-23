@@ -22,7 +22,7 @@ public interface LoanService {
     void approve(TradeId tradeId);
     void refuse(TradeId tradeId);
 
-    void startLoan(TradeId tradeId);
+    Result<Order> startLoan(TradeId tradeId);
     void completeLoan(TradeId tradeId);
 
     /**
