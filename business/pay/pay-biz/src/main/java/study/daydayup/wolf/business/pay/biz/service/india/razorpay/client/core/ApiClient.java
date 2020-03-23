@@ -1,11 +1,11 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.core;
 
-import com.razorpay.Entity;
 import com.razorpay.RazorpayException;
 import okhttp3.Response;
 import org.apache.commons.text.WordUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.Entity;
 
 import java.io.IOException;
 import java.util.ArrayList;

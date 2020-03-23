@@ -19,4 +19,8 @@ public class Constants {
     public static final String USER_AGENT = "User-Agent";
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public static final String CONTACT_CREATE = "contacts";
+    public static final String FUND_ACCOUNT_CREATE = "fund_accounts";
+    public static final String PAYOUT_CREATE = "payouts";
+
 }
