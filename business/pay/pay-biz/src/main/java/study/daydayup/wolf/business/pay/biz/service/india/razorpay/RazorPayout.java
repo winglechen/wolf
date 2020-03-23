@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.biz.domain.service.PayoutManager;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout.RazorAccountService;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout.RazorPayoutService;
 
 import javax.annotation.Resource;
 
@@ -25,6 +26,8 @@ public class RazorPayout implements PayoutManager {
 
     @Resource
     private RazorAccountService accountService;
+    @Resource
+    private RazorPayoutService payoutService;
 
     private PayoutRequest request;
     private RazorAccount account;
@@ -35,10 +38,7 @@ public class RazorPayout implements PayoutManager {
 
         validRequest();
         findPayoutAccount();
-        doPayout();
-        logPayoutResponse();
-
-        return null;
+        return doPayout();
     }
 
     private void validRequest() {
@@ -52,13 +52,8 @@ public class RazorPayout implements PayoutManager {
         }
     }
 
-    private void doPayout() {
-
+    private PayoutResponse doPayout() {
+        return payoutService.create(account, request);
     }
-
-    private void logPayoutResponse() {
-
-    }
-
 
 }
