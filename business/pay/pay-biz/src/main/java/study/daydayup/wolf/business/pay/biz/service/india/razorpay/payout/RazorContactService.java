@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
 import com.razorpay.RazorpayException;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,7 @@ import javax.annotation.Resource;
  * @since 2020/3/23 1:06 上午
  **/
 @Component
+@Slf4j
 public class RazorContactService implements Service {
     private RazorAccount account;
     private PayoutRequest payoutRequest;
@@ -39,6 +41,7 @@ public class RazorContactService implements Service {
 
         payoutRequest = request;
         initAccount(account);
+        callEpi();
 
         return this.account;
     }
@@ -51,11 +54,31 @@ public class RazorContactService implements Service {
         return null != account.getContactId();
     }
 
-    private void initAccount(RazorAccount account) {
-        if (null == account) {
-            this.account = new RazorAccount();
+    private void initAccount(RazorAccount razorAccount) {
+        if (null == razorAccount) {
+            account = new RazorAccount();
         } else {
-            this.account = account;
+            account = razorAccount;
+        }
+
+        account.setPayeeId(payoutRequest.getPayeeId());
+        account.setPayeeName(payoutRequest.getPayeeName());
+        account.setPayerId(payoutRequest.getPayerId());
+        account.setPayerName(payoutRequest.getPayerName());
+    }
+
+
+    private void callEpi() {
+        JSONObject request = createContactRequest();
+        log.debug("razorpay contact create request: {}", request);
+
+        try {
+            ContactClient client = ClientFactory.createContactClient(config.getKeyId(), config.getKeySecret());
+            Contact contact = client.create(request);
+            parseResponse(contact);
+        } catch (RazorpayException e) {
+            account = null;
+            throw new PayoutFailException("create razorpay contact fail");
         }
     }
 
@@ -71,20 +94,15 @@ public class RazorContactService implements Service {
         return new JSONObject(request);
     }
 
-    private void callEpi() {
-        JSONObject request = createContactRequest();
-
-        try {
-            ContactClient client = ClientFactory.createContactClient(config.getKeyId(), config.getKeySecret());
-            Contact contact = client.create(request);
-            parseResponse(contact);
-        } catch (RazorpayException e) {
+    private void parseResponse(Contact contact) {
+        log.debug("razorpay contact create response: {}", contact);
+        if (contact == null || null == contact.get("id")) {
             account = null;
             throw new PayoutFailException("create razorpay contact fail");
         }
-    }
 
-    private void parseResponse(Contact contact) {
-
+        account.setContactId(contact.get("id"));
+        account.setContactType(contact.get("type"));
+        account.setAccountActive(contact.get("active"));
     }
 }

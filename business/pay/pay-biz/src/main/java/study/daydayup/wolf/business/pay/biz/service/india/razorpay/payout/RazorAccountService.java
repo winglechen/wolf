@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayoutAccountException;
 import study.daydayup.wolf.business.pay.api.domain.exception.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.biz.dal.dao.RazorpayAccountDAO;
@@ -58,18 +59,53 @@ public class RazorAccountService implements Service {
             throw new PayoutFailException("razorpay payout create contact fail");
         }
 
-        saveContactInfo();
+        saveAccountToDb();
     }
 
     private void creatFundAccount() {
-
+        if (null == account || StringUtil.isEmpty(account.getContactId(), true)) {
+            throw new InvalidPayoutAccountException("razorpay contact can't be null");
+        }
     }
 
-    private void saveContactInfo() {
+    private void saveAccountToDb() {
+        if (account == null) {
+            return;
+        }
 
+        if (null == account.getId()) {
+            addToDb();
+            return;
+        }
+
+        modifyToDb();
     }
 
-    private void saveFundAccountInfo() {
+    private void addToDb() {
+        if (account == null) {
+            return;
+        }
 
+        RazorpayAccountDO accountDO = RazorAccountConverter.toDO(account);
+        if (accountDO == null) {
+            return;
+        }
+
+        accountDAO.insertSelective(accountDO);
     }
+
+    private void modifyToDb() {
+        if (account == null || null == account.getId()) {
+            return;
+        }
+
+        RazorpayAccountDO accountDO = RazorAccountConverter.toDO(account);
+        if (accountDO == null) {
+            return;
+        }
+
+        accountDAO.updateByIdSelective(accountDO);
+    }
+
+
 }
