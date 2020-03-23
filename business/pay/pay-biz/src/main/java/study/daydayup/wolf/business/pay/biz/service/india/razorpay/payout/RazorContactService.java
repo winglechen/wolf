@@ -27,7 +27,7 @@ import javax.annotation.Resource;
  **/
 @Component
 @Slf4j
-public class RazorContactService implements Service {
+public class RazorContactService {
     private RazorAccount account;
     private PayoutRequest payoutRequest;
 

@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @since 2020/3/23 1:06 上午
  **/
 @Component
-public class RazorAccountService implements Service {
+public class RazorAccountService {
     private PayoutRequest request;
     private RazorAccount account;
 

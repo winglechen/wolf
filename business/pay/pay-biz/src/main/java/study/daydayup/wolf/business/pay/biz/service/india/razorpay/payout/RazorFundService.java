@@ -31,7 +31,7 @@ import javax.annotation.Resource;
  **/
 @Slf4j
 @Component
-public class RazorFundService implements Service {
+public class RazorFundService {
     private RazorAccount account;
     private PayoutRequest payoutRequest;
     private BankCard bankCard;

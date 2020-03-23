@@ -53,6 +53,23 @@
         </dependency>
         <!-- lib dependency end -->
 
+<!--        <dependency>-->
+<!--            <groupId>study.daydayup.wolf.business.uc</groupId>-->
+<!--            <artifactId>uc-agent</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>study.daydayup.wolf.middleware.notice</groupId>
+            <artifactId>notice-agent</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>study.daydayup.wolf.middleware.notice</groupId>
+            <artifactId>notice-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
+
+
 
         <!-- business biz start -->
         <dependency>

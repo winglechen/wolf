@@ -42,7 +42,7 @@ import java.util.List;
  **/
 @Slf4j
 @Component
-public class RazorPayoutService implements Service {
+public class RazorPayoutService {
     private RazorAccount account;
     private PayoutRequest payoutRequest;
     protected Payment payment;

@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @since 2020/2/29 11:41 下午
  **/
 @Component
-public class RazorPayout implements PayoutManager {
+public class RazorPayout  {
     @Resource
     private RazorConfig config;
 
@@ -33,7 +33,6 @@ public class RazorPayout implements PayoutManager {
     private PayoutRequest request;
     private RazorAccount account;
 
-    @Override
     public PayoutResponse payout(@Validated PayoutRequest request) {
         this.request = request;
         this.request.setPaymentMethod(PaymentMethodEnum.RAZOR_PAYOUT.getCode());
