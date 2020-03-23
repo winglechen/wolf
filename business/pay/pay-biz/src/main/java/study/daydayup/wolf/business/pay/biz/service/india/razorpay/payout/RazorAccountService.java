@@ -29,6 +29,8 @@ public class RazorAccountService implements Service {
     private RazorpayAccountDAO accountDAO;
     @Resource
     private RazorContactService contactService;
+    @Resource
+    private RazorFundService fundService;
 
     public RazorAccount find(@Validated PayoutRequest request) {
         this.request = request;
@@ -66,6 +68,9 @@ public class RazorAccountService implements Service {
         if (null == account || StringUtil.isEmpty(account.getContactId(), true)) {
             throw new InvalidPayoutAccountException("razorpay contact can't be null");
         }
+        account = fundService.create(account, request);
+
+        saveAccountToDb();
     }
 
     private void saveAccountToDb() {
