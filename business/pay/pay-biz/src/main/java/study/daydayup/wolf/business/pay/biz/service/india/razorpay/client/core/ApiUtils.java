@@ -27,7 +27,7 @@ public class ApiUtils {
 
     private static String version = null;
 
-    static void createHttpClientInstance(boolean enableLogging) throws RazorpayException {
+    public static void createHttpClientInstance(boolean enableLogging) throws RazorpayException {
         if (client == null) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             if (enableLogging) {
@@ -61,7 +61,7 @@ public class ApiUtils {
         GET, POST, PUT, PATCH, DELETE
     }
 
-    static Response postRequest(String path, JSONObject requestObject, String auth)
+    public static Response postRequest(String path, JSONObject requestObject, String auth)
             throws RazorpayException {
 
         HttpUrl.Builder builder = getBuilder(path);
@@ -74,7 +74,7 @@ public class ApiUtils {
         return processRequest(request);
     }
 
-    static Response putRequest(String path, JSONObject requestObject, String auth)
+    public static Response putRequest(String path, JSONObject requestObject, String auth)
             throws RazorpayException {
 
         HttpUrl.Builder builder = getBuilder(path);
@@ -87,7 +87,7 @@ public class ApiUtils {
         return processRequest(request);
     }
 
-    static Response patchRequest(String path, JSONObject requestObject, String auth)
+    public static Response patchRequest(String path, JSONObject requestObject, String auth)
             throws RazorpayException {
 
         HttpUrl.Builder builder = getBuilder(path);
@@ -100,7 +100,7 @@ public class ApiUtils {
         return processRequest(request);
     }
 
-    static Response getRequest(String path, JSONObject requestObject, String auth)
+    public static Response getRequest(String path, JSONObject requestObject, String auth)
             throws RazorpayException {
 
         HttpUrl.Builder builder = getBuilder(path);
@@ -110,7 +110,7 @@ public class ApiUtils {
         return processRequest(request);
     }
 
-    static Response deleteRequest(String path, JSONObject requestObject, String auth)
+    public static Response deleteRequest(String path, JSONObject requestObject, String auth)
             throws RazorpayException {
 
         HttpUrl.Builder builder = getBuilder(path);
@@ -158,7 +158,7 @@ public class ApiUtils {
         }
     }
 
-    static void addHeaders(Map<String, String> header) {
+    public static void addHeaders(Map<String, String> header) {
         headers.putAll(header);
     }
 

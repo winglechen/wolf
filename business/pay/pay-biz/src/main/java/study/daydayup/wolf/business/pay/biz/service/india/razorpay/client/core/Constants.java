@@ -10,13 +10,13 @@ import okhttp3.MediaType;
  **/
 public class Constants {
     // API constants
-    static final String SCHEME = "https";
-    static final String HOSTNAME = "api.razorpay.com";
-    static final Integer PORT = 443;
-    static final String VERSION = "v1";
+    public static final String SCHEME = "https";
+    public static final String HOSTNAME = "api.razorpay.com";
+    public static final Integer PORT = 443;
+    public static final String VERSION = "v1";
 
-    static final String AUTH_HEADER_KEY = "Authorization";
-    static final String USER_AGENT = "User-Agent";
-    static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+    public static final String AUTH_HEADER_KEY = "Authorization";
+    public static final String USER_AGENT = "User-Agent";
+    public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
 }
