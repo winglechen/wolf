@@ -35,7 +35,7 @@ public class JsonUtil {
         JSONObject tmp = obj;
         for (String key : keys) {
             tmp = tmp.getJSONObject(key);
-            if (0 == tmp.size()) {
+            if (null == tmp) {
                 return null;
             }
         }

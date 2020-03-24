@@ -69,7 +69,7 @@ public class RazorSubscriber {
         PaymentLog log = PaymentLog.builder()
                 .logType(PaymentLogTypeEnum.PAY_RETURN.getCode())
                 .paymentMethod(PAYMENT_METHOD.getCode())
-                .data(StringUtil.join(SEPARATOR, eventId, signature, data))
+                .data(StringUtil.joinWith(SEPARATOR, eventId, signature, data))
                 .build();
         logRepository.add(log);
     }

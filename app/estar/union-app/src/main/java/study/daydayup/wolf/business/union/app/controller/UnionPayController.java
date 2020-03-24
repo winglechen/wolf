@@ -35,7 +35,7 @@ public class UnionPayController {
     }
 
     @PostMapping("/pay/razorpay/subscribe")
-    public Result<String> razorpaySubscribe(@RequestHeader("X-Razorpay-Event-Id") String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
+    public Result<String> razorpaySubscribe(@RequestHeader(value = "X-Razorpay-Event-Id", required = false) String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
         log.info("razorpay:{}, {}, {}", eventId, signature, data);
         Integer response = razorpayService.subscribe(eventId, signature, data).getData();
         //TODO check response and return code != 200 when response fail
