@@ -189,6 +189,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
                 .build();
 
         key.setState(model.getState());
+
         changes.setStateEvent(event);
     }
 

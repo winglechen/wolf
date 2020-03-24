@@ -144,8 +144,12 @@ public class ContractRepository extends AbstractRepository implements Repository
 
         ContractDO changesDO = converter.toDo(changes);
         changesDO.setUpdatedAt(rpcContext.getRequestTime());
-        TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
-        if (state != null) {
+
+        if (null != changes.getStateEvent()) {
+            TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
+            if (state == null) {
+                return;
+            }
             changesDO.setState(state.getCode());
         }
 

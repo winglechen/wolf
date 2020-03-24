@@ -79,6 +79,8 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
                 .build();
 
         key.setState(model.getState());
+
+        initChanges();
         changes.setStateEvent(event);
         changes.setOutTradeNo(notification.getOutTradeNo());
         changes.setPaymentMethod(notification.getPaymentMethod());

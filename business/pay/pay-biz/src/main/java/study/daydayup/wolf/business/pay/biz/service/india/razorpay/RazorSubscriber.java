@@ -150,7 +150,7 @@ public class RazorSubscriber {
 
         notification.setPaymentNo(payout.getString("reference_id"));
         notification.setOutTradeNo(payout.getString("id"));
-        notification.setAmount(parseAmount(payout.getLongValue("amount_paid")));
+        notification.setAmount(parseAmount(payout.getLongValue("amount")));
         notification.setStatus(payout.getString("status"));
     }
 
@@ -187,7 +187,7 @@ public class RazorSubscriber {
             return false;
         }
 
-        if (notification.getAmount().compareTo(BigDecimal.ZERO) < 1) {
+        if (notification.getAmount().compareTo(BigDecimal.ZERO) < 0) {
             return false;
         }
 

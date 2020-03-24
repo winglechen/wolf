@@ -3,81 +3,12 @@ POST http://localhost:8100/pay/razorpay/subscribe
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
-X-Razorpay-Event-Id: idxxx
-X-Razorpay-Signature: signxxx
+X-Razorpay-Event-Id: EW1z0WqbYMOWD3
+X-Razorpay-Signature: 5ae5442ff443df7927a1ec3944e4d6037b86b24244cd73ccd73a33dec3dd25ac
+
+{"entity":"event","account_id":"acc_EKXMRHi2Y72UvU","event":"payout.processed","contains":["payout"],"payload":{"payout":{"entity":{"id":"pout_EW1xUXallJrBP2","entity":"payout","fund_account_id":"fa_EVjMRcxHswGnzX","amount":90000,"currency":"INR","notes":[],"fees":472,"tax":72,"status":"processed","purpose":"payout","utr":"EW1xUXallJrBP2","mode":"IMPS","reference_id":"20200324185635600119015582185096","narration":"onion Fund Transfer","batch_id":null,"failure_reason":null,"created_at":1585047395}}},"created_at":1585047481}
 
 
-{
-  "entity": "event",
-  "account_id": "acc_EKXMRHi2Y72UvU",
-  "event": "order.paid",
-  "contains": [
-    "payment",
-    "order"
-  ],
-  "payload": {
-    "payment": {
-      "entity": {
-        "id": "pay_EOXyyZkhOsSIzH",
-        "entity": "payment",
-        "amount": 38660,
-        "currency": "INR",
-        "status": "captured",
-        "order_id": "order_EOXyh0J9roM6OM",
-        "invoice_id": null,
-        "international": false,
-        "method": "upi",
-        "amount_refunded": 0,
-        "refund_status": null,
-        "captured": true,
-        "description": "Credits towards consultation",
-        "card_id": null,
-        "bank": null,
-        "wallet": null,
-        "vpa": "uuuu@paytm",
-        "email": "gaurav.kumar@example.com",
-        "contact": "+919191919191",
-        "notes": [],
-        "fee": 914,
-        "tax": 140,
-        "error_code": null,
-        "error_description": null,
-        "created_at": 1583413451
-      }
-    },
-    "order": {
-      "entity": {
-        "id": "order_EOXyh0J9roM6OM",
-        "entity": "order",
-        "amount": 38660,
-        "amount_paid": 38660,
-        "amount_due": 0,
-        "currency": "INR",
-        "receipt": "20200305210354600059505955474084",
-        "offer_id": null,
-        "status": "paid",
-        "attempts": 1,
-        "notes": [],
-        "created_at": 1583413434
-      }
-    }
-  },
-  "created_at": 1583413451
-}
-
-###
-
-# test
-POST https://onionwallet.net/api/pay/razorpay/subscribe
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{
-  "name": "ok",
-  "tradeNo" : "20200303195344000119344411981847",
-  "installmentNo": 1
-}
 
 ###
 

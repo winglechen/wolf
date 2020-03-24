@@ -52,6 +52,10 @@ public abstract class AbstractNotificationHandler implements NotificationHandler
     }
 
     protected boolean savePayment() {
+        if (paymentEntity.isPaid()) {
+            return true;
+        }
+
         paymentEntity.handleSuccessNotification(notification);
         return paymentRepository.save(paymentEntity) > 0;
     }

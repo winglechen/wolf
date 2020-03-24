@@ -2,7 +2,7 @@ spring:
   application:
     name: wolf-union-app
   profiles:
-    active: test
+    active: dev
   main:
     allow-bean-definition-overriding: true
   redis:

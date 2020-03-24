@@ -29,6 +29,10 @@ public class PaymentEntity extends AbstractEntity<Payment> implements Entity {
         return BeanUtil.equals(model.getState(), PaymentStateEnum.WAIT_TO_PAY.getCode());
     }
 
+    public boolean isPaid() {
+        return BeanUtil.equals(model.getState(), PaymentStateEnum.PAID.getCode());
+    }
+
     private void initChanges() {
         if (changes != null) {
             return;
@@ -37,7 +41,11 @@ public class PaymentEntity extends AbstractEntity<Payment> implements Entity {
     }
 
     public boolean handleSuccessNotification(PayNotification notification) {
-        if (isPayable()) {
+        if (isPaid()) {
+            return true;
+        }
+
+        if (!isPayable()) {
             return false;
         }
 
@@ -48,6 +56,7 @@ public class PaymentEntity extends AbstractEntity<Payment> implements Entity {
         model.setOutTradeNo(notification.getOutTradeNo());
         model.setUpdateAt(now);
 
+        initChanges();
         changes.setState(PaymentStateEnum.PAID.getCode());
         changes.setOutTradeNo(notification.getOutTradeNo());
         changes.setUpdateAt(now);
