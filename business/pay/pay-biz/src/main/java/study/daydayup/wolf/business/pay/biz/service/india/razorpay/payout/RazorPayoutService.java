@@ -114,7 +114,12 @@ public class RazorPayoutService {
     }
 
     private PayoutResponse formatResponse() {
-        return null;
+        PayoutResponse response = new PayoutResponse();
+        response.setPaymentNo(payment.getPaymentNo());
+        response.setPaymentMethod(payment.getPaymentMethod());
+        response.setAmount(payment.getAmount());
+
+        return response;
     }
 
     private JSONObject createPayoutRequest() {

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `last_editor`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`            DATETIME            ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
-    INDEX `udx_trade_no` (`trade_no`, `state`) COMMENT '覆盖索引：检查重复支付问题',
+    INDEX `idx_trade_no` (`trade_no`, `state`) COMMENT '覆盖索引：检查重复支付问题',
     UNIQUE INDEX `udx_pay_no` (`payment_no` ASC),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
