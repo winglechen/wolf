@@ -26,10 +26,12 @@ public class RazorConfig implements Serializable {
     private String keySecret;
     @NotNull
     private String webHookSecret;
+    @NotNull
+    private String keyAccount;
 
-    private String companyName = "Acme Corp";
-    private String companyDescription = "Credits towards consultation";
-    private String companyLogo = "https://i.imgur.com/3g7nmJC.png";
+    private String companyName = "Onion Wallet";
+    private String companyDescription = "Onion";
+    private String companyLogo = "https://onionwallet.net/static/icon_mini.png";
 
     private RazorPrefill prefill = new RazorPrefill();
     private RazorTheme theme = new RazorTheme();

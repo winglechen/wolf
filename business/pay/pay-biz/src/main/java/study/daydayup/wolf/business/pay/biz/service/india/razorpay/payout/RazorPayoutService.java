@@ -78,11 +78,6 @@ public class RazorPayoutService {
     }
 
     public void initPayment() {
-        if (!payoutRequest.isDuplicateCheck()) {
-            createPayment();
-            return;
-        }
-
         if (!checkExistence()) {
             createPayment();
         }
@@ -125,7 +120,7 @@ public class RazorPayoutService {
     private JSONObject createPayoutRequest() {
         JSONObject request = new JSONObject();
 
-        request.put("account_number", account.getAccountNumber());
+        request.put("account_number", config.getKeyAccount());
         request.put("fund_account_id", account.getAccountId());
         request.put("amount", getAmount(payoutRequest.getAmount()));
         request.put("currency", "INR");
@@ -158,6 +153,10 @@ public class RazorPayoutService {
 
 
     private boolean checkExistence() {
+        if (!payoutRequest.isDuplicateCheck()) {
+            return false;
+        }
+
         String tradeNo = payoutRequest.getTradeNo();
         Integer state = PaymentStateEnum.WAIT_TO_PAY.getCode();
 

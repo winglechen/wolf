@@ -77,7 +77,7 @@ public class RazorAccountService {
             return;
         }
 
-        if (null == account.getId()) {
+        if (null == account.getId() || account.getId() <= 0) {
             addToDb();
             return;
         }

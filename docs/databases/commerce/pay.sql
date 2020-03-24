@@ -140,6 +140,7 @@ CREATE TABLE IF NOT EXISTS `razorpay_account`
 
     `delete_flag`           TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    UNIQUE INDEX `udx_payer`(`payer_id`, `payee_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'razorpay_account';
 

@@ -104,6 +104,7 @@ pay:
   razorpay:
     keyId: "rzp_test_AVfB2VIxmnf4v6"
     keySecret: "pJ8TpvIge88kfBBrAPurUP7p"
+    keyAccount: "2323230056878780"
     webHookSecret: "T2kdT6vwgBcPDY7Qc8"
 
 
