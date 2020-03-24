@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/3/20 4:26 下午
  **/
 
-@Configuration
+//@Configuration
 public class PayAutoConfiguration {
 }

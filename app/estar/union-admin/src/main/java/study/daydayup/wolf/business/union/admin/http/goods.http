@@ -9,7 +9,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "name": "loan show1",
+  "name": "pay test",
   "price": 1000,
   "loan" : {
      "handlingFeeRate": 10,
@@ -105,7 +105,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8200/goods?pageNum=19
+GET http://localhost:8200/goods?pageNum=1
 Accept: */*
 Cache-Control: no-cache
 

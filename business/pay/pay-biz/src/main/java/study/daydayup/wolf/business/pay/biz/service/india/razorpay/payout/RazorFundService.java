@@ -19,6 +19,7 @@ import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.Con
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.FundAccount;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.AccountTypeEnum;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
 
 import javax.annotation.Resource;
@@ -63,11 +64,22 @@ public class RazorFundService {
             throw new InvalidPayoutAccountException("Razorpay payout Can't find customer contact info");
         }
 
-        return null != account.getAccountId();
+        return StringUtil.notEmpty(account.getAccountId());
     }
 
+    private boolean fackCustomerInfo() {
+        account.setAccountName("onionTest");
+        account.setAccountIfsc("HDFC0000053");
+        account.setAccountNumber("765432123456111");
+
+        return true;
+    }
 
     private void findCustomerInfo() {
+        if (fackCustomerInfo()) {
+            return;
+        }
+
         bankCard = customerEpi.find(account.getPayerId(), account.getPayeeId());
         if (bankCard == null) {
             throw new InvalidPayoutAccountException("Can't find customer bankCard info");

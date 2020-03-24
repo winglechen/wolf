@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.pay.biz.domain.service.PayoutManager;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout.RazorAccountService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout.RazorPayoutService;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
 
@@ -48,7 +49,7 @@ public class RazorPayout  {
 
     private void findPayoutAccount() {
         account = accountService.find(request);
-        if (account == null) {
+        if (account == null || StringUtil.isEmpty(account.getAccountId())) {
             throw new PayoutAccountNotFoundException();
         }
     }

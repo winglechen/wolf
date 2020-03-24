@@ -28,7 +28,6 @@ import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
-import study.daydayup.wolf.framework.layer.domain.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -127,7 +126,7 @@ public class RazorPayoutService {
         JSONObject request = new JSONObject();
 
         request.put("account_number", account.getAccountNumber());
-        request.put("fund_account_id", account.getContactId());
+        request.put("fund_account_id", account.getAccountId());
         request.put("amount", getAmount(payoutRequest.getAmount()));
         request.put("currency", "INR");
         request.put("mode", PayoutModeEnum.IMPS.getName());

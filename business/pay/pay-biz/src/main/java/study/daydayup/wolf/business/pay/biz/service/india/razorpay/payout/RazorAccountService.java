@@ -25,7 +25,7 @@ public class RazorAccountService {
     private RazorAccount account;
 
     @Resource
-    private RazorpayAccountDAO accountDAO;
+    private RazorpayAccountDAO razorpayAccountDAO;
     @Resource
     private RazorContactService contactService;
     @Resource
@@ -42,7 +42,7 @@ public class RazorAccountService {
     }
 
     private void findFromDb() {
-        RazorpayAccountDO accountDO = accountDAO.selectByPayerId(request.getPayerId(), request.getPayeeId());
+        RazorpayAccountDO accountDO = razorpayAccountDAO.selectByPayerId(request.getPayerId(), request.getPayeeId());
         if (accountDO == null) {
             return;
         }
@@ -95,7 +95,7 @@ public class RazorAccountService {
             return;
         }
 
-        accountDAO.insertSelective(accountDO);
+        razorpayAccountDAO.insertSelective(accountDO);
     }
 
     private void modifyToDb() {
@@ -108,7 +108,7 @@ public class RazorAccountService {
             return;
         }
 
-        accountDAO.updateByPayerId(accountDO, accountDO.getPayerId(), accountDO.getPayeeId());
+        razorpayAccountDAO.updateByPayerId(accountDO, accountDO.getPayerId(), accountDO.getPayeeId());
     }
 
 

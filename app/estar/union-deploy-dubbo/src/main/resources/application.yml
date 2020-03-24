@@ -53,6 +53,7 @@ spring:
         payment_log.actual-data-nodes: pay.payment_log
         payment_state_log.actual-data-nodes: pay.payment_state_log
         trade_merge.actual-data-nodes: pay.trade_merge
+        razorpay_account.actual-data-nodes: pay.razorpay_account
         #credit
         credit_config.actual-data-nodes: credit.credit_config
         credit_line.actual-data-nodes: credit.credit_line

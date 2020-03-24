@@ -82,7 +82,7 @@ public class RazorContactService {
         }
     }
 
-    private JSONObject createContactRequest() {
+    private JSONObject bakCreateContactRequest() {
         String customerId = CustomerId.toId(payoutRequest.getPayeeId(), payoutRequest.getPayerId());
 
         ContactEpiRequest request = ContactEpiRequest.builder()
@@ -92,6 +92,19 @@ public class RazorContactService {
                 .build();
 
         return new JSONObject(request);
+    }
+
+    private JSONObject createContactRequest() {
+        JSONObject request = new JSONObject();
+        String customerId = CustomerId.toId(payoutRequest.getPayeeId(), payoutRequest.getPayerId());
+
+
+//        request.put("name", payoutRequest.getPayerName());
+        request.put("name", "onionTest");
+        request.put("type", ContactTypeEnum.CUSTOMER.getName());
+        request.put("reference_id", customerId);
+
+        return request;
     }
 
     private void parseResponse(Contact contact) {

@@ -8,7 +8,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "goodsId" : 1
+  "goodsId" : 15
 }
 
 > {%
