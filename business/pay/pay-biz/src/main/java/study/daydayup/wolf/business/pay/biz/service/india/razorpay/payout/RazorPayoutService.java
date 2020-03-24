@@ -110,7 +110,11 @@ public class RazorPayoutService {
         if (null == payment || null == payment.getOutTradeNo()) {
             return;
         }
-        paymentRepository.add(payment);
+        if (null == payment.getId()) {
+            paymentRepository.add(payment);
+            return;
+        }
+        paymentRepository.save(payment);
     }
 
     private PayoutResponse formatResponse() {

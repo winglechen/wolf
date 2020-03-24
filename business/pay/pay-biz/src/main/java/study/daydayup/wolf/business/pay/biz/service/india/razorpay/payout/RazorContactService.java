@@ -15,6 +15,7 @@ import study.daydayup.wolf.business.pay.biz.service.india.razorpay.dto.razor.Con
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.ContactTypeEnum;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
 import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.CustomerId;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
 
 import javax.annotation.Resource;
@@ -51,7 +52,7 @@ public class RazorContactService {
             return false;
         }
 
-        return null != account.getContactId();
+        return StringUtil.notEmpty(account.getContactId());
     }
 
     private void initAccount(RazorAccount razorAccount) {
@@ -77,7 +78,6 @@ public class RazorContactService {
             Contact contact = client.create(request);
             parseResponse(contact);
         } catch (RazorpayException e) {
-            account = null;
             throw new PayoutFailException("create razorpay contact fail");
         }
     }
@@ -110,7 +110,6 @@ public class RazorContactService {
     private void parseResponse(Contact contact) {
         log.debug("razorpay contact create response: {}", contact);
         if (contact == null || null == contact.get("id")) {
-            account = null;
             throw new PayoutFailException("create razorpay contact fail");
         }
 

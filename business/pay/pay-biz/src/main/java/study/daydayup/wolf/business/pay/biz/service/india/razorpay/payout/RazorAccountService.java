@@ -96,6 +96,9 @@ public class RazorAccountService {
         }
 
         razorpayAccountDAO.insertSelective(accountDO);
+        if (null == accountDO.getId()) {
+            account.setId(accountDO.getId());
+        }
     }
 
     private void modifyToDb() {
@@ -110,6 +113,5 @@ public class RazorAccountService {
 
         razorpayAccountDAO.updateByPayerId(accountDO, accountDO.getPayerId(), accountDO.getPayeeId());
     }
-
 
 }

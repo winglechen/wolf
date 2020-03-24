@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment implements Model {
+    private Long id;
     private String paymentNo;
 
     private Long payerId;

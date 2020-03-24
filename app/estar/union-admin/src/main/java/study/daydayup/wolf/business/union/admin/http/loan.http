@@ -39,7 +39,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ### 通过借款请求
-PUT http://localhost:8200/loan/contract/approve/20200323225602000119529981693243
+PUT http://localhost:8200/loan/contract/approve/20200324172127000039225713491075
 Accept: */*
 Cache-Control: no-cache
 
@@ -49,7 +49,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ### 放款
-PUT http://localhost:8200/loan/contract/loan/20200323225602000119529981693243
+PUT http://localhost:8200/loan/contract/loan/20200324172127000039225713491075
 Accept: */*
 Cache-Control: no-cache
 
