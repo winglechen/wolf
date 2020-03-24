@@ -71,16 +71,25 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
             throw new InvalidContractException("Invalid installment: key and change's size are not match");
         }
 
-        TradeState state = getChangedState(keys.get(0), changes.get(0));
+        TradeState state = null;
+        InstallmentTerm first = changes.get(0);
+        if (null != first.getStateEvent()) {
+            state = getChangedState(keys.get(0), first);
+            if (state == null) {
+                return;
+            }
+        }
+
         LocalDateTime updateAt = LocalDateTime.now();
         for (int i = 0, size=keyDOs.size(); i < size; i++) {
             InstallmentTermDO keyDO = keyDOs.get(i);
             InstallmentTermDO changeDO = changeDOs.get(i);
+
+            changeDO.setUpdatedAt(updateAt);
             if (state != null) {
                 changeDO.setState(state.getCode());
             }
 
-            changeDO.setUpdatedAt(updateAt);
             installmentTermDAO.updateByTradeNo(changeDO, keyDO);
         }
     }
@@ -132,10 +141,9 @@ public class InstallmentTermRepository extends AbstractRepository implements Rep
         }
 
         StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(TradeTypeEnum.INSTALLMENT_TERM);
-
         TradeState state = stateMachine.fire(key.getState(), change.getStateEvent());
         if (state == null) {
-            throw new UnsupportedStateChangeException(key.getState(), change.getStateEvent());
+            return null;
         }
 
         return state;
