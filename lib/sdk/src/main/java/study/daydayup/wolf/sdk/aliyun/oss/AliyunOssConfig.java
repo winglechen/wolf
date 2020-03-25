@@ -1,5 +1,6 @@
 package study.daydayup.wolf.sdk.aliyun.oss;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,13 +10,15 @@ import org.springframework.context.annotation.Configuration;
  * @author Wingle
  * @since 2020/3/25 12:42 下午
  **/
+@Data
 @Configuration
 @ConfigurationProperties(prefix = "wolf.aliyun.oss")
 public class AliyunOssConfig {
-    private String accessKeyId;
-    private String accessKeySecret;
-    private String securityToken;
+    private String accessId;
+    private String accessKey;
 
     private String endpoint;
-    private String bucketName;
+    private String defaultBucket;
+
+    private String rootPath;
 }

@@ -16,12 +16,27 @@
 
     <properties>
         <aliyun.oss.version>3.8.1</aliyun.oss.version>
+        <aliyun.sts.version>3.0.1</aliyun.sts.version>
+        <aliyun.core.version>4.5.0</aliyun.core.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
             <!-- aliyun sdk start -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun.core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-sts</artifactId>
+                <version>${aliyun.sts.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
