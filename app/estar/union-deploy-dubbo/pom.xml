@@ -69,6 +69,11 @@
             <version>${version.snapshot}</version>
         </dependency>
 
+        <dependency>
+            <groupId>study.daydayup.wolf.bigdata.datav</groupId>
+            <artifactId>datav-biz</artifactId>
+            <version>${version.snapshot}</version>
+        </dependency>
 
 
         <!-- business biz start -->

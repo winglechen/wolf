@@ -29,6 +29,12 @@
             <artifactId>sdk</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>study.daydayup.wolf.bigdata.datav</groupId>
+            <artifactId>datav-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>
