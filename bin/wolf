@@ -129,6 +129,8 @@ case "$command" in
     install_content ;;
   install-onion)
     install_onion ;;
+  install-datav)
+    install_datav ;;
 esac
 
 

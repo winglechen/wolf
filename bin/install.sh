@@ -106,6 +106,12 @@ function install_content() {
     cd ${dir} && mvn clean install
 }
 
+function install_datav() {
+    echo "install bigdata.datav"
+    dir="${PROJECT_DIR}/bigdata/datav/"
+    cd ${dir} && mvn clean install
+}
+
 function install_onion() {
     echo "install onion"
     dir="/code/work/onion/onion-api/"
@@ -125,6 +131,7 @@ function install_business() {
     install_pay
 
     install_content
+    install_datav
 }
 
 function install_business_starter() {
