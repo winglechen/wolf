@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
     `driving_license_count` INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '驾照数',
     `voter_count`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '选民卡数',
     `kyc_count`             INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'KYC数',
-    `credit_promote_count`  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '信用额提升数',
     `auth_success_count`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '完成认证数',
+    `credit_promote_count`  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '信用额提升数',
 
     `delete_flag`           TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
