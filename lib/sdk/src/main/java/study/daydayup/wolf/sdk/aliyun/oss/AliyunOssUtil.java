@@ -72,18 +72,20 @@ public class AliyunOssUtil {
         return formatSignature(signature, encodedPolicy, dir, bucket, expireAt);
     }
 
-    public String encode(@NonNull String url) {
+    public String encode(@NonNull String str) {
         OSS client = createClient();
 
-        String[] items = StringUtil.split(url, ":");
+        String[] items = StringUtil.split(str, ":");
         if (items.length != 2) {
             throw new IllegalArgumentException("invalid oss url");
         }
 
+        String bucket = items[0];
+        String path = StringUtil.ltrim(items[0], "/");
         LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
-        URL path = client.generatePresignedUrl(items[0], items[1], DateUtil.asDate(expireAt));
+        URL url = client.generatePresignedUrl(bucket, path, DateUtil.asDate(expireAt));
 
-        return path.toString();
+        return url.toString();
     }
 
     private OSS createClient() {
