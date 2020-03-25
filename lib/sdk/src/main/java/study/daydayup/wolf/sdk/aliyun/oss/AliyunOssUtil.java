@@ -83,7 +83,7 @@ public class AliyunOssUtil {
         LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
         URL path = client.generatePresignedUrl(items[0], items[1], DateUtil.asDate(expireAt));
 
-        return formatUrl(items[0], path.toString());
+        return path.toString();
     }
 
     private OSS createClient() {

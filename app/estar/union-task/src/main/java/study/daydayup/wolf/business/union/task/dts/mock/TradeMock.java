@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.union.task.dts.mock;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.framework.mock.Mock;
+import study.daydayup.wolf.mock.Mock;
 
 import javax.annotation.Resource;
 

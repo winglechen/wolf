@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "wolf.aliyun.oss")
+@ConfigurationProperties(prefix = "wolf.sdk.aliyun.oss")
 public class AliyunOssConfig {
     private String accessId;
     private String accessKey;

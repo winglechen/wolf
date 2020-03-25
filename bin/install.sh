@@ -24,8 +24,16 @@ function install_libs() {
     dir="${PROJECT_DIR}/lib/framework/"
     cd ${dir} && mvn clean install
 
+    echo "install mock ..."
+    dir="${PROJECT_DIR}/lib/mock/"
+    cd ${dir} && mvn clean install
+
     echo "install dts ..."
     dir="${PROJECT_DIR}/lib/dts/"
+    cd ${dir} && mvn clean install
+
+    echo "install sdk ..."
+    dir="${PROJECT_DIR}/lib/sdk/"
     cd ${dir} && mvn clean install
 
     echo "install wolf-boot-start"
