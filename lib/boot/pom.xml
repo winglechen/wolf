@@ -34,6 +34,8 @@
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
         <wolf-dts.version>1.0.0-SNAPSHOT</wolf-dts.version>
+        <wolf-mock.version>1.0.0-SNAPSHOT</wolf-mock.version>
+        <wolf-sdk.version>1.0.0-SNAPSHOT</wolf-sdk.version>
         <wolf-model.version>1.0.0-SNAPSHOT</wolf-model.version>
 
         <lombok.version>1.18.10</lombok.version>
@@ -126,6 +128,16 @@
                 <groupId>study.daydayup.wolf</groupId>
                 <artifactId>dts</artifactId>
                 <version>${wolf-dts.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>mock</artifactId>
+                <version>${wolf-mock.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf</groupId>
+                <artifactId>sdk</artifactId>
+                <version>${wolf-sdk.version}</version>
             </dependency>
             <dependency>
                 <groupId>study.daydayup.wolf</groupId>
