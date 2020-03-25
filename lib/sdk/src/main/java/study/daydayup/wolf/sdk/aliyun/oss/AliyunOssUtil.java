@@ -15,9 +15,9 @@ import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.sdk.InvalidSdkConfigException;
 
 import javax.annotation.Resource;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,11 +31,22 @@ import java.util.Map;
 @Component
 public class AliyunOssUtil {
     private static final int SIGNATURE_EXPIRE_TIME = 30;
+    private static final int URL_EXPIRE_TIME = 3600;
     private static final long MIN_CONTENT_LENGTH = 0;
     private static final long MAX_CONTENT_LENGTH = 1048576000;
 
     @Resource
     private AliyunOssConfig ossConfig;
+
+    public void validOssConfig() {
+        if (null == ossConfig.getAccessId() || null == ossConfig.getAccessKey()) {
+            throw new InvalidSdkConfigException("invalid aliyun oss config: accessId and accessKey can't be null");
+        }
+
+        if (null == ossConfig.getEndpoint()) {
+            throw new InvalidSdkConfigException("invalid aliyun oss config: endpoint can't be null");
+        }
+    }
 
     public String createSignature() {
         return createSignature(ossConfig.getRootPath(), ossConfig.getDefaultBucket());
@@ -49,10 +60,8 @@ public class AliyunOssUtil {
     }
 
     public String createSignature(String dir, String bucket) {
-        validOssConfig();
-
+        OSS client = createClient();
         PolicyConditions policy = createPolicy(dir);
-        OSS client = new OSSClientBuilder().build(ossConfig.getEndpoint(), ossConfig.getAccessId(), ossConfig.getAccessKey());
 
         LocalDateTime expireAt = LocalDateTime.now().plusSeconds(SIGNATURE_EXPIRE_TIME);
         String policyString = client.generatePostPolicy(DateUtil.asDate(expireAt), policy);
@@ -63,13 +72,44 @@ public class AliyunOssUtil {
         return formatSignature(signature, encodedPolicy, dir, bucket, expireAt);
     }
 
+    public String encode(@NonNull String url) {
+        OSS client = createClient();
+
+        String[] items = StringUtil.split(url, ":");
+        if (items.length != 2) {
+            throw new IllegalArgumentException("invalid oss url");
+        }
+
+        LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
+        URL path = client.generatePresignedUrl(items[0], items[1], DateUtil.asDate(expireAt));
+
+        return formatUrl(items[0], path.toString());
+    }
+
+    private OSS createClient() {
+        validOssConfig();
+        return new OSSClientBuilder().build(
+                ossConfig.getEndpoint(),
+                ossConfig.getAccessId(),
+                ossConfig.getAccessKey()
+        );
+    }
+
+    private String formatUrl(String bucket, String path) {
+        return StringUtil.join( getBaseUrl(bucket), path );
+    }
+
+    private String getBaseUrl(String bucket) {
+        return StringUtil.join("//", bucket, ".", ossConfig.getEndpoint());
+    }
+
     private String formatSignature(@NonNull String signature, @NonNull String policy, String dir, String bucket, LocalDateTime expireAt) {
         Map<String, String> resp = new HashMap<>(8);
         resp.put("accessId", ossConfig.getAccessId());
         resp.put("policy", policy);
         resp.put("signature", signature);
         resp.put("directory", dir);
-        resp.put("hostname", StringUtil.join("//", bucket, ".", ossConfig.getEndpoint()));
+        resp.put("hostname", getBaseUrl(bucket));
         resp.put("expireAt", expireAt.toString());
 
         return JSON.toJSONString(resp);
@@ -79,7 +119,6 @@ public class AliyunOssUtil {
         byte[] binaryData = policyString.getBytes(StandardCharsets.UTF_8);
         return BinaryUtil.toBase64String(binaryData);
     }
-
 
     private PolicyConditions createPolicy(String path) {
         PolicyConditions policy = new PolicyConditions();
@@ -92,13 +131,5 @@ public class AliyunOssUtil {
         return policy;
     }
 
-    public void validOssConfig() {
-        if (null == ossConfig.getAccessId() || null == ossConfig.getAccessKey()) {
-            throw new InvalidSdkConfigException("invalid aliyun oss config: accessId and accessKey can't be null");
-        }
 
-        if (null == ossConfig.getEndpoint()) {
-            throw new InvalidSdkConfigException("invalid aliyun oss config: endpoint can't be null");
-        }
-    }
 }
