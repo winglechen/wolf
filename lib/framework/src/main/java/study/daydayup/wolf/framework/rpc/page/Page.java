@@ -1,10 +1,7 @@
 package study.daydayup.wolf.framework.rpc.page;
 
 import com.github.pagehelper.PageHelper;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.common.io.enums.OrderEnum;
 
@@ -24,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Page<T> implements Serializable {
     private List<T> data;
+    private Object attachment;
 
     private Long total;
     private Integer pageSize;
@@ -37,8 +35,8 @@ public class Page<T> implements Serializable {
     private String orderBy;
     private Long orderValue;
 
-    public static void nextPage(PageOrder order, int pageSize) {
-
+    public static void nextPage(@NonNull PageOrder order, int pageSize) {
+        PageUtil.nextPage(order, pageSize);
     }
 
     public static void startPage(int pageNum, int pageSize) {
@@ -68,7 +66,7 @@ public class Page<T> implements Serializable {
             return null;
         }
 
-        Page<T> page = Page.<T>builder()
+        return Page.<T>builder()
                 .total(pageInfo.getTotal())
                 .pageSize(pageInfo.getPageSize())
                 .pages(pageInfo.getPages())
@@ -76,8 +74,6 @@ public class Page<T> implements Serializable {
                 .hasPrePage(pageInfo.getPages() > 0 && pageInfo.getPageNum() > 1)
                 .pageNum(pageInfo.getPageNum())
                 .build();
-
-        return page;
     }
 
     public static <T> Page<T> empty() {
