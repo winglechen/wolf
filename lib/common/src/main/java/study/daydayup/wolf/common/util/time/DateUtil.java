@@ -15,8 +15,10 @@ import java.util.Date;
  * @since 2019/10/23 10:44 下午
  **/
 public class DateUtil {
-    private static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+    public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+    public static final DateTimeFormatter DEFAULT_DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+    public static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
 
     public static Date asDate(@NonNull LocalDate localDate) {
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
@@ -31,8 +33,7 @@ public class DateUtil {
     }
 
     public static LocalDate asLocalDate(@NonNull String str) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
-        return LocalDate.parse(str, formatter);
+        return LocalDate.parse(str, DEFAULT_DATE_FORMATTER);
     }
 
     public static LocalDateTime asLocalDateTime(@NonNull String str) {
@@ -64,7 +65,7 @@ public class DateUtil {
 
     public static String asString(@NonNull LocalDate localDate, String format) {
         if (null == format) {
-            return localDate.format(DEFAULT_FORMATTER);
+            return localDate.format(DEFAULT_DATETIME_FORMATTER);
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
@@ -77,7 +78,7 @@ public class DateUtil {
 
     public static String asString(@NonNull LocalDateTime localDateTime, String format) {
         if (format == null) {
-            return localDateTime.format(DEFAULT_FORMATTER);
+            return localDateTime.format(DEFAULT_DATETIME_FORMATTER);
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);

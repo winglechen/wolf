@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020/3/25 11:44 下午
  **/
 @RestController
-public class DailyLoanController {
+public class UnionDailyLoanController {
 }

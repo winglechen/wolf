@@ -8,6 +8,7 @@ import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyKoi;
 import study.daydayup.wolf.bigdata.datav.api.service.daily.DailyKoiService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -22,7 +23,7 @@ import java.time.LocalDate;
  * @since 2020/3/25 11:43 下午
  **/
 @RestController
-public class DailyKoiController {
+public class UnionDailyKoiController {
     @Reference
     private DailyKoiService koiService;
     @Resource
@@ -30,8 +31,8 @@ public class DailyKoiController {
 
     @GetMapping("/datav/daily/koi/range")
     public Result<Page<DailyKoi>> findByDate(
-            @RequestParam(value = "startDate", required=false ) LocalDate startDate,
-            @RequestParam(value = "endDate", required=false ) LocalDate endDate,
+            @RequestParam(value = "startDate", required=false ) String startDate,
+            @RequestParam(value = "endDate", required=false ) String endDate,
             @RequestParam(value = "pageNum", required=false ) Integer pageNum) {
 
         Long orgId = session.get("orgId", Long.class);
@@ -40,11 +41,18 @@ public class DailyKoiController {
                 .pageSize(10)
                 .build();
 
+
         DateRangeRequest request = DateRangeRequest.builder()
                 .orgId(orgId)
-                .startDate(startDate)
-                .endDate(endDate)
                 .build();
+
+        if (null != startDate) {
+            request.setStartDate(LocalDate.parse(startDate, DateUtil.DEFAULT_DATE_FORMATTER));
+        }
+
+        if (null != endDate) {
+            request.setEndDate(LocalDate.parse(endDate, DateUtil.DEFAULT_DATE_FORMATTER));
+        }
 
         return koiService.findByRange(request, pageRequest);
     }

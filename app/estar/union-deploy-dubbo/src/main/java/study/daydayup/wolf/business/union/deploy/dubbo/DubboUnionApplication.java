@@ -23,6 +23,7 @@ import study.daydayup.wolf.framework.util.ContextUtil;
         , "study.daydayup.wolf.business.org.biz.task.dal.dao"
         , "study.daydayup.wolf.business.trade.order.biz.dal.dao"
         , "study.daydayup.wolf.business.pay.biz.dal.dao"
+        , "study.daydayup.wolf.bigdata.datav.biz.dal.dao"
 })
 @EnableDiscoveryClient
 public class DubboUnionApplication {
