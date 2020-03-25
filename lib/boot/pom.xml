@@ -9,6 +9,7 @@
 
     <modules>
         <module>wolf-business-dependencies</module>
+        <module>wolf-sdk-dependencies</module>
     </modules>
 
     <name>wolf-parent</name>
@@ -28,6 +29,7 @@
 
         <wolf-boot.version>1.0.0-SNAPSHOT</wolf-boot.version>
         <wolf-business.version>1.0.0-SNAPSHOT</wolf-business.version>
+        <wolf-sdk.version>1.0.0-SNAPSHOT</wolf-sdk.version>
 
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
@@ -86,6 +88,14 @@
                 <groupId>study.daydayup.wolf.boot</groupId>
                 <artifactId>wolf-business-dependencies</artifactId>
                 <version>${wolf-business.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>study.daydayup.wolf.boot</groupId>
+                <artifactId>wolf-sdk-dependencies</artifactId>
+                <version>${wolf-sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
