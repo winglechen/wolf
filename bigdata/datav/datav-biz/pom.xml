@@ -15,10 +15,10 @@
 
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>study.daydayup.wolf.bigdata.datav</groupId>-->
-<!--            <artifactId>datav-api</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>study.daydayup.wolf.bigdata.datav</groupId>
+            <artifactId>datav-api</artifactId>
+        </dependency>
 
 
         <dependency>
