@@ -21,6 +21,7 @@
         <module>starter</module>
         <module>dts</module>
         <module>mock</module>
+        <module>sdk</module>
     </modules>
 
     <properties>
