@@ -20,7 +20,7 @@ public class DateRangeRequest implements Request {
     @NotNull @Positive
     private Long orgId;
 
-    private LocalDate dateBefore;
-    private LocalDate dateAfter;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 }

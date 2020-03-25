@@ -1,0 +1,8 @@
+# hello world
+GET http://localhost:8200/datav/daily/koi/range?startDate=2020-01-10&endDate=2020-01-25&pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+
