@@ -1,4 +1,4 @@
-package study.daydayup.wolf.framework.mock;
+package study.daydayup.wolf.mock;
 
 import org.springframework.stereotype.Component;
 

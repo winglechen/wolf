@@ -20,6 +20,7 @@
         <module>generator</module>
         <module>starter</module>
         <module>dts</module>
+        <module>mock</module>
     </modules>
 
     <properties>
