@@ -48,18 +48,18 @@ public class AliyunOssUtil {
         }
     }
 
-    public String createSignature() {
+    public Map<String, String> createSignature() {
         return createSignature(ossConfig.getRootPath(), ossConfig.getDefaultBucket());
     }
 
-    public String createSignature(String dir) {
+    public Map<String, String> createSignature(String dir) {
         if (null == ossConfig.getDefaultBucket()) {
             throw new IllegalArgumentException("aliyun oss bucket can't be null");
         }
         return createSignature(dir, ossConfig.getDefaultBucket());
     }
 
-    public String createSignature(String dir, String bucket) {
+    public Map<String, String> createSignature(String dir, String bucket) {
         OSS client = createClient();
         PolicyConditions policy = createPolicy(dir);
 
@@ -75,7 +75,7 @@ public class AliyunOssUtil {
     public String encode(@NonNull String str) {
         OSS client = createClient();
 
-        String[] items = StringUtil.split(str, ":");
+        String[] items = StringUtil.split(str, "://");
         if (items.length != 2) {
             throw new IllegalArgumentException("invalid oss url");
         }
@@ -105,7 +105,7 @@ public class AliyunOssUtil {
         return StringUtil.join("//", bucket, ".", ossConfig.getEndpoint());
     }
 
-    private String formatSignature(@NonNull String signature, @NonNull String policy, String dir, String bucket, LocalDateTime expireAt) {
+    private Map<String, String> formatSignature(@NonNull String signature, @NonNull String policy, String dir, String bucket, LocalDateTime expireAt) {
         Map<String, String> resp = new HashMap<>(8);
         resp.put("accessId", ossConfig.getAccessId());
         resp.put("policy", policy);
@@ -114,7 +114,7 @@ public class AliyunOssUtil {
         resp.put("hostname", getBaseUrl(bucket));
         resp.put("expireAt", expireAt.toString());
 
-        return JSON.toJSONString(resp);
+        return resp;
     }
 
     private String encodePolicy(@NonNull String policyString) {

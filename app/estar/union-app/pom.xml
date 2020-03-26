@@ -21,6 +21,10 @@
             <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>uc-agent</artifactId>
         </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf</groupId>
+            <artifactId>sdk</artifactId>
+        </dependency>
 
     </dependencies>
 
