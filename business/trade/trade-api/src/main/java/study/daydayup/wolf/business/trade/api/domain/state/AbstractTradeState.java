@@ -27,4 +27,9 @@ public abstract class AbstractTradeState implements TradeState {
         return code;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
 }
