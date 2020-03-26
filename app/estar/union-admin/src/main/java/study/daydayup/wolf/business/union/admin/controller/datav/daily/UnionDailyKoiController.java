@@ -29,7 +29,7 @@ public class UnionDailyKoiController {
     @Resource
     private Session session;
 
-    @GetMapping("/datav/daily/koi/range")
+    @GetMapping("/datav/daily/koi")
     public Result<Page<DailyKoi>> findByDate(
             @RequestParam(value = "startDate", required=false ) String startDate,
             @RequestParam(value = "endDate", required=false ) String endDate,
