@@ -17,18 +17,18 @@ function init() {
 
     echo "start nacos"
     echo $line
-    sh /code/bin/nacos/bin/startup.sh -m standalone > /code/github/wolf/bin/logs/wolf.log 2>&1  &
+    sh /Users/wingle/code/bin/nacos/bin/startup.sh -m standalone > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1  &
 
     echo "start redis" 
     echo $line
-    /usr/local/redis/bin/redis-server > /code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-server > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
 }
 
 function deploy_union_test() {
     dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
     cd ${dir} && mvn clean package -Ptest
 
-    scp /code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
+    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "union-deploy-dubbo.tar.gz transporting..."
 
@@ -37,18 +37,18 @@ function deploy_union_test() {
 }
 
 function deploy_onion_test() {
-    dir="/code/work/onion/onion-api/onion-admin/"
+    dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
     cd ${dir} && mvn clean package -Ptest
 
-    scp /code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
+    scp /Users/wingle/code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "onion-admin.tar.gz transporting..."
 
 
-    dir="/code/work/onion/onion-api/onion-user/"
+    dir="/Users/wingle/code/work/onion/onion-api/onion-user/"
     cd ${dir} && mvn clean package -Ptest
 
-    scp /code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
+    scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
         app@47.111.7.95:/home/app/tmp
     echo "onion-user.tar.gz transporting..."
 
@@ -66,11 +66,11 @@ function clear() {
 
     echo "stop nacos"
     echo $line
-    sh /code/bin/nacos/bin/shutdown.sh > /code/github/wolf/bin/logs/wolf.log 2>&1 &
+    sh /Users/wingle/code/bin/nacos/bin/shutdown.sh > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
 
     echo "stop redis"
     echo $line
-    /usr/local/redis/bin/redis-cli shutdown > /code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-cli shutdown > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
 }
 
 function start() {
