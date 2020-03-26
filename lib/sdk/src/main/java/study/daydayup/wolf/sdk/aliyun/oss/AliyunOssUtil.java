@@ -30,7 +30,7 @@ import java.util.Map;
 @Slf4j
 @Component
 public class AliyunOssUtil {
-    private static final int SIGNATURE_EXPIRE_TIME = 30;
+    private static final int SIGNATURE_EXPIRE_TIME = 300;
     private static final int URL_EXPIRE_TIME = 3600;
     private static final long MIN_CONTENT_LENGTH = 0;
     private static final long MAX_CONTENT_LENGTH = 1048576000;
