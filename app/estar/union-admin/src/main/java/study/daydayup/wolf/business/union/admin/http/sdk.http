@@ -1,0 +1,10 @@
+### aliyun oss signature
+GET http://localhost:8200/sdk/aliyun/oss/signature
+Accept: */*
+Cache-Control: no-cache
+
+
+
+###
+
+
