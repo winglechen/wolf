@@ -195,6 +195,7 @@ CREATE TABLE `track_repay`
     `loss_amount`         DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '资损金额',
     `partly_loss_count`   INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '部分资损数',
     `partly_loss_amount`  DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT '部分资损金额',
+    `m1_loss_rate`        DECIMAL(8, 4)      NOT NULL DEFAULT 0.00 COMMENT '30天坏账率',
 
     `d1_amount`           DECIMAL(15, 4)      NOT NULL DEFAULT 0.00 COMMENT 'd1金额',
     `d1`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '当日催当日还数',
