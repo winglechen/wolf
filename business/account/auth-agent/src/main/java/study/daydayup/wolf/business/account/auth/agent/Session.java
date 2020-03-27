@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent
- * TODO: move it to the framework package
+ * TODO: store it to redis
  * @author Wingle
  * @since 2019/12/4 5:50 下午
  **/
@@ -199,17 +199,21 @@ public class Session {
     }
 
     private String getBearer() {
-        String authType = request.getAuthType();
-        if (! "Bearer".equals(authType)) {
-            return null;
-        }
-
         String auth = request.getHeader("Authorization");
         if (StringUtil.isEmpty(auth)) {
             return null;
         }
 
-        return auth;
+        String[] authArr = auth.split(" ");
+        if (auth.length() != 2 || !"Bearer".equals(authArr[0])) {
+            return null;
+        }
+
+        if (StringUtil.isEmpty(authArr[1])) {
+            return null;
+        }
+
+        return authArr[1].trim();
     }
 
     private void loadFromRedis() {

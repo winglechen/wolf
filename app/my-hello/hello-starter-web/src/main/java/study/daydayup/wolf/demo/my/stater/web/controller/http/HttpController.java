@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 public class HttpController {
     @GetMapping("/http/auth")
     public String auth(HttpServletRequest request) {
-        String authType = request.getAuthType();
-        String authData = request.getHeader("Authorization");
+        String auth = request.getHeader("Authorization");
+
+        String[] args = auth.split(" ");
+        String authType = args[0];
+        String authData = args[1];
+
 
         return StringUtil.joinWith(":", authType, authData);
     }
