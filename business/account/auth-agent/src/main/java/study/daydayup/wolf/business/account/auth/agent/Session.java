@@ -180,6 +180,11 @@ public class Session {
     private String createSessionId() {
         String sId;
 
+        sId = getBearer();
+        if (null != sId) {
+            return sId;
+        }
+
         sId = CookieUtil.get(request, sessionKey);
         if (null != sId) {
             return sId;
@@ -191,6 +196,20 @@ public class Session {
         }
 
         return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    private String getBearer() {
+        String authType = request.getAuthType();
+        if (! "Bearer".equals(authType)) {
+            return null;
+        }
+
+        String auth = request.getHeader("Authorization");
+        if (StringUtil.isEmpty(auth)) {
+            return null;
+        }
+
+        return auth;
     }
 
     private void loadFromRedis() {

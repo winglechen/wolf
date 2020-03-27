@@ -31,19 +31,19 @@ public class HelloController {
     private TradeFlow tradeFlow;
 
 
-    @RequestMapping("/show")
+    @RequestMapping("/hello/show")
     public String show() {
         HelloService helloService = helloContainer.getHelloService();
         return helloService.sayHello();
     }
 
-    @RequestMapping("/demo")
+    @RequestMapping("/hello/demo")
     public String demo() {
         demoService.show();
         return "demo";
     }
 
-    @RequestMapping("/flow")
+    @RequestMapping("/hello/flow")
     public String flow(@RequestParam Integer type) {
         if (type == null) {
             return "no type!";

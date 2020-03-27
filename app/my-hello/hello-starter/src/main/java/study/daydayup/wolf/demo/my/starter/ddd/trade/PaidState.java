@@ -13,4 +13,9 @@ public class PaidState implements State {
     public int getCode() {
         return 20;
     }
+
+    @Override
+    public String getName() {
+        return "paid";
+    }
 }

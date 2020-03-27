@@ -13,4 +13,9 @@ public class WaitToPayState implements State {
     public int getCode() {
         return 10;
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }
