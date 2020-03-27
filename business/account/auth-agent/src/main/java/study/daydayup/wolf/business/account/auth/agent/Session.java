@@ -180,12 +180,12 @@ public class Session {
     private String createSessionId() {
         String sId;
 
-        sId = getBearer();
+        sId = CookieUtil.get(request, sessionKey);
         if (null != sId) {
             return sId;
         }
 
-        sId = CookieUtil.get(request, sessionKey);
+        sId = getBearer();
         if (null != sId) {
             return sId;
         }
