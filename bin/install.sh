@@ -114,7 +114,7 @@ function install_datav() {
 
 function install_onion() {
     echo "install onion"
-    dir="/code/work/onion/onion-api/"
+    dir="/Users/wingle/code/work/onion/onion-api/"
     cd ${dir} && mvn clean install
 }
 
