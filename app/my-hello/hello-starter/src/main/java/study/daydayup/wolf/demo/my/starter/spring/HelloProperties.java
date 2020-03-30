@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.my.starter;
+package study.daydayup.wolf.demo.my.starter.spring;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

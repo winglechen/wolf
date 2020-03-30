@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.my.starter.oo;
+package study.daydayup.wolf.demo.my.starter.base.oo;
 
 import lombok.Data;
 import study.daydayup.wolf.common.sm.Event;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * study.daydayup.wolf.demo.my.starter.oo
+ * study.daydayup.wolf.demo.my.starter.base.oo
  *
  * @author Wingle
  * @since 2019/12/26 5:50 下午

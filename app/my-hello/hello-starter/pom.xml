@@ -22,6 +22,12 @@
         </dependency>
         -->
         <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>8.5.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>study.daydayup.wolf.boot</groupId>
             <artifactId>wolf-boot-starter</artifactId>
         </dependency>

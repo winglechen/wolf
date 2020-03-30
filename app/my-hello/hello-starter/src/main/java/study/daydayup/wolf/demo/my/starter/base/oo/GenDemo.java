@@ -1,9 +1,9 @@
-package study.daydayup.wolf.demo.my.starter.oo;
+package study.daydayup.wolf.demo.my.starter.base.oo;
 
 import lombok.Data;
 
 /**
- * study.daydayup.wolf.demo.my.starter.oo
+ * study.daydayup.wolf.demo.my.starter.base.oo
  *
  * @author Wingle
  * @since 2019/12/25 8:26 下午

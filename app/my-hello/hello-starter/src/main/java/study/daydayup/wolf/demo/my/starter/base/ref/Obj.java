@@ -1,7 +1,7 @@
-package study.daydayup.wolf.demo.my.starter.ref;
+package study.daydayup.wolf.demo.my.starter.base.ref;
 
 /**
- * study.daydayup.wolf.demo.my.starter.ref
+ * study.daydayup.wolf.demo.my.starter.base.ref
  *
  * @author Wingle
  * @since 2019/12/25 9:10 下午

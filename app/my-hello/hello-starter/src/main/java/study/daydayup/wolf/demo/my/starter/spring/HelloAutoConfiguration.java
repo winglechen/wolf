@@ -1,11 +1,8 @@
-package study.daydayup.wolf.demo.my.starter;
+package study.daydayup.wolf.demo.my.starter.spring;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;

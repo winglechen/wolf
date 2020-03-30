@@ -1,10 +1,10 @@
-package study.daydayup.wolf.demo.my.starter.json;
+package study.daydayup.wolf.demo.my.starter.ds.json;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * study.daydayup.wolf.demo.my.starter.json
+ * study.daydayup.wolf.demo.my.starter.ds.json
  *
  * @author Wingle
  * @since 2020/2/26 12:38 下午

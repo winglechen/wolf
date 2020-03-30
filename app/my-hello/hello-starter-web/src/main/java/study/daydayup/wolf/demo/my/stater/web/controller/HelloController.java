@@ -3,9 +3,9 @@ package study.daydayup.wolf.demo.my.stater.web.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.demo.my.starter.DemoService;
-import study.daydayup.wolf.demo.my.starter.HelloContainer;
-import study.daydayup.wolf.demo.my.starter.HelloService;
+import study.daydayup.wolf.demo.my.starter.spring.DemoService;
+import study.daydayup.wolf.demo.my.starter.spring.HelloContainer;
+import study.daydayup.wolf.demo.my.starter.spring.HelloService;
 import study.daydayup.wolf.demo.my.stater.web.flow.TradeFlow;
 import study.daydayup.wolf.demo.my.stater.web.flow.TradeType;
 

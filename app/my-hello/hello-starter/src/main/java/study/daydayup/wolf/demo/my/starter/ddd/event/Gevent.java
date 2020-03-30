@@ -1,11 +1,11 @@
-package study.daydayup.wolf.demo.my.starter.event;
+package study.daydayup.wolf.demo.my.starter.ddd.event;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import lombok.Data;
 
 /**
- * study.daydayup.wolf.demo.my.starter.event
+ * study.daydayup.wolf.demo.my.starter.ddd.event
  *
  * @author Wingle
  * @since 2019/12/16 9:35 下午

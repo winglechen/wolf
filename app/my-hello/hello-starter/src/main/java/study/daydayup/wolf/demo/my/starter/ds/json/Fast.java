@@ -1,11 +1,11 @@
-package study.daydayup.wolf.demo.my.starter.json;
+package study.daydayup.wolf.demo.my.starter.ds.json;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
- * study.daydayup.wolf.demo.my.starter.json
+ * study.daydayup.wolf.demo.my.starter.ds.json
  *
  * @author Wingle
  * @since 2020/1/3 4:14 下午

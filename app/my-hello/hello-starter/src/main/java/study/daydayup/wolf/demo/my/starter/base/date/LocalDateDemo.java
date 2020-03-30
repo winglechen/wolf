@@ -1,4 +1,4 @@
-package study.daydayup.wolf.demo.my.starter.date;
+package study.daydayup.wolf.demo.my.starter.base.date;
 
 import lombok.Data;
 import study.daydayup.wolf.common.util.time.DateUtil;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * study.daydayup.wolf.demo.my.starter.date
+ * study.daydayup.wolf.demo.my.starter.base.date
  *
  * @author Wingle
  * @since 2019/12/9 5:01 下午
