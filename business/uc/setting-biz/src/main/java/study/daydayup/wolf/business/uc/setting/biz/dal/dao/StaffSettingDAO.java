@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.uc.setting.biz.dal.dao;
 
+import org.apache.ibatis.annotations.Param;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.StaffSettingDO;
 
 public interface StaffSettingDAO {
@@ -16,4 +17,8 @@ public interface StaffSettingDAO {
     int updateByPrimaryKeyWithBLOBs(StaffSettingDO record);
 
     int updateById(StaffSettingDO record);
+
+    int updateByAccountId(@Param("updated") StaffSettingDO updated, @Param("accountId")Long accountId, @Param("orgId")Long orgId);
+
+    StaffSettingDO findByAccountId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
 }
