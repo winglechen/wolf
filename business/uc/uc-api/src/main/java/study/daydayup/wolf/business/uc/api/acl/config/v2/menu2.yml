@@ -1,8 +1,8 @@
 estar:
   goods:
-    - add
-    - modify
-    - query
+    name: xxName
+    icon: xxx
+    children:
   trade:
     - send
     - close
