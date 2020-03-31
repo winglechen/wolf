@@ -76,16 +76,31 @@
         </javaClientGenerator>
 
         <table tableName="account_status" domainObjectName="AccountStatusDO" mapperName="AccountStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
         <table tableName="customer_status" domainObjectName="CustomerStatusDO" mapperName="CustomerStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
-            <property name="useActualColumnNames" value="false"/>
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
+
+        <table tableName="company_status" domainObjectName="CompanyStatusDO" mapperName="CompanyStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+
+        <table tableName="account_setting" domainObjectName="AccountSettingDO" mapperName="AccountSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="customer_setting" domainObjectName="CustomerSettingDO" mapperName="CustomerSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="company_setting" domainObjectName="CompanySettingDO" mapperName="CompanySettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+
 
 
     </context>
