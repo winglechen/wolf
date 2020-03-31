@@ -83,6 +83,10 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
+        <table tableName="staff_status" domainObjectName="StaffStatusDO" mapperName="StaffStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
         <table tableName="company_status" domainObjectName="CompanyStatusDO" mapperName="CompanyStatusDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
@@ -93,6 +97,10 @@
         </table>
 
         <table tableName="customer_setting" domainObjectName="CustomerSettingDO" mapperName="CustomerSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="staff_setting" domainObjectName="StaffSettingDO" mapperName="StaffSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
