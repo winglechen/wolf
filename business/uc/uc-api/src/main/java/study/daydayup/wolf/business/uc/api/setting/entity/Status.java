@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.uc.api.setting.entity;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
+import java.time.LocalDateTime;
+
 /**
  * study.daydayup.wolf.business.uc.api.setting.entity
  *
@@ -34,4 +36,6 @@ public class Status implements Model {
     protected Long s20 = 0L;
 
     protected Integer version;
+    protected LocalDateTime createdAt;
+    protected LocalDateTime updatedAt;
 }
