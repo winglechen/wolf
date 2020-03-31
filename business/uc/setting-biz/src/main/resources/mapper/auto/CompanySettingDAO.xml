@@ -5,26 +5,19 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="namespace" jdbcType="VARCHAR" property="namespace" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
-    <result column="data" jdbcType="LONGVARCHAR" property="data" />
-  </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, namespace, version, delete_flag, last_editor, created_at, updated_at
+    id, org_id, namespace, `data`, version, delete_flag, last_editor, created_at, updated_at
   </sql>
-  <sql id="Blob_Column_List">
-    `data`
-  </sql>
-  <select id="selectById" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from company_setting
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -34,12 +27,12 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
     insert into company_setting (id, org_id, namespace, 
-      version, delete_flag, last_editor, 
-      created_at, updated_at, `data`
+      `data`, version, delete_flag, 
+      last_editor, created_at, updated_at
       )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{namespace,jdbcType=VARCHAR}, 
-      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{data,jdbcType=LONGVARCHAR}
+      #{data,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
@@ -54,6 +47,9 @@
       <if test="namespace != null">
         namespace,
       </if>
+      <if test="data != null">
+        `data`,
+      </if>
       <if test="version != null">
         version,
       </if>
@@ -67,9 +63,6 @@
       <if test="updatedAt != null">
         updated_at,
       </if>
-      <if test="data != null">
-        `data`,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,6 +73,9 @@
       </if>
       <if test="namespace != null">
         #{namespace,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -94,9 +90,6 @@
       <if test="updatedAt != null">
         #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="data != null">
-        #{data,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
@@ -107,6 +100,9 @@
       </if>
       <if test="namespace != null">
         namespace = #{namespace,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        `data` = #{data,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -123,28 +119,14 @@
       <if test="updatedAt != null">
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="data != null">
-        `data` = #{data,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
-    update company_setting
-    set org_id = #{orgId,jdbcType=BIGINT},
-      namespace = #{namespace,jdbcType=VARCHAR},
-      version = #{version,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=TINYINT},
-      last_editor = #{lastEditor,jdbcType=BIGINT},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      `data` = #{data,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO">
     update company_setting
     set org_id = #{orgId,jdbcType=BIGINT},
       namespace = #{namespace,jdbcType=VARCHAR},
+      `data` = #{data,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
