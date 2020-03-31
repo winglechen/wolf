@@ -13,17 +13,12 @@
             <if test="updated.namespace != null and updated.namespace != ''">
                 namespace = #{updated.namespace,jdbcType=VARCHAR},
             </if>
-            <if test="updated.version != null">
-                version = #{updated.version,jdbcType=INTEGER},
-            </if>
+                version = version + 1,
             <if test="updated.deleteFlag != null">
                 delete_flag = #{updated.deleteFlag,jdbcType=TINYINT},
             </if>
             <if test="updated.lastEditor != null">
                 last_editor = #{updated.lastEditor,jdbcType=BIGINT},
-            </if>
-            <if test="updated.createdAt != null">
-                created_at = #{updated.createdAt,jdbcType=TIMESTAMP},
             </if>
             <if test="updated.updatedAt != null">
                 updated_at = #{updated.updatedAt,jdbcType=TIMESTAMP},

@@ -1,5 +1,4 @@
 package study.daydayup.wolf.business.uc.setting.biz.dal.dao;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.AccountSettingDO;
