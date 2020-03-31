@@ -93,18 +93,22 @@
 
 
         <table tableName="account_setting" domainObjectName="AccountSettingDO" mapperName="AccountSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="data" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
         <table tableName="customer_setting" domainObjectName="CustomerSettingDO" mapperName="CustomerSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="data" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
         <table tableName="staff_setting" domainObjectName="StaffSettingDO" mapperName="StaffSettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="data" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
         <table tableName="company_setting" domainObjectName="CompanySettingDO" mapperName="CompanySettingDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="data" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
