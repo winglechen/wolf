@@ -4,10 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import study.daydayup.wolf.common.util.collection.ArrayUtil;
-import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.api.Model;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -21,19 +19,18 @@ import java.util.*;
 public class SettingDTO implements Model {
     private Long accountId;
     private Long orgId;
-    private Collection<String> keys;
+    private Collection<String> namespaces;
+    private String namespace;
 
-    private String key;
-    private Object value;
     private Map<String, Object> map;
 
-    public SettingDTO addKey(String... keyArray) {
+    public SettingDTO addNamespace(String... keyArray) {
         if (ArrayUtil.isEmpty(keyArray)) {
             return this;
         }
 
         initKeys();
-        keys.addAll(Arrays.asList(keyArray));
+        namespaces.addAll(Arrays.asList(keyArray));
         return this;
     }
 
@@ -45,11 +42,11 @@ public class SettingDTO implements Model {
     }
 
     public void initKeys() {
-        if (keys != null) {
+        if (namespaces != null) {
             return;
         }
 
-        keys = new ArrayList<>(4);
+        namespaces = new ArrayList<>(4);
     }
 
     public void initMap() {
