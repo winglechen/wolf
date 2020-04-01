@@ -42,10 +42,7 @@ public class CustomerStatusAgent {
             return;
         }
 
-        CustomerStatus status = service.find(accountId, orgId);
-        if (status == null) {
-            throw new StatusNotFoundException();
-        }
+        CustomerStatus status = service.find(accountId, orgId).notNullData();
 
         this.accountId = accountId;
         this.orgId = orgId;
