@@ -43,6 +43,14 @@ public class StringUtil {
         return ! notEmpty(s);
     }
 
+    public static boolean isBlank(String s) {
+        return isEmpty(s, true);
+    }
+
+    public static boolean notBlank(String s) {
+        return ! isBlank(s);
+    }
+
     public static boolean notEmpty(String s) {
         return s != null && s.length() > 0;
     }
