@@ -14,8 +14,6 @@ public interface CompanySettingDAO {
 
     int updateByIdSelective(CompanySettingDO record);
 
-    int updateByPrimaryKeyWithBLOBs(CompanySettingDO record);
-
     int updateById(CompanySettingDO record);
 
     int updateByOrgId(@Param("updated")CompanySettingDO updated,@Param("orgId")Long orgId);

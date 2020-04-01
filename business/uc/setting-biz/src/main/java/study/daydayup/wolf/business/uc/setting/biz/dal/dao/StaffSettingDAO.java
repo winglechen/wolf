@@ -14,8 +14,6 @@ public interface StaffSettingDAO {
 
     int updateByIdSelective(StaffSettingDO record);
 
-    int updateByPrimaryKeyWithBLOBs(StaffSettingDO record);
-
     int updateById(StaffSettingDO record);
 
     int updateByAccountId(@Param("updated") StaffSettingDO updated, @Param("accountId")Long accountId, @Param("orgId")Long orgId);

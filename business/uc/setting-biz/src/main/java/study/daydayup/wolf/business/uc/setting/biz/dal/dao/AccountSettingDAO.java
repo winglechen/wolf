@@ -14,8 +14,6 @@ public interface AccountSettingDAO {
 
     int updateByIdSelective(AccountSettingDO record);
 
-    int updateByPrimaryKeyWithBLOBs(AccountSettingDO record);
-
     int updateById(AccountSettingDO record);
 
     int updateByAccountId(@Param("updated")AccountSettingDO updated,@Param("accountId")Long accountId);
