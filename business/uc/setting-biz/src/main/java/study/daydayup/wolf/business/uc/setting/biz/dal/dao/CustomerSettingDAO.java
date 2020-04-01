@@ -1,4 +1,5 @@
 package study.daydayup.wolf.business.uc.setting.biz.dal.dao;
+import java.util.Collection;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +20,10 @@ public interface CustomerSettingDAO {
 
     int updateByAccountId(@Param("updated")CustomerSettingDO updated,@Param("accountId")Long accountId,@Param("orgId")Long orgId);
 
-    CustomerSettingDO findByAccountId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
+    List<CustomerSettingDO> findByAccountId(@Param("accountId")Long accountId,@Param("orgId")Long orgId);
 
+    CustomerSettingDO findByNamespace(@Param("namespace")String namespace,@Param("accountId")Long accountId,@Param("orgId")Long orgId);
+
+    List<CustomerSettingDO> findByNamespaceIn(@Param("namespaceCollection")Collection<String> namespaceCollection, @Param("accountId")Long accountId,@Param("orgId")Long orgId);
 
 }
