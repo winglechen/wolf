@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
+import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CompanySettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO;
@@ -26,7 +27,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         if (companyId == null) {
             return Result.fail(10000, "invalid args");
         }
-        CompanySettingDO companySettingDO = dao.findByOrgId(companyId);
+        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companyId);
         if (companySettingDO == null) {
             return initSetting(companyId);
         }
@@ -37,7 +38,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     @Override
     public Result<Integer> save(@Validated CompanySetting companySetting) {
         int status;
-        CompanySettingDO companySettingDO = dao.findByOrgId(companySetting.getOrgId());
+        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companySetting.getOrgId());
         if (companySettingDO == null) {
             status = dao.insertSelective(modelToDO(companySetting));
             return Result.ok(status);

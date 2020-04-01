@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.entity.StaffSetting;
 import study.daydayup.wolf.business.uc.api.setting.service.StaffSettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.StaffSettingDAO;
@@ -25,7 +26,7 @@ public class StaffSettingServiceImpl implements StaffSettingService {
 
     @Override
     public Result<StaffSetting> find(@NonNull Long accountId, @NonNull Long orgId) {
-        StaffSettingDO customerSettingDO = dao.findByAccountId(accountId, orgId);
+        StaffSettingDO customerSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, accountId, orgId);
         if (customerSettingDO == null) {
             return initSetting(accountId, orgId);
         }
@@ -36,7 +37,7 @@ public class StaffSettingServiceImpl implements StaffSettingService {
     @Override
     public Result<Integer> save(@Validated StaffSetting customerSetting) {
         int status;
-        StaffSettingDO customerSettingDO = dao.findByAccountId(customerSetting.getAccountId(), customerSetting.getOrgId());
+        StaffSettingDO customerSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, customerSetting.getAccountId(), customerSetting.getOrgId());
         if (customerSettingDO == null) {
             status = dao.insertSelective(modelToDO(customerSetting));
             return Result.ok(status);

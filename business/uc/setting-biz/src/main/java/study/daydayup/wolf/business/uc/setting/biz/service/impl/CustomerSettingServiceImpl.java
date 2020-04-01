@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerSetting;
+import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerSettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CustomerSettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CustomerSettingDO;
@@ -25,7 +26,7 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
 
     @Override
     public Result<CustomerSetting> find(@NonNull Long accountId, @NonNull Long orgId) {
-        CustomerSettingDO customerSettingDO = dao.findByAccountId(accountId, orgId);
+        CustomerSettingDO customerSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, accountId, orgId);
         if (customerSettingDO == null) {
             return initSetting(accountId, orgId);
         }
@@ -36,7 +37,7 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
     @Override
     public Result<Integer> save(@Validated CustomerSetting customerSetting) {
         int status;
-        CustomerSettingDO customerSettingDO = dao.findByAccountId(customerSetting.getAccountId(), customerSetting.getOrgId());
+        CustomerSettingDO customerSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, customerSetting.getAccountId(), customerSetting.getOrgId());
         if (customerSettingDO == null) {
             status = dao.insertSelective(modelToDO(customerSetting));
             return Result.ok(status);

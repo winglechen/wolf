@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.AccountSetting;
+import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.AccountSettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.AccountSettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.AccountSettingDO;
@@ -26,7 +27,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
         if (accountId == null) {
             return Result.fail(10000, "invalid args");
         }
-        AccountSettingDO accountSettingDO = dao.findByAccountId(accountId);
+        AccountSettingDO accountSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, accountId);
         if (accountSettingDO == null) {
             return initSetting(accountId);
         }
@@ -44,7 +45,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
             return Result.fail(10000, "invalid args", 0);
         }
 
-        AccountSettingDO accountSettingDO = dao.findByAccountId(accountSetting.getAccountId());
+        AccountSettingDO accountSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, accountSetting.getAccountId());
         if (accountSettingDO == null) {
             dao.insertSelective(modelToDO(accountSetting));
             return Result.fail(10000, "invalid args", 0);
