@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import study.daydayup.wolf.common.util.collection.ArrayUtil;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.util.*;
@@ -24,12 +26,44 @@ public class SettingDTO implements Model {
 
     private Map<String, Object> map;
 
+    public void valid() {
+        valid(false);
+    }
+
+    public void valid(boolean needBothAccount) {
+        if (needBothAccount) {
+            if (null == accountId || null == orgId) {
+                throw new IllegalArgumentException("accountId and orgId can't be null");
+            }
+        }
+
+        if (!needBothAccount) {
+            if (null == accountId && null == orgId) {
+                throw new IllegalArgumentException("accountId and orgId can't be null");
+            }
+        }
+
+        if (StringUtil.isEmpty(namespace) || CollectionUtil.isEmpty(namespaces)) {
+            throw new IllegalArgumentException("namespace can't be null");
+        }
+
+        format();
+    }
+
+    public void format() {
+        if (StringUtil.notBlank(namespace)) {
+            initNamespaces();
+            addNamespace(namespace);
+            namespace = null;
+        }
+    }
+
     public SettingDTO addNamespace(String... keyArray) {
         if (ArrayUtil.isEmpty(keyArray)) {
             return this;
         }
 
-        initKeys();
+        initNamespaces();
         namespaces.addAll(Arrays.asList(keyArray));
         return this;
     }
@@ -41,7 +75,7 @@ public class SettingDTO implements Model {
         return this;
     }
 
-    public void initKeys() {
+    public void initNamespaces() {
         if (namespaces != null) {
             return;
         }

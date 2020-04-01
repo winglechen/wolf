@@ -104,8 +104,6 @@ public class MapUtil {
         for (K k : keys) {
             map.remove(k);
         }
-
-        return;
     }
 
     @SafeVarargs

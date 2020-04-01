@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
 import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
 import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
@@ -11,6 +12,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.uc.setting.biz.service.impl
@@ -45,6 +47,21 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         }
         status = dao.updateByOrgId(modelToDO(companySetting), companySetting.getOrgId());
         return Result.ok(status);
+    }
+
+    @Override
+    public Result<Integer> set(SettingDTO settingDTO) {
+        return null;
+    }
+
+    @Override
+    public Result<List<CompanySetting>> findByNamespaces(SettingDTO settingDTO) {
+        return null;
+    }
+
+    @Override
+    public Result<List<CompanySetting>> findAll(Long accountId) {
+        return null;
     }
 
     private Result<CompanySetting> initSetting(Long companyId) {

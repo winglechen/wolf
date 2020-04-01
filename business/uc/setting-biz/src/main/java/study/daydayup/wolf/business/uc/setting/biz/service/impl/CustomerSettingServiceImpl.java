@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerSetting;
 import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerSettingService;
@@ -12,6 +13,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.uc.setting.biz.service.impl
@@ -45,6 +47,21 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
 
         status = dao.updateByAccountId(modelToDO(customerSetting), customerSetting.getAccountId(), customerSetting.getOrgId());
         return Result.ok(status);
+    }
+
+    @Override
+    public Result<Integer> set(SettingDTO settingDTO) {
+        return null;
+    }
+
+    @Override
+    public Result<List<CustomerSetting>> findByNamespaces(SettingDTO settingDTO) {
+        return null;
+    }
+
+    @Override
+    public Result<List<CustomerSetting>> findAll(Long accountId) {
+        return null;
     }
 
     private Result<CustomerSetting> initSetting(Long accountId, Long orgId) {
