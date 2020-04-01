@@ -1,11 +1,13 @@
 package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.StaffStatus;
 import study.daydayup.wolf.business.uc.api.setting.service.StaffStatusService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.StaffStatusDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.StaffStatusDO;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -22,34 +24,29 @@ public class StaffStatusServiceImpl implements StaffStatusService {
     private StaffStatusDAO dao;
 
     @Override
-    public StaffStatus find(Long accountId, Long orgId) {
-        if (null == accountId || null == orgId) {
-            return null;
-        }
-
+    public Result<StaffStatus> find(@NonNull Long accountId, @NonNull Long orgId) {
         StaffStatusDO customerStatusDO = dao.findByAccountId(accountId, orgId);
         if (customerStatusDO == null) {
             return initStatus(accountId, orgId);
         }
-        return DOToModel(customerStatusDO);
+        StaffStatus status = DOToModel(customerStatusDO);
+        return Result.ok(status);
     }
 
     @Override
-    public void save(@Validated StaffStatus customerStatus) {
-        if (customerStatus == null) {
-            return;
-        }
-
+    public Result<Integer> save(@Validated StaffStatus customerStatus) {
+        int status;
         StaffStatusDO customerStatusDO = dao.findByAccountId(customerStatus.getAccountId(), customerStatus.getOrgId());
         if (customerStatusDO == null) {
-            dao.insertSelective(modelToDO(customerStatus));
-            return;
+            status = dao.insertSelective(modelToDO(customerStatus));
+            return Result.ok(status);
         }
 
-        dao.updateByAccountId(modelToDO(customerStatus), customerStatus.getAccountId(), customerStatus.getOrgId());
+        status = dao.updateByAccountId(modelToDO(customerStatus), customerStatus.getAccountId(), customerStatus.getOrgId());
+        return Result.ok(status);
     }
 
-    private StaffStatus initStatus(Long accountId, Long orgId) {
+    private Result<StaffStatus> initStatus(Long accountId, Long orgId) {
         StaffStatus status = new StaffStatus();
         status.setAccountId(accountId);
         status.setOrgId(orgId);
@@ -57,7 +54,7 @@ public class StaffStatusServiceImpl implements StaffStatusService {
         StaffStatusDO statusDO = modelToDO(status);
         dao.insertSelective(statusDO);
 
-        return status;
+        return Result.ok(status);
     }
 
     private StaffStatus DOToModel(StaffStatusDO customerStatusDO) {

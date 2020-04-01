@@ -1,11 +1,13 @@
 package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerSetting;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerSettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CustomerSettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CustomerSettingDO;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -22,34 +24,29 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
     private CustomerSettingDAO dao;
 
     @Override
-    public CustomerSetting find(Long accountId, Long orgId) {
-        if (null == accountId || null == orgId) {
-            return null;
-        }
-
+    public Result<CustomerSetting> find(@NonNull Long accountId, @NonNull Long orgId) {
         CustomerSettingDO customerSettingDO = dao.findByAccountId(accountId, orgId);
         if (customerSettingDO == null) {
             return initSetting(accountId, orgId);
         }
-        return DOToModel(customerSettingDO);
+        CustomerSetting setting = DOToModel(customerSettingDO);
+        return Result.ok(setting);
     }
 
     @Override
-    public void save(@Validated CustomerSetting customerSetting) {
-        if (customerSetting == null) {
-            return;
-        }
-
+    public Result<Integer> save(@Validated CustomerSetting customerSetting) {
+        int status;
         CustomerSettingDO customerSettingDO = dao.findByAccountId(customerSetting.getAccountId(), customerSetting.getOrgId());
         if (customerSettingDO == null) {
-            dao.insertSelective(modelToDO(customerSetting));
-            return;
+            status = dao.insertSelective(modelToDO(customerSetting));
+            return Result.ok(status);
         }
 
-        dao.updateByAccountId(modelToDO(customerSetting), customerSetting.getAccountId(), customerSetting.getOrgId());
+        status = dao.updateByAccountId(modelToDO(customerSetting), customerSetting.getAccountId(), customerSetting.getOrgId());
+        return Result.ok(status);
     }
 
-    private CustomerSetting initSetting(Long accountId, Long orgId) {
+    private Result<CustomerSetting> initSetting(Long accountId, Long orgId) {
         CustomerSetting status = new CustomerSetting();
         status.setAccountId(accountId);
         status.setOrgId(orgId);
@@ -57,7 +54,7 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
         CustomerSettingDO statusDO = modelToDO(status);
         dao.insertSelective(statusDO);
 
-        return status;
+        return Result.ok(status);
     }
 
     private CustomerSetting DOToModel(CustomerSettingDO customerSettingDO) {

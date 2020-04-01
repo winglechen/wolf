@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CompanySettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -21,39 +22,38 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     @Resource
     private CompanySettingDAO dao;
     @Override
-    public CompanySetting find(Long companyId) {
+    public Result<CompanySetting> find(Long companyId) {
         if (companyId == null) {
-            return null;
+            return Result.fail(10000, "invalid args");
         }
         CompanySettingDO companySettingDO = dao.findByOrgId(companyId);
         if (companySettingDO == null) {
             return initSetting(companyId);
         }
-        return DOToModel(companySettingDO);
+        CompanySetting setting = DOToModel(companySettingDO);
+        return Result.ok(setting);
     }
 
     @Override
-    public void save(@Validated CompanySetting companySetting) {
-        if (companySetting == null) {
-            return;
-        }
-
+    public Result<Integer> save(@Validated CompanySetting companySetting) {
+        int status;
         CompanySettingDO companySettingDO = dao.findByOrgId(companySetting.getOrgId());
         if (companySettingDO == null) {
-            dao.insertSelective(modelToDO(companySetting));
-            return;
+            status = dao.insertSelective(modelToDO(companySetting));
+            return Result.ok(status);
         }
-        dao.updateByOrgId(modelToDO(companySetting), companySetting.getOrgId());
+        status = dao.updateByOrgId(modelToDO(companySetting), companySetting.getOrgId());
+        return Result.ok(status);
     }
 
-    private CompanySetting initSetting(Long companyId) {
+    private Result<CompanySetting> initSetting(Long companyId) {
         CompanySetting status = new CompanySetting();
         status.setOrgId(companyId);
 
         CompanySettingDO statusDO = modelToDO(status);
         dao.insertSelective(statusDO);
 
-        return status;
+        return Result.ok(status);
     }
 
     private CompanySetting DOToModel(CompanySettingDO companySettingDO) {

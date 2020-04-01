@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.entity.AccountStatus;
@@ -22,27 +23,17 @@ public class AccountStatusServiceImpl implements AccountStatusService {
     @Resource
     private AccountStatusDAO dao;
     @Override
-    public Result<AccountStatus> find(Long accountId) {
-        if (accountId == null) {
-            return Result.fail(10000, "invalid args");
-        }
+    public Result<AccountStatus> find(@NonNull Long accountId) {
         AccountStatusDO accountStatusDO = dao.findByAccountId(accountId);
         if (accountStatusDO == null) {
             return initStatus(accountId);
         }
         AccountStatus status = DOToModel(accountStatusDO);
-        if (status == null) {
-            return Result.fail(10000, "invalid args");
-        }
         return Result.ok(status);
     }
 
     @Override
     public Result<Integer> save(@Validated AccountStatus accountStatus) {
-        if (accountStatus == null) {
-            return Result.fail(10000, "invalid args", 0);
-        }
-
         int status;
         AccountStatusDO accountStatusDO = dao.findByAccountId(accountStatus.getAccountId());
         if (accountStatusDO == null) {
@@ -59,9 +50,6 @@ public class AccountStatusServiceImpl implements AccountStatusService {
         status.setAccountId(accountId);
 
         AccountStatusDO statusDO = modelToDO(status);
-        if (statusDO == null) {
-            return Result.fail(10000, "invalid args");
-        }
 
         dao.insertSelective(statusDO);
         return Result.ok(status);
