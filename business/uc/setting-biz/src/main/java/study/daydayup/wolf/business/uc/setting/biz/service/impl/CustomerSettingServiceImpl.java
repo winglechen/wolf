@@ -35,7 +35,7 @@ public class CustomerSettingServiceImpl implements CustomerSettingService {
     }
 
     @Override
-    public Result<Integer> save(@Validated CustomerSetting customerSetting) {
+    public Result<Integer> replace(@Validated CustomerSetting customerSetting) {
         int status;
         CustomerSettingDO customerSettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, customerSetting.getAccountId(), customerSetting.getOrgId());
         if (customerSettingDO == null) {

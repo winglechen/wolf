@@ -36,7 +36,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     }
 
     @Override
-    public Result<Integer> save(@Validated CompanySetting companySetting) {
+    public Result<Integer> replace(@Validated CompanySetting companySetting) {
         int status;
         CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companySetting.getOrgId());
         if (companySettingDO == null) {

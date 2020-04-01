@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public interface StaffSettingService extends Service {
     Result<StaffSetting> find(Long accountId, Long orgId);
-    Result<Integer> save(StaffSetting staffSetting);
+    Result<Integer> replace(StaffSetting staffSetting);
 
     Result<Integer> set(SettingDTO settingDTO);
     Result<List<StaffSetting>> findByNamespaces(SettingDTO settingDTO);

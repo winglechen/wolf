@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public interface CustomerSettingService extends Service {
     Result<CustomerSetting> find(Long accountId, Long orgId);
-    Result<Integer> save(CustomerSetting customerSetting);
+    Result<Integer> replace(CustomerSetting customerSetting);
 
     Result<Integer> set(SettingDTO settingDTO);
     Result<List<CustomerSetting>> findByNamespaces(SettingDTO settingDTO);

@@ -40,7 +40,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     }
 
     @Override
-    public Result<Integer> save(@Validated AccountSetting accountSetting) {
+    public Result<Integer> replace(@Validated AccountSetting accountSetting) {
         if (accountSetting == null) {
             return Result.fail(10000, "invalid args", 0);
         }

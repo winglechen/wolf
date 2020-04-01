@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public interface CompanySettingService extends Service {
     Result<CompanySetting> find(Long companyId);
-    Result<Integer> save(CompanySetting companySetting);
+    Result<Integer> replace(CompanySetting companySetting);
 
     Result<Integer> set(SettingDTO settingDTO);
     Result<List<CompanySetting>> findByNamespaces(SettingDTO settingDTO);
