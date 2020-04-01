@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.uc.api.setting.entity.AccountStatus;
 import study.daydayup.wolf.business.uc.api.setting.service.AccountStatusService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.AccountStatusDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.AccountStatusDO;
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -21,39 +22,49 @@ public class AccountStatusServiceImpl implements AccountStatusService {
     @Resource
     private AccountStatusDAO dao;
     @Override
-    public AccountStatus find(Long accountId) {
+    public Result<AccountStatus> find(Long accountId) {
         if (accountId == null) {
-            return null;
+            return Result.fail(10000, "invalid args");
         }
         AccountStatusDO accountStatusDO = dao.findByAccountId(accountId);
         if (accountStatusDO == null) {
             return initStatus(accountId);
         }
-        return DOToModel(accountStatusDO);
+        AccountStatus status = DOToModel(accountStatusDO);
+        if (status == null) {
+            return Result.fail(10000, "invalid args");
+        }
+        return Result.ok(status);
     }
 
     @Override
-    public void save(@Validated AccountStatus accountStatus) {
+    public Result<Integer> save(@Validated AccountStatus accountStatus) {
         if (accountStatus == null) {
-            return;
+            return Result.fail(10000, "invalid args", 0);
         }
 
+        int status;
         AccountStatusDO accountStatusDO = dao.findByAccountId(accountStatus.getAccountId());
         if (accountStatusDO == null) {
-            dao.insertSelective(modelToDO(accountStatus));
-            return;
+            status = dao.insertSelective(modelToDO(accountStatus));
+            return Result.ok(status);
         }
-        dao.updateByAccountId(modelToDO(accountStatus), accountStatus.getAccountId());
+
+        status = dao.updateByAccountId(modelToDO(accountStatus), accountStatus.getAccountId());
+        return Result.ok(status);
     }
 
-    private AccountStatus initStatus(Long accountId) {
+    private Result<AccountStatus> initStatus(Long accountId) {
         AccountStatus status = new AccountStatus();
         status.setAccountId(accountId);
 
         AccountStatusDO statusDO = modelToDO(status);
-        dao.insertSelective(statusDO);
+        if (statusDO == null) {
+            return Result.fail(10000, "invalid args");
+        }
 
-        return status;
+        dao.insertSelective(statusDO);
+        return Result.ok(status);
     }
 
     private AccountStatus DOToModel(AccountStatusDO accountStatusDO) {
