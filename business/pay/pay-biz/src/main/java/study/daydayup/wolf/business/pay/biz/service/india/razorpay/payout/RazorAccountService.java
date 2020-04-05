@@ -96,7 +96,7 @@ public class RazorAccountService {
         }
 
         razorpayAccountDAO.insertSelective(accountDO);
-        if (null == accountDO.getId()) {
+        if (null != accountDO.getId()) {
             account.setId(accountDO.getId());
         }
     }

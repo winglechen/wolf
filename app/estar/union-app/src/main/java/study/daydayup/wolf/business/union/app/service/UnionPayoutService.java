@@ -19,7 +19,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @Component
 public class UnionPayoutService {
-    @Reference
+    @Reference(timeout = 30000 )
     private RazorpayService razorpayService;
 
     public void payout(@NonNull Order order) {
