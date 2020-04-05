@@ -17,11 +17,11 @@ function init() {
 
     echo "start nacos"
     echo $line
-    sh /Users/wingle/code/bin/nacos/bin/startup.sh -m standalone > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1  &
+    sh /Users/wingle/code/bin/nacos/bin/startup.sh -m standalone > /Users/wingle/logs/wolf/wolf.log 2>&1  &
 
     echo "start redis" 
     echo $line
-    /usr/local/redis/bin/redis-server > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-server > /Users/wingle/logs/wolf/wolf.log 2>&1 &
 }
 
 function deploy_union_test() {
@@ -66,11 +66,11 @@ function clear() {
 
     echo "stop nacos"
     echo $line
-    sh /Users/wingle/code/bin/nacos/bin/shutdown.sh > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
+    sh /Users/wingle/code/bin/nacos/bin/shutdown.sh > /Users/wingle/logs/wolf/wolf.log 2>&1 &
 
     echo "stop redis"
     echo $line
-    /usr/local/redis/bin/redis-cli shutdown > /Users/wingle/code/github/wolf/bin/logs/wolf.log 2>&1 &
+    /usr/local/redis/bin/redis-cli shutdown > /Users/wingle/logs/wolf/wolf.log 2>&1 &
 }
 
 function start() {

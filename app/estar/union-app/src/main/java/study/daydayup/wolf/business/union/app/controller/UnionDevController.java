@@ -3,12 +3,15 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
 import study.daydayup.wolf.business.union.app.dto.LoanActionRequest;
+import study.daydayup.wolf.business.union.app.service.UnionPayoutService;
 import study.daydayup.wolf.framework.rpc.Result;
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 
 /**
@@ -21,6 +24,8 @@ import java.time.LocalDate;
 public class UnionDevController extends BaseUnionController {
     @Reference
     private LoanService loanService;
+    @Resource
+    private UnionPayoutService payoutService;
 
 
 
@@ -36,7 +41,8 @@ public class UnionDevController extends BaseUnionController {
     public Result<String> loaning(@PathVariable String tradeNo) {
         TradeId tradeId = initTradeId(tradeNo);
 
-        loanService.startLoan(tradeId);
+        Order order = loanService.startLoan(tradeId).notNullData();
+        payoutService.payout(order);
         return Result.ok("ok");
     }
 
