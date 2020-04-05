@@ -8,7 +8,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "goodsId" : 32
+  "goodsId" : 20
 }
 
 > {%
@@ -27,19 +27,19 @@ Cache-Control: no-cache
 
 
 ###
-PUT http://localhost:8100/loan/dev/loaned
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
-
-{
-  "tradeNo": "{{tradeNo}}",
-  "effectAt": "2020-03-01"
-}
+#PUT http://localhost:8100/loan/dev/loaned
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json
+#
+#{
+#  "tradeNo": "{{tradeNo}}",
+#  "effectAt": "2020-03-01"
+#}
 
 ###
-GET http://localhost:8100/loan/{{tradeNo}}?lang=zh_CN
-Accept: */*
-Cache-Control: no-cache
+#GET http://localhost:8100/loan/{{tradeNo}}
+#Accept: */*
+#Cache-Control: no-cache
 
 ###
