@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.dto.tm.trade.TradeIds;
 import study.daydayup.wolf.business.trade.order.biz.dal.dao.ContractDAO;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.ContractDO;
 import study.daydayup.wolf.business.trade.order.biz.domain.repository.ContractQueryRepository;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
@@ -70,9 +71,17 @@ public class SellerContractRepository extends ContractQueryRepository {
     }
 
     public Page<Contract> findByTradeState(StateRequest request, PageRequest pageReq) {
+        request.valid();
+
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
-        List<ContractDO> contractDOList = contractDAO.sellerByState(request);
-        if (contractDOList == null || contractDOList.isEmpty()) {
+        List<ContractDO> contractDOList;
+        if (null != request.getState()) {
+            contractDOList = contractDAO.sellerByState(request);
+        } else {
+            contractDOList = contractDAO.sellerByStateIn(request);
+        }
+
+        if (CollectionUtil.isEmpty(contractDOList)) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
         TradeOwner owner = new TradeOwner();

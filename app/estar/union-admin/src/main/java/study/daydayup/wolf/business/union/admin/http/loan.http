@@ -19,6 +19,11 @@ Accept: */*
 Cache-Control: no-cache
 
 ### 商家待放款列表
+GET http://localhost:8200/loan/contract/loaning?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+### 商家已审核列表
 GET http://localhost:8200/loan/contract/approved?pageNum=2
 Accept: */*
 Cache-Control: no-cache

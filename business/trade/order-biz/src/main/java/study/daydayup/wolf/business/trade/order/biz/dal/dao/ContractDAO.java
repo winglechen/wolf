@@ -37,6 +37,8 @@ public interface ContractDAO {
 
     List<ContractDO> sellerByState(@Param("query") StateRequest request);
 
+    List<ContractDO> sellerByStateIn(@Param("query") StateRequest request);
+
     List<ContractDO> sellerByBuyerId(@Param("query") BuyerRequest request);
 
 
