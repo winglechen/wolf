@@ -20,7 +20,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 @RestController
 @Slf4j
 public class UnionPayController {
-    @Reference
+    @Reference(timeout = 30000)
     private RazorpayService razorpayService;
 
 
