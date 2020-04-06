@@ -1,10 +1,7 @@
 package study.daydayup.wolf.business.trade.order.biz.tsm.loan;
 
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.base.CancelEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.base.CompleteEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.base.ExpireEvent;
-import study.daydayup.wolf.business.trade.api.domain.event.base.PayEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.base.*;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.*;
 import study.daydayup.wolf.business.trade.order.biz.tsm.TradeStateMachineFactory;
@@ -27,7 +24,7 @@ public class LoanOrderFactory implements TradeStateMachineFactory {
     @Override
     public StateMachine<TradeState, TradeEvent> create() {
         StateMachine<TradeState, TradeEvent> machine = new DefaultStateMachine<TradeState, TradeEvent>(waitToPay)
-                .bind(waitToPay, paid, new PayEvent())
+                .bind(waitToPay, paid, new PaidEvent())
                 .bind(paid, completed, new CompleteEvent())
 
                 .bind(waitToPay, expired, new ExpireEvent())
