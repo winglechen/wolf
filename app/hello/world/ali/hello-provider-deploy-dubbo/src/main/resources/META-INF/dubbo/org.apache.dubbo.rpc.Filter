@@ -1,2 +1,0 @@
-wolfExceptionFilter=study.daydayup.wolf.framework.rpc.dubbo.filter.WolfExceptionFilter
-wolfExceptionHandler=study.daydayup.wolf.framework.rpc.dubbo.filter.WolfExceptionHandler

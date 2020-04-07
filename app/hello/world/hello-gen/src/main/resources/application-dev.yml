@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    learn:
-      username: root
-      password: 123456
-      jdbcUrl: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false
-
-server:
-  port:8090
