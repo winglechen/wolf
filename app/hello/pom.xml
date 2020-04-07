@@ -11,16 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.demo.my</groupId>
-    <artifactId>my-hello</artifactId>
+    <artifactId>hello</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>hello-plus</module>
-        <module>hello-gen</module>
-        <module>hello-sharding</module>
         <module>hello-starter</module>
         <module>hello-starter-web</module>
         <module>big-data</module>
+        <module>world</module>
     </modules>
 
     <dependencies>

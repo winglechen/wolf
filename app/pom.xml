@@ -12,7 +12,6 @@
 
     <modules>
         <module>shop</module>
-        <module>ali</module>
         <module>hello</module>
         <module>estar</module>
     </modules>

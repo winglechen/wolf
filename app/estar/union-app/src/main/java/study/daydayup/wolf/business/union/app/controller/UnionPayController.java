@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
+import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.rpc.Result;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * study.daydayup.wolf.business.union.app.controller
@@ -35,10 +38,14 @@ public class UnionPayController {
     }
 
     @PostMapping("/pay/razorpay/subscribe")
-    public Result<String> razorpaySubscribe(@RequestHeader(value = "X-Razorpay-Event-Id", required = false) String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
+    public Result<String> razorpaySubscribe(HttpServletResponse response, @RequestHeader(value = "X-Razorpay-Event-Id", required = false) String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
         log.info("razorpay:{}, {}, {}", eventId, signature, data);
-        Integer response = razorpayService.subscribe(eventId, signature, data).getData();
-        //TODO check response and return code != 200 when response fail
+
+        Integer status = razorpayService.subscribe(eventId, signature, data).getData();
+        if (!BeanUtil.equals(status, 1)) {
+            response.setStatus(500);
+            return Result.fail(500, "inner error", "fail");
+        }
 
         return Result.ok("ok");
     }
