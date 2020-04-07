@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.app.controller;
+package study.daydayup.wolf.business.union.app.controller.dev;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
+import study.daydayup.wolf.business.union.app.controller.BaseUnionController;
 import study.daydayup.wolf.business.union.app.dto.LoanActionRequest;
 import study.daydayup.wolf.business.union.app.service.UnionPayoutService;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -46,7 +47,6 @@ public class UnionDevController extends BaseUnionController {
         return Result.ok("ok");
     }
 
-
     @PutMapping("/loan/dev/loaned")
     public Result<String> completeLoan(@Validated @RequestBody LoanActionRequest request) {
         TradeId tradeId = initTradeId(request.getTradeNo());
@@ -55,8 +55,6 @@ public class UnionDevController extends BaseUnionController {
         loanService.completeLoan(tradeId, effectAt);
         return Result.ok("ok");
     }
-
-
 
     private TradeId initTradeId(String tradeNo) {
         if (tradeNo == null) {
@@ -73,7 +71,6 @@ public class UnionDevController extends BaseUnionController {
 
         return tradeId;
     }
-
 
     private ContractOption initContractOption() {
         return ContractOption.builder()
