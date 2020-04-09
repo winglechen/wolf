@@ -17,6 +17,10 @@ public class Main {
 
     }
 
+    class Store extends Thread {
+
+    }
+
     class ParserGateway {
         private final Semaphore semaphore;
         private final int permits;

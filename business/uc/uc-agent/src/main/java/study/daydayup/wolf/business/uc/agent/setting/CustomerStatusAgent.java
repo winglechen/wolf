@@ -2,11 +2,11 @@ package study.daydayup.wolf.business.uc.agent.setting;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
+import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusGroupEnum;
 import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusProgressEnum;
-import study.daydayup.wolf.business.uc.api.setting.exception.StatusNotFoundException;
 import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
 import study.daydayup.wolf.common.model.type.number.Step;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -20,7 +20,7 @@ import java.util.*;
  * @since 2020/1/1 2:47 下午
  **/
 public class CustomerStatusAgent {
-    private final int STATUS_LENGTH = 20;
+    private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;
 
     private long accountId;
@@ -46,7 +46,7 @@ public class CustomerStatusAgent {
 
         this.accountId = accountId;
         this.orgId = orgId;
-        initStatus(status);
+        statusSet = StatusUtil.initStatus(status);
         initStatusMap();
 
         this.isInit = true;
@@ -151,19 +151,6 @@ public class CustomerStatusAgent {
         }
     }
 
-    private void initStatus(CustomerStatus status) {
-        long[] sArray = {
-                status.getS1(), status.getS2(), status.getS3(), status.getS4(), status.getS5(),
-                status.getS6(), status.getS7(), status.getS8(), status.getS9(), status.getS10(),
-
-                status.getS11(), status.getS12(), status.getS13(), status.getS14(), status.getS15(),
-                status.getS16(), status.getS17(), status.getS18(), status.getS19(), status.getS20(),
-                1
-        };
-
-        statusSet = BitSet.valueOf(sArray);
-    }
-
     private CustomerStatus arrayToModel(long[] s) {
         if (s.length != STATUS_LENGTH + 1) {
             throw new IllegalArgumentException("invalid status array format");
@@ -173,23 +160,10 @@ public class CustomerStatusAgent {
         status.setAccountId(accountId);
         status.setOrgId(orgId);
 
-        long[] sArray = formatBitArray(s);
-
-        status.setS1(sArray[1]); status.setS2(sArray[2]); status.setS3(sArray[3]); status.setS4(sArray[4]); status.setS5(sArray[5]);
-        status.setS6(sArray[6]); status.setS7(sArray[7]); status.setS8(sArray[8]); status.setS9(sArray[9]); status.setS10(sArray[10]);
-
-        status.setS11(sArray[11]); status.setS12(sArray[12]); status.setS13(sArray[13]); status.setS14(sArray[14]); status.setS15(sArray[15]);
-        status.setS16(sArray[16]); status.setS17(sArray[17]); status.setS18(sArray[18]); status.setS19(sArray[19]); status.setS20(sArray[20]);
+        long[] sArray = StatusUtil.formatBitArray(s, STATUS_LENGTH);
+        StatusUtil.setStatus(status, sArray);
 
         return status;
-    }
-
-    private long[] formatBitArray(long[] s) {
-        long[] sArray = new long[STATUS_LENGTH + 1];
-        sArray[0] = 0;
-        System.arraycopy(s, 0, sArray, 1, STATUS_LENGTH);
-
-        return sArray;
     }
 
 }
