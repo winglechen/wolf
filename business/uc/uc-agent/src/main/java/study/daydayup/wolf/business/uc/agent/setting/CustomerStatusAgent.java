@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.uc.agent.setting;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
@@ -19,6 +20,7 @@ import java.util.*;
  * @author Wingle
  * @since 2020/1/1 2:47 下午
  **/
+@Component
 public class CustomerStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;

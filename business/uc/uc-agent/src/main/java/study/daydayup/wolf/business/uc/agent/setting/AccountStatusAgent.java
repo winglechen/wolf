@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.api.setting.entity.AccountStatus;
 import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
@@ -14,6 +15,7 @@ import java.util.BitSet;
  * @author Wingle
  * @since 2020/1/1 2:47 下午
  **/
+@Component
 public class AccountStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;

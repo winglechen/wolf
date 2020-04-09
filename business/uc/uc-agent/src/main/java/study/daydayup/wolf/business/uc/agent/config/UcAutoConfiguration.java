@@ -16,17 +16,5 @@ import study.daydayup.wolf.business.uc.agent.setting.CustomerStatusAgent;
 @ComponentScan("study.daydayup.wolf.business.uc.agent")
 public class UcAutoConfiguration {
 
-    @Bean
-    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public CustomerStatusAgent customerStatusAgent() {
-        return new CustomerStatusAgent();
-    }
-
-    @Bean
-    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public AccountStatusAgent accountStatusAgent() {
-        return new AccountStatusAgent();
-    }
-
 
 }
