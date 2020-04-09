@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 public class KvData implements Model {
-    public static final String DEFAULT_NAMESPACE = "default";
+    public static final String DEFAULT_NAMESPACE = "defNS";
     protected String namespace = DEFAULT_NAMESPACE;
     protected String data;
 
