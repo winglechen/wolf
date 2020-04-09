@@ -8,9 +8,9 @@ import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTe
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayEffectEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepaySuccessEvent;
-import study.daydayup.wolf.business.trade.api.domain.state.base.PaidState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoaningState;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.EffectedState;
 import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
@@ -236,7 +236,7 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         }
 
         boolean allPaid = true;
-        PaidState paidState = new PaidState();
+        EffectedState effectedState = new EffectedState();
         TradeEvent paidEvent = new RepaySuccessEvent();
 
         InstallmentTerm k, c;
@@ -244,11 +244,11 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
         List<InstallmentTerm> cs = new ArrayList<>();
 
         for (InstallmentTerm term: model.getInstallmentTermList() ) {
-            if (StateUtil.equals(term.getState(), paidState)) {
+            if (!StateUtil.equals(term.getState(), effectedState)) {
                 continue;
             }
 
-            if (null != noMap.get(term.getInstallmentNo())) {
+            if (null == noMap.get(term.getInstallmentNo())) {
                 allPaid = false;
                 continue;
             }
