@@ -1,0 +1,71 @@
+
+
+
+
+
+
+###
+GET http://localhost:8100/status/all
+Accept: */*
+Cache-Control: no-cache
+
+
+
+###
+GET http://localhost:8100/status/customer/info
+Accept: */*
+Cache-Control: no-cache
+
+
+
+
+
+
+
+
+
+
+###
+PUT http://localhost:8100/status/mock
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customer.info.bank.card": true,
+  "customer.info.complete": true,
+  "trade.loan.loaning": true
+}
+
+###
+PUT http://localhost:8100/status/mock
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeLoanOverdueTimeout": true,
+  "customerAuthSuccess": true
+}
+
+
+###
+GET http://localhost:8100/status/show
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8100/status/show/step1
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8100/status/show/step2
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+
+
+
