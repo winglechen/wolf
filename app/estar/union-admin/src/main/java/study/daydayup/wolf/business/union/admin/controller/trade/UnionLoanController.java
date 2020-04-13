@@ -154,7 +154,7 @@ public class UnionLoanController implements Controller {
         return sellerContractService.findByTradeState(request, pageRequest);
     }
 
-    @GetMapping("/loan/contract/loaned")
+    @GetMapping("/loan/contract/waitToRepay")
     public Result<Page<Contract>> loanedList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         StateRequest request = initStateRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());

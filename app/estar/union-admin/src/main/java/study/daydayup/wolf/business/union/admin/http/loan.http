@@ -29,7 +29,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ### 商家已打款列表
-GET http://localhost:8200/loan/contract/loaned?pageNum=2
+GET http://localhost:8200/loan/contract/waitToRepay?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
