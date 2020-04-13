@@ -112,7 +112,7 @@ public class ContractEntity extends AbstractEntity<Contract> implements Entity  
         for (InstallmentTerm installmentTerm : model.getInstallmentTermList()) {
             TradeState state = installmentTerm.getState();
             if (!StateUtil.inArray(state, new EffectedState(), new DueState(), new OverdueState())) {
-                break;
+                continue;
             }
 
             parseInstallment(loan, repayment, installmentTerm);
