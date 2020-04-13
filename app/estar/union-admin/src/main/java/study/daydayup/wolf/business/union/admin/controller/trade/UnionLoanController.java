@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoanedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoaningState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -144,6 +145,20 @@ public class UnionLoanController implements Controller {
         StateRequest request = initStateRequest();
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         request.setState(new WaitToApproveState().getCode());
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerContractService.findByTradeState(request, pageRequest);
+    }
+
+    @GetMapping("/loan/contract/loaned")
+    public Result<Page<Contract>> loanedList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        StateRequest request = initStateRequest();
+        request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
+        request.setState(new LoanedState().getCode());
 
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
