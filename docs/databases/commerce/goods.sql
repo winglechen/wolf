@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `goods`
     `goods_type`    SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '产品类型',
 
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
-    #`price`         BIGINT(20) NOT NULL DEFAULT 0 COMMENT '价格',
     `price`         DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '价格',
     `currency`      INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
     `charge_unit`   INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
@@ -81,7 +80,6 @@ CREATE TABLE IF NOT EXISTS `sku`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
 COMMENT = 'sku';
 
-DROP TABLE IF EXISTS `loan_detail`;
 DROP TABLE IF EXISTS `goods_loan`;
 CREATE TABLE IF NOT EXISTS `goods_loan`
 (
@@ -114,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `goods_loan`
 COMMENT = 'loan';
 
 
-DROP TABLE IF EXISTS `installment_detail`;
 DROP TABLE IF EXISTS `goods_installment`;
 CREATE TABLE IF NOT EXISTS `goods_installment`
 (
