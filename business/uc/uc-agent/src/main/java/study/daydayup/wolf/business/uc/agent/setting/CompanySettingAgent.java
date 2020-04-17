@@ -86,6 +86,10 @@ public class CompanySettingAgent {
     }
 
     public void save() {
+        if (orgId <= 0) {
+            throw new IllegalArgumentException("accountId and orgId can not less than 0");
+        }
+
         if (CollectionUtil.isEmpty(changedNamespaceSet)) {
             return;
         }
@@ -97,10 +101,24 @@ public class CompanySettingAgent {
 
 
     private void saveByNamespace(@NonNull String namespace) {
+        if (MapUtil.isEmpty(map.get(namespace))) {
+            return;
+        }
 
+        CompanySetting setting = CompanySetting.builder()
+                .orgId(orgId)
+                .namespace(namespace)
+                .data(JSON.toJSONString(map.get(namespace)))
+                .build();
+        
+        service.save(setting);
     }
 
     private void initNamespace(@NonNull String namespace) {
+        if (orgId <= 0) {
+            throw new IllegalArgumentException("accountId and orgId can not less than 0");
+        }
+
         if (null != map.get(namespace)) {
             return;
         }
