@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.admin.controller.customer;
+package study.daydayup.wolf.business.union.admin.controller.uc;
 
 import lombok.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;

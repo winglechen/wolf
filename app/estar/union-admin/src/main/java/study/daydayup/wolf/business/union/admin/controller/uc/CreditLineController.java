@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.union.admin.controller.customer;
+package study.daydayup.wolf.business.union.admin.controller.uc;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
