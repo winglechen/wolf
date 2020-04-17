@@ -19,6 +19,5 @@ public interface CompanySettingService extends Service {
 
     Result<Integer> set(SettingDTO settingDTO);
     Result<CompanySetting> findByNamespace(SettingDTO settingDTO);
-    Result<List<CompanySetting>> findByNamespaces(SettingDTO settingDTO);
     Result<List<CompanySetting>> findAll(Long accountId);
 }

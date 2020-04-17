@@ -40,7 +40,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     @Override
     public Result<Integer> save(@Validated CompanySetting companySetting) {
         int status;
-        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companySetting.getOrgId());
+        CompanySettingDO companySettingDO = dao.findByNamespace(companySetting.getNamespace(), companySetting.getOrgId());
         if (companySettingDO == null) {
             status = dao.insertSelective(modelToDO(companySetting));
             return Result.ok(status);
@@ -55,8 +55,14 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     }
 
     @Override
-    public Result<List<CompanySetting>> findByNamespaces(SettingDTO settingDTO) {
-        return null;
+    public Result<CompanySetting> findByNamespace(SettingDTO settingDTO) {
+        settingDTO.valid();
+        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, settingDTO.getOrgId());
+        if (companySettingDO == null) {
+            return initSetting(settingDTO.getOrgId());
+        }
+        CompanySetting setting = DOToModel(companySettingDO);
+        return Result.ok(setting);
     }
 
     @Override

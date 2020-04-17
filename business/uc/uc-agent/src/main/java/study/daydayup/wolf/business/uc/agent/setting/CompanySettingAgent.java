@@ -110,7 +110,7 @@ public class CompanySettingAgent {
                 .namespace(namespace)
                 .data(JSON.toJSONString(map.get(namespace)))
                 .build();
-        
+
         service.save(setting);
     }
 
