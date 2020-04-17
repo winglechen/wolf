@@ -1,12 +1,16 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
+import com.alibaba.fastjson.JSON;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
+import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
 import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
+import study.daydayup.wolf.common.util.collection.MapUtil;
+import study.daydayup.wolf.framework.rpc.Result;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -22,6 +26,7 @@ import java.util.Set;
 public class CompanySettingAgent {
     private boolean isInit = false;
     private Set<String> changedNamespaceSet;
+    private String currentNamespace;
     private Map<String, ObjectMap> map;
 
     private long orgId;
@@ -40,10 +45,16 @@ public class CompanySettingAgent {
 
         this.orgId = orgId;
         changedNamespaceSet = new HashSet<>(8);
+        currentNamespace = KvData.DEFAULT_NAMESPACE;
+        isInit = true;
+    }
+
+    public void namespace(@NonNull String namespace) {
+        currentNamespace = namespace;
     }
 
     public ObjectMap getAll() {
-        return getAll(KvData.DEFAULT_NAMESPACE);
+        return getAll(currentNamespace);
     }
 
     public ObjectMap getAll(@NonNull String namespace) {
@@ -51,19 +62,18 @@ public class CompanySettingAgent {
     }
 
     public Object get(@NonNull String key) {
-        return get(key, KvData.DEFAULT_NAMESPACE);
+        return get(key, currentNamespace);
     }
 
     public Object get(@NonNull String key, @NonNull String namespace) {
         if (null == map.get(namespace)) {
             return null;
         }
-
         return map.get(namespace).get(key);
     }
 
     public CompanySettingAgent set(@NonNull String key, @NonNull Object value) {
-        return set(key, value, KvData.DEFAULT_NAMESPACE);
+        return set(key, value, currentNamespace);
     }
 
     public CompanySettingAgent set(@NonNull String key, @NonNull Object value, @NonNull String namespace) {
@@ -89,6 +99,15 @@ public class CompanySettingAgent {
                 .orgId(orgId)
                 .namespace(namespace)
                 .build();
+
+        CompanySetting setting = service.findByNamespace(query).getData();
+        if (setting == null) {
+            map = MapUtil.empty();
+            return;
+        }
+
+        ObjectMap data = JSON.parseObject(setting.getData(), ObjectMap.class);
+        map.put(namespace, data);
     }
 
 }
