@@ -29,6 +29,7 @@ target/
 hs_err_pid*
 
 #profiles
+application-dev.yml
 application-test.yml
 application-release.yml
 application-prod.yml
