@@ -23,18 +23,7 @@ management:
       exposure:
         include : "*"
 
-wolf:
-  auth:
-    enable: true
-    excludedPaths: "/auth/**/*,/pay/*/subscribe"
-  sdk:
-    aliyun:
-      oss:
-        accessId: LTAI4Fc6aira5zSQ8A1EknvR
-        accessKey: 4N1c2jMCclrf5AhSSLMY7mGCkmJeNN
-        endPoint: oss-ap-south-1.aliyuncs.com
-        defaultBucket: onionwallet-private
-        rootPath: img/
+
 
 
 

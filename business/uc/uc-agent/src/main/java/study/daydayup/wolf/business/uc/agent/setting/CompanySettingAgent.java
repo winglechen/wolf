@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
 import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
@@ -28,7 +29,7 @@ public class CompanySettingAgent {
     @Reference
     private CompanySettingService service;
 
-    public void init( long orgId) {
+    public void init(long orgId) {
         if (orgId <= 0) {
             throw new IllegalArgumentException("accountId and orgId can not less than 0");
         }
@@ -79,6 +80,15 @@ public class CompanySettingAgent {
         if (null == changedNamespaceSet || changedNamespaceSet.isEmpty()) {
             return;
         }
+    }
+
+
+
+    private void findByNamespace(@NonNull String namespace) {
+        SettingDTO query = SettingDTO.builder()
+                .orgId(orgId)
+                .namespace(namespace)
+                .build();
     }
 
 }
