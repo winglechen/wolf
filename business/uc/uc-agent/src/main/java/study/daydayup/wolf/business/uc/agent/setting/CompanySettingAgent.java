@@ -38,7 +38,15 @@ public class CompanySettingAgent {
         }
 
         this.orgId = orgId;
-        changedNamespaceSet = new HashSet<>(4);
+        changedNamespaceSet = new HashSet<>(8);
+    }
+
+    public ObjectMap getAll() {
+        return getAll(KvData.DEFAULT_NAMESPACE);
+    }
+
+    public ObjectMap getAll(@NonNull String namespace) {
+        return map.get(namespace);
     }
 
     public Object get(@NonNull String key) {
