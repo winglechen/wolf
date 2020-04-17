@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.uc.api.setting.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.time.LocalDateTime;
@@ -12,9 +14,11 @@ import java.time.LocalDateTime;
  * @since 20L20L/1/1 12:25 下午
  **/
 @Data
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 public class KvData implements Model {
     public static final String DEFAULT_NAMESPACE = "defNS";
-    protected String namespace = DEFAULT_NAMESPACE;
+    protected String namespace;
     protected String data;
 
     protected Integer version;

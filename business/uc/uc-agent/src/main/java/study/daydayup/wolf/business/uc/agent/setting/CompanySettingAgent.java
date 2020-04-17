@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
 import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 
@@ -66,9 +67,7 @@ public class CompanySettingAgent {
     }
 
     public Object get(@NonNull String key, @NonNull String namespace) {
-        if (null == map.get(namespace)) {
-            return null;
-        }
+        initNamespace(namespace);
         return map.get(namespace).get(key);
     }
 
@@ -87,12 +86,27 @@ public class CompanySettingAgent {
     }
 
     public void save() {
-        if (null == changedNamespaceSet || changedNamespaceSet.isEmpty()) {
+        if (CollectionUtil.isEmpty(changedNamespaceSet)) {
             return;
+        }
+
+        for (String namespace : changedNamespaceSet) {
+            saveByNamespace(namespace);
         }
     }
 
 
+    private void saveByNamespace(@NonNull String namespace) {
+
+    }
+
+    private void initNamespace(@NonNull String namespace) {
+        if (null != map.get(namespace)) {
+            return;
+        }
+
+        findByNamespace(namespace);
+    }
 
     private void findByNamespace(@NonNull String namespace) {
         SettingDTO query = SettingDTO.builder()
