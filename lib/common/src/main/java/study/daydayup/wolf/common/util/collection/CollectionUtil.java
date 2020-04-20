@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
  * @since 2020/1/14 3:58 下午
  **/
 public class CollectionUtil {
+    public static <E> List<E> empty() {
+        return new ArrayList<>();
+    }
+
     public static <E> boolean notEmpty(Collection<E> collection) {
         return null != collection && !collection.isEmpty();
     }

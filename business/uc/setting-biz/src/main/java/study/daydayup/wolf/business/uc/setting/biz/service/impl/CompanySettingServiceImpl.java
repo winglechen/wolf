@@ -1,5 +1,8 @@
 package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
@@ -8,11 +11,14 @@ import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
 import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CompanySettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.uc.setting.biz.service.impl
@@ -45,13 +51,12 @@ public class CompanySettingServiceImpl implements CompanySettingService {
             status = dao.insertSelective(modelToDO(companySetting));
             return Result.ok(status);
         }
-        status = dao.updateByOrgId(modelToDO(companySetting), companySetting.getOrgId());
-        return Result.ok(status);
-    }
 
-    @Override
-    public Result<Integer> set(SettingDTO settingDTO) {
-        return null;
+        CompanySettingDO changedDO = modelToDO(companySetting);
+        mergeDataChanges(changedDO, companySettingDO);
+
+        status = dao.updateByOrgId(changedDO, companySetting.getOrgId());
+        return Result.ok(status);
     }
 
     @Override
@@ -66,8 +71,11 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     }
 
     @Override
-    public Result<List<CompanySetting>> findAll(Long accountId) {
-        return null;
+    public Result<List<CompanySetting>> findAll(@NonNull Long companyId) {
+        List<CompanySettingDO> companySettingDOList = dao.findByOrgId(companyId);
+
+        List<CompanySetting> companySettingList = toModel(companySettingDOList);
+        return Result.ok(companySettingList);
     }
 
     private Result<CompanySetting> initSetting(Long companyId) {
@@ -91,6 +99,10 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         return companySetting;
     }
 
+    private List<CompanySetting> toModel(List<CompanySettingDO> companySettingDOList ) {
+        return CollectionUtil.to(companySettingDOList, this::DOToModel);
+    }
+
     private CompanySettingDO modelToDO(CompanySetting companySetting) {
         if (companySetting == null) {
             return null;
@@ -100,5 +112,33 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         BeanUtils.copyProperties(companySetting, companySettingDO);
 
         return companySettingDO;
+    }
+
+    private void mergeDataChanges(CompanySettingDO changedDO, CompanySettingDO companySettingDO) {
+        String changedData = changedDO.getData();
+        if (StringUtil.isBlank(changedData)) {
+            return;
+        }
+
+        String baseData = companySettingDO.getData();
+        JSONObject baseJson = JSON.parseObject(baseData);
+        if (baseJson.getInnerMap().isEmpty()) {
+            return;
+        }
+
+
+        JSONObject changedJson = JSON.parseObject(changedData);
+        Map<String, Object> map =changedJson.getInnerMap();
+
+        for (String k : map.keySet()) {
+            Object v = map.get(k);
+            if (v == null) {
+                continue;
+            }
+
+            baseJson.put(k, v);
+        }
+
+        changedDO.setData(JSON.toJSONString(baseJson));
     }
 }
