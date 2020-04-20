@@ -43,7 +43,7 @@ public class SettingDTO implements Model {
             }
         }
 
-        if (StringUtil.isEmpty(namespace) || CollectionUtil.isEmpty(namespaces)) {
+        if (StringUtil.isEmpty(namespace) && CollectionUtil.isEmpty(namespaces)) {
             throw new IllegalArgumentException("namespace can't be null");
         }
 

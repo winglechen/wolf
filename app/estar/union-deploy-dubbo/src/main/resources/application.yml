@@ -2,7 +2,7 @@ spring:
   application:
     name: wolf-union
   profiles:
-    active: test
+    active: dev
   main:
     allow-bean-definition-overriding: true
   messages:
@@ -47,7 +47,13 @@ spring:
         wmq_tcc_message.actual-data-nodes: mq.wmq_tcc_message
         #setting
         account_status.actual-data-nodes: setting.account_status
+        account_setting.actual-data-nodes: setting.account_setting
+        company.actual-data-nodes: setting.company_status
+        company_setting.actual-data-nodes: setting.company_setting
         customer_status.actual-data-nodes: setting.customer_status
+        customer_setting.actual-data-nodes: setting.customer_setting
+        staff.actual-data-nodes: setting.staff_status
+        staff_setting.actual-data-nodes: setting.staff_setting
         #pay
         payment.actual-data-nodes: pay.payment
         payment_log.actual-data-nodes: pay.payment_log

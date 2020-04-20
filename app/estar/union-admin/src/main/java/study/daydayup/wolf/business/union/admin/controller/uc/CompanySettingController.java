@@ -27,6 +27,7 @@ public class CompanySettingController {
         Long orgId = session.get("orgId", Long.class);
         agent.init(orgId);
 
+//        agent.namespace("info");
         agent.set("companyName", "test company name");
         agent.set("companyAge", 10);
         agent.save();

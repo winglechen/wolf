@@ -21,6 +21,8 @@ public interface CompanySettingDAO {
 
     int updateByOrgId(@Param("updated")CompanySettingDO updated,@Param("orgId")Long orgId);
 
+    int updateByNamespace(@Param("updated")CompanySettingDO updated,@Param("namespace")String namespace,@Param("orgId")Long orgId);
+
     List<CompanySettingDO> findByOrgId(@Param("orgId")Long orgId);
 
     CompanySettingDO findByNamespace(@Param("namespace")String namespace, @Param("orgId")Long orgId);

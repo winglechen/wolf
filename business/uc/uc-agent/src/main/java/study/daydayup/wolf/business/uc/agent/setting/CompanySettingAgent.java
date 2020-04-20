@@ -1,8 +1,8 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import com.alibaba.fastjson.JSON;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
 import study.daydayup.wolf.business.uc.api.setting.entity.CompanySetting;
@@ -11,8 +11,9 @@ import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.MapUtil;
-import study.daydayup.wolf.framework.rpc.Result;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -47,6 +48,7 @@ public class CompanySettingAgent {
         this.orgId = orgId;
         changedNamespaceSet = new HashSet<>(8);
         currentNamespace = KvData.DEFAULT_NAMESPACE;
+        map = new HashMap<>();
         isInit = true;
     }
 
@@ -77,7 +79,7 @@ public class CompanySettingAgent {
 
     public CompanySettingAgent set(@NonNull String key, @NonNull Object value, @NonNull String namespace) {
         if (null == map.get(namespace)) {
-            return this;
+            initNamespace(namespace);
         }
 
         map.get(namespace).put(key, value);
@@ -133,7 +135,7 @@ public class CompanySettingAgent {
                 .build();
 
         CompanySetting setting = service.findByNamespace(query).getData();
-        if (setting == null) {
+        if (setting == null || StringUtil.isBlank(setting.getData())) {
             map = MapUtil.empty();
             return;
         }

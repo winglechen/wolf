@@ -120,9 +120,6 @@ CREATE TABLE IF NOT EXISTS `staff_status`
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT 'staff_status';
 
-
-
-
 DROP TABLE IF EXISTS `company_status`;
 CREATE TABLE IF NOT EXISTS `company_status`
 (
@@ -178,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `account_setting`
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `udx_account` (`account_id`)
+    UNIQUE INDEX `udx_account` (`account_id`, `namespace`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT 'account_setting';
@@ -200,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `customer_setting`
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `udx_account` (`account_id`, `org_id`)
+    UNIQUE INDEX `udx_account` (`account_id`, `org_id`, `namespace`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT 'customer_setting';
@@ -221,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `staff_setting`
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `udx_account` (`account_id`, `org_id`)
+    UNIQUE INDEX `udx_account` (`account_id`, `org_id`, `namespace`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT 'staff_setting';
@@ -242,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `company_setting`
     `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `udx_org` (`org_id`)
+    UNIQUE INDEX `udx_org` (`org_id`, `namespace`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT 'company_setting';

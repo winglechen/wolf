@@ -37,7 +37,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         }
         CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companyId);
         if (companySettingDO == null) {
-            return initSetting(companyId);
+            return initSetting(companyId, KvData.DEFAULT_NAMESPACE);
         }
         CompanySetting setting = DOToModel(companySettingDO);
         return Result.ok(setting);
@@ -55,16 +55,16 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         CompanySettingDO changedDO = modelToDO(companySetting);
         mergeDataChanges(changedDO, companySettingDO);
 
-        status = dao.updateByOrgId(changedDO, companySetting.getOrgId());
+        status = dao.updateByNamespace(changedDO, companySetting.getNamespace(), companySetting.getOrgId());
         return Result.ok(status);
     }
 
     @Override
     public Result<CompanySetting> findByNamespace(SettingDTO settingDTO) {
         settingDTO.valid();
-        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, settingDTO.getOrgId());
+        CompanySettingDO companySettingDO = dao.findByNamespace(settingDTO.getNamespace(), settingDTO.getOrgId());
         if (companySettingDO == null) {
-            return initSetting(settingDTO.getOrgId());
+            return initSetting(settingDTO.getOrgId(), settingDTO.getNamespace());
         }
         CompanySetting setting = DOToModel(companySettingDO);
         return Result.ok(setting);
@@ -78,9 +78,11 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         return Result.ok(companySettingList);
     }
 
-    private Result<CompanySetting> initSetting(Long companyId) {
+    private Result<CompanySetting> initSetting(Long companyId, String namespace) {
         CompanySetting status = new CompanySetting();
         status.setOrgId(companyId);
+        status.setNamespace(namespace);
+        status.setData("{}");
 
         CompanySettingDO statusDO = modelToDO(status);
         dao.insertSelective(statusDO);
