@@ -1,0 +1,6 @@
+###
+GET http://localhost:8200/uc/company/setting/demo
+Accept: */*
+Cache-Control: no-cache
+
+###
