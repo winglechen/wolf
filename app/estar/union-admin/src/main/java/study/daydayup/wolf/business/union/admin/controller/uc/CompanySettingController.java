@@ -27,9 +27,11 @@ public class CompanySettingController {
         Long orgId = session.get("orgId", Long.class);
         agent.init(orgId);
 
-//        agent.namespace("info");
-        agent.set("companyName", "test company name");
-        agent.set("companyAge", 10);
+        agent.namespace("info");
+        agent.set("name", "repeat company name");
+        agent.set("age", 10);
+        agent.set("address", "HangZhou");
+
         agent.save();
 
         ObjectMap map = agent.getAll();

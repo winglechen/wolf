@@ -79,7 +79,7 @@ public class CompanySettingAgent {
 
     public CompanySettingAgent set(@NonNull String key, @NonNull Object value, @NonNull String namespace) {
         if (null == map.get(namespace)) {
-            initNamespace(namespace);
+            map.put(namespace, new ObjectMap());
         }
 
         map.get(namespace).put(key, value);
