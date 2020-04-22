@@ -4,13 +4,13 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-PUT http://localhost:8200/uc/company/setting/6
+PUT http://localhost:8200/uc/company/setting/32
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "name": "org 6",
+  "name": "org xxx",
   "logo": "/img/20191213/870576fc-025b-6862-ca5d-aa2f2f72f88f.jpg"
 }
 
@@ -21,7 +21,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "k": "v",
+  "k": "v"
 
 }
 
