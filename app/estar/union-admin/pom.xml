@@ -16,6 +16,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>study.daydayup.wolf.business.union</groupId>
+            <artifactId>union-common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>study.daydayup.wolf.business.account</groupId>
             <artifactId>auth-agent</artifactId>
         </dependency>

@@ -22,6 +22,7 @@
         <module>union-deploy-app</module>
         <module>union-task</module>
         <module>union-task-api</module>
+        <module>union-common</module>
 
     </modules>
 
@@ -31,6 +32,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.union</groupId>
+                <artifactId>union-common</artifactId>
+                <version>${union.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>study.daydayup.wolf.business.union</groupId>
