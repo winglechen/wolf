@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8200/uc/company/setting/demo
+GET http://localhost:8200/uc/company/demo
 Accept: */*
 Cache-Control: no-cache
 

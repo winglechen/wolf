@@ -1,14 +1,13 @@
 package study.daydayup.wolf.business.union.admin.controller.uc;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.uc.agent.setting.CompanySettingAgent;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.union.admin.controller.uc
@@ -23,7 +22,7 @@ public class CompanySettingController {
     @Resource
     private Session session;
 
-    @GetMapping("/uc/company/setting/demo")
+    @GetMapping("/uc/company/demo")
     public String demo() {
         Long orgId = session.get("orgId", Long.class);
         agent.init(orgId);
@@ -44,6 +43,28 @@ public class CompanySettingController {
         Long orgId = session.get("orgId", Long.class);
         agent.init(orgId);
         agent.namespace(namespace);
+
+        ObjectMap map = agent.getAll();
+        return JSON.toJSONString(map);
+    }
+
+    @PutMapping("/uc/company/setting/{namespace}")
+    public String mockByNamespace(@PathVariable("namespace") String namespace, @RequestBody Map<String, Object> setting) {
+        Long orgId = session.get("orgId", Long.class);
+        agent.init(orgId);
+        agent.namespace(namespace);
+
+        ObjectMap map = agent.getAll();
+        return JSON.toJSONString(map);
+    }
+
+    @PutMapping("/uc/company/setting")
+    public String mockOrg(@RequestBody Map<String, Object> setting) {
+        Long orgId = session.get("orgId", Long.class);
+        agent.init(orgId);
+
+        agent.setAll(setting);
+        agent.save();
 
         ObjectMap map = agent.getAll();
         return JSON.toJSONString(map);

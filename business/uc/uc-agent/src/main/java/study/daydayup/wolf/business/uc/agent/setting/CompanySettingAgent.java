@@ -49,11 +49,18 @@ public class CompanySettingAgent {
         changedNamespaceSet = new HashSet<>(8);
         currentNamespace = KvData.DEFAULT_NAMESPACE;
         map = new HashMap<>();
+
+        initNamespace(currentNamespace);
         isInit = true;
+    }
+
+    public void defaultNamespace() {
+        currentNamespace = KvData.DEFAULT_NAMESPACE;
     }
 
     public void namespace(@NonNull String namespace) {
         currentNamespace = namespace;
+        initNamespace(currentNamespace);
     }
 
     public ObjectMap getAll() {
@@ -69,7 +76,6 @@ public class CompanySettingAgent {
     }
 
     public Object get(@NonNull String key, @NonNull String namespace) {
-        initNamespace(namespace);
         return map.get(namespace).get(key);
     }
 
@@ -83,6 +89,24 @@ public class CompanySettingAgent {
         }
 
         map.get(namespace).put(key, value);
+        changedNamespaceSet.add(namespace);
+        return this;
+    }
+
+    public CompanySettingAgent setAll(@NonNull Map<String, Object> kv) {
+        return setAll(kv, currentNamespace);
+    }
+
+    public CompanySettingAgent setAll(@NonNull Map<String, Object> kv, @NonNull String namespace) {
+        if (kv.isEmpty()) {
+            return this;
+        }
+
+        if (null == map.get(namespace)) {
+            map.put(namespace, new ObjectMap());
+        }
+
+        map.get(namespace).putAll(kv);
         changedNamespaceSet.add(namespace);
         return this;
     }
