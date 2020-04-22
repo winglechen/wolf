@@ -92,8 +92,6 @@ public class Tsm {
                 return new LoanContractFactory();
             case LOAN_ORDER:
                 return new LoanOrderFactory();
-            case LOAN_PROXY:
-                return new LoanProxyFactory();
             case REPAY_ORDER:
                 return new RepayOrderFactory();
             case COLLECTION_ORDER:
