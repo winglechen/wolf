@@ -25,12 +25,8 @@ public enum TradeTypeEnum implements CodeBasedEnum {
     GROUP_PARTICIPATE(30, "团购参与"),
 
 
-
-    OVERDUE_REPAY(16, "逾期还款订单"),
-    PREPAY_All(15, "提前还款订单"),
-    PREPAY_ORDER(14, "提前还款订单"),
+    PRE_LOAN_ORDER(14, "前置货超"),
     COLLECTION_ORDER(13, "催收订单"),
-    LOAN_PROXY(12, "放款代理"),
     REPAY_ORDER(11, "还款订单"),
     LOAN_ORDER(10, "放款订单"),
 

@@ -78,8 +78,6 @@ public class TradeFlowFactory {
                 return fenXiaoFlow;
             case COLLECTION_ORDER:
                 return collectionOrderFlow;
-            case LOAN_PROXY:
-                return loanProxyFlow;
             case REPAY_ORDER:
                 return repayOrderFlow;
             case LOAN_ORDER:
