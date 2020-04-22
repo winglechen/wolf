@@ -18,6 +18,7 @@ import study.daydayup.wolf.framework.util.ContextUtil;
          "study.daydayup.wolf.business.account.biz.dal.dao"
         , "study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao"
         , "study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao"
+        , "study.daydayup.wolf.business.uc.crm.biz.staff.info.dal.dao"
         , "study.daydayup.wolf.business.uc.setting.biz.dal.dao"
         , "study.daydayup.wolf.business.goods.biz.dal.dao"
         , "study.daydayup.wolf.business.org.biz.task.dal.dao"

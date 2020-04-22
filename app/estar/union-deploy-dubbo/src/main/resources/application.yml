@@ -84,6 +84,27 @@ spring:
         task_state_log.actual-data-nodes: org.task_state_log
         task_assignment_log.actual-data-nodes: org.task_assignment_log
         task_progress.actual-data-nodes: org.task_progress
+        #onion
+        aadhaar.actual-data-nodes: onion.aadhaar
+        address_book.actual-data-nodes: onion.address_book
+        admin.actual-data-nodes: onion.admin
+        app_installed.actual-data-nodes: onion.app_installed
+        bank_card.actual-data-nodes: onion.bank_card
+        basic_info.actual-data-nodes: onion.basic_info
+        device.actual-data-nodes: onion.device
+        driving_license.actual-data-nodes: onion.driving_license
+        emergency_contact.actual-data-nodes: onion.emergency_contact
+        gps.actual-data-nodes: onion.gps
+        liveness_auth_info.actual-data-nodes: onion.liveness_auth_info
+        pan_card.actual-data-nodes: onion.pan_card
+        passport.actual-data-nodes: onion.passport
+        user.actual-data-nodes: onion.user
+        user_black.actual-data-nodes: onion.user_black
+        user_credit.actual-data-nodes: onion.user_credit
+        user_credit_log.actual-data-nodes: onion.user_credit_log
+        voter_card.actual-data-nodes: onion.voter_card
+
+
 
 
 
