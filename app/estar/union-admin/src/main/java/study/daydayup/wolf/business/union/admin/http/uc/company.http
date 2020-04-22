@@ -4,3 +4,25 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+PUT http://localhost:8200/uc/company/setting/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "name": "orgName",
+  "logo": "/img/20191213/870576fc-025b-6862-ca5d-aa2f2f72f88f.jpg"
+
+
+}
+
+###
+PUT http://localhost:8200/uc/company/setting/1/{namespace}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "k": "v",
+
+}

@@ -48,9 +48,8 @@ public class CompanySettingController {
         return JSON.toJSONString(map);
     }
 
-    @PutMapping("/uc/company/setting/{namespace}")
-    public String mockByNamespace(@PathVariable("namespace") String namespace, @RequestBody Map<String, Object> setting) {
-        Long orgId = session.get("orgId", Long.class);
+    @PutMapping("/uc/company/setting/{orgId}/{namespace}")
+    public String mockByNamespace(@PathVariable("orgId") Long orgId, @PathVariable("namespace") String namespace, @RequestBody Map<String, Object> setting) {
         agent.init(orgId);
         agent.namespace(namespace);
 
@@ -58,9 +57,8 @@ public class CompanySettingController {
         return JSON.toJSONString(map);
     }
 
-    @PutMapping("/uc/company/setting")
-    public String mockOrg(@RequestBody Map<String, Object> setting) {
-        Long orgId = session.get("orgId", Long.class);
+    @PutMapping("/uc/company/setting/{orgId}")
+    public String mockOrg(@PathVariable("orgId") Long orgId,@RequestBody Map<String, Object> setting) {
         agent.init(orgId);
 
         agent.setAll(setting);
