@@ -11,7 +11,11 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum GoodsTypeEnum implements CodeBasedEnum {
-    LOAN(50, "票务商品"),
+
+    PRE_LOAN_FEE(51, "前置贷超"),
+    LOAN_MARKET(52, "贷超商品"),
+    LOAN(50, "贷款商品"),
+
     TICKET(40, "票务商品"),
     VIRTUAL(30, "虚拟商品"),
     IOT(20, "IOT商品"),
