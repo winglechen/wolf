@@ -54,7 +54,6 @@ public class SettingDTO implements Model {
         if (StringUtil.notBlank(namespace)) {
             initNamespaces();
             addNamespace(namespace);
-            namespace = null;
         }
     }
 

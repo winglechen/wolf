@@ -37,11 +37,15 @@ public class CompanySettingAgent {
     private CompanySettingService service;
 
     public void init(long orgId) {
+        init(orgId, true);
+    }
+
+    public void init(long orgId, boolean initCheck) {
         if (orgId <= 0) {
             throw new IllegalArgumentException("accountId and orgId can not less than 0");
         }
 
-        if (isInit) {
+        if (isInit && initCheck) {
             return;
         }
 

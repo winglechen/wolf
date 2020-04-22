@@ -50,7 +50,7 @@ public class CompanySettingController {
 
     @PutMapping("/uc/company/setting/{orgId}/{namespace}")
     public String mockByNamespace(@PathVariable("orgId") Long orgId, @PathVariable("namespace") String namespace, @RequestBody Map<String, Object> setting) {
-        agent.init(orgId);
+        agent.init(orgId, false);
         agent.namespace(namespace);
 
         ObjectMap map = agent.getAll();
@@ -59,7 +59,7 @@ public class CompanySettingController {
 
     @PutMapping("/uc/company/setting/{orgId}")
     public String mockOrg(@PathVariable("orgId") Long orgId,@RequestBody Map<String, Object> setting) {
-        agent.init(orgId);
+        agent.init(orgId, false);
 
         agent.setAll(setting);
         agent.save();
