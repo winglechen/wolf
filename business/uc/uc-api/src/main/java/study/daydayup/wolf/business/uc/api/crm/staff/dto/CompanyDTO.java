@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import study.daydayup.wolf.framework.layer.api.DTO;
 
 /**
  * study.daydayup.wolf.business.union.admin.dto
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyDTO {
+public class CompanyDTO implements DTO {
     private Long orgId;
     private String name;
     private String logo;
