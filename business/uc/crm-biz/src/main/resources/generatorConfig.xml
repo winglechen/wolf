@@ -49,7 +49,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/wolf_credit?useSSL=false"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/onion?useSSL=false"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -59,7 +59,7 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dataobject"
+        <javaModelGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.staff.info.dal.dataobject"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -70,25 +70,18 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.customer.credit.dal.dao"
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.staff.info.dal.dao"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
 
 
-        <table tableName="credit_config" domainObjectName="CreditConfigDO" mapperName="CreditConfigDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        <table tableName="admin" domainObjectName="AdminDO" mapperName="AdminDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
         </table>
 
-        <table tableName="credit_line" domainObjectName="CreditLineDO" mapperName="CreditLineDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
-
-        <table tableName="credit_log" domainObjectName="CreditLogDO" mapperName="CreditLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="operation_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
 
 
 
