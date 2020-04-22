@@ -29,5 +29,7 @@ public interface CompanySettingDAO {
 
     List<CompanySettingDO> findByNamespaceIn(@Param("namespaceCollection")Collection<String> namespaceCollection, @Param("orgId")Long orgId);
 
+    List<CompanySettingDO> findByOrgIdIn(@Param("namespace")String namespace, @Param("orgIdCollection")Collection<Long> orgIdCollection);
+
 
 }

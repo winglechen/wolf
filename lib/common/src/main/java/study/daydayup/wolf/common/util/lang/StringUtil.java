@@ -4,6 +4,7 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterators;
+import study.daydayup.wolf.common.util.collection.ListUtil;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -192,7 +193,6 @@ public class StringUtil {
     public static String upperUnderscore(String s) {
         return CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, s);
     }
-
 
     public static String capitalize(String str) {
         if (str == null) {

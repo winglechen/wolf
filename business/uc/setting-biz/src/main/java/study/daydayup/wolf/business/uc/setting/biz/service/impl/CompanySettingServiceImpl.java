@@ -12,11 +12,13 @@ import study.daydayup.wolf.business.uc.api.setting.service.CompanySettingService
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.CompanySettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.CompanySettingDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.ListUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +77,23 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         List<CompanySettingDO> companySettingDOList = dao.findByOrgId(companyId);
 
         List<CompanySetting> companySettingList = toModel(companySettingDOList);
+        return Result.ok(companySettingList);
+    }
+
+    @Override
+    public Result<List<CompanySetting>> findByOrgIds(Collection<Long> companyIds) {
+        return findByOrgIds(KvData.DEFAULT_NAMESPACE, companyIds);
+    }
+
+    @Override
+    public Result<List<CompanySetting>> findByOrgIds(@NonNull String namespace, Collection<Long> companyIds) {
+        if (CollectionUtil.isEmpty(companyIds)) {
+            return Result.ok(ListUtil.empty());
+        }
+
+        List<CompanySettingDO> companySettingDOList = dao.findByOrgIdIn(namespace, companyIds);
+        List<CompanySetting> companySettingList = toModel(companySettingDOList);
+
         return Result.ok(companySettingList);
     }
 
