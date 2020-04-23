@@ -175,9 +175,12 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         AccountDO accountDO = accountDAO.selectById(id);
+        if (accountDO == null) {
+            return null;
+        }
+
         Account account = new Account();
         BeanUtils.copyProperties(accountDO, account);
-
         account.setAccountType(account.getAccountType());
 
         return account;
