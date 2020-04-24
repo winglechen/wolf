@@ -28,6 +28,10 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 ###
+PUT http://localhost:8200/auth/company/change/2
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
 
 
 
