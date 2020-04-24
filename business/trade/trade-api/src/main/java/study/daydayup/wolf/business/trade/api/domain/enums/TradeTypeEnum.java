@@ -18,12 +18,14 @@ public enum TradeTypeEnum implements CodeBasedEnum {
 
     SECKILL(70, "秒杀"),
 
-    PEERPAY(60, "代付"),
+    PEERPAY(51, "代付"),
     PEERPAY_PAY(50, "代付支付"),
 
-    GROUP_BUY(40, "团购"),
-    GROUP_PARTICIPATE(30, "团购参与"),
+    AUDIT_FEE(41, "审核费用"),
+    MEMBERSHIP_FEE(40, "会员费用"),
 
+    GROUP_BUY(31, "团购"),
+    GROUP_PARTICIPATE(30, "团购参与"),
 
     PRE_LOAN_ORDER(14, "前置货超"),
     COLLECTION_ORDER(13, "催收订单"),

@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 
 public class WaitToApproveState extends AbstractTradeState implements TradeState {
     {
-        code = 1;
+        code = 5;
     }
 
 }

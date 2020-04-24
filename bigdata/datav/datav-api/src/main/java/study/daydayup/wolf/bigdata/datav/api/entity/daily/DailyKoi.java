@@ -14,19 +14,21 @@ public class DailyKoi implements Model {
 
     private Integer pv;
     private Integer uv;
-    private Integer registerCount;
 
-    private Integer basicInfoCount;
+        private Integer registerCount;
+        private Integer basicInfoCount;
+        private Integer aadhaarCount;
+        private Integer bankcardCount;
+        private Integer authSuccessCount;
+
     private Integer livenessCount;
-    private Integer bankcardCount;
-    private Integer aadhaarCount;
     private Integer panCardCount;
     private Integer passportCount;
     private Integer drivingLicenseCount;
     private Integer voterCount;
     private Integer kycCount;
     private Integer creditPromoteCount;
-    private Integer authSuccessCount;
+
 
     private Boolean deleteFlag;
     private LocalDateTime createdAt;

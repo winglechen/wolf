@@ -13,6 +13,7 @@ public class TrackRepay implements Model {
     private Long id;
 
     private Long orgId;
+    private Long goodsId;
 
     private LocalDate requestDate;
 
@@ -20,7 +21,6 @@ public class TrackRepay implements Model {
 
     private LocalDate dueDate;
 
-    private Long goodsId;
 
     private Integer installmentNo;
 

@@ -11,8 +11,9 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum GoodsTypeEnum implements CodeBasedEnum {
+    AUDIT_FEE(61, "审核费用"),
+    MEMBERSHIP_FEE(60, "会员费用"),
 
-    PRE_LOAN_FEE(51, "前置贷超"),
     LOAN_MARKET(52, "贷超商品"),
     LOAN(50, "贷款商品"),
 

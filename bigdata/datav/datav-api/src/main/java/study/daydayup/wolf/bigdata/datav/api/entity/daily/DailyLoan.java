@@ -16,41 +16,29 @@ public class DailyLoan implements Model {
     private LocalDate date;
 
     private Integer requestCount;
-
     private Integer requestApproved;
-
     private Integer requestRefused;
 
     private Integer loanCount;
-
     private Integer loanAmount;
 
     private Integer firstLoanCount;
-
     private Integer firstLoanAmount;
 
     private Integer dueCount;
-
     private Integer dueAmount;
-
     private Integer overdueCount;
-
     private Integer overdueAmount;
 
     private Integer firstOverdueCount;
-
     private Integer firstOverdueAmount;
 
     private Integer repayCount;
-
     private Integer repayAmount;
 
     private Integer lossCount;
-
     private Integer lossAmount;
-
     private Boolean deleteFlag;
-
     private LocalDateTime createdAt;
 
     private static final long serialVersionUID = 1L;
