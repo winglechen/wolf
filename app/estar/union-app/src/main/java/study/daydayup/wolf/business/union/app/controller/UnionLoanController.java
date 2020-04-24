@@ -3,7 +3,6 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
@@ -72,7 +71,7 @@ public class UnionLoanController extends BaseUnionController {
         // merge result
         LoanAuditResponse response = new LoanAuditResponse();
         response.setContract(loanResponse.getContract());
-        response.setGoods((Goods) goods);
+        response.setGoods(goods);
 
         return Result.ok(response);
     }
