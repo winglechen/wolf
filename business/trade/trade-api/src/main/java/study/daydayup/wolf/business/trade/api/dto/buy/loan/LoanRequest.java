@@ -27,4 +27,5 @@ public class LoanRequest implements Request {
 
     private String tradeNo;
     private Boolean storeOnPreview;
+    private Boolean needAuditFee;
 }

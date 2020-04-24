@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToAuditState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
@@ -97,6 +98,10 @@ public class UnionLoanController extends BaseUnionController {
 
         if (null != loanRequest.getStoreOnPreview() && loanRequest.getStoreOnPreview()) {
             request.setStoreTrade(true);
+        }
+
+        if (null != loanRequest.getNeedAuditFee() && loanRequest.getNeedAuditFee()) {
+            request.setTradeState(new WaitToAuditState());
         }
 
         for (GoodsRequest goods : request.getGoodsRequest()) {
@@ -256,6 +261,7 @@ public class UnionLoanController extends BaseUnionController {
         LoanRequest loanRequest = new LoanRequest();
         loanRequest.setGoodsId(goodsId);
         loanRequest.setStoreOnPreview(true);
+        loanRequest.setNeedAuditFee(true);
 
         return preview(loanRequest).notNullData();
     }
