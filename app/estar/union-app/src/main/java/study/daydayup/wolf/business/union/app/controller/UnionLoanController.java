@@ -22,6 +22,7 @@ import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.api.service.order.BuyerContractService;
 import study.daydayup.wolf.business.trade.api.service.order.ContractService;
 import study.daydayup.wolf.business.trade.api.service.order.SellerContractService;
+import study.daydayup.wolf.business.union.app.dto.LoanAuditResponse;
 import study.daydayup.wolf.business.union.app.service.UnionLoanService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
@@ -49,6 +50,23 @@ public class UnionLoanController extends BaseUnionController {
     private SellerContractService sellerContractService;
     @Resource
     private UnionLoanService unionLoanService;
+
+    @PostMapping("/loan/audit/preview/{goodsId}")
+    public Result<LoanAuditResponse> auditPreview(@PathVariable("goodsId") Long goodsId) {
+        return null;
+    }
+
+    @PutMapping("/loan/audit/pay")
+    public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
+        TradeId tradeId = initTradeId(request.getTradeNo());
+        request.setTradeId(tradeId);
+
+        PayResponse response = unionLoanService.pay(request);
+        if (response == null) {
+            return Result.fail(10000, "repay fail");
+        }
+        return Result.ok(response);
+    }
 
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {

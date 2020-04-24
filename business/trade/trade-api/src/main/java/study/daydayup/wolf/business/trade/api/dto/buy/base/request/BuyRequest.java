@@ -36,7 +36,9 @@ public class BuyRequest implements Request {
     private OrderAddress address;
     private BuyerMemo buyerMemo;
 
-    private UmpRequest umpRequest;
     @NotNull
     private List<GoodsRequest> goodsRequest;
+    private UmpRequest umpRequest;
+
+    private boolean storeOnPreview;
 }
