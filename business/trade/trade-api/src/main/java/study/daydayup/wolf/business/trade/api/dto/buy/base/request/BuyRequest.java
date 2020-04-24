@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.trade.api.dto.buy.base.request;
 
 import lombok.Data;
+import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.OrderAddress;
@@ -27,6 +28,7 @@ public class BuyRequest implements Request {
      * @see TradeTypeEnum
      */
     private Integer tradeType;
+    private TradeState tradeState;
     private String relatedTradeNo;
 
     private String source;

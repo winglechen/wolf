@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.goods.api.enums.InstallmentTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
+import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
@@ -63,10 +64,16 @@ public class CreateContractNode extends AbstractTradeNode implements TradeNode {
 
         contract = Contract.builder()
                 .tradeType(context.getTradeType().getCode())
-                .state(new WaitToApproveState())
                 .source(context.getRequest().getSource())
                 .createdAt(rpcContext.getRequestTime())
                 .build();
+
+        TradeState requestTradeState = context.getRequest().getTradeState();
+        if (requestTradeState != null) {
+            contract.setState(requestTradeState);
+        } else {
+            contract.setState(new WaitToApproveState());
+        }
     }
 
     private void createTradeNo() {
