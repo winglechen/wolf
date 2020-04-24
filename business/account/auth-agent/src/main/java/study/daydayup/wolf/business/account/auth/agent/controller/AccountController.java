@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
+import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 
@@ -25,6 +26,12 @@ public class AccountController {
     @Resource
     private Session session;
 
+    @PutMapping("/auth/company/change/{orgId}")
+    public Result<String> changeCompany(@PathVariable("orgId") Long orgId) {
+        session.changeScope(orgId);
+        return Result.ok("ok");
+    }
+
     @RequestMapping("/account/create")
     public String create() {
         Account a = new Account();
@@ -37,8 +44,8 @@ public class AccountController {
 
     @RequestMapping("/account/show")
     public String show() {
-        Long accountId = (Long) session.get("accountId");
-        Long orgId = (Long)session.get("orgId");
+        Object accountId = session.get("accountId");
+        Object orgId = session.get("orgId");
         LocalDateTime expiredAt = DateUtil.asLocalDateTime((Date)session.get("expiredAt"));
         LocalDateTime now = LocalDateTime.now();
         Date dNow = new Date();
@@ -50,10 +57,6 @@ public class AccountController {
     }
 
 
-    @PutMapping("/auth/company/change/{orgId}")
-    public Result<String> changeCompany(@PathVariable("orgId") Long orgId) {
-        session.changeScope(orgId);
-        return Result.ok("ok");
-    }
+
 
 }

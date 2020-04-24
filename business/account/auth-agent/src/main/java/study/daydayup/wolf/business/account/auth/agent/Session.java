@@ -80,23 +80,19 @@ public class Session {
     public <T> T get(String key, Class<T> type, boolean throwException) {
         Object value = get(key);
         if (value == null) {
-            if (throwException) {
-                throw new SessionNotFoundException(key);
+            if (!throwException) {
+                return null;
             }
-            return null;
+            if ("orgId".equals(key)) {
+                throw new CompanyNotChosenException();
+            }
+            throw new SessionNotFoundException(key);
         }
 
         if(type.equals(value.getClass())) {
             return type.cast(value);
         }
 
-        if (throwException) {
-            if ("orgId".equals(key)) {
-                throw new CompanyNotChosenException();
-            }
-
-            throw new SessionNotFoundException(key);
-        }
         return null;
     }
 
