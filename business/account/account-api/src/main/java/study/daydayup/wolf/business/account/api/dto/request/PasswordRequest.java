@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class PasswordRequest implements Request {
     @NotBlank
     private String account;
-    private long orgId;
+    private Long orgId;
 
     @NotBlank
     private String password;

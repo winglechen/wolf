@@ -20,7 +20,7 @@ public class SmsRequest implements Request {
     @NotBlank
     private String code;
 
-    private long orgId;
+    private Long orgId;
 
     private String source;
     private String token;

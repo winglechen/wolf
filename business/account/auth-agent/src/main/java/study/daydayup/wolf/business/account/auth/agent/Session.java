@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.auth.agent;
 
+import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
@@ -154,8 +155,13 @@ public class Session {
         }
     }
 
+    public void changeScope(@NonNull Long orgId) {
+        set("orgId", orgId);
+        oauthLicenseService.changeScope(sessionId, String.valueOf(orgId));
+    }
+
     private void setOrgId(OauthLicense license) {
-        if (!StringUtil.notEmpty(license.getScope(), true)) {
+        if (StringUtil.isBlank(license.getScope())) {
             return;
         }
 

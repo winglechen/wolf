@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.service.impl;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
@@ -124,6 +125,11 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         }
 
         return 0;
+    }
+
+    @Override
+    public void changeScope(@NonNull String accessToken, @NonNull String scope) {
+        accessTokenDAO.updateScopeByAccessToken(accessToken, scope);
     }
 
     private License createLicense(LicenseRequest request, boolean useRequestToken) {

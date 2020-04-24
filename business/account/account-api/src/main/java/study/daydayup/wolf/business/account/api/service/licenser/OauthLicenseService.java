@@ -21,4 +21,6 @@ public interface OauthLicenseService {
     void refresh(String refreshToken, Date expiredAt);
     void expire(String accessToken, Date expiredAt);
     void expire(String accessToken);
+    void changeScope(String accessToken, String scope);
+
 }

@@ -28,6 +28,8 @@ public interface AccessTokenDAO {
 
     int updateExpiredAtByAccessToken(@Param("accessToken")String accessToken, @Param("updatedExpiredAt")Date updatedExpiredAt);
 
+    int updateScopeByAccessToken(@Param("accessToken")String accessToken, @Param("scope")String scope);
+
     Long selectIdByAccessToken(@Param("accessToken")String accessToken);
 
 }

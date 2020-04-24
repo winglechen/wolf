@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.api;
 
+import lombok.NonNull;
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.entity.Account;
@@ -46,6 +47,11 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
 
         Date expiredAt = new Date();
         expire(accessToken, expiredAt);
+    }
+
+    @Override
+    public void changeScope(@NonNull String accessToken, @NonNull String scope) {
+        accessTokenService.changeScope(accessToken, scope);
     }
 
     @Override

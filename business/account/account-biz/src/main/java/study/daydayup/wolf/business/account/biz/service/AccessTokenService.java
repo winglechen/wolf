@@ -22,4 +22,5 @@ public interface AccessTokenService {
     void refreshById(long id, int seconds);
     void refreshByAccountId(long accountId, int seconds);
     long existToken(@NotBlank String token);
+    void changeScope(String accessToken, String scope);
 }

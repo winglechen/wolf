@@ -53,7 +53,11 @@ public class AuthController {
         return session.isLogin();
     }
 
-    protected String formatScope(String scope, long orgId) {
+    protected String formatScope(String scope, Long orgId) {
+        if (null == scope && null == orgId) {
+            return "";
+        }
+
         StringBuilder builder = new StringBuilder();
 
         if (null != scope) {
