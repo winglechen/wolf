@@ -59,14 +59,10 @@ public class UnionLoanController extends BaseUnionController {
     @PostMapping("/loan/audit/preview/{goodsId}")
     public Result<LoanAuditResponse> auditPreview(@PathVariable("goodsId") Long goodsId) {
         // preview loan
-        LoanRequest loanRequest = new LoanRequest();
-        loanRequest.setGoodsId(goodsId);
-        PreviewResponse loanResponse = preview(loanRequest).notNullData();
+        PreviewResponse loanResponse = loanPreview(goodsId);
 
         // find audit goods
-        Long orgId = getFromSession("orgId", Long.class);
-        Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
-        LoanGoods goods = loanGoodsService.findOneByOrgId(orgId, goodsType);
+        LoanGoods goods = findAuditGoods();
 
         // merge result
         LoanAuditResponse response = new LoanAuditResponse();
@@ -76,9 +72,23 @@ public class UnionLoanController extends BaseUnionController {
         return Result.ok(response);
     }
 
+    private PreviewResponse loanPreview(Long goodsId) {
+        LoanRequest loanRequest = new LoanRequest();
+        loanRequest.setGoodsId(goodsId);
+        return preview(loanRequest).notNullData();
+    }
+
+    private LoanGoods findAuditGoods() {
+        Long orgId = getFromSession("orgId", Long.class);
+        Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
+        return loanGoodsService.findOneByOrgId(orgId, goodsType);
+    }
+
     @PutMapping("/loan/audit/pay")
     public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
         // find audit goods
+        LoanGoods goods = findAuditGoods();
+
         // create audit fee order
         // get pay args
         return null;
