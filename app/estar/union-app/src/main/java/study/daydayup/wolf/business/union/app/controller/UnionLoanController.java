@@ -122,7 +122,7 @@ public class UnionLoanController extends BaseUnionController {
         for (GoodsRequest goods : request.getGoodsRequest()) {
             goods.setOrgId(orgId);
         }
-        
+
         request.setStoreTrade(true);
         return buyService.confirm(request);
     }
