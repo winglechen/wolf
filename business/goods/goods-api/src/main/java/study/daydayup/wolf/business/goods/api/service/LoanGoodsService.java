@@ -16,7 +16,7 @@ public interface LoanGoodsService {
     LoanGoods findById(Long goodsId, Long orgId);
     LoanGoods findById(Long goodsId, Long orgId, GoodsOption option);
     Page<LoanGoods> findByOrgId(Long orgId, PageRequest pageRequest);
-    LoanGoods findOneByOrgId(Long orgId);
+    LoanGoods findOneByOrgId(Long orgId, Integer goodsType);
 
     int modify(LoanGoods goods);
     int remove(Long goodsId, Long orgId);

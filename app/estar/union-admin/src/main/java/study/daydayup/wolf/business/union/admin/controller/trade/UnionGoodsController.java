@@ -70,9 +70,13 @@ public class UnionGoodsController extends BaseUnionController {
     }
 
     @GetMapping("/goods/one")
-    public Result<LoanGoods> findOneByOrgId() {
+    public Result<LoanGoods> findOneByOrgId(@RequestParam(value = "goodsType", required = false) Integer goodsType) {
         Long orgId = getFromSession("orgId", Long.class);
-        LoanGoods goods = loanGoodsService.findOneByOrgId(orgId);
+        if (goodsType == null) {
+            goodsType = DEFAULT_GOODS_TYPE;
+        }
+
+        LoanGoods goods = loanGoodsService.findOneByOrgId(orgId, goodsType);
 
         return Result.ok(goods);
     }

@@ -62,8 +62,8 @@ public class LoanGoodsRepository implements  Repository {
         return getLoanByGoodsDO(goodsDO);
     }
 
-    public LoanEntity findOneByOrgId(long orgId) {
-        GoodsDO goodsDO = goodsDAO.selectOneByOrgId(orgId);
+    public LoanEntity findOneByOrgId(long orgId, Integer goodsType) {
+        GoodsDO goodsDO = goodsDAO.selectOneByOrgId(orgId, goodsType);
         return getLoanByGoodsDO(goodsDO);
     }
 

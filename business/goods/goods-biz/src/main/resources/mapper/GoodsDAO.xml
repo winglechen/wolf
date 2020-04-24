@@ -46,6 +46,7 @@
         <include refid="Base_Column_List"/>
         from goods
         where org_id=#{orgId,jdbcType=BIGINT}
+        and goods_type=#{goodsType,jdbcType=INTEGER}
         and state = 1
         and delete_flag = 0
         order by id desc

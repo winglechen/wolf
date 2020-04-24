@@ -25,7 +25,7 @@ public interface GoodsDAO {
 
     List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
 
-    GoodsDO selectOneByOrgId(@Param("orgId")Long orgId);
+    GoodsDO selectOneByOrgId(@Param("orgId")Long orgId, @Param("goodsType")Integer goodsType);
 
 
     List<GoodsDO> selectByIdIn(@Param("idCollection")List<Long> idCollection, @Param("orgId") long orgId);
