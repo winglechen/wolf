@@ -5,8 +5,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "18067961031",
-  "orgId": 1
+  "mobile": "18067961031"
 }
 
 ###
@@ -17,8 +16,7 @@ Content-Type: application/json
 
 {
   "mobile": "18067961031",
-  "code": "778899",
-  "orgId": 1
+  "code": "778899"
 }
 
 ###
@@ -28,10 +26,12 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 ###
-PUT http://localhost:8200/auth/company/change/2
+PUT http://localhost:8200/auth/company/change/3
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
+
+###
 
 
 
