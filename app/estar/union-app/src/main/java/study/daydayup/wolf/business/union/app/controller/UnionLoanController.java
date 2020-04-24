@@ -3,6 +3,10 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import study.daydayup.wolf.business.goods.api.entity.Goods;
+import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
+import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
+import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
@@ -50,22 +54,35 @@ public class UnionLoanController extends BaseUnionController {
     private SellerContractService sellerContractService;
     @Resource
     private UnionLoanService unionLoanService;
+    @Reference
+    private LoanGoodsService loanGoodsService;
 
     @PostMapping("/loan/audit/preview/{goodsId}")
     public Result<LoanAuditResponse> auditPreview(@PathVariable("goodsId") Long goodsId) {
-        return null;
+        // preview loan
+        LoanRequest loanRequest = new LoanRequest();
+        loanRequest.setGoodsId(goodsId);
+        PreviewResponse loanResponse = preview(loanRequest).notNullData();
+
+        // find audit goods
+        Long orgId = getFromSession("orgId", Long.class);
+        Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
+        LoanGoods goods = loanGoodsService.findOneByOrgId(orgId, goodsType);
+
+        // merge result
+        LoanAuditResponse response = new LoanAuditResponse();
+        response.setContract(loanResponse.getContract());
+        response.setGoods((Goods) goods);
+
+        return Result.ok(response);
     }
 
     @PutMapping("/loan/audit/pay")
     public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
-        TradeId tradeId = initTradeId(request.getTradeNo());
-        request.setTradeId(tradeId);
-
-        PayResponse response = unionLoanService.pay(request);
-        if (response == null) {
-            return Result.fail(10000, "repay fail");
-        }
-        return Result.ok(response);
+        // find audit goods
+        // create audit fee order
+        // get pay args
+        return null;
     }
 
     @PostMapping("/loan/preview")
