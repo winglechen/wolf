@@ -40,5 +40,5 @@ public class BuyRequest implements Request {
     private List<GoodsRequest> goodsRequest;
     private UmpRequest umpRequest;
 
-    private boolean storeOnPreview;
+    private boolean storeTrade;
 }

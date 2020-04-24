@@ -45,6 +45,7 @@ public class LoanContractFlow extends AbstractTradeFlow implements TradeFlow {
     public List<TradeNode> buildPreviewFlow() {
         List<TradeNode> nodeList = initLoanNodes();
 
+        nodeList.add(storeContractNode);
         nodeList.add(fakeLoanEffectTimeNode);
 
         return nodeList;

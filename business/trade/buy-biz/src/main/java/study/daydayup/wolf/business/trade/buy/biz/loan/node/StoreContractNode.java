@@ -24,6 +24,10 @@ public class StoreContractNode extends AbstractTradeNode implements TradeNode {
 
     @Override
     public void run(BuyContext context) {
+        if (!context.getRequest().isStoreTrade()) {
+            return;
+        }
+
         Contract contract = context.getContract();
 
         LoanContractEntity entity = new LoanContractEntity(contract);

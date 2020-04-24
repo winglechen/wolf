@@ -72,17 +72,6 @@ public class UnionLoanController extends BaseUnionController {
         return Result.ok(response);
     }
 
-    private PreviewResponse loanPreview(Long goodsId) {
-        LoanRequest loanRequest = new LoanRequest();
-        loanRequest.setGoodsId(goodsId);
-        return preview(loanRequest).notNullData();
-    }
-
-    private LoanGoods findAuditGoods() {
-        Long orgId = getFromSession("orgId", Long.class);
-        Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
-        return loanGoodsService.findOneByOrgId(orgId, goodsType);
-    }
 
     @PutMapping("/loan/audit/pay")
     public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
@@ -105,6 +94,10 @@ public class UnionLoanController extends BaseUnionController {
 
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
+
+        if (null != loanRequest.getStoreOnPreview() && loanRequest.getStoreOnPreview()) {
+            request.setStoreTrade(true);
+        }
 
         for (GoodsRequest goods : request.getGoodsRequest()) {
             goods.setOrgId(orgId);
@@ -129,6 +122,8 @@ public class UnionLoanController extends BaseUnionController {
         for (GoodsRequest goods : request.getGoodsRequest()) {
             goods.setOrgId(orgId);
         }
+        
+        request.setStoreTrade(true);
         return buyService.confirm(request);
     }
 
@@ -256,4 +251,19 @@ public class UnionLoanController extends BaseUnionController {
 
         return request;
     }
+
+    private PreviewResponse loanPreview(Long goodsId) {
+        LoanRequest loanRequest = new LoanRequest();
+        loanRequest.setGoodsId(goodsId);
+        loanRequest.setStoreOnPreview(true);
+
+        return preview(loanRequest).notNullData();
+    }
+
+    private LoanGoods findAuditGoods() {
+        Long orgId = getFromSession("orgId", Long.class);
+        Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
+        return loanGoodsService.findOneByOrgId(orgId, goodsType);
+    }
+
 }
