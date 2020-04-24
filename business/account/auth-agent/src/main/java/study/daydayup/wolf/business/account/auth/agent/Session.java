@@ -5,6 +5,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
+import study.daydayup.wolf.business.account.auth.agent.exception.CompanyNotChosenException;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -90,7 +91,11 @@ public class Session {
         }
 
         if (throwException) {
-            throw new SessionNotFoundException(key + " - Invalid value type");
+            if ("orgId".equals(key)) {
+                throw new CompanyNotChosenException();
+            }
+
+            throw new SessionNotFoundException(key);
         }
         return null;
     }
