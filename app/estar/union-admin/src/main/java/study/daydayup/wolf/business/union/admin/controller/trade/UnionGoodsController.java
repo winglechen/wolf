@@ -49,7 +49,6 @@ public class UnionGoodsController extends BaseUnionController {
             goods.setLoan(loan);
         }
 
-
         goods.setId(null);
         goods.setOrgId(getFromSession("orgId", Long.class));
 

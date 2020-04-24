@@ -68,6 +68,10 @@ public class LoanConverter implements Converter {
         BeanUtils.copyProperties(loan, loanDO);
         formatLoanDo(loanDO, loan);
 
+        if (null == installmentList) {
+            return loanDO;
+        }
+
         formatInstallmentList(installmentList);
         String installments = JSON.toJSONString(installmentList);
         loanDO.setInstallment(installments);
