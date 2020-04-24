@@ -19,7 +19,6 @@ import study.daydayup.wolf.common.lang.enums.unit.UnitEnum;
 @Component
 @ConfigurationProperties(prefix = "wolf.goods")
 public class GoodsConfig {
-    private int goodsType           = GoodsTypeEnum.LOAN.getCode();
     private int stockType           = StockTypeEnum.NO_STOCK.getCode();
     private int categoryId          = 0;
     private int state               = GoodsStateEnum.SALABLE.getCode();

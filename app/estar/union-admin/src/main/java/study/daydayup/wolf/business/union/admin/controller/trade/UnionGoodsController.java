@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
+import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.goods.api.vo.Loan;
@@ -25,6 +26,7 @@ import javax.annotation.Resource;
  **/
 @RestController
 public class UnionGoodsController extends BaseUnionController {
+    private static final int DEFAULT_GOODS_TYPE = GoodsTypeEnum.LOAN.getCode();
     @Reference
     private LoanGoodsService loanGoodsService;
     @Reference
@@ -37,10 +39,16 @@ public class UnionGoodsController extends BaseUnionController {
     @PostMapping("/goods")
     public Result<Object> create(@Validated @RequestBody LoanGoods goods) {
         BeanUtils.copyProperties(goodsConfig, goods);
+        if (null == goods.getGoodsType()) {
+            goods.setGoodsType(DEFAULT_GOODS_TYPE);
+        }
 
         Loan loan = goods.getLoan();
-        BeanUtils.copyProperties(loanConfig, loan);
-        goods.setLoan(loan);
+        if (loan != null) {
+            BeanUtils.copyProperties(loanConfig, loan);
+            goods.setLoan(loan);
+        }
+
 
         goods.setId(null);
         goods.setOrgId(getFromSession("orgId", Long.class));

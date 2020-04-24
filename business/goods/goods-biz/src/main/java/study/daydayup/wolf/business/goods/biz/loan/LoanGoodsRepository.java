@@ -147,6 +147,10 @@ public class LoanGoodsRepository implements  Repository {
 
     private void saveLoanDO(LoanEntity entity) {
         Loan loan = entity.getLoan();
+        if (loan == null) {
+            return;
+        }
+
         loan.setGoodsId(entity.getId());
         loan.setOrgId(entity.getOrgId());
 
