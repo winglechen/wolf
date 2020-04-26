@@ -4,6 +4,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
@@ -28,11 +30,7 @@ public interface PayService {
      */
     Result<PayVerifyResponse> verify(PayVerifyRequest request);
 
-    /**
-     * 订阅异步通知
-     * @param data response of third party pay company
-     * @return String
-     */
-    Result<String> subscribe(String data);
+    Result<PayoutResponse> payout(PayoutRequest request);
+
 
 }
