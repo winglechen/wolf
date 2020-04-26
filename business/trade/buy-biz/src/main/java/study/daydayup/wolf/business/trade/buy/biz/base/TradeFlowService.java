@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
@@ -31,7 +31,7 @@ public class TradeFlowService {
         return tradeFlow.preview(request);
     }
 
-    public ConfirmResponse confirm(BuyRequest request) {
+    public PreviewResponse confirm(BuyRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = flowFactory.create(tradeType);
         tradeFlow.buildConfirmFlow();

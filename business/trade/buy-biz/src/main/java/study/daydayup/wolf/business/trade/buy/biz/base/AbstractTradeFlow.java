@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.trade.buy.biz.base;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
@@ -24,10 +24,10 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     }
 
     @Override
-    public ConfirmResponse confirm(BuyRequest request) {
+    public PreviewResponse confirm(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
 
-        ConfirmResponse response = new ConfirmResponse();
+        PreviewResponse response = new PreviewResponse();
 
         List<TradeNode> nodeList = buildConfirmFlow();
         execute(nodeList, context);

@@ -13,6 +13,7 @@ import study.daydayup.wolf.framework.layer.api.Response;
  **/
 @Data
 public class PreviewResponse implements Response {
+    private String tradeNo;
     private Contract contract;
     private Order order;
 }

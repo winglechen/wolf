@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.union.app.controller;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
@@ -17,7 +18,7 @@ import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
@@ -79,14 +80,30 @@ public class UnionLoanController extends BaseUnionController {
 
 
     @PutMapping("/loan/audit/pay")
-    public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
+    public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest payRequest) {
         // find audit goods
         LoanGoods loan = findAuditGoods();
         Goods goods = loanToGoods(loan);
+        if (goods == null) {
+            return Result.fail(500, "audit goods not found");
+        }
 
         // create audit fee order
+        BuyRequest request = new BuyRequest();
+        Buyer buyer = new Buyer();
+        buyer.setId(getFromSession("accountId", Long.class));
+        buyer.setName(getFromSession("account", String.class));
+        request.setBuyer(buyer);
+
+        request.setTradeType(TradeTypeEnum.AUDIT_FEE.getCode());
+        request.setGoods(goods);
+        request.setStoreTrade(true);
+
+        PreviewResponse response = buyService.preview(request).notNullData();
+
         // get pay args
-        return null;
+        PayResponse payResponse = unionLoanService.audit(response.getOrder());
+        return Result.ok(payResponse);
     }
 
     private Goods loanToGoods(LoanGoods loan) {
@@ -99,6 +116,7 @@ public class UnionLoanController extends BaseUnionController {
                 .buyerId(session.get("accountId", Long.class))
                 .sellId(loan.getOrgId())
                 .build();
+        BeanUtils.copyProperties(loan, goods);
 
         return goods;
     }
@@ -106,11 +124,6 @@ public class UnionLoanController extends BaseUnionController {
     @PostMapping("/loan/preview")
     public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
         BuyRequest request = initBuyRequest(loanRequest);
-
-        Buyer buyer = new Buyer();
-        buyer.setId(getFromSession("accountId", Long.class));
-        buyer.setName(getFromSession("account", String.class));
-        request.setBuyer(buyer);
 
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
@@ -132,13 +145,8 @@ public class UnionLoanController extends BaseUnionController {
 
 
     @PostMapping("/loan/confirm")
-    public Result<ConfirmResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
+    public Result<PreviewResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
         BuyRequest request = initBuyRequest(loanRequest);
-
-        Buyer buyer = new Buyer();
-        buyer.setId(getFromSession("accountId", Long.class));
-        buyer.setName(getFromSession("account", String.class));
-        request.setBuyer(buyer);
 
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
@@ -262,6 +270,11 @@ public class UnionLoanController extends BaseUnionController {
 
     private BuyRequest initBuyRequest(LoanRequest loanRequest) {
         BuyRequest request = new BuyRequest();
+
+        Buyer buyer = new Buyer();
+        buyer.setId(getFromSession("accountId", Long.class));
+        buyer.setName(getFromSession("account", String.class));
+        request.setBuyer(buyer);
 
         GoodsRequest goodsRequest = new GoodsRequest();
         goodsRequest.setGoodsId(loanRequest.getGoodsId());

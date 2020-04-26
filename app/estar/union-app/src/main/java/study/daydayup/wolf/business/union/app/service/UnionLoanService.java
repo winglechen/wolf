@@ -42,6 +42,11 @@ public class UnionLoanService implements Service {
         return formatPaymentCreateResponse(response, order);
     }
 
+    public PayResponse audit(Order order) {
+        PaymentCreateResponse response = callPayApi(order);
+        return formatPaymentCreateResponse(response, order);
+    }
+
     private PayResponse formatPaymentCreateResponse(PaymentCreateResponse paymentCreateResponse, Order order) {
         if (paymentCreateResponse == null || null == order) {
             return null;

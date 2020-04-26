@@ -4,7 +4,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.ConfirmResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
@@ -33,8 +33,8 @@ public class BuyServiceImpl implements BuyService {
     }
 
     @Override
-    public Result<ConfirmResponse> confirm(@Validated BuyRequest request) {
-        ConfirmResponse response = flowService.confirm(request);
+    public Result<PreviewResponse> confirm(@Validated BuyRequest request) {
+        PreviewResponse response = flowService.confirm(request);
         return Result.ok(response);
     }
 
