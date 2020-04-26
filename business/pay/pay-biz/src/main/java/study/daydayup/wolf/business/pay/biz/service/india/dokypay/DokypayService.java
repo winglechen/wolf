@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.service.india;
+package study.daydayup.wolf.business.pay.biz.service.india.dokypay;
 
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.PayoutService;

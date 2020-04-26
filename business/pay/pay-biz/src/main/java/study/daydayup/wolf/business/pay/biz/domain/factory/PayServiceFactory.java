@@ -11,6 +11,9 @@ import study.daydayup.wolf.business.pay.api.service.PayService;
  **/
 @Component
 public class PayServiceFactory {
+
+
+
     public static PayService create(Integer paymentCode) {
 
         return null;
