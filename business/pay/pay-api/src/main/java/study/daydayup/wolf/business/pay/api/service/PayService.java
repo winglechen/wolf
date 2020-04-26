@@ -30,7 +30,6 @@ public interface PayService {
      */
     Result<PayVerifyResponse> verify(PayVerifyRequest request);
 
-    Result<PayoutResponse> payout(PayoutRequest request);
 
 
 }
