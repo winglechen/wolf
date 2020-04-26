@@ -101,7 +101,7 @@ public class UnionLoanController extends BaseUnionController {
         BuyResponse response = buyService.preview(request).notNullData();
 
         // get pay args
-        PayResponse payResponse = unionLoanService.audit(response.getOrder());
+        PayResponse payResponse = unionLoanService.audit(response.getOrder(), payRequest.getPaymentMethod());
         return Result.ok(payResponse);
     }
 
@@ -211,7 +211,7 @@ public class UnionLoanController extends BaseUnionController {
         TradeId tradeId = initTradeId(tradeNo);
         request.setTradeId(tradeId);
 
-        PayResponse response = unionLoanService.pay(request);
+        PayResponse response = unionLoanService.pay(request, request.getPaymentMethod());
         if (response == null) {
             return Result.fail(10000, "repay fail");
         }

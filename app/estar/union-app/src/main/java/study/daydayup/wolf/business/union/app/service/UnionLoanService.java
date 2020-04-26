@@ -29,19 +29,26 @@ public class UnionLoanService implements Service {
     @Reference
     private RazorpayService razorpayService;
 
-    public PayResponse pay(@NonNull PayRequest request) {
+    public PayResponse pay(@NonNull PayRequest request, Integer paymentMethod) {
         if (null == request.getTradeId()) {
             return null;
         }
 
         Order order = loanService.repay(request).notNullData();
 
-        PaymentCreateResponse response = callPayApi(order, PaymentMethodEnum.RAZORPAY.getCode());
+        if (null == paymentMethod) {
+            paymentMethod = PaymentMethodEnum.RAZORPAY.getCode();
+        }
+        PaymentCreateResponse response = callPayApi(order, paymentMethod);
         return formatPaymentCreateResponse(response, order);
     }
 
     public PayResponse audit(Order order, Integer paymentMethod) {
-        PaymentCreateResponse response = callPayApi(order, PaymentMethodEnum.RAZORPAY.getCode());
+        if (null == paymentMethod) {
+            paymentMethod = PaymentMethodEnum.CASEFREE.getCode();
+        }
+
+        PaymentCreateResponse response = callPayApi(order, paymentMethod);
         return formatPaymentCreateResponse(response, order);
     }
 
