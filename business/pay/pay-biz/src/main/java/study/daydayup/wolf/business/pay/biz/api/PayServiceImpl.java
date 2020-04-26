@@ -7,6 +7,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
+import study.daydayup.wolf.business.pay.api.service.PayoutService;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -17,7 +18,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  * @since 2020/4/26 6:25 下午
  **/
 @RpcService(protocol = "dubbo")
-public class PayServiceImpl implements PayService {
+public class PayServiceImpl implements PayService, PayoutService {
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
         return null;
