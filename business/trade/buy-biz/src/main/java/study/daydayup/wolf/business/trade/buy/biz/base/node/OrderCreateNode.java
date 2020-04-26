@@ -35,6 +35,7 @@ public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
         initOrder();
         initSellerAndBuyer();
 
+        context.setOrder(order);
     }
 
     protected void initOrder() {

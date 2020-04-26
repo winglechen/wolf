@@ -35,6 +35,7 @@ import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +116,11 @@ public class UnionLoanController extends BaseUnionController {
                 .buyerId(session.get("accountId", Long.class))
                 .sellId(loan.getOrgId())
                 .build();
+
         BeanUtils.copyProperties(loan, goods);
+        goods.setSalePrice(loan.getPrice());
+        goods.setPayPrice(loan.getPrice());
+        goods.setPostage(BigDecimal.ZERO);
 
         return goods;
     }

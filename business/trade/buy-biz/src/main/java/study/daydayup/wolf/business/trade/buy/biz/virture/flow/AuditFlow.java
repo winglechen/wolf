@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.trade.buy.biz.base.AbstractTradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.OrderCreateNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.node.OrderStoreNode;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import java.util.List;
 public class AuditFlow extends AbstractTradeFlow implements TradeFlow {
     @Resource
     private OrderCreateNode orderCreateNode;
+    @Resource
+    private OrderStoreNode orderStoreNode;
 
     @Override
     public List<TradeNode> buildConfirmFlow() {
@@ -31,6 +34,7 @@ public class AuditFlow extends AbstractTradeFlow implements TradeFlow {
         List<TradeNode> nodeList = new ArrayList<>();
 
         nodeList.add(orderCreateNode);
+        nodeList.add(orderStoreNode);
 
         return nodeList;
     }
