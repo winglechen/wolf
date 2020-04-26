@@ -33,7 +33,7 @@ public class UnionPayoutService {
 
     private PayoutRequest createRequest(@NonNull Order order) {
         return PayoutRequest.builder()
-                .paymentMethod(PaymentMethodEnum.RAZOR_PAYOUT.getCode())
+                .paymentMethod(PaymentMethodEnum.RAZORPAY_PAYOUT.getCode())
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(true)
 

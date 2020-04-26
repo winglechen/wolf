@@ -11,11 +11,14 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PaymentMethodEnum implements CodeBasedEnum {
+    DOCYPAY(120, "DOCYPAY"),
+    CASEFREE_PAYOUT(111, "cash free payout"),
+    CASEFREE(110, "cash free"),
 
-    RAZOR_PAYOUT(102, "razor payout"),
-    RAZORPAY(101, "razorpay"),
+    RAZORPAY_PAYOUT(101, "razor payout"),
+    RAZORPAY(100, "razorpay"),
 
-    WECHAT_PAY(2, "wechat pay"),
+    WECHATPAY(2, "wechat pay"),
     ALIPAY(1, "alipay")
     ;
 

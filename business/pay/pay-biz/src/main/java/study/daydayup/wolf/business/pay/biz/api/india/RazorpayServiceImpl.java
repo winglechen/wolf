@@ -53,7 +53,7 @@ public class RazorpayServiceImpl implements RazorpayService {
 
     @Override
     public Result<PayoutResponse> payout(@NonNull PayoutRequest request) {
-        request.setPaymentMethod(PaymentMethodEnum.RAZOR_PAYOUT.getCode());
+        request.setPaymentMethod(PaymentMethodEnum.RAZORPAY_PAYOUT.getCode());
         PayoutResponse response = payout.payout(request);
 
         return Result.ok(response);

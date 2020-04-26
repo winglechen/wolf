@@ -24,8 +24,6 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  **/
 @Component
 public class UnionLoanService implements Service {
-    private static final PaymentMethodEnum PAYMENT_METHOD = PaymentMethodEnum.RAZORPAY;
-
     @Reference
     private LoanService loanService;
     @Reference
@@ -38,12 +36,12 @@ public class UnionLoanService implements Service {
 
         Order order = loanService.repay(request).notNullData();
 
-        PaymentCreateResponse response = callPayApi(order);
+        PaymentCreateResponse response = callPayApi(order, PaymentMethodEnum.RAZORPAY.getCode());
         return formatPaymentCreateResponse(response, order);
     }
 
-    public PayResponse audit(Order order) {
-        PaymentCreateResponse response = callPayApi(order);
+    public PayResponse audit(Order order, Integer paymentMethod) {
+        PaymentCreateResponse response = callPayApi(order, PaymentMethodEnum.RAZORPAY.getCode());
         return formatPaymentCreateResponse(response, order);
     }
 
@@ -63,9 +61,9 @@ public class UnionLoanService implements Service {
                 .build();
     }
 
-    private PaymentCreateResponse callPayApi(Order order) {
+    private PaymentCreateResponse callPayApi(Order order, Integer paymentMethod) {
         PaymentCreateRequest request = PaymentCreateRequest.builder()
-                .paymentMethod(PAYMENT_METHOD.getCode())
+                .paymentMethod(paymentMethod)
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(false)
 
