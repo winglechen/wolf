@@ -18,13 +18,14 @@ import java.util.List;
  * @since 2019/10/5 2:03 PM
  **/
 public abstract class AbstractTradeFlow implements TradeFlow {
+    protected BuyContext context;
     @Override
     public void init() {
     }
 
     @Override
     public BuyResponse confirm(BuyRequest request) {
-        BuyContext context = BuyContextBuilder.build(request);
+        context = BuyContextBuilder.build(request);
 
         BuyResponse response = new BuyResponse();
 
@@ -43,7 +44,7 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
     @Override
     public BuyResponse preview(BuyRequest request) {
-        BuyContext context = BuyContextBuilder.build(request);
+        context = BuyContextBuilder.build(request);
 
         List<TradeNode> nodeList = buildPreviewFlow();
         execute(nodeList, context);
