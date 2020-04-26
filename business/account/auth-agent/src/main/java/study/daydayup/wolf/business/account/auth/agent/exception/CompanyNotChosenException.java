@@ -10,6 +10,6 @@ import study.daydayup.wolf.common.lang.exception.BusinessException;
  **/
 public class CompanyNotChosenException extends BusinessException {
     public CompanyNotChosenException() {
-        super(110404, "Company Not chosen" );
+        super(110501, "Company Not chosen" );
     }
 }

@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.union.app.controller;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.goods.api.entity.goods.LoanGoods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
@@ -10,6 +11,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToAuditState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
@@ -56,6 +58,8 @@ public class UnionLoanController extends BaseUnionController {
     private UnionLoanService unionLoanService;
     @Reference
     private LoanGoodsService loanGoodsService;
+    @Resource
+    private Session session;
 
     @PostMapping("/loan/audit/preview/{goodsId}")
     public Result<LoanAuditResponse> auditPreview(@PathVariable("goodsId") Long goodsId) {
@@ -77,11 +81,26 @@ public class UnionLoanController extends BaseUnionController {
     @PutMapping("/loan/audit/pay")
     public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest request) {
         // find audit goods
-        LoanGoods goods = findAuditGoods();
+        LoanGoods loan = findAuditGoods();
+        Goods goods = loanToGoods(loan);
 
         // create audit fee order
         // get pay args
         return null;
+    }
+
+    private Goods loanToGoods(LoanGoods loan) {
+        if (loan == null) {
+            return null;
+        }
+
+        Goods goods = Goods.builder()
+                .goodsId(loan.getId())
+                .buyerId(session.get("accountId", Long.class))
+                .sellId(loan.getOrgId())
+                .build();
+
+        return goods;
     }
 
     @PostMapping("/loan/preview")
