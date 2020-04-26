@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.buy.biz.base.AbstractTradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.node.OrderCreateNode;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import java.util.List;
  **/
 @Component
 public class AuditFlow extends AbstractTradeFlow implements TradeFlow {
+    @Resource
+    private OrderCreateNode orderCreateNode;
 
     @Override
     public List<TradeNode> buildConfirmFlow() {
@@ -26,7 +30,9 @@ public class AuditFlow extends AbstractTradeFlow implements TradeFlow {
     public List<TradeNode> buildPreviewFlow() {
         List<TradeNode> nodeList = new ArrayList<>();
 
-        return null;
+        nodeList.add(orderCreateNode);
+
+        return nodeList;
     }
 
     @Override
