@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.OrderAddress;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
@@ -40,6 +41,7 @@ public class BuyRequest implements Request {
 
     @NotNull
     private List<GoodsRequest> goodsRequest;
+    private Goods goods;
     private UmpRequest umpRequest;
 
     private boolean storeTrade;
