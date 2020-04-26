@@ -4,10 +4,9 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.BuyService;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlowService;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -27,14 +26,14 @@ public class BuyServiceImpl implements BuyService {
     private TradeFlowService flowService;
 
     @Override
-    public Result<PreviewResponse> preview(@Validated BuyRequest request) {
-        PreviewResponse response =  flowService.preview(request);
+    public Result<BuyResponse> preview(@Validated BuyRequest request) {
+        BuyResponse response =  flowService.preview(request);
         return Result.ok(response);
     }
 
     @Override
-    public Result<PreviewResponse> confirm(@Validated BuyRequest request) {
-        PreviewResponse response = flowService.confirm(request);
+    public Result<BuyResponse> confirm(@Validated BuyRequest request) {
+        BuyResponse response = flowService.confirm(request);
         return Result.ok(response);
     }
 

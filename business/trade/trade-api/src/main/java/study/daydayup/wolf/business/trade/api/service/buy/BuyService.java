@@ -3,10 +3,9 @@ package study.daydayup.wolf.business.trade.api.service.buy;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
@@ -21,14 +20,14 @@ public interface BuyService {
      * @param request 同真实下单参数
      * @return 预览的订单信息
      */
-    Result<PreviewResponse> preview(BuyRequest request);
+    Result<BuyResponse> preview(BuyRequest request);
 
     /**
      * 用户下单接口
      * @param request 下单参数
      * @return 下单完成状态
      */
-    Result<PreviewResponse> confirm(BuyRequest request);
+    Result<BuyResponse> confirm(BuyRequest request);
 
     /**
      * 用户端发起的支付请求

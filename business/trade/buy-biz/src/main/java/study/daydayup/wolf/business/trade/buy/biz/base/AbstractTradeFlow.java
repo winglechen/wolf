@@ -3,10 +3,9 @@ package study.daydayup.wolf.business.trade.buy.biz.base;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContextBuilder;
 
@@ -24,10 +23,10 @@ public abstract class AbstractTradeFlow implements TradeFlow {
     }
 
     @Override
-    public PreviewResponse confirm(BuyRequest request) {
+    public BuyResponse confirm(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
 
-        PreviewResponse response = new PreviewResponse();
+        BuyResponse response = new BuyResponse();
 
         List<TradeNode> nodeList = buildConfirmFlow();
         execute(nodeList, context);
@@ -43,13 +42,13 @@ public abstract class AbstractTradeFlow implements TradeFlow {
 
 
     @Override
-    public PreviewResponse preview(BuyRequest request) {
+    public BuyResponse preview(BuyRequest request) {
         BuyContext context = BuyContextBuilder.build(request);
 
         List<TradeNode> nodeList = buildPreviewFlow();
         execute(nodeList, context);
 
-        PreviewResponse response = new PreviewResponse();
+        BuyResponse response = new BuyResponse();
         response.setContract(context.getContract());
         return response;
     }

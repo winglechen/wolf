@@ -18,10 +18,9 @@ import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.GoodsRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.loan.LoanRequest;
 import study.daydayup.wolf.business.trade.api.dto.order.ContractOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.BuyerRequest;
@@ -65,7 +64,7 @@ public class UnionLoanController extends BaseUnionController {
     @PostMapping("/loan/audit/preview/{goodsId}")
     public Result<LoanAuditResponse> auditPreview(@PathVariable("goodsId") Long goodsId) {
         // preview loan
-        PreviewResponse loanResponse = loanPreview(goodsId);
+        BuyResponse loanResponse = loanPreview(goodsId);
 
         // find audit goods
         LoanGoods goods = findAuditGoods();
@@ -99,7 +98,7 @@ public class UnionLoanController extends BaseUnionController {
         request.setGoods(goods);
         request.setStoreTrade(true);
 
-        PreviewResponse response = buyService.preview(request).notNullData();
+        BuyResponse response = buyService.preview(request).notNullData();
 
         // get pay args
         PayResponse payResponse = unionLoanService.audit(response.getOrder());
@@ -122,7 +121,7 @@ public class UnionLoanController extends BaseUnionController {
     }
 
     @PostMapping("/loan/preview")
-    public Result<PreviewResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
+    public Result<BuyResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
         BuyRequest request = initBuyRequest(loanRequest);
 
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
@@ -145,7 +144,7 @@ public class UnionLoanController extends BaseUnionController {
 
 
     @PostMapping("/loan/confirm")
-    public Result<PreviewResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
+    public Result<BuyResponse> confirm(@Validated @RequestBody LoanRequest loanRequest) {
         BuyRequest request = initBuyRequest(loanRequest);
 
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
@@ -289,7 +288,7 @@ public class UnionLoanController extends BaseUnionController {
         return request;
     }
 
-    private PreviewResponse loanPreview(Long goodsId) {
+    private BuyResponse loanPreview(Long goodsId) {
         LoanRequest loanRequest = new LoanRequest();
         loanRequest.setGoodsId(goodsId);
         loanRequest.setStoreOnPreview(true);

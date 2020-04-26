@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.layer.api.Response;
  * @since 2019/10/9 1:39 下午
  **/
 @Data
-public class PreviewResponse implements Response {
+public class BuyResponse implements Response {
     private String tradeNo;
     private Contract contract;
     private Order order;

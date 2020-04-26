@@ -4,10 +4,9 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayResultRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResultResponse;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PreviewResponse;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 
@@ -24,14 +23,14 @@ public class TradeFlowService {
     @Resource
     private TradeFlowFactory flowFactory;
 
-    public PreviewResponse preview(BuyRequest request) {
+    public BuyResponse preview(BuyRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = flowFactory.create(tradeType);
 
         return tradeFlow.preview(request);
     }
 
-    public PreviewResponse confirm(BuyRequest request) {
+    public BuyResponse confirm(BuyRequest request) {
         TradeTypeEnum tradeType = EnumUtil.codeOf(request.getTradeType(), TradeTypeEnum.class);
         TradeFlow tradeFlow = flowFactory.create(tradeType);
         tradeFlow.buildConfirmFlow();
