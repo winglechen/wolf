@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.service.china;
+package study.daydayup.wolf.business.pay.biz.service.china.wechat;
 
 /**
  * study.daydayup.wolf.business.pay.biz.api.china
