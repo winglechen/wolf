@@ -26,7 +26,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
     private BankCardDAO bankCardDAO;
 
     @Override
-    public Result<IndianBankCard> find(Long accountId, Long orgId) {
+    public Result<IndianBankCard> findIndianBankCard(Long accountId, Long orgId) {
         IndianBankCard card = IndianBankCard.builder()
                 .accountId(accountId)
                 .orgId(orgId)

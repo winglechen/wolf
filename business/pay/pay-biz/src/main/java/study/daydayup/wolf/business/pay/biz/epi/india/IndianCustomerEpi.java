@@ -26,7 +26,7 @@ public class IndianCustomerEpi implements Epi {
             return null;
         }
 
-        IndianBankCard iCard = customerService.find(payerId, payeeId).notNullData();
+        IndianBankCard iCard = customerService.findIndianBankCard(payerId, payeeId).notNullData();
         return convert(iCard, payerId, payeeId);
     }
 
