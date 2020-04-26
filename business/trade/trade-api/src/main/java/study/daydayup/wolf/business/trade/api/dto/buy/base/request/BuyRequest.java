@@ -22,6 +22,7 @@ import java.util.List;
  **/
 @Data
 public class BuyRequest implements Request {
+    private boolean preview;
     private String tradeNo;
     private Buyer buyer;
 

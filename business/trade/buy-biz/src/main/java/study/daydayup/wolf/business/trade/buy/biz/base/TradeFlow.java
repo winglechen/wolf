@@ -22,8 +22,11 @@ public interface TradeFlow {
     List<TradeNode> buildPayFlow();
     List<TradeNode> buildPayNotifyFlow();
 
+    //TODO merge preview and confirm
     BuyResponse preview(BuyRequest request);
     BuyResponse confirm(BuyRequest request);
+
+    //TODO DELETE pay and pay Notify
     PayResponse pay(PayRequest request);
     PayResultResponse payNotify(PayResultRequest request);
 }
