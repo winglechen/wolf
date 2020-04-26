@@ -29,17 +29,18 @@ public class UnionLoanService implements Service {
     @Reference
     private RazorpayService razorpayService;
 
-    public PayResponse pay(@NonNull PayRequest request, Integer paymentMethod) {
-        if (null == request.getTradeId()) {
+    public PayResponse pay(@NonNull PayRequest payRequest, Integer paymentMethod) {
+        if (null == payRequest.getTradeId()) {
             return null;
         }
 
-        Order order = loanService.repay(request).notNullData();
+        Order order = loanService.repay(payRequest).notNullData();
 
         if (null == paymentMethod) {
             paymentMethod = PaymentMethodEnum.RAZORPAY.getCode();
         }
-        PaymentCreateResponse response = callPayApi(order, paymentMethod);
+        PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
+        PaymentCreateResponse response = callRazorPayApi(request);
         return formatPaymentCreateResponse(response, order);
     }
 
@@ -47,8 +48,8 @@ public class UnionLoanService implements Service {
         if (null == paymentMethod) {
             paymentMethod = PaymentMethodEnum.CASEFREE.getCode();
         }
-
-        PaymentCreateResponse response = callPayApi(order, paymentMethod);
+        PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
+        PaymentCreateResponse response = callPayApi(request);
         return formatPaymentCreateResponse(response, order);
     }
 
@@ -68,8 +69,8 @@ public class UnionLoanService implements Service {
                 .build();
     }
 
-    private PaymentCreateResponse callPayApi(Order order, Integer paymentMethod) {
-        PaymentCreateRequest request = PaymentCreateRequest.builder()
+    private PaymentCreateRequest formatPaymentCreateRequest(Order order, Integer paymentMethod) {
+        return PaymentCreateRequest.builder()
                 .paymentMethod(paymentMethod)
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(false)
@@ -83,7 +84,13 @@ public class UnionLoanService implements Service {
                 .currency(order.getCurrency())
 
                 .build();
+    }
 
+    private PaymentCreateResponse callPayApi(PaymentCreateRequest request) {
+        return null;
+    }
+
+    private PaymentCreateResponse callRazorPayApi(PaymentCreateRequest request) {
         return razorpayService.create(request).notNullData();
     }
 
