@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2020/3/20 3:07 下午
  **/
 @Data
-public class Supplier implements Config {
+public class SMSSupplier implements Config {
     @NotBlank
     private String appId;
     @NotBlank

@@ -7,10 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
-import study.daydayup.wolf.middleware.notice.api.config.sms.Supplier;
+import study.daydayup.wolf.middleware.notice.api.config.sms.SMSSupplier;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.InvalidSMSConfigException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSEncodeFailException;
-import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSSendFailException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSTooLongException;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.AbstractSender;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.Sender;
@@ -44,7 +43,7 @@ public class SkylineSender extends AbstractSender implements Sender {
 
     @Resource
     private SMSConfig config;
-    private Supplier skylineConfig;
+    private SMSSupplier skylineConfig;
 
     private String mobile;
     private String msg;
