@@ -9,6 +9,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
+import javax.annotation.Resource;
+
 /**
  * study.daydayup.wolf.business.pay.biz.api.india
  *
@@ -17,9 +19,13 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @Component
 public class DokypayServiceImpl implements DokypayService {
+    @Resource
+    private DokypayCreator creator;
+
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
-        return null;
+        PaymentCreateResponse response = creator.create(request);
+        return Result.ok(response);
     }
 
     @Override
