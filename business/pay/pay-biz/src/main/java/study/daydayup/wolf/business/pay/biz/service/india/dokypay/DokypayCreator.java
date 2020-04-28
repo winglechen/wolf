@@ -6,8 +6,10 @@ import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,17 +60,20 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         request.put("currency", "INR");
         request.put("amount", getAmount());
 
-
         Map<String, Object> extInfo = new HashMap<>(2);
         extInfo.put("paymentTypes","credit,debit,ewallet,upi");
         request.put("extInfo", extInfo);
 
         String sign = SignUtil.create(config.getAppSecret(), request);
+        request.put("sign", sign);
 
         return request;
     }
 
     private String getAmount() {
-        return null;
+        BigDecimal amount = request.getAmount();
+        amount = DecimalUtil.scale(amount, 2);
+
+        return amount.toString();
     }
 }
