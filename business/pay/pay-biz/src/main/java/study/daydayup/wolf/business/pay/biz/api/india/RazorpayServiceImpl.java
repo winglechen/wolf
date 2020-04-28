@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.api.india;
 
 import lombok.NonNull;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
@@ -36,7 +37,7 @@ public class RazorpayServiceImpl implements RazorpayService {
     private RazorPayout payout;
 
     @Override
-    public Result<PaymentCreateResponse> create(@NonNull PaymentCreateRequest request) {
+    public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
         request.setPaymentMethod(PaymentMethodEnum.RAZORPAY.getCode());
 
         PaymentCreateResponse response = creator.create(request);
