@@ -1,5 +1,8 @@
 package study.daydayup.wolf.common.util.encrypt;
 
+import com.google.common.base.Charsets;
+import study.daydayup.wolf.common.util.lang.CharsetUtil;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,7 +21,7 @@ public class ShaEncrypt {
             return null;
         }
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-        messageDigest.update(text.getBytes());
+        messageDigest.update(text.getBytes(CharsetUtil.UTF_8));
         byte[] byteBuffer = messageDigest.digest();
 
         StringBuilder stringBuffer = new StringBuilder();
