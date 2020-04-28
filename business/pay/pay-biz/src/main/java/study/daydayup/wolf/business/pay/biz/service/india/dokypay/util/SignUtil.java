@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dokypay.util;
 
 import lombok.NonNull;
+import study.daydayup.wolf.business.pay.api.domain.exception.CreateSignFailException;
 import study.daydayup.wolf.common.util.encrypt.ShaEncrypt;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -18,7 +19,7 @@ public class SignUtil {
     private static final String KEY_SIGN = "sign";
     private static final String KEY_EXT = "extInfo";
 
-    public static String create(@NonNull String appSecret, @NonNull Map<String, Object> map) throws NoSuchAlgorithmException {
+    public static String create(@NonNull String appSecret, @NonNull Map<String, Object> map) {
         if (map.isEmpty()) {
             return null;
         }
@@ -42,7 +43,11 @@ public class SignUtil {
             originStr.append(key).append("=").append(value).append("&");
         }
         originStr.append("key=").append(appSecret);
-        return ShaEncrypt.sha256(originStr.toString());
+        try {
+            return ShaEncrypt.sha256(originStr.toString());
+        } catch (NoSuchAlgorithmException e) {
+            throw new CreateSignFailException();
+        }
     }
 
     private static boolean isIgnoredItem(Object key, Object value) {
@@ -58,11 +63,7 @@ public class SignUtil {
         }
 
         sValue = value.toString().trim();
-        if (StringUtil.isBlank(sValue)) {
-            return true;
-        }
-
-        return false;
+        return StringUtil.isBlank(sValue);
     }
 
     private static String parseExtInfo(Object ext) {
