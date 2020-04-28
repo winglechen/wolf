@@ -21,9 +21,9 @@ public class ShaEncrypt {
         messageDigest.update(text.getBytes());
         byte[] byteBuffer = messageDigest.digest();
 
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < byteBuffer.length; i++) {
-            String hex = Integer.toHexString(0xff & byteBuffer[i]);
+        StringBuilder stringBuffer = new StringBuilder();
+        for (byte b : byteBuffer) {
+            String hex = Integer.toHexString(0xff & b);
             if (hex.length() == 1) {
                 stringBuffer.append('0');
             }
