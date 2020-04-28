@@ -12,4 +12,6 @@ import java.util.Map;
 public class PayConfig {
     @NotNull
     private Map<String, PaySupplier> supplier;
+
+    private String returnUrl;
 }
