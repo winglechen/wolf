@@ -1,11 +1,14 @@
 package study.daydayup.wolf.business.pay.api.config;
 
+import lombok.Data;
+
 /**
  * study.daydayup.wolf.business.pay.api.config
  *
  * @author Wingle
  * @since 2020/4/26 10:54 下午
  **/
+@Data
 public class PaySupplier {
     private String appId;
     private String appSecret;
