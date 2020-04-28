@@ -18,5 +18,5 @@ public class PaySupplier {
     private String notifyUrl;
 
     private String createUrl;
-    
+
 }
