@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -26,8 +27,9 @@ import study.daydayup.wolf.framework.layer.domain.Service;
 public class UnionLoanService implements Service {
     @Reference
     private LoanService loanService;
-    @Reference
-    private RazorpayService razorpayService;
+
+    @Reference(timeout = 5000)
+    private PayService payService;
 
     public PayResponse pay(@NonNull PayRequest payRequest, Integer paymentMethod) {
         if (null == payRequest.getTradeId()) {
@@ -40,7 +42,7 @@ public class UnionLoanService implements Service {
             paymentMethod = PaymentMethodEnum.RAZORPAY.getCode();
         }
         PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
-        PaymentCreateResponse response = callRazorPayApi(request);
+        PaymentCreateResponse response = callPayApi(request);
         return formatPaymentCreateResponse(response, order);
     }
 
@@ -87,11 +89,11 @@ public class UnionLoanService implements Service {
     }
 
     private PaymentCreateResponse callPayApi(PaymentCreateRequest request) {
-        return null;
+        return payService.create(request).notNullData();
     }
 
     private PaymentCreateResponse callRazorPayApi(PaymentCreateRequest request) {
-        return razorpayService.create(request).notNullData();
+        return payService.create(request).notNullData();
     }
 
     public PayResultResponse payResult(TradeId tradeId) {

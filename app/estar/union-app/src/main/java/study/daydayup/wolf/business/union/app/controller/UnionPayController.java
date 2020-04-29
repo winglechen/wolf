@@ -30,11 +30,7 @@ import java.util.Map;
 @Slf4j
 public class UnionPayController {
     @Reference(timeout = 10000)
-    private RazorpayService razorpayService;
-
-    @Reference(timeout = 10000)
     private PayService payService;
-
 
     @PostMapping("/pay/verify")
     public Result<PayVerifyResponse> verify(PayVerifyRequest request) {
@@ -60,7 +56,7 @@ public class UnionPayController {
                 .data(data)
                 .build();
 
-        SubscribeResponse response = razorpayService.subscribe(request).getData();
+        SubscribeResponse response = payService.subscribe(request).getData();
         if (!BeanUtil.equals(response.getCode(), 1)) {
             servletResponse.setStatus(500);
             return Result.fail(500, "inner error", "fail");
@@ -69,6 +65,7 @@ public class UnionPayController {
         return Result.ok("ok");
     }
 
+    @PostMapping("/pay/dokypay/subscribe")
     public String dokypaySubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
         log.info("dokypay subscribe: {}", data);
 
