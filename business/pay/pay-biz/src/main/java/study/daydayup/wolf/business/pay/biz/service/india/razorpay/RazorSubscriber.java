@@ -66,6 +66,10 @@ public class RazorSubscriber {
     }
 
     private void logResponse(String eventId, String signature,String data) {
+        if (StringUtil.isBlank(data)) {
+            return;
+        }
+
         PaymentLog log = PaymentLog.builder()
                 .logType(PaymentLogTypeEnum.PAY_RETURN.getCode())
                 .paymentMethod(PAYMENT_METHOD.getCode())
@@ -187,11 +191,7 @@ public class RazorSubscriber {
             return false;
         }
 
-        if (notification.getAmount().compareTo(BigDecimal.ZERO) < 0) {
-            return false;
-        }
-
-        return true;
+        return notification.getAmount().compareTo(BigDecimal.ZERO) >= 0;
     }
 
     private int updatePayment() {
