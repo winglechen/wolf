@@ -28,7 +28,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 public class UnionPayController {
-    @Reference(timeout = 30000)
+    @Reference(timeout = 10000)
     private RazorpayService razorpayService;
 
 
@@ -64,4 +64,5 @@ public class UnionPayController {
 
         return Result.ok("ok");
     }
+    
 }
