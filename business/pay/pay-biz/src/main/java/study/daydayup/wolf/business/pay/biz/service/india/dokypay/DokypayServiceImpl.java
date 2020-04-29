@@ -1,6 +1,8 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dokypay;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
@@ -9,6 +11,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
@@ -23,6 +26,8 @@ import javax.annotation.Resource;
 public class DokypayServiceImpl implements DokypayService {
     @Resource
     private DokypayCreator creator;
+    @Resource
+    private DokypaySubscriber subscriber;
 
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
@@ -41,7 +46,14 @@ public class DokypayServiceImpl implements DokypayService {
     }
 
     @Override
-    public Result<SubscribeResponse> subscribe(SubscribeRequest request) {
-        return null;
+    public Result<SubscribeResponse> subscribe(@Validated SubscribeRequest request) {
+        if (StringUtil.isBlank(request.getData())) {
+            throw  new InvalidPayRequestException("dokypay data can't be blank");
+        }
+        int code = subscriber.subscribe(request.getData());
+        SubscribeResponse response = SubscribeResponse.builder()
+                .code(code)
+                .build();
+        return Result.ok(response);
     }
 }
