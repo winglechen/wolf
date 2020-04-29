@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
+import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.rpc.Result;
@@ -31,6 +32,9 @@ public class UnionPayController {
     @Reference(timeout = 10000)
     private RazorpayService razorpayService;
 
+    @Reference(timeout = 10000)
+    private PayService payService;
+
 
     @PostMapping("/pay/verify")
     public Result<PayVerifyResponse> verify(PayVerifyRequest request) {
@@ -44,7 +48,7 @@ public class UnionPayController {
 
     @PostMapping("/pay/razorpay/subscribe")
     public Result<String> razorpaySubscribe(HttpServletResponse servletResponse, @RequestHeader(value = "X-Razorpay-Event-Id", required = false) String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
-        log.info("razorpay:{}, {}, {}", eventId, signature, data);
+        log.info("razorpay subscribe:{}, {}, {}", eventId, signature, data);
 
         Map<String, Object> header = new HashMap<>(2);
         header.put("eventId", eventId);
@@ -64,5 +68,22 @@ public class UnionPayController {
 
         return Result.ok("ok");
     }
-    
+
+    public String dokypaySubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
+        log.info("dokypay subscribe: {}", data);
+
+        SubscribeRequest request = SubscribeRequest.builder()
+                .paymentMethod(PaymentMethodEnum.DOKYPAY.getCode())
+                .data(data)
+                .build();
+
+        SubscribeResponse response = payService.subscribe(request).getData();
+        if (!BeanUtil.equals(response.getCode(), 1)) {
+            servletResponse.setStatus(500);
+            return "fail";
+        }
+
+        return "success";
+
+    }
 }

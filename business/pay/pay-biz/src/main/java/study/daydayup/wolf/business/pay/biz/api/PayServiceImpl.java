@@ -50,8 +50,13 @@ public class PayServiceImpl implements PayService, PayoutService {
     }
 
     @Override
-    public Result<SubscribeResponse> subscribe(SubscribeRequest request) {
-        return null;
+    public Result<SubscribeResponse> subscribe(@Validated SubscribeRequest request) {
+        if (null == request.getPaymentMethod()) {
+            throw new InvalidPayRequestException("PaymentMethod can't be null");
+        }
+
+        PayService service = factory.create(request.getPaymentMethod());
+        return service.subscribe(request);
     }
 
     @Override
