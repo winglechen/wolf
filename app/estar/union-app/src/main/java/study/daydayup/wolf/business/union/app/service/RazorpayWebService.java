@@ -18,8 +18,6 @@ import study.daydayup.wolf.framework.rpc.Result;
 public class RazorpayWebService {
     @Reference
     private LoanService loanService;
-    @Reference
-    private RazorpayService razorpayService;
 
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
         //获取合同信息
