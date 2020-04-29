@@ -1,6 +1,7 @@
-package study.daydayup.wolf.business.pay.biz.api.india;
+package study.daydayup.wolf.business.pay.biz.service.india.razorpay;
 
 import lombok.NonNull;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
@@ -12,7 +13,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
-import study.daydayup.wolf.business.pay.api.service.india.RazorpayService;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorpayService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorCreator;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorPayer;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorPayout;
@@ -28,7 +29,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/2/27 7:37 下午
  **/
-@RpcService(protocol = "dubbo")
+@Component
 public class RazorpayServiceImpl implements RazorpayService {
     @Resource
     private RazorCreator creator;
