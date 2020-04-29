@@ -8,6 +8,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.PayoutService;
 import study.daydayup.wolf.business.pay.biz.domain.factory.PayServiceFactory;
@@ -45,6 +47,11 @@ public class PayServiceImpl implements PayService, PayoutService {
 
         PayService service = factory.create(request.getPaymentMethod());
         return service.verify(request);
+    }
+
+    @Override
+    public Result<SubscribeResponse> subscribe(SubscribeRequest request) {
+        return null;
     }
 
     @Override
