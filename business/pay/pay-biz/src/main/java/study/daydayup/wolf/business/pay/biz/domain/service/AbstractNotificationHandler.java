@@ -20,8 +20,8 @@ import javax.annotation.Resource;
 @Data
 @Component
 public abstract class AbstractNotificationHandler implements NotificationHandler {
-    private PayNotification notification;
-    private PaymentEntity paymentEntity;
+    protected PayNotification notification;
+    protected PaymentEntity paymentEntity;
 
     @Resource
     private PaymentRepository paymentRepository;

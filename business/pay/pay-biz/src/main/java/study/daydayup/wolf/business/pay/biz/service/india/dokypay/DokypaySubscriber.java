@@ -7,15 +7,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
+import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
 import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentSubscriber;
+import study.daydayup.wolf.business.pay.biz.service.india.dokypay.handler.DokypayPaidHandler;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -34,6 +38,8 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
 
     @Resource
     private PayConfig payConfig;
+    @Resource
+    private DokypayPaidHandler paidHandler;
 
     public int subscribe(@NonNull String data) {
         logResponse(LOG_TYPE, PAYMENT_METHOD, data);
@@ -66,11 +72,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
             return false;
         }
 
-        if ("0000".equals(data.getString("resultCode"))) {
-            return false;
-        }
-
-        return "success".equals(data.getString("transStatus"));
+        return !"0000".equals(data.getString("resultCode"));
     }
 
     private boolean isResponseValid(){
@@ -90,7 +92,27 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private int savePayment() {
-        return 0;
+        JSONObject data = response.getJSONObject("data");
+
+        PayNotification notification = PayNotification.builder()
+                .amount(getAmount())
+                .paymentNo(data.getString("merTransNo"))
+                .outOrderNo(data.getString("transNo"))
+                .status(data.getString("transStatus"))
+                .paymentMethod(PAYMENT_METHOD)
+                .build();
+
+        return paidHandler.handle(notification);
+    }
+
+    private BigDecimal getAmount() {
+        String strAmount = response.getJSONObject("data").getString("amount");
+        if (StringUtil.isBlank(strAmount)) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal amount = new BigDecimal(strAmount);
+        return DecimalUtil.scale(amount);
     }
 
 

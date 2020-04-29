@@ -14,8 +14,8 @@ import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
-import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PaymentHandler;
-import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.PayoutHandler;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPaidHandler;
+import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPayoutHandler;
 import study.daydayup.wolf.common.model.type.string.Decimal;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
@@ -43,9 +43,9 @@ public class RazorSubscriber {
     @Resource
     private RazorConfig config;
     @Resource
-    private PayoutHandler payoutHandler;
+    private RazorPayoutHandler razorPayoutHandler;
     @Resource
-    private PaymentHandler paymentHandler;
+    private RazorPaidHandler razorPaidHandler;
 
 
     public int subscribe(@NonNull String eventId, @NonNull String signature, @NonNull String data) {
@@ -198,9 +198,9 @@ public class RazorSubscriber {
 
         switch (notification.getEvent()) {
             case "order.paid":
-                return paymentHandler.handle(notification);
+                return razorPaidHandler.handle(notification);
             case "payout.processed":
-                return payoutHandler.handle(notification);
+                return razorPayoutHandler.handle(notification);
             default:
                 return NotifyReturnEnum.SUCCESS.getCode();
         }

@@ -1,6 +1,9 @@
 package study.daydayup.wolf.business.pay.api.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
@@ -12,12 +15,16 @@ import java.math.BigDecimal;
  * @since 2020/2/26 11:12 下午
  **/
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PayNotification implements Model {
     /**
      * order.paid or payout.processed or ...
      */
     private String event;
 
+    private Integer paymentMethod;
     private String paymentNo;
     /**
      * payment.id or payout.id
