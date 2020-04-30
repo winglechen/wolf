@@ -7,6 +7,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
+import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
@@ -24,6 +26,11 @@ public class CashFreeServiceImpl implements CashFreeService {
 
     @Override
     public Result<PayVerifyResponse> verify(PayVerifyRequest request) {
+        return null;
+    }
+
+    @Override
+    public Result<SubscribeResponse> subscribe(SubscribeRequest request) {
         return null;
     }
 
