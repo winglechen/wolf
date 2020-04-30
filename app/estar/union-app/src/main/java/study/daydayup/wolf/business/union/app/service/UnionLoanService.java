@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.union.app.service;
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
@@ -45,7 +46,7 @@ public class UnionLoanService implements Service {
         return formatPaymentCreateResponse(response, order);
     }
 
-    public PayResponse audit(Order order, Integer paymentMethod) {
+    public PayResponse audit(@Validated Order order, Integer paymentMethod) {
         if (null == paymentMethod) {
             paymentMethod = PaymentMethodEnum.CASEFREE.getCode();
         }

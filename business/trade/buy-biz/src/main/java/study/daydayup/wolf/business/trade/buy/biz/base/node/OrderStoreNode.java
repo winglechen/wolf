@@ -20,7 +20,7 @@ public class OrderStoreNode extends AbstractTradeNode implements TradeNode {
 
     @Override
     public void run(BuyContext context) {
-        if (!context.getRequest().isPreview()) {
+        if (context.getRequest().isPreview()) {
             return;
         }
 

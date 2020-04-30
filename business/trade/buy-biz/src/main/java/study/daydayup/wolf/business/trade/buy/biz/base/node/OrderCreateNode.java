@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.WaitToPayState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
@@ -34,8 +35,30 @@ public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
 
         initOrder();
         initSellerAndBuyer();
+        initGoodsInfo();
 
         context.setOrder(order);
+    }
+
+    protected void initGoodsInfo() {
+        if (null == context.getRequest().getGoods()) {
+            handleMultiGoods();
+            return;
+        }
+
+        handleSingleGoods();
+    }
+
+    protected void handleSingleGoods() {
+        Goods goods = context.getRequest().getGoods();
+
+        order.setCurrency(goods.getCurrency());
+        order.setAmount(goods.getPayPrice());
+        order.setPostage(goods.getPostage());
+    }
+
+    protected void handleMultiGoods() {
+
     }
 
     protected void initOrder() {
