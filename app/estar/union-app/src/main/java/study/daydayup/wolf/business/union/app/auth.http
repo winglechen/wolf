@@ -98,3 +98,10 @@ Content-Type: application/json
 }
 
 ###
+###
+PUT http://localhost:8100/auth/company/change/3
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###

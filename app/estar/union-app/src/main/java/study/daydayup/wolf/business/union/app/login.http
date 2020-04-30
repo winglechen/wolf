@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
   "mobile": "18067961007",
-  "orgId": 1
+  "orgId": 3
 }
 
 ###
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
   "mobile": "18067961007",
   "code": "778899",
-  "orgId": 1
+  "orgId": 3
 }
 
 ###

@@ -80,7 +80,7 @@ public class UnionLoanController extends BaseUnionController {
 
 
     @PutMapping("/loan/audit/pay")
-    public Result<PayResponse> auditPay(@Validated @RequestBody PayRequest payRequest) {
+    public Result<PayResponse> auditPay(@RequestBody PayRequest payRequest) {
         // find audit goods
         LoanGoods loan = findAuditGoods();
         Goods goods = loanToGoods(loan);

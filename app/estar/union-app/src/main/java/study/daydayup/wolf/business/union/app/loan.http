@@ -71,3 +71,21 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8100/loan/audit/preview/3
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT http://localhost:8100/loan/audit/pay
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "paymentMethod": 120
+}
+
+###
+
+

@@ -5,6 +5,7 @@ import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.buy.biz.base.flow.*;
 import study.daydayup.wolf.business.trade.api.domain.exception.UnsupportedTradeTypeException;
 import study.daydayup.wolf.business.trade.buy.biz.loan.flow.*;
+import study.daydayup.wolf.business.trade.buy.biz.virture.flow.AuditFlow;
 
 import javax.annotation.Resource;
 
@@ -37,7 +38,7 @@ public class TradeFlowFactory {
     @Resource
     private CollectionOrderFlow collectionOrderFlow;
     @Resource
-    private LoanProxyFlow loanProxyFlow;
+    private AuditFlow auditFlow;
     @Resource
     private RepayOrderFlow repayOrderFlow;
     @Resource
@@ -84,6 +85,8 @@ public class TradeFlowFactory {
                 return loanOrderFlow;
             case LOAN_CONTRACT:
                 return loanContractFlow;
+            case AUDIT_FEE:
+                return auditFlow;
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }

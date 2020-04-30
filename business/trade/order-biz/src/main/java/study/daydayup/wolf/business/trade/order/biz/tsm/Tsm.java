@@ -98,20 +98,11 @@ public class Tsm {
                 return new CollectionOrderFactory();
             case INSTALLMENT_TERM:
                 return new InstallmentTermFactory();
+            case AUDIT_FEE:
+                return new AuditFeeFactory();
             default:
                 throw new UnsupportedTradeTypeException(tradeTypeEnum.getCode());
         }
     }
 
-
-    public static void main(String[] args) {
-        String stateKey = "study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState";
-
-        stateKey = StringUtil.ltrim(stateKey, STATE_NS_PREFIX);
-        stateKey = StringUtil.rtrim(stateKey, STATE_NS_SUFFIX);
-        stateKey = StringUtil.join(STATE_LANG_PREFIX, stateKey);
-
-        System.out.println(stateKey);
-
-    }
 }
