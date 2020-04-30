@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
-import study.daydayup.wolf.business.pay.api.domain.exception.PayoutFailException;
+import study.daydayup.wolf.business.pay.api.domain.exception.payout.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.service.PayoutService;

@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.api;
 
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayRequestException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;

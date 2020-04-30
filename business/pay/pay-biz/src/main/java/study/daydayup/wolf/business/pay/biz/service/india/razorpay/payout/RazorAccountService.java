@@ -2,8 +2,8 @@ package study.daydayup.wolf.business.pay.biz.service.india.razorpay.payout;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayoutAccountException;
-import study.daydayup.wolf.business.pay.api.domain.exception.PayoutFailException;
+import study.daydayup.wolf.business.pay.api.domain.exception.payout.InvalidPayoutAccountException;
+import study.daydayup.wolf.business.pay.api.domain.exception.payout.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.biz.dal.dao.RazorpayAccountDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.RazorpayAccountDO;

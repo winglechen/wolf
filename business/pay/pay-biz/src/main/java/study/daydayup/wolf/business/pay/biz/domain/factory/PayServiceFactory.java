@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.pay.biz.domain.factory;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
-import study.daydayup.wolf.business.pay.api.domain.exception.PayServiceNotFoundException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.PayServiceNotFoundException;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorpayService;
 import study.daydayup.wolf.business.pay.biz.service.india.cashfree.CashFreeService;

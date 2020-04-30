@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.pay.biz.service.india.dokypay;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayRequestException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;

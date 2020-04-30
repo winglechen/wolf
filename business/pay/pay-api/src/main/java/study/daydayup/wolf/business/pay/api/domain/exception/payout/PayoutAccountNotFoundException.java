@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.domain.exception;
+package study.daydayup.wolf.business.pay.api.domain.exception.payout;
 
 import study.daydayup.wolf.common.lang.exception.SystemException;
 

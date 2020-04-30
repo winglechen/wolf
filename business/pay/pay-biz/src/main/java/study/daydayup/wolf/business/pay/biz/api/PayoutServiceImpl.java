@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.api;
 
-import study.daydayup.wolf.business.pay.api.domain.exception.InvalidPayRequestException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.service.PayoutService;
