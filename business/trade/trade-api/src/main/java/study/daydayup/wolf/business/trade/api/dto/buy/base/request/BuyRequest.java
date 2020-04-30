@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.domain.vo.BuyerMemo;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.OrderAddress;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.TradeEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
@@ -25,6 +26,7 @@ public class BuyRequest implements Request {
     private boolean preview;
     private String tradeNo;
     private Buyer buyer;
+    private Seller seller;
 
     /**
      * @see TradeTypeEnum

@@ -29,6 +29,7 @@ public class GetSellerNode extends AbstractTradeNode implements TradeNode {
         seller.setId(goods.getSellId());
 
         context.setSeller(seller);
+        context.getRequest().setSeller(seller);
     }
 
 

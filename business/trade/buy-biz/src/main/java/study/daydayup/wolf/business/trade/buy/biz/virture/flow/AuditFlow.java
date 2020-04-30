@@ -1,11 +1,15 @@
 package study.daydayup.wolf.business.trade.buy.biz.virture.flow;
 
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
+import study.daydayup.wolf.business.trade.api.dto.buy.base.response.BuyResponse;
 import study.daydayup.wolf.business.trade.buy.biz.base.AbstractTradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeFlow;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
+import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContextBuilder;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.OrderCreateNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.OrderStoreNode;
+import study.daydayup.wolf.business.trade.buy.biz.loan.node.GetSellerNode;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -23,6 +27,18 @@ public class AuditFlow extends AbstractTradeFlow implements TradeFlow {
     private OrderCreateNode orderCreateNode;
     @Resource
     private OrderStoreNode orderStoreNode;
+
+    @Override
+    public BuyResponse preview(BuyRequest request) {
+        context = BuyContextBuilder.build(request);
+
+        List<TradeNode> nodeList = buildPreviewFlow();
+        execute(nodeList, context);
+
+        BuyResponse response = new BuyResponse();
+        response.setOrder(context.getOrder());
+        return response;
+    }
 
     @Override
     public List<TradeNode> buildConfirmFlow() {

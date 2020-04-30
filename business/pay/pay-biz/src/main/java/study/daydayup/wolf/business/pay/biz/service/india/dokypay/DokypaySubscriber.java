@@ -33,6 +33,7 @@ import java.util.Map;
 public class DokypaySubscriber extends AbstractPaymentSubscriber implements PaymentSubscriber {
     private static final int LOG_TYPE = PaymentLogTypeEnum.PAY_RETURN.getCode();
     private static final int PAYMENT_METHOD = PaymentMethodEnum.DOKYPAY.getCode();
+    private static final String CONFIG_KEY = "dokypay";
     private JSONObject response;
     private PaySupplier config;
 
@@ -88,7 +89,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private void initConfig() {
-
+        config = payConfig.getSupplier().get(CONFIG_KEY);
     }
 
     private int savePayment() {

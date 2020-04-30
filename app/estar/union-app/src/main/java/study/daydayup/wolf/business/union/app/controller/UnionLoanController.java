@@ -10,9 +10,11 @@ import study.daydayup.wolf.business.goods.api.enums.GoodsTypeEnum;
 import study.daydayup.wolf.business.goods.api.service.LoanGoodsService;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.exception.order.OrderCreateFailException;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToAuditState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
+import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.TradeOwner;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
@@ -95,11 +97,18 @@ public class UnionLoanController extends BaseUnionController {
         buyer.setName(getFromSession("account", String.class));
         request.setBuyer(buyer);
 
+        Seller seller = new Seller();
+        seller.setId(session.get("orgId", Long.class));
+        request.setSeller(seller);
+
         request.setTradeType(TradeTypeEnum.AUDIT_FEE.getCode());
         request.setGoods(goods);
         request.setStoreTrade(true);
 
         BuyResponse response = buyService.preview(request).notNullData();
+        if (null == response.getOrder()) {
+            throw new OrderCreateFailException();
+        }
 
         // get pay args
         PayResponse payResponse = unionLoanService.audit(response.getOrder(), payRequest.getPaymentMethod());
@@ -279,6 +288,10 @@ public class UnionLoanController extends BaseUnionController {
         buyer.setId(getFromSession("accountId", Long.class));
         buyer.setName(getFromSession("account", String.class));
         request.setBuyer(buyer);
+
+        Seller seller = new Seller();
+        seller.setId(session.get("orgId", Long.class));
+        request.setSeller(seller);
 
         GoodsRequest goodsRequest = new GoodsRequest();
         goodsRequest.setGoodsId(loanRequest.getGoodsId());

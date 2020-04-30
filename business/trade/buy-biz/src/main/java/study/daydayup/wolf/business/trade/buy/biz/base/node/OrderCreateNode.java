@@ -56,8 +56,8 @@ public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
     }
 
     protected void initSellerAndBuyer() {
-        Buyer buyer = context.getBuyer();
-        Seller seller = context.getSeller();
+        Buyer buyer = context.getRequest().getBuyer();
+        Seller seller = context.getRequest().getSeller();
 
         order.setBuyerId(buyer.getId());
         order.setBuyerName(buyer.getName());

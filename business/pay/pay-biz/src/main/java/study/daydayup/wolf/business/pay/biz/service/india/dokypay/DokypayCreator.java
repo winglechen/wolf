@@ -123,7 +123,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     private void initConfig() {
-
+        config = payConfig.getSupplier().get(CONFIG_KEY);
     }
 
     private Request createRequest() {
