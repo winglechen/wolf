@@ -12,6 +12,7 @@ import study.daydayup.wolf.business.trade.api.dto.buy.base.request.BuyRequest;
 import study.daydayup.wolf.business.trade.buy.biz.base.TradeNode;
 import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 
 import javax.annotation.Resource;
@@ -61,6 +62,24 @@ public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
 
     }
 
+    protected void initTradeState() {
+        TradeState requestTradeState = context.getRequest().getTradeState();
+        if (requestTradeState != null) {
+            order.setState(requestTradeState);
+        } else {
+            order.setState(new WaitToPayState());
+        }
+    }
+
+    protected void initRelatedTradeNo() {
+        String relatedTradeNo = context.getRequest().getRelatedTradeNo();
+        if (StringUtil.isBlank(relatedTradeNo)) {
+            return;
+        }
+
+        order.setRelatedTradeNo(relatedTradeNo);
+    }
+
     protected void initOrder() {
         order = Order.builder()
                 .tradeType(context.getTradeType().getCode())
@@ -68,14 +87,9 @@ public class OrderCreateNode extends AbstractTradeNode implements TradeNode {
                 .createdAt(rpcContext.getRequestTime())
                 .build();
 
-        TradeState requestTradeState = context.getRequest().getTradeState();
-        if (requestTradeState != null) {
-            order.setState(requestTradeState);
-        } else {
-            order.setState(new WaitToPayState());
-        }
-
         createTradeNo();
+        initTradeState();
+        initRelatedTradeNo();
     }
 
     protected void initSellerAndBuyer() {

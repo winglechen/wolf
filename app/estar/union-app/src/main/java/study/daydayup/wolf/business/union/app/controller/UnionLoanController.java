@@ -105,6 +105,8 @@ public class UnionLoanController extends BaseUnionController {
         request.setGoods(goods);
         request.setStoreTrade(true);
 
+        request.setRelatedTradeNo(payRequest.getTradeNo());
+
         BuyResponse response = buyService.preview(request).notNullData();
         if (null == response.getOrder()) {
             throw new OrderCreateFailException();
