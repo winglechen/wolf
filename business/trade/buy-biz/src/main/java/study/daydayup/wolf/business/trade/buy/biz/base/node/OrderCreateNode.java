@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.WaitToPayState;
-import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.WaitToApproveState;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Buyer;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Goods;
 import study.daydayup.wolf.business.trade.api.domain.vo.buy.Seller;
