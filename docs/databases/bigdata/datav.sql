@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
     `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`                BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `date`                  DATE                NOT NULL COMMENT '统计日期',
+    `source`                VARCHAR(50) NOT NULL DEFAULT '' COMMENT '渠道',
 
     `pv`                    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'PV',
     `uv`                    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'UV',
