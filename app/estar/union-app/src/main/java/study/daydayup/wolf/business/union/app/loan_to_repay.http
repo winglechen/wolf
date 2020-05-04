@@ -34,7 +34,7 @@ Cache-Control: no-cache
 #}
 
 ###
-GET http://localhost:8100/loan/{{tradeNo}}
+GET http://localhost:8100/loan/detail/{{tradeNo}}
 Accept: */*
 Cache-Control: no-cache
 

@@ -117,25 +117,6 @@ public class UnionLoanController extends BaseUnionController {
         return Result.ok(payResponse);
     }
 
-    private Goods loanToGoods(LoanGoods loan) {
-        if (loan == null) {
-            return null;
-        }
-
-        Goods goods = Goods.builder()
-                .goodsId(loan.getId())
-                .buyerId(session.get("accountId", Long.class))
-                .sellId(loan.getOrgId())
-                .build();
-
-        BeanUtils.copyProperties(loan, goods);
-        goods.setSalePrice(loan.getPrice());
-        goods.setPayPrice(loan.getPrice());
-        goods.setPostage(BigDecimal.ZERO);
-
-        return goods;
-    }
-
     @PostMapping("/loan/preview")
     public Result<BuyResponse> preview(@Validated @RequestBody LoanRequest loanRequest) {
         BuyRequest request = initBuyRequest(loanRequest);
@@ -174,7 +155,7 @@ public class UnionLoanController extends BaseUnionController {
         return buyService.confirm(request);
     }
 
-    @GetMapping("/loan/{tradeNo}")
+    @GetMapping("/loan/detail/{tradeNo}")
     public Result<Contract> detail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = new TradeId();
         tradeId.setTradeNo(tradeNo);
@@ -321,6 +302,25 @@ public class UnionLoanController extends BaseUnionController {
         Long orgId = getFromSession("orgId", Long.class);
         Integer goodsType = GoodsTypeEnum.AUDIT_FEE.getCode();
         return loanGoodsService.findOneByOrgId(orgId, goodsType);
+    }
+
+    private Goods loanToGoods(LoanGoods loan) {
+        if (loan == null) {
+            return null;
+        }
+
+        Goods goods = Goods.builder()
+                .goodsId(loan.getId())
+                .buyerId(session.get("accountId", Long.class))
+                .sellId(loan.getOrgId())
+                .build();
+
+        BeanUtils.copyProperties(loan, goods);
+        goods.setSalePrice(loan.getPrice());
+        goods.setPayPrice(loan.getPrice());
+        goods.setPostage(BigDecimal.ZERO);
+
+        return goods;
     }
 
 }

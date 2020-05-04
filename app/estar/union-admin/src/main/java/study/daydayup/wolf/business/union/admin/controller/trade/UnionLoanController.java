@@ -61,7 +61,7 @@ public class UnionLoanController implements Controller {
     @Resource
     private RpcContext rpcContext;
 
-    @GetMapping("/loan/contract/{tradeNo}")
+    @GetMapping("/loan/contract/detail/{tradeNo}")
     public Result<LoanWithOrder> contractDetail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = initTradeId(tradeNo);
         ContractOption option = initContractOption();
