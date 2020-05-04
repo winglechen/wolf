@@ -12,7 +12,7 @@
     <result column="success_amount" jdbcType="INTEGER" property="successAmount" />
     <result column="fail_count" jdbcType="INTEGER" property="failCount" />
     <result column="fail_amount" jdbcType="INTEGER" property="failAmount" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -38,7 +38,7 @@
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, 
       #{collectionCount,jdbcType=INTEGER}, #{caseCount,jdbcType=INTEGER}, #{caseAmount,jdbcType=INTEGER}, 
       #{successCount,jdbcType=INTEGER}, #{successAmount,jdbcType=INTEGER}, #{failCount,jdbcType=INTEGER}, 
-      #{failAmount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
+      #{failAmount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.ModelCollectorDO">
@@ -113,7 +113,7 @@
         #{failAmount,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -151,7 +151,7 @@
         fail_amount = #{failAmount,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -170,7 +170,7 @@
       success_amount = #{successAmount,jdbcType=INTEGER},
       fail_count = #{failCount,jdbcType=INTEGER},
       fail_amount = #{failAmount,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

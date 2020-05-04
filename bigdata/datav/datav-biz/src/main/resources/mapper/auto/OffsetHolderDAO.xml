@@ -11,7 +11,7 @@
     <result column="locker" jdbcType="TINYINT" property="locker" />
     <result column="lock_at" jdbcType="TIMESTAMP" property="lockAt" />
     <result column="version" jdbcType="INTEGER" property="version" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
@@ -38,7 +38,7 @@
     values (#{id,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, #{shardingKey,jdbcType=VARCHAR}, 
       #{source,jdbcType=VARCHAR}, #{sink,jdbcType=VARCHAR}, #{offset,jdbcType=BIGINT}, 
       #{locker,jdbcType=TINYINT}, #{lockAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.OffsetHolderDO">
@@ -110,7 +110,7 @@
         #{version,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -148,7 +148,7 @@
         version = #{version,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -169,7 +169,7 @@
       locker = #{locker,jdbcType=TINYINT},
       lock_at = #{lockAt,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

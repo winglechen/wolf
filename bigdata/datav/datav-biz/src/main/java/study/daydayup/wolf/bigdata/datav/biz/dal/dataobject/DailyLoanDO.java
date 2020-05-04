@@ -1,6 +1,7 @@
 package study.daydayup.wolf.bigdata.datav.biz.dal.dataobject;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -15,37 +16,31 @@ public class DailyLoanDO implements Serializable {
 
     private Integer requestCount;
 
+    private Integer firstRequestCount;
+
     private Integer requestApproved;
+
+    private Integer firstRequestApproved;
 
     private Integer requestRefused;
 
-    private Integer loanCount;
+    private Integer firstRequestRefused;
 
-    private Integer loanAmount;
+    private BigDecimal approvedRate;
+
+    private BigDecimal firstApprovedRate;
+
+    private Integer loanCount;
 
     private Integer firstLoanCount;
 
-    private Integer firstLoanAmount;
+    private BigDecimal loanAmount;
 
-    private Integer dueCount;
+    private BigDecimal firstLoanAmount;
 
-    private Integer dueAmount;
+    private BigDecimal loanRate;
 
-    private Integer overdueCount;
-
-    private Integer overdueAmount;
-
-    private Integer firstOverdueCount;
-
-    private Integer firstOverdueAmount;
-
-    private Integer repayCount;
-
-    private Integer repayAmount;
-
-    private Integer lossCount;
-
-    private Integer lossAmount;
+    private BigDecimal firstLoanRate;
 
     private Boolean deleteFlag;
 
@@ -63,22 +58,19 @@ public class DailyLoanDO implements Serializable {
         sb.append(", orgId=").append(orgId);
         sb.append(", date=").append(date);
         sb.append(", requestCount=").append(requestCount);
+        sb.append(", firstRequestCount=").append(firstRequestCount);
         sb.append(", requestApproved=").append(requestApproved);
+        sb.append(", firstRequestApproved=").append(firstRequestApproved);
         sb.append(", requestRefused=").append(requestRefused);
+        sb.append(", firstRequestRefused=").append(firstRequestRefused);
+        sb.append(", approvedRate=").append(approvedRate);
+        sb.append(", firstApprovedRate=").append(firstApprovedRate);
         sb.append(", loanCount=").append(loanCount);
-        sb.append(", loanAmount=").append(loanAmount);
         sb.append(", firstLoanCount=").append(firstLoanCount);
+        sb.append(", loanAmount=").append(loanAmount);
         sb.append(", firstLoanAmount=").append(firstLoanAmount);
-        sb.append(", dueCount=").append(dueCount);
-        sb.append(", dueAmount=").append(dueAmount);
-        sb.append(", overdueCount=").append(overdueCount);
-        sb.append(", overdueAmount=").append(overdueAmount);
-        sb.append(", firstOverdueCount=").append(firstOverdueCount);
-        sb.append(", firstOverdueAmount=").append(firstOverdueAmount);
-        sb.append(", repayCount=").append(repayCount);
-        sb.append(", repayAmount=").append(repayAmount);
-        sb.append(", lossCount=").append(lossCount);
-        sb.append(", lossAmount=").append(lossAmount);
+        sb.append(", loanRate=").append(loanRate);
+        sb.append(", firstLoanRate=").append(firstLoanRate);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -101,22 +93,19 @@ public class DailyLoanDO implements Serializable {
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
             && (this.getRequestCount() == null ? other.getRequestCount() == null : this.getRequestCount().equals(other.getRequestCount()))
+            && (this.getFirstRequestCount() == null ? other.getFirstRequestCount() == null : this.getFirstRequestCount().equals(other.getFirstRequestCount()))
             && (this.getRequestApproved() == null ? other.getRequestApproved() == null : this.getRequestApproved().equals(other.getRequestApproved()))
+            && (this.getFirstRequestApproved() == null ? other.getFirstRequestApproved() == null : this.getFirstRequestApproved().equals(other.getFirstRequestApproved()))
             && (this.getRequestRefused() == null ? other.getRequestRefused() == null : this.getRequestRefused().equals(other.getRequestRefused()))
+            && (this.getFirstRequestRefused() == null ? other.getFirstRequestRefused() == null : this.getFirstRequestRefused().equals(other.getFirstRequestRefused()))
+            && (this.getApprovedRate() == null ? other.getApprovedRate() == null : this.getApprovedRate().equals(other.getApprovedRate()))
+            && (this.getFirstApprovedRate() == null ? other.getFirstApprovedRate() == null : this.getFirstApprovedRate().equals(other.getFirstApprovedRate()))
             && (this.getLoanCount() == null ? other.getLoanCount() == null : this.getLoanCount().equals(other.getLoanCount()))
-            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
             && (this.getFirstLoanCount() == null ? other.getFirstLoanCount() == null : this.getFirstLoanCount().equals(other.getFirstLoanCount()))
+            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
             && (this.getFirstLoanAmount() == null ? other.getFirstLoanAmount() == null : this.getFirstLoanAmount().equals(other.getFirstLoanAmount()))
-            && (this.getDueCount() == null ? other.getDueCount() == null : this.getDueCount().equals(other.getDueCount()))
-            && (this.getDueAmount() == null ? other.getDueAmount() == null : this.getDueAmount().equals(other.getDueAmount()))
-            && (this.getOverdueCount() == null ? other.getOverdueCount() == null : this.getOverdueCount().equals(other.getOverdueCount()))
-            && (this.getOverdueAmount() == null ? other.getOverdueAmount() == null : this.getOverdueAmount().equals(other.getOverdueAmount()))
-            && (this.getFirstOverdueCount() == null ? other.getFirstOverdueCount() == null : this.getFirstOverdueCount().equals(other.getFirstOverdueCount()))
-            && (this.getFirstOverdueAmount() == null ? other.getFirstOverdueAmount() == null : this.getFirstOverdueAmount().equals(other.getFirstOverdueAmount()))
-            && (this.getRepayCount() == null ? other.getRepayCount() == null : this.getRepayCount().equals(other.getRepayCount()))
-            && (this.getRepayAmount() == null ? other.getRepayAmount() == null : this.getRepayAmount().equals(other.getRepayAmount()))
-            && (this.getLossCount() == null ? other.getLossCount() == null : this.getLossCount().equals(other.getLossCount()))
-            && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
+            && (this.getLoanRate() == null ? other.getLoanRate() == null : this.getLoanRate().equals(other.getLoanRate()))
+            && (this.getFirstLoanRate() == null ? other.getFirstLoanRate() == null : this.getFirstLoanRate().equals(other.getFirstLoanRate()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -129,22 +118,19 @@ public class DailyLoanDO implements Serializable {
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         result = prime * result + ((getRequestCount() == null) ? 0 : getRequestCount().hashCode());
+        result = prime * result + ((getFirstRequestCount() == null) ? 0 : getFirstRequestCount().hashCode());
         result = prime * result + ((getRequestApproved() == null) ? 0 : getRequestApproved().hashCode());
+        result = prime * result + ((getFirstRequestApproved() == null) ? 0 : getFirstRequestApproved().hashCode());
         result = prime * result + ((getRequestRefused() == null) ? 0 : getRequestRefused().hashCode());
+        result = prime * result + ((getFirstRequestRefused() == null) ? 0 : getFirstRequestRefused().hashCode());
+        result = prime * result + ((getApprovedRate() == null) ? 0 : getApprovedRate().hashCode());
+        result = prime * result + ((getFirstApprovedRate() == null) ? 0 : getFirstApprovedRate().hashCode());
         result = prime * result + ((getLoanCount() == null) ? 0 : getLoanCount().hashCode());
-        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
         result = prime * result + ((getFirstLoanCount() == null) ? 0 : getFirstLoanCount().hashCode());
+        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
         result = prime * result + ((getFirstLoanAmount() == null) ? 0 : getFirstLoanAmount().hashCode());
-        result = prime * result + ((getDueCount() == null) ? 0 : getDueCount().hashCode());
-        result = prime * result + ((getDueAmount() == null) ? 0 : getDueAmount().hashCode());
-        result = prime * result + ((getOverdueCount() == null) ? 0 : getOverdueCount().hashCode());
-        result = prime * result + ((getOverdueAmount() == null) ? 0 : getOverdueAmount().hashCode());
-        result = prime * result + ((getFirstOverdueCount() == null) ? 0 : getFirstOverdueCount().hashCode());
-        result = prime * result + ((getFirstOverdueAmount() == null) ? 0 : getFirstOverdueAmount().hashCode());
-        result = prime * result + ((getRepayCount() == null) ? 0 : getRepayCount().hashCode());
-        result = prime * result + ((getRepayAmount() == null) ? 0 : getRepayAmount().hashCode());
-        result = prime * result + ((getLossCount() == null) ? 0 : getLossCount().hashCode());
-        result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
+        result = prime * result + ((getLoanRate() == null) ? 0 : getLoanRate().hashCode());
+        result = prime * result + ((getFirstLoanRate() == null) ? 0 : getFirstLoanRate().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;

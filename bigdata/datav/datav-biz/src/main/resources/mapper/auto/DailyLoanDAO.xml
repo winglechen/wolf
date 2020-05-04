@@ -6,30 +6,27 @@
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="date" jdbcType="DATE" property="date" />
     <result column="request_count" jdbcType="INTEGER" property="requestCount" />
+    <result column="first_request_count" jdbcType="INTEGER" property="firstRequestCount" />
     <result column="request_approved" jdbcType="INTEGER" property="requestApproved" />
+    <result column="first_request_approved" jdbcType="INTEGER" property="firstRequestApproved" />
     <result column="request_refused" jdbcType="INTEGER" property="requestRefused" />
+    <result column="first_request_refused" jdbcType="INTEGER" property="firstRequestRefused" />
+    <result column="approved_rate" jdbcType="DECIMAL" property="approvedRate" />
+    <result column="first_approved_rate" jdbcType="DECIMAL" property="firstApprovedRate" />
     <result column="loan_count" jdbcType="INTEGER" property="loanCount" />
-    <result column="loan_amount" jdbcType="INTEGER" property="loanAmount" />
     <result column="first_loan_count" jdbcType="INTEGER" property="firstLoanCount" />
-    <result column="first_loan_amount" jdbcType="INTEGER" property="firstLoanAmount" />
-    <result column="due_count" jdbcType="INTEGER" property="dueCount" />
-    <result column="due_amount" jdbcType="INTEGER" property="dueAmount" />
-    <result column="overdue_count" jdbcType="INTEGER" property="overdueCount" />
-    <result column="overdue_amount" jdbcType="INTEGER" property="overdueAmount" />
-    <result column="first_overdue_count" jdbcType="INTEGER" property="firstOverdueCount" />
-    <result column="first_overdue_amount" jdbcType="INTEGER" property="firstOverdueAmount" />
-    <result column="repay_count" jdbcType="INTEGER" property="repayCount" />
-    <result column="repay_amount" jdbcType="INTEGER" property="repayAmount" />
-    <result column="loss_count" jdbcType="INTEGER" property="lossCount" />
-    <result column="loss_amount" jdbcType="INTEGER" property="lossAmount" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="loan_amount" jdbcType="DECIMAL" property="loanAmount" />
+    <result column="first_loan_amount" jdbcType="DECIMAL" property="firstLoanAmount" />
+    <result column="loan_rate" jdbcType="DECIMAL" property="loanRate" />
+    <result column="first_loan_rate" jdbcType="DECIMAL" property="firstLoanRate" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `date`, request_count, request_approved, request_refused, loan_count, 
-    loan_amount, first_loan_count, first_loan_amount, due_count, due_amount, overdue_count, 
-    overdue_amount, first_overdue_count, first_overdue_amount, repay_count, repay_amount, 
-    loss_count, loss_amount, delete_flag, created_at
+    id, org_id, `date`, request_count, first_request_count, request_approved, first_request_approved, 
+    request_refused, first_request_refused, approved_rate, first_approved_rate, loan_count, 
+    first_loan_count, loan_amount, first_loan_amount, loan_rate, first_loan_rate, delete_flag, 
+    created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -43,20 +40,18 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyLoanDO">
     insert into daily_loan (id, org_id, `date`, request_count, 
-      request_approved, request_refused, loan_count, 
-      loan_amount, first_loan_count, first_loan_amount, 
-      due_count, due_amount, overdue_count, 
-      overdue_amount, first_overdue_count, first_overdue_amount, 
-      repay_count, repay_amount, loss_count, 
-      loss_amount, delete_flag, created_at
+      first_request_count, request_approved, first_request_approved, 
+      request_refused, first_request_refused, approved_rate, 
+      first_approved_rate, loan_count, first_loan_count, 
+      loan_amount, first_loan_amount, loan_rate, 
+      first_loan_rate, delete_flag, created_at
       )
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{requestCount,jdbcType=INTEGER}, 
-      #{requestApproved,jdbcType=INTEGER}, #{requestRefused,jdbcType=INTEGER}, #{loanCount,jdbcType=INTEGER}, 
-      #{loanAmount,jdbcType=INTEGER}, #{firstLoanCount,jdbcType=INTEGER}, #{firstLoanAmount,jdbcType=INTEGER}, 
-      #{dueCount,jdbcType=INTEGER}, #{dueAmount,jdbcType=INTEGER}, #{overdueCount,jdbcType=INTEGER}, 
-      #{overdueAmount,jdbcType=INTEGER}, #{firstOverdueCount,jdbcType=INTEGER}, #{firstOverdueAmount,jdbcType=INTEGER}, 
-      #{repayCount,jdbcType=INTEGER}, #{repayAmount,jdbcType=INTEGER}, #{lossCount,jdbcType=INTEGER}, 
-      #{lossAmount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
+      #{firstRequestCount,jdbcType=INTEGER}, #{requestApproved,jdbcType=INTEGER}, #{firstRequestApproved,jdbcType=INTEGER}, 
+      #{requestRefused,jdbcType=INTEGER}, #{firstRequestRefused,jdbcType=INTEGER}, #{approvedRate,jdbcType=DECIMAL}, 
+      #{firstApprovedRate,jdbcType=DECIMAL}, #{loanCount,jdbcType=INTEGER}, #{firstLoanCount,jdbcType=INTEGER}, 
+      #{loanAmount,jdbcType=DECIMAL}, #{firstLoanAmount,jdbcType=DECIMAL}, #{loanRate,jdbcType=DECIMAL}, 
+      #{firstLoanRate,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyLoanDO">
@@ -74,53 +69,44 @@
       <if test="requestCount != null">
         request_count,
       </if>
+      <if test="firstRequestCount != null">
+        first_request_count,
+      </if>
       <if test="requestApproved != null">
         request_approved,
+      </if>
+      <if test="firstRequestApproved != null">
+        first_request_approved,
       </if>
       <if test="requestRefused != null">
         request_refused,
       </if>
+      <if test="firstRequestRefused != null">
+        first_request_refused,
+      </if>
+      <if test="approvedRate != null">
+        approved_rate,
+      </if>
+      <if test="firstApprovedRate != null">
+        first_approved_rate,
+      </if>
       <if test="loanCount != null">
         loan_count,
-      </if>
-      <if test="loanAmount != null">
-        loan_amount,
       </if>
       <if test="firstLoanCount != null">
         first_loan_count,
       </if>
+      <if test="loanAmount != null">
+        loan_amount,
+      </if>
       <if test="firstLoanAmount != null">
         first_loan_amount,
       </if>
-      <if test="dueCount != null">
-        due_count,
+      <if test="loanRate != null">
+        loan_rate,
       </if>
-      <if test="dueAmount != null">
-        due_amount,
-      </if>
-      <if test="overdueCount != null">
-        overdue_count,
-      </if>
-      <if test="overdueAmount != null">
-        overdue_amount,
-      </if>
-      <if test="firstOverdueCount != null">
-        first_overdue_count,
-      </if>
-      <if test="firstOverdueAmount != null">
-        first_overdue_amount,
-      </if>
-      <if test="repayCount != null">
-        repay_count,
-      </if>
-      <if test="repayAmount != null">
-        repay_amount,
-      </if>
-      <if test="lossCount != null">
-        loss_count,
-      </if>
-      <if test="lossAmount != null">
-        loss_amount,
+      <if test="firstLoanRate != null">
+        first_loan_rate,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -142,56 +128,47 @@
       <if test="requestCount != null">
         #{requestCount,jdbcType=INTEGER},
       </if>
+      <if test="firstRequestCount != null">
+        #{firstRequestCount,jdbcType=INTEGER},
+      </if>
       <if test="requestApproved != null">
         #{requestApproved,jdbcType=INTEGER},
+      </if>
+      <if test="firstRequestApproved != null">
+        #{firstRequestApproved,jdbcType=INTEGER},
       </if>
       <if test="requestRefused != null">
         #{requestRefused,jdbcType=INTEGER},
       </if>
+      <if test="firstRequestRefused != null">
+        #{firstRequestRefused,jdbcType=INTEGER},
+      </if>
+      <if test="approvedRate != null">
+        #{approvedRate,jdbcType=DECIMAL},
+      </if>
+      <if test="firstApprovedRate != null">
+        #{firstApprovedRate,jdbcType=DECIMAL},
+      </if>
       <if test="loanCount != null">
         #{loanCount,jdbcType=INTEGER},
-      </if>
-      <if test="loanAmount != null">
-        #{loanAmount,jdbcType=INTEGER},
       </if>
       <if test="firstLoanCount != null">
         #{firstLoanCount,jdbcType=INTEGER},
       </if>
+      <if test="loanAmount != null">
+        #{loanAmount,jdbcType=DECIMAL},
+      </if>
       <if test="firstLoanAmount != null">
-        #{firstLoanAmount,jdbcType=INTEGER},
+        #{firstLoanAmount,jdbcType=DECIMAL},
       </if>
-      <if test="dueCount != null">
-        #{dueCount,jdbcType=INTEGER},
+      <if test="loanRate != null">
+        #{loanRate,jdbcType=DECIMAL},
       </if>
-      <if test="dueAmount != null">
-        #{dueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="overdueCount != null">
-        #{overdueCount,jdbcType=INTEGER},
-      </if>
-      <if test="overdueAmount != null">
-        #{overdueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="firstOverdueCount != null">
-        #{firstOverdueCount,jdbcType=INTEGER},
-      </if>
-      <if test="firstOverdueAmount != null">
-        #{firstOverdueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="repayCount != null">
-        #{repayCount,jdbcType=INTEGER},
-      </if>
-      <if test="repayAmount != null">
-        #{repayAmount,jdbcType=INTEGER},
-      </if>
-      <if test="lossCount != null">
-        #{lossCount,jdbcType=INTEGER},
-      </if>
-      <if test="lossAmount != null">
-        #{lossAmount,jdbcType=INTEGER},
+      <if test="firstLoanRate != null">
+        #{firstLoanRate,jdbcType=DECIMAL},
       </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -210,56 +187,47 @@
       <if test="requestCount != null">
         request_count = #{requestCount,jdbcType=INTEGER},
       </if>
+      <if test="firstRequestCount != null">
+        first_request_count = #{firstRequestCount,jdbcType=INTEGER},
+      </if>
       <if test="requestApproved != null">
         request_approved = #{requestApproved,jdbcType=INTEGER},
+      </if>
+      <if test="firstRequestApproved != null">
+        first_request_approved = #{firstRequestApproved,jdbcType=INTEGER},
       </if>
       <if test="requestRefused != null">
         request_refused = #{requestRefused,jdbcType=INTEGER},
       </if>
+      <if test="firstRequestRefused != null">
+        first_request_refused = #{firstRequestRefused,jdbcType=INTEGER},
+      </if>
+      <if test="approvedRate != null">
+        approved_rate = #{approvedRate,jdbcType=DECIMAL},
+      </if>
+      <if test="firstApprovedRate != null">
+        first_approved_rate = #{firstApprovedRate,jdbcType=DECIMAL},
+      </if>
       <if test="loanCount != null">
         loan_count = #{loanCount,jdbcType=INTEGER},
-      </if>
-      <if test="loanAmount != null">
-        loan_amount = #{loanAmount,jdbcType=INTEGER},
       </if>
       <if test="firstLoanCount != null">
         first_loan_count = #{firstLoanCount,jdbcType=INTEGER},
       </if>
+      <if test="loanAmount != null">
+        loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      </if>
       <if test="firstLoanAmount != null">
-        first_loan_amount = #{firstLoanAmount,jdbcType=INTEGER},
+        first_loan_amount = #{firstLoanAmount,jdbcType=DECIMAL},
       </if>
-      <if test="dueCount != null">
-        due_count = #{dueCount,jdbcType=INTEGER},
+      <if test="loanRate != null">
+        loan_rate = #{loanRate,jdbcType=DECIMAL},
       </if>
-      <if test="dueAmount != null">
-        due_amount = #{dueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="overdueCount != null">
-        overdue_count = #{overdueCount,jdbcType=INTEGER},
-      </if>
-      <if test="overdueAmount != null">
-        overdue_amount = #{overdueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="firstOverdueCount != null">
-        first_overdue_count = #{firstOverdueCount,jdbcType=INTEGER},
-      </if>
-      <if test="firstOverdueAmount != null">
-        first_overdue_amount = #{firstOverdueAmount,jdbcType=INTEGER},
-      </if>
-      <if test="repayCount != null">
-        repay_count = #{repayCount,jdbcType=INTEGER},
-      </if>
-      <if test="repayAmount != null">
-        repay_amount = #{repayAmount,jdbcType=INTEGER},
-      </if>
-      <if test="lossCount != null">
-        loss_count = #{lossCount,jdbcType=INTEGER},
-      </if>
-      <if test="lossAmount != null">
-        loss_amount = #{lossAmount,jdbcType=INTEGER},
+      <if test="firstLoanRate != null">
+        first_loan_rate = #{firstLoanRate,jdbcType=DECIMAL},
       </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -272,23 +240,20 @@
     set org_id = #{orgId,jdbcType=BIGINT},
       `date` = #{date,jdbcType=DATE},
       request_count = #{requestCount,jdbcType=INTEGER},
+      first_request_count = #{firstRequestCount,jdbcType=INTEGER},
       request_approved = #{requestApproved,jdbcType=INTEGER},
+      first_request_approved = #{firstRequestApproved,jdbcType=INTEGER},
       request_refused = #{requestRefused,jdbcType=INTEGER},
+      first_request_refused = #{firstRequestRefused,jdbcType=INTEGER},
+      approved_rate = #{approvedRate,jdbcType=DECIMAL},
+      first_approved_rate = #{firstApprovedRate,jdbcType=DECIMAL},
       loan_count = #{loanCount,jdbcType=INTEGER},
-      loan_amount = #{loanAmount,jdbcType=INTEGER},
       first_loan_count = #{firstLoanCount,jdbcType=INTEGER},
-      first_loan_amount = #{firstLoanAmount,jdbcType=INTEGER},
-      due_count = #{dueCount,jdbcType=INTEGER},
-      due_amount = #{dueAmount,jdbcType=INTEGER},
-      overdue_count = #{overdueCount,jdbcType=INTEGER},
-      overdue_amount = #{overdueAmount,jdbcType=INTEGER},
-      first_overdue_count = #{firstOverdueCount,jdbcType=INTEGER},
-      first_overdue_amount = #{firstOverdueAmount,jdbcType=INTEGER},
-      repay_count = #{repayCount,jdbcType=INTEGER},
-      repay_amount = #{repayAmount,jdbcType=INTEGER},
-      loss_count = #{lossCount,jdbcType=INTEGER},
-      loss_amount = #{lossAmount,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      first_loan_amount = #{firstLoanAmount,jdbcType=DECIMAL},
+      loan_rate = #{loanRate,jdbcType=DECIMAL},
+      first_loan_rate = #{firstLoanRate,jdbcType=DECIMAL},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

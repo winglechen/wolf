@@ -22,7 +22,7 @@
     <result column="first_loss_count" jdbcType="INTEGER" property="firstLossCount" />
     <result column="loss_amount" jdbcType="DECIMAL" property="lossAmount" />
     <result column="first_loss_amount" jdbcType="DECIMAL" property="firstLossAmount" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -56,7 +56,7 @@
       #{firstOverdueCount,jdbcType=INTEGER}, #{firstOverdueAmount,jdbcType=DECIMAL}, 
       #{repayCount,jdbcType=INTEGER}, #{firstRepayCount,jdbcType=INTEGER}, #{repayAmount,jdbcType=DECIMAL}, 
       #{firstRepayAmount,jdbcType=DECIMAL}, #{lossCount,jdbcType=INTEGER}, #{firstLossCount,jdbcType=INTEGER}, 
-      #{lossAmount,jdbcType=DECIMAL}, #{firstLossAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=BIT}, 
+      #{lossAmount,jdbcType=DECIMAL}, #{firstLossAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, 
       #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyRepayDO">
@@ -191,7 +191,7 @@
         #{firstLossAmount,jdbcType=DECIMAL},
       </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -259,7 +259,7 @@
         first_loss_amount = #{firstLossAmount,jdbcType=DECIMAL},
       </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -288,7 +288,7 @@
       first_loss_count = #{firstLossCount,jdbcType=INTEGER},
       loss_amount = #{lossAmount,jdbcType=DECIMAL},
       first_loss_amount = #{firstLossAmount,jdbcType=DECIMAL},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

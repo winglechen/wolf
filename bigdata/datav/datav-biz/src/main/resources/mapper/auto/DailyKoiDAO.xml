@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="date" jdbcType="DATE" property="date" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="pv" jdbcType="INTEGER" property="pv" />
     <result column="uv" jdbcType="INTEGER" property="uv" />
     <result column="register_count" jdbcType="INTEGER" property="registerCount" />
@@ -17,15 +18,15 @@
     <result column="driving_license_count" jdbcType="INTEGER" property="drivingLicenseCount" />
     <result column="voter_count" jdbcType="INTEGER" property="voterCount" />
     <result column="kyc_count" jdbcType="INTEGER" property="kycCount" />
-    <result column="credit_promote_count" jdbcType="INTEGER" property="creditPromoteCount" />
     <result column="auth_success_count" jdbcType="INTEGER" property="authSuccessCount" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="credit_promote_count" jdbcType="INTEGER" property="creditPromoteCount" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `date`, pv, uv, register_count, basic_info_count, liveness_count, bankcard_count, 
-    aadhaar_count, pan_card_count, passport_count, driving_license_count, voter_count, 
-    kyc_count, credit_promote_count, auth_success_count, delete_flag, created_at
+    id, org_id, `date`, `source`, pv, uv, register_count, basic_info_count, liveness_count, 
+    bankcard_count, aadhaar_count, pan_card_count, passport_count, driving_license_count, 
+    voter_count, kyc_count, auth_success_count, credit_promote_count, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -38,20 +39,20 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
-    insert into daily_koi (id, org_id, `date`, pv, 
-      uv, register_count, basic_info_count, 
-      liveness_count, bankcard_count, aadhaar_count, 
-      pan_card_count, passport_count, driving_license_count, 
-      voter_count, kyc_count, credit_promote_count, 
-      auth_success_count, delete_flag, created_at
-      )
-    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{pv,jdbcType=INTEGER}, 
-      #{uv,jdbcType=INTEGER}, #{registerCount,jdbcType=INTEGER}, #{basicInfoCount,jdbcType=INTEGER}, 
-      #{livenessCount,jdbcType=INTEGER}, #{bankcardCount,jdbcType=INTEGER}, #{aadhaarCount,jdbcType=INTEGER}, 
-      #{panCardCount,jdbcType=INTEGER}, #{passportCount,jdbcType=INTEGER}, #{drivingLicenseCount,jdbcType=INTEGER}, 
-      #{voterCount,jdbcType=INTEGER}, #{kycCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, 
-      #{authSuccessCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+    insert into daily_koi (id, org_id, `date`, `source`, 
+      pv, uv, register_count, 
+      basic_info_count, liveness_count, bankcard_count, 
+      aadhaar_count, pan_card_count, passport_count, 
+      driving_license_count, voter_count, kyc_count, 
+      auth_success_count, credit_promote_count, delete_flag, 
+      created_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{source,jdbcType=VARCHAR}, 
+      #{pv,jdbcType=INTEGER}, #{uv,jdbcType=INTEGER}, #{registerCount,jdbcType=INTEGER}, 
+      #{basicInfoCount,jdbcType=INTEGER}, #{livenessCount,jdbcType=INTEGER}, #{bankcardCount,jdbcType=INTEGER}, 
+      #{aadhaarCount,jdbcType=INTEGER}, #{panCardCount,jdbcType=INTEGER}, #{passportCount,jdbcType=INTEGER}, 
+      #{drivingLicenseCount,jdbcType=INTEGER}, #{voterCount,jdbcType=INTEGER}, #{kycCount,jdbcType=INTEGER}, 
+      #{authSuccessCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
     insert into daily_koi
@@ -64,6 +65,9 @@
       </if>
       <if test="date != null">
         `date`,
+      </if>
+      <if test="source != null">
+        `source`,
       </if>
       <if test="pv != null">
         pv,
@@ -101,11 +105,11 @@
       <if test="kycCount != null">
         kyc_count,
       </if>
-      <if test="creditPromoteCount != null">
-        credit_promote_count,
-      </if>
       <if test="authSuccessCount != null">
         auth_success_count,
+      </if>
+      <if test="creditPromoteCount != null">
+        credit_promote_count,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -123,6 +127,9 @@
       </if>
       <if test="date != null">
         #{date,jdbcType=DATE},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
       </if>
       <if test="pv != null">
         #{pv,jdbcType=INTEGER},
@@ -160,14 +167,14 @@
       <if test="kycCount != null">
         #{kycCount,jdbcType=INTEGER},
       </if>
-      <if test="creditPromoteCount != null">
-        #{creditPromoteCount,jdbcType=INTEGER},
-      </if>
       <if test="authSuccessCount != null">
         #{authSuccessCount,jdbcType=INTEGER},
       </if>
+      <if test="creditPromoteCount != null">
+        #{creditPromoteCount,jdbcType=INTEGER},
+      </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -182,6 +189,9 @@
       </if>
       <if test="date != null">
         `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
       </if>
       <if test="pv != null">
         pv = #{pv,jdbcType=INTEGER},
@@ -219,14 +229,14 @@
       <if test="kycCount != null">
         kyc_count = #{kycCount,jdbcType=INTEGER},
       </if>
-      <if test="creditPromoteCount != null">
-        credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
-      </if>
       <if test="authSuccessCount != null">
         auth_success_count = #{authSuccessCount,jdbcType=INTEGER},
       </if>
+      <if test="creditPromoteCount != null">
+        credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
+      </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -238,6 +248,7 @@
     update daily_koi
     set org_id = #{orgId,jdbcType=BIGINT},
       `date` = #{date,jdbcType=DATE},
+      `source` = #{source,jdbcType=VARCHAR},
       pv = #{pv,jdbcType=INTEGER},
       uv = #{uv,jdbcType=INTEGER},
       register_count = #{registerCount,jdbcType=INTEGER},
@@ -250,9 +261,9 @@
       driving_license_count = #{drivingLicenseCount,jdbcType=INTEGER},
       voter_count = #{voterCount,jdbcType=INTEGER},
       kyc_count = #{kycCount,jdbcType=INTEGER},
-      credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
       auth_success_count = #{authSuccessCount,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      credit_promote_count = #{creditPromoteCount,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

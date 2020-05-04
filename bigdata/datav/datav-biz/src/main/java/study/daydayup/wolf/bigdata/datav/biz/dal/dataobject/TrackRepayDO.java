@@ -40,6 +40,8 @@ public class TrackRepayDO implements Serializable {
 
     private BigDecimal partlyLossAmount;
 
+    private BigDecimal m1LossRate;
+
     private BigDecimal d1Amount;
 
     private Integer d1;
@@ -94,6 +96,7 @@ public class TrackRepayDO implements Serializable {
         sb.append(", lossAmount=").append(lossAmount);
         sb.append(", partlyLossCount=").append(partlyLossCount);
         sb.append(", partlyLossAmount=").append(partlyLossAmount);
+        sb.append(", m1LossRate=").append(m1LossRate);
         sb.append(", d1Amount=").append(d1Amount);
         sb.append(", d1=").append(d1);
         sb.append(", d2=").append(d2);
@@ -141,6 +144,7 @@ public class TrackRepayDO implements Serializable {
             && (this.getLossAmount() == null ? other.getLossAmount() == null : this.getLossAmount().equals(other.getLossAmount()))
             && (this.getPartlyLossCount() == null ? other.getPartlyLossCount() == null : this.getPartlyLossCount().equals(other.getPartlyLossCount()))
             && (this.getPartlyLossAmount() == null ? other.getPartlyLossAmount() == null : this.getPartlyLossAmount().equals(other.getPartlyLossAmount()))
+            && (this.getM1LossRate() == null ? other.getM1LossRate() == null : this.getM1LossRate().equals(other.getM1LossRate()))
             && (this.getD1Amount() == null ? other.getD1Amount() == null : this.getD1Amount().equals(other.getD1Amount()))
             && (this.getD1() == null ? other.getD1() == null : this.getD1().equals(other.getD1()))
             && (this.getD2() == null ? other.getD2() == null : this.getD2().equals(other.getD2()))
@@ -178,6 +182,7 @@ public class TrackRepayDO implements Serializable {
         result = prime * result + ((getLossAmount() == null) ? 0 : getLossAmount().hashCode());
         result = prime * result + ((getPartlyLossCount() == null) ? 0 : getPartlyLossCount().hashCode());
         result = prime * result + ((getPartlyLossAmount() == null) ? 0 : getPartlyLossAmount().hashCode());
+        result = prime * result + ((getM1LossRate() == null) ? 0 : getM1LossRate().hashCode());
         result = prime * result + ((getD1Amount() == null) ? 0 : getD1Amount().hashCode());
         result = prime * result + ((getD1() == null) ? 0 : getD1().hashCode());
         result = prime * result + ((getD2() == null) ? 0 : getD2().hashCode());

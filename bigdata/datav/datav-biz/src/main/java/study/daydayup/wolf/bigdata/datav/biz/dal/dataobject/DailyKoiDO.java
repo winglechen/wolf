@@ -13,6 +13,8 @@ public class DailyKoiDO implements Serializable {
 
     private LocalDate date;
 
+    private String source;
+
     private Integer pv;
 
     private Integer uv;
@@ -37,9 +39,9 @@ public class DailyKoiDO implements Serializable {
 
     private Integer kycCount;
 
-    private Integer creditPromoteCount;
-
     private Integer authSuccessCount;
+
+    private Integer creditPromoteCount;
 
     private Boolean deleteFlag;
 
@@ -56,6 +58,7 @@ public class DailyKoiDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
         sb.append(", date=").append(date);
+        sb.append(", source=").append(source);
         sb.append(", pv=").append(pv);
         sb.append(", uv=").append(uv);
         sb.append(", registerCount=").append(registerCount);
@@ -68,8 +71,8 @@ public class DailyKoiDO implements Serializable {
         sb.append(", drivingLicenseCount=").append(drivingLicenseCount);
         sb.append(", voterCount=").append(voterCount);
         sb.append(", kycCount=").append(kycCount);
-        sb.append(", creditPromoteCount=").append(creditPromoteCount);
         sb.append(", authSuccessCount=").append(authSuccessCount);
+        sb.append(", creditPromoteCount=").append(creditPromoteCount);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -91,6 +94,7 @@ public class DailyKoiDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
+            && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getPv() == null ? other.getPv() == null : this.getPv().equals(other.getPv()))
             && (this.getUv() == null ? other.getUv() == null : this.getUv().equals(other.getUv()))
             && (this.getRegisterCount() == null ? other.getRegisterCount() == null : this.getRegisterCount().equals(other.getRegisterCount()))
@@ -103,8 +107,8 @@ public class DailyKoiDO implements Serializable {
             && (this.getDrivingLicenseCount() == null ? other.getDrivingLicenseCount() == null : this.getDrivingLicenseCount().equals(other.getDrivingLicenseCount()))
             && (this.getVoterCount() == null ? other.getVoterCount() == null : this.getVoterCount().equals(other.getVoterCount()))
             && (this.getKycCount() == null ? other.getKycCount() == null : this.getKycCount().equals(other.getKycCount()))
-            && (this.getCreditPromoteCount() == null ? other.getCreditPromoteCount() == null : this.getCreditPromoteCount().equals(other.getCreditPromoteCount()))
             && (this.getAuthSuccessCount() == null ? other.getAuthSuccessCount() == null : this.getAuthSuccessCount().equals(other.getAuthSuccessCount()))
+            && (this.getCreditPromoteCount() == null ? other.getCreditPromoteCount() == null : this.getCreditPromoteCount().equals(other.getCreditPromoteCount()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -116,6 +120,7 @@ public class DailyKoiDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
+        result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
         result = prime * result + ((getPv() == null) ? 0 : getPv().hashCode());
         result = prime * result + ((getUv() == null) ? 0 : getUv().hashCode());
         result = prime * result + ((getRegisterCount() == null) ? 0 : getRegisterCount().hashCode());
@@ -128,8 +133,8 @@ public class DailyKoiDO implements Serializable {
         result = prime * result + ((getDrivingLicenseCount() == null) ? 0 : getDrivingLicenseCount().hashCode());
         result = prime * result + ((getVoterCount() == null) ? 0 : getVoterCount().hashCode());
         result = prime * result + ((getKycCount() == null) ? 0 : getKycCount().hashCode());
-        result = prime * result + ((getCreditPromoteCount() == null) ? 0 : getCreditPromoteCount().hashCode());
         result = prime * result + ((getAuthSuccessCount() == null) ? 0 : getAuthSuccessCount().hashCode());
+        result = prime * result + ((getCreditPromoteCount() == null) ? 0 : getCreditPromoteCount().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;

@@ -18,6 +18,7 @@
     <result column="loss_amount" jdbcType="DECIMAL" property="lossAmount" />
     <result column="partly_loss_count" jdbcType="INTEGER" property="partlyLossCount" />
     <result column="partly_loss_amount" jdbcType="DECIMAL" property="partlyLossAmount" />
+    <result column="m1_loss_rate" jdbcType="DECIMAL" property="m1LossRate" />
     <result column="d1_amount" jdbcType="DECIMAL" property="d1Amount" />
     <result column="d1" jdbcType="INTEGER" property="d1" />
     <result column="d2" jdbcType="INTEGER" property="d2" />
@@ -31,14 +32,14 @@
     <result column="w4" jdbcType="INTEGER" property="w4" />
     <result column="m1" jdbcType="INTEGER" property="m1" />
     <result column="mn" jdbcType="INTEGER" property="mn" />
-    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, loan_date, due_date, goods_id, installment_no, prepay_count, prepay_amount, 
     repay_count, repay_amount, overdue_count, overdue_amount, loss_count, loss_amount, 
-    partly_loss_count, partly_loss_amount, d1_amount, d1, d2, d3, d4, d5, d6, d7, w2, 
-    w3, w4, m1, mn, delete_flag, created_at
+    partly_loss_count, partly_loss_amount, m1_loss_rate, d1_amount, d1, d2, d3, d4, d5, 
+    d6, d7, w2, w3, w4, m1, mn, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -56,21 +57,21 @@
       prepay_count, prepay_amount, repay_count, 
       repay_amount, overdue_count, overdue_amount, 
       loss_count, loss_amount, partly_loss_count, 
-      partly_loss_amount, d1_amount, d1, 
-      d2, d3, d4, d5, 
-      d6, d7, w2, w3, 
-      w4, m1, mn, delete_flag, 
-      created_at)
+      partly_loss_amount, m1_loss_rate, d1_amount, 
+      d1, d2, d3, d4, 
+      d5, d6, d7, w2, 
+      w3, w4, m1, mn, 
+      delete_flag, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{loanDate,jdbcType=DATE}, 
       #{dueDate,jdbcType=DATE}, #{goodsId,jdbcType=BIGINT}, #{installmentNo,jdbcType=INTEGER}, 
       #{prepayCount,jdbcType=INTEGER}, #{prepayAmount,jdbcType=DECIMAL}, #{repayCount,jdbcType=INTEGER}, 
       #{repayAmount,jdbcType=DECIMAL}, #{overdueCount,jdbcType=INTEGER}, #{overdueAmount,jdbcType=DECIMAL}, 
       #{lossCount,jdbcType=INTEGER}, #{lossAmount,jdbcType=DECIMAL}, #{partlyLossCount,jdbcType=INTEGER}, 
-      #{partlyLossAmount,jdbcType=DECIMAL}, #{d1Amount,jdbcType=DECIMAL}, #{d1,jdbcType=INTEGER}, 
-      #{d2,jdbcType=INTEGER}, #{d3,jdbcType=INTEGER}, #{d4,jdbcType=INTEGER}, #{d5,jdbcType=INTEGER}, 
-      #{d6,jdbcType=INTEGER}, #{d7,jdbcType=INTEGER}, #{w2,jdbcType=INTEGER}, #{w3,jdbcType=INTEGER}, 
-      #{w4,jdbcType=INTEGER}, #{m1,jdbcType=INTEGER}, #{mn,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{partlyLossAmount,jdbcType=DECIMAL}, #{m1LossRate,jdbcType=DECIMAL}, #{d1Amount,jdbcType=DECIMAL}, 
+      #{d1,jdbcType=INTEGER}, #{d2,jdbcType=INTEGER}, #{d3,jdbcType=INTEGER}, #{d4,jdbcType=INTEGER}, 
+      #{d5,jdbcType=INTEGER}, #{d6,jdbcType=INTEGER}, #{d7,jdbcType=INTEGER}, #{w2,jdbcType=INTEGER}, 
+      #{w3,jdbcType=INTEGER}, #{w4,jdbcType=INTEGER}, #{m1,jdbcType=INTEGER}, #{mn,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.TrackRepayDO">
     insert into track_repay
@@ -122,6 +123,9 @@
       </if>
       <if test="partlyLossAmount != null">
         partly_loss_amount,
+      </if>
+      <if test="m1LossRate != null">
+        m1_loss_rate,
       </if>
       <if test="d1Amount != null">
         d1_amount,
@@ -218,6 +222,9 @@
       <if test="partlyLossAmount != null">
         #{partlyLossAmount,jdbcType=DECIMAL},
       </if>
+      <if test="m1LossRate != null">
+        #{m1LossRate,jdbcType=DECIMAL},
+      </if>
       <if test="d1Amount != null">
         #{d1Amount,jdbcType=DECIMAL},
       </if>
@@ -258,7 +265,7 @@
         #{mn,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        #{deleteFlag,jdbcType=BIT},
+        #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -313,6 +320,9 @@
       <if test="partlyLossAmount != null">
         partly_loss_amount = #{partlyLossAmount,jdbcType=DECIMAL},
       </if>
+      <if test="m1LossRate != null">
+        m1_loss_rate = #{m1LossRate,jdbcType=DECIMAL},
+      </if>
       <if test="d1Amount != null">
         d1_amount = #{d1Amount,jdbcType=DECIMAL},
       </if>
@@ -353,7 +363,7 @@
         mn = #{mn,jdbcType=INTEGER},
       </if>
       <if test="deleteFlag != null">
-        delete_flag = #{deleteFlag,jdbcType=BIT},
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -378,6 +388,7 @@
       loss_amount = #{lossAmount,jdbcType=DECIMAL},
       partly_loss_count = #{partlyLossCount,jdbcType=INTEGER},
       partly_loss_amount = #{partlyLossAmount,jdbcType=DECIMAL},
+      m1_loss_rate = #{m1LossRate,jdbcType=DECIMAL},
       d1_amount = #{d1Amount,jdbcType=DECIMAL},
       d1 = #{d1,jdbcType=INTEGER},
       d2 = #{d2,jdbcType=INTEGER},
@@ -391,7 +402,7 @@
       w4 = #{w4,jdbcType=INTEGER},
       m1 = #{m1,jdbcType=INTEGER},
       mn = #{mn,jdbcType=INTEGER},
-      delete_flag = #{deleteFlag,jdbcType=BIT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
