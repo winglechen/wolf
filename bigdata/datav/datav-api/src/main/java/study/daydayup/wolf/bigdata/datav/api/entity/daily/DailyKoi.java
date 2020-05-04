@@ -11,15 +11,16 @@ import java.time.LocalDateTime;
 public class DailyKoi implements Model {
     private Long orgId;
     private LocalDate date;
+    private String source;
 
     private Integer pv;
     private Integer uv;
 
-        private Integer registerCount;
-        private Integer basicInfoCount;
-        private Integer aadhaarCount;
-        private Integer bankcardCount;
-        private Integer authSuccessCount;
+    private Integer registerCount;
+    private Integer basicInfoCount;
+    private Integer aadhaarCount;
+    private Integer bankcardCount;
+    private Integer authSuccessCount;
 
     private Integer livenessCount;
     private Integer panCardCount;
