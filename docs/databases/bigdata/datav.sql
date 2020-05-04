@@ -33,6 +33,41 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '运营日报';
 
+
+-- 通用交易日报
+DROP TABLE IF EXISTS `daily_trade`;
+CREATE TABLE IF NOT EXISTS `daily_trade`
+(
+    `id`                        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `org_id`                    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `date`                      DATE                NOT NULL COMMENT '统计日期',
+    `trade_type`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单类型',
+    `trade_state`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单状态：0代表新增',
+    `source`                    VARCHAR(50) NOT NULL DEFAULT '' COMMENT '渠道',
+
+    `request_count`             INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '借款申请数',
+    `first_request_count`       INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次申请数',
+    `request_approved`          INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '申请通过数',
+    `first_request_approved`    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次申请通过数',
+    `request_refused`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '申请拒绝数',
+    `first_request_refused`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次申请拒绝数',
+    `approved_rate`             DECIMAL(10, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '通过比率',
+    `first_approved_rate`       DECIMAL(10, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次申请通过比率',
+    `loan_count`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '放款数',
+    `first_loan_count`          INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次放款数',
+    `loan_amount`               DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '放款金额',
+    `first_loan_amount`         DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次放款金额',
+    `loan_rate`                 DECIMAL(10, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '放款比率',
+    `first_loan_rate`           DECIMAL(10, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '首次申请放款比率',
+
+    `delete_flag`          TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `created_at`           DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX udx_date (`org_id`, `date`, `trade_type`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+    COMMENT = '交易日报';
+
+
 -- 放款概况日报
 DROP TABLE IF EXISTS `daily_loan`;
 CREATE TABLE IF NOT EXISTS `daily_loan`
