@@ -19,6 +19,8 @@ public class DailyKoiDO implements Serializable {
 
     private Integer uv;
 
+    private Integer installCount;
+
     private Integer registerCount;
 
     private Integer basicInfoCount;
@@ -61,6 +63,7 @@ public class DailyKoiDO implements Serializable {
         sb.append(", source=").append(source);
         sb.append(", pv=").append(pv);
         sb.append(", uv=").append(uv);
+        sb.append(", installCount=").append(installCount);
         sb.append(", registerCount=").append(registerCount);
         sb.append(", basicInfoCount=").append(basicInfoCount);
         sb.append(", livenessCount=").append(livenessCount);
@@ -97,6 +100,7 @@ public class DailyKoiDO implements Serializable {
             && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getPv() == null ? other.getPv() == null : this.getPv().equals(other.getPv()))
             && (this.getUv() == null ? other.getUv() == null : this.getUv().equals(other.getUv()))
+            && (this.getInstallCount() == null ? other.getInstallCount() == null : this.getInstallCount().equals(other.getInstallCount()))
             && (this.getRegisterCount() == null ? other.getRegisterCount() == null : this.getRegisterCount().equals(other.getRegisterCount()))
             && (this.getBasicInfoCount() == null ? other.getBasicInfoCount() == null : this.getBasicInfoCount().equals(other.getBasicInfoCount()))
             && (this.getLivenessCount() == null ? other.getLivenessCount() == null : this.getLivenessCount().equals(other.getLivenessCount()))
@@ -123,6 +127,7 @@ public class DailyKoiDO implements Serializable {
         result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
         result = prime * result + ((getPv() == null) ? 0 : getPv().hashCode());
         result = prime * result + ((getUv() == null) ? 0 : getUv().hashCode());
+        result = prime * result + ((getInstallCount() == null) ? 0 : getInstallCount().hashCode());
         result = prime * result + ((getRegisterCount() == null) ? 0 : getRegisterCount().hashCode());
         result = prime * result + ((getBasicInfoCount() == null) ? 0 : getBasicInfoCount().hashCode());
         result = prime * result + ((getLivenessCount() == null) ? 0 : getLivenessCount().hashCode());

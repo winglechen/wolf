@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
 
     `pv`                    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'PV',
     `uv`                    INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'UV',
+    `install_count`         INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '安装数',
     `register_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '注册数',
     `basic_info_count`      INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '基础信息数',
     `liveness_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '活体认证数',

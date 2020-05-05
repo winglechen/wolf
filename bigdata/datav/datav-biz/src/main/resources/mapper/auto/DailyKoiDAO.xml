@@ -8,6 +8,7 @@
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="pv" jdbcType="INTEGER" property="pv" />
     <result column="uv" jdbcType="INTEGER" property="uv" />
+    <result column="install_count" jdbcType="INTEGER" property="installCount" />
     <result column="register_count" jdbcType="INTEGER" property="registerCount" />
     <result column="basic_info_count" jdbcType="INTEGER" property="basicInfoCount" />
     <result column="liveness_count" jdbcType="INTEGER" property="livenessCount" />
@@ -24,8 +25,8 @@
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `date`, `source`, pv, uv, register_count, basic_info_count, liveness_count, 
-    bankcard_count, aadhaar_count, pan_card_count, passport_count, driving_license_count, 
+    id, org_id, `date`, `source`, pv, uv, install_count, register_count, basic_info_count, 
+    liveness_count, bankcard_count, aadhaar_count, pan_card_count, passport_count, driving_license_count, 
     voter_count, kyc_count, auth_success_count, credit_promote_count, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -40,19 +41,19 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
     insert into daily_koi (id, org_id, `date`, `source`, 
-      pv, uv, register_count, 
-      basic_info_count, liveness_count, bankcard_count, 
-      aadhaar_count, pan_card_count, passport_count, 
-      driving_license_count, voter_count, kyc_count, 
-      auth_success_count, credit_promote_count, delete_flag, 
-      created_at)
+      pv, uv, install_count, 
+      register_count, basic_info_count, liveness_count, 
+      bankcard_count, aadhaar_count, pan_card_count, 
+      passport_count, driving_license_count, voter_count, 
+      kyc_count, auth_success_count, credit_promote_count, 
+      delete_flag, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{source,jdbcType=VARCHAR}, 
-      #{pv,jdbcType=INTEGER}, #{uv,jdbcType=INTEGER}, #{registerCount,jdbcType=INTEGER}, 
-      #{basicInfoCount,jdbcType=INTEGER}, #{livenessCount,jdbcType=INTEGER}, #{bankcardCount,jdbcType=INTEGER}, 
-      #{aadhaarCount,jdbcType=INTEGER}, #{panCardCount,jdbcType=INTEGER}, #{passportCount,jdbcType=INTEGER}, 
-      #{drivingLicenseCount,jdbcType=INTEGER}, #{voterCount,jdbcType=INTEGER}, #{kycCount,jdbcType=INTEGER}, 
-      #{authSuccessCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP})
+      #{pv,jdbcType=INTEGER}, #{uv,jdbcType=INTEGER}, #{installCount,jdbcType=INTEGER}, 
+      #{registerCount,jdbcType=INTEGER}, #{basicInfoCount,jdbcType=INTEGER}, #{livenessCount,jdbcType=INTEGER}, 
+      #{bankcardCount,jdbcType=INTEGER}, #{aadhaarCount,jdbcType=INTEGER}, #{panCardCount,jdbcType=INTEGER}, 
+      #{passportCount,jdbcType=INTEGER}, #{drivingLicenseCount,jdbcType=INTEGER}, #{voterCount,jdbcType=INTEGER}, 
+      #{kycCount,jdbcType=INTEGER}, #{authSuccessCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO">
     insert into daily_koi
@@ -74,6 +75,9 @@
       </if>
       <if test="uv != null">
         uv,
+      </if>
+      <if test="installCount != null">
+        install_count,
       </if>
       <if test="registerCount != null">
         register_count,
@@ -137,6 +141,9 @@
       <if test="uv != null">
         #{uv,jdbcType=INTEGER},
       </if>
+      <if test="installCount != null">
+        #{installCount,jdbcType=INTEGER},
+      </if>
       <if test="registerCount != null">
         #{registerCount,jdbcType=INTEGER},
       </if>
@@ -199,6 +206,9 @@
       <if test="uv != null">
         uv = #{uv,jdbcType=INTEGER},
       </if>
+      <if test="installCount != null">
+        install_count = #{installCount,jdbcType=INTEGER},
+      </if>
       <if test="registerCount != null">
         register_count = #{registerCount,jdbcType=INTEGER},
       </if>
@@ -251,6 +261,7 @@
       `source` = #{source,jdbcType=VARCHAR},
       pv = #{pv,jdbcType=INTEGER},
       uv = #{uv,jdbcType=INTEGER},
+      install_count = #{installCount,jdbcType=INTEGER},
       register_count = #{registerCount,jdbcType=INTEGER},
       basic_info_count = #{basicInfoCount,jdbcType=INTEGER},
       liveness_count = #{livenessCount,jdbcType=INTEGER},
