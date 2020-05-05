@@ -2,11 +2,8 @@ package study.daydayup.wolf.business.union.task.dts.source;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
-import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.dts.config.SourceConfig;
-import study.daydayup.wolf.dts.source.MysqlScanner;
 import study.daydayup.wolf.dts.source.MysqlSource;
-import study.daydayup.wolf.dts.source.Source;
 
 import javax.annotation.Resource;
 
@@ -23,8 +20,15 @@ public class ContractSource {
     @Resource
     private MysqlSource mysqlSource;
 
-    public Table latest(String sinkName) {
+    public MysqlSource latest() {
+        SourceConfig sourceConfig = SourceConfig.builder()
+                .sourceName("latest-contract")
+                .tableName("contract")
+                .columns("id, buyer_id, seller_id, trade_type, state, source, tags, created_at")
+                .shardingKey(shardingConfig.getShard())
+                .build();
+        mysqlSource.init(sourceConfig);
 
-        return null;
+        return mysqlSource;
     }
 }
