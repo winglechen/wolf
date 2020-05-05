@@ -9,6 +9,9 @@ import study.daydayup.wolf.dts.transformation.Operator;
 import study.daydayup.wolf.dts.transformation.Statistics;
 import study.daydayup.wolf.dts.transformation.Transformation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * study.daydayup.wolf.business.union.task.dts.transformation
  *
@@ -30,8 +33,25 @@ public class UserCreditLogTransformation implements Transformation {
                 .toLocalDate("created_at", "date");
 
         operator.aggregate()
-                .count("register_count");
+                .mapCount("auth_type",getAuthTypeMap());
 
         return transformation.transform(stream, true);
+    }
+
+    private Map<Object, String> getAuthTypeMap() {
+        Map<Object, String> map = new HashMap<>(8);
+        map.put(1, "basic_info_count");
+        map.put(2, "liveness_count");
+        map.put(3, "aadhaar_count");
+        map.put(4, "pan_card_count");
+        map.put(5, "passport_count");
+        map.put(6, "driving_license_count");
+        map.put(7, "voter_count");
+        map.put(8, "bankcard_count");
+        map.put(9, "kyc_count");
+
+        map.put(20, "auth_success_count");
+        map.put(50, "install_count");
+        return map;
     }
 }

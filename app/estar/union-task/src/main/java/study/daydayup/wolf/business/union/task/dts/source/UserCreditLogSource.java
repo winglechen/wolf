@@ -23,7 +23,7 @@ public class UserCreditLogSource {
     public MysqlSource  findLatestLog() {
         SourceConfig sourceConfig = SourceConfig.builder()
                 .sourceName("latest-credit-log")
-                .tableName("user")
+                .tableName("user_credit_log")
                 .columns("id, org_id, account_id, auth_type, status, created_at")
                 .shardingKey(shardingConfig.getShard())
                 .build();
