@@ -9,6 +9,6 @@ package study.daydayup.wolf.business.union.task.service;
 public interface DailyTradeService {
     void countNewContract();
     void countNewOrder();
-    void countPaidOrder();
+    void countTradeStateChange();
 
 }

@@ -53,7 +53,7 @@ public class DailyKoiServiceImpl implements DailyKoiService {
 
     @Override
     public void countIndianInfoState() {
-        String taskName = "ind-info-count";
+        String taskName = "indian-info-count";
         MysqlSource source = creditLogSource.findLatestLog();
         Table stream = source.getStream(taskName);
 
