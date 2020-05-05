@@ -37,7 +37,6 @@ public class ContractTransformation implements Transformation {
         operator.aggregate()
                 .count("trade_count");
 
-
         return transformation.transform(stream, true);
     }
 

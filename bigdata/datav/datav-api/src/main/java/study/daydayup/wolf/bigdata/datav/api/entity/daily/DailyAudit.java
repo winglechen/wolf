@@ -18,8 +18,15 @@ public class DailyAudit implements Model {
     private Long orgId;
     private LocalDate date;
 
+    private Integer installCount;
+    private Integer registerCount;
+
+    private Integer aadhaarCount;
+    private Integer bankCardCount;
+
     private Integer requestCount;
     private Integer payCount;
+
     private BigDecimal payAmount;
 
 }
