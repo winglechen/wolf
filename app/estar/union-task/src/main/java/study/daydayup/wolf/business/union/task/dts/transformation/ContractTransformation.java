@@ -20,7 +20,7 @@ import study.daydayup.wolf.dts.transformation.Transformation;
 @Component
 public class ContractTransformation implements Transformation {
 
-    public Statistics latest(Table stream, MysqlSink mysqlSink) {
+    public Statistics newCount(Table stream, MysqlSink mysqlSink) {
         if (CollectionUtil.isEmpty(stream)) {
             return null;
         }

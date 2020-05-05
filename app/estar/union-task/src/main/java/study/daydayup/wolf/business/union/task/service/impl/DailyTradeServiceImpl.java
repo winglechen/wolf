@@ -48,7 +48,7 @@ public class DailyTradeServiceImpl implements DailyTradeService {
         Table stream = source.getStream(taskName);
 
         MysqlSink sink = tradeSink.create(taskName, source);
-        Statistics statistics = contractTransformation.latest(stream, sink);
+        Statistics statistics = contractTransformation.newCount(stream, sink);
         sink.save(statistics);
 
     }

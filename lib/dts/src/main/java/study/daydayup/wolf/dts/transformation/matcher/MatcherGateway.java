@@ -142,6 +142,12 @@ public class MatcherGateway extends AbstractMatcher implements Matcher {
         return this;
     }
 
+    public MatcherGateway addMatcher(@NonNull Matcher matcher) {
+        matcherList.add(matcher);
+
+        return this;
+    }
+
     private void initMatcher(@NonNull Matcher matcher, @NonNull String column, @NonNull Object value) {
         matcher.init(column, value);
         matcherList.add(matcher);

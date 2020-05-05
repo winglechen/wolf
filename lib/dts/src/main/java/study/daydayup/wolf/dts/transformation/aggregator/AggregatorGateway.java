@@ -153,4 +153,10 @@ public class AggregatorGateway extends AbstractAggregator implements Aggregator 
         return this;
     }
 
+    public AggregatorGateway addAggregator(@NonNull Aggregator aggregator) {
+        aggregatorList.add(aggregator);
+
+        return this;
+    }
+
 }

@@ -66,4 +66,9 @@ public class MapperGateway extends AbstractMapper implements Mapper {
         return this;
     }
 
+    public MapperGateway addMapper(@NonNull Mapper mapper) {
+        mapperList.add(mapper);
+        return this;
+    }
+
 }
