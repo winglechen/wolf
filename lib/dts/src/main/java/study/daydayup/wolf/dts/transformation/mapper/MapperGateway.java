@@ -36,7 +36,7 @@ public class MapperGateway extends AbstractMapper implements Mapper {
     }
 
     public MapperGateway toLocalDate(@NonNull String column, String newColumn) {
-        Mapper mapper = new LocalDateMapper();
+        LocalDateMapper mapper = new LocalDateMapper();
 
         mapper.init(column, newColumn);
         mapperList.add(mapper);
@@ -45,7 +45,7 @@ public class MapperGateway extends AbstractMapper implements Mapper {
     }
 
     public MapperGateway rename(@NonNull String column, @NonNull String newColumn) {
-        Mapper mapper = new RenameMapper();
+        RenameMapper mapper = new RenameMapper();
 
         mapper.init(column, newColumn);
         mapperList.add(mapper);
@@ -58,9 +58,18 @@ public class MapperGateway extends AbstractMapper implements Mapper {
     }
 
     public MapperGateway toTag(@NonNull String column) {
-        Mapper mapper = new TagMapper();
+        TagMapper mapper = new TagMapper();
 
         mapper.init(column, newColumn);
+        mapperList.add(mapper);
+
+        return this;
+    }
+
+    public MapperGateway set(@NonNull String column, @NonNull Object value) {
+        SetMapper mapper = new SetMapper();
+
+        mapper.init(column, value);
         mapperList.add(mapper);
 
         return this;

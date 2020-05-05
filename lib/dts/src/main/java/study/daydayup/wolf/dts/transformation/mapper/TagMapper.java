@@ -9,7 +9,7 @@ import study.daydayup.wolf.common.model.type.string.Tag;
  * @author Wingle
  * @since 2020/2/11 6:09 下午
  **/
-public class TagMapper extends AbstractMapper implements Mapper {
+public class TagMapper extends AbstractMapper implements InitableMapper {
     @Override
     public void map(Row row) {
         Object value = row.get(column);

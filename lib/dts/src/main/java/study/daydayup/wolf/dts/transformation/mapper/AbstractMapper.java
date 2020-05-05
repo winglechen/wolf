@@ -8,7 +8,7 @@ import lombok.NonNull;
  * @author Wingle
  * @since 2020/2/11 6:09 下午
  **/
-public abstract class AbstractMapper implements Mapper {
+public abstract class AbstractMapper implements InitableMapper {
     protected String column;
     protected String newColumn;
 

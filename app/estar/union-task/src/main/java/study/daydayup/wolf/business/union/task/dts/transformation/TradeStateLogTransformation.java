@@ -33,17 +33,9 @@ public class TradeStateLogTransformation implements Transformation {
                 .rename("seller_id", "org_id")
                 .toLocalDate("created_at", "date")
                 .toTag();
-        operator.match()
-                .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode());
         operator.aggregate()
-                .count("request_count");
-
-        operator = transformation.addJob();
-        operator.match()
-                .equal("trade_type", TradeTypeEnum.LOAN_CONTRACT.getCode())
-                .hasTag(TradeTag.FIRST_TRADE);
-        operator.aggregate()
-                .count("first_request_count");
+                .count("trade_count")
+                .sum("amount", "trade_amount");
 
         return transformation.transform(stream, true);
     }

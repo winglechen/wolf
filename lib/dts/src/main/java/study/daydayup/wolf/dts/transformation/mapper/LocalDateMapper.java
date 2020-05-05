@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Wingle
  * @since 2020/2/11 6:09 下午
  **/
-public class LocalDateMapper extends AbstractMapper implements Mapper {
+public class LocalDateMapper extends AbstractMapper implements InitableMapper {
     @Override
     public void map(Row row) {
         Date value = (Date) row.get(column);

@@ -9,7 +9,5 @@ import study.daydayup.wolf.common.io.db.Row;
  * @since 2020/2/11 11:44 上午
  **/
 public interface Mapper {
-    void init(String column);
-    void init(String column, String newColumn);
     void map(Row row);
 }
