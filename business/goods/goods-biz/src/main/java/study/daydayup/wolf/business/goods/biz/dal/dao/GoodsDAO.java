@@ -21,6 +21,8 @@ public interface GoodsDAO {
 
     int updateStateByOrgId(@Param("orgId")Long orgId, @Param("oldState")Integer oldState, @Param("newState") Integer newSate);
 
+    int updateStateByGoodsType(@Param("orgId")Long orgId, @Param("goodsType")Integer goodsType, @Param("oldState")Integer oldState, @Param("newState") Integer newSate);
+
     int updateDeleteFlagById(@Param("id")Long id,@Param("orgId")Long orgId, @Param("updatedDeleteFlag")Boolean updatedDeleteFlag);
 
     List<GoodsDO> selectByOrgId(@Param("orgId")Long orgId);
