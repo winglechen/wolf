@@ -1,6 +1,8 @@
 package study.daydayup.wolf.dts.source;
 
 import lombok.NonNull;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.dts.config.SourceConfig;
@@ -18,6 +20,7 @@ import java.util.Map;
  * @since 2020/2/16 6:12 下午
  **/
 @Component
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MysqlSource extends AbstractSource implements Source {
     @Resource
     private Offset offset;

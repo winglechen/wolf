@@ -1,6 +1,8 @@
 package study.daydayup.wolf.dts.sink;
 
 import lombok.NonNull;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ import java.util.Set;
  * @since 2020/2/16 6:59 下午
  **/
 @Component
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MysqlSink extends AbstractSink  implements Sink {
     private Statistics statistics;
 

@@ -2,6 +2,8 @@ package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.union.task.config.ShardingConfig;
+import study.daydayup.wolf.business.union.task.dts.sink.DailyKoiSink;
+import study.daydayup.wolf.business.union.task.dts.source.UserSource;
 import study.daydayup.wolf.business.union.task.dts.transformation.UserTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyKoiService;
 import study.daydayup.wolf.common.io.db.Table;
@@ -21,12 +23,11 @@ import javax.annotation.Resource;
  **/
 @Component
 public class DailyKoiServiceImpl implements DailyKoiService {
+
     @Resource
-    private ShardingConfig shardingConfig;
+    private UserSource userSource;
     @Resource
-    private MysqlSource mysqlSource;
-    @Resource
-    private MysqlSink mysqlSink;
+    private DailyKoiSink koiSink;
     @Resource
     private UserTransformation userTransformation;
 
@@ -37,28 +38,13 @@ public class DailyKoiServiceImpl implements DailyKoiService {
 
     @Override
     public void countRegister() {
-        SourceConfig sourceConfig = SourceConfig.builder()
-                .sourceName("onion-latest-user")
-                .tableName("user")
-                .columns("id, org_id, account_id, created_at")
-                .shardingKey(shardingConfig.getShard())
-                .build();
-        mysqlSource.init(sourceConfig);
+        String taskName = "register-count";
+        MysqlSource source = userSource.findLatestUser();
+        Table stream = source.getStream(taskName);
 
-        String sinkName = "onion-register-count";
-        Table stream = mysqlSource.getStream(sinkName);
-
-        SinkConfig sinkConfig = SinkConfig.builder()
-                .sinkName(sinkName)
-                .tableName("daily_koi")
-                .source(mysqlSource)
-                .build()
-                .setKeyColumns("org_id", "date");
-
-        Statistics statistics = userTransformation.latest(stream, mysqlSink);
-        mysqlSink.save(statistics);
-        mysqlSource.saveOffset(statistics.getMaxId());
-
+        MysqlSink sink = koiSink.countRegister(taskName, source);
+        Statistics statistics = userTransformation.latest(stream, sink);
+        sink.save(statistics);
     }
 
     @Override
