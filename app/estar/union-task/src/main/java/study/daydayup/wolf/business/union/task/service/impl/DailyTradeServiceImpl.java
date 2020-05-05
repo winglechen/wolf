@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.union.task.service.DailyTradeService;
 public class DailyTradeServiceImpl implements DailyTradeService {
     @Override
     public void countNewContract() {
-        
+
     }
 
     @Override
