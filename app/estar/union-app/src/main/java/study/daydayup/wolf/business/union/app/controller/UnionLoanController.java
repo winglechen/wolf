@@ -155,7 +155,7 @@ public class UnionLoanController extends BaseUnionController {
         return buyService.confirm(request);
     }
 
-    @GetMapping("/loan/detail/{tradeNo}")
+    @GetMapping("/loan/contract/detail/{tradeNo}")
     public Result<Contract> detail(@PathVariable("tradeNo") String tradeNo) {
         TradeId tradeId = new TradeId();
         tradeId.setTradeNo(tradeNo);
