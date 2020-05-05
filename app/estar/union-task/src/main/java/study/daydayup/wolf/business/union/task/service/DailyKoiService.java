@@ -20,5 +20,5 @@ public interface DailyKoiService {
      * 6) password_count
      * 7) ... ...
      */
-    void countCustomerInfoState();
+    void countIndianInfoState();
 }
