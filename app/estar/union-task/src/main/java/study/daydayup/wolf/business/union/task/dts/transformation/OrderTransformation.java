@@ -20,7 +20,7 @@ import study.daydayup.wolf.dts.transformation.Transformation;
 @Component
 public class OrderTransformation implements Transformation {
 
-    public Statistics latest(Table stream, MysqlSink mysqlSink) {
+    public Statistics newOrder(Table stream, MysqlSink mysqlSink) {
         if (CollectionUtil.isEmpty(stream)) {
             return null;
         }
@@ -32,6 +32,7 @@ public class OrderTransformation implements Transformation {
         operator.map()
                 .rename("seller_id", "org_id")
                 .toLocalDate("created_at", "date")
+                .set("state", 0)
                 .toTag();
         operator.aggregate()
                 .count("trade_count");

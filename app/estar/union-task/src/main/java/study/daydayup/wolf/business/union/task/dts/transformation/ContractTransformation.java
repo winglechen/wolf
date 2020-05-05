@@ -32,6 +32,7 @@ public class ContractTransformation implements Transformation {
         operator.map()
                 .rename("seller_id", "org_id")
                 .toLocalDate("created_at", "date")
+                .set("state", 0)
                 .toTag();
         operator.aggregate()
                 .count("trade_count");
