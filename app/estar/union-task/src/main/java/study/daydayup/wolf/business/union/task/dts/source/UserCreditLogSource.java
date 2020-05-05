@@ -14,17 +14,17 @@ import javax.annotation.Resource;
  * @since 2020/5/5 11:22 上午
  **/
 @Component
-public class UserSource {
+public class UserCreditLogSource {
     @Resource
     private ShardingConfig shardingConfig;
     @Resource
     private MysqlSource mysqlSource;
 
-    public MysqlSource  findLatestUser() {
+    public MysqlSource  findLatestLog() {
         SourceConfig sourceConfig = SourceConfig.builder()
-                .sourceName("latest-user")
+                .sourceName("latest-credit-log")
                 .tableName("user")
-                .columns("id, org_id, account_id, created_at")
+                .columns("id, org_id, account_id, auth_type, status, created_at")
                 .shardingKey(shardingConfig.getShard())
                 .build();
         mysqlSource.init(sourceConfig);
