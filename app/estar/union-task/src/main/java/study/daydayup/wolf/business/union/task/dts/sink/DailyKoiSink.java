@@ -18,7 +18,7 @@ public class DailyKoiSink {
     @Resource
     private MysqlSink mysqlSink;
 
-    public MysqlSink countRegister(String taskName, MysqlSource mysqlSource) {
+    public MysqlSink create(String taskName, MysqlSource mysqlSource) {
         SinkConfig sinkConfig = SinkConfig.builder()
                 .sinkName(taskName)
                 .tableName("daily_koi")

@@ -1,14 +1,13 @@
 package study.daydayup.wolf.business.union.task.service.impl;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.union.task.config.ShardingConfig;
 import study.daydayup.wolf.business.union.task.dts.sink.DailyKoiSink;
+import study.daydayup.wolf.business.union.task.dts.source.UserCreditLogSource;
 import study.daydayup.wolf.business.union.task.dts.source.UserSource;
+import study.daydayup.wolf.business.union.task.dts.transformation.UserCreditLogTransformation;
 import study.daydayup.wolf.business.union.task.dts.transformation.UserTransformation;
 import study.daydayup.wolf.business.union.task.service.DailyKoiService;
 import study.daydayup.wolf.common.io.db.Table;
-import study.daydayup.wolf.dts.config.SinkConfig;
-import study.daydayup.wolf.dts.config.SourceConfig;
 import study.daydayup.wolf.dts.sink.MysqlSink;
 import study.daydayup.wolf.dts.source.MysqlSource;
 import study.daydayup.wolf.dts.transformation.Statistics;
@@ -31,6 +30,11 @@ public class DailyKoiServiceImpl implements DailyKoiService {
     @Resource
     private UserTransformation userTransformation;
 
+    @Resource
+    private UserCreditLogSource creditLogSource;
+    @Resource
+    private UserCreditLogTransformation creditLogTransformation;
+
     @Override
     public void countPvAndUv() {
 
@@ -42,13 +46,19 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         MysqlSource source = userSource.findLatestUser();
         Table stream = source.getStream(taskName);
 
-        MysqlSink sink = koiSink.countRegister(taskName, source);
+        MysqlSink sink = koiSink.create(taskName, source);
         Statistics statistics = userTransformation.latest(stream, sink);
         sink.save(statistics);
     }
 
     @Override
     public void countIndianInfoState() {
+        String taskName = "ind-info-count";
+        MysqlSource source = creditLogSource.findLatestLog();
+        Table stream = source.getStream(taskName);
 
+        MysqlSink sink = koiSink.create(taskName, source);
+        Statistics statistics = creditLogTransformation.latest(stream, sink);
+        sink.save(statistics);
     }
 }
