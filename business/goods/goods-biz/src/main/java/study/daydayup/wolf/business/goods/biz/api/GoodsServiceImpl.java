@@ -1,11 +1,13 @@
 package study.daydayup.wolf.business.goods.biz.api;
 
-import org.apache.dubbo.rpc.RpcContext;
+import lombok.NonNull;
 import study.daydayup.wolf.business.goods.api.dto.GoodsOption;
 import study.daydayup.wolf.business.goods.api.entity.Goods;
 import study.daydayup.wolf.business.goods.api.enums.GoodsStateEnum;
+import study.daydayup.wolf.business.goods.api.exception.GoodsNotFoundException;
 import study.daydayup.wolf.business.goods.api.service.GoodsService;
 import study.daydayup.wolf.business.goods.biz.dal.dao.GoodsDAO;
+import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO;
 import study.daydayup.wolf.business.goods.biz.goods.GoodsEntity;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
@@ -72,5 +74,19 @@ public class GoodsServiceImpl implements GoodsService {
         int newState = GoodsStateEnum.UNSALABLE.getCode();
 
         return goodsDAO.updateStateByOrgId(orgId, oldState, newState);
+    }
+
+    @Override
+    public int delistingOthers(@NonNull Long goodsId, @NonNull Long orgId) {
+        GoodsDO goodsDO = goodsDAO.selectById(goodsId, orgId);
+        if (goodsDO == null) {
+            throw new GoodsNotFoundException();
+        }
+
+        int goodsType = goodsDO.getGoodsType();
+        int oldState = GoodsStateEnum.SALABLE.getCode();
+        int newState = GoodsStateEnum.UNSALABLE.getCode();
+
+        return goodsDAO.updateStateByGoodsType(orgId, goodsType, oldState, newState);
     }
 }

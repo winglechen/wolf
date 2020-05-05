@@ -125,7 +125,7 @@ public class UnionGoodsController extends BaseUnionController {
 
         Long orgId = getFromSession("orgId", Long.class);
 
-        goodsService.delistingAll(orgId);
+        goodsService.delistingOthers(goodsId, orgId);
         goodsService.listing(goodsId, orgId);
 
         return Result.ok();
