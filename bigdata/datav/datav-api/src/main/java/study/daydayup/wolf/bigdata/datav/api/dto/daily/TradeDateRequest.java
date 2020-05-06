@@ -25,7 +25,7 @@ public class TradeDateRequest implements Request {
     private Long orgId;
 
     private Integer tradeType;
-    private Integer tradeState;
+    private Integer state;
     private String source;
 
     private Set<LocalDate> dateList;

@@ -25,9 +25,18 @@
         from daily_trade
         where `org_id` = #{request.orgId, jdbcType=BIGINT}
         and `date` in
-        <foreach item="item" index="index" collection="dateList "
+        <foreach item="item" index="index" collection="request.dateList "
                  open="(" separator="," close=")">
             #{item,jdbcType=DATE}
         </foreach>
+        <if test="request.tradeType != null">
+            and `trade_type` >= #{request.tradeType,jdbcType=INTEGER}
+        </if>
+        <if test="request.state != null">
+            and `state` >= #{request.state,jdbcType=INTEGER}
+        </if>
+        <if test="request.source != null">
+            and `source` >= #{request.source, jdbcType=VARCHAR}
+        </if>
     </select>
 </mapper>
