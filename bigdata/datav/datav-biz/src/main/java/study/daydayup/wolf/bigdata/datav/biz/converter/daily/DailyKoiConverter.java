@@ -1,6 +1,7 @@
 package study.daydayup.wolf.bigdata.datav.biz.converter.daily;
 
 import org.springframework.beans.BeanUtils;
+import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyAudit;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyKoi;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
@@ -39,5 +40,21 @@ public class DailyKoiConverter implements Converter {
     public static List<DailyKoi> toModel(List<DailyKoiDO> koiDOList) {
         return CollectionUtil.to(koiDOList, DailyKoiConverter::toModel);
     }
+
+    public static DailyAudit toAudit(DailyKoi koi) {
+        if (koi == null) {
+            return null;
+        }
+
+        DailyAudit audit = new DailyAudit();
+        BeanUtils.copyProperties(koi, audit);
+
+        return audit;
+    }
+
+    public static List<DailyAudit> toAudit(List<DailyKoi> koiList) {
+        return CollectionUtil.to(koiList, DailyKoiConverter::toAudit);
+    }
+
 
 }
