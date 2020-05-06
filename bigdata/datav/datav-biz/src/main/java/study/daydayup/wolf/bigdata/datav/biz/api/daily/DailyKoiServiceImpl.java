@@ -37,8 +37,23 @@ public class DailyKoiServiceImpl implements DailyKoiService {
 
     @Override
     public Result<Page<DailyAudit>> findAuditByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
-        Page<DailyKoi> result = selectByRange(request, pageReq);
-        return null;
+        Page<DailyAudit> auditPage;
+
+        Page<DailyKoi> koiPage = selectByRange(request, pageReq);
+        if (CollectionUtil.isEmpty(koiPage.getData())) {
+            auditPage = Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
+            return Result.ok(auditPage) ;
+        }
+
+        List<DailyAudit> auditList = DailyKoiConverter.toAudit(koiPage.getData());
+        mergeAuditTradeStatistics(auditList, request);
+        auditPage = koiPage.to(auditList);
+
+        return Result.ok(auditPage) ;
+    }
+
+    private void mergeAuditTradeStatistics(@NonNull List<DailyAudit> auditList,@NonNull DateRangeRequest request) {
+
     }
 
     private Page<DailyKoi> selectByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {

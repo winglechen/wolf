@@ -25,10 +25,9 @@ public class DailyAudit implements Model {
     private Integer aadhaarCount;
     private Integer bankCardCount;
 
-    private Integer requestCount;
-    private Integer orderCount;
-    private Integer payCount;
-
-    private BigDecimal payAmount;
+    private Integer auditPreviewCount;
+    private Integer auditRequestCount;
+    private Integer auditPaidCount;
+    private BigDecimal auditPaidAmount;
 
 }
