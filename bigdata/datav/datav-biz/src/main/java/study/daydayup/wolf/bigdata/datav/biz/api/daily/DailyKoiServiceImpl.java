@@ -1,7 +1,9 @@
 package study.daydayup.wolf.bigdata.datav.biz.api.daily;
 
+import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
+import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyAudit;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyKoi;
 import study.daydayup.wolf.bigdata.datav.api.service.daily.DailyKoiService;
 import study.daydayup.wolf.bigdata.datav.biz.converter.daily.DailyKoiConverter;
@@ -28,16 +30,25 @@ public class DailyKoiServiceImpl implements DailyKoiService {
     private DailyKoiDAO koiDAO;
 
     @Override
-    public Result<Page<DailyKoi>> findByRange(@Validated DateRangeRequest request, PageRequest pageReq) {
+    public Result<Page<DailyKoi>> findByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
+        Page<DailyKoi> result = selectByRange(request, pageReq);
+        return Result.ok(result);
+    }
+
+    @Override
+    public Result<Page<DailyAudit>> findAuditByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
+        Page<DailyKoi> result = selectByRange(request, pageReq);
+        return null;
+    }
+
+    private Page<DailyKoi> selectByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<DailyKoiDO> koiDOList = koiDAO.selectByDate(request);
         if (CollectionUtil.isEmpty(koiDOList)) {
-            return Result.ok(
-                    Page.empty(pageReq.getPageNum(), pageReq.getPageSize())
-            );
+            return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
 
         List<DailyKoi> koiList = DailyKoiConverter.toModel(koiDOList);
-        return Result.ok(Page.of(koiDOList).to(koiList));
+        return Page.of(koiDOList).to(koiList);
     }
 }

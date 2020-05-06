@@ -16,7 +16,9 @@ public class DailyKoi implements Model {
     private Integer pv;
     private Integer uv;
 
+    private Integer installCount;
     private Integer registerCount;
+
     private Integer basicInfoCount;
     private Integer aadhaarCount;
     private Integer bankcardCount;
