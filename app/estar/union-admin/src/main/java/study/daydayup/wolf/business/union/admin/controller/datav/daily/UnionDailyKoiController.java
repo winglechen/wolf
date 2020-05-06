@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
+import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyAudit;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyKoi;
 import study.daydayup.wolf.bigdata.datav.api.service.daily.DailyKoiService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
@@ -56,4 +57,34 @@ public class UnionDailyKoiController {
 
         return koiService.findByRange(request, pageRequest);
     }
+
+    @GetMapping("/datav/daily/audit")
+    public Result<Page<DailyAudit>> findAuditByDate(
+            @RequestParam(value = "startDate", required=false ) String startDate,
+            @RequestParam(value = "endDate", required=false ) String endDate,
+            @RequestParam(value = "pageNum", required=false ) Integer pageNum) {
+
+        Long orgId = session.get("orgId", Long.class);
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+
+        DateRangeRequest request = DateRangeRequest.builder()
+                .orgId(orgId)
+                .build();
+
+        if (null != startDate) {
+            request.setStartDate(LocalDate.parse(startDate, DateUtil.DEFAULT_DATE_FORMATTER));
+        }
+
+        if (null != endDate) {
+            request.setEndDate(LocalDate.parse(endDate, DateUtil.DEFAULT_DATE_FORMATTER));
+        }
+
+        return koiService.findAuditByRange(request, pageRequest);
+    }
+
+
 }

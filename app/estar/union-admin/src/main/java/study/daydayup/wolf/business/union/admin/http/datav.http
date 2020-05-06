@@ -3,6 +3,11 @@ GET http://localhost:8200/datav/daily/koi?startDate=2020-01-10&endDate=2020-01-1
 Accept: */*
 Cache-Control: no-cache
 
+### daily audit
+GET http://localhost:8200/datav/daily/audit?startDate=2020-01-10&endDate=2020-01-19&pageNum=1
+Accept: */*
+Cache-Control: no-cache
+
 ### track repay
 GET http://localhost:8200/datav/track/repay?goodsId=1&installmentNo=1&startDate=2020-01-10&endDate=2020-01-19&pageNum=1
 Accept: */*
