@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
     `register_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '注册数',
     `basic_info_count`      INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '基础信息数',
     `liveness_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '活体认证数',
-    `bankcard_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '银行卡绑定数',
+    `bank_card_count`       INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '银行卡绑定数',
     `aadhaar_count`         INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'aadhaar数',
     `pan_card_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT 'PAN Card数',
     `passport_count`        INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '护照数',
