@@ -1,5 +1,10 @@
 package study.daydayup.wolf.bigdata.datav.biz.dal.dao;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+import java.time.LocalDate;
+import java.util.Collection;
 
+import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyTradeDO;
 
 public interface DailyTradeDAO {
@@ -14,4 +19,10 @@ public interface DailyTradeDAO {
     int updateByIdSelective(DailyTradeDO record);
 
     int updateById(DailyTradeDO record);
+
+    List<DailyTradeDO> selectByDateIn(@Param("dateList")Collection<LocalDate> dateList, @Param("orgId") Long orgId);
+
+    List<DailyTradeDO> selectByDate(@Param("request") DateRangeRequest request);
+
+
 }
