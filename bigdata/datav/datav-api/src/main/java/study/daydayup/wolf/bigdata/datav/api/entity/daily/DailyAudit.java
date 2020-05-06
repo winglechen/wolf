@@ -21,10 +21,12 @@ public class DailyAudit implements Model {
     private Integer installCount;
     private Integer registerCount;
 
+    private Integer basicInfoCount;
     private Integer aadhaarCount;
     private Integer bankCardCount;
 
     private Integer requestCount;
+    private Integer orderCount;
     private Integer payCount;
 
     private BigDecimal payAmount;
