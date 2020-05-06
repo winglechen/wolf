@@ -9,6 +9,8 @@ import study.daydayup.wolf.bigdata.datav.api.service.daily.DailyKoiService;
 import study.daydayup.wolf.bigdata.datav.biz.converter.daily.DailyKoiConverter;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailyKoiDAO;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO;
+import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.state.NewState;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -16,6 +18,8 @@ import study.daydayup.wolf.framework.rpc.page.Page;
 import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,13 +50,33 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         }
 
         List<DailyAudit> auditList = DailyKoiConverter.toAudit(koiPage.getData());
-        mergeAuditTradeStatistics(auditList, request);
+        mergeAuditTradeStatistics(auditList, request.getOrgId());
         auditPage = koiPage.to(auditList);
 
         return Result.ok(auditPage) ;
     }
 
-    private void mergeAuditTradeStatistics(@NonNull List<DailyAudit> auditList,@NonNull DateRangeRequest request) {
+    private void mergeAuditTradeStatistics(@NonNull List<DailyAudit> auditList,@NonNull Long orgId) {
+        List<LocalDate> dateList = CollectionUtil.keys(auditList, DailyAudit::getDate);
+        if (CollectionUtil.isEmpty(dateList)) {
+            return;
+        }
+
+        mergeAuditPreviewCount(auditList, dateList, orgId);
+        mergeAuditRequestCount(auditList, dateList, orgId);
+        mergeAuditPaidCount(auditList, dateList, orgId);
+    }
+
+    private void mergeAuditPreviewCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId) {
+        int tradeType = TradeTypeEnum.LOAN_CONTRACT.getCode();
+        int state = (new NewState()).getCode();
+    }
+
+    private void mergeAuditRequestCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId) {
+
+    }
+
+    private void mergeAuditPaidCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId) {
 
     }
 
