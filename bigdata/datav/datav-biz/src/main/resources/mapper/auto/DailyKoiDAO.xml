@@ -12,7 +12,7 @@
     <result column="register_count" jdbcType="INTEGER" property="registerCount" />
     <result column="basic_info_count" jdbcType="INTEGER" property="basicInfoCount" />
     <result column="liveness_count" jdbcType="INTEGER" property="livenessCount" />
-    <result column="bankcard_count" jdbcType="INTEGER" property="bankcardCount" />
+    <result column="bank_card_count" jdbcType="INTEGER" property="bankCardCount" />
     <result column="aadhaar_count" jdbcType="INTEGER" property="aadhaarCount" />
     <result column="pan_card_count" jdbcType="INTEGER" property="panCardCount" />
     <result column="passport_count" jdbcType="INTEGER" property="passportCount" />
@@ -26,7 +26,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, `date`, `source`, pv, uv, install_count, register_count, basic_info_count, 
-    liveness_count, bankcard_count, aadhaar_count, pan_card_count, passport_count, driving_license_count, 
+    liveness_count, bank_card_count, aadhaar_count, pan_card_count, passport_count, driving_license_count, 
     voter_count, kyc_count, auth_success_count, credit_promote_count, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -43,14 +43,14 @@
     insert into daily_koi (id, org_id, `date`, `source`, 
       pv, uv, install_count, 
       register_count, basic_info_count, liveness_count, 
-      bankcard_count, aadhaar_count, pan_card_count, 
+      bank_card_count, aadhaar_count, pan_card_count, 
       passport_count, driving_license_count, voter_count, 
       kyc_count, auth_success_count, credit_promote_count, 
       delete_flag, created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{source,jdbcType=VARCHAR}, 
       #{pv,jdbcType=INTEGER}, #{uv,jdbcType=INTEGER}, #{installCount,jdbcType=INTEGER}, 
       #{registerCount,jdbcType=INTEGER}, #{basicInfoCount,jdbcType=INTEGER}, #{livenessCount,jdbcType=INTEGER}, 
-      #{bankcardCount,jdbcType=INTEGER}, #{aadhaarCount,jdbcType=INTEGER}, #{panCardCount,jdbcType=INTEGER}, 
+      #{bankCardCount,jdbcType=INTEGER}, #{aadhaarCount,jdbcType=INTEGER}, #{panCardCount,jdbcType=INTEGER}, 
       #{passportCount,jdbcType=INTEGER}, #{drivingLicenseCount,jdbcType=INTEGER}, #{voterCount,jdbcType=INTEGER}, 
       #{kycCount,jdbcType=INTEGER}, #{authSuccessCount,jdbcType=INTEGER}, #{creditPromoteCount,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
@@ -88,8 +88,8 @@
       <if test="livenessCount != null">
         liveness_count,
       </if>
-      <if test="bankcardCount != null">
-        bankcard_count,
+      <if test="bankCardCount != null">
+        bank_card_count,
       </if>
       <if test="aadhaarCount != null">
         aadhaar_count,
@@ -153,8 +153,8 @@
       <if test="livenessCount != null">
         #{livenessCount,jdbcType=INTEGER},
       </if>
-      <if test="bankcardCount != null">
-        #{bankcardCount,jdbcType=INTEGER},
+      <if test="bankCardCount != null">
+        #{bankCardCount,jdbcType=INTEGER},
       </if>
       <if test="aadhaarCount != null">
         #{aadhaarCount,jdbcType=INTEGER},
@@ -218,8 +218,8 @@
       <if test="livenessCount != null">
         liveness_count = #{livenessCount,jdbcType=INTEGER},
       </if>
-      <if test="bankcardCount != null">
-        bankcard_count = #{bankcardCount,jdbcType=INTEGER},
+      <if test="bankCardCount != null">
+        bank_card_count = #{bankCardCount,jdbcType=INTEGER},
       </if>
       <if test="aadhaarCount != null">
         aadhaar_count = #{aadhaarCount,jdbcType=INTEGER},
@@ -265,7 +265,7 @@
       register_count = #{registerCount,jdbcType=INTEGER},
       basic_info_count = #{basicInfoCount,jdbcType=INTEGER},
       liveness_count = #{livenessCount,jdbcType=INTEGER},
-      bankcard_count = #{bankcardCount,jdbcType=INTEGER},
+      bank_card_count = #{bankCardCount,jdbcType=INTEGER},
       aadhaar_count = #{aadhaarCount,jdbcType=INTEGER},
       pan_card_count = #{panCardCount,jdbcType=INTEGER},
       passport_count = #{passportCount,jdbcType=INTEGER},

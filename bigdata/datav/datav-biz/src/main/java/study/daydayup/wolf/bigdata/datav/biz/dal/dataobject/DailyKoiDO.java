@@ -27,7 +27,7 @@ public class DailyKoiDO implements Serializable {
 
     private Integer livenessCount;
 
-    private Integer bankcardCount;
+    private Integer bankCardCount;
 
     private Integer aadhaarCount;
 
@@ -67,7 +67,7 @@ public class DailyKoiDO implements Serializable {
         sb.append(", registerCount=").append(registerCount);
         sb.append(", basicInfoCount=").append(basicInfoCount);
         sb.append(", livenessCount=").append(livenessCount);
-        sb.append(", bankcardCount=").append(bankcardCount);
+        sb.append(", bankCardCount=").append(bankCardCount);
         sb.append(", aadhaarCount=").append(aadhaarCount);
         sb.append(", panCardCount=").append(panCardCount);
         sb.append(", passportCount=").append(passportCount);
@@ -104,7 +104,7 @@ public class DailyKoiDO implements Serializable {
             && (this.getRegisterCount() == null ? other.getRegisterCount() == null : this.getRegisterCount().equals(other.getRegisterCount()))
             && (this.getBasicInfoCount() == null ? other.getBasicInfoCount() == null : this.getBasicInfoCount().equals(other.getBasicInfoCount()))
             && (this.getLivenessCount() == null ? other.getLivenessCount() == null : this.getLivenessCount().equals(other.getLivenessCount()))
-            && (this.getBankcardCount() == null ? other.getBankcardCount() == null : this.getBankcardCount().equals(other.getBankcardCount()))
+            && (this.getBankCardCount() == null ? other.getBankCardCount() == null : this.getBankCardCount().equals(other.getBankCardCount()))
             && (this.getAadhaarCount() == null ? other.getAadhaarCount() == null : this.getAadhaarCount().equals(other.getAadhaarCount()))
             && (this.getPanCardCount() == null ? other.getPanCardCount() == null : this.getPanCardCount().equals(other.getPanCardCount()))
             && (this.getPassportCount() == null ? other.getPassportCount() == null : this.getPassportCount().equals(other.getPassportCount()))
@@ -131,7 +131,7 @@ public class DailyKoiDO implements Serializable {
         result = prime * result + ((getRegisterCount() == null) ? 0 : getRegisterCount().hashCode());
         result = prime * result + ((getBasicInfoCount() == null) ? 0 : getBasicInfoCount().hashCode());
         result = prime * result + ((getLivenessCount() == null) ? 0 : getLivenessCount().hashCode());
-        result = prime * result + ((getBankcardCount() == null) ? 0 : getBankcardCount().hashCode());
+        result = prime * result + ((getBankCardCount() == null) ? 0 : getBankCardCount().hashCode());
         result = prime * result + ((getAadhaarCount() == null) ? 0 : getAadhaarCount().hashCode());
         result = prime * result + ((getPanCardCount() == null) ? 0 : getPanCardCount().hashCode());
         result = prime * result + ((getPassportCount() == null) ? 0 : getPassportCount().hashCode());
