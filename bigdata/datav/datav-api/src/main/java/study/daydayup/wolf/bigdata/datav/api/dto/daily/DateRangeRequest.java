@@ -19,6 +19,7 @@ import java.time.LocalDate;
 public class DateRangeRequest implements Request {
     @NotNull @Positive
     private Long orgId;
+    private String source;
 
     private LocalDate startDate;
     private LocalDate endDate;
