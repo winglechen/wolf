@@ -6,6 +6,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.LoanTerm;
 import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTerm;
+import study.daydayup.wolf.business.trade.api.domain.entity.trade.TradeStateLog;
 import study.daydayup.wolf.business.trade.api.domain.enums.PaymentReturnEnum;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
@@ -62,7 +63,6 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         changes = new Order();
     }
 
-
     public int paid(@Validated TradeNotification notification) {
         if (StateUtil.equals(model.getState(), new PaidState())) {
             return PaymentReturnEnum.DUPLICATE.getCode();
@@ -80,11 +80,16 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
 
         key.setState(model.getState());
 
+        model.setStateEvent(event);
+        model.setOutTradeNo(notification.getOutTradeNo());
+        model.setPaymentMethod(notification.getPaymentMethod());
+
         initChanges();
         changes.setStateEvent(event);
         changes.setOutTradeNo(notification.getOutTradeNo());
         changes.setPaymentMethod(notification.getPaymentMethod());
 
+        logStateChange();
         return PaymentReturnEnum.SUCCESS.getCode();
     }
 
@@ -193,5 +198,26 @@ public class LoanOrderEntity extends AbstractEntity<Order> implements Entity  {
         }
 
         return loan.getAmount();
+    }
+
+    private void logStateChange() {
+        TradeStateLog log = TradeStateLog.builder()
+                .tradeNo(model.getTradeNo())
+                .relatedTradeNo(model.getRelatedTradeNo())
+                .tradeType(model.getTradeType())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+
+                .sourceState(model.getState().getCode())
+                .amount(model.getAmount())
+                .paymentMethod(model.getPaymentMethod())
+                .consignMethod(model.getConsignMethod())
+                .tags(model.getTags())
+                .source(model.getSource())
+                .sourceVersion(model.getVersion())
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        changes.setStateLog(log);
     }
 }

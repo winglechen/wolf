@@ -38,6 +38,8 @@ public class OrderRepository extends AbstractRepository implements Repository {
     @Resource
     protected OrderAddressRepository addressRepository;
     @Resource
+    protected TradeStateLogRepository stateLogRepository;
+    @Resource
     protected OrderDAO orderDAO;
 
     protected OrderConverter converter = new OrderConverter();
@@ -54,6 +56,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
             return;
         }
         updateOrder(key, changes);
+        stateLogRepository.log(changes);
         lineRepository.save(key.getOrderLineList(), changes.getOrderLineList());
     }
 
@@ -102,6 +105,7 @@ public class OrderRepository extends AbstractRepository implements Repository {
             changesDO.setState(state.getCode());
 
             if (key.getState() != null) {
+                changes.setState(key.getState());
                 keyDO.setState(key.getState().getCode());
             }
         }

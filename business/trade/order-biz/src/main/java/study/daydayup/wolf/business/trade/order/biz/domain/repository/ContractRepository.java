@@ -46,6 +46,8 @@ public class ContractRepository extends AbstractRepository implements Repository
     @Resource
     protected TaxTermRepository taxTermRepository;
     @Resource
+    protected TradeStateLogRepository stateLogRepository;
+    @Resource
     protected ContractDAO contractDAO;
     @Resource
     protected RpcContext rpcContext;
@@ -71,6 +73,7 @@ public class ContractRepository extends AbstractRepository implements Repository
     public void save(@NonNull Contract key, @NonNull Contract changes) {
         updateContract(key, changes);
 
+        stateLogRepository.log(changes);
 //        consignTermRepository.save(key.getConsignTerm(), changes.getConsignTerm());
         installmentTermRepository.save(key.getInstallmentTermList(), changes.getInstallmentTermList());
 //        loanTermRepository.save(key.getLoanTerm(), changes.getLoanTerm());
@@ -144,6 +147,7 @@ public class ContractRepository extends AbstractRepository implements Repository
         ContractDO keyDO = converter.toDo(key);
         if (key.getState() != null) {
             keyDO.setState(key.getState().getCode());
+            changes.setState(key.getState());
         }
 
         ContractDO changesDO = converter.toDo(changes);
