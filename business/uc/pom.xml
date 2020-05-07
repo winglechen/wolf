@@ -15,6 +15,7 @@
         <module>uc-deploy-web</module>
         <module>uc-agent</module>
         <module>setting-biz</module>
+        <module>setting-api</module>
     </modules>
 
     <parent>
@@ -25,6 +26,7 @@
     </parent>
 
     <properties>
+
     </properties>
 
     <dependencies>

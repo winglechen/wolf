@@ -3,9 +3,9 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
-import study.daydayup.wolf.business.uc.api.setting.entity.StaffStatus;
-import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
-import study.daydayup.wolf.business.uc.api.setting.service.StaffStatusService;
+import study.daydayup.wolf.business.uc.setting.api.entity.StaffStatus;
+import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
+import study.daydayup.wolf.business.uc.setting.api.service.StaffStatusService;
 
 import java.util.*;
 

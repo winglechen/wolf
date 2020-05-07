@@ -1,6 +1,6 @@
 package study.daydayup.wolf.business.uc.agent.setting.util;
 
-import study.daydayup.wolf.business.uc.api.setting.entity.Status;
+import study.daydayup.wolf.business.uc.setting.api.entity.Status;
 
 import java.util.BitSet;
 

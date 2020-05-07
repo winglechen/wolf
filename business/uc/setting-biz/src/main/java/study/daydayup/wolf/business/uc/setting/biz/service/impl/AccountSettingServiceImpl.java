@@ -2,10 +2,10 @@ package study.daydayup.wolf.business.uc.setting.biz.service.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.uc.api.setting.dto.SettingDTO;
-import study.daydayup.wolf.business.uc.api.setting.entity.AccountSetting;
-import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
-import study.daydayup.wolf.business.uc.api.setting.service.AccountSettingService;
+import study.daydayup.wolf.business.uc.setting.api.dto.SettingDTO;
+import study.daydayup.wolf.business.uc.setting.api.entity.AccountSetting;
+import study.daydayup.wolf.business.uc.setting.api.entity.KvData;
+import study.daydayup.wolf.business.uc.setting.api.service.AccountSettingService;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dao.AccountSettingDAO;
 import study.daydayup.wolf.business.uc.setting.biz.dal.dataobject.AccountSettingDO;
 import study.daydayup.wolf.framework.rpc.Result;

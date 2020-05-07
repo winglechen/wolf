@@ -3,9 +3,9 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
-import study.daydayup.wolf.business.uc.api.setting.entity.AccountStatus;
-import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
-import study.daydayup.wolf.business.uc.api.setting.service.AccountStatusService;
+import study.daydayup.wolf.business.uc.setting.api.entity.AccountStatus;
+import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
+import study.daydayup.wolf.business.uc.setting.api.service.AccountStatusService;
 
 import java.util.BitSet;
 

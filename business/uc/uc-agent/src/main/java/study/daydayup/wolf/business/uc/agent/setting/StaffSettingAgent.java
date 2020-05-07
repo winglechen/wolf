@@ -3,9 +3,8 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.uc.api.setting.entity.KvData;
-import study.daydayup.wolf.business.uc.api.setting.entity.StaffSetting;
-import study.daydayup.wolf.business.uc.api.setting.service.StaffSettingService;
+import study.daydayup.wolf.business.uc.setting.api.entity.KvData;
+import study.daydayup.wolf.business.uc.setting.api.service.StaffSettingService;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 
 import java.util.HashSet;

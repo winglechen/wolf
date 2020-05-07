@@ -4,11 +4,11 @@ import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
-import study.daydayup.wolf.business.uc.api.setting.entity.CustomerStatus;
-import study.daydayup.wolf.business.uc.api.setting.enums.StatusEnum;
-import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusGroupEnum;
-import study.daydayup.wolf.business.uc.api.setting.enums.customer.CustomerStatusProgressEnum;
-import study.daydayup.wolf.business.uc.api.setting.service.CustomerStatusService;
+import study.daydayup.wolf.business.uc.setting.api.entity.CustomerStatus;
+import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
+import study.daydayup.wolf.business.uc.setting.api.enums.customer.CustomerStatusGroupEnum;
+import study.daydayup.wolf.business.uc.setting.api.enums.customer.CustomerStatusProgressEnum;
+import study.daydayup.wolf.business.uc.setting.api.service.CustomerStatusService;
 import study.daydayup.wolf.common.model.type.number.Step;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
