@@ -153,10 +153,12 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         args.put("country", "IN");
         args.put("currency", "INR");
         args.put("amount", getAmount());
+        initPayerInfo(args);
 
         Map<String, Object> extInfo = new HashMap<>(2);
         extInfo.put("paymentTypes","credit,debit,ewallet,upi");
         args.put("extInfo", extInfo);
+
 
         String sign = SignUtil.create(config.getAppSecret(), args);
         args.put("sign", sign);
