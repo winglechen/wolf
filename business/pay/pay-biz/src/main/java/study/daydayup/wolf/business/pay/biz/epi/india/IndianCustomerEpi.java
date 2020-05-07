@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.dto.india.BankCard;
+import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianPayInfo;
 import study.daydayup.wolf.business.uc.api.crm.customer.info.service.india.IndianCustomerService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
@@ -21,7 +21,7 @@ public class IndianCustomerEpi implements Epi {
     @Reference
     private IndianCustomerService customerService;
 
-    public BankCard find(long payerId, long payeeId) {
+    public IndianBankCard find(long payerId, long payeeId) {
         if (payeeId <= 0 || payerId <= 0) {
             return null;
         }
@@ -30,16 +30,16 @@ public class IndianCustomerEpi implements Epi {
         return convert(iCard, payerId, payeeId);
     }
 
-    public BankCard findAadhaar(long payerId, long payeeId) {
+    public IndianBankCard findContact(long payerId, long payeeId) {
         if (payeeId <= 0 || payerId <= 0) {
             return null;
         }
 
-        IndianPayInfo iCard = customerService.findIndianAadhaar(payerId, payeeId).notNullData();
+        IndianPayInfo iCard = customerService.findIndianContact(payerId, payeeId).notNullData();
         return convert(iCard, payerId, payeeId);
     }
 
-    private BankCard convert(@NonNull IndianPayInfo iCard, long payerId, long payeeId) {
+    private IndianBankCard convert(@NonNull IndianPayInfo iCard, long payerId, long payeeId) {
         if (BeanUtil.equals(payerId, iCard.getAccountId())) {
             return null;
         }
@@ -48,7 +48,7 @@ public class IndianCustomerEpi implements Epi {
             return null;
         }
 
-        BankCard card = new BankCard();
+        IndianBankCard card = new IndianBankCard();
         BeanUtils.copyProperties(iCard, card);
 
         card.setPayerId(payerId);

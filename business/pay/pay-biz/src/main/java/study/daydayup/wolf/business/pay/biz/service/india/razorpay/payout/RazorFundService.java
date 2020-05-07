@@ -10,7 +10,7 @@ import study.daydayup.wolf.business.pay.api.config.india.RazorConfig;
 import study.daydayup.wolf.business.pay.api.domain.exception.payout.InvalidPayoutAccountException;
 import study.daydayup.wolf.business.pay.api.domain.exception.payout.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
-import study.daydayup.wolf.business.pay.api.dto.india.BankCard;
+import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.epi.india.IndianCustomerEpi;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.AccountClient;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.client.ClientFactory;
@@ -32,7 +32,7 @@ import javax.annotation.Resource;
 public class RazorFundService {
     private RazorAccount account;
     private PayoutRequest payoutRequest;
-    private BankCard bankCard;
+    private IndianBankCard bankCard;
 
     @Resource
     private RazorConfig config;

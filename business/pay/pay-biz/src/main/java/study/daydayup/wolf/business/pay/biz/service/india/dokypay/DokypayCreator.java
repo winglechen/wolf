@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
-import study.daydayup.wolf.business.pay.api.dto.india.BankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
 import study.daydayup.wolf.business.pay.biz.epi.india.IndianCustomerEpi;
