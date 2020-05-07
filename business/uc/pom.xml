@@ -7,6 +7,7 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
+        <module>setting-api</module>
         <module>uc-api</module>
         <module>profile-biz</module>
         <module>acl-biz</module>
@@ -15,7 +16,6 @@
         <module>uc-deploy-web</module>
         <module>uc-agent</module>
         <module>setting-biz</module>
-        <module>setting-api</module>
     </modules>
 
     <parent>
