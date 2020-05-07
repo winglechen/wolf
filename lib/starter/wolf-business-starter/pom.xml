@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>setting-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>uc-api</artifactId>
 
         </dependency>
