@@ -23,6 +23,7 @@ public class IndianBankInfo implements DTO {
     private String aadhaarNo;
     private String aadhaarName;
     private String email;
+    private String mobile;
 
     private String bankName;
     private String accountIfsc;

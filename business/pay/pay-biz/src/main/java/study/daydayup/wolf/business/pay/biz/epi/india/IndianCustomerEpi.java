@@ -30,6 +30,15 @@ public class IndianCustomerEpi implements Epi {
         return convert(iCard, payerId, payeeId);
     }
 
+    public BankCard findAadhaar(long payerId, long payeeId) {
+        if (payeeId <= 0 || payerId <= 0) {
+            return null;
+        }
+
+        IndianBankInfo iCard = customerService.findIndianAadhaar(payerId, payeeId).notNullData();
+        return convert(iCard, payerId, payeeId);
+    }
+
     private BankCard convert(@NonNull IndianBankInfo iCard, long payerId, long payeeId) {
         if (BeanUtil.equals(payerId, iCard.getAccountId())) {
             return null;

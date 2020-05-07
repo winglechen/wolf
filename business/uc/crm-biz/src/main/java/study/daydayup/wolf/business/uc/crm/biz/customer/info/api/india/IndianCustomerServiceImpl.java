@@ -76,6 +76,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         String name = StringUtil.joinSkipBlank(basicInfoDO.getFirstName(), basicInfoDO.getMiddleName(), basicInfoDO.getLastName());
         card.setAadhaarNo(basicInfoDO.getAadhaarNo());
         card.setAadhaarName(name);
+        card.setMobile("");
         return card;
     }
 

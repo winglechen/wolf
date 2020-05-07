@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
+import study.daydayup.wolf.business.pay.api.dto.india.BankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
+import study.daydayup.wolf.business.pay.biz.epi.india.IndianCustomerEpi;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -40,15 +42,17 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 
     @Resource
     private PayConfig payConfig;
+    @Resource
+    private IndianCustomerEpi customerEpi;
 
 
     @Override
     public void callPayEpi() {
         initConfig();
-        Request request = createRequest();
+        Request payRequest = createRequest();
 
         try {
-            Response response = CLIENT.newCall(request).execute();
+            Response response = CLIENT.newCall(payRequest).execute();
             parseResponse(response);
         } catch (Exception e) {
             log.error("Dokypay create exception ", e);
@@ -138,26 +142,50 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     private String initArgs() {
-        Map<String, Object> request = new HashMap<>(8);
-        request.put("appId", config.getAppId());
-        request.put("prodName", PROD_NAME);
-        request.put("version", config.getVersion());
-        request.put("returnUrl", config.getReturnUrl());
-        request.put("notifyUrl", config.getNotifyUrl());
+        Map<String, Object> args = new HashMap<>(8);
+        args.put("appId", config.getAppId());
+        args.put("prodName", PROD_NAME);
+        args.put("version", config.getVersion());
+        args.put("returnUrl", config.getReturnUrl());
+        args.put("notifyUrl", config.getNotifyUrl());
 
-        request.put("merTransNo", payment.getPaymentNo());
-        request.put("country", "IN");
-        request.put("currency", "INR");
-        request.put("amount", getAmount());
+        args.put("merTransNo", payment.getPaymentNo());
+        args.put("country", "IN");
+        args.put("currency", "INR");
+        args.put("amount", getAmount());
 
         Map<String, Object> extInfo = new HashMap<>(2);
         extInfo.put("paymentTypes","credit,debit,ewallet,upi");
-        request.put("extInfo", extInfo);
+        args.put("extInfo", extInfo);
 
-        String sign = SignUtil.create(config.getAppSecret(), request);
-        request.put("sign", sign);
+        String sign = SignUtil.create(config.getAppSecret(), args);
+        args.put("sign", sign);
 
-        return JSON.toJSONString(request);
+        return JSON.toJSONString(args);
+    }
+
+    private void initPayerInfo(@NonNull Map<String, Object> args) {
+        args.put("payerName", "ppea");
+        args.put("payerEmail", "abc@gmail.com");
+        args.put("payerMobile", "123456789");
+        return;
+
+//        BankCard card = customerEpi.findAadhaar(request.getPayerId(), request.getPayeeId());
+//        if (card == null) {
+//            return;
+//        }
+//
+//        if (StringUtil.notBlank(card.getAadhaarName())) {
+//            args.put("payerName", card.getAadhaarName());
+//        }
+//
+//        if (StringUtil.notBlank(card.getEmail())) {
+//            args.put("payerEmail", card.getEmail());
+//        }
+//
+//        if (StringUtil.notBlank(card.getMobile())) {
+//            args.put("payerMobile", card.getMobile());
+//        }
     }
 
     private String getAmount() {
