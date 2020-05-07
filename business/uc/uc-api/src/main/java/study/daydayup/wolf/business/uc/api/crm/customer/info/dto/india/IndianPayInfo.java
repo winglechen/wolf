@@ -16,7 +16,7 @@ import study.daydayup.wolf.framework.layer.api.DTO;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IndianBankInfo implements DTO {
+public class IndianPayInfo implements DTO {
     private Long accountId;
     private Long orgId;
 

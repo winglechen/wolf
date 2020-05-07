@@ -1,14 +1,16 @@
 package study.daydayup.wolf.business.uc.crm.biz.customer.info.api.india;
 
 import lombok.NonNull;
-import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianBankInfo;
+import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianPayInfo;
 import study.daydayup.wolf.business.uc.api.crm.customer.info.service.india.IndianCustomerService;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.AadhaarDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.BankCardDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.BasicInfoDAO;
+import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao.UserDAO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.AadhaarDO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BankCardDO;
 import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.BasicInfoDO;
+import study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -29,10 +31,12 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
     private BankCardDAO bankCardDAO;
     @Resource
     private BasicInfoDAO basicInfoDAO;
+    @Resource
+    private UserDAO userDAO;
 
     @Override
-    public Result<IndianBankInfo> findIndianBankCard(Long accountId, Long orgId) {
-        IndianBankInfo card = IndianBankInfo.builder()
+    public Result<IndianPayInfo> findIndianBankCard(Long accountId, Long orgId) {
+        IndianPayInfo card = IndianPayInfo.builder()
                 .accountId(accountId)
                 .orgId(orgId)
                 .build();
@@ -51,8 +55,8 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
     }
 
     @Override
-    public Result<IndianBankInfo> findIndianAadhaar(Long accountId, Long orgId) {
-        IndianBankInfo card = IndianBankInfo.builder()
+    public Result<IndianPayInfo> findIndianAadhaar(Long accountId, Long orgId) {
+        IndianPayInfo card = IndianPayInfo.builder()
                 .accountId(accountId)
                 .orgId(orgId)
                 .build();
@@ -64,7 +68,36 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         return Result.ok(card);
     }
 
-    private IndianBankInfo findBasicInfoByCard(@NonNull IndianBankInfo card) {
+    @Override
+    public Result<IndianPayInfo> findIndianContact(Long accountId, Long orgId) {
+        IndianPayInfo card = IndianPayInfo.builder()
+                .accountId(accountId)
+                .orgId(orgId)
+                .build();
+
+        card = findUserInfoByCard(card);
+        if (card == null) {
+            return Result.fail(10000, "no such card");
+        }
+        return Result.ok(card);
+    }
+
+    private IndianPayInfo findUserInfoByCard(@NonNull IndianPayInfo card) {
+        UserDO userDO = userDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
+        if (userDO == null
+                || null == userDO.getRealName()) {
+            return null;
+        }
+
+        card.setAadhaarNo(userDO.getAadhaarNo());
+        card.setAadhaarName(userDO.getRealName());
+        card.setMobile(userDO.getMobile());
+        card.setEmail(userDO.getEmail());
+
+        return card;
+    }
+
+    private IndianPayInfo findBasicInfoByCard(@NonNull IndianPayInfo card) {
         BasicInfoDO basicInfoDO = basicInfoDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
         if (basicInfoDO == null
                 || null == basicInfoDO.getAadhaarNo()
@@ -80,7 +113,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         return card;
     }
 
-    private IndianBankInfo findAadhaarByCard(@NonNull IndianBankInfo card) {
+    private IndianPayInfo findAadhaarByCard(@NonNull IndianPayInfo card) {
         AadhaarDO aadhaarDO = aadhaarDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
         if (aadhaarDO == null
             || null == aadhaarDO.getAadhaarNo()
@@ -93,7 +126,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         return card;
     }
 
-    private IndianBankInfo findBankCardByCard(@NonNull IndianBankInfo card) {
+    private IndianPayInfo findBankCardByCard(@NonNull IndianPayInfo card) {
         BankCardDO cardDO = bankCardDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
         if (cardDO == null
             || null == cardDO.getIfsc()
