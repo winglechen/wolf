@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.trade.api.domain.entity.contract.RepaymentTe
 import study.daydayup.wolf.business.trade.api.domain.event.TradeEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayEffectEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepaySuccessEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.virtual.AuditPaidEvent;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.ApprovedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.contract.LoaningState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.repay.EffectedState;
@@ -78,6 +79,18 @@ public class LoanContractEntity extends AbstractEntity<Contract> implements Enti
     public void approve() {
         //loan.state:approved
         ApproveEvent event = ApproveEvent.builder()
+                .tradeNo(model.getTradeNo())
+                .buyerId(model.getBuyerId())
+                .sellerId(model.getSellerId())
+                .build();
+
+        key.setState(model.getState());
+        changes.setStateEvent(event);
+    }
+
+    public void toApprove() {
+        //loan.state:approved
+        AuditPaidEvent event = AuditPaidEvent.builder()
                 .tradeNo(model.getTradeNo())
                 .buyerId(model.getBuyerId())
                 .sellerId(model.getSellerId())

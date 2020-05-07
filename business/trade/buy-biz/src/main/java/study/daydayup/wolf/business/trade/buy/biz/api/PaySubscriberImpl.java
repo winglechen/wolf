@@ -94,16 +94,29 @@ public class PaySubscriberImpl implements PaySubscriber {
         TradeTypeEnum tradeType = EnumUtil.codeOf(typeCode, TradeTypeEnum.class);
         switch (tradeType) {
             case LOAN_ORDER:
-                return notifyLoanContract();
+                return markLoanContractLoaned();
             case REPAY_ORDER:
-                return notifyRepayContract();
+                return markLoanContractRepaid();
+            case AUDIT_FEE:
+                return markLoanContractToApprove();
             default:
                 return PaymentReturnEnum.USELESS.getCode();
         }
     }
 
+    private int markLoanContractToApprove() {
+        LoanContractEntity contractEntity = getContractEntity();
+        if (contractEntity == null) {
+            return PaymentReturnEnum.ERROR.getCode();
+        }
 
-    private int notifyLoanContract() {
+        contractEntity.toApprove();
+        loanContractRepository.save(contractEntity);
+
+        return PaymentReturnEnum.SUCCESS.getCode();
+    }
+
+    private int markLoanContractLoaned() {
         LoanContractEntity contractEntity = getContractEntity();
         if (contractEntity == null) {
             return PaymentReturnEnum.ERROR.getCode();
@@ -115,7 +128,7 @@ public class PaySubscriberImpl implements PaySubscriber {
         return PaymentReturnEnum.SUCCESS.getCode();
     }
 
-    private int notifyRepayContract() {
+    private int markLoanContractRepaid() {
         LoanContractEntity contractEntity = getContractEntity();
         if (contractEntity == null) {
             return PaymentReturnEnum.ERROR.getCode();
