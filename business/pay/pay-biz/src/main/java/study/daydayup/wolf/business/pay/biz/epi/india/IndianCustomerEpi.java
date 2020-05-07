@@ -5,7 +5,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.dto.india.BankCard;
-import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianBankCard;
+import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianBankInfo;
 import study.daydayup.wolf.business.uc.api.crm.customer.info.service.india.IndianCustomerService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.layer.epi.Epi;
@@ -26,11 +26,11 @@ public class IndianCustomerEpi implements Epi {
             return null;
         }
 
-        IndianBankCard iCard = customerService.findIndianBankCard(payerId, payeeId).notNullData();
+        IndianBankInfo iCard = customerService.findIndianBankCard(payerId, payeeId).notNullData();
         return convert(iCard, payerId, payeeId);
     }
 
-    private BankCard convert(@NonNull IndianBankCard iCard, long payerId, long payeeId) {
+    private BankCard convert(@NonNull IndianBankInfo iCard, long payerId, long payeeId) {
         if (BeanUtil.equals(payerId, iCard.getAccountId())) {
             return null;
         }

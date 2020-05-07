@@ -16,12 +16,14 @@ import study.daydayup.wolf.framework.layer.api.DTO;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IndianBankCard implements DTO {
+public class IndianBankInfo implements DTO {
     private Long accountId;
     private Long orgId;
 
     private String aadhaarNo;
     private String aadhaarName;
+    private String email;
+
     private String bankName;
     private String accountIfsc;
     private String accountNumber;

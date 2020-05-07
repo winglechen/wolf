@@ -21,6 +21,17 @@ public class StringUtilTest {
     }
 
     @Test
+    public void joinWith() {
+        String s ;
+
+        s = StringUtil.joinWith(" ", "f", "", "t");
+        assertEquals("StringUtil.join fail", s, "f  t");
+
+        s = StringUtil.joinSkipBlank(" ", "f", "", "t");
+        assertEquals("StringUtil.join fail", s, "f t");
+    }
+
+    @Test
     public void isTrue() {
     }
 

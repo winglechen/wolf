@@ -81,6 +81,27 @@ public class StringUtil {
         return joiner.join(f, s, r);
     }
 
+    public static String joinSkipBlank(String delimiter, Object... r) {
+        StringBuilder sb = new StringBuilder();
+        String s;
+        boolean isFirst = true;
+        for (Object o : r) {
+            s = o.toString();
+            if (isBlank(s)) {
+                continue;
+            }
+
+            if (!isFirst) {
+                sb.append(delimiter);
+            }
+
+            sb.append(s);
+            isFirst = false;
+        }
+
+        return sb.toString();
+    }
+
     public static String quote(String keyword) {
         return quote(keyword, false);
     }
