@@ -303,6 +303,7 @@ CREATE TABLE `user`
     `avatar`                 varchar(255)        NOT NULL DEFAULT '' COMMENT '头像',
     `real_name`              varchar(100)        NOT NULL DEFAULT '' COMMENT '真名',
     `mobile`                 varchar(20)         NOT NULL DEFAULT '' COMMENT '手机号',
+    `email`                  varchar(100)         NOT NULL DEFAULT '' COMMENT '邮箱',
     `aadhaar_no`             varchar(20)         NOT NULL DEFAULT '' COMMENT 'Aadhaar号码',
     `pan_no`                 varchar(20)         NOT NULL DEFAULT '' COMMENT 'pan号码',
     `gender`                 varchar(10)         NOT NULL DEFAULT '' COMMENT '性别 male(男) female(女)',

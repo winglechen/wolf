@@ -22,6 +22,8 @@ public class UserDO implements Serializable {
 
     private String mobile;
 
+    private String email;
+
     private String aadhaarNo;
 
     private String panNo;
@@ -78,6 +80,7 @@ public class UserDO implements Serializable {
         sb.append(", avatar=").append(avatar);
         sb.append(", realName=").append(realName);
         sb.append(", mobile=").append(mobile);
+        sb.append(", email=").append(email);
         sb.append(", aadhaarNo=").append(aadhaarNo);
         sb.append(", panNo=").append(panNo);
         sb.append(", gender=").append(gender);
@@ -122,6 +125,7 @@ public class UserDO implements Serializable {
             && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
             && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
             && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getAadhaarNo() == null ? other.getAadhaarNo() == null : this.getAadhaarNo().equals(other.getAadhaarNo()))
             && (this.getPanNo() == null ? other.getPanNo() == null : this.getPanNo().equals(other.getPanNo()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
@@ -156,6 +160,7 @@ public class UserDO implements Serializable {
         result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
         result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());
         result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getAadhaarNo() == null) ? 0 : getAadhaarNo().hashCode());
         result = prime * result + ((getPanNo() == null) ? 0 : getPanNo().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());

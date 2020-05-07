@@ -10,6 +10,7 @@
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="aadhaar_no" jdbcType="VARCHAR" property="aadhaarNo" />
     <result column="pan_no" jdbcType="VARCHAR" property="panNo" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
@@ -32,7 +33,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account_id, org_id, channel_id, nickname, avatar, real_name, mobile, aadhaar_no, 
+    id, account_id, org_id, channel_id, nickname, avatar, real_name, mobile, email, aadhaar_no, 
     pan_no, gender, dob, credit_amount, tags, basic_info_auth_status, liveness_auth_status, 
     aadhaar_auth_status, pan_auth_status, passport_auth_status, dl_auth_status, voter_card_auth_status, 
     bank_card_bind_status, kyc_status, version, delete_flag, last_editor, created_at, 
@@ -41,39 +42,39 @@
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from userxx
+    from userx
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
-    delete from userxx
+    delete from userx
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    insert into userxx (id, account_id, org_id, 
+    insert into userx (id, account_id, org_id, 
       channel_id, nickname, avatar, 
-      real_name, mobile, aadhaar_no, 
-      pan_no, gender, dob, 
-      credit_amount, tags, basic_info_auth_status, 
-      liveness_auth_status, aadhaar_auth_status, 
-      pan_auth_status, passport_auth_status, dl_auth_status, 
-      voter_card_auth_status, bank_card_bind_status, 
+      real_name, mobile, email, 
+      aadhaar_no, pan_no, gender, 
+      dob, credit_amount, tags, 
+      basic_info_auth_status, liveness_auth_status, 
+      aadhaar_auth_status, pan_auth_status, passport_auth_status, 
+      dl_auth_status, voter_card_auth_status, bank_card_bind_status, 
       kyc_status, version, delete_flag, 
       last_editor, created_at, updated_at
       )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
       #{channelId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{aadhaarNo,jdbcType=VARCHAR}, 
-      #{panNo,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{dob,jdbcType=VARCHAR}, 
-      #{creditAmount,jdbcType=BIGINT}, #{tags,jdbcType=VARCHAR}, #{basicInfoAuthStatus,jdbcType=TINYINT}, 
-      #{livenessAuthStatus,jdbcType=TINYINT}, #{aadhaarAuthStatus,jdbcType=TINYINT}, 
-      #{panAuthStatus,jdbcType=TINYINT}, #{passportAuthStatus,jdbcType=TINYINT}, #{dlAuthStatus,jdbcType=TINYINT}, 
-      #{voterCardAuthStatus,jdbcType=TINYINT}, #{bankCardBindStatus,jdbcType=TINYINT}, 
+      #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{aadhaarNo,jdbcType=VARCHAR}, #{panNo,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{dob,jdbcType=VARCHAR}, #{creditAmount,jdbcType=BIGINT}, #{tags,jdbcType=VARCHAR}, 
+      #{basicInfoAuthStatus,jdbcType=TINYINT}, #{livenessAuthStatus,jdbcType=TINYINT}, 
+      #{aadhaarAuthStatus,jdbcType=TINYINT}, #{panAuthStatus,jdbcType=TINYINT}, #{passportAuthStatus,jdbcType=TINYINT}, 
+      #{dlAuthStatus,jdbcType=TINYINT}, #{voterCardAuthStatus,jdbcType=TINYINT}, #{bankCardBindStatus,jdbcType=TINYINT}, 
       #{kycStatus,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    insert into userxx
+    insert into userx
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -98,6 +99,9 @@
       </if>
       <if test="mobile != null">
         mobile,
+      </if>
+      <if test="email != null">
+        email,
       </if>
       <if test="aadhaarNo != null">
         aadhaar_no,
@@ -185,6 +189,9 @@
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="aadhaarNo != null">
         #{aadhaarNo,jdbcType=VARCHAR},
       </if>
@@ -248,7 +255,7 @@
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    update userxx
+    update userx
     <set>
       <if test="accountId != null">
         account_id = #{accountId,jdbcType=BIGINT},
@@ -270,6 +277,9 @@
       </if>
       <if test="mobile != null">
         mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="aadhaarNo != null">
         aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
@@ -335,7 +345,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    update userxx
+    update userx
     set account_id = #{accountId,jdbcType=BIGINT},
       org_id = #{orgId,jdbcType=BIGINT},
       channel_id = #{channelId,jdbcType=BIGINT},
@@ -343,6 +353,7 @@
       avatar = #{avatar,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       aadhaar_no = #{aadhaarNo,jdbcType=VARCHAR},
       pan_no = #{panNo,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
