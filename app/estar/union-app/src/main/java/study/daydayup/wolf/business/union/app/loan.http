@@ -35,7 +35,7 @@ Content-Type: application/json
 #}
 
 ###
-GET http://localhost:8100/loan/20200406233201000209141440380805?lang=zh_CN
+GET http://localhost:8100/loan/contract/detail/20200507165857000039703606118079?lang=zh_CN
 Accept: */*
 Cache-Control: no-cache
 
