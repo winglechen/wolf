@@ -10,6 +10,7 @@ import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepayOverd
 import study.daydayup.wolf.business.trade.api.domain.event.loan.repay.RepaySuccessEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanBeginEvent;
 import study.daydayup.wolf.business.trade.api.domain.event.loan.loan.LoanSuccessEvent;
+import study.daydayup.wolf.business.trade.api.domain.event.virtual.AuditPaidEvent;
 import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 import study.daydayup.wolf.business.trade.api.domain.state.base.CompletedState;
 import study.daydayup.wolf.business.trade.api.domain.state.loan.*;
@@ -29,6 +30,7 @@ import study.daydayup.wolf.common.sm.StateMachine;
 public class LoanContractFactory implements TradeStateMachineFactory {
     private StateMachine<TradeState, TradeEvent> machine;
 
+    private TradeState waitToAudit          = new WaitToAuditState();
     private TradeState waitToApprove        = new WaitToApproveState();
     private TradeState approved             = new ApprovedState();
 
@@ -52,6 +54,7 @@ public class LoanContractFactory implements TradeStateMachineFactory {
     public StateMachine<TradeState, TradeEvent> create() {
         //TODO: Prepay support
         machine = new DefaultStateMachine<TradeState, TradeEvent>(waitToApprove)
+                .bind(waitToAudit, waitToApprove, new AuditPaidEvent())
                 .bind(waitToApprove, approved, new ApproveEvent())
                 .bind(waitToApprove, refused, new RefuseEvent())
 
