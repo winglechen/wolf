@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.trade.order.biz.converter;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.trade.api.domain.entity.trade.TradeStateLog;
 import study.daydayup.wolf.business.trade.order.biz.dal.dataobject.TradeStateLogDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
