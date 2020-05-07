@@ -1,6 +1,5 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dokypay;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +16,12 @@ import study.daydayup.wolf.business.pay.biz.service.india.dokypay.handler.Dokypa
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
+import study.daydayup.wolf.common.util.lang.UrlUtil;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -58,8 +60,13 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private boolean parseResponse(@NonNull String data) {
-        response = JSON.parseObject(data);
-
+        try {
+            Map<String, String> map = UrlUtil.parseUrl(data);
+            Map<String, Object> objMap = new HashMap<>(map);
+            response = new JSONObject(objMap);
+        } catch (UnsupportedEncodingException e) {
+            return false;
+        }
         return isResponseSuccess(response);
     }
 
@@ -68,21 +75,17 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
             return false;
         }
 
-        JSONObject data = json.getJSONObject("data");
-        if (null == data) {
-            return false;
-        }
-
-        return !"0000".equals(data.getString("resultCode"));
+        JSONObject data = json.getJSONObject("transStatus");
+        return null != data;
     }
 
     private boolean isResponseValid(){
-        String responseSign = response.getJSONObject("data").getString("sign");
+        String responseSign = response.getString("sign");
         if (StringUtil.isBlank(responseSign)) {
             return false;
         }
 
-        Map<String, Object> data = response.getJSONObject("data").getInnerMap();
+        Map<String, Object> data = response.getInnerMap();
         String sign = SignUtil.create(config.getAppSecret(), data);
 
         return responseSign.equals(sign);
@@ -93,13 +96,11 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private int savePayment() {
-        JSONObject data = response.getJSONObject("data");
-
         PayNotification notification = PayNotification.builder()
                 .amount(getAmount())
-                .paymentNo(data.getString("merTransNo"))
-                .outOrderNo(data.getString("transNo"))
-                .status(data.getString("transStatus"))
+                .paymentNo(response.getString("merTransNo"))
+                .outOrderNo(response.getString("transNo"))
+                .status(response.getString("transStatus"))
                 .paymentMethod(PAYMENT_METHOD)
                 .build();
 
@@ -107,7 +108,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private BigDecimal getAmount() {
-        String strAmount = response.getJSONObject("data").getString("amount");
+        String strAmount = response.getString("amount");
         if (StringUtil.isBlank(strAmount)) {
             return BigDecimal.ZERO;
         }
