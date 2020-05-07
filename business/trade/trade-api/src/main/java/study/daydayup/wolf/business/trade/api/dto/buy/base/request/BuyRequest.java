@@ -23,7 +23,6 @@ import java.util.List;
  **/
 @Data
 public class BuyRequest implements Request {
-    private boolean preview;
     private String tradeNo;
     private Buyer buyer;
     private Seller seller;
@@ -47,5 +46,5 @@ public class BuyRequest implements Request {
     private Goods goods;
     private UmpRequest umpRequest;
 
-    private boolean storeTrade;
+    private boolean preview;
 }

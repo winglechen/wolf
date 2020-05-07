@@ -103,7 +103,6 @@ public class UnionLoanController extends BaseUnionController {
 
         request.setTradeType(TradeTypeEnum.AUDIT_FEE.getCode());
         request.setGoods(goods);
-        request.setStoreTrade(true);
 
         request.setRelatedTradeNo(payRequest.getTradeNo());
 
@@ -124,11 +123,11 @@ public class UnionLoanController extends BaseUnionController {
         request.setTradeType(TradeTypeEnum.LOAN_CONTRACT.getCode());
         Long orgId = getFromSession("orgId", Long.class);
 
-        if (null != loanRequest.getStoreOnPreview() && loanRequest.getStoreOnPreview()) {
-            request.setStoreTrade(true);
+        if (!loanRequest.isPreview()) {
+            request.setPreview(false);
         }
 
-        if (null != loanRequest.getNeedAuditFee() && loanRequest.getNeedAuditFee()) {
+        if (loanRequest.isNeedAuditFee()) {
             request.setTradeState(new WaitToAuditState());
         }
 
@@ -151,7 +150,6 @@ public class UnionLoanController extends BaseUnionController {
             goods.setOrgId(orgId);
         }
 
-        request.setStoreTrade(true);
         return buyService.confirm(request);
     }
 
@@ -292,7 +290,7 @@ public class UnionLoanController extends BaseUnionController {
     private BuyResponse loanPreview(Long goodsId) {
         LoanRequest loanRequest = new LoanRequest();
         loanRequest.setGoodsId(goodsId);
-        loanRequest.setStoreOnPreview(true);
+        loanRequest.setPreview(false);
         loanRequest.setNeedAuditFee(true);
 
         return preview(loanRequest).notNullData();

@@ -125,9 +125,13 @@ public class ContractRepository extends AbstractRepository implements Repository
         ContractDO contractDO = converter.toDo(contract);
         contractDO.setCreatedAt(rpcContext.getRequestTime());
 
-        StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contract.getTradeType());
-        TradeState initState = stateMachine.getInitState();
-        contractDO.setState(initState.getCode());
+        if (null != contract.getState()) {
+            contractDO.setState(contract.getState().getCode());
+        } else {
+            StateMachine<TradeState, TradeEvent> stateMachine = Tsm.create(contract.getTradeType());
+            TradeState initState = stateMachine.getInitState();
+            contractDO.setState(initState.getCode());
+        }
 
         contractDAO.insertSelective(contractDO);
     }
