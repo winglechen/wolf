@@ -18,7 +18,7 @@ public enum CustomerStatusProgressEnum {
 
     KYC(CustomerInfoEnum.KYC, CustomerInfoEnum.INFO_COMPLETE),
     BANK_CARD(CustomerInfoEnum.BANK_CARD, CustomerInfoEnum.INFO_COMPLETE),
-    LIVENESS(CustomerInfoEnum.LIVENESS, CustomerInfoEnum.INFO_COMPLETE),
+//    LIVENESS(CustomerInfoEnum.LIVENESS, CustomerInfoEnum.INFO_COMPLETE),
     BASIC_INFO(CustomerInfoEnum.BASIC_INFO, CustomerInfoEnum.INFO_COMPLETE)
             ;
     private StatusEnum status;
