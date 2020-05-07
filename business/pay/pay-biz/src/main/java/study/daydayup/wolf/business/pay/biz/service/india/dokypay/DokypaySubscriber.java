@@ -75,8 +75,8 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
             return false;
         }
 
-        JSONObject data = json.getJSONObject("transStatus");
-        return null != data;
+        String status = json.getString("transStatus");
+        return null != status;
     }
 
     private boolean isResponseValid(){
