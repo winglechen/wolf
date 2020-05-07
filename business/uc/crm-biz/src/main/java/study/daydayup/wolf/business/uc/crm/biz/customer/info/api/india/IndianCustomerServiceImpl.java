@@ -32,12 +32,12 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
                 .orgId(orgId)
                 .build();
 
-        card = findAadhaar(card);
+        card = findAadhaarByCard(card);
         if (card == null) {
             return Result.fail(10000, "no such card");
         }
 
-        card = findBankCard(card);
+        card = findBankCardByCard(card);
         if (card == null) {
             return Result.fail(10000, "no such card");
         }
@@ -45,7 +45,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         return Result.ok(card);
     }
 
-    private IndianBankCard findAadhaar(@NonNull IndianBankCard card) {
+    private IndianBankCard findAadhaarByCard(@NonNull IndianBankCard card) {
         AadhaarDO aadhaarDO = aadhaarDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
         if (aadhaarDO == null
             || null == aadhaarDO.getAadhaarNo()
@@ -58,7 +58,7 @@ public class IndianCustomerServiceImpl implements IndianCustomerService {
         return card;
     }
 
-    private IndianBankCard findBankCard(@NonNull IndianBankCard card) {
+    private IndianBankCard findBankCardByCard(@NonNull IndianBankCard card) {
         BankCardDO cardDO = bankCardDAO.selectByAccountIdAndOrgId(card.getAccountId(), card.getOrgId());
         if (cardDO == null
             || null == cardDO.getIfsc()
