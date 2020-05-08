@@ -20,7 +20,7 @@ public abstract class AbstractTradeState implements TradeState {
 
     @Override
     public int getCode() {
-        if (code <= 0) {
+        if (code < 0) {
             throw new InvalidTradeStateException(code);
         }
 

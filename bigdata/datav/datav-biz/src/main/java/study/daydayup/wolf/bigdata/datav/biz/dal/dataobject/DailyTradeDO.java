@@ -74,20 +74,4 @@ public class DailyTradeDO implements Serializable {
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
-        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
-        result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
-        result = prime * result + ((getTradeCount() == null) ? 0 : getTradeCount().hashCode());
-        result = prime * result + ((getTradeAmount() == null) ? 0 : getTradeAmount().hashCode());
-        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
-        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        return result;
-    }
 }
