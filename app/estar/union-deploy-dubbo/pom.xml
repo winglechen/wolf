@@ -155,12 +155,12 @@
             </properties>
         </profile>
 
-<!--        <profile>-->
-<!--            <id>release</id>-->
-<!--            <properties>-->
-<!--                <profileActive>release</profileActive>-->
-<!--            </properties>-->
-<!--        </profile>-->
+        <profile>
+            <id>cr</id>
+            <properties>
+                <profileActive>cr</profileActive>
+            </properties>
+        </profile>
 
 <!--        <profile>-->
 <!--            <id>prod</id>-->

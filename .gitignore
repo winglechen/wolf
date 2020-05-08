@@ -32,4 +32,5 @@ hs_err_pid*
 application-dev.yml
 application-test.yml
 application-release.yml
+application-cr.yml
 application-prod.yml
