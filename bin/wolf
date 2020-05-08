@@ -36,6 +36,38 @@ function deploy_union_test() {
     ssh -A smapp "/home/app/bin/wolf release-union"
 }
 
+function deploy_union_cr() {
+    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
+    cd ${dir} && mvn clean package -Ptest
+
+    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
+        app@crapp:/home/app/tmp
+    echo "union-deploy-dubbo.tar.gz transporting..."
+
+    echo "union restart ..."
+    ssh -A crapp "/home/app/bin/wolf release-union"
+}
+
+function deploy_onion_cr() {
+    dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
+    cd ${dir} && mvn clean package -Ptest
+
+    scp /Users/wingle/code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
+        app@crapp:/home/app/tmp
+    echo "onion-admin.tar.gz transporting..."
+
+
+    dir="/Users/wingle/code/work/onion/onion-api/onion-user/"
+    cd ${dir} && mvn clean package -Ptest
+
+    scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
+        app@crapp:/home/app/tmp
+    echo "onion-user.tar.gz transporting..."
+
+    echo "onion restart ..."
+    ssh -A crapp "/home/app/bin/wolf release-onion"
+}
+
 function deploy_onion_test() {
     dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
     cd ${dir} && mvn clean package -Ptest
@@ -90,6 +122,10 @@ case "$command" in
       deploy_union_test ;;
   deploy-onion-test)
       deploy_onion_test ;;
+  deploy-union-cr)
+      deploy_union_cr ;;
+  deploy-onion-cr)
+      deploy_onion_cr ;;
 
   redis-test)
       conn_test_redis ;;
