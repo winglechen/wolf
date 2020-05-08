@@ -21,7 +21,7 @@ public class DailyTradeController {
     public String koi() {
         tradeService.countNewContract();
         tradeService.countNewOrder();
-//        tradeService.countTradeStateChange();
+        tradeService.countTradeStateChange();
 
         return "daily trade data creating ...";
     }

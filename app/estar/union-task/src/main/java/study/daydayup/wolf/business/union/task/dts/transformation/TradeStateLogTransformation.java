@@ -31,6 +31,7 @@ public class TradeStateLogTransformation implements Transformation {
         operator = transformation.addJob();
         operator.map()
                 .rename("seller_id", "org_id")
+                .rename("target_state", "state")
                 .toLocalDate("created_at", "date")
                 .toTag();
         operator.aggregate()
