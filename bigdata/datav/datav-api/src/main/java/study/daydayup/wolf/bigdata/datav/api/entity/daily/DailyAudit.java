@@ -17,6 +17,7 @@ public class DailyAudit implements Model {
     private Long id;
     private Long orgId;
     private LocalDate date;
+    private String source;
 
     private Integer installCount;
     private Integer registerCount;

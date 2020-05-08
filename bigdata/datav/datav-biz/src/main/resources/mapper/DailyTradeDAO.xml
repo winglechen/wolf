@@ -30,13 +30,13 @@
             #{item,jdbcType=DATE}
         </foreach>
         <if test="request.tradeType != null">
-            and `trade_type` >= #{request.tradeType,jdbcType=INTEGER}
+            and `trade_type` = #{request.tradeType,jdbcType=INTEGER}
         </if>
         <if test="request.state != null">
-            and `state` >= #{request.state,jdbcType=INTEGER}
+            and `state` = #{request.state,jdbcType=INTEGER}
         </if>
         <if test="request.source != null">
-            and `source` >= #{request.source, jdbcType=VARCHAR}
+            and `source` = #{request.source, jdbcType=VARCHAR}
         </if>
     </select>
 </mapper>
