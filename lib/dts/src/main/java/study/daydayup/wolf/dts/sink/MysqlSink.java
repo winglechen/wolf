@@ -27,6 +27,7 @@ import java.util.Set;
  **/
 @Component
 //@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope("prototype")
 public class MysqlSink extends AbstractSink  implements Sink {
     private Statistics statistics;
 

@@ -99,6 +99,8 @@ case "$command" in
       install_boot ;;
   install-lib)
       install_libs ;;
+  install-dts)
+      install_dts ;;
   install-business)
       install_business ;;
   install-business-stater)

@@ -21,6 +21,7 @@ import java.util.Map;
  **/
 @Component
 //@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope("prototype")
 public class MysqlSource extends AbstractSource implements Source {
     @Resource
     private Offset offset;

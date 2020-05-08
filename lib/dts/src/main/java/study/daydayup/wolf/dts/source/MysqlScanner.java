@@ -1,6 +1,7 @@
 package study.daydayup.wolf.dts.source;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @author Wingle
  * @since 2020/2/4 5:31 下午
  **/
+@Slf4j
 @Component
 public class MysqlScanner implements DbScanner {
     private static final int MAX_ROW_NUM = 5;
@@ -93,6 +95,7 @@ public class MysqlScanner implements DbScanner {
                 .limit(SELECT_LIMIT)
                 .toString();
 
+        log.info("scan sql: {}", sql);
         return JdbcMapper.map(jdbc.queryForList(sql));
     }
 
