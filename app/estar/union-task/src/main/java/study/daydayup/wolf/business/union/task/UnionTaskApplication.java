@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.util.ContextUtil;
  * @author Wingle
  * @since 2020/2/3 7:43 下午
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"study.daydayup.wolf"})
 @MapperScan("study.daydayup.wolf.business.union.task.dal.dao")
 public class UnionTaskApplication {
     public static void main(String[] args) {

@@ -34,9 +34,10 @@ public class IndexController {
 
     @RequestMapping("/index/jdbc")
     public List<Map<String, Object>> jdbc() {
-        List<Map<String, Object>>  result = jdbcTemplate.queryForList("select * from `contract` order by id desc limit 5");
+        List<Map<String, Object>>  result = jdbcTemplate.queryForList(
+                "select * from `contract` order by id desc limit 5"
+        );
         
-
         return result;
     }
 

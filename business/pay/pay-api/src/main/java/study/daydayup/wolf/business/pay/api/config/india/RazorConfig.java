@@ -15,7 +15,6 @@ import java.io.Serializable;
  * @since 2020/2/27 4:18 下午
  **/
 @Data
-@Validated
 @Configuration
 @ConfigurationProperties(prefix = "pay.razorpay")
 public class RazorConfig implements Serializable {

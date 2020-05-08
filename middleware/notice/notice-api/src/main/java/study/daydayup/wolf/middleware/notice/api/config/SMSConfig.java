@@ -18,7 +18,6 @@ import java.util.Map;
  * @since 2020/3/20 3:03 下午
  **/
 @Data
-@Validated
 @Configuration
 @ConfigurationProperties(prefix = "wolf.sms")
 public class SMSConfig implements Config {
