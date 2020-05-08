@@ -38,7 +38,7 @@ function deploy_union_test() {
 
 function deploy_union_cr() {
     dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
-    cd ${dir} && mvn clean package -Ptest
+    cd ${dir} && mvn clean package -Pcr
 
     scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
         app@crapp:/home/app/tmp
@@ -50,7 +50,7 @@ function deploy_union_cr() {
 
 function deploy_onion_cr() {
     dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
-    cd ${dir} && mvn clean package -Ptest
+    cd ${dir} && mvn clean package -Pcr
 
     scp /Users/wingle/code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
         app@crapp:/home/app/tmp
@@ -58,7 +58,7 @@ function deploy_onion_cr() {
 
 
     dir="/Users/wingle/code/work/onion/onion-api/onion-user/"
-    cd ${dir} && mvn clean package -Ptest
+    cd ${dir} && mvn clean package -Pcr
 
     scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
         app@crapp:/home/app/tmp
