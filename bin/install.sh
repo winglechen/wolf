@@ -9,6 +9,12 @@ function install_boot() {
     cd $dir && mvn clean install
 }
 
+function install_dts() {
+    echo "install dts ..."
+    dir="${PROJECT_DIR}/lib/dts/"
+    cd ${dir} && mvn clean install
+}
+
 function install_libs() {
     install_boot
 
@@ -28,9 +34,7 @@ function install_libs() {
     dir="${PROJECT_DIR}/lib/mock/"
     cd ${dir} && mvn clean install
 
-    echo "install dts ..."
-    dir="${PROJECT_DIR}/lib/dts/"
-    cd ${dir} && mvn clean install
+    install_dts
 
     echo "install sdk ..."
     dir="${PROJECT_DIR}/lib/sdk/"

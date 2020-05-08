@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2020/2/16 6:12 下午
  **/
 @Component
-@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MysqlSource extends AbstractSource implements Source {
     @Resource
     private Offset offset;
@@ -30,7 +30,7 @@ public class MysqlSource extends AbstractSource implements Source {
     private Map<String, Long> offsetMap;
 
     @Override
-    public Source init(SourceConfig config) {
+    public MysqlSource init(SourceConfig config) {
         super.init(config);
 
         offset.load(sourceName, tableName, shardingKey);

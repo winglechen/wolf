@@ -45,16 +45,53 @@ spring:
         wmq_tcc_message.actual-data-nodes: mq.wmq_tcc_message
         #setting
         account_status.actual-data-nodes: setting.account_status
+        account_setting.actual-data-nodes: setting.account_setting
+        company.actual-data-nodes: setting.company_status
+        company_setting.actual-data-nodes: setting.company_setting
         customer_status.actual-data-nodes: setting.customer_status
+        customer_setting.actual-data-nodes: setting.customer_setting
+        staff.actual-data-nodes: setting.staff_status
+        staff_setting.actual-data-nodes: setting.staff_setting
         #datav
         daily_koi.actual-data-nodes: datav.daily_koi
         daily_loan.actual-data-nodes: datav.daily_loan
+        daily_trade.actual-data-nodes: datav.daily_trade
         daily_repay.actual-data-nodes: datav.daily_repay
         daily_collection.actual-data-nodes: datav.daily_collection
         daily_collector.actual-data-nodes: datav.daily_collector
         model_collector.actual-data-nodes: datav.model_collector
         tract_repay.actual-data-nodes: datav.tract_repay
         offset_holder.actual-data-nodes: datav.offset_holder
+        #org
+        task.actual-data-nodes: org.task
+        task_detail.actual-data-nodes: org.task_detail
+        project.actual-data-nodes: org.project
+        project_detail.actual-data-nodes: org.project_detail
+        task_scheduler.actual-data-nodes: org.task_scheduler
+        task_contact.actual-data-nodes: org.task_contact
+        task_trade.actual-data-nodes: org.task_trade
+        task_state_log.actual-data-nodes: org.task_state_log
+        task_assignment_log.actual-data-nodes: org.task_assignment_log
+        task_progress.actual-data-nodes: org.task_progress
+        #onion
+        aadhaar.actual-data-nodes: onion.aadhaar
+        address_book.actual-data-nodes: onion.address_book
+        admin.actual-data-nodes: onion.admin
+        app_installed.actual-data-nodes: onion.app_installed
+        bank_card.actual-data-nodes: onion.bank_card
+        basic_info.actual-data-nodes: onion.basic_info
+        device.actual-data-nodes: onion.device
+        driving_license.actual-data-nodes: onion.driving_license
+        emergency_contact.actual-data-nodes: onion.emergency_contact
+        gps.actual-data-nodes: onion.gps
+        liveness_auth_info.actual-data-nodes: onion.liveness_auth_info
+        pan_card.actual-data-nodes: onion.pan_card
+        passport.actual-data-nodes: onion.passport
+        user.actual-data-nodes: onion.user
+        user_black.actual-data-nodes: onion.user_black
+        user_credit.actual-data-nodes: onion.user_credit
+        user_credit_log.actual-data-nodes: onion.user_credit_log
+        voter_card.actual-data-nodes: onion.voter_card
 
 server:
   port: 9100

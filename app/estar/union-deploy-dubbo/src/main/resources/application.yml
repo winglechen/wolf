@@ -67,6 +67,7 @@ spring:
         #datav
         daily_koi.actual-data-nodes: datav.daily_koi
         daily_loan.actual-data-nodes: datav.daily_loan
+        daily_trade.actual-data-nodes: datav.daily_trade
         daily_repay.actual-data-nodes: datav.daily_repay
         daily_collection.actual-data-nodes: datav.daily_collection
         daily_collector.actual-data-nodes: datav.daily_collector

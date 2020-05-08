@@ -27,8 +27,6 @@ public class UserSource {
                 .columns("id, org_id, account_id, created_at")
                 .shardingKey(shardingConfig.getShard())
                 .build();
-        mysqlSource.init(sourceConfig);
-
-        return mysqlSource;
+        return mysqlSource.init(sourceConfig);
     }
 }
