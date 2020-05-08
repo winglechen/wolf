@@ -15,9 +15,9 @@ import java.util.Date;
  **/
 @Data
 public class SmsRequest implements Request {
-    @NotBlank
+    @NotBlank(message = "Mobile can not be null")
     private String mobile;
-    @NotBlank
+    @NotBlank(message = "OTP can not be null")
     private String code;
 
     private Long orgId;

@@ -32,12 +32,12 @@ public class SmsController extends AuthController {
     private AuthConfig authConfig;
 
     @PostMapping("/auth/sms/login")
-    public Result<OauthLicense> login(@Valid @RequestBody SmsRequest request) {
+    public Result<OauthLicense> login(@Validated @RequestBody SmsRequest request) {
         return registerAndLogin(request);
     }
 
     @PostMapping("/auth/sms/registerAndLogin")
-    public Result<OauthLicense> registerAndLogin(@Valid @RequestBody SmsRequest request) {
+    public Result<OauthLicense> registerAndLogin(@Validated @RequestBody SmsRequest request) {
 //        if (isLogin()) {
 //            return Result.ok(getLicenseFromSession());
 //        }
