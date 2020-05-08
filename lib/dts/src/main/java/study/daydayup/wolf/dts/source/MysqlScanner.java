@@ -25,8 +25,8 @@ import java.util.Map;
 @Slf4j
 @Component
 public class MysqlScanner implements DbScanner {
-    private static final int MAX_ROW_NUM = 5;
-    private static final int SELECT_LIMIT = 5;
+    private static final int MAX_ROW_NUM = 30;
+    private static final int SELECT_LIMIT = 30;
 
     private static final String ID = "id";
     private static final String CLAUSE = ">";
