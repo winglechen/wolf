@@ -19,7 +19,7 @@ import java.util.List;
 public class AuthConfig {
     private boolean enable = true;
 
-    private String denyCode     = "501";
+    private String denyCode     = "110500";
     private String denyMessage  = "Access Denied, You don’t have permission to access on this Server";
 
     private String sessionKey = "WSESSIONID";

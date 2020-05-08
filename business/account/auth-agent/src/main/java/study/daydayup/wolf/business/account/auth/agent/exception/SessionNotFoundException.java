@@ -11,6 +11,6 @@ import study.daydayup.wolf.common.lang.string.Str;
  **/
 public class SessionNotFoundException extends BusinessException {
     public SessionNotFoundException(String field) {
-        super(111000, Str.join("Couldn't find field:", field, " in session") );
+        super(110000, Str.join("Couldn't find field:", field, " in session") );
     }
 }
