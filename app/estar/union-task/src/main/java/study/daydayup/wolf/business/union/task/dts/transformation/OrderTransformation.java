@@ -35,6 +35,7 @@ public class OrderTransformation implements Transformation {
                 .set("state", 0)
                 .toTag();
         operator.aggregate()
+                .sum("amount","trade_amount")
                 .count("trade_count");
 
         return transformation.transform(stream, true);
