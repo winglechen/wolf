@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `daily_trade`
     `date`                      DATE                NOT NULL COMMENT '统计日期',
 
     `trade_type`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单类型',
-    `trade_state`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单状态：0代表新增',
+    `state`                     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单状态：0代表新增',
     `source`                    VARCHAR(50) NOT NULL DEFAULT '' COMMENT '渠道',
 
     `trade_count`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易数',
