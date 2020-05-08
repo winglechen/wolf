@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.union.task.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.union.task.service.DailyKoiService;
+import study.daydayup.wolf.business.union.task.service.DailyTradeService;
 
 import javax.annotation.Resource;
 
@@ -13,16 +13,16 @@ import javax.annotation.Resource;
  * @since 2020/2/7 4:34 下午
  **/
 @RestController
-public class DailyKoiController {
+public class DailyTradeController {
     @Resource
-    private DailyKoiService koiService;
+    private DailyTradeService tradeService;
 
-    @GetMapping("/daily/koi")
+    @GetMapping("/daily/trade")
     public String koi() {
-        koiService.countPvAndUv();
-        koiService.countRegister();
-        koiService.countIndianInfoState();
+        tradeService.countNewContract();
+        tradeService.countNewOrder();
+        tradeService.countTradeStateChange();
 
-        return "daily koi data creating ...";
+        return "daily trade data creating ...";
     }
 }

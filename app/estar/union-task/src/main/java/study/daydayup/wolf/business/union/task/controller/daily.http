@@ -1,0 +1,9 @@
+GET http://localhost:9100/daily/koi
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:9100/daily/trade
+Accept: */*
+Cache-Control: no-cache

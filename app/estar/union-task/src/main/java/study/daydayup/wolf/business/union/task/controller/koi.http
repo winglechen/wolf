@@ -1,6 +1,0 @@
-GET http://localhost:9100/koi/koi
-Accept: */*
-Cache-Control: no-cache
-
-
-###
