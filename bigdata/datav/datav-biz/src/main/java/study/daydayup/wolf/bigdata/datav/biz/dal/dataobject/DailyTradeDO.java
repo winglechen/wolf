@@ -16,7 +16,7 @@ public class DailyTradeDO implements Serializable {
 
     private Integer tradeType;
 
-    private Integer tradeState;
+    private Integer state;
 
     private String source;
 
@@ -40,7 +40,7 @@ public class DailyTradeDO implements Serializable {
         sb.append(", orgId=").append(orgId);
         sb.append(", date=").append(date);
         sb.append(", tradeType=").append(tradeType);
-        sb.append(", tradeState=").append(tradeState);
+        sb.append(", state=").append(state);
         sb.append(", source=").append(source);
         sb.append(", tradeCount=").append(tradeCount);
         sb.append(", tradeAmount=").append(tradeAmount);
@@ -66,7 +66,7 @@ public class DailyTradeDO implements Serializable {
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
             && (this.getTradeType() == null ? other.getTradeType() == null : this.getTradeType().equals(other.getTradeType()))
-            && (this.getTradeState() == null ? other.getTradeState() == null : this.getTradeState().equals(other.getTradeState()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getTradeCount() == null ? other.getTradeCount() == null : this.getTradeCount().equals(other.getTradeCount()))
             && (this.getTradeAmount() == null ? other.getTradeAmount() == null : this.getTradeAmount().equals(other.getTradeAmount()))
@@ -82,7 +82,7 @@ public class DailyTradeDO implements Serializable {
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
         result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
-        result = prime * result + ((getTradeState() == null) ? 0 : getTradeState().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
         result = prime * result + ((getTradeCount() == null) ? 0 : getTradeCount().hashCode());
         result = prime * result + ((getTradeAmount() == null) ? 0 : getTradeAmount().hashCode());
