@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.union.task.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.union.task.service.DailyKoiService;
 
@@ -16,11 +17,12 @@ public class DailyKoiController {
     @Resource
     private DailyKoiService koiService;
 
+    @GetMapping("/koi/koi")
     public String koi() {
         koiService.countPvAndUv();
         koiService.countRegister();
         koiService.countIndianInfoState();
-        
+
         return "daily koi data creating ...";
     }
 }
