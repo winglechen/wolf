@@ -41,6 +41,12 @@
 
             <!-- business agent end -->
 
+            <dependency>
+                <groupId>study.daydayup.wolf.bigdata.datav</groupId>
+                <artifactId>datav-api</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
+
             <!-- middleware api start -->
             <dependency>
                 <groupId>study.daydayup.wolf.middleware.notice</groupId>

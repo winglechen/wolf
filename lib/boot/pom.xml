@@ -73,6 +73,7 @@
         <okhttp.version>4.4.1</okhttp.version>
 
         <xxljob.version>2.1.2</xxljob.version>
+        <csv.version>1.8</csv.version>
 
 
         <flink.version>1.9.1</flink.version>
@@ -149,6 +150,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${csv.version}</version>
             </dependency>
 
 
