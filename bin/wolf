@@ -65,7 +65,7 @@ function deploy_onion_cr() {
     echo "onion-user.tar.gz transporting..."
 
     echo "onion restart ..."
-    ssh -A crapp "/home/app/bin/wolf release-onion"
+    ssh -A crapp "source /etc/profile; /home/app/bin/wolf release-onion"
 }
 
 function deploy_onion_test() {
@@ -85,7 +85,7 @@ function deploy_onion_test() {
     echo "onion-user.tar.gz transporting..."
 
     echo "onion restart ..."
-    ssh -A smapp "/home/app/bin/wolf release-onion"
+    ssh -A smapp "source /etc/profile; /home/app/bin/wolf release-onion"
 }
 
 function conn_test_redis() {
