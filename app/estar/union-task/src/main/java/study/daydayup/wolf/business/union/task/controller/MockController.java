@@ -77,6 +77,7 @@ public class MockController {
 
         Sql sql = Sql.insert("daily_koi").values(data);
         System.out.println(sql.getSql());
+        System.out.println(data);
 
         jdbc.update(sql.getSql(), sql.getData());
     }
@@ -93,6 +94,7 @@ public class MockController {
 
         Sql sql = Sql.insert("daily_trade").values(data);
         System.out.println(sql.getSql());
+        System.out.println(data);
 
         jdbc.update(sql.getSql(), sql.getData());
     }
@@ -108,6 +110,7 @@ public class MockController {
 
         Sql sql = Sql.insert("daily_trade").values(data);
         System.out.println(sql.getSql());
+        System.out.println(data);
 
         jdbc.update(sql.getSql(), sql.getData());
     }
@@ -126,16 +129,20 @@ public class MockController {
 
         Sql sql = Sql.insert("daily_trade").values(data);
         System.out.println(sql.getSql());
+        System.out.println(data);
 
         jdbc.update(sql.getSql(), sql.getData());
     }
 
-    private LocalDate parseDate(String date) {
+    private String parseDate(String date) {
         if (date == null) {
             return null;
         }
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
-        return LocalDate.parse(date, format);
+        LocalDate d = LocalDate.parse(date, format);
+        System.out.println("date: " + date + " : " + d);
+
+        return d.toString();
     }
 }
