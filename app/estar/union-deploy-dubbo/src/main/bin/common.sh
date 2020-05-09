@@ -6,12 +6,16 @@ PROJECT_PATH=$(cd `dirname $0`; cd ../ ; pwd)
 BIN_PATH="${PROJECT_PATH}/bin"
 
 
+
 #if [ ! -d ${BASE_PATH}/logs ] ; then
 #	mkdir -p ${BASE_PATH}/logs
 #fi
 
 ## set java path
-JAVA=$(which java)
+#JAVA=$(`which java`)
+source /etc/profile
+
+JAVA="${JAVA_HOME}/bin/java"
 if [ -z "$JAVA" ]; then
   	echo "Cannot find a Java JDK. Please set either set JAVA or put java (>=1.8) in your PATH." 2>&2
     exit 1
