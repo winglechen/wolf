@@ -13,6 +13,6 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
 
 public class ApprovedState extends AbstractTradeState implements TradeState {
     {
-        code = 5;
+        code = 10;
     }
 }
