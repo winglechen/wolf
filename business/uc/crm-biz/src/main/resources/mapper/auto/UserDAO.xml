@@ -17,6 +17,7 @@
     <result column="dob" jdbcType="VARCHAR" property="dob" />
     <result column="credit_amount" jdbcType="BIGINT" property="creditAmount" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="basic_info_auth_status" jdbcType="TINYINT" property="basicInfoAuthStatus" />
     <result column="liveness_auth_status" jdbcType="TINYINT" property="livenessAuthStatus" />
     <result column="aadhaar_auth_status" jdbcType="TINYINT" property="aadhaarAuthStatus" />
@@ -34,7 +35,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, account_id, org_id, channel_id, nickname, avatar, real_name, mobile, email, aadhaar_no, 
-    pan_no, gender, dob, credit_amount, tags, basic_info_auth_status, liveness_auth_status, 
+    pan_no, gender, dob, credit_amount, tags, `source`, basic_info_auth_status, liveness_auth_status, 
     aadhaar_auth_status, pan_auth_status, passport_auth_status, dl_auth_status, voter_card_auth_status, 
     bank_card_bind_status, kyc_status, version, delete_flag, last_editor, created_at, 
     updated_at
@@ -55,7 +56,7 @@
       real_name, mobile, email, 
       aadhaar_no, pan_no, gender, 
       dob, credit_amount, tags, 
-      basic_info_auth_status, liveness_auth_status, 
+      `source`, basic_info_auth_status, liveness_auth_status, 
       aadhaar_auth_status, pan_auth_status, passport_auth_status, 
       dl_auth_status, voter_card_auth_status, bank_card_bind_status, 
       kyc_status, version, delete_flag, 
@@ -66,7 +67,7 @@
       #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{aadhaarNo,jdbcType=VARCHAR}, #{panNo,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{dob,jdbcType=VARCHAR}, #{creditAmount,jdbcType=BIGINT}, #{tags,jdbcType=VARCHAR}, 
-      #{basicInfoAuthStatus,jdbcType=TINYINT}, #{livenessAuthStatus,jdbcType=TINYINT}, 
+      #{source,jdbcType=VARCHAR}, #{basicInfoAuthStatus,jdbcType=TINYINT}, #{livenessAuthStatus,jdbcType=TINYINT}, 
       #{aadhaarAuthStatus,jdbcType=TINYINT}, #{panAuthStatus,jdbcType=TINYINT}, #{passportAuthStatus,jdbcType=TINYINT}, 
       #{dlAuthStatus,jdbcType=TINYINT}, #{voterCardAuthStatus,jdbcType=TINYINT}, #{bankCardBindStatus,jdbcType=TINYINT}, 
       #{kycStatus,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
@@ -120,6 +121,9 @@
       </if>
       <if test="tags != null">
         tags,
+      </if>
+      <if test="source != null">
+        `source`,
       </if>
       <if test="basicInfoAuthStatus != null">
         basic_info_auth_status,
@@ -210,6 +214,9 @@
       <if test="tags != null">
         #{tags,jdbcType=VARCHAR},
       </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
       <if test="basicInfoAuthStatus != null">
         #{basicInfoAuthStatus,jdbcType=TINYINT},
       </if>
@@ -299,6 +306,9 @@
       <if test="tags != null">
         tags = #{tags,jdbcType=VARCHAR},
       </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
       <if test="basicInfoAuthStatus != null">
         basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
       </if>
@@ -360,6 +370,7 @@
       dob = #{dob,jdbcType=VARCHAR},
       credit_amount = #{creditAmount,jdbcType=BIGINT},
       tags = #{tags,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
       basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
       liveness_auth_status = #{livenessAuthStatus,jdbcType=TINYINT},
       aadhaar_auth_status = #{aadhaarAuthStatus,jdbcType=TINYINT},

@@ -135,7 +135,7 @@
         </table>
 
 
-        <table tableName="user" domainObjectName="UserDO" mapperName="UserDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        <table tableName="userx" domainObjectName="UserDO" mapperName="UserDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="basic_info_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="liveness_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="aadhaar_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />

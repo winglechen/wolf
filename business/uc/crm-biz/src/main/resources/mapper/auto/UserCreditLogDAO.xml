@@ -7,6 +7,8 @@
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="auth_type" jdbcType="TINYINT" property="authType" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -14,8 +16,8 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, account_id, org_id, auth_type, `status`, version, delete_flag, last_editor, created_at, 
-    updated_at
+    id, account_id, org_id, auth_type, `status`, `source`, tags, version, delete_flag, 
+    last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -29,13 +31,15 @@
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditLogDO">
     insert into user_credit_log (id, account_id, org_id, 
-      auth_type, `status`, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
+      auth_type, `status`, `source`, 
+      tags, version, delete_flag, 
+      last_editor, created_at, updated_at
+      )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, 
-      #{authType,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{authType,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{source,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserCreditLogDO">
     insert into user_credit_log
@@ -54,6 +58,12 @@
       </if>
       <if test="status != null">
         `status`,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="tags != null">
+        tags,
       </if>
       <if test="version != null">
         version,
@@ -87,6 +97,12 @@
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
@@ -119,6 +135,12 @@
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
       </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
       </if>
@@ -143,6 +165,8 @@
       org_id = #{orgId,jdbcType=BIGINT},
       auth_type = #{authType,jdbcType=TINYINT},
       `status` = #{status,jdbcType=TINYINT},
+      `source` = #{source,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
