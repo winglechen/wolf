@@ -391,6 +391,7 @@ CREATE TABLE `user_credit_log`
     `auth_type`   tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '基础信息1 活体认证2 Aadhaar认证3 PAN认证4 护照认证5 驾驶证认证6 选民证认证7 银行卡绑定8 kyc认证9',
     `status`      tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '认证状态 0未通过 1通过',
     `source`      varchar(100)        NOT NULL DEFAULT '' COMMENT '用户来源',
+    `tags`        varchar(100)        NOT NULL DEFAULT '' COMMENT 'tags',
     `version`     int(11) unsigned    NOT NULL DEFAULT '0' COMMENT '版本号',
     `delete_flag` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除，1已删除',
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
