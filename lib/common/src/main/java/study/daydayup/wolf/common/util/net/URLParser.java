@@ -16,7 +16,11 @@ public class URLParser {
 
     private URL url;
     private String str;
-    public URL parse(String s) {
+    public static URL parse(String s) {
+        return new URLParser().parseURL(s);
+    }
+
+    public URL parseURL(String s) {
         url = new URL();
         str = s;
         if (StringUtil.isBlank(str)) {
@@ -25,6 +29,7 @@ public class URLParser {
 
         parseProtocol();
         parseHostAndPath();
+        parseQuery();
 
         return url;
     }
@@ -40,7 +45,33 @@ public class URLParser {
     }
 
     private void parseHostAndPath() {
+        if (StringUtil.isBlank(str)) {
+            throw new InvalidURLException("host not found");
+        }
+
         String sArr[] = StringUtil.split(str, QUERY_DELIMITER);
+        if (sArr.length > 2) {
+            throw new InvalidURLException("too many query delimiter");
+        }
+
+        str = (2 == sArr.length) ? sArr[1] : null;
+        splitHostAndPath(sArr[0]);
+    }
+
+    private void splitHostAndPath(String s) {
+        if (StringUtil.isBlank(s)) {
+            return;
+        }
+
+        String sArr[] = s.split("/", 2);
+        url.setHost(sArr[0]);
+
+        if (2 == sArr.length) {
+            url.setPath(StringUtil.join("/", sArr[1]));
+        }
+    }
+
+    private void parseQuery() {
 
     }
 

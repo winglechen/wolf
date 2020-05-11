@@ -180,6 +180,16 @@ public class StringUtilTest {
         assertEquals("StringUtil.split fail", "hello", sArr2[0]);
         assertEquals("StringUtil.split fail", "world", sArr2[1]);
 
+        s = "h/e/l/l/o";
+        String sArr3[] = s.split("/", 2);
+        assertEquals("StringUtil.split fail", 2, sArr3.length);
+        assertEquals("StringUtil.split fail", "h", sArr3[0]);
+        assertEquals("StringUtil.split fail", "e/l/l/o", sArr3[1]);
+
+        s = "hello";
+        String sArr4[] = s.split("/", 2);
+        assertEquals("StringUtil.split fail", 1, sArr4.length);
+        assertEquals("StringUtil.split fail", "hello", sArr4[0]);
     }
 
 }
