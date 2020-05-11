@@ -10,5 +10,13 @@ import study.daydayup.wolf.common.model.contract.DataType;
  * @since 2019/10/15 1:34 下午
  **/
 @Data
-public class URI implements DataType {
+public class URL implements DataType {
+    private String protocol;
+    private String host;
+    private int port = -1;
+    private String file;
+    private String query;
+    private String path;
+    private String ref;
+
 }

@@ -16,7 +16,7 @@ import study.daydayup.wolf.business.pay.biz.service.india.dokypay.handler.Dokypa
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
-import study.daydayup.wolf.common.util.lang.UrlUtil;
+import study.daydayup.wolf.common.util.net.UrlUtil;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
@@ -61,7 +61,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
 
     private boolean parseResponse(@NonNull String data) {
         try {
-            Map<String, String> map = UrlUtil.parseUrl(data);
+            Map<String, String> map = UrlUtil.parseQuery(data);
             Map<String, Object> objMap = new HashMap<>(map);
             response = new JSONObject(objMap);
         } catch (UnsupportedEncodingException e) {

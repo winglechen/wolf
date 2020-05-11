@@ -1,4 +1,7 @@
-package study.daydayup.wolf.common.util.lang;
+package study.daydayup.wolf.common.util.net;
+
+import study.daydayup.wolf.common.util.lang.CharsetUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -13,11 +16,11 @@ import java.util.Map;
  **/
 public class UrlUtil {
 
-    public static Map<String, String> parseUrl(String url) throws UnsupportedEncodingException {
-        return parseUrl(url, true, CharsetUtil.UTF_8.toString());
+    public static Map<String, String> parseQuery(String url) throws UnsupportedEncodingException {
+        return parseQuery(url, true, CharsetUtil.UTF_8.toString());
     }
 
-    public static Map<String, String> parseUrl(String url, boolean decode, String enc) throws UnsupportedEncodingException {
+    public static Map<String, String> parseQuery(String url, boolean decode, String enc) throws UnsupportedEncodingException {
         Map<String, String> result = new HashMap<>(8);
         if (StringUtil.isBlank(url)) {
             return result;
