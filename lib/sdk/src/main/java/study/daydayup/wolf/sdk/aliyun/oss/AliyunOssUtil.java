@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.sdk.domain.exception.InvalidSdkConfigException;
-import study.daydayup.wolf.sdk.domain.AbstractOSS;
+import study.daydayup.wolf.sdk.domain.oss.AbstractOSS;
 
 import javax.annotation.Resource;
 import java.net.URL;
@@ -28,7 +28,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Component
-public class AliyunOssUtil extends AbstractOSS implements study.daydayup.wolf.sdk.domain.OSS {
+public class AliyunOssUtil extends AbstractOSS implements study.daydayup.wolf.sdk.domain.oss.OSS {
     private static final int SIGNATURE_EXPIRE_TIME = 300;
     private static final int URL_EXPIRE_TIME = 3600;
     private static final long MIN_CONTENT_LENGTH = 0;

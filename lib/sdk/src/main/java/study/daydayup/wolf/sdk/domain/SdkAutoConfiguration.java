@@ -1,4 +1,4 @@
-package study.daydayup.wolf.sdk;
+package study.daydayup.wolf.sdk.domain;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

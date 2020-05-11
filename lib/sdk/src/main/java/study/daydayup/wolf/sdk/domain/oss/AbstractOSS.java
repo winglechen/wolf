@@ -1,4 +1,4 @@
-package study.daydayup.wolf.sdk.domain;
+package study.daydayup.wolf.sdk.domain.oss;
 
 import study.daydayup.wolf.common.util.lang.StringUtil;
 

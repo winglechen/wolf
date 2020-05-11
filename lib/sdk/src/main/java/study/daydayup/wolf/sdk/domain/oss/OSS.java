@@ -1,4 +1,4 @@
-package study.daydayup.wolf.sdk.domain;
+package study.daydayup.wolf.sdk.domain.oss;
 
 /**
  * study.daydayup.wolf.sdk.domain

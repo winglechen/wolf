@@ -1,4 +1,4 @@
-package study.daydayup.wolf.sdk.domain;
+package study.daydayup.wolf.sdk.domain.oss;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
