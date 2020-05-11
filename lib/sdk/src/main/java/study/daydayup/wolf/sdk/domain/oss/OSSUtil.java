@@ -2,6 +2,11 @@ package study.daydayup.wolf.sdk.domain.oss;
 
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.sdk.aliyun.oss.AliyunOssUtil;
+
+import javax.annotation.Resource;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * study.daydayup.wolf.sdk.domain
@@ -11,6 +16,8 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class OSSUtil extends AbstractOSS implements OSS {
+    @Resource
+    private AliyunOssUtil aliyunOssUtil;
     @Override
     public String decode(@NonNull String str) {
         return null;
