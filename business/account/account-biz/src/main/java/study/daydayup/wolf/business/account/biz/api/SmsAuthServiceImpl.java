@@ -32,6 +32,8 @@ import java.util.Date;
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
     private static final String OTP_KEY = "account.login.otp";
+    // "OnionWallet"
+    private static final String BRAND_NAME = "RupeeWallet";
     private static final String TEST_OTP = "778899";
 
     @Resource
@@ -89,7 +91,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
             return;
         }
 
-        String[] args = new String[]{code};
+        String[] args = new String[]{code, BRAND_NAME};
         String msg = LocaleUtil.get(OTP_KEY, args);
         if (msg == null) {
             throw new LocaleNotFoundException(OTP_KEY);
