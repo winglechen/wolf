@@ -4,10 +4,8 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterators;
-import study.daydayup.wolf.common.util.collection.ListUtil;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 
 /**
  * study.daydayup.wolf.common.util
@@ -302,5 +300,4 @@ public class StringUtil {
         Iterable<String> i = Splitter.on(separator).split(s);
         return Iterators.toArray(i.iterator(), String.class);
     }
-
 }
