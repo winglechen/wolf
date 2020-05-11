@@ -14,23 +14,23 @@ import java.util.Map;
  * @author Wingle
  * @since 2020/5/7 7:39 下午
  **/
-public class UrlUtil {
+public class URLUtil {
 
-    public static Map<String, String> parseQuery(String url) throws UnsupportedEncodingException {
-        return parseQuery(url, true, CharsetUtil.UTF_8.toString());
+    public static Map<String, String> parseQuery(String query) throws UnsupportedEncodingException {
+        return parseQuery(query, true, CharsetUtil.UTF_8.toString());
     }
 
-    public static Map<String, String> parseQuery(String url, boolean decode, String enc) throws UnsupportedEncodingException {
+    public static Map<String, String> parseQuery(String query, boolean decode, String enc) throws UnsupportedEncodingException {
         Map<String, String> result = new HashMap<>(8);
-        if (StringUtil.isBlank(url)) {
+        if (StringUtil.isBlank(query)) {
             return result;
         }
 
         if (decode) {
-            url = URLDecoder.decode(url, enc);
+            query = URLDecoder.decode(query, enc);
         }
 
-        String[] sArr = StringUtil.split(url, "&");
+        String[] sArr = StringUtil.split(query, "&");
         String[] kvArr;
         String key, value;
         for (String s: sArr) {
