@@ -165,4 +165,21 @@ public class StringUtilTest {
         assertEquals("capitalize fail", "tRAde.order.line", StringUtil.lcWords("TRAde.Order.Line", "."));
     }
 
+    @Test
+    public void split() {
+        String s;
+
+        s = "hello";
+        String sArr1[] = StringUtil.split(s, "-");
+        assertEquals("StringUtil.split fail", 1, sArr1.length);
+        assertEquals("StringUtil.split fail", s, sArr1[0]);
+
+        s = "hello-world";
+        String sArr2[] = StringUtil.split(s, "-");
+        assertEquals("StringUtil.split fail", 2, sArr2.length);
+        assertEquals("StringUtil.split fail", "hello", sArr2[0]);
+        assertEquals("StringUtil.split fail", "world", sArr2[1]);
+
+    }
+
 }
