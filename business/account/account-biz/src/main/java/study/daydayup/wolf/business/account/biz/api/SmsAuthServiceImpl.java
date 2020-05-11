@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.account.biz.api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
@@ -21,6 +22,7 @@ import study.daydayup.wolf.middleware.notice.agent.service.SMSAgent;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -31,6 +33,8 @@ import java.util.Date;
 @Slf4j
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
+    @Value("${wolf.sms.mockMode:false}")
+    private boolean mockMode;
     private static final String OTP_KEY = "account.login.otp";
     // "OnionWallet"
     private static final String BRAND_NAME = "RupeeWallet";
@@ -87,7 +91,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     private void sendSms(String mobile, String code) {
-        if (TEST_OTP.equals(code)) {
+        if (mockMode) {
             return;
         }
 
@@ -101,9 +105,11 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     }
 
     private String createCode() {
-        return TEST_OTP;
-        //TODO remove the mock data
-//        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
-//        return Integer.toString(num);
+        if (mockMode) {
+            return TEST_OTP;
+        }
+
+        int num = ThreadLocalRandom.current().nextInt(100000, 999999);
+        return Integer.toString(num);
     }
 }
