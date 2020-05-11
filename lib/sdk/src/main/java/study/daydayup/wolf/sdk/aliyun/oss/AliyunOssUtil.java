@@ -1,8 +1,6 @@
 package study.daydayup.wolf.sdk.aliyun.oss;
 
-import com.alibaba.fastjson.JSON;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
@@ -12,7 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.time.DateUtil;
-import study.daydayup.wolf.sdk.InvalidSdkConfigException;
+import study.daydayup.wolf.sdk.domain.exception.InvalidSdkConfigException;
+import study.daydayup.wolf.sdk.domain.AbstractOSS;
 
 import javax.annotation.Resource;
 import java.net.URL;
@@ -29,7 +28,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Component
-public class AliyunOssUtil {
+public class AliyunOssUtil extends AbstractOSS implements study.daydayup.wolf.sdk.domain.OSS {
     private static final int SIGNATURE_EXPIRE_TIME = 300;
     private static final int URL_EXPIRE_TIME = 3600;
     private static final long MIN_CONTENT_LENGTH = 0;
@@ -46,6 +45,23 @@ public class AliyunOssUtil {
         if (null == ossConfig.getEndpoint()) {
             throw new InvalidSdkConfigException("invalid aliyun oss config: endpoint can't be null");
         }
+    }
+
+    @Override
+    public String decode(@NonNull String str) {
+        OSS client = createClient();
+
+        String[] items = StringUtil.split(str, "://");
+        if (items.length != 2) {
+            throw new IllegalArgumentException("invalid oss url");
+        }
+
+        String bucket = items[0];
+        String path = StringUtil.ltrim(items[1], "/");
+        LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
+        URL url = client.generatePresignedUrl(bucket, path, DateUtil.asDate(expireAt));
+
+        return url.toString();
     }
 
     public Map<String, String> createSignature() {
@@ -72,21 +88,7 @@ public class AliyunOssUtil {
         return formatSignature(signature, encodedPolicy, dir, bucket, expireAt);
     }
 
-    public String encode(@NonNull String str) {
-        OSS client = createClient();
 
-        String[] items = StringUtil.split(str, "://");
-        if (items.length != 2) {
-            throw new IllegalArgumentException("invalid oss url");
-        }
-
-        String bucket = items[0];
-        String path = StringUtil.ltrim(items[1], "/");
-        LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
-        URL url = client.generatePresignedUrl(bucket, path, DateUtil.asDate(expireAt));
-
-        return url.toString();
-    }
 
     private OSS createClient() {
         validOssConfig();

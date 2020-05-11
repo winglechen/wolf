@@ -1,4 +1,4 @@
-package study.daydayup.wolf.sdk;
+package study.daydayup.wolf.sdk.domain.exception;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.lang.exception.SystemException;
