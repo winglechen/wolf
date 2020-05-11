@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS `user`
     `gender`                 VARCHAR(10)         NOT NULL DEFAULT '' COMMENT '性别 male(男) female(女)',
     `aadhaar_no`             VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'Aadhaar号码',
     `pan_no`                 VARCHAR(20)         NOT NULL DEFAULT '' COMMENT 'pan号码',
-    `delete_flag`            TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
-    `version`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+
+    `source`                 VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'source',
 
     `aadhaar_auth_status`    TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Aadhaar认证状态 0未认证 1未通过 2通过',
     `pan_auth_status`        TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'PAN认证状态 0未认证 1未通过 2通过',
@@ -25,12 +25,15 @@ CREATE TABLE IF NOT EXISTS `user`
     `dl_auth_status`         TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '驾驶证认证状态 0未认证 1未通过 2通过',
     `voter_card_auth_status` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '选民证认证状态 0未认证 1未通过 2通过',
 
+    `version`                INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag`            TINYINT(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `last_editor`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`             DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`             DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
 
     UNIQUE INDEX `udx_aadhaar_no` (`aadhaar_no`),
     UNIQUE INDEX `udx_pan_no` (`pan_no`),
+    UNIQUE INDEX `udx_aid` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4 COMMENT = '用户基础信息表';

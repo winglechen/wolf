@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.sdk.aliyun.oss.AliyunOssUtil;
 
 import javax.annotation.Resource;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * study.daydayup.wolf.sdk.domain

@@ -310,6 +310,8 @@ CREATE TABLE `user`
     `dob`                    varchar(12)         NOT NULL DEFAULT '' COMMENT '出生日期',
     `credit_amount`          bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '信用额度',
     `tags`                   varchar(200)        NOT NULL DEFAULT '' COMMENT '用户标签，标识用户是否在黑名单等',
+    `source`                 varchar(100)        NOT NULL DEFAULT '' COMMENT '用户来源',
+
     `basic_info_auth_status` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '基础信息状态 0未认证 1未通过 2通过',
     `liveness_auth_status`   tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '活体认证状态 0未认证 1未通过 2通过',
     `aadhaar_auth_status`    tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT 'Aadhaar认证状态 0未认证 1未通过 2通过',
@@ -388,6 +390,7 @@ CREATE TABLE `user_credit_log`
     `org_id`      bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '组织ID',
     `auth_type`   tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '基础信息1 活体认证2 Aadhaar认证3 PAN认证4 护照认证5 驾驶证认证6 选民证认证7 银行卡绑定8 kyc认证9',
     `status`      tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '认证状态 0未通过 1通过',
+    `source`      varchar(100)        NOT NULL DEFAULT '' COMMENT '用户来源',
     `version`     int(11) unsigned    NOT NULL DEFAULT '0' COMMENT '版本号',
     `delete_flag` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除，1已删除',
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
