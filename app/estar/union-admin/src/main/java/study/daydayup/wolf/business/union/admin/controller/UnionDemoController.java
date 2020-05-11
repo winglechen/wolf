@@ -19,10 +19,9 @@ public class UnionDemoController {
 
     @GetMapping("/show")
     public String show() {
-        String str = "onionwallet-private://img/20200323/1584952484948.jpg";
+        String str = "onionwallet-private://img/20200409/6831ebf9-b5ce-e492-533e-8bd5b5db7c3c.jpg";
 
         String url = ossUtil.encode(str);
-
         return url;
     }
 

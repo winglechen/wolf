@@ -81,7 +81,7 @@ public class AliyunOssUtil {
         }
 
         String bucket = items[0];
-        String path = StringUtil.ltrim(items[0], "/");
+        String path = StringUtil.ltrim(items[1], "/");
         LocalDateTime expireAt = LocalDateTime.now().plusSeconds(URL_EXPIRE_TIME);
         URL url = client.generatePresignedUrl(bucket, path, DateUtil.asDate(expireAt));
 
