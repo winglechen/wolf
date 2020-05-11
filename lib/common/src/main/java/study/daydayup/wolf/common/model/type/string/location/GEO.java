@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.model.type.contact;
+package study.daydayup.wolf.common.model.type.string.location;
 
 import study.daydayup.wolf.common.model.contract.DataType;
 
@@ -6,7 +6,7 @@ import study.daydayup.wolf.common.model.contract.DataType;
  * study.daydayup.wolf.common.model.type.string
  *
  * @author Wingle
- * @since 2019/10/15 12:36 下午
+ * @since 2019/10/15 1:27 下午
  **/
-public class Telephone implements DataType {
+public class GEO implements DataType {
 }

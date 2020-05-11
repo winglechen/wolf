@@ -25,7 +25,7 @@ import study.daydayup.wolf.business.pay.biz.service.india.razorpay.enums.PayoutP
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.model.RazorAccount;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.model.type.string.id.TradeNo;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 

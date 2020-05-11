@@ -17,7 +17,7 @@ import study.daydayup.wolf.business.trade.buy.biz.base.context.BuyContext;
 import study.daydayup.wolf.business.trade.buy.biz.base.node.AbstractTradeNode;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.unit.RateEnum;
-import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.model.type.string.id.TradeNo;
 import study.daydayup.wolf.common.model.type.number.Rate;
 import study.daydayup.wolf.common.util.finance.RateUtil;
 import study.daydayup.wolf.common.util.finance.installment.RateInstallment;

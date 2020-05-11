@@ -16,7 +16,7 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPaidHandler;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPayoutHandler;
-import study.daydayup.wolf.common.model.type.string.Decimal;
+import study.daydayup.wolf.common.model.type.number.Decimal;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;

@@ -2,7 +2,7 @@ package study.daydayup.wolf.common.model.currency;
 
 import org.junit.Test;
 import study.daydayup.wolf.common.lang.enums.currency.IndianRupeeEnum;
-import study.daydayup.wolf.common.model.type.currency.IndianRupee;
+import study.daydayup.wolf.common.model.type.number.currency.IndianRupee;
 
 import static org.junit.Assert.*;
 

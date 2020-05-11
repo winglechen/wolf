@@ -2,7 +2,7 @@ package study.daydayup.wolf.common.model.currency;
 
 import org.junit.Test;
 import study.daydayup.wolf.common.lang.enums.currency.RMBEnum;
-import study.daydayup.wolf.common.model.type.currency.RMB;
+import study.daydayup.wolf.common.model.type.number.currency.RMB;
 
 import static org.junit.Assert.*;
 

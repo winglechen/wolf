@@ -13,7 +13,7 @@ import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogReposito
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.model.type.string.id.TradeNo;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 
 import javax.annotation.Resource;

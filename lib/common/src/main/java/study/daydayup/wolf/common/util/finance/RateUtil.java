@@ -1,7 +1,7 @@
 package study.daydayup.wolf.common.util.finance;
 
 import study.daydayup.wolf.common.model.type.number.Rate;
-import study.daydayup.wolf.common.model.type.string.Decimal;
+import study.daydayup.wolf.common.model.type.number.Decimal;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

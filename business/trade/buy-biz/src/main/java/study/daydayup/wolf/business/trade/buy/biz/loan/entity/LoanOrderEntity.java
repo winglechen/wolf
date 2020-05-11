@@ -16,11 +16,10 @@ import study.daydayup.wolf.business.trade.api.domain.util.StateUtil;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.TradeNotification;
 import study.daydayup.wolf.common.lang.enums.finance.FeeStrategyEnum;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
-import study.daydayup.wolf.common.model.type.id.TradeNo;
+import study.daydayup.wolf.common.model.type.string.id.TradeNo;
 import study.daydayup.wolf.common.model.type.string.Tag;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
-import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.layer.domain.AbstractEntity;
 import study.daydayup.wolf.framework.layer.domain.Entity;
 

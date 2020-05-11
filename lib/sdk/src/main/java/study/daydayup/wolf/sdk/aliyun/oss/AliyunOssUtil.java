@@ -45,6 +45,10 @@ public class AliyunOssUtil extends AbstractOSS implements study.daydayup.wolf.sd
         if (null == ossConfig.getEndpoint()) {
             throw new InvalidSdkConfigException("invalid aliyun oss config: endpoint can't be null");
         }
+
+        if (null == ossConfig.getUrlMap()) {
+            ossConfig.setUrlMap(new HashMap<>());
+        }
     }
 
     @Override

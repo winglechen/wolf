@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.model.type.string;
+package study.daydayup.wolf.common.model.type.number;
 
 import lombok.NonNull;
 import study.daydayup.wolf.common.model.contract.DataType;

@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.model.type.currency;
+package study.daydayup.wolf.common.model.type.number.currency;
 
 import study.daydayup.wolf.common.model.contract.DataType;
 

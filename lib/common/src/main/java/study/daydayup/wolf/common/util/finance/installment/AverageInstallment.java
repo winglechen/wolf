@@ -2,7 +2,7 @@ package study.daydayup.wolf.common.util.finance.installment;
 
 import study.daydayup.wolf.common.lang.enums.unit.RateEnum;
 import study.daydayup.wolf.common.model.type.number.Rate;
-import study.daydayup.wolf.common.model.type.string.Decimal;
+import study.daydayup.wolf.common.model.type.number.Decimal;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

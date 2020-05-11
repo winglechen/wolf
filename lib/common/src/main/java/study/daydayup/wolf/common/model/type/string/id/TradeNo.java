@@ -1,4 +1,4 @@
-package study.daydayup.wolf.common.model.type.id;
+package study.daydayup.wolf.common.model.type.string.id;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * study.daydayup.wolf.common.model.type.id
+ * study.daydayup.wolf.common.model.type.string.id
  *
  * tradeNo = Datetime       (14位  必选  格式：yyyyMMddHHmmss )
  *          + TradePhase    (1位   必选  TradePhaseEnum      )
