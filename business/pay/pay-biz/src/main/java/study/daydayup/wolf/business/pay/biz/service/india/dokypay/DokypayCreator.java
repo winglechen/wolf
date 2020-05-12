@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
+import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
 import study.daydayup.wolf.business.pay.biz.epi.india.IndianCustomerEpi;
@@ -166,27 +167,27 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     private void initPayerInfo(@NonNull Map<String, Object> args) {
-        args.put("payerName", "ppea");
-        args.put("payerEmail", "abc@gmail.com");
-        args.put("payerMobile", "123456789");
-        return;
+//        args.put("payerName", "ppea");
+//        args.put("payerEmail", "abc@gmail.com");
+//        args.put("payerMobile", "123456789");
+//        return;
 
-//        BankCard card = customerEpi.findAadhaar(request.getPayerId(), request.getPayeeId());
-//        if (card == null) {
-//            return;
-//        }
-//
-//        if (StringUtil.notBlank(card.getAadhaarName())) {
-//            args.put("payerName", card.getAadhaarName());
-//        }
-//
-//        if (StringUtil.notBlank(card.getEmail())) {
-//            args.put("payerEmail", card.getEmail());
-//        }
-//
-//        if (StringUtil.notBlank(card.getMobile())) {
-//            args.put("payerMobile", card.getMobile());
-//        }
+        IndianBankCard card = customerEpi.findContact(request.getPayerId(), request.getPayeeId());
+        if (card == null) {
+            return;
+        }
+
+        if (StringUtil.notBlank(card.getAadhaarName())) {
+            args.put("payerName", card.getAadhaarName());
+        }
+
+        if (StringUtil.notBlank(card.getEmail())) {
+            args.put("payerEmail", card.getEmail());
+        }
+
+        if (StringUtil.notBlank(card.getMobile())) {
+            args.put("payerMobile", card.getMobile());
+        }
     }
 
     private String getAmount() {
