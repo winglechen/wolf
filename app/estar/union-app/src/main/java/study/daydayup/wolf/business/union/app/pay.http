@@ -15,7 +15,16 @@ Accept: */*
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
 
-processCurrency=INR&amount=100.00&merTransNo=20200512155323600039768803615229&sign=f06f4c31dbe94021c047d5ebe24312acd663c5425409aa277f915e9fefa9285c&updateTime=2020-05-12+15%3A53%3A37&pmId=credit.in&transNo=20200512155324439010474954&payerMobile=123456789&createTime=2020-05-12+15%3A53%3A24&processAmount=100.00&payerName=ppea&currency=INR&payerEmail=abc%40gmail.com&transStatus=success
+processCurrency=INR&amount=100.00&merTransNo=20200512144450600829696840088319&sign=9003eac5fd421b03f3f90f2ba510bc00dc8b925879999c599e5a908a8453bd77&updateTime=2020-05-12+14%3A47%3A38&pmId=credit.in&transNo=20200512144450555010476815&payerMobile=123456789&createTime=2020-05-12+14%3A44%3A51&processAmount=100.00&payerName=ppea&currency=INR&payerEmail=abc%40gmail.com&transStatus=success
+###
+
+
+POST https://onionwallet.net/api/pay/dokypay/subscribe
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+processCurrency=INR&amount=100.00&merTransNo=20200512144450600829696840088319&sign=9003eac5fd421b03f3f90f2ba510bc00dc8b925879999c599e5a908a8453bd77&updateTime=2020-05-12+14%3A47%3A38&pmId=credit.in&transNo=20200512144450555010476815&payerMobile=123456789&createTime=2020-05-12+14%3A44%3A51&processAmount=100.00&payerName=ppea&currency=INR&payerEmail=abc%40gmail.com&transStatus=success
 ###
 
 
