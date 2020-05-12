@@ -37,7 +37,7 @@ public class PaySubscriberImpl implements PaySubscriber {
     @Override
     public Result<TradeNotificationResponse> subscribe(@Validated TradeNotification notification) {
         int status = updateOrder(notification);
-        if (PaymentReturnEnum.SUCCESS.getCode() != status) {
+        if (PaymentReturnEnum.SUCCESS.getCode() != status && PaymentReturnEnum.DUPLICATE.getCode() != status) {
             return fail(status);
         }
 
@@ -75,6 +75,8 @@ public class PaySubscriberImpl implements PaySubscriber {
 
         LoanOrderEntity orderEntity = loanOrderRepository.find(orderId);
         int status = orderEntity.paid(notification);
+        order = orderEntity.getModel();
+
         if (PaymentReturnEnum.SUCCESS.getCode() != status) {
             return status;
         }
