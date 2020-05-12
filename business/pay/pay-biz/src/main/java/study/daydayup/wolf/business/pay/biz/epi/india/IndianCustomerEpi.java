@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.uc.api.crm.customer.info.dto.india.IndianPay
 import study.daydayup.wolf.business.uc.api.crm.customer.info.service.india.IndianCustomerService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.layer.epi.Epi;
+import study.daydayup.wolf.framework.rpc.Result;
 
 /**
  * study.daydayup.wolf.business.pay.biz.epi.india
@@ -26,7 +27,12 @@ public class IndianCustomerEpi implements Epi {
             return null;
         }
 
-        IndianPayInfo iCard = customerService.findIndianBankCard(payerId, payeeId).notNullData();
+        Result<IndianPayInfo> result = customerService.findIndianBankCard(payerId, payeeId);
+        if (!result.isSuccess()) {
+            return null;
+        }
+
+        IndianPayInfo iCard = result.getData();
         return convert(iCard, payerId, payeeId);
     }
 
@@ -35,7 +41,12 @@ public class IndianCustomerEpi implements Epi {
             return null;
         }
 
-        IndianPayInfo iCard = customerService.findIndianContact(payerId, payeeId).notNullData();
+        Result<IndianPayInfo> result = customerService.findIndianContact(payerId, payeeId);
+        if (!result.isSuccess()) {
+            return null;
+        }
+
+        IndianPayInfo iCard = result.getData();
         return convert(iCard, payerId, payeeId);
     }
 
