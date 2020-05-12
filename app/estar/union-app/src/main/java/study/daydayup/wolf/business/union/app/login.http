@@ -29,18 +29,7 @@ Content-Type: application/json
 
 ###
 
-###
-POST https://flashwallet.tech/api/auth/sms/code
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/json
 
-{
-  "mobile": "919532915872",
-  "orgId": 1
-}
-
-###
 
 
 

@@ -7,7 +7,7 @@
     <select id="selectByAccountIdAndOrgId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from userxx
+        from user
         where account_id=#{accountId,jdbcType=BIGINT} and org_id=#{orgId,jdbcType=BIGINT}
         limit 1
     </select>

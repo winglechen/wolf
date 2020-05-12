@@ -43,15 +43,15 @@
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from userx
+    from user
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
-    delete from userx
+    delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    insert into userx (id, account_id, org_id, 
+    insert into user (id, account_id, org_id, 
       channel_id, nickname, avatar, 
       real_name, mobile, email, 
       aadhaar_no, pan_no, gender, 
@@ -75,7 +75,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    insert into userx
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -262,7 +262,7 @@
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    update userx
+    update user
     <set>
       <if test="accountId != null">
         account_id = #{accountId,jdbcType=BIGINT},
@@ -355,7 +355,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateById" parameterType="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject.UserDO">
-    update userx
+    update user
     set account_id = #{accountId,jdbcType=BIGINT},
       org_id = #{orgId,jdbcType=BIGINT},
       channel_id = #{channelId,jdbcType=BIGINT},
