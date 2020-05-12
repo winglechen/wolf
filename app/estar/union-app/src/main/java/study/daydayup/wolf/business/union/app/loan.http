@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8100/loan/audit/preview/3
+POST http://localhost:8100/loan/audit/preview/10
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -83,7 +83,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "tradeNo": "20200512174628000829465190467826",
+  "tradeNo": "20200512182800000069745423401861",
   "paymentMethod": 120
 }
 

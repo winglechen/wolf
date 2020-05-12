@@ -51,14 +51,6 @@ public class IndianCustomerEpi implements Epi {
     }
 
     private IndianBankCard convert(@NonNull IndianPayInfo iCard, long payerId, long payeeId) {
-        if (BeanUtil.equals(payerId, iCard.getAccountId())) {
-            return null;
-        }
-
-        if (BeanUtil.equals(payeeId, iCard.getOrgId())) {
-            return null;
-        }
-
         IndianBankCard card = new IndianBankCard();
         BeanUtils.copyProperties(iCard, card);
 
