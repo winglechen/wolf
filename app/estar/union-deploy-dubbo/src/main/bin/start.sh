@@ -15,7 +15,10 @@ echo "start execute ..."
 JAVA_OPTS="-server -Xms256m -Xmx256m -Xss256k -XX:SurvivorRatio=2 -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/logs"
 JAVA_OPTS=" $JAVA_OPTS -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom"
 JAVA_OPTS=" $JAVA_OPTS -DappName=$APPLICATION_NAME"
+
 JAVA_OPTS=" $JAVA_OPTS -Dspring.profiles.active=@profileActive@"
+#JAVA_OPTS=" $JAVA_OPTS -Dspring.config.location=/home/app/union-deploy-dubbo/config/application.yml"
+
 
 LOG_PATH="/data/logs/$APPLICATION_NAME"
 
