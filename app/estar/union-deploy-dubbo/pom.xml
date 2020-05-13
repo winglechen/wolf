@@ -147,6 +147,12 @@
             </activation>
         </profile>
 
+        <profile>
+            <id>cr</id>
+            <properties>
+                <profileActive>cr</profileActive>
+            </properties>
+        </profile>
 
         <profile>
             <id>test</id>
@@ -155,12 +161,7 @@
             </properties>
         </profile>
 
-        <profile>
-            <id>cr</id>
-            <properties>
-                <profileActive>cr</profileActive>
-            </properties>
-        </profile>
+
 
 <!--        <profile>-->
 <!--            <id>prod</id>-->
