@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
@@ -20,6 +21,7 @@ import java.util.*;
  * @author Wingle
  * @since 2020/1/1 2:47 下午
  **/
+@Slf4j
 @Component
 public class CustomerStatusAgent {
     private static final int STATUS_LENGTH = 20;
@@ -45,6 +47,7 @@ public class CustomerStatusAgent {
         }
 
         CustomerStatus status = service.find(accountId, orgId).notNullData();
+        log.info("init customerStatus agent: {}", status);
 
         this.accountId = accountId;
         this.orgId = orgId;

@@ -1,11 +1,19 @@
 ###
+POST https://flashwallet.tech/api/auth/logout
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+
+###
 POST https://flashwallet.tech/api/auth/sms/code
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "918004919816",
+  "mobile": "91152436123978995",
   "orgId": 1
 }
 
@@ -16,10 +24,11 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "918004919816",
-  "code": "273605",
+  "mobile": "91152436123978995",
+  "code": "202091",
   "orgId": 1
 }
+
 
 ###
 POST https://flashwallet.tech/api/account/show
@@ -29,6 +38,12 @@ Content-Type: application/json
 
 ###
 
+###
+GET https://flashwallet.tech/api/status/all
+Accept: */*
+Cache-Control: no-cache
+
+###
 
 
 
