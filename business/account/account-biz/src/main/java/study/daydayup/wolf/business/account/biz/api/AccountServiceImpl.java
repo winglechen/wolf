@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 import study.daydayup.wolf.common.util.encrypt.password.Password;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -120,7 +121,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private boolean verifyPassword(String salt, String realPassword, String password) {
-        if (realPassword == null) {
+        if (StringUtil.isBlank(realPassword)) {
             return true;
         }
 
