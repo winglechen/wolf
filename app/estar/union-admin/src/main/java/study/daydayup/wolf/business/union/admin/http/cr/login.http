@@ -1,0 +1,17 @@
+
+###
+POST https://cp.flashwallet.tech/api/auth/password/register
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "account": "18067961001",
+  "password": "123456",
+  "captcha": "",
+  "orgId": 1
+}
+
+###
+
+
