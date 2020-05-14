@@ -43,19 +43,63 @@ public class PasswordController extends AuthController {
             return Result.fail(10000, "invalid captcha");
         }
 
-        passwordRequest.setEnv(null);
-        passwordRequest.setToken(session.getSessionId());
-
-        String scope = formatScope(passwordRequest.getScope(), passwordRequest.getOrgId());
-        passwordRequest.setScope(scope);
-        passwordRequest.setExpiredIn(authConfig.getExpiredIn());
-        passwordRequest.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
+        initPasswordRequest(passwordRequest);
 
         Result<OauthLicense> result = passwordService.login(passwordRequest);
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
         return Result.ok(filterLicense(license));
+    }
+
+
+
+    @PostMapping("/auth/password/registerAndLogin")
+    public Result<OauthLicense> registerAndLogin(HttpServletRequest httpRequest, @Valid @RequestBody PasswordRequest request) {
+//        if(isLogin()) {
+//            return Result.ok(getLicenseFromSession());
+//        }
+
+        if (!validCaptcha(httpRequest, request)) {
+            return Result.fail(10000, "invalid captcha");
+        }
+
+        initPasswordRequest(request);
+        Result<OauthLicense> result = passwordService.registerAndLogin(request);
+        OauthLicense license = result.notNullData();
+        saveLicenseToSession(license);
+
+        return Result.ok(filterLicense(license));
+    }
+
+    @PostMapping("/auth/password/register")
+    public Result<Object> register(HttpServletRequest httpRequest, @Validated @RequestBody PasswordRequest request) {
+        if (!validCaptcha(httpRequest, request)) {
+            return Result.fail(10000, "invalid captcha");
+        }
+
+        initPasswordRequest(request);
+        passwordService.register(request);
+
+        return Result.ok();
+    }
+
+    @PostMapping("/auth/password/change")
+    public Result<Object> changePassword(@Validated @RequestBody PasswordRequest request) {
+        request.setEnv(null);
+        passwordService.changePassword(request);
+
+        return Result.ok();
+    }
+
+    private void initPasswordRequest(@NonNull PasswordRequest request) {
+        request.setEnv(null);
+        request.setToken(session.getSessionId());
+        request.setExpiredIn(authConfig.getExpiredIn());
+        request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
+
+        String scope = formatScope(request.getScope(), request.getOrgId());
+        request.setScope(scope);
     }
 
     private boolean validCaptcha(HttpServletRequest httpRequest, @NonNull PasswordRequest passwordRequest) {
@@ -67,43 +111,6 @@ public class PasswordController extends AuthController {
         CaptchaUtil.clear(httpRequest);
 
         return result;
-    }
-
-    @PostMapping("/auth/password/registerAndLogin")
-    public Result<OauthLicense> registerAndLogin(@Valid @RequestBody PasswordRequest request) {
-//        if(isLogin()) {
-//            return Result.ok(getLicenseFromSession());
-//        }
-
-        request.setEnv(null);
-        request.setToken(session.getSessionId());
-        request.setExpiredIn(authConfig.getExpiredIn());
-        request.setRefreshExpiredIn(authConfig.getRefreshExpiredIn());
-
-        String scope = formatScope(request.getScope(), request.getOrgId());
-        request.setScope(scope);
-
-        Result<OauthLicense> result = passwordService.registerAndLogin(request);
-        OauthLicense license = result.notNullData();
-        saveLicenseToSession(license);
-
-        return Result.ok(filterLicense(license));
-    }
-
-    @PostMapping("/auth/password/register")
-    public Result register(@Validated @RequestBody PasswordRequest request) {
-        request.setEnv(null);
-        passwordService.register(request);
-
-        return Result.ok();
-    }
-
-    @PostMapping("/auth/password/change")
-    public Result changePassword(@Validated @RequestBody PasswordRequest request) {
-        request.setEnv(null);
-        passwordService.changePassword(request);
-
-        return Result.ok();
     }
 
 }

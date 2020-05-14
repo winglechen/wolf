@@ -6,9 +6,9 @@
         <module>account-api</module>
         <module>account-biz</module>
         <module>security-biz</module>
+        <module>auth-agent</module>
         <module>account-deploy-web</module>
         <module>account-deploy-dubbo</module>
-        <module>auth-agent</module>
     </modules>
 
     <parent>

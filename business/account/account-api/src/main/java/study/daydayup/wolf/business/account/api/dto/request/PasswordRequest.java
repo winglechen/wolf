@@ -5,7 +5,6 @@ import study.daydayup.wolf.business.account.api.entity.AuthEnv;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.dto
@@ -21,6 +20,7 @@ public class PasswordRequest implements Request {
 
     @NotBlank
     private String password;
+
     private String newPassword;
     private String repeatedPassword;
     private String captcha;
