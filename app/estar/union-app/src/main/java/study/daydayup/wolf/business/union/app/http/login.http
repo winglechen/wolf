@@ -1,41 +1,41 @@
 ###
-POST http://localhost:8100/auth/logout
+POST http://localhost:8800/auth/logout
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 ###
-POST http://localhost:8100/auth/sms/code
+POST http://localhost:8800/auth/sms/code
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "28069886912",
+  "mobile": "2806987000001",
   "orgId": 1
 }
 
 ###
-POST http://localhost:8100/auth/sms/registerAndLogin
+POST http://localhost:8800/auth/sms/registerAndLogin
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "28069886912",
+  "mobile": "2806987000001",
   "code": "778899",
   "orgId": 1
 }
 
 ###
-POST http://localhost:8100/account/show
+POST http://localhost:8800/account/show
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 ###
 ###
-GET http://localhost:8100/status/all
+GET http://localhost:8800/status/all
 Accept: */*
 Cache-Control: no-cache
 

@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.setting.api.entity.CustomerStatus;
@@ -23,6 +24,7 @@ import java.util.*;
  **/
 @Slf4j
 @Component
+@Scope("prototype")
 public class CustomerStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;
@@ -42,9 +44,9 @@ public class CustomerStatusAgent {
             throw new IllegalArgumentException("accountId and orgId can not less than 0");
         }
 
-        if (isInit) {
-            return;
-        }
+//        if (isInit) {
+//            return;
+//        }
 
         CustomerStatus status = service.find(accountId, orgId).notNullData();
         log.info("init customerStatus agent: {}", status);

@@ -13,7 +13,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "91152436123978995",
+  "mobile": "918753155642",
   "orgId": 1
 }
 
@@ -24,8 +24,8 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "91152436123978995",
-  "code": "202091",
+  "mobile": "918753155642",
+  "code": "359665",
   "orgId": 1
 }
 
@@ -42,6 +42,17 @@ Content-Type: application/json
 GET https://flashwallet.tech/api/status/all
 Accept: */*
 Cache-Control: no-cache
+
+###
+###
+PUT https://flashwallet.tech/api/status/mock
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "trade.loan.loaning": true
+}
 
 ###
 

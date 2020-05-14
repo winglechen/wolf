@@ -19,6 +19,8 @@ import java.util.List;
 public class AuthConfig {
     private boolean enable = true;
 
+    private CaptchaConfig captcha;
+
     private String denyCode     = "110500";
     private String denyMessage  = "Access Denied, You don’t have permission to access on this Server";
 
@@ -31,5 +33,14 @@ public class AuthConfig {
     private int codeExpiredIn = 5*60;
     private int expiredIn = 60*60*24;
     private int refreshExpiredIn = 60*60*24*7;
+
+    public CaptchaConfig getCaptcha() {
+        if (captcha != null) {
+            return captcha;
+        }
+
+        captcha = new CaptchaConfig();
+        return captcha;
+    }
 
 }
