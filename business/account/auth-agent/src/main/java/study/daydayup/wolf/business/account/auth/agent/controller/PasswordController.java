@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.account.auth.agent.controller;
 
 import com.wf.captcha.utils.CaptchaUtil;
+import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +39,7 @@ public class PasswordController extends AuthController {
 //            return Result.ok(getLicenseFromSession());
 //        }
 
-        if (!CaptchaUtil.ver(passwordRequest.getCaptcha(), httpRequest)) {
-            CaptchaUtil.clear(httpRequest);
+        if (!validCaptcha(httpRequest, passwordRequest)) {
             return Result.fail(10000, "invalid captcha");
         }
 
@@ -56,6 +56,17 @@ public class PasswordController extends AuthController {
         saveLicenseToSession(license);
 
         return Result.ok(filterLicense(license));
+    }
+
+    private boolean validCaptcha(HttpServletRequest httpRequest, @NonNull PasswordRequest passwordRequest) {
+        if (!authConfig.getCaptcha().isEnable()) {
+            return true;
+        }
+
+        boolean result = CaptchaUtil.ver(passwordRequest.getCaptcha(), httpRequest);
+        CaptchaUtil.clear(httpRequest);
+
+        return result;
     }
 
     @PostMapping("/auth/password/registerAndLogin")
