@@ -97,6 +97,11 @@ public class AccountServiceImpl implements AccountService {
             throw new AuthFailedException();
         }
 
+        if (StringUtil.isBlank(accountDO.getPassword()) && StringUtil.notBlank(request.getPassword())) {
+            request.setNewPassword(request.getPassword());
+            saveNewPassword(request, accountDO);
+        }
+
         return accountDO.getId();
     }
 
@@ -109,13 +114,17 @@ public class AccountServiceImpl implements AccountService {
             throw new AuthFailedException();
         }
 
+        saveNewPassword(request, accountDO);
+    }
+
+    private void saveNewPassword(PasswordRequest request, AccountDO accountDO) {
         String newSalt = Password.createSalt();
         String encryptPassword = Password.encrypt(request.getNewPassword(), newSalt);
 
         AccountDO newAccountDO = new AccountDO();
         newAccountDO.setId(accountDO.getId());
         newAccountDO.setPassword(encryptPassword);
-        newAccountDO.setSalt(salt);
+        newAccountDO.setSalt(newSalt);
 
         accountDAO.updateByIdSelective(newAccountDO);
     }

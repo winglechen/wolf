@@ -64,7 +64,7 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
 
     @Override
     public Result<OauthLicense> registerAndLogin(@Validated PasswordRequest request) {
-        long accountId = accountService.existByAccount(request.getAccount());
+        long accountId = accountService.verifyPasswordAccount(request);
 
         if (0 == accountId) {
             accountId = accountService.createPasswordAccount(request);
