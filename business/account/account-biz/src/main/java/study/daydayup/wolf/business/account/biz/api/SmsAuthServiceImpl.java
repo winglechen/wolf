@@ -96,8 +96,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         return Result.ok();
     }
 
-    @Override
-    public long createSmsAccount(String mobile, String source) {
+    private long createSmsAccount(String mobile, String source) {
         if(null == mobile) {
             return 0;
         }
