@@ -18,4 +18,5 @@ public interface SmsAuthService {
     Result<OauthLicense> registerAndLogin(SmsRequest request);
 
     Result<Object> sendCode(SmsCodeRequest request);
+    long createSmsAccount(String mobile, String source);
 }

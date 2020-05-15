@@ -8,10 +8,13 @@ import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsCodeRequest;
 import study.daydayup.wolf.business.account.api.dto.request.SmsRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
+import study.daydayup.wolf.business.account.api.enums.AccountTypeEnum;
 import study.daydayup.wolf.business.account.api.exception.InvalidVerifyCodeException;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.api.service.auth.SmsAuthService;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
+import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
+import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.exception.LocaleNotFoundException;
@@ -33,6 +36,8 @@ import java.util.concurrent.ThreadLocalRandom;
 @Slf4j
 @RpcService(protocol = "dubbo")
 public class SmsAuthServiceImpl implements SmsAuthService {
+    @Resource
+    private AccountDAO accountDAO;
     @Value("${wolf.sms.mockMode:false}")
     private boolean mockMode;
     private static final String OTP_KEY = "account.login.otp";
@@ -67,13 +72,14 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
         long accountId = accountService.existByAccount(request.getMobile());
         if (0 == accountId) {
-            accountId = accountService.createSmsAccount(request.getMobile(), request.getSource());
+            accountId = createSmsAccount(request.getMobile(), request.getSource());
         }
 
         LicenseRequest licenseRequest = new LicenseRequest();
         BeanUtils.copyProperties(request, licenseRequest);
         licenseRequest.setAccountId(accountId);
 
+        //TODO MOVE to accountService
         OauthLicense license = licenseService.grant(licenseRequest);
         return Result.ok(license);
     }
@@ -88,6 +94,25 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         sendSms(mobile, code);
 
         return Result.ok();
+    }
+
+    @Override
+    public long createSmsAccount(String mobile, String source) {
+        if(null == mobile) {
+            return 0;
+        }
+
+        AccountDO accountDO = new AccountDO();
+        accountDO.setAccount(mobile);
+        accountDO.setSource(source);
+        accountDO.setAccountType((byte) AccountTypeEnum.MOBILE.getCode());
+        accountDO.setCreatedAt(new Date());
+
+        accountDAO.insertSelective(accountDO);
+        if (null == accountDO.getId()) {
+            return 0;
+        }
+        return accountDO.getId();
     }
 
     private void sendSms(String mobile, String code) {

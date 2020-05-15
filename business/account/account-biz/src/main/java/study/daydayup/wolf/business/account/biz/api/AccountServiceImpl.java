@@ -45,25 +45,6 @@ public class AccountServiceImpl implements AccountService {
         return accountDO.getId();
     }
 
-    @Override
-    public long createSmsAccount(String mobile, String source) {
-        if(null == mobile) {
-            return 0;
-        }
-
-        AccountDO accountDO = new AccountDO();
-        accountDO.setAccount(mobile);
-        accountDO.setSource(source);
-        accountDO.setAccountType((byte)AccountTypeEnum.MOBILE.getCode());
-        accountDO.setCreatedAt(new Date());
-
-        accountDAO.insertSelective(accountDO);
-        if (null == accountDO.getId()) {
-            return 0;
-        }
-        return accountDO.getId();
-    }
-
     private AccountDO selectByAccount(String accountName) {
         if (null == accountName) {
             return null;
