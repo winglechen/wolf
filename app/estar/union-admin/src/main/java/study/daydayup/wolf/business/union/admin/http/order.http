@@ -18,4 +18,12 @@ GET http://localhost:8200/loan/order/repay?pageNum=2
 Accept: */*
 Cache-Control: no-cache
 
-###
+### 商家审核费订单列表
+GET http://localhost:8200/trade/order/audit?pageNum=2
+Accept: */*
+Cache-Control: no-cache
+
+### 商家审核费已支付订单列表
+GET http://localhost:8200/trade/order/audit/paid?pageNum=2
+Accept: */*
+Cache-Control: no-cache

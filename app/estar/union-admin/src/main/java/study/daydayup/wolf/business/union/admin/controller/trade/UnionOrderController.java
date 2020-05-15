@@ -9,6 +9,7 @@ import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.trade.api.domain.entity.Contract;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
+import study.daydayup.wolf.business.trade.api.domain.state.base.PaidState;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.dto.order.OrderOption;
 import study.daydayup.wolf.business.trade.api.dto.tm.trade.seller.StateRequest;
@@ -83,6 +84,33 @@ public class UnionOrderController implements Controller {
     public Result<Page<Order>> repayList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
         TypeRequest request = initTypeRequest();
         request.setTradeType(TradeTypeEnum.REPAY_ORDER.getCode());
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerOrderService.findByTradeType(request, pageRequest);
+    }
+
+    @GetMapping("/trade/order/audit")
+    public Result<Page<Order>> auditList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        TypeRequest request = initTypeRequest();
+        request.setTradeType(TradeTypeEnum.AUDIT_FEE.getCode());
+
+        PageRequest pageRequest = PageRequest.builder()
+                .pageNum(null == pageNum ? 1 : pageNum)
+                .pageSize(10)
+                .build();
+
+        return sellerOrderService.findByTradeType(request, pageRequest);
+    }
+
+    @GetMapping("/trade/order/audit/paid")
+    public Result<Page<Order>> auditPaidList(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
+        TypeRequest request = initTypeRequest();
+        request.setTradeType(TradeTypeEnum.AUDIT_FEE.getCode());
+        request.setState(new PaidState().getCode());
 
         PageRequest pageRequest = PageRequest.builder()
                 .pageNum(null == pageNum ? 1 : pageNum)
