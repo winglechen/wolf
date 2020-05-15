@@ -64,83 +64,6 @@ public class AccountServiceImpl implements AccountService {
         return accountDO.getId();
     }
 
-    @Override
-    public long createPasswordAccount(@Valid PasswordRequest request) {
-        AccountDO accountDO = new AccountDO();
-        BeanUtils.copyProperties(request, accountDO);
-
-        accountDO.setAccountType((byte)AccountTypeEnum.NAME.getCode());
-        accountDO.setCreatedAt(new Date());
-
-        String salt = Password.createSalt();
-        String pass = Password.encrypt(request.getPassword(), salt);
-        accountDO.setPassword(pass);
-        accountDO.setSalt(salt);
-
-        accountDAO.insertSelective(accountDO);
-        if (null == accountDO.getId()) {
-            return 0;
-        }
-        return accountDO.getId();
-    }
-
-    @Override
-    public long verifyPasswordAccount(@Validated PasswordRequest request) {
-        String accountName = request.getAccount();
-        String password = request.getPassword();
-        if (null == accountName || null == password) {
-            return 0;
-        }
-
-        AccountDO accountDO = selectByAccount(accountName);
-        if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
-            throw new AuthFailedException();
-        }
-
-        if (StringUtil.isBlank(accountDO.getPassword()) && StringUtil.notBlank(request.getPassword())) {
-            request.setNewPassword(request.getPassword());
-            saveNewPassword(request, accountDO);
-        }
-
-        return accountDO.getId();
-    }
-
-    @Override
-    public void changePassword(@Validated PasswordRequest request) {
-        AccountDO accountDO = selectByAccount(request.getAccount());
-        String salt = accountDO.getSalt();
-
-        if (!verifyPassword(salt, accountDO.getPassword(), request.getPassword())) {
-            throw new AuthFailedException();
-        }
-
-        saveNewPassword(request, accountDO);
-    }
-
-    private void saveNewPassword(PasswordRequest request, AccountDO accountDO) {
-        String newSalt = Password.createSalt();
-        String encryptPassword = Password.encrypt(request.getNewPassword(), newSalt);
-
-        AccountDO newAccountDO = new AccountDO();
-        newAccountDO.setId(accountDO.getId());
-        newAccountDO.setPassword(encryptPassword);
-        newAccountDO.setSalt(newSalt);
-
-        accountDAO.updateByIdSelective(newAccountDO);
-    }
-
-    private boolean verifyPassword(String salt, String realPassword, String password) {
-        if (StringUtil.isBlank(realPassword)) {
-            return true;
-        }
-
-        String encryptPassword = Password.encrypt(password, salt);
-        if (encryptPassword.equals(realPassword)) {
-            return true;
-        }
-        return false;
-    }
-
     private AccountDO selectByAccount(String accountName) {
         if (null == accountName) {
             return null;
@@ -153,8 +76,6 @@ public class AccountServiceImpl implements AccountService {
 
         return accountDO;
     }
-
-
 
     @Override
     public Account findByAccount(String accountName) {

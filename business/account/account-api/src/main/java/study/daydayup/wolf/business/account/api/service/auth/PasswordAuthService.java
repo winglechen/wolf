@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 public interface PasswordAuthService {
     Result<Long> register(PasswordRequest request);
-    Result changePassword(PasswordRequest request);
+    Result<Object> changePassword(PasswordRequest request);
 
     Result<OauthLicense> login(PasswordRequest request);
     Result<OauthLicense> registerAndLogin(PasswordRequest request);
