@@ -25,4 +25,6 @@ public class DailyTradeController {
 
         return "daily trade data creating ...";
     }
+
+
 }
