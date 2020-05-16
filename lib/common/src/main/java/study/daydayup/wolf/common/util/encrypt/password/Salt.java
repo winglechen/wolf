@@ -20,6 +20,6 @@ public class Salt {
         SecureRandom random = new SecureRandom();
         random.nextBytes(salt);
 
-        return Arrays.toString(salt);
+        return salt.toString();
     }
 }
