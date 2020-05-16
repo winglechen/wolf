@@ -103,9 +103,9 @@ public class OrderRepository extends AbstractRepository implements Repository {
         TradeState state = Tsm.getStateByEvent(key.getTradeType(), key.getState(), changes.getStateEvent());
         if (state != null) {
             changesDO.setState(state.getCode());
+            changes.setState(state);
 
             if (key.getState() != null) {
-                changes.setState(key.getState());
                 keyDO.setState(key.getState().getCode());
             }
         }
