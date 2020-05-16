@@ -1,6 +1,7 @@
 package study.daydayup.wolf.common.util.encrypt.password;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 /**
  * study.daydayup.wolf.common.util.encrypt
@@ -19,6 +20,6 @@ public class Salt {
         SecureRandom random = new SecureRandom();
         random.nextBytes(salt);
 
-        return salt.toString();
+        return Arrays.toString(salt);
     }
 }

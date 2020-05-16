@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.account.biz.api;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
@@ -31,6 +32,7 @@ import java.util.Date;
  * @author Wingle
  * @since 2019/12/5 6:01 下午
  **/
+@Slf4j
 @RpcService(protocol = "dubbo")
 public class PasswordAuthServiceImpl implements PasswordAuthService {
     @Resource
@@ -156,7 +158,7 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
     }
 
     private boolean verifyPassword(String salt, String realPassword, String password) {
-        if (StringUtil.isBlank(realPassword)) {
+        if (StringUtil.isBlank(realPassword) || StringUtil.isBlank(password)) {
             return true;
         }
 
