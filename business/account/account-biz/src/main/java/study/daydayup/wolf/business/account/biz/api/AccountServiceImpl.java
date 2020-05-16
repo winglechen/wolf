@@ -1,22 +1,14 @@
 package study.daydayup.wolf.business.account.biz.api;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.account.api.dto.request.PasswordRequest;
 import study.daydayup.wolf.business.account.api.entity.Account;
-import study.daydayup.wolf.business.account.api.enums.AccountTypeEnum;
 import study.daydayup.wolf.business.account.api.exception.AccountNotFoundException;
-import study.daydayup.wolf.business.account.api.exception.AuthFailedException;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
-import study.daydayup.wolf.common.util.encrypt.password.Password;
-import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.biz.api

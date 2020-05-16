@@ -117,6 +117,10 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
         }
 
         AccountDO accountDO = selectByAccount(accountName);
+        if (null == accountDO) {
+            return 0;
+        }
+
         if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
             throw new AuthFailedException();
         }
