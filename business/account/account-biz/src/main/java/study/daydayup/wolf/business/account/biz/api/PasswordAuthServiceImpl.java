@@ -58,8 +58,11 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
         }
 
         AccountDO accountDO = selectByAccount(request.getAccount());
-        String salt = accountDO.getSalt();
+        if (accountDO == null) {
+            throw new AccountNotFoundException();
+        }
 
+        String salt = accountDO.getSalt();
         if (!verifyPassword(salt, accountDO.getPassword(), request.getPassword())) {
             throw new AuthFailedException();
         }
@@ -138,12 +141,7 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
             return null;
         }
 
-        AccountDO accountDO = accountDAO.selectByAccount(accountName);
-        if (accountDO == null || null == accountDO.getId()) {
-            throw new AccountNotFoundException();
-        }
-
-        return accountDO;
+        return accountDAO.selectByAccount(accountName);
     }
 
     private void saveNewPassword(PasswordRequest request, AccountDO accountDO) {
