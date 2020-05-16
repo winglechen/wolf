@@ -9,3 +9,6 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+GET http://127.0.0.1:9100/daily/koi/audit
+Accept: */*
+Cache-Control: no-cache

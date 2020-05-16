@@ -64,7 +64,7 @@ function deploy_task_cr() {
     dir="${PROJECT_DIR}/app/estar/union-task/"
     cd ${dir} && mvn clean package -Pcr
 
-    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-task.tar.gz \
+    scp /Users/wingle/code/github/wolf/app/estar/union-task/target/union-task.tar.gz \
         app@crapp:/home/app/tmp
     echo "union-task.tar.gz transporting..."
 
