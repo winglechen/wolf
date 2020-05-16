@@ -2,7 +2,7 @@ spring:
   application:
     name: wolf-union-task
   profiles:
-    active: dev
+    active: cr
   main:
     allow-bean-definition-overriding: true
   shardingsphere:
