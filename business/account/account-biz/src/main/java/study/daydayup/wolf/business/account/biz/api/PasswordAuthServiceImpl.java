@@ -124,13 +124,12 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
             return 0;
         }
 
-        if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
-            throw new AuthFailedException();
+        if (StringUtil.isBlank(accountDO.getPassword()) && StringUtil.notBlank(request.getNewPassword())) {
+            saveNewPassword(request, accountDO);
         }
 
-        if (StringUtil.isBlank(accountDO.getPassword()) && StringUtil.notBlank(request.getPassword())) {
-            request.setNewPassword(request.getPassword());
-            saveNewPassword(request, accountDO);
+        if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
+            throw new AuthFailedException();
         }
 
         return accountDO.getId();
