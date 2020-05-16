@@ -1,12 +1,14 @@
 package study.daydayup.wolf.dts.sink;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import study.daydayup.wolf.common.io.db.Row;
+import study.daydayup.wolf.common.io.sql.SqlUtil;
 import study.daydayup.wolf.dts.transformation.Statistics;
 import study.daydayup.wolf.common.io.sql.Sql;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
@@ -25,6 +27,7 @@ import java.util.Set;
  * @author Wingle
  * @since 2020/2/16 6:59 下午
  **/
+@Slf4j
 @Component
 //@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Scope("prototype")
@@ -146,6 +149,8 @@ public class MysqlSink extends AbstractSink  implements Sink {
                 .where(keyMap)
                 .limit(1);
 
+        log.info("datav exists: {}", sql.getSql());
+        log.info("datav exists data: {}", keyMap);
         List<Long> idList = jdbc.queryForList(sql.getSql(), sql.getData(), Long.class);
         if (CollectionUtil.isEmpty(idList)) {
             return null;
@@ -158,6 +163,8 @@ public class MysqlSink extends AbstractSink  implements Sink {
         Sql sql = Sql.insert(config.getTableName(), true)
                 .values(row);
 
+        log.info("datav insert: {}", sql.getSql());
+        log.info("datav insert data: {}", row);
         jdbc.update(sql.getSql(), sql.getData());
     }
 
@@ -168,10 +175,12 @@ public class MysqlSink extends AbstractSink  implements Sink {
         }
 
         Sql sql = Sql.update(config.getTableName(), true)
-                .set(row)
+                .set(SqlUtil.toAdd(row))
                 .where("id = ?", id)
                 .limit(1);
 
+        log.info("datav update: {}", sql.getSql());
+        log.info("datav update data: {}", row);
         jdbc.update(sql.getSql(), sql.getData());
     }
 

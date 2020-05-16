@@ -60,7 +60,7 @@ public class DbTransformation implements Transformation {
         }
 
         if (sqlFormat){
-            return format();
+            //return format();
         }
 
         return statistics;
