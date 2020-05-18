@@ -29,6 +29,8 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     private Collection<BASE> baseList;
     @Getter
     private Function<BASE, Object>[] baseGetters;
+    @Getter
+    private BiConsumer<BASE, EXT> baseSetter;
 
     private Map<Object, EXT> extMap;
 
@@ -41,7 +43,11 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     @Override
     public final Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object>... getters) {
         validBaseGetter(getters);
-        return null;
+
+        baseSetter = setter;
+        baseGetters = getters;
+
+        return this;
     }
 
     @SafeVarargs
@@ -64,8 +70,14 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
         }
 
         Object key;
+        EXT ext;
         for (BASE base : baseList) {
             key = getBaseKey(base);
+            ext = extMap.get(key);
+            if (ext == null) {
+                continue;
+            }
+            baseSetter.accept(base, ext);
         }
     }
 
