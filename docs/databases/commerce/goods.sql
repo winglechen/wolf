@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `goods_detail`
 
     `pics`          TEXT COMMENT '商品图',
     `sku_info`      TEXT COMMENT 'sku信息',
+    `ext_info`      TEXT COMMENT 'ext信息',
     `detail`        TEXT COMMENT '产品详情',
 
     `version`     INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
