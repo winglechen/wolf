@@ -1,5 +1,7 @@
 package study.daydayup.wolf.common.util.collection.joiner;
 
+import lombok.Setter;
+
 import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -10,28 +12,33 @@ import java.util.function.Function;
  * @author Wingle
  * @since 2020/5/18 3:01 下午
  **/
-public class CollectionJoiner {
+public class CollectionJoiner<BASE, EXT> {
+    @Setter
+    private Joiner<BASE, EXT> joiner;
 
     public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base) {
-        return null;
+        CollectionJoiner<BASE, EXT> gateway = new CollectionJoiner<>();
+        Joiner<BASE, EXT> joiner = new DefaultJoiner<>(base, gateway);
+
+        gateway.setJoiner(joiner);
+        return joiner;
     }
 
-    public <BASE, EXT> Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object> ...getters) {
-        return null;
+    @SafeVarargs
+    public final Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object>... getters) {
+        Collection<BASE> base = joiner.getBaseList();
+        Joiner<BASE, EXT> joiner = new DefaultJoiner<>(base, this);
+
+        setJoiner(joiner);
+        joiner.on(setter, getters);
+        return joiner;
     }
 
-    public <BASE> Collection<BASE> getList() {
-        return null;
+    public Collection<BASE> getList() {
+        if (joiner == null) {
+            return null;
+        }
+        return joiner.getBaseList();
     }
-
-    public static void main(String[] args) {
-//        CollectionJoiner.base(c1)
-//                .on(setter, getter1, getter2, ...)
-//                .join(c2, getter1, getter2, ...)
-//                .on(setter, getter1, getter2, ...)
-//                .join(c2, getter1, getter2, ...)
-//                .getList();
-    }
-
 
 }
