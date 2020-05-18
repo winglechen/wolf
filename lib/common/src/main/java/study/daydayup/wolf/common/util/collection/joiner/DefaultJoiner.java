@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.util.collection.joiner;
 
+import lombok.Getter;
 import study.daydayup.wolf.common.util.collection.joiner.exception.InvalidGetterException;
 
 import java.util.Collection;
@@ -17,7 +18,10 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     private static final int MIN_GETTER_LENGTH = 1;
     private static final int MAX_GETTER_LENGTH = 0;
 
+
+    @Getter
     private Collection<BASE> base;
+    @Getter
     private Function<BASE, Object>[] baseGetters;
 
     private Map<Object, EXT> extMap;
@@ -35,10 +39,10 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     @SafeVarargs
     @Override
-    public final CollectionJoiner join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object>... getters) {
-        this.validExtGetter(getters);
+    public final Joiner<BASE, EXT> join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object>... getters) {
+        validExtGetter(getters);
 
-        return new CollectionJoiner();
+        return this;
     }
 
     @SafeVarargs

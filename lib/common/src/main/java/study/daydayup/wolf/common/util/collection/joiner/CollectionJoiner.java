@@ -12,12 +12,18 @@ import java.util.function.Function;
  **/
 public class CollectionJoiner {
     @SafeVarargs
-    public static <BASE, EXT> Joiner<BASE, EXT> join(Collection<BASE> base, Function<BASE, Object>...getters) {
+    public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base, Function<BASE, Object>...getters) {
+        return new CollectionJoiner().base(base, getters);
+    }
+
+    @SafeVarargs
+    public final <BASE, EXT> Joiner<BASE, EXT> init(Collection<BASE> base, Function<BASE, Object>... getters) {
         return new DefaultJoiner<BASE, EXT>();
     }
 
     @SafeVarargs
-    public final <BASE, EXT> Joiner<BASE, EXT> join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object>... getters) {
-        return null;
+    public final <BASE, EXT> CollectionJoiner join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object>... getters) {
+        return this;
     }
+
 }

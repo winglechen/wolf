@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `goods`
     `feature`       VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品特色',
     `main_pic`      VARCHAR(200) NOT NULL DEFAULT '' COMMENT '产品主图',
     `main_video`    VARCHAR(200) NOT NULL DEFAULT '' COMMENT '产品主视频',
+    `url`           VARCHAR(200) NOT NULL DEFAULT '' COMMENT '外部链接地址',
 
     `code`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT '产品编码',
     `tags`          VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'tags',
