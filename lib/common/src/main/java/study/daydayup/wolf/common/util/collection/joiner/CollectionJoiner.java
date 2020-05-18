@@ -11,19 +11,27 @@ import java.util.function.Function;
  * @since 2020/5/18 3:01 下午
  **/
 public class CollectionJoiner {
-    @SafeVarargs
-    public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base, Function<BASE, Object>...getters) {
-        return new CollectionJoiner().base(base, getters);
+
+    public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base) {
+        return null;
     }
 
-    @SafeVarargs
-    public final <BASE, EXT> Joiner<BASE, EXT> init(Collection<BASE> base, Function<BASE, Object>... getters) {
-        return new DefaultJoiner<BASE, EXT>();
+    public <BASE, EXT> Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object> ...getters) {
+        return null;
     }
 
-    @SafeVarargs
-    public final <BASE, EXT> CollectionJoiner join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object>... getters) {
-        return this;
+    public <BASE> Collection<BASE> getList() {
+        return null;
     }
+
+    public static void main(String[] args) {
+//        CollectionJoiner.base(c1)
+//                .on(setter, getter1, getter2, ...)
+//                .join(c2, getter1, getter2, ...)
+//                .on(setter, getter1, getter2, ...)
+//                .join(c2, getter1, getter2, ...)
+//                .getList();
+    }
+
 
 }

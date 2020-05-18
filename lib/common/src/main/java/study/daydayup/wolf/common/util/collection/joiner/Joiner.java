@@ -12,9 +12,10 @@ import java.util.function.Function;
  **/
 public interface Joiner<BASE, EXT> {
     @SuppressWarnings("all")
-    Joiner<BASE, EXT> base(Collection<BASE> base, Function<BASE, Object> ...getters);
+    Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object> ...getters);
+
     @SuppressWarnings("all")
-    Joiner<BASE, EXT> join(Collection<EXT> ext, BiConsumer<BASE, EXT> setter, Function<EXT, Object> ...getters);
+    CollectionJoiner join(Collection<EXT> ext, Function<EXT, Object> ...getters);
 
     Collection<BASE> getBase();
     Function<BASE, Object>[] getBaseGetters();
