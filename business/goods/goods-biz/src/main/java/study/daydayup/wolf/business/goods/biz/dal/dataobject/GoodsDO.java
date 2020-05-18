@@ -37,6 +37,8 @@ public class GoodsDO implements Serializable {
 
     private String mainVideo;
 
+    private String url;
+
     private String code;
 
     private String tags;
@@ -76,6 +78,7 @@ public class GoodsDO implements Serializable {
         sb.append(", feature=").append(feature);
         sb.append(", mainPic=").append(mainPic);
         sb.append(", mainVideo=").append(mainVideo);
+        sb.append(", url=").append(url);
         sb.append(", code=").append(code);
         sb.append(", tags=").append(tags);
         sb.append(", creator=").append(creator);
@@ -115,6 +118,7 @@ public class GoodsDO implements Serializable {
             && (this.getFeature() == null ? other.getFeature() == null : this.getFeature().equals(other.getFeature()))
             && (this.getMainPic() == null ? other.getMainPic() == null : this.getMainPic().equals(other.getMainPic()))
             && (this.getMainVideo() == null ? other.getMainVideo() == null : this.getMainVideo().equals(other.getMainVideo()))
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
             && (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
@@ -144,6 +148,7 @@ public class GoodsDO implements Serializable {
         result = prime * result + ((getFeature() == null) ? 0 : getFeature().hashCode());
         result = prime * result + ((getMainPic() == null) ? 0 : getMainPic().hashCode());
         result = prime * result + ((getMainVideo() == null) ? 0 : getMainVideo().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());
