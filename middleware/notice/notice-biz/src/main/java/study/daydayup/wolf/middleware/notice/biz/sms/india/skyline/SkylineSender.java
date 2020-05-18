@@ -112,8 +112,7 @@ public class SkylineSender extends AbstractSender implements Sender {
     }
 
     private String createSendUrl() {
-        DateTimeFormatter df =DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        String now = df.format(LocalDateTime.now());
+        String now = getCurrentTimestamp();
 
         String signStr = StringUtil.join(
                 skylineConfig.getAppId(),
@@ -128,6 +127,14 @@ public class SkylineSender extends AbstractSender implements Sender {
                 "&sign=", sign,
                 "&datetime=", now
         );
+    }
+
+    private String getCurrentTimestamp() {
+        DateTimeFormatter df =DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime now = LocalDateTime.now();
+        //TODO CHANGE BY TIMEZONE
+        now = now.minusMinutes(150);
+        return df.format(now);
     }
 
     private String createSmsContent() {
