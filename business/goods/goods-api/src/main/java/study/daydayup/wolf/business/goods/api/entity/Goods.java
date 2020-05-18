@@ -20,6 +20,7 @@ public class Goods extends BaseGoods {
     public Goods() {}
     protected String pics;
     protected String skuInfo;
+    protected String extInfo;
     protected String detail;
 
     protected List<Sku> skuList;

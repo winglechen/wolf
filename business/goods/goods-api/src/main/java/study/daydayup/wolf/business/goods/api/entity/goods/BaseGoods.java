@@ -54,6 +54,7 @@ public class BaseGoods implements Serializable {
     protected String feature;
     protected String mainPic;
     protected String mainVideo;
+    protected String url;
     protected String code;
     protected String tags;
 
