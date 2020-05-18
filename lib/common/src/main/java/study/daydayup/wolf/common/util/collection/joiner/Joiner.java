@@ -17,6 +17,6 @@ public interface Joiner<BASE, EXT> {
     @SuppressWarnings("all")
     CollectionJoiner join(Collection<EXT> ext, Function<EXT, Object> ...getters);
 
-    Collection<BASE> getBase();
+    Collection<BASE> getBaseList();
     Function<BASE, Object>[] getBaseGetters();
 }

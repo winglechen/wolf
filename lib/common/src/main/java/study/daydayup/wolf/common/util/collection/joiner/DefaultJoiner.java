@@ -1,10 +1,12 @@
 package study.daydayup.wolf.common.util.collection.joiner;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
 import lombok.Getter;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.joiner.exception.InvalidGetterException;
-import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -24,14 +26,14 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     private CollectionJoiner gateway;
 
     @Getter
-    private Collection<BASE> base;
+    private Collection<BASE> baseList;
     @Getter
     private Function<BASE, Object>[] baseGetters;
 
     private Map<Object, EXT> extMap;
 
-    public DefaultJoiner(Collection<BASE> base, CollectionJoiner gateway) {
-        this.base = base;
+    public DefaultJoiner(Collection<BASE> baseList, CollectionJoiner gateway) {
+        this.baseList = baseList;
         this.gateway = gateway;
     }
 
@@ -44,9 +46,38 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     @SafeVarargs
     @Override
-    public final CollectionJoiner join(Collection<EXT> ext, Function<EXT, Object>... getters) {
+    public final CollectionJoiner join(Collection<EXT> extList, Function<EXT, Object>... getters) {
+        if (CollectionUtil.isEmpty(extList)) {
+            return gateway;
+        }
+
         validExtGetter(getters);
+        formatExtMap(extList, getters);
+        joinExtMap();
+
         return gateway;
+    }
+
+    private void joinExtMap() {
+        if (CollectionUtil.isEmpty(baseList)) {
+            return;
+        }
+
+        Object key;
+        for (BASE base : baseList) {
+            key = getBaseKey(base);
+        }
+    }
+
+    @SafeVarargs
+    private final void formatExtMap(Collection<EXT> extList, Function<EXT, Object>... getters) {
+        extMap = new HashMap<>(extList.size());
+
+        Object key;
+        for (EXT ext : extList) {
+            key = getExtKey(ext, getters);
+            extMap.put(key, ext);
+        }
     }
 
     @SafeVarargs
@@ -65,15 +96,15 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
         }
     }
 
-    private Object getBaseValue(BASE base, Function<BASE, Object>... getters) {
+    private Object getBaseKey(BASE base) {
         Object value;
-        if (1 == getters.length) {
-            value = getters[0].apply(base);
+        if (1 == baseGetters.length) {
+            value = baseGetters[0].apply(base);
             return formatValue(value);
         }
 
         StringBuilder sb = new StringBuilder();
-        for (Function<BASE, Object> getter : getters) {
+        for (Function<BASE, Object> getter : baseGetters) {
             value = getter.apply(base);
             sb.append(value).append(KEY_DELIMITER);
         }
@@ -81,7 +112,7 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
         return sb.toString();
     }
 
-    private Object getExtValue(EXT ext, Function<EXT, Object>... getters) {
+    private Object getExtKey(EXT ext, Function<EXT, Object>... getters) {
         Object value;
         if (1 == getters.length) {
             value = getters[0].apply(ext);
