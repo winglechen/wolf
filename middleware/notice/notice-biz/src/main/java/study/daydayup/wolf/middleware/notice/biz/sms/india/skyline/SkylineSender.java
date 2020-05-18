@@ -22,8 +22,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.TimeZone;
 
 /**
  * study.daydayup.wolf.business.uc.biz.sms.india.skyline
@@ -131,9 +133,8 @@ public class SkylineSender extends AbstractSender implements Sender {
 
     private String getCurrentTimestamp() {
         DateTimeFormatter df =DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        LocalDateTime now = LocalDateTime.now();
-        //TODO CHANGE BY TIMEZONE
-        now = now.minusMinutes(150);
+        ZoneId zoneId = ZoneId.of("Asia/Shanghai");
+        LocalDateTime now = LocalDateTime.now(zoneId);
         return df.format(now);
     }
 
