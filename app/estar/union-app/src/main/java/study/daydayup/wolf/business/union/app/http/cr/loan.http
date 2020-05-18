@@ -1,0 +1,92 @@
+
+
+
+###
+POST https://flashwallet.tech/api/loan/preview
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "goodsId" : 1
+}
+
+###
+POST https://flashwallet.tech/api/loan/confirm
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "goodsId" : 15
+}
+
+
+
+###
+#PUT https://flashwallet.tech/api/loan/repay/installment
+#Accept: */*
+#Cache-Control: no-cache
+#Content-Type: application/json
+#
+#{
+#  "tradeNo" : "20200303195344000119344411981847",
+#  "installmentNo": 1
+#}
+
+###
+GET https://flashwallet.tech/api/loan/contract/detail/20200507170603000039657944593022?lang=en_US
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET https://flashwallet.tech/api/loan
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET https://flashwallet.tech/api/loan?pageNum=10
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET https://flashwallet.tech/api/loan/living
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+
+
+###
+PUT https://flashwallet.tech/api/loan/repay
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo" : "20200303204857000119453125198010",
+  "installmentNo": 1
+}
+
+###
+POST https://flashwallet.tech/api/loan/audit/preview/1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+###
+PUT https://flashwallet.tech/api/loan/audit/pay
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "tradeNo": "20200518104807000399580451930400",
+  "paymentMethod": 120
+}
+
+###
+
+
