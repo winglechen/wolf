@@ -91,6 +91,7 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <columnOverride column="pics" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="sku_info" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <columnOverride column="ext_info" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
