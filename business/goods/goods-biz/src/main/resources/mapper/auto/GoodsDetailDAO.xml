@@ -6,6 +6,7 @@
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="pics" jdbcType="VARCHAR" property="pics" />
     <result column="sku_info" jdbcType="VARCHAR" property="skuInfo" />
+    <result column="ext_info" jdbcType="VARCHAR" property="extInfo" />
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
@@ -14,8 +15,8 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, pics, sku_info, detail, version, delete_flag, last_editor, created_at, 
-    updated_at
+    id, org_id, pics, sku_info, ext_info, detail, version, delete_flag, last_editor, 
+    created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -23,19 +24,26 @@
     from goods_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
-    insert into goods_detail (org_id, pics, sku_info,
-      detail, version, delete_flag, 
-      last_editor, created_at, updated_at
-      )
-    values (#{orgId,jdbcType=BIGINT}, #{pics,jdbcType=VARCHAR}, #{skuInfo,jdbcType=VARCHAR}, 
-      #{detail,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
-      #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from goods_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
+    insert into goods_detail (id, org_id, pics, 
+      sku_info, ext_info, detail, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{pics,jdbcType=VARCHAR}, 
+      #{skuInfo,jdbcType=VARCHAR}, #{extInfo,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDetailDO">
     insert into goods_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="orgId != null">
         org_id,
       </if>
@@ -44,6 +52,9 @@
       </if>
       <if test="skuInfo != null">
         sku_info,
+      </if>
+      <if test="extInfo != null">
+        ext_info,
       </if>
       <if test="detail != null">
         detail,
@@ -63,6 +74,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
       </if>
@@ -71,6 +85,9 @@
       </if>
       <if test="skuInfo != null">
         #{skuInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="extInfo != null">
+        #{extInfo,jdbcType=VARCHAR},
       </if>
       <if test="detail != null">
         #{detail,jdbcType=VARCHAR},
@@ -102,6 +119,9 @@
       <if test="skuInfo != null">
         sku_info = #{skuInfo,jdbcType=VARCHAR},
       </if>
+      <if test="extInfo != null">
+        ext_info = #{extInfo,jdbcType=VARCHAR},
+      </if>
       <if test="detail != null">
         detail = #{detail,jdbcType=VARCHAR},
       </if>
@@ -128,6 +148,7 @@
     set org_id = #{orgId,jdbcType=BIGINT},
       pics = #{pics,jdbcType=VARCHAR},
       sku_info = #{skuInfo,jdbcType=VARCHAR},
+      ext_info = #{extInfo,jdbcType=VARCHAR},
       detail = #{detail,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},

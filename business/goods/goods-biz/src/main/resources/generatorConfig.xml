@@ -68,18 +68,18 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="goods" domainObjectName="GoodsDO" mapperName="GoodsDAO"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByPrimaryKey="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-        >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="goods_type" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="boolean"/>
-        </table>
+<!--        <table tableName="goods" domainObjectName="GoodsDO" mapperName="GoodsDAO"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByPrimaryKey="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--        >-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="goods_type" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="boolean"/>-->
+<!--        </table>-->
 
         <table tableName="goods_detail" domainObjectName="GoodsDetailDO" mapperName="GoodsDetailDAO"
                enableCountByExample="false"
@@ -88,7 +88,7 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
         >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
             <columnOverride column="pics" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="sku_info" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="ext_info" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -96,39 +96,39 @@
             <columnOverride column="delete_flag" javaType="boolean"/>
         </table>
 
-        <table tableName="goods_installment" domainObjectName="GoodsInstallmentDO" mapperName="GoodsInstallmentDAO"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByPrimaryKey="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-        >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="delete_flag" javaType="boolean"/>
-        </table>
+<!--        <table tableName="goods_installment" domainObjectName="GoodsInstallmentDO" mapperName="GoodsInstallmentDAO"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByPrimaryKey="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--        >-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="delete_flag" javaType="boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="goods_loan" domainObjectName="GoodsLoanDO" mapperName="GoodsLoanDAO"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByPrimaryKey="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-        >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="installment" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="delete_flag" javaType="boolean"/>
-        </table>
+<!--        <table tableName="goods_loan" domainObjectName="GoodsLoanDO" mapperName="GoodsLoanDAO"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByPrimaryKey="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--        >-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="installment" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="delete_flag" javaType="boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="sku" domainObjectName="SkuDO" mapperName="SkuDAO"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByPrimaryKey="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-        >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="delete_flag" javaType="boolean"/>
-        </table>
+<!--        <table tableName="sku" domainObjectName="SkuDO" mapperName="SkuDAO"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByPrimaryKey="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--        >-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--            <columnOverride column="delete_flag" javaType="boolean"/>-->
+<!--        </table>-->
 
 
     </context>

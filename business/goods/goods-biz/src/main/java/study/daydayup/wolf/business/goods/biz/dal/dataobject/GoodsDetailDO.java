@@ -14,6 +14,8 @@ public class GoodsDetailDO implements Serializable {
 
     private String skuInfo;
 
+    private String extInfo;
+
     private String detail;
 
     private Integer version;
@@ -38,6 +40,7 @@ public class GoodsDetailDO implements Serializable {
         sb.append(", orgId=").append(orgId);
         sb.append(", pics=").append(pics);
         sb.append(", skuInfo=").append(skuInfo);
+        sb.append(", extInfo=").append(extInfo);
         sb.append(", detail=").append(detail);
         sb.append(", version=").append(version);
         sb.append(", deleteFlag=").append(deleteFlag);
@@ -64,6 +67,7 @@ public class GoodsDetailDO implements Serializable {
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getPics() == null ? other.getPics() == null : this.getPics().equals(other.getPics()))
             && (this.getSkuInfo() == null ? other.getSkuInfo() == null : this.getSkuInfo().equals(other.getSkuInfo()))
+            && (this.getExtInfo() == null ? other.getExtInfo() == null : this.getExtInfo().equals(other.getExtInfo()))
             && (this.getDetail() == null ? other.getDetail() == null : this.getDetail().equals(other.getDetail()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.isDeleteFlag() == other.isDeleteFlag())
@@ -80,6 +84,7 @@ public class GoodsDetailDO implements Serializable {
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getPics() == null) ? 0 : getPics().hashCode());
         result = prime * result + ((getSkuInfo() == null) ? 0 : getSkuInfo().hashCode());
+        result = prime * result + ((getExtInfo() == null) ? 0 : getExtInfo().hashCode());
         result = prime * result + ((getDetail() == null) ? 0 : getDetail().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + (isDeleteFlag() ? 1231 : 1237);
