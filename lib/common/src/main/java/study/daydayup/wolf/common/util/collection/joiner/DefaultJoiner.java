@@ -1,6 +1,5 @@
 package study.daydayup.wolf.common.util.collection.joiner;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
 import lombok.Getter;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.collection.joiner.exception.InvalidGetterException;
@@ -23,7 +22,7 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     private static final String NULL_VALUE = "NULL_VALUE";
     private static final String KEY_DELIMITER = ":";
 
-    private CollectionJoiner gateway;
+    private CollectionJoiner<BASE, EXT> gateway;
 
     @Getter
     private Collection<BASE> baseList;
@@ -34,7 +33,7 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     private Map<Object, EXT> extMap;
 
-    public DefaultJoiner(Collection<BASE> baseList, CollectionJoiner gateway) {
+    public DefaultJoiner(Collection<BASE> baseList, CollectionJoiner<BASE, EXT> gateway) {
         this.baseList = baseList;
         this.gateway = gateway;
     }
@@ -52,7 +51,7 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     @SafeVarargs
     @Override
-    public final CollectionJoiner join(Collection<EXT> extList, Function<EXT, Object>... getters) {
+    public final CollectionJoiner<BASE, EXT> join(Collection<EXT> extList, Function<EXT, Object>... getters) {
         if (CollectionUtil.isEmpty(extList)) {
             return gateway;
         }
