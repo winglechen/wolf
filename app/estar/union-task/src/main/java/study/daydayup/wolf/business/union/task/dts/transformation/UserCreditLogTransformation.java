@@ -47,7 +47,7 @@ public class UserCreditLogTransformation implements Transformation {
         map.put(5, "passport_count");
         map.put(6, "driving_license_count");
         map.put(7, "voter_count");
-        map.put(8, "bankcard_count");
+        map.put(8, "bank_card_count");
         map.put(9, "kyc_count");
 
         map.put(20, "auth_success_count");
