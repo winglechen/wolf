@@ -33,6 +33,12 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     private Map<Object, EXT> extMap;
 
+    public DefaultJoiner(Collection<BASE> baseList) {
+        this.baseList = baseList;
+        this.gateway =  new CollectionJoiner<>();
+        gateway.setJoiner(this);
+    }
+
     public DefaultJoiner(Collection<BASE> baseList, CollectionJoiner<BASE, EXT> gateway) {
         this.baseList = baseList;
         this.gateway = gateway;
