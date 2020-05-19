@@ -29,8 +29,10 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     private Map<Object, EXT> extMap;
 
-    public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base) {
-        return new DefaultJoiner<>(base);
+    @SafeVarargs
+    public static <BASE, EXT> Joiner<BASE, EXT> on(Collection<BASE> base, BiConsumer<BASE, EXT> setter, Function<BASE, Object>... getters) {
+        Joiner <BASE, EXT> joiner = new DefaultJoiner<>(base);
+        return joiner.on(setter, getters);
     }
 
     public DefaultJoiner(Collection<BASE> baseList) {
@@ -50,21 +52,16 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     @SafeVarargs
     @Override
-    public final Joiner<BASE, EXT> join(Collection<EXT> extList, Function<EXT, Object>... getters) {
+    public final CollectionJoiner<BASE> join(Collection<EXT> extList, Function<EXT, Object>... getters) {
         if (CollectionUtil.isEmpty(extList)) {
-            return this;
+            return new CollectionJoiner<>(baseList);
         }
 
         validExtGetter(getters);
         formatExtMap(extList, getters);
         joinExtMap();
 
-        return this;
-    }
-
-    @Override
-    public Collection<BASE> getList() {
-        return this.baseList;
+        return new CollectionJoiner<>(baseList);
     }
 
     private void joinExtMap() {
@@ -127,7 +124,8 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
         return sb.toString();
     }
 
-    private Object getExtKey(EXT ext, Function<EXT, Object>... getters) {
+    @SafeVarargs
+    private final Object getExtKey(EXT ext, Function<EXT, Object>... getters) {
         Object value;
         if (1 == getters.length) {
             value = getters[0].apply(ext);

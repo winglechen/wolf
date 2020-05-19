@@ -26,19 +26,18 @@ public class DefaultJoinerTest {
         joiner.on(Goods::setDetail, Goods::getId).join(detailList, GoodsDetail::getGoodsId);
 
         assertNotNull("DefaultJoiner join fail", goodsList);
-        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
-
         assertEquals("DefaultJoiner join fail", 20, goodsList.size());
+
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
 
         assertEquals("DefaultJoiner join fail", goodsList.get(0).getId(), goodsList.get(0).getDetail().getGoodsId());
         assertEquals("DefaultJoiner join fail", goodsList.get(0).getCid(), goodsList.get(0).getDetail().getCid());
 
         assertEquals("DefaultJoiner join fail", goodsList.get(10).getId(), goodsList.get(10).getDetail().getGoodsId());
         assertEquals("DefaultJoiner join fail", goodsList.get(10).getCid(), goodsList.get(10).getDetail().getCid());
-
-        assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
-        assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
-        assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
     }
 
     @Test
@@ -52,20 +51,82 @@ public class DefaultJoinerTest {
                 .join(detailList, GoodsDetail::getGoodsId, GoodsDetail::getCid);
 
         assertNotNull("DefaultJoiner join fail", goodsList);
-        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
-
         assertEquals("DefaultJoiner join fail", 20, goodsList.size());
+
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
 
         assertEquals("DefaultJoiner join fail", goodsList.get(0).getId(), goodsList.get(0).getDetail().getGoodsId());
         assertEquals("DefaultJoiner join fail", goodsList.get(0).getCid(), goodsList.get(0).getDetail().getCid());
 
         assertEquals("DefaultJoiner join fail", goodsList.get(10).getId(), goodsList.get(10).getDetail().getGoodsId());
         assertEquals("DefaultJoiner join fail", goodsList.get(10).getCid(), goodsList.get(10).getDetail().getCid());
+    }
+
+    @Test
+    @SuppressWarnings("all")
+    public void join_two_v2() {
+        List<Goods> goodsList = mockGoodsList();
+        List<GoodsDetail> detailList = mockDetailList();
+
+        CollectionJoiner.base(goodsList)
+                .on(Goods::setDetail, Goods::getId, Goods::getCid)
+                .join(detailList, GoodsDetail::getGoodsId, GoodsDetail::getCid)
+                ;
+
+        assertNotNull("DefaultJoiner join fail", goodsList);
+        assertEquals("DefaultJoiner join fail", 20, goodsList.size());
+
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
+
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getId(), goodsList.get(0).getDetail().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getCid(), goodsList.get(0).getDetail().getCid());
+
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getId(), goodsList.get(10).getDetail().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getCid(), goodsList.get(10).getDetail().getCid());
+    }
+
+    @Test
+    @SuppressWarnings("all")
+    public void join_three() {
+        List<Goods> goodsList = mockGoodsList();
+        List<GoodsDetail> detailList = mockDetailList();
+        List<GoodsSku> skuList = mockSkuList();
+
+        CollectionJoiner.base(goodsList)
+                .on(Goods::setDetail, Goods::getId, Goods::getCid)
+                .join(detailList, GoodsDetail::getGoodsId, GoodsDetail::getCid)
+                .on(Goods::setSku, Goods::getId, Goods::getCid)
+                .join(skuList, GoodsSku::getGoodsId, GoodsSku::getCid)
+                ;
+
+        assertNotNull("DefaultJoiner join fail", goodsList);
+        assertEquals("DefaultJoiner join fail", 20, goodsList.size());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
 
         assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
         assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
         assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0).getSku());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(10).getSku());
+        assertNotNull("DefaultJoiner join fail", goodsList.get(19).getSku());
+
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getId(), goodsList.get(0).getDetail().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getCid(), goodsList.get(0).getDetail().getCid());
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getId(), goodsList.get(0).getSku().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(0).getCid(), goodsList.get(0).getSku().getCid());
+
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getId(), goodsList.get(10).getDetail().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getCid(), goodsList.get(10).getDetail().getCid());
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getId(), goodsList.get(10).getSku().getGoodsId());
+        assertEquals("DefaultJoiner join fail", goodsList.get(10).getCid(), goodsList.get(10).getSku().getCid());
     }
+
 
     private List<Goods> mockGoodsList() {
         List<Goods> goodsList = new ArrayList<>();

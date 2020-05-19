@@ -15,7 +15,5 @@ public interface Joiner<BASE, EXT> {
     Joiner<BASE, EXT> on(BiConsumer<BASE, EXT> setter, Function<BASE, Object> ...getters);
 
     @SuppressWarnings("all")
-    Joiner<BASE, EXT> join(Collection<EXT> ext, Function<EXT, Object> ...getters);
-
-    Collection<BASE> getList();
+    CollectionJoiner<BASE> join(Collection<EXT> ext, Function<EXT, Object> ...getters);
 }
