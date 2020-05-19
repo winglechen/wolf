@@ -22,26 +22,19 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
     private static final String NULL_VALUE = "NULL_VALUE";
     private static final String KEY_DELIMITER = ":";
 
-    private CollectionJoiner<BASE, EXT> gateway;
-
     @Getter
     private Collection<BASE> baseList;
-    @Getter
     private Function<BASE, Object>[] baseGetters;
-    @Getter
     private BiConsumer<BASE, EXT> baseSetter;
 
     private Map<Object, EXT> extMap;
 
-    public DefaultJoiner(Collection<BASE> baseList) {
-        this.baseList = baseList;
-        this.gateway =  new CollectionJoiner<>();
-        gateway.setJoiner(this);
+    public static <BASE, EXT> Joiner<BASE, EXT> base(Collection<BASE> base) {
+        return new DefaultJoiner<>(base);
     }
 
-    public DefaultJoiner(Collection<BASE> baseList, CollectionJoiner<BASE, EXT> gateway) {
+    public DefaultJoiner(Collection<BASE> baseList) {
         this.baseList = baseList;
-        this.gateway = gateway;
     }
 
     @SafeVarargs
@@ -57,16 +50,21 @@ public class DefaultJoiner<BASE, EXT> implements Joiner<BASE, EXT> {
 
     @SafeVarargs
     @Override
-    public final CollectionJoiner<BASE, EXT> join(Collection<EXT> extList, Function<EXT, Object>... getters) {
+    public final Joiner<BASE, EXT> join(Collection<EXT> extList, Function<EXT, Object>... getters) {
         if (CollectionUtil.isEmpty(extList)) {
-            return gateway;
+            return this;
         }
 
         validExtGetter(getters);
         formatExtMap(extList, getters);
         joinExtMap();
 
-        return gateway;
+        return this;
+    }
+
+    @Override
+    public Collection<BASE> getList() {
+        return this.baseList;
     }
 
     private void joinExtMap() {
