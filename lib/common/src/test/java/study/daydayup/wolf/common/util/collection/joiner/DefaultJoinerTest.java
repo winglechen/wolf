@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class DefaultJoinerTest {
 
     @Test
+    @SuppressWarnings("all")
     public void join_one() {
         List<Goods> goodsList = mockGoodsList();
         List<GoodsDetail> detailList = mockDetailList();
@@ -38,11 +39,10 @@ public class DefaultJoinerTest {
         assertNotNull("DefaultJoiner join fail", goodsList.get(0).getDetail());
         assertNotNull("DefaultJoiner join fail", goodsList.get(10).getDetail());
         assertNotNull("DefaultJoiner join fail", goodsList.get(19).getDetail());
-
-
     }
 
     @Test
+    @SuppressWarnings("all")
     public void join_two() {
         List<Goods> goodsList = mockGoodsList();
         List<GoodsDetail> detailList = mockDetailList();
@@ -109,11 +109,34 @@ public class DefaultJoinerTest {
         return goodsList;
     }
 
+    private List<GoodsSku> mockSkuList() {
+        List<GoodsSku> goodsList = new ArrayList<>();
+
+        GoodsSku goods;
+        for (int i = 0; i < 20; i++) {
+            goods = new GoodsSku();
+            goods.setGoodsId((long) i);
+            goods.setSkuId((long)i);
+            goods.setSkuName("sku_" + i);
+
+            if (i % 2 == 0) {
+                goods.setCid("a");
+            } else {
+                goods.setCid("b");
+            }
+
+            goodsList.add(goods);
+        }
+
+        return goodsList;
+    }
+
     @Data
-    class Goods {
+    static class Goods {
         private Long id;
         private String cid;
         private GoodsDetail detail;
+        private GoodsSku sku;
     }
 
     @Data
