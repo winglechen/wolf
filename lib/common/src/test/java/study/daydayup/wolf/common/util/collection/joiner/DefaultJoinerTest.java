@@ -24,8 +24,8 @@ public class DefaultJoinerTest {
         Joiner<Goods, GoodsDetail> joiner = new DefaultJoiner<>(goodsList);
         joiner.on(Goods::setDetail, Goods::getId).join(detailList, GoodsDetail::getGoodsId);
 
-        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
         assertNotNull("DefaultJoiner join fail", goodsList);
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
 
         assertEquals("DefaultJoiner join fail", 20, goodsList.size());
 
@@ -51,8 +51,8 @@ public class DefaultJoinerTest {
         joiner.on(Goods::setDetail, Goods::getId, Goods::getCid)
                 .join(detailList, GoodsDetail::getGoodsId, GoodsDetail::getCid);
 
-        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
         assertNotNull("DefaultJoiner join fail", goodsList);
+        assertNotNull("DefaultJoiner join fail", goodsList.get(0));
 
         assertEquals("DefaultJoiner join fail", 20, goodsList.size());
 
@@ -117,10 +117,18 @@ public class DefaultJoinerTest {
     }
 
     @Data
-    class GoodsDetail {
+    static class GoodsDetail {
         private Long goodsId;
         private String cid;
         private String detail;
         private String pics;
+    }
+
+    @Data
+    static class GoodsSku {
+        private Long goodsId;
+        private String cid;
+        private Long skuId;
+        private String skuName;
     }
 }
