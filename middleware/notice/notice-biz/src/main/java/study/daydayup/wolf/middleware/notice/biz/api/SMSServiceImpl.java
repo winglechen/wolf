@@ -1,7 +1,6 @@
 package study.daydayup.wolf.middleware.notice.biz.api;
 
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
-import study.daydayup.wolf.middleware.notice.api.domain.exception.InvalidSMSConfigException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSConfigNotFoundException;
 import study.daydayup.wolf.middleware.notice.api.service.SMSService;
 import study.daydayup.wolf.middleware.notice.biz.sms.china.ChinaSMSService;
