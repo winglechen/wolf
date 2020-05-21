@@ -11,6 +11,7 @@ import study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsLoanDO;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.framework.layer.converter.Converter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -39,7 +40,11 @@ public class LoanConverter implements Converter {
         }
         GoodsDO goodsDO = new GoodsDO();
         BeanUtils.copyProperties(entity, goodsDO);
-        goodsDO.setPrice(DecimalUtil.scale(entity.getPrice()));
+
+        BigDecimal price = DecimalUtil.scale(entity.getPrice());
+        goodsDO.setPrice(price);
+        goodsDO.setMinPrice(price);
+        goodsDO.setMaxPrice(price);
 
         return goodsDO;
     }
