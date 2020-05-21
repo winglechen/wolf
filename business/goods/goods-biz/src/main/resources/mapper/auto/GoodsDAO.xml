@@ -18,8 +18,8 @@
     <result column="vs_price" jdbcType="VARCHAR" property="vsPrice" />
     <result column="feature" jdbcType="VARCHAR" property="feature" />
     <result column="main_pic" jdbcType="VARCHAR" property="mainPic" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="main_video" jdbcType="VARCHAR" property="mainVideo" />
-    <result column="url" jdbcType="VARCHAR" property="mainVideo" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
@@ -30,43 +30,52 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, category_id, goods_type, `name`, price, min_price, max_price, currency, charge_unit, `state`,
-    stock_type, sku_type, vs_price, feature, main_pic, main_video, `url`, code, tags, creator,
-    version, delete_flag, last_editor, created_at, updated_at
+    id, org_id, category_id, goods_type, `name`, price, min_price, max_price, currency, 
+    charge_unit, `state`, stock_type, sku_type, vs_price, feature, main_pic, url, main_video, 
+    code, tags, creator, version, delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from goods
     where id = #{id,jdbcType=BIGINT}
-    and org_id = #{orgId,jdbcType=BIGINT}
-    and delete_flag = 0
-    limit 1
   </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods (org_id, category_id, goods_type,
-      `name`, price, min_price, max_price, currency,
+    insert into goods (id, org_id, category_id, 
+      goods_type, `name`, price, 
+      min_price, max_price, currency, 
       charge_unit, `state`, stock_type, 
       sku_type, vs_price, feature, 
-      main_pic, main_video, `url`,  code,
-      tags, creator, version, 
-      delete_flag, last_editor, created_at, 
-      updated_at)
-    values (#{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, #{goodsType,jdbcType=SMALLINT}, 
-      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER},
+      main_pic, url, main_video, 
+      code, tags, creator, 
+      version, delete_flag, last_editor, 
+      created_at, updated_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, 
+      #{goodsType,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{minPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
       #{chargeUnit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
       #{skuType,jdbcType=INTEGER}, #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
-      #{mainPic,jdbcType=VARCHAR}, #{mainVideo,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
-      #{tags,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{mainPic,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{mainVideo,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.goods.biz.dal.dataobject.GoodsDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="orgId != null">
         org_id,
       </if>
@@ -112,11 +121,11 @@
       <if test="mainPic != null">
         main_pic,
       </if>
+      <if test="url != null">
+        url,
+      </if>
       <if test="mainVideo != null">
         main_video,
-      </if>
-      <if test="url != null">
-        `url`,
       </if>
       <if test="code != null">
         code,
@@ -130,7 +139,9 @@
       <if test="version != null">
         version,
       </if>
-      delete_flag,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
       <if test="lastEditor != null">
         last_editor,
       </if>
@@ -142,6 +153,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="orgId != null">
         #{orgId,jdbcType=BIGINT},
       </if>
@@ -187,11 +201,11 @@
       <if test="mainPic != null">
         #{mainPic,jdbcType=VARCHAR},
       </if>
-      <if test="mainVideo != null">
-        #{mainVideo,jdbcType=VARCHAR},
-      </if>
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="mainVideo != null">
+        #{mainVideo,jdbcType=VARCHAR},
       </if>
       <if test="code != null">
         #{code,jdbcType=VARCHAR},
@@ -205,7 +219,9 @@
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
-      #{deleteFlag,jdbcType=TINYINT},
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
       <if test="lastEditor != null">
         #{lastEditor,jdbcType=BIGINT},
       </if>
@@ -265,11 +281,11 @@
       <if test="mainPic != null">
         main_pic = #{mainPic,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
       <if test="mainVideo != null">
         main_video = #{mainVideo,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        `url` = #{url,jdbcType=VARCHAR},
       </if>
       <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
@@ -315,8 +331,8 @@
       vs_price = #{vsPrice,jdbcType=VARCHAR},
       feature = #{feature,jdbcType=VARCHAR},
       main_pic = #{mainPic,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
       main_video = #{mainVideo,jdbcType=VARCHAR},
-      `url` = #{url,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=BIGINT},
