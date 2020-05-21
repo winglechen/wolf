@@ -11,10 +11,10 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
  **/
 public class InvalidVerifyCodeException extends BusinessException {
     public InvalidVerifyCodeException() {
-        super(111005, "invalid verify code");
+        super(111005, "Invalid OTP code, Pls try again");
     }
 
     public InvalidVerifyCodeException(String phoneNum) {
-        super(111005, StringUtil.join("invalid verify code for: ", phoneNum));
+        super(111005, StringUtil.join("Invalid verify code for: ", phoneNum));
     }
 }

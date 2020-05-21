@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS `goods`
 
     `name`          VARCHAR(100) NOT NULL DEFAULT '' COMMENT '产品名',
     `price`         DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT '价格',
+    `min_price`     DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT 'min价格',
+    `max_price`     DECIMAL(15, 4) NOT NULL DEFAULT 0 COMMENT 'max价格',
     `currency`      INT(10) NOT NULL DEFAULT 0 COMMENT '币种',
     `charge_unit`   INT(10) NOT NULL DEFAULT 0 COMMENT '单位',
 
