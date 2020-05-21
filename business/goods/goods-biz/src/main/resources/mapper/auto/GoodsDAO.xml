@@ -8,6 +8,8 @@
     <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
+    <result column="max_price" jdbcType="DECIMAL" property="maxPrice" />
     <result column="currency" jdbcType="INTEGER" property="currency" />
     <result column="charge_unit" jdbcType="INTEGER" property="chargeUnit" />
     <result column="state" jdbcType="TINYINT" property="state" />
@@ -28,7 +30,7 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, category_id, goods_type, `name`, price, currency, charge_unit, `state`, 
+    id, org_id, category_id, goods_type, `name`, price, min_price, max_price, currency, charge_unit, `state`,
     stock_type, sku_type, vs_price, feature, main_pic, main_video, `url`, code, tags, creator,
     version, delete_flag, last_editor, created_at, updated_at
   </sql>
@@ -46,7 +48,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into goods (org_id, category_id, goods_type,
-      `name`, price, currency, 
+      `name`, price, min_price, max_price, currency,
       charge_unit, `state`, stock_type, 
       sku_type, vs_price, feature, 
       main_pic, main_video, `url`,  code,
@@ -54,7 +56,7 @@
       delete_flag, last_editor, created_at, 
       updated_at)
     values (#{orgId,jdbcType=BIGINT}, #{categoryId,jdbcType=INTEGER}, #{goodsType,jdbcType=SMALLINT}, 
-      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER},
       #{chargeUnit,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{stockType,jdbcType=INTEGER}, 
       #{skuType,jdbcType=INTEGER}, #{vsPrice,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
       #{mainPic,jdbcType=VARCHAR}, #{mainVideo,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
@@ -79,6 +81,12 @@
       </if>
       <if test="price != null">
         price,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="maxPrice != null">
+        max_price,
       </if>
       <if test="currency != null">
         currency,
@@ -148,6 +156,12 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null">
+        #{maxPrice,jdbcType=DECIMAL},
       </if>
       <if test="currency != null">
         #{currency,jdbcType=INTEGER},
@@ -221,6 +235,12 @@
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="minPrice != null">
+        min_price = #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null">
+        max_price = #{maxPrice,jdbcType=DECIMAL},
+      </if>
       <if test="currency != null">
         currency = #{currency,jdbcType=INTEGER},
       </if>
@@ -285,6 +305,8 @@
       goods_type = #{goodsType,jdbcType=SMALLINT},
       `name` = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
+      min_price = #{minPrice,jdbcType=DECIMAL},
+      max_price = #{maxPrice,jdbcType=DECIMAL},
       currency = #{currency,jdbcType=INTEGER},
       charge_unit = #{chargeUnit,jdbcType=INTEGER},
       `state` = #{state,jdbcType=TINYINT},
