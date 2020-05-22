@@ -1,9 +1,11 @@
 package study.daydayup.wolf.business.union.task.controller;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.union.task.dal.dao.ContractDAO;
+import study.daydayup.wolf.middleware.notice.biz.email.SmtpSender;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +23,8 @@ public class IndexController {
     private JdbcTemplate jdbcTemplate;
     @Resource
     private ContractDAO contractDAO;
+    @Resource
+    private SmtpSender mailSender;
 
     @RequestMapping("/index/hello")
     public String hello() {
@@ -47,6 +51,12 @@ public class IndexController {
         demo.show();
 
         return "demo showing ...";
+    }
+
+    @GetMapping("/index/mail/hello")
+    public String email() {
+
+        return "sending mail";
     }
 
 }
