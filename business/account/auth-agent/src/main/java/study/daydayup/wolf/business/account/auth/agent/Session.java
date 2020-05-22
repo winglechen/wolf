@@ -2,15 +2,16 @@ package study.daydayup.wolf.business.account.auth.agent;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.exception.CompanyNotChosenException;
 import study.daydayup.wolf.business.account.auth.agent.exception.SessionNotFoundException;
 import study.daydayup.wolf.business.account.auth.agent.util.CookieUtil;
+import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
-import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,11 +29,13 @@ import java.util.UUID;
 public class Session {
     private String sessionId;
     private String sessionKey;
-    private Map<String, Object> data;
+    private Map<Object, Object> data;
 
     private HttpServletRequest request;
     private HttpServletResponse response;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
     @Resource
     private AuthConfig config;
     @Reference
@@ -42,7 +45,7 @@ public class Session {
         if (null != data) {
             return;
         }
-        data = new HashMap<String, Object>();
+        data = new HashMap<>();
 
         this.request = request;
         this.response = response;
@@ -70,7 +73,19 @@ public class Session {
     }
 
     public void set(String key, Object value) {
+        set(key, value, true);
+    }
+
+    public void set(@NonNull String key, @NonNull Object value, boolean saveToRedis) {
         data.put(key, value);
+
+        if (saveToRedis) {
+            redisSet(key, value);
+        }
+    }
+
+    private void redisSet(String key, Object value) {
+        stringRedisTemplate.opsForHash().put(sessionId, key, value);
     }
 
     public <T> T get(String key, Class<T> type) {
@@ -110,11 +125,7 @@ public class Session {
         }
 
         Date expiredAt = (Date)get("expiredAt");
-        if (expiredAt.before(now)) {
-            return false;
-        }
-
-        return true;
+        return !expiredAt.before(now);
     }
 
     public boolean isLogin() {
@@ -131,29 +142,31 @@ public class Session {
         oauthLicenseService.expire(sessionId, now);
     }
 
-    @PreDestroy
-    public void storeToRedis() {
 
-    }
 
     public void saveLicense(OauthLicense license) {
         if (null == license) {
             return;
         }
 
-        set("accountId", license.getAccountId());
-        set("account", license.getAccount());
-        set("accountType", license.getAccountType());
-        set("accessToken", license.getAccessToken());
-        set("refreshToken", license.getRefreshToken());
-        set("expiredAt", license.getExpiredAt());
-        set("refreshExpiredAt", license.getRefreshExpiredAt());
+        set("accountId", license.getAccountId(), false);
+        set("account", license.getAccount(), false);
+        set("accountType", license.getAccountType(), false);
+        set("accessToken", license.getAccessToken(), false);
+        set("refreshToken", license.getRefreshToken(), false);
+        set("expiredAt", license.getExpiredAt(), false);
+        set("refreshExpiredAt", license.getRefreshExpiredAt(), false);
 
-        setOrgId(license);
+        Long orgId = parseOrgId(license);
+        if (orgId != null) {
+            set("orgId", orgId, false);
+        }
 
         if (!sessionId.equals(license.getAccessToken())) {
             setSessionId(license.getAccessToken());
         }
+
+        storeToRedis();
     }
 
     public void changeScope(@NonNull Long orgId) {
@@ -161,19 +174,18 @@ public class Session {
         oauthLicenseService.changeScope(sessionId, String.valueOf(orgId));
     }
 
-    private void setOrgId(OauthLicense license) {
+    private Long parseOrgId(OauthLicense license) {
         if (StringUtil.isBlank(license.getScope())) {
-            return;
+            return null;
         }
 
         try {
             String scope = license.getScope().trim();
-            Long orgId = Long.valueOf(scope);
-            set("orgId", orgId);
-        } catch (Exception e) {
+            return Long.valueOf(scope);
+        } catch (Exception ignored) {
+            return null;
         }
     }
-
 
     private void initSessionId() {
         sessionId = createSessionId();
@@ -223,8 +235,20 @@ public class Session {
         return authArr[1].trim();
     }
 
+    public void storeToRedis() {
+        if (MapUtil.isEmpty(data)) {
+            return;
+        }
+
+        stringRedisTemplate.opsForHash().putAll(sessionId, data);
+    }
+
     private void loadFromRedis() {
-        //TODO
+        Map<Object, Object> tmpData = stringRedisTemplate.opsForHash().entries(sessionId);
+        if (MapUtil.notEmpty(tmpData)) {
+            data.putAll(tmpData);
+            return;
+        }
 
         loadFromRpc();
     }
