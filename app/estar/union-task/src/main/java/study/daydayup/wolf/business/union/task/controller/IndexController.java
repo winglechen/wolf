@@ -38,11 +38,9 @@ public class IndexController {
 
     @RequestMapping("/index/jdbc")
     public List<Map<String, Object>> jdbc() {
-        List<Map<String, Object>>  result = jdbcTemplate.queryForList(
+        return jdbcTemplate.queryForList(
                 "select * from `contract` order by id desc limit 5"
         );
-        
-        return result;
     }
 
     @RequestMapping("/index/demo")
@@ -55,6 +53,7 @@ public class IndexController {
 
     @GetMapping("/index/mail/hello")
     public String email() {
+        mailSender.send("winglechen@gmail.com", "smtp mail test", "I am from tech");
 
         return "sending mail";
     }

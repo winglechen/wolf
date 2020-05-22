@@ -9,3 +9,6 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+GET http://localhost:9100/index/mail/hello
+Accept: */*
+Cache-Control: no-cache

@@ -62,7 +62,10 @@
             <artifactId>notice-agent</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.middleware.notice</groupId>
             <artifactId>notice-biz</artifactId>
