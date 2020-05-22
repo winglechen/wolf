@@ -11,7 +11,7 @@ import java.util.Collection;
  * @author Wingle
  * @since 2020/3/20 5:18 下午
  **/
-public abstract class AbstractSender implements Sender {
+public abstract class AbstractSMSSender implements SMSSender {
     @Override
     public int send(String mobile, String msg) {
         throw new SupplierNotSupportException();

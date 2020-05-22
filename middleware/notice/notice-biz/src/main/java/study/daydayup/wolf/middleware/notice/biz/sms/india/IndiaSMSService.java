@@ -2,7 +2,7 @@ package study.daydayup.wolf.middleware.notice.biz.sms.india;
 
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.middleware.notice.api.domain.entity.SMS;
-import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.Sender;
+import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.SMSSender;
 import study.daydayup.wolf.middleware.notice.biz.sms.india.skyline.SkylineSender;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.Collection;
  * @since 2020/3/20 8:54 下午
  **/
 @Component
-public class IndiaSMSService implements Sender {
+public class IndiaSMSService implements SMSSender {
     @Resource
     private SkylineSender skylineSender;
 

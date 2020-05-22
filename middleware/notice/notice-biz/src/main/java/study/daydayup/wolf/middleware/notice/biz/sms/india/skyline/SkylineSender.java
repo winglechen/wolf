@@ -11,8 +11,8 @@ import study.daydayup.wolf.middleware.notice.api.config.sms.SMSSupplier;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.InvalidSMSConfigException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSEncodeFailException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSTooLongException;
-import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.AbstractSender;
-import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.Sender;
+import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.AbstractSMSSender;
+import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.SMSSender;
 import study.daydayup.wolf.common.util.encrypt.MD5Util;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.TimeZone;
 
 /**
  * study.daydayup.wolf.business.uc.biz.sms.india.skyline
@@ -35,7 +34,7 @@ import java.util.TimeZone;
  **/
 @Component
 @Slf4j
-public class SkylineSender extends AbstractSender implements Sender {
+public class SkylineSender extends AbstractSMSSender implements SMSSender {
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final int MAX_SMS_LENGTH = 1024;
     private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");

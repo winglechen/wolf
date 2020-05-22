@@ -11,7 +11,7 @@ import java.util.Collection;
  * @author Wingle
  * @since 2020/3/20 5:16 下午
  **/
-public interface Sender extends Service {
+public interface SMSSender extends Service {
     int send(String mobile, String msg);
     int bulkSend(Collection<SMS> smsList);
 }
