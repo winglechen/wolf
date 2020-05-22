@@ -24,7 +24,7 @@ public class IndexController {
     @Resource
     private ContractDAO contractDAO;
     @Resource
-    private SmtpSender mailSender;
+    private SmtpSender smtpSender;
 
     @RequestMapping("/index/hello")
     public String hello() {
@@ -53,7 +53,7 @@ public class IndexController {
 
     @GetMapping("/index/mail/hello")
     public String email() {
-        mailSender.send("winglechen@gmail.com", "smtp mail test", "I am from tech");
+        smtpSender.send("winglechen@gmail.com", "smtp mail test", "I am from tech");
 
         return "sending mail";
     }
