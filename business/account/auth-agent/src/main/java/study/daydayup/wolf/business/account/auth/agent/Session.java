@@ -84,9 +84,7 @@ public class Session {
         }
     }
 
-    private void redisSet(String key, Object value) {
-        stringRedisTemplate.opsForHash().put(sessionId, key, value);
-    }
+
 
     public <T> T get(String key, Class<T> type) {
        return get(key, type, true);
@@ -115,6 +113,17 @@ public class Session {
         return data.get(key);
     }
 
+    public void destroy() {
+        Date now = new Date();
+        if ( !isLogin(now) ) {
+            return;
+        }
+
+        set("expiredAt", now);
+        oauthLicenseService.expire(sessionId, now);
+    }
+
+    // account & orgId operations
     public boolean isLogin(Date now) {
         if(null == get("accountId")) {
             return false;
@@ -131,18 +140,6 @@ public class Session {
     public boolean isLogin() {
         return isLogin(new Date());
     }
-
-    public void destroy() {
-        Date now = new Date();
-        if ( !isLogin(now) ) {
-            return;
-        }
-
-        set("expiredAt", now);
-        oauthLicenseService.expire(sessionId, now);
-    }
-
-
 
     public void saveLicense(OauthLicense license) {
         if (null == license) {
@@ -187,6 +184,7 @@ public class Session {
         }
     }
 
+    // sessionId operations
     private void initSessionId() {
         sessionId = createSessionId();
         saveSessionId();
@@ -235,11 +233,17 @@ public class Session {
         return authArr[1].trim();
     }
 
+    //redis operations
+    private void redisSet(String key, Object value) {
+        stringRedisTemplate.opsForHash().put(sessionId, key, value);
+    }
+
     public void storeToRedis() {
         if (MapUtil.isEmpty(data)) {
             return;
         }
 
+        //TODO: add batch update when request finished
         stringRedisTemplate.opsForHash().putAll(sessionId, data);
     }
 
