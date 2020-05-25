@@ -26,55 +26,55 @@ import java.util.Map;
 @RestController
 public class CompanySettingController {
     @Resource
-    private CompanySettingAgent agent;
+    private CompanySettingAgent companySettingAgent;
     @Resource
     private Session session;
     @Reference
-    private CompanySettingService service;
+    private CompanySettingService companySettingService;
 
     @GetMapping("/uc/company/demo")
     public String demo() {
         Long orgId = session.get("orgId", Long.class);
-        agent.init(orgId);
+        companySettingAgent.init(orgId);
 
-        agent.namespace("info");
-        agent.set("name", "repeat company name");
-        agent.set("age", 10);
-        agent.set("address", "HangZhou");
+        companySettingAgent.namespace("info");
+        companySettingAgent.set("name", "repeat company name");
+        companySettingAgent.set("age", 10);
+        companySettingAgent.set("address", "HangZhou");
 
-        agent.save();
+        companySettingAgent.save();
 
-        ObjectMap map = agent.getAll();
+        ObjectMap map = companySettingAgent.getAll();
         return JSON.toJSONString(map);
     }
 
     @GetMapping("/uc/company/setting/{namespace}")
     public String findByNamespace(@PathVariable("namespace") String namespace) {
         Long orgId = session.get("orgId", Long.class);
-        agent.init(orgId);
-        agent.namespace(namespace);
+        companySettingAgent.init(orgId);
+        companySettingAgent.namespace(namespace);
 
-        ObjectMap map = agent.getAll();
+        ObjectMap map = companySettingAgent.getAll();
         return JSON.toJSONString(map);
     }
 
     @PutMapping("/uc/company/setting/{orgId}/{namespace}")
     public String mockByNamespace(@PathVariable("orgId") Long orgId, @PathVariable("namespace") String namespace, @RequestBody Map<String, Object> setting) {
-        agent.init(orgId, false);
-        agent.namespace(namespace);
+        companySettingAgent.init(orgId, false);
+        companySettingAgent.namespace(namespace);
 
-        ObjectMap map = agent.getAll();
+        ObjectMap map = companySettingAgent.getAll();
         return JSON.toJSONString(map);
     }
 
     @PutMapping("/uc/company/setting/{orgId}")
     public String mockOrg(@PathVariable("orgId") Long orgId,@RequestBody Map<String, Object> setting) {
-        agent.init(orgId, false);
+        companySettingAgent.init(orgId, false);
 
-        agent.setAll(setting);
-        agent.save();
+        companySettingAgent.setAll(setting);
+        companySettingAgent.save();
 
-        ObjectMap map = agent.getAll();
+        ObjectMap map = companySettingAgent.getAll();
         return JSON.toJSONString(map);
     }
 
@@ -100,7 +100,7 @@ public class CompanySettingController {
             orgIds.add(orgId);
         }
 
-        return service.findByOrgIds(namespace, orgIds);
+        return companySettingService.findByOrgIds(namespace, orgIds);
     }
 
 

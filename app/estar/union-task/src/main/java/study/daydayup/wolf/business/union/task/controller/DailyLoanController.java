@@ -15,15 +15,15 @@ import javax.annotation.Resource;
 @RestController
 public class DailyLoanController {
     @Resource
-    private DailyLoanService loanService;
+    private DailyLoanService dailyLoanService;
 
     @RequestMapping("/daily/loan")
     public String loan() {
-        loanService.countLoanContract();
-        loanService.countLoanContractState();
-        loanService.countLoanOrder();
-        loanService.countRepayContract();
-        loanService.countRepayOrder();
+        dailyLoanService.countLoanContract();
+        dailyLoanService.countLoanContractState();
+        dailyLoanService.countLoanOrder();
+        dailyLoanService.countRepayContract();
+        dailyLoanService.countRepayOrder();
 
         return "daily loan executing ....";
     }

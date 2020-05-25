@@ -34,7 +34,7 @@ public class CompanySettingAgent {
     private long orgId;
 
     @Reference
-    private CompanySettingService service;
+    private CompanySettingService companySettingService;
 
     public void init(long orgId) {
         init(orgId, true);
@@ -141,7 +141,7 @@ public class CompanySettingAgent {
                 .data(JSON.toJSONString(map.get(namespace)))
                 .build();
 
-        service.save(setting);
+        companySettingService.save(setting);
     }
 
     private void initNamespace(@NonNull String namespace) {
@@ -162,7 +162,7 @@ public class CompanySettingAgent {
                 .namespace(namespace)
                 .build();
 
-        CompanySetting setting = service.findByNamespace(query).getData();
+        CompanySetting setting = companySettingService.findByNamespace(query).getData();
         if (setting == null || StringUtil.isBlank(setting.getData())) {
             map = MapUtil.empty();
             return;

@@ -29,15 +29,15 @@ import java.util.List;
 @RpcService(protocol = "dubbo")
 public class AdminServiceImpl implements AdminService {
     @Resource
-    private AdminDAO dao;
+    private AdminDAO adminDAO;
     @Reference
-    private CompanySettingService settingService;
+    private CompanySettingService companySettingService;
 
     @Override
     public Result<Page<CompanyDTO>> findCompanies(Long accountId, PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
 
-        List<AdminDO> adminDOList = dao.selectByAccountId(accountId);
+        List<AdminDO> adminDOList = adminDAO.selectByAccountId(accountId);
         if (CollectionUtil.isEmpty(adminDOList)) {
             return Result.ok(Page.empty(pageReq.getPageNum(), pageReq.getPageSize()));
         }
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 
     private Page<CompanyDTO> mergeCompanyInfo(List<AdminDO> adminDOList) {
         List<Long> orgIds = CollectionUtil.keys(adminDOList, AdminDO::getOrgId);
-        List<CompanySetting> settingList = settingService.findByOrgIds(orgIds).notNullData();
+        List<CompanySetting> settingList = companySettingService.findByOrgIds(orgIds).notNullData();
 
         List<CompanyDTO> companyDTOList = new ArrayList<>(settingList.size());
         for (CompanySetting setting : settingList) {

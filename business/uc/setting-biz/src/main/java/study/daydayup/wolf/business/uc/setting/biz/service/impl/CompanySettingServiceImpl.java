@@ -31,13 +31,13 @@ import java.util.Map;
 @RpcService(protocol = "dubbo")
 public class CompanySettingServiceImpl implements CompanySettingService {
     @Resource
-    private CompanySettingDAO dao;
+    private CompanySettingDAO companySettingDAO;
     @Override
     public Result<CompanySetting> find(Long companyId) {
         if (companyId == null) {
             return Result.fail(10000, "invalid args");
         }
-        CompanySettingDO companySettingDO = dao.findByNamespace(KvData.DEFAULT_NAMESPACE, companyId);
+        CompanySettingDO companySettingDO = companySettingDAO.findByNamespace(KvData.DEFAULT_NAMESPACE, companyId);
         if (companySettingDO == null) {
             return initSetting(companyId, KvData.DEFAULT_NAMESPACE);
         }
@@ -48,23 +48,23 @@ public class CompanySettingServiceImpl implements CompanySettingService {
     @Override
     public Result<Integer> save(@Validated CompanySetting companySetting) {
         int status;
-        CompanySettingDO companySettingDO = dao.findByNamespace(companySetting.getNamespace(), companySetting.getOrgId());
+        CompanySettingDO companySettingDO = companySettingDAO.findByNamespace(companySetting.getNamespace(), companySetting.getOrgId());
         if (companySettingDO == null) {
-            status = dao.insertSelective(modelToDO(companySetting));
+            status = companySettingDAO.insertSelective(modelToDO(companySetting));
             return Result.ok(status);
         }
 
         CompanySettingDO changedDO = modelToDO(companySetting);
         mergeDataChanges(changedDO, companySettingDO);
 
-        status = dao.updateByNamespace(changedDO, companySetting.getNamespace(), companySetting.getOrgId());
+        status = companySettingDAO.updateByNamespace(changedDO, companySetting.getNamespace(), companySetting.getOrgId());
         return Result.ok(status);
     }
 
     @Override
     public Result<CompanySetting> findByNamespace(SettingDTO settingDTO) {
         settingDTO.valid();
-        CompanySettingDO companySettingDO = dao.findByNamespace(settingDTO.getNamespace(), settingDTO.getOrgId());
+        CompanySettingDO companySettingDO = companySettingDAO.findByNamespace(settingDTO.getNamespace(), settingDTO.getOrgId());
         if (companySettingDO == null) {
             return initSetting(settingDTO.getOrgId(), settingDTO.getNamespace());
         }
@@ -74,7 +74,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
 
     @Override
     public Result<List<CompanySetting>> findAll(@NonNull Long companyId) {
-        List<CompanySettingDO> companySettingDOList = dao.findByOrgId(companyId);
+        List<CompanySettingDO> companySettingDOList = companySettingDAO.findByOrgId(companyId);
 
         List<CompanySetting> companySettingList = toModel(companySettingDOList);
         return Result.ok(companySettingList);
@@ -91,7 +91,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
             return Result.ok(ListUtil.empty());
         }
 
-        List<CompanySettingDO> companySettingDOList = dao.findByOrgIdIn(namespace, companyIds);
+        List<CompanySettingDO> companySettingDOList = companySettingDAO.findByOrgIdIn(namespace, companyIds);
         List<CompanySetting> companySettingList = toModel(companySettingDOList);
 
         return Result.ok(companySettingList);
@@ -104,7 +104,7 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         status.setData("{}");
 
         CompanySettingDO statusDO = modelToDO(status);
-        dao.insertSelective(statusDO);
+        companySettingDAO.insertSelective(statusDO);
 
         return Result.ok(status);
     }
