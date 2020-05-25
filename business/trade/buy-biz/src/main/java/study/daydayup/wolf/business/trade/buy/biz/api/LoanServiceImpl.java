@@ -9,9 +9,7 @@ import study.daydayup.wolf.business.trade.api.domain.exception.buy.ContractNotRe
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
 import study.daydayup.wolf.business.trade.api.domain.event.base.PaidEvent;
 import study.daydayup.wolf.business.trade.api.dto.buy.base.request.PayRequest;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
 import study.daydayup.wolf.business.trade.api.service.buy.LoanService;
-import study.daydayup.wolf.business.trade.buy.biz.converter.OrderConverter;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanContractEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.entity.LoanOrderEntity;
 import study.daydayup.wolf.business.trade.buy.biz.loan.repository.LoanContractRepository;

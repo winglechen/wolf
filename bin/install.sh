@@ -135,7 +135,6 @@ function install_business() {
     install_pay
 
     install_content
-    install_datav
 }
 
 function install_business_starter() {
@@ -158,6 +157,8 @@ function install_all() {
     install_middleware
     install_business
     install_business_starter
+
+    install_datav
     install_union
 }
 

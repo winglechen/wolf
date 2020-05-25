@@ -39,7 +39,7 @@ public class TaskController implements Controller {
     @Reference
     private TaskService taskService;
     @Reference
-    private CollectionTaskService collectionService;
+    private CollectionTaskService collectionTaskService;
     @Resource
     private Session session;
 
@@ -126,55 +126,55 @@ public class TaskController implements Controller {
     @PutMapping("/task/collection/partlyPay/{taskId}")
     public Result<Integer> partlyPay(@PathVariable("taskId") Long taskId, @Validated @RequestBody CollectionAmount collectionAmount) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.partlyPay(taskId, orgId, collectionAmount.getAmount());
+        return collectionTaskService.partlyPay(taskId, orgId, collectionAmount.getAmount());
     }
 
     @PutMapping("/task/collection/confirm/partlyPay/{taskId}")
     public Result<Integer> confirmPartlyPay(@PathVariable("taskId") Long taskId, @Validated @RequestBody CollectionAmount collectionAmount) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.confirmPartlyPay(taskId, orgId, collectionAmount.getAmount());
+        return collectionTaskService.confirmPartlyPay(taskId, orgId, collectionAmount.getAmount());
     }
 
     @PutMapping("/task/collection/pay/{taskId}")
     public Result<Integer> pay(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.pay(taskId, orgId);
+        return collectionTaskService.pay(taskId, orgId);
     }
 
     @PutMapping("/task/collection/confirm/pay/{taskId}")
     public Result<Integer> confirmPay(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.confirmPay(taskId, orgId);
+        return collectionTaskService.confirmPay(taskId, orgId);
     }
 
     @PutMapping("/task/collection/fail/{taskId}")
     public Result<Integer> fail(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.fail(taskId, orgId);
+        return collectionTaskService.fail(taskId, orgId);
     }
 
     @PutMapping("/task/collection/confirm/fail/{taskId}")
     public Result<Integer> confirmFail(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.confirmFail(taskId, orgId);
+        return collectionTaskService.confirmFail(taskId, orgId);
     }
 
     @PutMapping("/task/collection/question/partlyPay/{taskId}")
     public Result<Integer> questionPartlyPay(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.questionPartlyPay(taskId, orgId);
+        return collectionTaskService.questionPartlyPay(taskId, orgId);
     }
 
     @PutMapping("/task/collection/question/pay/{taskId}")
     public Result<Integer> questionPay(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.questionPay(taskId, orgId);
+        return collectionTaskService.questionPay(taskId, orgId);
     }
 
     @PutMapping("/task/collection/question/fail/{taskId}")
     public Result<Integer> questionFail(@PathVariable("taskId") Long taskId) {
         Long orgId = session.get("orgId", Long.class);
-        return collectionService.questionFail(taskId, orgId);
+        return collectionTaskService.questionFail(taskId, orgId);
     }
 
     @GetMapping("/task/all")

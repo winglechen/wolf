@@ -27,7 +27,7 @@ import javax.validation.Valid;
 @RestController
 public class PasswordController extends AuthController {
     @Reference
-    private PasswordAuthService passwordService;
+    private PasswordAuthService passwordAuthService;
     @Resource
     private AuthConfig authConfig;
     @Resource
@@ -45,7 +45,7 @@ public class PasswordController extends AuthController {
 
         initPasswordRequest(passwordRequest);
 
-        Result<OauthLicense> result = passwordService.login(passwordRequest);
+        Result<OauthLicense> result = passwordAuthService.login(passwordRequest);
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
@@ -65,7 +65,7 @@ public class PasswordController extends AuthController {
         }
 
         initPasswordRequest(request);
-        Result<OauthLicense> result = passwordService.registerAndLogin(request);
+        Result<OauthLicense> result = passwordAuthService.registerAndLogin(request);
         OauthLicense license = result.notNullData();
         saveLicenseToSession(license);
 
@@ -79,7 +79,7 @@ public class PasswordController extends AuthController {
         }
 
         initPasswordRequest(request);
-        passwordService.register(request);
+        passwordAuthService.register(request);
 
         return Result.ok();
     }
@@ -87,7 +87,7 @@ public class PasswordController extends AuthController {
     @PostMapping("/auth/password/change")
     public Result<Object> changePassword(@Validated @RequestBody PasswordRequest request) {
         request.setEnv(null);
-        passwordService.changePassword(request);
+        passwordAuthService.changePassword(request);
 
         return Result.ok();
     }
