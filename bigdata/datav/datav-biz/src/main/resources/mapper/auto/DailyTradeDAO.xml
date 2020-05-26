@@ -9,13 +9,14 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="trade_count" jdbcType="INTEGER" property="tradeCount" />
+    <result column="buyer_count" jdbcType="INTEGER" property="buyerCount" />
     <result column="trade_amount" jdbcType="DECIMAL" property="tradeAmount" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `date`, trade_type, `state`, `source`, trade_count, trade_amount, delete_flag, 
-    created_at
+    id, org_id, `date`, trade_type, `state`, `source`, trade_count, buyer_count, trade_amount, 
+    delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -30,12 +31,12 @@
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyTradeDO">
     insert into daily_trade (id, org_id, `date`, trade_type, 
       `state`, `source`, trade_count, 
-      trade_amount, delete_flag, created_at
-      )
+      buyer_count, trade_amount, delete_flag, 
+      created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{tradeType,jdbcType=INTEGER}, 
       #{state,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{tradeCount,jdbcType=INTEGER}, 
-      #{tradeAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{buyerCount,jdbcType=INTEGER}, #{tradeAmount,jdbcType=DECIMAL}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyTradeDO">
     insert into daily_trade
@@ -60,6 +61,9 @@
       </if>
       <if test="tradeCount != null">
         trade_count,
+      </if>
+      <if test="buyerCount != null">
+        buyer_count,
       </if>
       <if test="tradeAmount != null">
         trade_amount,
@@ -93,6 +97,9 @@
       <if test="tradeCount != null">
         #{tradeCount,jdbcType=INTEGER},
       </if>
+      <if test="buyerCount != null">
+        #{buyerCount,jdbcType=INTEGER},
+      </if>
       <if test="tradeAmount != null">
         #{tradeAmount,jdbcType=DECIMAL},
       </if>
@@ -125,6 +132,9 @@
       <if test="tradeCount != null">
         trade_count = #{tradeCount,jdbcType=INTEGER},
       </if>
+      <if test="buyerCount != null">
+        buyer_count = #{buyerCount,jdbcType=INTEGER},
+      </if>
       <if test="tradeAmount != null">
         trade_amount = #{tradeAmount,jdbcType=DECIMAL},
       </if>
@@ -145,6 +155,7 @@
       `state` = #{state,jdbcType=INTEGER},
       `source` = #{source,jdbcType=VARCHAR},
       trade_count = #{tradeCount,jdbcType=INTEGER},
+      buyer_count = #{buyerCount,jdbcType=INTEGER},
       trade_amount = #{tradeAmount,jdbcType=DECIMAL},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}

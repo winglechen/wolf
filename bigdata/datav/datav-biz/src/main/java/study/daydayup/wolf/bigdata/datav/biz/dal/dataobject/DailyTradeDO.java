@@ -22,6 +22,8 @@ public class DailyTradeDO implements Serializable {
 
     private Integer tradeCount;
 
+    private Integer buyerCount;
+
     private BigDecimal tradeAmount;
 
     private Boolean deleteFlag;
@@ -43,6 +45,7 @@ public class DailyTradeDO implements Serializable {
         sb.append(", state=").append(state);
         sb.append(", source=").append(source);
         sb.append(", tradeCount=").append(tradeCount);
+        sb.append(", buyerCount=").append(buyerCount);
         sb.append(", tradeAmount=").append(tradeAmount);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
@@ -69,9 +72,27 @@ public class DailyTradeDO implements Serializable {
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getTradeCount() == null ? other.getTradeCount() == null : this.getTradeCount().equals(other.getTradeCount()))
+            && (this.getBuyerCount() == null ? other.getBuyerCount() == null : this.getBuyerCount().equals(other.getBuyerCount()))
             && (this.getTradeAmount() == null ? other.getTradeAmount() == null : this.getTradeAmount().equals(other.getTradeAmount()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
+        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
+        result = prime * result + ((getTradeType() == null) ? 0 : getTradeType().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
+        result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
+        result = prime * result + ((getTradeCount() == null) ? 0 : getTradeCount().hashCode());
+        result = prime * result + ((getBuyerCount() == null) ? 0 : getBuyerCount().hashCode());
+        result = prime * result + ((getTradeAmount() == null) ? 0 : getTradeAmount().hashCode());
+        result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
+        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        return result;
+    }
 }
