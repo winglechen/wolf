@@ -17,7 +17,7 @@ function init() {
 
     echo "start nacos"
     echo $line
-    sh /Users/wingle/code/bin/nacos/bin/startup.sh -m standalone > /Users/wingle/logs/wolf/wolf.log 2>&1  &
+    sh /Users/wingle/code/software/nacos/bin//startup.sh -m standalone > /Users/wingle/logs/wolf/wolf.log 2>&1  &
 
     echo "start redis" 
     echo $line
@@ -122,7 +122,7 @@ function clear() {
 
     echo "stop nacos"
     echo $line
-    sh /Users/wingle/code/bin/nacos/bin/shutdown.sh > /Users/wingle/logs/wolf/wolf.log 2>&1 &
+    sh /Users/wingle/code/software/nacos/bin//shutdown.sh > /Users/wingle/logs/wolf/wolf.log 2>&1 &
 
     echo "stop redis"
     echo $line
