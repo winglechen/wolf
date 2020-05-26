@@ -42,8 +42,8 @@ public class URLUtil {
                 continue;
             }
 
-            key = kvArr[0].trim();
-            value = kvArr[1].trim();
+            key = kvArr[0];
+            value = kvArr[1];
             result.put(key, value);
         }
 
