@@ -18,12 +18,3 @@ Content-Type: application/x-www-form-urlencoded
 processCurrency=INR&amount=299.00&merTransNo=20200525070305606229949558829688&sign=09f69dcb4d1de7312999fbf77eae4abbb9833255e41748a296d09c57133ebdb9&updateTime=2020-05-25+09%3A33%3A08&pmId=paytm&transNo=20200525093306016010034651&payerMobile=919553360889&createTime=2020-05-25+09%3A33%3A06&processAmount=299.00&payerName=Jupalli+Srinivasarao++Jupalli++Jupalli+Srinivasarao+&currency=INR&payerEmail=jupallisrinivasurao805%40gmail.com&transStatus=success,,,,
 
 
-###
-POST https://onionwallet.net/api/pay/dokypay/subscribe
-Accept: */*
-Cache-Control: no-cache
-Content-Type: application/x-www-form-urlencoded
-
-processCurrency=INR&amount=299.00&merTransNo=20200518140149604549981802833427&sign=9f91d82d3c6b5b091eb9704e14dc640ee40ccb5eb74672bfa83b1421ea32045b&updateTime=2020-05-18+16%3A31%3A55&pmId=debit.in&transNo=20200518163149050022459182&payerMobile=919560957767&createTime=2020-05-18+16%3A31%3A49&processAmount=299.00&payerName=GAURAV++Singh+TANWAR&currency=INR&payerEmail=gtanwar17%40gmail.com&transStatus=success
-
-

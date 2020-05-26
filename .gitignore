@@ -2,6 +2,7 @@
 *.class
 target/
 crhttp/
+testhttp/
 
 # Log file
 *.log
