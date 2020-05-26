@@ -19,6 +19,7 @@ public class DailyTrade implements Model {
     private String source;
 
     private Integer tradeCount;
+    private Integer buyerCount;
     private BigDecimal tradeAmount;
 
     private Boolean deleteFlag;
