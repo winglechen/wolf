@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `daily_trade`
     `source`                    VARCHAR(50) NOT NULL DEFAULT '' COMMENT '渠道',
 
     `trade_count`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易数',
+    `buyer_count`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易人数',
     `trade_amount`              DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易金额',
 
     `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
