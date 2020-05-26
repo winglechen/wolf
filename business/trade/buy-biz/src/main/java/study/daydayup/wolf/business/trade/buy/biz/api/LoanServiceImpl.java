@@ -26,7 +26,7 @@ import java.time.LocalDate;
  * @author Wingle
  * @since 2019/12/30 5:11 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class LoanServiceImpl implements LoanService {
     @Resource
     private LoanContractRepository loanContractRepository;

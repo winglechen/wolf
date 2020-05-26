@@ -25,7 +25,7 @@ import javax.annotation.Resource;
  * @since 2020/3/9 11:26 上午
  **/
 
-@RpcService(protocol = "dubbo")
+@RpcService
 public class PaySubscriberImpl implements PaySubscriber {
     private Order order;
 

@@ -34,7 +34,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @since 2019/12/5 6:02 下午
  **/
 @Slf4j
-@RpcService(protocol = "dubbo")
+@RpcService
 public class SmsAuthServiceImpl implements SmsAuthService {
     @Resource
     private AccountDAO accountDAO;

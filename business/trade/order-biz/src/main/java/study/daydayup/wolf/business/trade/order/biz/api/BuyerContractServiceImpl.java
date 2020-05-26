@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/1/14 12:40 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class BuyerContractServiceImpl implements BuyerContractService {
     @Resource
     private BuyerContractRepository repository;

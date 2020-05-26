@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/3/22 9:12 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class BankCardServiceImpl implements BankCardService {
     @Resource
     private BankCardDAO dao;

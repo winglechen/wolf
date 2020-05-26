@@ -33,7 +33,7 @@ import java.util.Date;
  * @since 2019/12/5 6:01 下午
  **/
 @Slf4j
-@RpcService(protocol = "dubbo")
+@RpcService
 public class PasswordAuthServiceImpl implements PasswordAuthService {
     @Resource
     private AccountDAO accountDAO;

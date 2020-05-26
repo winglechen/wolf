@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/4/29 6:24 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class PayoutServiceImpl implements PayoutService {
     @Resource
     private PayoutServiceFactory factory;

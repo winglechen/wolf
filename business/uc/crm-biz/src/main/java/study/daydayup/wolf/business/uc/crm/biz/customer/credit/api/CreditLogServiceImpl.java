@@ -20,7 +20,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/3/10 1:20 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class CreditLogServiceImpl implements CreditLogService {
     @Resource
     private CreditLogDAO dao;

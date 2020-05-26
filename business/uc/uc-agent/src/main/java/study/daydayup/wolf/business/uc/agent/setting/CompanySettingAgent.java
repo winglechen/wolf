@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.uc.agent.setting;
 import com.alibaba.fastjson.JSON;
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.setting.api.dto.SettingDTO;
 import study.daydayup.wolf.business.uc.setting.api.entity.CompanySetting;
@@ -25,6 +26,7 @@ import java.util.Set;
  * @since 2020/4/9 11:53 下午
  **/
 @Component
+@Scope("prototype")
 public class CompanySettingAgent {
     private boolean isInit = false;
     private Set<String> changedNamespaceSet;

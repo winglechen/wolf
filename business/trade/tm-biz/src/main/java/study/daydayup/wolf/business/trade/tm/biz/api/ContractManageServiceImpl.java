@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/1/10 12:20 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class ContractManageServiceImpl implements ContractManageService {
     @Resource
     private ContractQueryEngine engine;

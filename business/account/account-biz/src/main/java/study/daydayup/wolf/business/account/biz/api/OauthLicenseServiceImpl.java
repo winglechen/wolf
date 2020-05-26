@@ -22,7 +22,7 @@ import java.util.Date;
  * @author Wingle
  * @since 2019/12/5 7:20 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class OauthLicenseServiceImpl implements OauthLicenseService {
     @Resource
     private AccessTokenService accessTokenService;

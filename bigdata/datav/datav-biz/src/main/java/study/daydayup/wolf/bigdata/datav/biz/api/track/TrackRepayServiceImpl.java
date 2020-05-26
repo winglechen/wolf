@@ -23,7 +23,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/3/26 6:07 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class TrackRepayServiceImpl implements TrackRepayService {
     @Resource
     private TrackRepayDAO repayDAO;

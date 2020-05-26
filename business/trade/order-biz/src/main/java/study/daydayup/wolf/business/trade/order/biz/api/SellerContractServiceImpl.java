@@ -28,7 +28,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/1/14 12:39 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class SellerContractServiceImpl implements SellerContractService {
     @Resource
     private SellerContractRepository repository;

@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/1/1 12:39 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class StaffStatusServiceImpl implements StaffStatusService {
     @Resource
     private StaffStatusDAO dao;

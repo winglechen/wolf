@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * @author Wingle
  * @since 2019/12/18 11:33 上午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class TradeGoodsServiceImpl implements TradeGoodsService {
     private GoodsOption option;
     private Long  orgId;

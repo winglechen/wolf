@@ -37,7 +37,7 @@ public class CustomerStatusAgent {
     private Map<StatusEnum, List<StatusEnum>> progressStep;
 
     @Reference
-    private CustomerStatusService service;
+    private CustomerStatusService customerStatusService;
 
     public void init(long accountId, long orgId) {
         if (accountId <= 0 || orgId <= 0) {
@@ -48,7 +48,7 @@ public class CustomerStatusAgent {
 //            return;
 //        }
 
-        CustomerStatus status = service.find(accountId, orgId).notNullData();
+        CustomerStatus status = customerStatusService.find(accountId, orgId).notNullData();
         log.info("init customerStatus agent: {}", status);
 
         this.accountId = accountId;
@@ -139,7 +139,7 @@ public class CustomerStatusAgent {
         long[] sArray = statusSet.toLongArray();
         CustomerStatus status = arrayToModel(sArray);
 
-        service.save(status);
+        customerStatusService.save(status);
     }
 
     private void initStatusMap() {

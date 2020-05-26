@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  * @author Wingle
  * @since 2020/3/16 12:44 上午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class CollectionTaskServiceImpl implements CollectionTaskService {
     @Resource
     private TaskRepository taskRepository;

@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/1/10 12:21 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class OrderManageServiceImpl implements OrderManageService {
     @Resource
     private OrderQueryEngine engine;

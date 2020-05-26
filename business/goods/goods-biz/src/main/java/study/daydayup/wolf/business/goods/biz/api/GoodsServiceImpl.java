@@ -20,7 +20,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/11 7:38 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsDAO goodsDAO;

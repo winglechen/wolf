@@ -9,7 +9,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  * @author Wingle
  * @since 2019/12/5 7:36 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class AuthServiceImpl implements AuthService {
     @Override
     public void logout(long accountId) {

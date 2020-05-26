@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.uc.agent.setting;
 
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.setting.api.entity.KvData;
 import study.daydayup.wolf.business.uc.setting.api.service.StaffSettingService;
@@ -18,6 +19,7 @@ import java.util.Set;
  * @since 2020/4/9 11:53 下午
  **/
 @Component
+@Scope("prototype")
 public class StaffSettingAgent {
     private boolean isInit = false;
     private Set<String> changedNamespaceSet;
@@ -27,7 +29,7 @@ public class StaffSettingAgent {
     private long orgId;
 
     @Reference
-    private StaffSettingService service;
+    private StaffSettingService staffSettingService;
 
     public void init(long accountId, long orgId) {
         if (accountId <= 0 || orgId <= 0) {

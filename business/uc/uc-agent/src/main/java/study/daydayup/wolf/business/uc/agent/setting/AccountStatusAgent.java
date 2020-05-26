@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.setting.api.entity.AccountStatus;
@@ -16,6 +17,7 @@ import java.util.BitSet;
  * @since 2020/1/1 2:47 下午
  **/
 @Component
+@Scope("prototype")
 public class AccountStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;
@@ -24,7 +26,7 @@ public class AccountStatusAgent {
     private BitSet statusSet;
 
     @Reference
-    private AccountStatusService service;
+    private AccountStatusService accountStatusService;
 
     public void init(long accountId) {
         if (accountId <= 0) {
@@ -35,7 +37,7 @@ public class AccountStatusAgent {
             return;
         }
 
-        AccountStatus status = service.find(accountId).notNullData();
+        AccountStatus status = accountStatusService.find(accountId).notNullData();
 
         this.accountId = accountId;
         statusSet = StatusUtil.initStatus(status);
@@ -64,7 +66,7 @@ public class AccountStatusAgent {
         long[] sArray = statusSet.toLongArray();
         AccountStatus status = arrayToModel(sArray);
 
-        service.save(status);
+        accountStatusService.save(status);
     }
 
     private AccountStatus arrayToModel(long[] s) {

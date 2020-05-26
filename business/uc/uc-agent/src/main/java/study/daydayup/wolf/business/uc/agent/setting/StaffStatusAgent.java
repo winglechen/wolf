@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.uc.agent.setting;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
 import study.daydayup.wolf.business.uc.setting.api.entity.StaffStatus;
@@ -16,6 +17,7 @@ import java.util.*;
  * @since 2020/1/1 2:47 下午
  **/
 @Component
+@Scope("prototype")
 public class StaffStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;
@@ -26,7 +28,7 @@ public class StaffStatusAgent {
     private BitSet statusSet;
 
     @Reference
-    private StaffStatusService service;
+    private StaffStatusService staffStatusService;
 
     public void init(long accountId, long orgId) {
         if (accountId <= 0 || orgId <= 0) {
@@ -37,7 +39,7 @@ public class StaffStatusAgent {
             return;
         }
 
-        StaffStatus status = service.find(accountId, orgId).notNullData();
+        StaffStatus status = staffStatusService.find(accountId, orgId).notNullData();
 
         this.accountId = accountId;
         this.orgId = orgId;
@@ -67,7 +69,7 @@ public class StaffStatusAgent {
         long[] sArray = statusSet.toLongArray();
         StaffStatus status = arrayToModel(sArray);
 
-        service.save(status);
+        staffStatusService.save(status);
     }
 
     private StaffStatus arrayToModel(long[] s) {

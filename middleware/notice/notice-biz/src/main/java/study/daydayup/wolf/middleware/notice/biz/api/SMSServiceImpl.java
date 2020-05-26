@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/3/20 8:52 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class SMSServiceImpl implements SMSService {
     @Resource
     private IndiaSMSService indiaSMSService;

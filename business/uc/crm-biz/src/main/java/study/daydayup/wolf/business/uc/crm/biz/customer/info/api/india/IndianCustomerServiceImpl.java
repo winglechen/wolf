@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/3/22 9:49 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class IndianCustomerServiceImpl implements IndianCustomerService {
     @Resource
     private AadhaarDAO aadhaarDAO;

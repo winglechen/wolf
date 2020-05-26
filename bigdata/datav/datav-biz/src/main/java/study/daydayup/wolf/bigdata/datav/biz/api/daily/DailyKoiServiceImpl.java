@@ -36,7 +36,7 @@ import java.util.function.Function;
  * @author Wingle
  * @since 2020/3/26 12:08 上午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class DailyKoiServiceImpl implements DailyKoiService {
     @Resource
     private DailyKoiDAO koiDAO;

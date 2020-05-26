@@ -10,7 +10,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
  * @author Wingle
  * @since 2019/12/5 7:19 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public long create(Organization org) {

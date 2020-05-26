@@ -12,7 +12,7 @@ import study.daydayup.wolf.framework.rpc.page.Page;
  * @author Wingle
  * @since 2020/1/14 12:43 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class LoanContractServiceImpl implements LoanContractService {
     @Override
     public Result<Page<InstallmentTerm>> findDueInstallment() {

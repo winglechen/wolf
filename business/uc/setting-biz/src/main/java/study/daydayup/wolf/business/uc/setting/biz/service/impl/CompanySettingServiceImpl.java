@@ -28,7 +28,7 @@ import java.util.Map;
  * @author Wingle
  * @since 2020/1/1 12:38 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class CompanySettingServiceImpl implements CompanySettingService {
     @Resource
     private CompanySettingDAO companySettingDAO;

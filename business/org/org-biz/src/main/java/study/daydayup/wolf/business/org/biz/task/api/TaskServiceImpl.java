@@ -32,7 +32,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/3/16 12:44 上午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class TaskServiceImpl implements TaskService {
     @Resource
     private TaskRepository taskRepository;

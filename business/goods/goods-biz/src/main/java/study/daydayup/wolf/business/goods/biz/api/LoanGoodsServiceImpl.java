@@ -21,7 +21,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/10 8:52 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class LoanGoodsServiceImpl implements LoanGoodsService {
     @Resource
     private LoanGoodsRepository repository;

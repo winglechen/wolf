@@ -20,7 +20,7 @@ import java.util.List;
  * @author Wingle
  * @since 2019/12/16 10:33 上午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderRepository orderRepository;

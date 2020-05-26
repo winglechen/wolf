@@ -26,7 +26,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/3/10 1:16 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class CreditLineServiceImpl implements CreditLineService {
     @Resource
     private CreditLineDAO dao;

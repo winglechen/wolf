@@ -24,7 +24,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/1/14 12:42 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class SellerOrderServiceImpl implements SellerOrderService {
     @Resource
     private SellerOrderRepository repository;

@@ -20,7 +20,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/1/1 12:38 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class AccountSettingServiceImpl implements AccountSettingService {
     @Resource
     private AccountSettingDAO dao;

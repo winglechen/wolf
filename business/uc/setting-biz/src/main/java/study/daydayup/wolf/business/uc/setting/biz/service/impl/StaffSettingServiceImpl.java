@@ -21,7 +21,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/1/1 12:39 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class StaffSettingServiceImpl implements StaffSettingService {
     @Resource
     private StaffSettingDAO dao;

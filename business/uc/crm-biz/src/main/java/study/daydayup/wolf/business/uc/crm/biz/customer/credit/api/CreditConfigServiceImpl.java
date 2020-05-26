@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/3/10 1:19 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class CreditConfigServiceImpl implements CreditConfigService {
     @Resource
     private CreditConfigDAO dao;

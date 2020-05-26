@@ -26,7 +26,7 @@ import java.util.List;
  * @author Wingle
  * @since 2020/4/22 10:01 下午
  **/
-@RpcService(protocol = "dubbo")
+@RpcService
 public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminDAO adminDAO;
