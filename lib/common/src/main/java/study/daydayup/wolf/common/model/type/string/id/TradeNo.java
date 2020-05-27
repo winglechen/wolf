@@ -47,7 +47,8 @@ public class TradeNo implements ID {
     }
 
     public String create() {
-        StringBuilder tradeNo = new StringBuilder(addDatetime());
+        StringBuilder tradeNo;
+        tradeNo = new StringBuilder(addDatetime());
 
         tradeNo.append(addTradePhase());
         tradeNo.append(addShardKey());
