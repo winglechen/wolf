@@ -76,15 +76,13 @@ public class Session {
         set(key, value, true);
     }
 
-    public void set(@NonNull String key, @NonNull Object value, boolean saveToRedis) {
+    public void set(@NonNull String key, Object value, boolean saveToRedis) {
         data.put(key, value);
 
         if (saveToRedis) {
             redisSet(key, value);
         }
     }
-
-
 
     public <T> T get(String key, Class<T> type) {
        return get(key, type, true);
@@ -259,6 +257,10 @@ public class Session {
 
     private void loadFromRpc() {
         OauthLicense license = oauthLicenseService.findByAccessToken(sessionId);
+        if (license == null) {
+            return;
+        }
+
         saveLicense(license);
     }
 

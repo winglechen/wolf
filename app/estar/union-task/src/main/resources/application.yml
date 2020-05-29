@@ -12,8 +12,8 @@ spring:
     password:
     lettuce:
       pool:
-        max-active: 8
-        max-wait: 1
+        max-active: 10
+        max-wait: 5
         max-idle: 8
         min-idle: 0
   shardingsphere:

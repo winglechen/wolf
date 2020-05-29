@@ -154,7 +154,6 @@ case "$command" in
       deploy_onion_cr ;;
   deploy-task-cr)
       deploy_task_cr ;;
-
   redis-test)
       conn_test_redis ;;
   install)
@@ -171,7 +170,6 @@ case "$command" in
       install_business_stater ;;
   install-union)
       install_union ;;
-
   install-middleware)
       install_middleware ;;
   install-notice)
