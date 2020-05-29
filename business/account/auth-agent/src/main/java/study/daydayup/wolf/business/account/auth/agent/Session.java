@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
@@ -29,13 +30,13 @@ import java.util.UUID;
 public class Session {
     private String sessionId;
     private String sessionKey;
-    private Map<Object, Object> data;
+    private Map<String, Object> data;
 
     private HttpServletRequest request;
     private HttpServletResponse response;
 
     @Resource
-    private RedisTemplate<Object, Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private AuthConfig config;
     @Reference
@@ -233,7 +234,7 @@ public class Session {
 
     //redis operations
     private void redisSet(String key, Object value) {
-        redisTemplate.opsForHash().put(sessionId, key, value);
+        getRedisHashOps().put(sessionId, key, value);
     }
 
     public void storeToRedis() {
@@ -242,11 +243,15 @@ public class Session {
         }
 
         //TODO: add batch update when request finished
-        redisTemplate.opsForHash().putAll(sessionId, data);
+        getRedisHashOps().putAll(sessionId, data);
+    }
+
+    private HashOperations<String, String, Object> getRedisHashOps() {
+        return redisTemplate.opsForHash();
     }
 
     private void loadFromRedis() {
-        Map<Object, Object> tmpData = redisTemplate.opsForHash().entries(sessionId);
+        Map<String, Object> tmpData = getRedisHashOps().entries(sessionId);
         if (MapUtil.notEmpty(tmpData)) {
             data.putAll(tmpData);
             return;
