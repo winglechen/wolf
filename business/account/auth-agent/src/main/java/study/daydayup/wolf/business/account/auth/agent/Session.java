@@ -2,7 +2,7 @@ package study.daydayup.wolf.business.account.auth.agent;
 
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseService;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
@@ -35,7 +35,7 @@ public class Session {
     private HttpServletResponse response;
 
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
     @Resource
     private AuthConfig config;
     @Reference
@@ -233,7 +233,7 @@ public class Session {
 
     //redis operations
     private void redisSet(String key, Object value) {
-        stringRedisTemplate.opsForHash().put(sessionId, key, value);
+        redisTemplate.opsForHash().put(sessionId, key, value);
     }
 
     public void storeToRedis() {
@@ -242,17 +242,18 @@ public class Session {
         }
 
         //TODO: add batch update when request finished
-        stringRedisTemplate.opsForHash().putAll(sessionId, data);
+        redisTemplate.opsForHash().putAll(sessionId, data);
     }
 
     private void loadFromRedis() {
-        Map<Object, Object> tmpData = stringRedisTemplate.opsForHash().entries(sessionId);
+        Map<Object, Object> tmpData = redisTemplate.opsForHash().entries(sessionId);
         if (MapUtil.notEmpty(tmpData)) {
             data.putAll(tmpData);
             return;
         }
 
         loadFromRpc();
+        storeToRedis();
     }
 
     private void loadFromRpc() {
