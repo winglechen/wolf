@@ -51,13 +51,12 @@ public class UnionGoodsController extends BaseUnionController {
         return Result.ok(goods);
     }
 
-    @GetMapping("/auth/loan/one")
+    @GetMapping("/home/goods")
     public Result<LoanGoods> findOneLoanByOrgId(@RequestParam(value = "orgId") Long orgId) {
         LoanGoods goods = loanGoodsService.findOneByOrgId(orgId, DEFAULT_GOODS_TYPE);
 
         return Result.ok(goods);
     }
-
 
     @GetMapping("/goods/list")
     public Result<Page<LoanGoods>> findByOrgId(@RequestParam(value = "pageNum", required = false) Integer pageNum) {
