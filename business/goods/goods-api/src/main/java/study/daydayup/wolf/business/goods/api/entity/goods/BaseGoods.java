@@ -38,6 +38,8 @@ public class BaseGoods implements Serializable {
     protected String name;
     @DecimalMin("0.0001")
     protected BigDecimal price;
+    protected BigDecimal minPrice;
+    protected BigDecimal maxPrice;
     protected Integer currency;
     protected Integer chargeUnit;
 

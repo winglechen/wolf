@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.config;
 
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -29,12 +30,14 @@ public class RedisAutoConfiguration {
 
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
 
+//        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
 //        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
 //        FastJsonConfig fastJsonConfig = fastJsonRedisSerializer.getFastJsonConfig();
 //        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
 //        fastJsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
 
         JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
+
         redisTemplate.setEnableDefaultSerializer(true);
         redisTemplate.setDefaultSerializer(jdkSerializationRedisSerializer);
 

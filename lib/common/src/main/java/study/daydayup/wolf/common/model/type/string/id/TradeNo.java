@@ -30,6 +30,7 @@ public class TradeNo implements ID {
     public static final int SHARD_LENGTH = 4;
     public static final int DATA_CENTER_LENGTH = 4;
     public static final int UUID_LENGTH = 9;
+    public static final int NANO_LENGTH = 6;
 
     private int shards;
     private int shard;
@@ -37,6 +38,7 @@ public class TradeNo implements ID {
     private int  dataCenterId;
     private long accountId;
     private long uuid;
+    private long nano;
 
     public static TradeNo of(String stringNo) {
         return of(stringNo, 0);
@@ -64,7 +66,20 @@ public class TradeNo implements ID {
             return String.valueOf(uuid);
         }
 
-        return generateRandomNum(UUID_LENGTH);
+        String ns = String.valueOf(getNano());
+        int nsLen = ns.length();
+        if (nsLen > 6) {
+            ns = ns.substring(0, NANO_LENGTH);
+            nsLen = NANO_LENGTH;
+        }
+
+        int randLen = UUID_LENGTH - nsLen;
+        if (randLen < 1) {
+            return ns;
+        }
+
+        String rand = generateRandomNum(randLen);
+        return StringUtil.join(ns, rand);
     }
 
     private String addDataCenterKey() {
@@ -92,6 +107,15 @@ public class TradeNo implements ID {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
         return now.format(formatter);
+    }
+
+    private long getNano() {
+        if (0 != nano) {
+            return nano;
+        }
+
+        nano = System.currentTimeMillis();
+        return nano;
     }
 
     private String addShardKey() {

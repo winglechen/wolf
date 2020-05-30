@@ -29,12 +29,10 @@ public class TradeNoTest {
 
 //    @Test
     public void demo() {
-//        System.out.println(String.format("%06d", 13345678).substring(0, 6));
-//        System.out.println(String.format("%06d", 1334).substring(0, 6));
-
-//        for (int i = 0; i < 10; i++) {
-//            System.out.println("tradeNo: " + createTradeNo4());
-//        }
+        for (int i = 0; i < 10000; i++) {
+            System.out.println("tradeNo: " + createTradeNo());
+            System.out.println("ms: " + System.currentTimeMillis());
+        }
     }
 
     public void create2() {
@@ -43,7 +41,7 @@ public class TradeNoTest {
         String tradeNo;
         int dupCount = 0;
         for (int i = 0; i < 1000000; i++) {
-            tradeNo = createTradeNo2();
+            tradeNo = createTradeNo();
 
             if (null == map.get(tradeNo)) {
                 map.put(tradeNo, true);
