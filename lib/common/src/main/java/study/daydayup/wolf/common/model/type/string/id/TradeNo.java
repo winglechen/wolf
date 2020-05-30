@@ -30,7 +30,7 @@ public class TradeNo implements ID {
     public static final int SHARD_LENGTH = 4;
     public static final int DATA_CENTER_LENGTH = 4;
     public static final int UUID_LENGTH = 9;
-    public static final int NANO_LENGTH = 6;
+    public static final int NANO_LENGTH = 4;
 
     private int shards;
     private int shard;

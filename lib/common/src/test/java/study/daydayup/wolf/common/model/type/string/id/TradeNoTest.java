@@ -22,7 +22,7 @@ public class TradeNoTest {
 
 //    @Test
     public void create() {
-//        create2();
+        create2();
 //        create3();
 //        create4();
     }
