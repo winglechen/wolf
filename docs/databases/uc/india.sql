@@ -31,8 +31,9 @@ CREATE TABLE `aadhaar`
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_aadhaar_no` (`aadhaar_no`)
+    INDEX `idx_account` (`account_id`, `org_id`),
+    UNIQUE KEY `udx_aadhaar_no` (`aadhaar_no`, `org_id`),
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户Aadhaar卡信息表';
 
@@ -49,6 +50,7 @@ CREATE TABLE `address_book`
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户通讯录信息表';
@@ -66,6 +68,7 @@ CREATE TABLE `app_installed`
     `last_editor`  bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`   datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户手机应用列表信息表';
@@ -93,6 +96,7 @@ CREATE TABLE `bank_card`
     `last_editor`     bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`      datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`      datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户绑定银行卡信息表';
@@ -122,6 +126,7 @@ CREATE TABLE `basic_info`
     `last_editor`    bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`     datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`     datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户基础信息表';
@@ -151,6 +156,7 @@ CREATE TABLE `device`
     `last_editor`    bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`     datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`     datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`org_id`, `account_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户手机设备信息表';
@@ -179,7 +185,8 @@ CREATE TABLE `driving_license`
     `created_at`        datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`        datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_dl_no` (`dl_no`)
+    INDEX `idx_account` (`account_id`, `org_id`),
+    UNIQUE KEY `udx_dl_no` (`dl_no`, `org_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户驾照信息表';
 
@@ -216,6 +223,7 @@ CREATE TABLE `gps`
     `last_editor` bigint(20) unsigned  NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime             NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                      DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户gps信息表';
@@ -233,6 +241,7 @@ CREATE TABLE `liveness_auth_info`
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='活体认证记录信息 ';
@@ -255,7 +264,8 @@ CREATE TABLE `pan_card`
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_pan_no` (`pan_no`)
+    INDEX `idx_account` (`account_id`, `org_id`),
+    UNIQUE KEY `udx_pan_no` (`pan_no`, `org_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户pan卡信息表';
 
@@ -288,7 +298,8 @@ CREATE TABLE `passport`
     `created_at`   datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`   datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_passport_no` (`passport_no`)
+    INDEX `idx_account` (`account_id`, `org_id`),
+    UNIQUE KEY `udx_passport_no` (`passport_no`, `org_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户护照信息表';
 
@@ -327,7 +338,7 @@ CREATE TABLE `user`
     `created_at`             datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`             datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_account` (`account_id`, `org_id`)
+    UNIQUE KEY `udx_account` (`org_id`,`account_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户基础信息表';
 
@@ -350,6 +361,7 @@ CREATE TABLE `user_black`
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='黑名单用户信息表';
@@ -397,6 +409,7 @@ CREATE TABLE `user_credit_log`
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    INDEX `idx_account` (`account_id`, `org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户授信认证日志信息表';
@@ -421,7 +434,8 @@ CREATE TABLE `voter_card`
     `created_at`  datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`  datetime                     DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `udx_voter_no` (`voter_no`)
+    INDEX `idx_account` (`account_id`, `org_id`),
+    UNIQUE KEY `udx_voter_no` (`voter_no`, `org_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='用户选民证信息表';
 
