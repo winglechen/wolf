@@ -251,15 +251,15 @@ public class Session {
             return;
         }
 
-        if (null != cache.get("accountId")) data.put("accountId", (Long)cache.get("accountId"));
-        if (null != cache.get("orgId")) data.put("orgId", (Long)cache.get("orgId"));
+        if (null != cache.get("accountId")) data.put("accountId", ((Number)cache.get("accountId")).longValue());
+        if (null != cache.get("orgId")) data.put("orgId", ((Number)cache.get("orgId")).longValue());
         if (null != cache.get("account")) data.put("account", cache.get("account"));
-        if (null != cache.get("accountType")) data.put("accountType", (Integer)cache.get("accountType"));
+        if (null != cache.get("accountType")) data.put("accountType", cache.get("accountType"));
         if (null != cache.get("scope")) data.put("scope", cache.get("scope"));
         if (null != cache.get("accessToken")) data.put("accessToken", cache.get("accessToken"));
         if (null != cache.get("refreshToken")) data.put("refreshToken", cache.get("refreshToken"));
-        if (null != cache.get("expiredAt")) data.put("expiredAt", (Long)cache.get("expiredAt"));
-        if (null != cache.get("refreshExpiredAt")) data.put("refreshExpiredAt", (Long)cache.get("refreshExpiredAt"));
+        if (null != cache.get("expiredAt")) data.put("expiredAt", ((Number)cache.get("expiredAt")).longValue());
+        if (null != cache.get("refreshExpiredAt")) data.put("refreshExpiredAt", ((Number)cache.get("refreshExpiredAt")).longValue());
     }
 
     public void saveLicense(OauthLicense license) {
