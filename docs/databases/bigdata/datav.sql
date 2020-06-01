@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
 
     `delete_flag`           TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    UNIQUE INDEX udx_date (`org_id`, `date`),
+    UNIQUE INDEX udx_date (`org_id`, `date`, `source`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `daily_trade`
 
     `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`                DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    INDEX udx_date (`org_id`, `date`, `trade_type`),
+    INDEX idx_date (`org_id`, `date`, `trade_type`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '交易日报';
