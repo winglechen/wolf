@@ -118,7 +118,7 @@ public class Session {
             return;
         }
 
-        set("expiredAt", now);
+        set("expiredAt", now.getTime());
         oauthLicenseService.expire(sessionId, now);
     }
 
@@ -132,52 +132,28 @@ public class Session {
             now = new Date();
         }
 
-        Date expiredAt = (Date)get("expiredAt");
-        return !expiredAt.before(now);
+        Long expiredAt = get("expiredAt", Long.class);
+        return expiredAt > now.getTime();
     }
 
     public boolean isLogin() {
         return isLogin(new Date());
     }
 
-    public void saveLicense(OauthLicense license) {
-        if (null == license) {
-            return;
-        }
 
-        set("accountId", license.getAccountId(), false);
-        set("account", license.getAccount(), false);
-        set("accountType", license.getAccountType(), false);
-        set("accessToken", license.getAccessToken(), false);
-        set("refreshToken", license.getRefreshToken(), false);
-        set("expiredAt", license.getExpiredAt(), false);
-        set("refreshExpiredAt", license.getRefreshExpiredAt(), false);
-
-        Long orgId = parseOrgId(license);
-        if (orgId != null) {
-            set("orgId", orgId, false);
-        }
-
-        if (!sessionId.equals(license.getAccessToken())) {
-            setSessionId(license.getAccessToken());
-        }
-
-        storeToRedis();
-    }
 
     public void changeScope(@NonNull Long orgId) {
         set("orgId", orgId);
         oauthLicenseService.changeScope(sessionId, String.valueOf(orgId));
     }
 
-    private Long parseOrgId(OauthLicense license) {
-        if (StringUtil.isBlank(license.getScope())) {
+    private Long parseOrgId(String scope) {
+        if (StringUtil.isBlank(scope)) {
             return null;
         }
 
         try {
-            String scope = license.getScope().trim();
-            return Long.valueOf(scope);
+            return Long.valueOf(scope.trim());
         } catch (Exception ignored) {
             return null;
         }
@@ -253,7 +229,7 @@ public class Session {
     private void loadFromRedis() {
         Map<String, Object> tmpData = getRedisHashOps().entries(sessionId);
         if (MapUtil.notEmpty(tmpData)) {
-            data.putAll(tmpData);
+            saveRedisData(tmpData);
             return;
         }
 
@@ -268,6 +244,48 @@ public class Session {
         }
 
         saveLicense(license);
+    }
+
+    private void saveRedisData(Map<String, Object> cache) {
+        if (MapUtil.isEmpty(cache)) {
+            return;
+        }
+
+        if (null != cache.get("accountId")) data.put("accountId", (Long)cache.get("accountId"));
+        if (null != cache.get("orgId")) data.put("orgId", (Long)cache.get("orgId"));
+        if (null != cache.get("account")) data.put("account", cache.get("account"));
+        if (null != cache.get("accountType")) data.put("accountType", (Integer)cache.get("accountType"));
+        if (null != cache.get("scope")) data.put("scope", cache.get("scope"));
+        if (null != cache.get("accessToken")) data.put("accessToken", cache.get("accessToken"));
+        if (null != cache.get("refreshToken")) data.put("refreshToken", cache.get("refreshToken"));
+        if (null != cache.get("expiredAt")) data.put("expiredAt", (Long)cache.get("expiredAt"));
+        if (null != cache.get("refreshExpiredAt")) data.put("refreshExpiredAt", (Long)cache.get("refreshExpiredAt"));
+    }
+
+    public void saveLicense(OauthLicense license) {
+        if (null == license) {
+            return;
+        }
+
+        set("accountId", license.getAccountId(), false);
+        set("account", license.getAccount(), false);
+        set("accountType", license.getAccountType(), false);
+        set("accessToken", license.getAccessToken(), false);
+        set("refreshToken", license.getRefreshToken(), false);
+        set("scope", license.getScope(), false);
+        set("expiredAt", license.getExpiredAt().getTime(), false);
+        set("refreshExpiredAt", license.getRefreshExpiredAt().getTime(), false);
+
+        Long orgId = parseOrgId(license.getScope());
+        if (orgId != null) {
+            set("orgId", orgId, false);
+        }
+
+        if (!sessionId.equals(license.getAccessToken())) {
+            setSessionId(license.getAccessToken());
+        }
+
+        storeToRedis();
     }
 
 }

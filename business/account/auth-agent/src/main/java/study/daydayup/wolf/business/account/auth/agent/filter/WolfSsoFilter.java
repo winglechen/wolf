@@ -1,7 +1,5 @@
 package study.daydayup.wolf.business.account.auth.agent.filter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.business.account.auth.agent.config.AuthConfig;
 import study.daydayup.wolf.business.account.auth.agent.util.AntPathMatcher;
@@ -11,7 +9,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.filter
@@ -20,7 +17,6 @@ import java.util.Date;
  * @since 2019/12/4 5:12 下午
  **/
 public class WolfSsoFilter implements Filter {
-    private static Logger logger = LoggerFactory.getLogger(WolfSsoFilter.class);
     private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
 
     @Resource
@@ -40,7 +36,7 @@ public class WolfSsoFilter implements Filter {
 
         session.init(request, response);
 
-        if(isAccessDenied(request.getServletPath())){
+        if(!isAccessAllowed(request.getServletPath())){
             accessDeny(response);
             return;
         }
@@ -48,18 +44,13 @@ public class WolfSsoFilter implements Filter {
         chain.doFilter(servletRequest, servletResponse);
     }
 
-    private boolean isAccessDenied(String path) {
+    private boolean isAccessAllowed(String path) {
         if (isExcludedPath(path)) {
-            return false;
-        }
-
-        if(null == session.get("accountId")) {
             return true;
         }
 
-        Date now = new Date();
-        Date expiredAt = (Date) session.get("expiredAt");
-        return expiredAt.before(now);
+
+        return session.isLogin();
     }
 
     private boolean isExcludedPath(String path) {

@@ -1,15 +1,10 @@
 package study.daydayup.wolf.framework.config;
 
-import com.alibaba.fastjson.parser.ParserConfig;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -30,22 +25,16 @@ public class RedisAutoConfiguration {
 
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
 
-//        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-//        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
-//        FastJsonConfig fastJsonConfig = fastJsonRedisSerializer.getFastJsonConfig();
-//        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-//        fastJsonRedisSerializer.setFastJsonConfig(fastJsonConfig);
-
-        JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
+        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
 
         redisTemplate.setEnableDefaultSerializer(true);
-        redisTemplate.setDefaultSerializer(jdkSerializationRedisSerializer);
+        redisTemplate.setDefaultSerializer(fastJsonRedisSerializer);
 
         redisTemplate.setKeySerializer(stringRedisSerializer);
         redisTemplate.setHashKeySerializer(stringRedisSerializer);
 
-        redisTemplate.setValueSerializer(jdkSerializationRedisSerializer);
-        redisTemplate.setHashValueSerializer(jdkSerializationRedisSerializer);
+        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
 
         return redisTemplate;
     }
