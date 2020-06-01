@@ -30,8 +30,9 @@ public class TradeNoTest {
 //    @Test
     public void demo() {
         for (int i = 0; i < 10000; i++) {
+            System.out.println("i: " + i + "; ms: " + System.currentTimeMillis());
             System.out.println("tradeNo: " + createTradeNo());
-            System.out.println("ms: " + System.currentTimeMillis());
+//            System.out.println("ms: " + System.nanoTime());
         }
     }
 

@@ -30,7 +30,8 @@ public class TradeNo implements ID {
     public static final int SHARD_LENGTH = 4;
     public static final int DATA_CENTER_LENGTH = 4;
     public static final int UUID_LENGTH = 9;
-    public static final int NANO_LENGTH = 4;
+    public static final int NANO_PREFIX_LENGTH = 3;
+    public static final int NANO_SUFFIX_LENGTH = 3;
 
     private int shards;
     private int shard;
@@ -60,26 +61,34 @@ public class TradeNo implements ID {
         return tradeNo.toString();
     }
 
+    @SuppressWarnings("all")
     private String addUuid() {
         if (uuid > 0) {
             //TODO padding length
             return String.valueOf(uuid);
         }
 
+        StringBuilder uuid = new StringBuilder();
         String ns = String.valueOf(getNano());
-        int nsLen = ns.length();
-        if (nsLen > 6) {
-            ns = ns.substring(0, NANO_LENGTH);
-            nsLen = NANO_LENGTH;
+        int nsLen = ns.length(), tsLen=0;
+        if (nsLen >= NANO_PREFIX_LENGTH) {
+            uuid.append(ns, 0, NANO_PREFIX_LENGTH);
+            tsLen += NANO_PREFIX_LENGTH;
         }
 
-        int randLen = UUID_LENGTH - nsLen;
+        if (nsLen >= NANO_PREFIX_LENGTH + NANO_SUFFIX_LENGTH) {
+            uuid.append(ns, nsLen-NANO_SUFFIX_LENGTH, nsLen);
+            tsLen += NANO_SUFFIX_LENGTH;
+        }
+
+        int randLen = UUID_LENGTH - tsLen;
         if (randLen < 1) {
-            return ns;
+            return uuid.toString();
         }
 
         String rand = generateRandomNum(randLen);
-        return StringUtil.join(ns, rand);
+        uuid.append(rand);
+        return uuid.toString();
     }
 
     private String addDataCenterKey() {
