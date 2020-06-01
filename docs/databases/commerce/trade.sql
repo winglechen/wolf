@@ -216,7 +216,6 @@ CREATE TABLE IF NOT EXISTS `consign_term`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '物流条款';
 
-DROP TABLE IF EXISTS `assurance_term`;
 DROP TABLE IF EXISTS `postage_term`;
 CREATE TABLE IF NOT EXISTS `postage_term`
 (
