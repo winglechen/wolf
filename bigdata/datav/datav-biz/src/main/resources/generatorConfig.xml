@@ -73,7 +73,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
+        <table tableName="beat" domainObjectName="BeatDO" mapperName="BeatDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        </table>
 
         <table tableName="daily_koi" domainObjectName="DailyKoiDO" mapperName="DailyKoiDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>

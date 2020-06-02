@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.bigdata.datav.biz.dal.dao.BeatDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.BeatDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="event_type" jdbcType="VARCHAR" property="eventType" />
+    <result column="event" jdbcType="VARCHAR" property="event" />
+    <result column="event_context" jdbcType="VARCHAR" property="eventContext" />
+    <result column="event_memo" jdbcType="VARCHAR" property="eventMemo" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, account_id, device_id, device_type, ip, latitude, longitude, event_type, 
+    event, event_context, event_memo, created_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from beat
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from beat
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.BeatDO">
+    insert into beat (id, org_id, account_id, 
+      device_id, device_type, ip, 
+      latitude, longitude, event_type, 
+      event, event_context, event_memo, 
+      created_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, 
+      #{deviceId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{eventType,jdbcType=VARCHAR}, 
+      #{event,jdbcType=VARCHAR}, #{eventContext,jdbcType=VARCHAR}, #{eventMemo,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.BeatDO">
+    insert into beat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="eventType != null">
+        event_type,
+      </if>
+      <if test="event != null">
+        event,
+      </if>
+      <if test="eventContext != null">
+        event_context,
+      </if>
+      <if test="eventMemo != null">
+        event_memo,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="eventType != null">
+        #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null">
+        #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="eventContext != null">
+        #{eventContext,jdbcType=VARCHAR},
+      </if>
+      <if test="eventMemo != null">
+        #{eventMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.BeatDO">
+    update beat
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="eventType != null">
+        event_type = #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null">
+        event = #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="eventContext != null">
+        event_context = #{eventContext,jdbcType=VARCHAR},
+      </if>
+      <if test="eventMemo != null">
+        event_memo = #{eventMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.BeatDO">
+    update beat
+    set org_id = #{orgId,jdbcType=BIGINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      event_type = #{eventType,jdbcType=VARCHAR},
+      event = #{event,jdbcType=VARCHAR},
+      event_context = #{eventContext,jdbcType=VARCHAR},
+      event_memo = #{eventMemo,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

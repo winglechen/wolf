@@ -71,11 +71,11 @@ public class TradeNo implements ID {
         StringBuilder uuid = new StringBuilder();
         String ns = String.valueOf(getNano());
         int nsLen = ns.length(), tsLen=0;
+
         if (nsLen >= NANO_PREFIX_LENGTH) {
             uuid.append(ns, 0, NANO_PREFIX_LENGTH);
             tsLen += NANO_PREFIX_LENGTH;
         }
-
         if (nsLen >= NANO_PREFIX_LENGTH + NANO_SUFFIX_LENGTH) {
             uuid.append(ns, nsLen-NANO_SUFFIX_LENGTH, nsLen);
             tsLen += NANO_SUFFIX_LENGTH;
