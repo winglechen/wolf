@@ -13,7 +13,7 @@ import java.util.Collection;
  * @since 2020/3/20 8:57 下午
  **/
 @Component
-public class ChinaSMSService implements SMSSender {
+public class ChinaSMSSender implements SMSSender {
     @Override
     public int send(String mobile, String msg) {
         return 0;

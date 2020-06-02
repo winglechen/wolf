@@ -1,10 +1,11 @@
 package study.daydayup.wolf.middleware.notice.biz.api;
 
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
+import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSConfigNotFoundException;
 import study.daydayup.wolf.middleware.notice.api.service.SMSService;
-import study.daydayup.wolf.middleware.notice.biz.sms.china.ChinaSMSService;
-import study.daydayup.wolf.middleware.notice.biz.sms.india.IndiaSMSService;
+import study.daydayup.wolf.middleware.notice.biz.sms.china.ChinaSMSSender;
+import study.daydayup.wolf.middleware.notice.biz.sms.india.IndiaSMSSender;
 import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
@@ -18,34 +19,48 @@ import javax.annotation.Resource;
 @RpcService
 public class SMSServiceImpl implements SMSService {
     @Resource
-    private IndiaSMSService indiaSMSService;
+    private IndiaSMSSender indiaSMSSender;
     @Resource
-    private ChinaSMSService chinaSMSService;
+    private ChinaSMSSender chinaSMSSender;
     @Resource
-    private SMSConfig config;
+    private SMSConfig smsConfig;
 
     @Override
     public int toIndia(String mobile, String msg) {
+        return toIndia(mobile, msg, new SMSSendConfig());
+    }
+
+    @Override
+    public int toIndia(String mobile, String msg, SMSSendConfig config) {
         validConfig();
-        if (config.isMockMode()) {
+        if (smsConfig.isMockMode()) {
             return 1;
         }
 
-        return indiaSMSService.send(mobile, msg);
+        return indiaSMSSender.send(mobile, msg);
     }
 
     @Override
     public int toChina(String mobile, String msg) {
+        return toChina(mobile, msg, new SMSSendConfig());
+    }
+
+    @Override
+    public int toChina(String mobile, String msg, SMSSendConfig config) {
         validConfig();
-        if (config.isMockMode()) {
+        if (smsConfig.isMockMode()) {
             return 1;
         }
 
-        return chinaSMSService.send(mobile, msg);
+        return chinaSMSSender.send(mobile, msg);
     }
 
+
+
+
+
     private void validConfig() {
-        if (null == config) {
+        if (null == smsConfig) {
             throw new SMSConfigNotFoundException();
         }
     }

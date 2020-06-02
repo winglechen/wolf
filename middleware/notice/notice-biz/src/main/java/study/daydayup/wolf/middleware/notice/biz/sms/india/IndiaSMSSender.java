@@ -15,7 +15,7 @@ import java.util.Collection;
  * @since 2020/3/20 8:54 下午
  **/
 @Component
-public class IndiaSMSService implements SMSSender {
+public class IndiaSMSSender implements SMSSender {
     @Resource
     private SkylineSender skylineSender;
 
