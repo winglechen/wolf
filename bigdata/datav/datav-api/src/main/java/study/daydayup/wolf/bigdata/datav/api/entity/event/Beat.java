@@ -2,6 +2,7 @@ package study.daydayup.wolf.bigdata.datav.api.entity.event;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Beat implements Serializable {
     private BigDecimal latitude;
     private BigDecimal longitude;
 
+    @NotBlank
     private String eventType;
     private String event;
     private String eventContext;
