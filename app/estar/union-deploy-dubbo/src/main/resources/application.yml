@@ -74,6 +74,7 @@ spring:
         model_collector.actual-data-nodes: datav.model_collector
         track_repay.actual-data-nodes: datav.track_repay
         offset_holder.actual-data-nodes: datav.offset_holder
+        beat.actual-data-nodes: datav.beat
         #org
         task.actual-data-nodes: org.task
         task_detail.actual-data-nodes: org.task_detail
