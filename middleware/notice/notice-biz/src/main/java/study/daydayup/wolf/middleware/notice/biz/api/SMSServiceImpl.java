@@ -1,5 +1,6 @@
 package study.daydayup.wolf.middleware.notice.biz.api;
 
+import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSConfigNotFoundException;
@@ -26,33 +27,35 @@ public class SMSServiceImpl implements SMSService {
     private SMSConfig smsConfig;
 
     @Override
-    public int toIndia(String mobile, String msg) {
+    public Result<Integer> toIndia(String mobile, String msg) {
         return toIndia(mobile, msg, new SMSSendConfig());
     }
 
     @Override
-    public int toIndia(String mobile, String msg, SMSSendConfig config) {
+    public Result<Integer> toIndia(String mobile, String msg, SMSSendConfig config) {
         validConfig();
         if (smsConfig.isMockMode()) {
-            return 1;
+            return Result.ok(1);
         }
 
-        return indiaSMSSender.send(mobile, msg);
+        int status = indiaSMSSender.send(mobile, msg);
+        return Result.ok(status);
     }
 
     @Override
-    public int toChina(String mobile, String msg) {
+    public Result<Integer> toChina(String mobile, String msg) {
         return toChina(mobile, msg, new SMSSendConfig());
     }
 
     @Override
-    public int toChina(String mobile, String msg, SMSSendConfig config) {
+    public Result<Integer> toChina(String mobile, String msg, SMSSendConfig config) {
         validConfig();
         if (smsConfig.isMockMode()) {
-            return 1;
+            return Result.ok(1);
         }
 
-        return chinaSMSSender.send(mobile, msg);
+        int status = chinaSMSSender.send(mobile, msg);
+        return Result.ok(status);
     }
 
 
