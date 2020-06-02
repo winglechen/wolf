@@ -11,8 +11,8 @@ import study.daydayup.wolf.business.trade.api.domain.state.TradeState;
  * @since 2019/10/5 11:23 PM
  **/
 
-public class ClosedState extends AbstractTradeState implements TradeState {
+public class RefundedState extends AbstractTradeState implements TradeState {
     {
-        code = 201;
+        code = 212;
     }
 }
