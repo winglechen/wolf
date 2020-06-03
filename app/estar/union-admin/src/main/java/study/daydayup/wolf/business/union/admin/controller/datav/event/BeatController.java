@@ -2,6 +2,7 @@ package study.daydayup.wolf.business.union.admin.controller.datav.event;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import study.daydayup.wolf.business.account.auth.agent.Session;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * study.daydayup.wolf.business.union.app.controller.dev
@@ -26,7 +28,16 @@ public class BeatController {
     @Resource
     private Session session;
 
-    @PostMapping("/log/beat/add")
+    @GetMapping("/log/beat")
+    public Result<Integer> beat(HttpServletRequest request) {
+        Long accountId = session.get("accountId", Long.class, false);
+        Long orgId = session.get("orgId", Long.class, false);
+        String query = request.getQueryString();
+
+        return beatService.add(accountId, orgId, query);
+    }
+
+    @PostMapping("/log/beat")
     public Result<Integer> add(@Validated @RequestBody Beat beat) {
         Long accountId = session.get("accountId", Long.class, false);
         Long orgId = session.get("orgId", Long.class, false);
@@ -40,4 +51,6 @@ public class BeatController {
 
         return beatService.add(beat);
     }
+
+
 }
