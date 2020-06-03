@@ -16,8 +16,10 @@
     <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="dob" jdbcType="VARCHAR" property="dob" />
     <result column="credit_amount" jdbcType="BIGINT" property="creditAmount" />
-    <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="referrer" jdbcType="VARCHAR" property="referrer" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="basic_info_auth_status" jdbcType="TINYINT" property="basicInfoAuthStatus" />
     <result column="liveness_auth_status" jdbcType="TINYINT" property="livenessAuthStatus" />
     <result column="aadhaar_auth_status" jdbcType="TINYINT" property="aadhaarAuthStatus" />
@@ -35,10 +37,10 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, account_id, org_id, channel_id, nickname, avatar, real_name, mobile, email, aadhaar_no, 
-    pan_no, gender, dob, credit_amount, tags, `source`, basic_info_auth_status, liveness_auth_status, 
-    aadhaar_auth_status, pan_auth_status, passport_auth_status, dl_auth_status, voter_card_auth_status, 
-    bank_card_bind_status, kyc_status, version, delete_flag, last_editor, created_at, 
-    updated_at
+    pan_no, gender, dob, credit_amount, `source`, device_id, referrer, tags, basic_info_auth_status, 
+    liveness_auth_status, aadhaar_auth_status, pan_auth_status, passport_auth_status, 
+    dl_auth_status, voter_card_auth_status, bank_card_bind_status, kyc_status, version, 
+    delete_flag, last_editor, created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -55,8 +57,9 @@
       channel_id, nickname, avatar, 
       real_name, mobile, email, 
       aadhaar_no, pan_no, gender, 
-      dob, credit_amount, tags, 
-      `source`, basic_info_auth_status, liveness_auth_status, 
+      dob, credit_amount, `source`, 
+      device_id, referrer, tags, 
+      basic_info_auth_status, liveness_auth_status, 
       aadhaar_auth_status, pan_auth_status, passport_auth_status, 
       dl_auth_status, voter_card_auth_status, bank_card_bind_status, 
       kyc_status, version, delete_flag, 
@@ -66,8 +69,9 @@
       #{channelId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
       #{realName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{aadhaarNo,jdbcType=VARCHAR}, #{panNo,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-      #{dob,jdbcType=VARCHAR}, #{creditAmount,jdbcType=BIGINT}, #{tags,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{basicInfoAuthStatus,jdbcType=TINYINT}, #{livenessAuthStatus,jdbcType=TINYINT}, 
+      #{dob,jdbcType=VARCHAR}, #{creditAmount,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, 
+      #{deviceId,jdbcType=VARCHAR}, #{referrer,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{basicInfoAuthStatus,jdbcType=TINYINT}, #{livenessAuthStatus,jdbcType=TINYINT}, 
       #{aadhaarAuthStatus,jdbcType=TINYINT}, #{panAuthStatus,jdbcType=TINYINT}, #{passportAuthStatus,jdbcType=TINYINT}, 
       #{dlAuthStatus,jdbcType=TINYINT}, #{voterCardAuthStatus,jdbcType=TINYINT}, #{bankCardBindStatus,jdbcType=TINYINT}, 
       #{kycStatus,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
@@ -119,11 +123,17 @@
       <if test="creditAmount != null">
         credit_amount,
       </if>
-      <if test="tags != null">
-        tags,
-      </if>
       <if test="source != null">
         `source`,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="referrer != null">
+        referrer,
+      </if>
+      <if test="tags != null">
+        tags,
       </if>
       <if test="basicInfoAuthStatus != null">
         basic_info_auth_status,
@@ -211,11 +221,17 @@
       <if test="creditAmount != null">
         #{creditAmount,jdbcType=BIGINT},
       </if>
-      <if test="tags != null">
-        #{tags,jdbcType=VARCHAR},
-      </if>
       <if test="source != null">
         #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrer != null">
+        #{referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
       </if>
       <if test="basicInfoAuthStatus != null">
         #{basicInfoAuthStatus,jdbcType=TINYINT},
@@ -303,11 +319,17 @@
       <if test="creditAmount != null">
         credit_amount = #{creditAmount,jdbcType=BIGINT},
       </if>
-      <if test="tags != null">
-        tags = #{tags,jdbcType=VARCHAR},
-      </if>
       <if test="source != null">
         `source` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrer != null">
+        referrer = #{referrer,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
       </if>
       <if test="basicInfoAuthStatus != null">
         basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
@@ -369,8 +391,10 @@
       gender = #{gender,jdbcType=VARCHAR},
       dob = #{dob,jdbcType=VARCHAR},
       credit_amount = #{creditAmount,jdbcType=BIGINT},
-      tags = #{tags,jdbcType=VARCHAR},
       `source` = #{source,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      referrer = #{referrer,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
       basic_info_auth_status = #{basicInfoAuthStatus,jdbcType=TINYINT},
       liveness_auth_status = #{livenessAuthStatus,jdbcType=TINYINT},
       aadhaar_auth_status = #{aadhaarAuthStatus,jdbcType=TINYINT},

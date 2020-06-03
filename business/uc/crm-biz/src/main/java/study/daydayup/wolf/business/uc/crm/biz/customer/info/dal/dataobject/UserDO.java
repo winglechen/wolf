@@ -34,9 +34,13 @@ public class UserDO implements Serializable {
 
     private Long creditAmount;
 
-    private String tags;
-
     private String source;
+
+    private String deviceId;
+
+    private String referrer;
+
+    private String tags;
 
     private Integer basicInfoAuthStatus;
 
@@ -88,8 +92,10 @@ public class UserDO implements Serializable {
         sb.append(", gender=").append(gender);
         sb.append(", dob=").append(dob);
         sb.append(", creditAmount=").append(creditAmount);
-        sb.append(", tags=").append(tags);
         sb.append(", source=").append(source);
+        sb.append(", deviceId=").append(deviceId);
+        sb.append(", referrer=").append(referrer);
+        sb.append(", tags=").append(tags);
         sb.append(", basicInfoAuthStatus=").append(basicInfoAuthStatus);
         sb.append(", livenessAuthStatus=").append(livenessAuthStatus);
         sb.append(", aadhaarAuthStatus=").append(aadhaarAuthStatus);
@@ -134,8 +140,10 @@ public class UserDO implements Serializable {
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
             && (this.getDob() == null ? other.getDob() == null : this.getDob().equals(other.getDob()))
             && (this.getCreditAmount() == null ? other.getCreditAmount() == null : this.getCreditAmount().equals(other.getCreditAmount()))
-            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
+            && (this.getDeviceId() == null ? other.getDeviceId() == null : this.getDeviceId().equals(other.getDeviceId()))
+            && (this.getReferrer() == null ? other.getReferrer() == null : this.getReferrer().equals(other.getReferrer()))
+            && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getBasicInfoAuthStatus() == null ? other.getBasicInfoAuthStatus() == null : this.getBasicInfoAuthStatus().equals(other.getBasicInfoAuthStatus()))
             && (this.getLivenessAuthStatus() == null ? other.getLivenessAuthStatus() == null : this.getLivenessAuthStatus().equals(other.getLivenessAuthStatus()))
             && (this.getAadhaarAuthStatus() == null ? other.getAadhaarAuthStatus() == null : this.getAadhaarAuthStatus().equals(other.getAadhaarAuthStatus()))
@@ -170,8 +178,10 @@ public class UserDO implements Serializable {
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
         result = prime * result + ((getDob() == null) ? 0 : getDob().hashCode());
         result = prime * result + ((getCreditAmount() == null) ? 0 : getCreditAmount().hashCode());
-        result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
+        result = prime * result + ((getDeviceId() == null) ? 0 : getDeviceId().hashCode());
+        result = prime * result + ((getReferrer() == null) ? 0 : getReferrer().hashCode());
+        result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getBasicInfoAuthStatus() == null) ? 0 : getBasicInfoAuthStatus().hashCode());
         result = prime * result + ((getLivenessAuthStatus() == null) ? 0 : getLivenessAuthStatus().hashCode());
         result = prime * result + ((getAadhaarAuthStatus() == null) ? 0 : getAadhaarAuthStatus().hashCode());
