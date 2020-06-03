@@ -1,5 +1,6 @@
 package study.daydayup.wolf.common.util.net;
 
+import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.common.util.lang.CharsetUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -16,8 +17,12 @@ import java.util.Map;
  **/
 public class URLUtil {
 
-    public static Map<String, String> parseQuery(String query) throws UnsupportedEncodingException {
-        return parseQuery(query, true, CharsetUtil.UTF_8.toString());
+    public static Map<String, String> parseQuery(String query) {
+        try {
+            return parseQuery(query, true, CharsetUtil.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            return MapUtil.empty();
+        }
     }
 
     public static Map<String, String> parseQuery(String query, boolean decode, String enc) throws UnsupportedEncodingException {

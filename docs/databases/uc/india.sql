@@ -323,6 +323,7 @@ CREATE TABLE `user`
     `credit_amount`          bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '信用额度',
     `tags`                   varchar(200)        NOT NULL DEFAULT '' COMMENT '用户标签，标识用户是否在黑名单等',
     `source`                 varchar(100)        NOT NULL DEFAULT '' COMMENT '用户来源',
+    `deviceId`               varchar(100)        NOT NULL DEFAULT '' COMMENT 'deviceId',
 
     `basic_info_auth_status` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '基础信息状态 0未认证 1未通过 2通过',
     `liveness_auth_status`   tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '活体认证状态 0未认证 1未通过 2通过',

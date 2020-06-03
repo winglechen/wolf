@@ -14,6 +14,7 @@ import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentSubscr
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.handler.DokypayPaidHandler;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.util.SignUtil;
+import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.net.URLUtil;
@@ -60,13 +61,14 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     }
 
     private boolean parseResponse(@NonNull String data) {
-        try {
-            Map<String, String> map = URLUtil.parseQuery(data);
-            Map<String, Object> objMap = new HashMap<>(map);
-            response = new JSONObject(objMap);
-        } catch (UnsupportedEncodingException e) {
+        Map<String, String> map = URLUtil.parseQuery(data);
+        if (MapUtil.isEmpty(map)) {
             return false;
         }
+
+        Map<String, Object> objMap = new HashMap<>(map);
+        response = new JSONObject(objMap);
+
         return isResponseSuccess(response);
     }
 
