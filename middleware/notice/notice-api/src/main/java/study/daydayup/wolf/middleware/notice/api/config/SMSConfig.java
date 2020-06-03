@@ -23,6 +23,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "wolf.sms")
 public class SMSConfig implements Config {
     public static final String SMS_NAMESPACE = "sms";
+    public static final String BRAND_PLACEHOLDER = "@BRAND@";
 
     private boolean mockMode;
 

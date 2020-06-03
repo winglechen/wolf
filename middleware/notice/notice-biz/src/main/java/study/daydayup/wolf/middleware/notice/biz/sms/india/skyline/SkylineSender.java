@@ -6,6 +6,9 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.uc.agent.setting.CompanySettingAgent;
+import study.daydayup.wolf.common.lang.ds.ObjectMap;
+import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.config.sms.SMSSupplier;
@@ -42,10 +45,14 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
 
     private static final String CONFIG_KEY = "skyline";
     private static final String API_VERSION = "1.0";
+    private SMSSendConfig sendConfig;
+    @Resource
+    private CompanySettingAgent companySettingAgent;
 
     @Resource
-    private SMSConfig config;
+    private SMSConfig smsConfig;
     private SMSSupplier skylineConfig;
+
 
     private String mobile;
     private String msg;
@@ -54,20 +61,46 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
     public int send(@NonNull String mobile, @NonNull String msg, SMSSendConfig config) {
         this.mobile = mobile;
         this.msg = msg;
+        this.sendConfig = config;
 
         validConfig();
         return sendSms();
     }
 
     private void validConfig() {
-        if (null == config.getSupplier()) {
+        if (null == smsConfig.getSupplier()) {
             throw new InvalidSMSConfigException();
         }
-        if (null == config.getSupplier().get(CONFIG_KEY)) {
+        if (null == smsConfig.getSupplier().get(CONFIG_KEY)) {
             throw new InvalidSMSConfigException();
         }
 
-        skylineConfig = config.getSupplier().get(CONFIG_KEY);
+        skylineConfig = smsConfig.getSupplier().get(CONFIG_KEY);
+        mergeOrgSetting();
+    }
+
+    private void mergeOrgSetting() {
+        if (null == sendConfig || null == sendConfig.getOrgId()) {
+            return;
+        }
+        companySettingAgent.init(sendConfig.getOrgId(), false);
+        companySettingAgent.namespace(smsConfig.SMS_NAMESPACE);
+        ObjectMap orgSetting = companySettingAgent.getAll();
+        if (null == orgSetting) {
+            throw new InvalidSMSConfigException("sms config not found");
+        }
+
+        JSONObject supplier = JsonUtil.getJSONObject(orgSetting, "supplier.skyline");
+        if (supplier == null) {
+            throw new InvalidSMSConfigException("sms config not found");
+        }
+
+        skylineConfig.setSignature(supplier.getString("signature"));
+        skylineConfig.setSenderNum(supplier.getString("senderNum"));
+        skylineConfig.setBrand(supplier.getString("brand"));
+        skylineConfig.setAppId(supplier.getString("appId"));
+        skylineConfig.setAppSecret(supplier.getString("appSecret"));
+        skylineConfig.setSendUrl(supplier.getString("sendUrl"));
     }
 
     private int sendSms() {
@@ -138,7 +171,13 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
         return df.format(now);
     }
 
+    private void parseMsg() {
+        msg = msg.replace(smsConfig.BRAND_PLACEHOLDER, skylineConfig.getBrand());
+    }
+
     private String createSmsContent() {
+        parseMsg();
+
         try {
             String content = URLEncoder.encode(msg, StandardCharsets.UTF_8.toString());
             if (content.length() >= MAX_SMS_LENGTH ) {
@@ -147,7 +186,7 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
 
             SkylineSMS sms = SkylineSMS.builder()
                     .content(content)
-                    .senderid(config.getSenderNum())
+                    .senderid(smsConfig.getSenderNum())
                     .version(API_VERSION)
                     .numbers(mobile)
                     .build();
