@@ -118,7 +118,7 @@ public class Session {
             return;
         }
 
-        set("expiredAt", now.getTime());
+        set("expiredAt", now.getTime()-60);
         oauthLicenseService.expire(sessionId, now);
     }
 
@@ -133,7 +133,7 @@ public class Session {
         }
 
         Long expiredAt = get("expiredAt", Long.class);
-        return expiredAt > now.getTime();
+        return expiredAt >= now.getTime();
     }
 
     public boolean isLogin() {
