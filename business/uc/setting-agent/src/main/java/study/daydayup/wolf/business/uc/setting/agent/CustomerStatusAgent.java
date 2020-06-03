@@ -1,11 +1,11 @@
-package study.daydayup.wolf.business.uc.agent.setting;
+package study.daydayup.wolf.business.uc.setting.agent;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
+import study.daydayup.wolf.business.uc.setting.agent.util.StatusUtil;
 import study.daydayup.wolf.business.uc.setting.api.entity.CustomerStatus;
 import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
 import study.daydayup.wolf.business.uc.setting.api.enums.customer.CustomerStatusGroupEnum;

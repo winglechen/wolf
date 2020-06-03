@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.business.uc.agent.setting.CompanySettingAgent;
+import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
 import study.daydayup.wolf.business.uc.setting.api.entity.CompanySetting;
 import study.daydayup.wolf.business.uc.setting.api.service.CompanySettingService;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;

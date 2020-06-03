@@ -1,11 +1,11 @@
-package study.daydayup.wolf.business.uc.agent.setting.util;
+package study.daydayup.wolf.business.uc.setting.agent.util;
 
 import study.daydayup.wolf.business.uc.setting.api.entity.Status;
 
 import java.util.BitSet;
 
 /**
- * study.daydayup.wolf.business.uc.agent.setting.util
+ * study.daydayup.wolf.business.uc.setting.agent.util
  *
  * @author Wingle
  * @since 2020/4/9 11:32 下午

@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
-            <artifactId>uc-agent</artifactId>
+            <artifactId>setting-agent</artifactId>
         </dependency>
 
         <dependency>

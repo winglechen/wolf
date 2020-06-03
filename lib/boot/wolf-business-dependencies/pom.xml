@@ -32,6 +32,11 @@
                 <artifactId>uc-agent</artifactId>
                 <version>${version.snapshot}</version>
             </dependency>
+            <dependency>
+                <groupId>study.daydayup.wolf.business.uc</groupId>
+                <artifactId>setting-agent</artifactId>
+                <version>${version.snapshot}</version>
+            </dependency>
 
             <dependency>
                 <groupId>study.daydayup.wolf.middleware.notice</groupId>

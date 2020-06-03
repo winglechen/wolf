@@ -10,31 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.business.uc</groupId>
-    <artifactId>uc-agent</artifactId>
+    <artifactId>setting-agent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
-            <artifactId>uc-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>study.daydayup.wolf.business.account</groupId>
-            <artifactId>auth-agent</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>setting-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>study.daydayup.wolf.business.uc</groupId>
-            <artifactId>setting-agent</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>

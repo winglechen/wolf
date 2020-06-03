@@ -31,10 +31,11 @@ Content-Type: application/json
     "skyline" : {
       "signature": "RupeeWallet",
       "senderNum": "RUPEEW",
-      "brand": "RupeeWallet",
+      "brand": "test",
       "appId": "cs_3wegkt",
       "appSecret": "dwhg27jN",
       "sendUrl" : "http://sms.skylinelabs.cc:20003/"
     }
   }
 }
+###"brand": "RupeeWallet",

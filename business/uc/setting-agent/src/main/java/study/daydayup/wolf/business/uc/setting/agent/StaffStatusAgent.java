@@ -1,14 +1,14 @@
-package study.daydayup.wolf.business.uc.agent.setting;
+package study.daydayup.wolf.business.uc.setting.agent;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.uc.agent.setting.util.StatusUtil;
-import study.daydayup.wolf.business.uc.setting.api.entity.AccountStatus;
+import study.daydayup.wolf.business.uc.setting.agent.util.StatusUtil;
+import study.daydayup.wolf.business.uc.setting.api.entity.StaffStatus;
 import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
-import study.daydayup.wolf.business.uc.setting.api.service.AccountStatusService;
+import study.daydayup.wolf.business.uc.setting.api.service.StaffStatusService;
 
-import java.util.BitSet;
+import java.util.*;
 
 /**
  * study.daydayup.wolf.business.uc.agent.setting
@@ -18,28 +18,31 @@ import java.util.BitSet;
  **/
 @Component
 @Scope("prototype")
-public class AccountStatusAgent {
+public class StaffStatusAgent {
     private static final int STATUS_LENGTH = 20;
     private boolean isInit = false;
 
     private long accountId;
+    private long orgId;
+
     private BitSet statusSet;
 
     @Reference
-    private AccountStatusService accountStatusService;
+    private StaffStatusService staffStatusService;
 
-    public void init(long accountId) {
-        if (accountId <= 0) {
-            throw new IllegalArgumentException("accountId can not less than 0");
+    public void init(long accountId, long orgId) {
+        if (accountId <= 0 || orgId <= 0) {
+            throw new IllegalArgumentException("accountId and orgId can not less than 0");
         }
 
         if (isInit) {
             return;
         }
 
-        AccountStatus status = accountStatusService.find(accountId).notNullData();
+        StaffStatus status = staffStatusService.find(accountId, orgId).notNullData();
 
         this.accountId = accountId;
+        this.orgId = orgId;
         statusSet = StatusUtil.initStatus(status);
 
         this.isInit = true;
@@ -51,11 +54,11 @@ public class AccountStatusAgent {
         return statusSet.get(code);
     }
 
-    public AccountStatusAgent set(StatusEnum status) {
+    public StaffStatusAgent set(StatusEnum status) {
         return set(status, true);
     }
 
-    public AccountStatusAgent set(StatusEnum status, boolean state) {
+    public StaffStatusAgent set(StatusEnum status, boolean state) {
         int code = status.getCode();
         statusSet.set(code, state);
 
@@ -64,22 +67,25 @@ public class AccountStatusAgent {
 
     public void save() {
         long[] sArray = statusSet.toLongArray();
-        AccountStatus status = arrayToModel(sArray);
+        StaffStatus status = arrayToModel(sArray);
 
-        accountStatusService.save(status);
+        staffStatusService.save(status);
     }
 
-    private AccountStatus arrayToModel(long[] s) {
+    private StaffStatus arrayToModel(long[] s) {
         if (s.length != STATUS_LENGTH + 1) {
             throw new IllegalArgumentException("invalid status array format");
         }
 
-        AccountStatus status = new AccountStatus();
+        StaffStatus status = new StaffStatus();
         status.setAccountId(accountId);
+        status.setOrgId(orgId);
 
         long[] sArray = StatusUtil.formatBitArray(s, STATUS_LENGTH);
         StatusUtil.setStatus(status, sArray);
 
         return status;
     }
+
+
 }

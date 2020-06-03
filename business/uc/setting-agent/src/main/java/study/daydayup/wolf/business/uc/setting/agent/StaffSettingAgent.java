@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.uc.agent.setting;
+package study.daydayup.wolf.business.uc.setting.agent;
 
 import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.NonNull;

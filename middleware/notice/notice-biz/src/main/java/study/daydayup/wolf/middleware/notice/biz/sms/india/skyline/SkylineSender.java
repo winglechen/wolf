@@ -21,7 +21,6 @@ import study.daydayup.wolf.common.util.encrypt.MD5Util;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -105,13 +104,14 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
 
     private int sendSms() {
         Request request = createRequest();
-        try {
-            Response response = CLIENT.newCall(request).execute();
-            return parseResponse(response);
-        } catch (IOException e) {
-            log.warn("SkylineSender send sms fail", e);
-            return 0;
-        }
+        return 1;
+//        try {
+//            Response response = CLIENT.newCall(request).execute();
+//            return parseResponse(response);
+//        } catch (IOException e) {
+//            log.warn("SkylineSender send sms fail", e);
+//            return 0;
+//        }
     }
 
     private int parseResponse(Response response) {
