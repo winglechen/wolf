@@ -128,7 +128,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
 
         SMSSendConfig config = SMSSendConfig.builder()
                 .orgId(orgId)
-                .build(); 
+                .build();
         smsAgent.toIndia(mobile, msg, config);
     }
 
