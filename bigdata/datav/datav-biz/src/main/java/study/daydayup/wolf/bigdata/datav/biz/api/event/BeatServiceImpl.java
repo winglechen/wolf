@@ -31,4 +31,9 @@ public class BeatServiceImpl implements BeatService {
         int status = beatDAO.insertSelective(beatDO);
         return Result.ok(status);
     }
+
+    @Override
+    public Result<Integer> add(Long accountId, Long orgId, String query) {
+        return Result.ok(1);
+    }
 }

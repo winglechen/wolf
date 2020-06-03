@@ -11,4 +11,5 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 public interface BeatService {
     Result<Integer> add(Beat beat);
+    Result<Integer> add(Long accountId, Long orgId, String query);
 }
