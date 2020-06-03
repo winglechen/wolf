@@ -23,8 +23,10 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "wolf.sms")
 public class SMSConfig implements Config {
     private boolean mockMode;
+
     private String senderNum;
     private String signature;
+    private String brand;
 
     @NotNull
     private Map<String, SMSSupplier> supplier;

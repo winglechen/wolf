@@ -14,6 +14,10 @@ import java.util.Map;
  **/
 @Data
 public class SMSSupplier implements Config {
+    private String signature;
+    private String senderNum;
+    private String brand;
+
     @NotBlank
     private String appId;
     @NotBlank
