@@ -6,7 +6,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.uc.agent.setting.CompanySettingAgent;
+import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.lang.JsonUtil;
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;

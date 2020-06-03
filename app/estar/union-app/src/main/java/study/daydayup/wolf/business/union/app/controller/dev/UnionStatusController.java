@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.business.uc.agent.setting.CustomerStatusAgent;
+import study.daydayup.wolf.business.uc.setting.agent.CustomerStatusAgent;
 import study.daydayup.wolf.business.uc.setting.api.enums.StatusEnum;
 import study.daydayup.wolf.business.uc.setting.api.enums.customer.*;
 import study.daydayup.wolf.common.util.collection.MapUtil;
