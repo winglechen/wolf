@@ -63,6 +63,9 @@ public class CompanySettingController {
         companySettingAgent.init(orgId, false);
         companySettingAgent.namespace(namespace);
 
+        companySettingAgent.setAll(setting);
+        companySettingAgent.save();
+
         ObjectMap map = companySettingAgent.getAll();
         return JSON.toJSONString(map);
     }

@@ -7,7 +7,7 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
-PUT http://localhost:8200/uc/company/setting/32
+PUT http://localhost:8200/uc/company/setting/2
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
@@ -31,7 +31,7 @@ Content-Type: application/json
     "skyline" : {
       "signature": "RupeeWallet",
       "senderNum": "RUPEEW",
-      "brand": "test",
+      "brand": "RupeeWallet",
       "appId": "cs_3wegkt",
       "appSecret": "dwhg27jN",
       "sendUrl" : "http://sms.skylinelabs.cc:20003/"

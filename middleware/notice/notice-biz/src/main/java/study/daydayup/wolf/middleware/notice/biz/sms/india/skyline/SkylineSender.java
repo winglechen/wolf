@@ -21,6 +21,7 @@ import study.daydayup.wolf.common.util.encrypt.MD5Util;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -83,7 +84,7 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
             return;
         }
         companySettingAgent.init(sendConfig.getOrgId(), false);
-        companySettingAgent.namespace(smsConfig.SMS_NAMESPACE);
+        companySettingAgent.namespace(SMSConfig.SMS_NAMESPACE);
         ObjectMap orgSetting = companySettingAgent.getAll();
         if (null == orgSetting) {
             throw new InvalidSMSConfigException("sms config not found");
@@ -104,14 +105,13 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
 
     private int sendSms() {
         Request request = createRequest();
-        return 1;
-//        try {
-//            Response response = CLIENT.newCall(request).execute();
-//            return parseResponse(response);
-//        } catch (IOException e) {
-//            log.warn("SkylineSender send sms fail", e);
-//            return 0;
-//        }
+        try {
+            Response response = CLIENT.newCall(request).execute();
+            return parseResponse(response);
+        } catch (IOException e) {
+            log.warn("SkylineSender send sms fail", e);
+            return 0;
+        }
     }
 
     private int parseResponse(Response response) {
@@ -172,7 +172,7 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
     }
 
     private void parseMsg() {
-        msg = msg.replace(smsConfig.BRAND_PLACEHOLDER, skylineConfig.getBrand());
+        msg = msg.replace(SMSConfig.BRAND_PLACEHOLDER, skylineConfig.getBrand());
     }
 
     private String createSmsContent() {
