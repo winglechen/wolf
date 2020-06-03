@@ -36,3 +36,12 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+PUT http://localhost:8200/uc/company/setting/1/{namespace}
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "k": "v"
+
+}
