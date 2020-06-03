@@ -18,6 +18,10 @@
             <groupId>study.daydayup.wolf.middleware.notice</groupId>
             <artifactId>notice-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>uc-agent</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

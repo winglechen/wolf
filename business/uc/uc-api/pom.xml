@@ -17,7 +17,6 @@
         <dependency>
             <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>setting-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

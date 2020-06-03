@@ -54,7 +54,7 @@ public class SMSServiceImpl implements SMSService {
             return Result.ok(1);
         }
 
-        int status = chinaSMSSender.send(mobile, msg);
+        int status = chinaSMSSender.send(mobile, msg, config);
         return Result.ok(status);
     }
 

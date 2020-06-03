@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
+import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.config.sms.SMSSupplier;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.InvalidSMSConfigException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSEncodeFailException;
@@ -50,7 +51,7 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
     private String msg;
 
     @Override
-    public int send(@NonNull String mobile, @NonNull String msg) {
+    public int send(@NonNull String mobile, @NonNull String msg, SMSSendConfig config) {
         this.mobile = mobile;
         this.msg = msg;
 

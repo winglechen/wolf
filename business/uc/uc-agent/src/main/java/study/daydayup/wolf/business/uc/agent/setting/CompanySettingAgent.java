@@ -28,7 +28,6 @@ import java.util.Set;
 @Component
 @Scope("prototype")
 public class CompanySettingAgent {
-    private boolean isInit = false;
     private Set<String> changedNamespaceSet;
     private String currentNamespace;
     private Map<String, ObjectMap> map;
@@ -42,22 +41,21 @@ public class CompanySettingAgent {
         init(orgId, true);
     }
 
-    public void init(long orgId, boolean initCheck) {
+    public void init(long orgId, boolean init) {
         if (orgId <= 0) {
             throw new IllegalArgumentException("accountId and orgId can not less than 0");
         }
 
-        if (isInit && initCheck) {
-            return;
-        }
+
 
         this.orgId = orgId;
         changedNamespaceSet = new HashSet<>(8);
         currentNamespace = KvData.DEFAULT_NAMESPACE;
         map = new HashMap<>();
 
-        initNamespace(currentNamespace);
-        isInit = true;
+        if (init) {
+            initNamespace(currentNamespace);
+        }
     }
 
     public void defaultNamespace() {

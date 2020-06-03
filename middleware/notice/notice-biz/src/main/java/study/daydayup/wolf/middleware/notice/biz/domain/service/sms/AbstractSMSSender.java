@@ -1,5 +1,6 @@
 package study.daydayup.wolf.middleware.notice.biz.domain.service.sms;
 
+import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.domain.entity.SMS;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SupplierNotSupportException;
 
@@ -13,12 +14,12 @@ import java.util.Collection;
  **/
 public abstract class AbstractSMSSender implements SMSSender {
     @Override
-    public int send(String mobile, String msg) {
+    public int send(String mobile, String msg, SMSSendConfig config) {
         throw new SupplierNotSupportException();
     }
 
     @Override
-    public int bulkSend(Collection<SMS> smsList) {
+    public int bulkSend(Collection<SMS> smsList, SMSSendConfig config) {
         throw new SupplierNotSupportException();
     }
 }

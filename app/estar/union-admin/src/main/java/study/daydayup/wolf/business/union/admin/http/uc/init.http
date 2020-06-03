@@ -24,12 +24,17 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "skyline" : {
-    "signature": "RupeeWallet",
-    "senderNum": "RUPEEW",
-    "brand": "RupeeWallet",
-    "appId": "cs_3wegkt",
-    "appSecret": "dwhg27jN",
-    "sendUrl" : "http://sms.skylinelabs.cc:20003/"
+  "signature": "RupeeWallet",
+  "senderNum": "RUPEEW",
+  "brand": "RupeeWallet",
+  "supplier": {
+    "skyline" : {
+      "signature": "RupeeWallet",
+      "senderNum": "RUPEEW",
+      "brand": "RupeeWallet",
+      "appId": "cs_3wegkt",
+      "appSecret": "dwhg27jN",
+      "sendUrl" : "http://sms.skylinelabs.cc:20003/"
+    }
   }
 }

@@ -22,6 +22,8 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "wolf.sms")
 public class SMSConfig implements Config {
+    public static final String SMS_NAMESPACE = "sms";
+
     private boolean mockMode;
 
     private String senderNum;

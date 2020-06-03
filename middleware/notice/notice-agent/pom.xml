@@ -18,6 +18,11 @@
             <groupId>study.daydayup.wolf.middleware.notice</groupId>
             <artifactId>notice-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>setting-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
