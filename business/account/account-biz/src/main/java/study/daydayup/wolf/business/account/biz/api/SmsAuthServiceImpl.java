@@ -22,6 +22,7 @@ import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
 import study.daydayup.wolf.framework.util.LocaleUtil;
 import study.daydayup.wolf.middleware.notice.agent.service.SMSAgent;
+import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -91,7 +92,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         Date expiredAt = DateUtil.secondsLater(request.getExpiredIn());
 
         verifyCodeService.send(mobile, code, expiredAt);
-        sendSms(mobile, code);
+        sendSms(mobile, code, request.getOrgId());
 
         return Result.ok();
     }
@@ -114,18 +115,21 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         return accountDO.getId();
     }
 
-    private void sendSms(String mobile, String code) {
+    private void sendSms(String mobile, String code, Long orgId) {
         if (mockMode) {
             return;
         }
 
-        String[] args = new String[]{code, BRAND_NAME};
+        String[] args = new String[]{code};
         String msg = LocaleUtil.get(OTP_KEY, args);
         if (msg == null) {
             throw new LocaleNotFoundException(OTP_KEY);
         }
 
-        smsAgent.toIndia(mobile, msg);
+        SMSSendConfig config = SMSSendConfig.builder()
+                .orgId(orgId)
+                .build(); 
+        smsAgent.toIndia(mobile, msg, config);
     }
 
     private String createCode() {
