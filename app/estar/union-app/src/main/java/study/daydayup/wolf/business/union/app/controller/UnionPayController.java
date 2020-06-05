@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
@@ -50,7 +50,7 @@ public class UnionPayController {
         header.put("signature", signature);
 
         SubscribeRequest request = SubscribeRequest.builder()
-                .paymentMethod(PaymentMethodEnum.RAZORPAY.getCode())
+                .paymentMethod(PaymentChannelEnum.RAZORPAY.getCode())
                 .header(header)
                 .data(data)
                 .build();
@@ -69,7 +69,7 @@ public class UnionPayController {
         log.info("dokypay subscribe: {}", data);
 
         SubscribeRequest request = SubscribeRequest.builder()
-                .paymentMethod(PaymentMethodEnum.DOKYPAY.getCode())
+                .paymentMethod(PaymentChannelEnum.DOKYPAY.getCode())
                 .data(data)
                 .build();
 

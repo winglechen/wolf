@@ -8,7 +8,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
@@ -36,7 +36,7 @@ public class RazorpayServiceImpl implements RazorpayService {
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
-        request.setPaymentMethod(PaymentMethodEnum.RAZORPAY.getCode());
+        request.setPaymentMethod(PaymentChannelEnum.RAZORPAY.getCode());
 
         PaymentCreateResponse response = creator.create(request);
         return Result.ok(response);
@@ -44,7 +44,7 @@ public class RazorpayServiceImpl implements RazorpayService {
 
     @Override
     public Result<PayVerifyResponse> verify(@NonNull PayVerifyRequest request) {
-        request.setPaymentMethod(PaymentMethodEnum.RAZORPAY.getCode());
+        request.setPaymentMethod(PaymentChannelEnum.RAZORPAY.getCode());
 
         PayVerifyResponse response = payer.pay(request);
         return Result.ok(response);
@@ -52,7 +52,7 @@ public class RazorpayServiceImpl implements RazorpayService {
 
     @Override
     public Result<PayoutResponse> payout(@NonNull PayoutRequest request) {
-        request.setPaymentMethod(PaymentMethodEnum.RAZORPAY_PAYOUT.getCode());
+        request.setPaymentMethod(PaymentChannelEnum.RAZORPAY_PAYOUT.getCode());
         PayoutResponse response = payout.payout(request);
 
         return Result.ok(response);

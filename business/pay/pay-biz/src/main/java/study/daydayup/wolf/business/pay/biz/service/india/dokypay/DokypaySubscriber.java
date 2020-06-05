@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
 import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.handler.DokypayPaidHandler;
@@ -20,7 +20,6 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.common.util.net.URLUtil;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,7 @@ import java.util.Map;
 @Component
 public class DokypaySubscriber extends AbstractPaymentSubscriber implements PaymentSubscriber {
     private static final int LOG_TYPE = PaymentLogTypeEnum.PAY_RETURN.getCode();
-    private static final int PAYMENT_METHOD = PaymentMethodEnum.DOKYPAY.getCode();
+    private static final int PAYMENT_METHOD = PaymentChannelEnum.DOKYPAY.getCode();
     private static final String CONFIG_KEY = "dokypay";
     private JSONObject response;
     private PaySupplier config;

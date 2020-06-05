@@ -12,7 +12,7 @@ import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
 import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPaidHandler;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.handler.RazorPayoutHandler;
@@ -34,7 +34,7 @@ import java.math.RoundingMode;
 @Component
 @Slf4j
 public class RazorSubscriber {
-    private static final PaymentMethodEnum PAYMENT_METHOD = PaymentMethodEnum.RAZORPAY;
+    private static final PaymentChannelEnum PAYMENT_METHOD = PaymentChannelEnum.RAZORPAY;
     private static final String SEPARATOR = ":";
     private PayNotification notification;
 

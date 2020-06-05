@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.trade.api.domain.entity.Order;
 import study.daydayup.wolf.business.trade.api.dto.TradeId;
@@ -39,7 +39,7 @@ public class UnionLoanService implements Service {
         Order order = loanService.repay(payRequest).notNullData();
 
         if (null == paymentMethod) {
-            paymentMethod = PaymentMethodEnum.RAZORPAY.getCode();
+            paymentMethod = PaymentChannelEnum.RAZORPAY.getCode();
         }
         PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
         PaymentCreateResponse response = callPayApi(request);
@@ -48,7 +48,7 @@ public class UnionLoanService implements Service {
 
     public PayResponse audit(@Validated Order order, Integer paymentMethod) {
         if (null == paymentMethod) {
-            paymentMethod = PaymentMethodEnum.CASEFREE.getCode();
+            paymentMethod = PaymentChannelEnum.CASEFREE.getCode();
         }
         PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
         PaymentCreateResponse response = callPayApi(request);

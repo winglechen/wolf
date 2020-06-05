@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.domain.factory;
 
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.payout.PayoutServiceNotFoundException;
 import study.daydayup.wolf.business.pay.api.service.PayoutService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorpayService;
@@ -27,7 +27,7 @@ public class PayoutServiceFactory {
     private RazorpayService razorpayService;
 
     public PayoutService create(int paymentCode) {
-        PaymentMethodEnum paymentMethod = EnumUtil.codeOf(paymentCode, PaymentMethodEnum.class);
+        PaymentChannelEnum paymentMethod = EnumUtil.codeOf(paymentCode, PaymentChannelEnum.class);
 
         switch (paymentMethod) {
             case CASEFREE:

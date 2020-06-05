@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.union.app.service;
 import lombok.NonNull;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentMethodEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.payout.PayoutFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.payout.PayoutResponse;
@@ -33,7 +33,7 @@ public class UnionPayoutService {
 
     private PayoutRequest createRequest(@NonNull Order order) {
         return PayoutRequest.builder()
-                .paymentMethod(PaymentMethodEnum.RAZORPAY_PAYOUT.getCode())
+                .paymentMethod(PaymentChannelEnum.RAZORPAY_PAYOUT.getCode())
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(true)
 

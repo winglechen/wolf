@@ -10,18 +10,22 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/9/29 4:51 PM
  **/
 @Getter
-public enum PaymentTypeEnum implements CodeBasedEnum {
+public enum PaymentChannelEnum implements CodeBasedEnum {
+    DOKYPAY(120, "DOKYPAY"),
+    CASEFREE_PAYOUT(111, "cash free payout"),
+    CASEFREE(110, "cash free"),
 
-    C_TO_B(1, "私对公"),
-    B_TO_B(2, "私对私"),
-    B_TO_C(3, "公对私"),
-    B_TO_BO(4, "公对公"),
+    RAZORPAY_PAYOUT(101, "razor payout"),
+    RAZORPAY(100, "razorpay"),
+
+    WECHATPAY(2, "wechat pay"),
+    ALIPAY(1, "alipay")
     ;
 
     private int code;
     private String name;
 
-    PaymentTypeEnum(int code, String name) {
+    PaymentChannelEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }
