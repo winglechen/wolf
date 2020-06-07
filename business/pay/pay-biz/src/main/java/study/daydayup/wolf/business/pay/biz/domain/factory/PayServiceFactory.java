@@ -5,7 +5,7 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PayServiceNotFoundException;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorpayService;
-import study.daydayup.wolf.business.pay.biz.service.india.cashfree.CashFreeService;
+import study.daydayup.wolf.business.pay.biz.service.india.cashfree.CashfreeService;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.DokypayService;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Component
 public class PayServiceFactory {
     @Resource
-    private CashFreeService cashFreeService;
+    private CashfreeService cashFreeService;
     @Resource
     private DokypayService dokypayService;
     @Resource

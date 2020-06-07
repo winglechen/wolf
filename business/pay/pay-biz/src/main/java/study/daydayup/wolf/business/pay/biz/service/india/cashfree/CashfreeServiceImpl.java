@@ -18,7 +18,7 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @since 2020/4/26 6:40 下午
  **/
 @Component
-public class CashFreeServiceImpl implements CashFreeService {
+public class CashfreeServiceImpl implements CashfreeService {
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
         return null;

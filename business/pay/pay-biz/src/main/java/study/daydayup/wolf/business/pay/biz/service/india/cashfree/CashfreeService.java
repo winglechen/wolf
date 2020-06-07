@@ -10,6 +10,6 @@ import study.daydayup.wolf.framework.rpc.Result;
  * @author Wingle
  * @since 2020/2/26 3:16 下午
  **/
-public interface CashFreeService extends PayService, PayoutService {
+public interface CashfreeService extends PayService, PayoutService {
 
 }
