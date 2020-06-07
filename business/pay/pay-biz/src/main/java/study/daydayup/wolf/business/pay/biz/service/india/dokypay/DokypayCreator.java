@@ -32,12 +32,12 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class DokypayCreator extends AbstractPaymentCreator implements PaymentCreator {
+    private static final String CONFIG_KEY = "dokypay";
+    private static final String PROD_NAME = "southeast.asia";
+
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");
 
-
-    private static String CONFIG_KEY = "dokypay";
-    private static String PROD_NAME = "southeast.asia";
     private PaySupplier config;
 
     @Resource

@@ -12,7 +12,7 @@ import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
 public class CashFreeCreator extends AbstractPaymentCreator implements PaymentCreator {
     @Override
     public void callPayEpi() {
-        
+
     }
 
     @Override
