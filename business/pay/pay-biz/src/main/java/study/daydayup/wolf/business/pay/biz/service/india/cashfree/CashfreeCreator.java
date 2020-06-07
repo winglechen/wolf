@@ -41,10 +41,6 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
     @Override
     public void callPayEpi() {
         initConfig();
-    }
-
-    @Override
-    public void parseEpiResponse() {
         Request payRequest = createRequest();
 
         try {
@@ -56,6 +52,11 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         }
     }
 
+    @Override
+    public void parseEpiResponse() {
+
+    }
+
     private void parseResponse(Response response) {
         if (null == response || !response.isSuccessful()) {
             throw new InvalidEpiResponseException("Cashfree create response is invalid");
@@ -63,9 +64,9 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 
         try {
             apiResponse = Objects.requireNonNull(response.body()).string();
-            log.info("dokypay create response: {}", apiResponse);
+            log.info("Cashfree create response: {}", apiResponse);
         } catch (Exception e) {
-            throw new InvalidEpiResponseException("Dokypay create responseBody is invalid");
+            throw new InvalidEpiResponseException("DokyCashfreepay create responseBody is invalid");
         }
     }
 
