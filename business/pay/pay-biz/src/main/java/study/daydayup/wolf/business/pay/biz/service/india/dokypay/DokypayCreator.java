@@ -43,7 +43,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     @Resource
     private PayConfig payConfig;
     @Resource
-    private IndianCustomerEpi customerEpi;
+    private IndianCustomerEpi indianCustomerEpi;
 
 
     @Override
@@ -172,7 +172,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 //        args.put("payerMobile", "123456789");
 //        return;
 
-        IndianBankCard card = customerEpi.findContact(request.getPayerId(), request.getPayeeId());
+        IndianBankCard card = indianCustomerEpi.findContact(request.getPayerId(), request.getPayeeId());
         if (card == null) {
             return;
         }
