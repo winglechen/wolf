@@ -26,19 +26,19 @@ import javax.annotation.Resource;
 @Component
 public class RazorpayServiceImpl implements RazorpayService {
     @Resource
-    private RazorCreator creator;
+    private RazorCreator razorCreator;
     @Resource
-    private RazorPayer payer;
+    private RazorPayer razorPayer;
     @Resource
-    private RazorSubscriber subscriber;
+    private RazorSubscriber razorSubscriber;
     @Resource
-    private RazorPayout payout;
+    private RazorPayout razorPayout;
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
         request.setPaymentMethod(PaymentChannelEnum.RAZORPAY.getCode());
 
-        PaymentCreateResponse response = creator.create(request);
+        PaymentCreateResponse response = razorCreator.create(request);
         return Result.ok(response);
     }
 
@@ -46,14 +46,14 @@ public class RazorpayServiceImpl implements RazorpayService {
     public Result<PayVerifyResponse> verify(@NonNull PayVerifyRequest request) {
         request.setPaymentMethod(PaymentChannelEnum.RAZORPAY.getCode());
 
-        PayVerifyResponse response = payer.pay(request);
+        PayVerifyResponse response = razorPayer.pay(request);
         return Result.ok(response);
     }
 
     @Override
     public Result<PayoutResponse> payout(@NonNull PayoutRequest request) {
         request.setPaymentMethod(PaymentChannelEnum.RAZORPAY_PAYOUT.getCode());
-        PayoutResponse response = payout.payout(request);
+        PayoutResponse response = razorPayout.payout(request);
 
         return Result.ok(response);
     }
@@ -67,7 +67,7 @@ public class RazorpayServiceImpl implements RazorpayService {
             throw  new InvalidPayRequestException("Razorpay eventId、signature、data can't be null");
         }
 
-        int code = subscriber.subscribe((String) eventId, (String) signature, request.getData());
+        int code = razorSubscriber.subscribe((String) eventId, (String) signature, request.getData());
         SubscribeResponse response = SubscribeResponse.builder()
                 .code(code)
                 .build();

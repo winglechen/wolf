@@ -25,13 +25,13 @@ import javax.annotation.Resource;
 @Component
 public class DokypayServiceImpl implements DokypayService {
     @Resource
-    private DokypayCreator creator;
+    private DokypayCreator dokypayCreator;
     @Resource
-    private DokypaySubscriber subscriber;
+    private DokypaySubscriber dokypaySubscriber;
 
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
-        PaymentCreateResponse response = creator.create(request);
+        PaymentCreateResponse response = dokypayCreator.create(request);
         return Result.ok(response);
     }
 
@@ -50,7 +50,7 @@ public class DokypayServiceImpl implements DokypayService {
         if (StringUtil.isBlank(request.getData())) {
             throw  new InvalidPayRequestException("dokypay data can't be blank");
         }
-        int code = subscriber.subscribe(request.getData());
+        int code = dokypaySubscriber.subscribe(request.getData());
         SubscribeResponse response = SubscribeResponse.builder()
                 .code(code)
                 .build();
