@@ -14,6 +14,6 @@ import study.daydayup.wolf.business.pay.biz.domain.service.NotificationHandler;
 public class RazorPaidHandler extends AbstractNotificationHandler implements NotificationHandler {
     @Override
     public boolean isSuccess () {
-        return getNotification().getStatus().equals("paid");
+        return getNotification().getStatus().equalsIgnoreCase("paid");
     }
 }
