@@ -53,7 +53,6 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
     private SMSConfig smsConfig;
     private SMSSupplier skylineConfig;
 
-
     private String mobile;
     private String msg;
 
@@ -121,18 +120,18 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
 
         try {
             String responseBody = Objects.requireNonNull(response.body()).string();
-            log.info("skyline send sms responseBody: {}", responseBody);
+            log.info("skyline send to mobile({}) responseBody: {}", mobile, responseBody);
             JSONObject responseJson = JSON.parseObject(responseBody);
 
             if (0 == responseJson.getInteger("status")) {
                 return 1;
+            } else {
+                return 0;
             }
         } catch (Exception e) {
             log.warn("SkylineSender send sms fail", e);
             return 0;
         }
-
-        return 0;
     }
 
     private Request createRequest() {
