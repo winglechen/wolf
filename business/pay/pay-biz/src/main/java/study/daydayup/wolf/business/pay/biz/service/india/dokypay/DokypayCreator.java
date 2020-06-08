@@ -97,6 +97,11 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         attachment.set("payUrl", data.getString("url"));
     }
 
+    /**
+     * TODO: CHECK THAT IS IT NEEDED?
+     * @param json
+     * @return
+     */
     private boolean isResponseValid(JSONObject json) {
         String responseSign = json.getJSONObject("data").getString("sign");
         if (StringUtil.isBlank(responseSign)) {
