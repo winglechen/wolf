@@ -82,4 +82,23 @@ public class UnionPayController {
         return "success";
 
     }
+
+    @PostMapping("/pay/cashfree/subscribe")
+    public String cashfreeSubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
+        log.info("cashfree subscribe: {}", data);
+
+        SubscribeRequest request = SubscribeRequest.builder()
+                .paymentMethod(PaymentChannelEnum.CASEFREE.getCode())
+                .data(data)
+                .build();
+
+        SubscribeResponse response = payService.subscribe(request).getData();
+        if (!BeanUtil.equals(response.getCode(), 1)) {
+            servletResponse.setStatus(500);
+            return "fail";
+        }
+
+        return "success";
+
+    }
 }
