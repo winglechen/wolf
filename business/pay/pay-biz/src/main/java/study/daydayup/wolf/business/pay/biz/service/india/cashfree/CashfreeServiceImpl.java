@@ -11,6 +11,8 @@ import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
+import javax.annotation.Resource;
+
 /**
  * study.daydayup.wolf.business.pay.biz.api.india
  *
@@ -19,9 +21,13 @@ import study.daydayup.wolf.framework.rpc.Result;
  **/
 @Component
 public class CashfreeServiceImpl implements CashfreeService {
+    @Resource
+    private CashfreeCreator cashfreeCreator;
+
     @Override
     public Result<PaymentCreateResponse> create(PaymentCreateRequest request) {
-        return null;
+        PaymentCreateResponse response = cashfreeCreator.create(request);
+        return Result.ok(response);
     }
 
     @Override

@@ -12,6 +12,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
 @Getter
 public enum PaymentChannelEnum implements CodeBasedEnum {
     DOKYPAY(120, "DOKYPAY"),
+
     CASEFREE_PAYOUT(111, "cash free payout"),
     CASEFREE(110, "cash free"),
 
