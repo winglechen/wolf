@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.pay.api.dto.china
@@ -30,6 +31,7 @@ public class PayNotification implements Model {
      * payment.id or payout.id
      */
     private String outTradeNo;
+    private LocalDateTime outPaidAt;
     /**
      * paid | processed
      */

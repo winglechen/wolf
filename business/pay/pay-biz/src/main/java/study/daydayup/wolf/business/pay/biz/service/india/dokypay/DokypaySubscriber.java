@@ -42,7 +42,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     @Resource
     private PayConfig payConfig;
     @Resource
-    private DokypayPaidHandler paidHandler;
+    private DokypayPaidHandler dokypayPaidHandler;
 
     public int subscribe(@NonNull String data) {
         logResponse(LOG_TYPE, PAYMENT_METHOD, data);
@@ -105,7 +105,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
                 .paymentMethod(PAYMENT_METHOD)
                 .build();
 
-        return paidHandler.handle(notification);
+        return dokypayPaidHandler.handle(notification);
     }
 
     private BigDecimal getAmount() {

@@ -19,7 +19,7 @@ public class SignUtil {
             "orderId", "orderAmount", "referenceId", "txStatus", "paymentMode",
             "txMsg", "txTime"
     };
-    public static String create(Map<String, Object> data, String secretKey) {
+    public static String create(String secretKey, Map<String, Object> data) {
         if (MapUtil.isEmpty(data) || StringUtil.isBlank(secretKey)) {
             return null;
         }
