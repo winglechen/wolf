@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
-import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayConfigException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentCreator;
@@ -31,7 +30,7 @@ import java.util.Objects;
  **/
 @Slf4j
 @Component
-public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCreator {
+public class CashfreeRnCreator extends AbstractPaymentCreator implements PaymentCreator {
     private static final String CONFIG_KEY = "cashfree";
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");
@@ -67,13 +66,39 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         setResponseAttachment(json);
     }
 
+    private void initPayerInfo() {
+//        args.put("payerName", "ppea");
+//        args.put("payerEmail", "abc@gmail.com");
+//        args.put("payerMobile", "123456789");
+//        return;
 
+        IndianBankCard card = indianCustomerEpi.findContact(request.getPayerId(), request.getPayeeId());
+        if (card == null) {
+            return;
+        }
+
+        if (StringUtil.notBlank(card.getAadhaarName())) {
+            attachment.put("customerName", card.getAadhaarName());
+        }
+
+        if (StringUtil.notBlank(card.getEmail())) {
+            attachment.put("customerEmail", card.getEmail());
+        }
+
+        if (StringUtil.notBlank(card.getMobile())) {
+            attachment.put("customerPhone", card.getMobile());
+        }
+    }
 
     private void setResponseAttachment(@NonNull JSONObject data) {
-        attachment.put("payUrl", data.getString("paymentLink"));
+        initPayerInfo();
+
+        attachment.put("cftoken", data.getString("cftoken"));
+        attachment.put("appId", config.getAppId());
         attachment.put("orderId", payment.getPaymentNo());
         attachment.put("orderAmount", getAmount());
         attachment.put("orderCurrency", "INR");
+        attachment.put("notifyUrl", config.getNotifyUrl());
     }
 
     private boolean isResponseSuccess(JSONObject json) {
@@ -81,11 +106,11 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
             return false;
         }
 
-        if (StringUtil.isBlank(json.getString("paymentLink"))) {
+        if (StringUtil.isBlank(json.getString("cftoken"))) {
             return false;
         }
 
-        return "OK".equalsIgnoreCase(json.getString("status"));
+        return "OK".equalsIgnoreCase(json.getString("resultCode"));
     }
 
     private void parseResponse(Response response) {
@@ -106,57 +131,26 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
     }
 
     private Request createRequest() {
-        RequestBody requestBody = initArgs();
+        String args = initArgs();
+        RequestBody requestBody = RequestBody.create(args, JSON_CONTENT_TYPE);
 
         return new Request.Builder()
                 .url(config.getCreateUrl())
-                .header("Content-Type", "application/x-www-form-urlencoded")
-//                .header("x-client-id", config.getAppId())
-//                .header("x-client-secret", config.getAppSecret())
+                .header("Content-Type", "application/json")
+                .header("x-client-id", config.getAppId())
+                .header("x-client-secret", config.getAppSecret())
+
                 .post(requestBody)
                 .build();
     }
 
-    private Map<String, Object> initPayerInfo() {
+    private String initArgs() {
         Map<String, Object> args = new HashMap<>(8);
-//        args.put("customerName", "abc");
-//        args.put("customerEmail", "abc@gmail.com");
-//        args.put("customerPhone", "123456789");
-//        return args;
+        args.put("orderId", payment.getPaymentNo());
+        args.put("orderAmount", getAmount());
+        args.put("orderCurrency", "INR");
 
-        IndianBankCard card = indianCustomerEpi.findContact(request.getPayerId(), request.getPayeeId());
-        if (card == null) {
-            throw new InvalidPayConfigException("lack of customer info(name,email,mobile)");
-        }
-
-        if (StringUtil.notBlank(card.getAadhaarName())) {
-            args.put("customerName", card.getAadhaarName());
-        }
-
-        if (StringUtil.notBlank(card.getEmail())) {
-            args.put("customerEmail", card.getEmail());
-        }
-
-        if (StringUtil.notBlank(card.getMobile())) {
-            args.put("customerPhone", card.getMobile());
-        }
-
-        return args;
-    }
-
-    private RequestBody initArgs() {
-        Map<String, Object> args = initPayerInfo();
-
-        return new FormBody.Builder()
-                .add("appId", config.getAppId())
-                .add("secretKey", config.getAppSecret())
-                .add("orderId", payment.getPaymentNo())
-                .add("orderAmount", getAmount().toString())
-                .add("orderCurrency", "INR")
-                .add("customerName", (String) args.get("customerName"))
-                .add("customerEmail", (String) args.get("customerEmail"))
-                .add("customerPhone", (String) args.get("customerPhone"))
-                .build();
+        return JSON.toJSONString(args);
     }
 
     private BigDecimal getAmount() {

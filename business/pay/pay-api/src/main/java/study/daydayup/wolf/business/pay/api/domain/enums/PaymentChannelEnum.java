@@ -11,20 +11,20 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PaymentChannelEnum implements CodeBasedEnum {
-    DOKYPAY(120, "DOKYPAY"),
+    DOKYPAY(120, "dokypay"),
 
-    CASEFREE_PAYOUT(111, "cash free payout"),
-    CASEFREE(110, "cash free"),
+    CASEFREE_PAYOUT(111, "cashfreePayout"),
+    CASEFREE(110, "cashfree"),
 
-    RAZORPAY_PAYOUT(101, "razor payout"),
+    RAZORPAY_PAYOUT(101, "razorpayPayout"),
     RAZORPAY(100, "razorpay"),
 
-    WECHATPAY(2, "wechat pay"),
+    WECHATPAY(2, "wechatpay"),
     ALIPAY(1, "alipay")
     ;
 
-    private int code;
-    private String name;
+    private final int code;
+    private final String name;
 
     PaymentChannelEnum(int code, String name) {
         this.code = code;
