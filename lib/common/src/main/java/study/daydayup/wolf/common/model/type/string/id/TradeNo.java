@@ -123,7 +123,7 @@ public class TradeNo implements ID {
             return nano;
         }
 
-        nano = System.currentTimeMillis();
+        nano = System.nanoTime();
         return nano;
     }
 
