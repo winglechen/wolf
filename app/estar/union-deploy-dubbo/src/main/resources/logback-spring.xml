@@ -40,7 +40,6 @@
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
     <springProfile name="test,dev, cr">
         <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
-        <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>

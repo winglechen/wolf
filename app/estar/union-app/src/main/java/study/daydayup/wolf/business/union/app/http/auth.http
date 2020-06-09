@@ -5,9 +5,9 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "18067962001",
-  "orgId": 1
+  "mobile": "917376189886"
 }
+###  "orgId": 1
 
 ###
 POST http://localhost:8100/auth/sms/registerAndLogin

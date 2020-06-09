@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.api.domain.entity.SMS;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.SMSSender;
+import study.daydayup.wolf.middleware.notice.biz.sms.india.nxcloud.NxcloudSMSSender;
 import study.daydayup.wolf.middleware.notice.biz.sms.india.skyline.SkylineSender;
 
 import javax.annotation.Resource;
@@ -19,6 +20,8 @@ import java.util.Collection;
 public class IndiaSMSSender implements SMSSender {
     @Resource
     private SkylineSender skylineSender;
+    @Resource
+    private NxcloudSMSSender nxcloudSMSSender;
 
     @Override
     public int send(String mobile, String msg, SMSSendConfig config) {
@@ -26,7 +29,8 @@ public class IndiaSMSSender implements SMSSender {
             return 0;
         }
 
-        return skylineSender.send(mobile, msg, config);
+        return nxcloudSMSSender.send(mobile, msg, config);
+        //return skylineSender.send(mobile, msg, config);
     }
 
     @Override

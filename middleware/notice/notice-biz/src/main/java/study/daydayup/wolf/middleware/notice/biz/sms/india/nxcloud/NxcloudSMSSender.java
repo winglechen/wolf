@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.AbstractSMSSender;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.SMSSender;
@@ -27,14 +28,12 @@ public class NxcloudSMSSender extends AbstractSMSSender implements SMSSender {
     private static final MediaType CONTENT_TYPE = MediaType.parse("application/x-www-form-urlencoded");
     private static final String CONFIG_KEY = "nxcloud";
 
-    private String mobile;
-    private String msg;
 
     @Override
     public int send(@NonNull String mobile, @NonNull String msg, SMSSendConfig config) {
         this.mobile = mobile;
         this.msg = msg;
-        this.sendConfig = config;
+        this.smsSendConfig = config;
 
         validConfig(CONFIG_KEY);
         return sendSms();
@@ -69,6 +68,8 @@ public class NxcloudSMSSender extends AbstractSMSSender implements SMSSender {
     }
 
     private Request createRequest() {
+        msg = msg.replace("for " + SMSConfig.BRAND_PLACEHOLDER, "");
+
         RequestBody body = new FormBody.Builder()
                 .add("appkey", supplierConfig.getAppId())
                 .add("secretkey", supplierConfig.getAppSecret())

@@ -22,13 +22,16 @@ import java.util.Collection;
  * @since 2020/3/20 5:18 下午
  **/
 public abstract class AbstractSMSSender implements SMSSender {
-    protected SMSSendConfig sendConfig;
+    protected SMSSendConfig smsSendConfig;
     @Resource
     protected CompanySettingAgent companySettingAgent;
 
     @Resource
     protected SMSConfig smsConfig;
     protected SMSSupplier supplierConfig;
+
+    protected String mobile;
+    protected String msg;
 
     @Override
     public int send(String mobile, String msg, SMSSendConfig config) {
@@ -54,10 +57,11 @@ public abstract class AbstractSMSSender implements SMSSender {
     }
 
     protected void mergeOrgSetting(@NonNull String configKey) {
-        if (null == sendConfig || null == sendConfig.getOrgId()) {
+        if (null == smsSendConfig || null == smsSendConfig.getOrgId()) {
             return;
         }
-        companySettingAgent.init(sendConfig.getOrgId(), false);
+
+        companySettingAgent.init(smsSendConfig.getOrgId(), false);
         companySettingAgent.namespace(SMSConfig.SMS_NAMESPACE);
         ObjectMap orgSetting = companySettingAgent.getAll();
         if (null == orgSetting) {
@@ -75,5 +79,9 @@ public abstract class AbstractSMSSender implements SMSSender {
         supplierConfig.setAppId(supplier.getString("appId"));
         supplierConfig.setAppSecret(supplier.getString("appSecret"));
         supplierConfig.setSendUrl(supplier.getString("sendUrl"));
+    }
+
+    protected void parseMsg() {
+        msg = msg.replace(SMSConfig.BRAND_PLACEHOLDER, supplierConfig.getBrand());
     }
 }
