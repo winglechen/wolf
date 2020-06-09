@@ -47,6 +47,7 @@ public class UnionLoanService implements Service {
     }
 
     public PayResponse audit(@Validated Order order, Integer paymentMethod) {
+        paymentMethod = PaymentChannelEnum.CASEFREE.getCode();
         if (null == paymentMethod) {
             paymentMethod = PaymentChannelEnum.CASEFREE.getCode();
         }
