@@ -29,10 +29,4 @@ public class UnionIndexController extends BaseUnionController {
     public String tradeNo() {
         return tradeNoTestService.create();
     }
-
-    public static void main(String[] args) {
-        System.out.println("now : " + LocalDateTime.now());
-        System.out.println("mill: " + System.currentTimeMillis());
-        System.out.println("nano: " + System.nanoTime());
-    }
 }

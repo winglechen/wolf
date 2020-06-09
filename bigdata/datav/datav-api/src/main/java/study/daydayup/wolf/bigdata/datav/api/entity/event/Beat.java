@@ -19,6 +19,7 @@ public class Beat implements Serializable {
 
     private Long orgId;
     private Long accountId;
+    private String sessionId;
 
     private String deviceId;
     private String deviceType;
@@ -29,6 +30,11 @@ public class Beat implements Serializable {
 
     @NotBlank
     private String eventType;
+
+    private String source;
+    private Long objectId;
+    private Integer objectType;
+
     private String event;
     private String eventContext;
     private String eventMemo;

@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `beat`
     `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`                BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `account_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `session_id`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '事件类型',
 
     `device_id`             VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '设备唯一标识',
     `device_type`           VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '设备类型',
@@ -16,6 +17,11 @@ CREATE TABLE IF NOT EXISTS `beat`
     `longitude`             DECIMAL(10, 4)        NOT NULL DEFAULT '0.0000' COMMENT '经度',
 
     `event_type`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '事件类型',
+
+    `source`                VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '事件类型',
+    `object_id`             BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '对象ID',
+    `object_type`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '对象类型',
+
     `event`                 VARCHAR(2000)         NOT NULL DEFAULT '' COMMENT '事件',
     `event_context`         VARCHAR(2000)         NOT NULL DEFAULT '' COMMENT '事件上下文',
     `event_memo`            VARCHAR(2000)         NOT NULL DEFAULT '' COMMENT '事件备注',
