@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * study.daydayup.wolf.business.pay.api.config.india
- *
+ * TODO: move to PayConfig
  * @author Wingle
  * @since 2020/2/27 4:18 下午
  **/

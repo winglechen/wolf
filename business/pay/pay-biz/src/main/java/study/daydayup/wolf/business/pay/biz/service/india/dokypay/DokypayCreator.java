@@ -38,17 +38,13 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");
 
-    private PaySupplier config;
-
-    @Resource
-    private PayConfig payConfig;
     @Resource
     private IndianCustomerEpi indianCustomerEpi;
 
 
     @Override
     public void callPayEpi() {
-        initConfig();
+        initConfig(CONFIG_KEY);
         Request payRequest = createRequest();
 
         try {
@@ -98,7 +94,6 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     /**
-     * TODO: CHECK THAT IS IT NEEDED?
      * @param json
      * @return
      */
@@ -129,10 +124,6 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         }
 
         return "0000".equals(data.getString("resultCode"));
-    }
-
-    private void initConfig() {
-        config = payConfig.getSupplier().get(CONFIG_KEY);
     }
 
     private Request createRequest() {

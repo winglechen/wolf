@@ -36,16 +36,12 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");
 
-    private PaySupplier config;
-
-    @Resource
-    private PayConfig payConfig;
     @Resource
     private IndianCustomerEpi indianCustomerEpi;
 
     @Override
     public void callPayEpi() {
-        initConfig();
+        initConfig(CONFIG_KEY);
         Request payRequest = createRequest();
 
         try {
@@ -66,8 +62,6 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 
         setResponseAttachment(json);
     }
-
-
 
     private void setResponseAttachment(@NonNull JSONObject data) {
         attachment.put("payUrl", data.getString("paymentLink"));
@@ -99,10 +93,6 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         } catch (Exception e) {
             throw new InvalidEpiResponseException("Cashfree create responseBody is invalid");
         }
-    }
-
-    private void initConfig() {
-        config = payConfig.getSupplier().get(CONFIG_KEY);
     }
 
     private Request createRequest() {

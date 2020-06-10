@@ -33,7 +33,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     };
 
     @Resource
-    private RazorConfig config;
+    private RazorConfig razorConfig;
 
     private Order order;
     private int amount;
@@ -46,7 +46,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
         options.put("payment_capture", true);
 
         try {
-            RazorpayClient client = new RazorpayClient(config.getKeyId(), config.getKeySecret());
+            RazorpayClient client = new RazorpayClient(razorConfig.getKeyId(), razorConfig.getKeySecret());
             order = client.Orders.create(options);
             apiResponse = order.toString();
         } catch (RazorpayException e) {
@@ -87,17 +87,17 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     }
 
     private void setResponseAttachment(Order order) {
-        attachment.set("description", config.getCompanyDescription());
-        attachment.set("image", config.getCompanyLogo());
+        attachment.set("description", razorConfig.getCompanyDescription());
+        attachment.set("image", razorConfig.getCompanyLogo());
         attachment.set("currency", CURRENCY);
 
-        attachment.set("key", config.getKeyId());
+        attachment.set("key", razorConfig.getKeyId());
         attachment.set("amount", String.valueOf(amount));
-        attachment.set("name", config.getCompanyName());
+        attachment.set("name", razorConfig.getCompanyName());
         attachment.set("order_id", order.get("id"));
 
-        attachment.set("prefill", config.getPrefill());
-        attachment.set("theme", config.getTheme());
+        attachment.set("prefill", razorConfig.getPrefill());
+        attachment.set("theme", razorConfig.getTheme());
     }
 
     private boolean validOrder(Order order) {
