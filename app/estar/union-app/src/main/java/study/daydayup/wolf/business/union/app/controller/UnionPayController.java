@@ -28,7 +28,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 public class UnionPayController {
-    @Reference(timeout = 10000)
+    @Reference(timeout = 5000)
     private PayService payService;
 
     @PostMapping("/pay/verify")
