@@ -18,5 +18,11 @@ Content-Type: application/x-www-form-urlencoded
 processCurrency=INR&amount=299.00&merTransNo=20200525070305606229949558829688&sign=09f69dcb4d1de7312999fbf77eae4abbb9833255e41748a296d09c57133ebdb9&updateTime=2020-05-25+09%3A33%3A08&pmId=paytm&transNo=20200525093306016010034651&payerMobile=919553360889&createTime=2020-05-25+09%3A33%3A06&processAmount=299.00&payerName=Jupalli+Srinivasarao++Jupalli++Jupalli+Srinivasarao+&currency=INR&payerEmail=jupallisrinivasurao805%40gmail.com&transStatus=success
 
 ###
+POST http://localhost:8100/pay/cashfree/subscribe
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+orderId=20200609234929601209421149923896&orderAmount=100.00&referenceId=356976&txStatus=SUCCESS&paymentMode=CREDIT_CARD&txMsg=Transaction+Successful&txTime=2020-06-09+21%3A20%3A12&signature=tfwE01vFLd5W8Pr2%2Bfwg6jIuHoR%2F8Cs9Sxr3eshoTnY%3D
 
 

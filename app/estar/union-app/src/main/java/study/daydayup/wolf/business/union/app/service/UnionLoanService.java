@@ -47,10 +47,10 @@ public class UnionLoanService implements Service {
     }
 
     public PayResponse audit(@Validated Order order, Integer paymentMethod) {
-        paymentMethod = PaymentChannelEnum.CASEFREE.getCode();
         if (null == paymentMethod) {
-            paymentMethod = PaymentChannelEnum.CASEFREE.getCode();
+            paymentMethod = PaymentChannelEnum.DOKYPAY.getCode();
         }
+
         PaymentCreateRequest request = formatPaymentCreateRequest(order, paymentMethod);
         PaymentCreateResponse response = callPayApi(request);
         return formatPaymentCreateResponse(response, order);

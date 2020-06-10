@@ -31,10 +31,6 @@ public class URLUtil {
             return result;
         }
 
-        if (decode) {
-            query = URLDecoder.decode(query, enc);
-        }
-
         String[] sArr = StringUtil.split(query, "&");
         String[] kvArr;
         String key, value;
@@ -49,6 +45,9 @@ public class URLUtil {
 
             key = kvArr[0];
             value = kvArr[1];
+            if (decode) {
+                value = URLDecoder.decode(value, enc);
+            }
             result.put(key, value);
         }
 
