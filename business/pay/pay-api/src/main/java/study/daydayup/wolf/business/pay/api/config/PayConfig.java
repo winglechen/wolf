@@ -21,4 +21,6 @@ public class PayConfig {
     private Map<String, PaySupplier> supplier;
 
     private String returnUrl;
+    private boolean useGlobal;
+    private String defaultSupplier;
 }

@@ -10,6 +10,10 @@ import lombok.Data;
  **/
 @Data
 public class PaySupplier {
+    private boolean enable = true;
+    private int order = 9999;
+
+
     private String appId;
     private String appSecret;
 
