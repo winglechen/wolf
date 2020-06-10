@@ -9,7 +9,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
  * @author Wingle
  * @since 2020/2/28 12:29 下午
  **/
-public interface PaymentCreator {
+public interface PaymentCreator extends PaymentDomainService {
     PaymentCreateResponse create(PaymentCreateRequest request);
 
 

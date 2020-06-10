@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2020/2/29 3:19 下午
  **/
 @Component
-public abstract class AbstractPaymentCreator implements PaymentCreator {
+public abstract class AbstractPaymentCreator extends AbstractPaymentDomainService implements PaymentCreator {
     protected PaymentCreateRequest request;
     protected Payment payment;
     protected ObjectMap attachment;
