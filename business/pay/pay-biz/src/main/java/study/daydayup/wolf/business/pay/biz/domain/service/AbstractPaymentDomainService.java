@@ -28,6 +28,10 @@ public abstract class AbstractPaymentDomainService implements PaymentDomainServi
 
     @Override
     public void initConfig(@NonNull String configKey) {
+        initConfig(configKey, null);
+    }
+
+    public void initConfig(@NonNull String configKey, Long payeeId) {
         config = payConfig.getSupplier().get(configKey);
     }
 
