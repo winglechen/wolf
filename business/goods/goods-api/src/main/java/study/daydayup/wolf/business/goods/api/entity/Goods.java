@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.business.goods.api.entity.goods.BaseGoods;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder(toBuilder = true)
-public class Goods extends BaseGoods {
+public class Goods extends BaseGoods implements Serializable {
     public Goods() {}
     protected String pics;
     protected String skuInfo;

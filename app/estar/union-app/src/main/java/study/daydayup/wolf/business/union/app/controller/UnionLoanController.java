@@ -49,7 +49,7 @@ import java.util.List;
  **/
 @RestController
 public class UnionLoanController extends BaseUnionController {
-    @Reference
+    @Reference(timeout = 5000)
     private BuyService buyService;
     @Reference
     private ContractService contractService;
