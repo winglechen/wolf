@@ -68,6 +68,16 @@ function install_uc() {
     cd ${dir} && mvn clean install
 }
 
+function install_setting() {
+    echo "install business.uc.setting"
+
+    dir="${PROJECT_DIR}/business/uc/setting-api"
+    cd ${dir} && mvn clean install
+
+    dir="${PROJECT_DIR}/business/uc/setting-agent"
+    cd ${dir} && mvn clean install
+}
+
 function install_org() {
     echo "install business.org"
     dir="${PROJECT_DIR}/business/org/"
@@ -154,6 +164,7 @@ function install_union() {
 function install_all() {
     install_boot
     install_libs
+    install_setting
     install_middleware
     install_business
     install_business_starter
