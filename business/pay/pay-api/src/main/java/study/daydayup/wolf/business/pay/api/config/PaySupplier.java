@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class PaySupplier {
     private boolean enable = true;
+    private boolean useGlobal = false;
     private int order = 9999;
 
 

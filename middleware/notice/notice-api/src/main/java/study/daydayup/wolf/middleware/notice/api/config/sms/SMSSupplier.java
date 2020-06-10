@@ -14,6 +14,10 @@ import java.util.Map;
  **/
 @Data
 public class SMSSupplier implements Config {
+    private boolean enable = true;
+    private boolean useGlobal = false;
+    private int order = 9999;
+
     private String signature;
     private String senderNum;
     private String brand;

@@ -25,7 +25,9 @@ public class SMSConfig implements Config {
     public static final String SMS_NAMESPACE = "sms";
     public static final String BRAND_PLACEHOLDER = "@BRAND@";
 
+    private boolean useGlobal;
     private boolean mockMode;
+    private String defaultSupplier;
 
     private String senderNum;
     private String signature;

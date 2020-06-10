@@ -17,10 +17,15 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "wolf.pay")
 public class PayConfig {
+    public static final String PAY_NAMESPACE = "pay";
+
+    private boolean useGlobal;
+    private String defaultSupplier;
+
+    private String returnUrl;
+
     @NotNull
     private Map<String, PaySupplier> supplier;
 
-    private String returnUrl;
-    private boolean useGlobal;
-    private String defaultSupplier;
+
 }
