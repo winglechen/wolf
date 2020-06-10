@@ -32,8 +32,7 @@ public class PayServiceImpl implements PayService, PayoutService {
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
-        request.setPaymentMethod(PaymentChannelEnum.CASEFREE.getCode());
-
+//        request.setPaymentMethod(PaymentChannelEnum.CASEFREE.getCode());
         if (null == request.getPaymentMethod()) {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
