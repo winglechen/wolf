@@ -83,8 +83,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "tradeNo": "20200610180359000109313812072770",
-  "paymentMethod": 120
+  "tradeNo": "20200611000118000109912102609405"
 }
 
 ###
