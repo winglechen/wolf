@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.api;
 
+import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
@@ -32,13 +33,24 @@ public class PayServiceImpl implements PayService, PayoutService {
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
-        request.setPaymentMethod(PaymentChannelEnum.CASEFREE.getCode());
+        paymentChannelWithList(request);
         if (null == request.getPaymentMethod()) {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
 
         PayService service = factory.create(request.getPaymentMethod());
         return service.create(request);
+    }
+
+    private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
+         Long payerId = request.getPayerId();
+        if (payerId == null) {
+            return;
+        }
+
+        if (payerId % 10 == 3) {
+            request.setPaymentMethod(PaymentChannelEnum.CASEFREE.getCode());
+        }
     }
 
     @Override

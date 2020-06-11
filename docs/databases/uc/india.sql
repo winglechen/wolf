@@ -44,7 +44,7 @@ CREATE TABLE `address_book`
     `account_id`  bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '账号id',
     `org_id`      bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '组织ID',
     `name`        varchar(100)        NOT NULL DEFAULT '' COMMENT '联系人姓名',
-    `mobile`      varchar(20)         NOT NULL DEFAULT '' COMMENT '联系电话',
+    `mobile`      varchar(200)         NOT NULL DEFAULT '' COMMENT '联系电话',
     `delete_flag` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除，1已删除',
     `version`     int(11) unsigned    NOT NULL DEFAULT '0' COMMENT '版本号',
     `last_editor` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '最后编辑者',
