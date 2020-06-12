@@ -88,7 +88,7 @@ public class UnionPayController {
         log.info("cashfree subscribe: {}", data);
 
         SubscribeRequest request = SubscribeRequest.builder()
-                .paymentMethod(PaymentChannelEnum.CASEFREE.getCode())
+                .paymentMethod(PaymentChannelEnum.CASHFREE.getCode())
                 .data(data)
                 .build();
 

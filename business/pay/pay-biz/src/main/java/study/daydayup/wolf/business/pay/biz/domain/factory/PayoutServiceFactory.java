@@ -30,7 +30,7 @@ public class PayoutServiceFactory {
         PaymentChannelEnum paymentMethod = EnumUtil.codeOf(paymentCode, PaymentChannelEnum.class);
 
         switch (paymentMethod) {
-            case CASEFREE:
+            case CASHFREE:
                 return cashFreeService;
             case DOKYPAY:
                 return dokypayService;

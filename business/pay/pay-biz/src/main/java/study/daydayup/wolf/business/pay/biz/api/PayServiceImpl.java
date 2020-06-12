@@ -49,7 +49,7 @@ public class PayServiceImpl implements PayService, PayoutService {
         }
 
         if (payerId % 10 == 3) {
-            request.setPaymentMethod(PaymentChannelEnum.CASEFREE.getCode());
+            request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
         }
     }
 

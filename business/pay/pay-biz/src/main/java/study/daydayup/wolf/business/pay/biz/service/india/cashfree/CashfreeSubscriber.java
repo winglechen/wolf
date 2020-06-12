@@ -13,7 +13,6 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.domain.service.PaymentSubscriber;
 import study.daydayup.wolf.business.pay.biz.service.india.cashfree.handler.CashfreePaidHandler;
-import study.daydayup.wolf.business.pay.biz.service.india.cashfree.SignUtil;
 import study.daydayup.wolf.common.util.collection.MapUtil;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -35,7 +34,7 @@ import java.util.Map;
 @Component
 public class CashfreeSubscriber extends AbstractPaymentSubscriber implements PaymentSubscriber {
     private static final int LOG_TYPE = PaymentLogTypeEnum.PAY_RETURN.getCode();
-    private static final int PAYMENT_METHOD = PaymentChannelEnum.CASEFREE.getCode();
+    private static final int PAYMENT_METHOD = PaymentChannelEnum.CASHFREE.getCode();
     private static final String CONFIG_KEY = "cashfree";
 
     private JSONObject response;
