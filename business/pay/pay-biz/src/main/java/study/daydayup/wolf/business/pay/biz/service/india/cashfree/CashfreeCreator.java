@@ -125,6 +125,8 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 
         if (StringUtil.notBlank(card.getEmail())) {
             args.put("customerEmail", card.getEmail());
+        } else {
+            args.put("customerEmail", "");
         }
 
         if (StringUtil.notBlank(card.getMobile())) {
