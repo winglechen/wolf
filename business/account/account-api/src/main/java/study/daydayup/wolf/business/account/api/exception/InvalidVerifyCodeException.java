@@ -17,4 +17,8 @@ public class InvalidVerifyCodeException extends BusinessException {
     public InvalidVerifyCodeException(String phoneNum) {
         super(111005, StringUtil.join("Invalid verify code for: ", phoneNum));
     }
+
+    public InvalidVerifyCodeException(String phoneNum, String code) {
+        super(111005, StringUtil.join("Invalid verify code(",code,") for: ", phoneNum));
+    }
 }

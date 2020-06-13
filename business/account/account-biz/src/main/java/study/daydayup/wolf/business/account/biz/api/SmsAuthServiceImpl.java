@@ -68,7 +68,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     @Override
     public Result<OauthLicense> registerAndLogin(SmsRequest request) {
         if (!verifyCodeService.verify(request.getMobile(), request.getCode())) {
-            throw new InvalidVerifyCodeException();
+            throw new InvalidVerifyCodeException(request.getMobile(), request.getCode());
         }
 
         long accountId = accountService.existByAccount(request.getMobile());
