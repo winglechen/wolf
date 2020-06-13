@@ -43,14 +43,17 @@ public class PayServiceImpl implements PayService, PayoutService {
     }
 
     private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
-         Long payerId = request.getPayerId();
-        if (payerId == null) {
-            return;
-        }
+        request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
+        return;
 
-        if (payerId % 10 == 3) {
-            request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
-        }
+//        Long payerId = request.getPayerId();
+//        if (payerId == null) {
+//            return;
+//        }
+//
+//        if (payerId % 10 == 3) {
+//            request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
+//        }
     }
 
     @Override
