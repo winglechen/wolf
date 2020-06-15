@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+        <!-- 格式化JAVA代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <!--
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        -->
+
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+
+            <!-- enable annotations -->
+            <property name="builder" value="false"/>
+            <!-- annotation's option(boolean) -->
+            <property name="builder.fluent" value="false"/>
+            <!-- annotation's option(String) -->
+            <property name="builder.builderMethodName" value="Builder"/>
+
+            <property name="accessors" value="false"/>
+            <!-- annotation's option(array of String) -->
+            <property name="accessors.prefix" value="m_, _"/>
+
+            <!-- disable annotations -->
+            <property name="allArgsConstructor" value="false"/>
+        </plugin>
+        <!--
+        <plugin type="org.mybatis.generator.plugins.LombokPlugin">
+            <property name="hasLombok" value="true"/>
+        </plugin>
+        -->
+
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/wolf_account?useSSL=false"
+                        userId="root"
+                        password="12345678">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dataobject"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
+                         targetProject="src/main/resources/mapper/auto">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        -->
+
+        <table tableName="account" domainObjectName="AccountDO" mapperName="AccountDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="account_alipay" domainObjectName="AlipayAccountDO" mapperName="AlipayAccountDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+        </table>
+
+        <table tableName="account_wechat" domainObjectName="WechatAccountDO" mapperName="WechatAccountDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+            
+        </table>
+
+        <table tableName="access_token" domainObjectName="AccessTokenDO" mapperName="AccessTokenDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+            
+        </table>
+
+        <table tableName="organization" domainObjectName="OrganizationDO" mapperName="OrganizationDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+            
+        </table>
+
+        <table tableName="verify_code" domainObjectName="VerifyCodeDO" mapperName="VerifyCodeDAO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+        >
+            <!-- 保持数据库原有的变量名字,不处理下划线为驼峰,默认为false -->
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="delete_flag" javaType="boolean"/>
+            
+        </table>
+
+    </context>
+</generatorConfiguration>
