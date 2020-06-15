@@ -4,7 +4,8 @@ import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 import study.daydayup.wolf.business.account.auth.agent.Session;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.controller
@@ -27,10 +28,10 @@ public class AuthController {
         license.setAccessToken(session.get("accessToken", String.class));
         license.setRefreshToken(session.get("refreshToken", String.class));
 
-        Date expiredAt = session.get("expiredAt", Date.class);
-        Date refreshExpiredAt = session.get("refreshExpiredAt", Date.class);
-        license.setExpiredAt(expiredAt);
-        license.setRefreshExpiredAt(refreshExpiredAt);
+        Long expiredAt = session.get("expiredAt", Long.class);
+        Long refreshExpiredAt = session.get("refreshExpiredAt", Long.class);
+        license.setExpiredAt(LocalDateTime.ofEpochSecond(expiredAt, 0, ZoneOffset.UTC));
+        license.setRefreshExpiredAt(LocalDateTime.ofEpochSecond(refreshExpiredAt, 0, ZoneOffset.UTC));
 
         return license;
     }

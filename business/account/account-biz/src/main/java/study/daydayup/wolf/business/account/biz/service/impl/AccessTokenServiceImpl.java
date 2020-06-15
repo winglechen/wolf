@@ -8,13 +8,11 @@ import study.daydayup.wolf.business.account.api.entity.License;
 import study.daydayup.wolf.business.account.biz.dal.dao.AccessTokenDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 import study.daydayup.wolf.business.account.biz.service.AccessTokenService;
-import study.daydayup.wolf.common.util.time.DateUtil;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -62,17 +60,17 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
     @Override
     public void expire(@NotBlank String accessToken) {
-        expire(accessToken, new Date());
+        expire(accessToken, LocalDateTime.now());
     }
 
     @Override
-    public void expire(@NotBlank String accessToken, Date expiredAt) {
+    public void expire(@NotBlank String accessToken, LocalDateTime expiredAt) {
         if (null == accessToken || "".equals(accessToken)) {
             return ;
         }
 
         if (null == expiredAt) {
-            expiredAt = new Date();
+            expiredAt = LocalDateTime.now();
         }
 
         accessTokenDAO.updateExpiredAtByAccessToken(accessToken, expiredAt);
@@ -89,28 +87,25 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         }
 
         LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusSeconds(seconds);
 
-        Date updatedAt = DateUtil.asDate(now);
-        Date expiredAt = formatExpireIn(now, seconds);
-        accessTokenDAO.updateExpiredAtByRefreshToken(refreshToken, expiredAt, updatedAt);
+        accessTokenDAO.updateExpiredAtByRefreshToken(refreshToken, expiredAt, now);
     }
 
     @Override
     public void refreshById(long id, int seconds) {
         LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusSeconds(seconds);
 
-        Date updatedAt = DateUtil.asDate(now);
-        Date expiredAt = formatExpireIn(now, seconds);
-        accessTokenDAO.updateExpiredAtById(id, expiredAt, updatedAt);
+        accessTokenDAO.updateExpiredAtById(id, expiredAt, now);
     }
 
     @Override
     public void refreshByAccountId(long accountId, int seconds) {
         LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusSeconds(seconds);
 
-        Date updatedAt = DateUtil.asDate(now);
-        Date expiredAt = formatExpireIn(now, seconds);
-        accessTokenDAO.updateExpiredAtByAccountId(accountId, expiredAt, updatedAt);
+        accessTokenDAO.updateExpiredAtByAccountId(accountId, expiredAt, now);
     }
 
     @Override
@@ -175,17 +170,13 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
     private void formatCreateDates(AccessTokenDO accessTokenDO, LicenseRequest request) {
         LocalDateTime now = LocalDateTime.now();
-        accessTokenDO.setCreatedAt(DateUtil.asDate(now));
+        accessTokenDO.setCreatedAt(now);
 
         LocalDateTime expiredAt = now.plusSeconds(request.getExpiredIn());
-        accessTokenDO.setExpiredAt(DateUtil.asDate(expiredAt));
+        accessTokenDO.setExpiredAt(expiredAt);
 
         LocalDateTime refreshExpiredAt = expiredAt.plusSeconds(request.getRefreshExpiredIn());
-        accessTokenDO.setRefreshExpiredAt(DateUtil.asDate(refreshExpiredAt) );
-    }
-
-    private Date formatExpireIn(LocalDateTime now, int seconds) {
-        return DateUtil.asDate( now.plusSeconds(seconds) );
+        accessTokenDO.setRefreshExpiredAt(refreshExpiredAt );
     }
 
     private String createToken() {

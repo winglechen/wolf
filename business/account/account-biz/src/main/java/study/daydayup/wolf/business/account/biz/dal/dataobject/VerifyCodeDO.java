@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.account.biz.dal.dataobject;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
@@ -12,15 +12,17 @@ public class VerifyCodeDO implements Serializable {
 
     private String code;
 
-    private Date expiredAt;
+    private LocalDateTime expiredAt;
 
     private boolean deleteFlag;
 
     private Long lastEditor;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
+
+    private Long orgId;
 
     private static final long serialVersionUID = 1L;
 
@@ -38,6 +40,7 @@ public class VerifyCodeDO implements Serializable {
         sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", orgId=").append(orgId);
         sb.append("]");
         return sb.toString();
     }
@@ -61,7 +64,8 @@ public class VerifyCodeDO implements Serializable {
             && (this.isDeleteFlag() == other.isDeleteFlag())
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+            && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()));
     }
 
     @Override
@@ -76,6 +80,7 @@ public class VerifyCodeDO implements Serializable {
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         return result;
     }
 }

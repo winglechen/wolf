@@ -8,7 +8,6 @@ import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent.controller
@@ -32,13 +31,12 @@ public class LogoutController extends AuthController {
     public String show() {
         Long accountId = (Long) session.get("accountId");
         Long orgId = (Long)session.get("orgId");
-        LocalDateTime expiredAt = DateUtil.asLocalDateTime((Date)session.get("expiredAt"));
+        LocalDateTime expiredAt = DateUtil.asLocalDateTime(session.get("expiredAt", Long.class));
         LocalDateTime now = LocalDateTime.now();
-        Date dNow = new Date();
 
         return "accountId:" + accountId + "; orgId:" + orgId
                 + "\nexpiredAt:" + expiredAt
                 + "\nnow:" + now
-                + "\ndateNow:" + DateUtil.asLocalDateTime(dNow);
+                ;
     }
 }

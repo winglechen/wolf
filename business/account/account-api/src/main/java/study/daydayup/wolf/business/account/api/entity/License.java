@@ -1,10 +1,9 @@
 package study.daydayup.wolf.business.account.api.entity;
 
 import lombok.Data;
-import study.daydayup.wolf.business.account.api.entity.Account;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.account.api.entity.license
@@ -21,8 +20,8 @@ public class License implements Serializable {
     protected String scope;
 
     protected String accessToken;
-    protected Date expiredAt;
+    protected LocalDateTime expiredAt;
     protected String refreshToken;
-    protected Date refreshExpiredAt;
+    protected LocalDateTime refreshExpiredAt;
 
 }

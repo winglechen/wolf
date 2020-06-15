@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
-import java.util.Date;
+import java.time.LocalDateTime;
 import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 import study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO;
 
@@ -20,7 +19,7 @@ public interface VerifyCodeDAO {
 
     VerifyCodeDO selectByMobile(@Param("mobile")String mobile);
 
-    int updateExpiredAtById(@Param("id")Long id,@Param("updatedExpiredAt")Date updatedExpiredAt);
+    int updateExpiredAtById(@Param("id")Long id,@Param("updatedExpiredAt") LocalDateTime updatedExpiredAt);
 
 
 
