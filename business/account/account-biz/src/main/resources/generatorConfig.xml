@@ -63,8 +63,8 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="study.daydayup.wolf.business.account.biz.dal.dao"
-                         targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="mapper/auto"
+                         targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
