@@ -10,5 +10,6 @@ import java.time.LocalDateTime;
  **/
 public interface VerifyCodeService {
     void send(String mobile, String code, LocalDateTime expiredAt);
+    void send(String mobile, String code, LocalDateTime expiredAt, Long orgId);
     boolean verify(String mobile, String code);
 }

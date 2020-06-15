@@ -21,11 +21,17 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 
     @Override
     public void send(String mobile, String code, LocalDateTime expiredAt) {
+        send(mobile, code, expiredAt, null);
+    }
+
+    @Override
+    public void send(String mobile, String code, LocalDateTime expiredAt, Long orgId) {
         VerifyCodeDO verifyCodeDO = new VerifyCodeDO();
 
         verifyCodeDO.setMobile(mobile);
         verifyCodeDO.setCode(code);
         verifyCodeDO.setExpiredAt(expiredAt);
+        verifyCodeDO.setOrgId(orgId);
         verifyCodeDO.setCreatedAt(LocalDateTime.now());
 
         verifyCodeDAO.insertSelective(verifyCodeDO);

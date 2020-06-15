@@ -90,7 +90,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         String code = createCode();
         LocalDateTime expiredAt = LocalDateTime.now().plusSeconds(request.getExpiredIn());
 
-        verifyCodeService.send(mobile, code, expiredAt);
+        verifyCodeService.send(mobile, code, expiredAt, request.getOrgId());
         sendSms(mobile, code, request.getOrgId());
 
         return Result.ok();
