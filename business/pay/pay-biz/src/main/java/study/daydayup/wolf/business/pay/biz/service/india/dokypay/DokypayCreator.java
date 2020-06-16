@@ -6,8 +6,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
@@ -94,8 +92,8 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     /**
-     * @param json
-     * @return
+     * @param json json request
+     * @return boolean response is value
      */
     private boolean isResponseValid(JSONObject json) {
         String responseSign = json.getJSONObject("data").getString("sign");
