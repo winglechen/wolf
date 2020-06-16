@@ -16,6 +16,7 @@ public interface PaymentDomainService extends Service {
     void logSubscribeResponse(int logType, int paymentMethod, String data);
     void logCreateResponse(String data);
 
+    void loadPayment(String paymentNo);
     Payment findByPaymentNo(String paymentNo);
     Payment findByTradeNo(String tradeNo);
 

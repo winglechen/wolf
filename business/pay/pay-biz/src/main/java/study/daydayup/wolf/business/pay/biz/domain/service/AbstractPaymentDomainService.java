@@ -9,6 +9,8 @@ import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentNotFoundException;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
@@ -45,6 +47,25 @@ public abstract class AbstractPaymentDomainService implements PaymentDomainServi
     @Override
     public void initConfig(@NonNull String configKey, Long payerId) {
         config = payConfig.getSupplier().get(configKey);
+    }
+
+    @Override
+    public void loadPayment(String paymentNo) {
+        if (StringUtil.isBlank(paymentNo)) {
+            throw new InvalidPayRequestException("paymentNo can't be null");
+        }
+
+        Payment tmp = findByPaymentNo(paymentNo);
+        if (tmp == null) {
+            throw new PaymentNotFoundException(paymentNo);
+        }
+
+        payment = tmp;
+    }
+
+    @Override
+    public void savePayment() {
+        paymentRepository.save(payment);
     }
 
     @Override

@@ -60,11 +60,6 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
     }
 
     @Override
-    public void savePayment() {
-        paymentRepository.add(payment);
-    }
-
-    @Override
     public PaymentCreateResponse formatResponse() {
         PaymentCreateResponse response = new PaymentCreateResponse();
         response.setPaymentNo(payment.getPaymentNo());
