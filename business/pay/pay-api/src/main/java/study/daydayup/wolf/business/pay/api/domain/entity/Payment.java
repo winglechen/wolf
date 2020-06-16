@@ -30,6 +30,8 @@ public class Payment implements Model {
 
     private String tradeNo;
     private String outTradeNo;
+    private LocalDateTime paidAt;
+    private LocalDateTime outPaidAt;
 
     private BigDecimal amount;
     private Integer currency;
