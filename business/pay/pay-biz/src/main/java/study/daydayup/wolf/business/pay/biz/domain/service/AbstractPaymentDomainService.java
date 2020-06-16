@@ -8,11 +8,14 @@ import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * study.daydayup.wolf.business.pay.biz.domain.service
@@ -39,11 +42,27 @@ public abstract class AbstractPaymentDomainService implements PaymentDomainServi
         initConfig(configKey, null);
     }
 
-    public void initConfig(@NonNull String configKey, Long payeeId) {
+    @Override
+    public void initConfig(@NonNull String configKey, Long payerId) {
         config = payConfig.getSupplier().get(configKey);
     }
 
+    @Override
+    public Payment findByPaymentNo(@NonNull String paymentNo) {
+        return paymentRepository.find(paymentNo);
+    }
 
+    @Override
+    public Payment findByTradeNo(String tradeNo) {
+        Integer state = PaymentStateEnum.WAIT_TO_PAY.getCode();
+
+        List<Payment> payments = paymentRepository.findByTradeNo(tradeNo, state);
+        if (CollectionUtil.isEmpty(payments) || null == payments.get(0)) {
+            return null;
+        }
+
+        return payments.get(0);
+    }
 
     @Override
     public void logCreateResponse(String data) {

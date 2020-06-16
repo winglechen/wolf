@@ -76,14 +76,12 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
     }
 
     protected boolean checkExistence(String tradeNo) {
-        Integer state = PaymentStateEnum.WAIT_TO_PAY.getCode();
-
-        List<Payment> payments = paymentRepository.findByTradeNo(tradeNo, state);
-        if (CollectionUtil.isEmpty(payments) || null == payments.get(0)) {
+        Payment p = findByTradeNo(tradeNo);
+        if (p == null) {
             return false;
         }
 
-        payment = payments.get(0);
+        payment = p;
         return true;
     }
 

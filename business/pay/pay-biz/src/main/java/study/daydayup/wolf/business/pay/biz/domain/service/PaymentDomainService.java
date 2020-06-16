@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.domain.service;
 
+import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.framework.layer.domain.Service;
 
 /**
@@ -10,11 +11,13 @@ import study.daydayup.wolf.framework.layer.domain.Service;
  **/
 public interface PaymentDomainService extends Service {
     void initConfig(String configKey);
-    void initConfig(String configKey, Long payeeId);
+    void initConfig(String configKey, Long payerId);
 
     void logSubscribeResponse(int logType, int paymentMethod, String data);
     void logCreateResponse(String data);
 
+    Payment findByPaymentNo(String paymentNo);
+    Payment findByTradeNo(String tradeNo);
 
     void savePayment();
 }
