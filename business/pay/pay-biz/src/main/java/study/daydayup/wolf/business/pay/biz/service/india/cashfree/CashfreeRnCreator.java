@@ -57,7 +57,7 @@ public class CashfreeRnCreator extends AbstractPaymentCreator implements Payment
     }
 
     @Override
-    public void parseEpiResponse() {
+    public void parseCreateResponse() {
         JSONObject json = JSON.parseObject(apiResponse);
         if (!isResponseSuccess(json)) {
             throw new InvalidEpiResponseException("Dokypay create response parse error");

@@ -11,5 +11,10 @@ import study.daydayup.wolf.framework.layer.domain.Service;
 public interface PaymentDomainService extends Service {
     void initConfig(String configKey);
     void initConfig(String configKey, Long payeeId);
-    void logResponse(int logType, int paymentMethod, String data);
+
+    void logSubscribeResponse(int logType, int paymentMethod, String data);
+    void logCreateResponse(String data);
+
+
+    void savePayment();
 }

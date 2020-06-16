@@ -6,10 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
-import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
-import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
-import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
@@ -28,25 +25,31 @@ import java.util.List;
 @Component
 public abstract class AbstractPaymentCreator extends AbstractPaymentDomainService implements PaymentCreator {
     protected PaymentCreateRequest request;
-    protected Payment payment;
-    protected ObjectMap attachment;
+    private ObjectMap attachment;
     protected String apiResponse;
 
-    @Resource
-    private PaymentRepository paymentRepository;
-    @Resource
-    private PaymentLogRepository logRepository;
+    @Override
+    public void initPayment(boolean duplicateCheck) {
+        if (!duplicateCheck) {
+            createPayment(request);
+            return;
+        }
+
+        if (!checkExistence(request.getTradeNo())) {
+            createPayment(request);
+        }
+    }
 
     @Override
     public PaymentCreateResponse create(@Validated PaymentCreateRequest request) {
         this.request = request;
 
         validateRequest();
-        initPayment();
+        initPayment(request.isDuplicateCheck());
 
         callPayEpi();
-        logEpiResponse();
-        parseEpiResponse();
+        logCreateResponse(apiResponse);
+        parseCreateResponse();
 
         savePayment();
         return formatResponse();
@@ -54,33 +57,6 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
 
     @Override
     public void validateRequest() {
-    }
-
-    @Override
-    public void initPayment() {
-        if (!request.isDuplicateCheck()) {
-            createPayment();
-            return;
-        }
-
-        if (!checkExistence()) {
-            createPayment();
-        }
-    }
-
-    @Override
-    public void logEpiResponse() {
-        PaymentLog log = PaymentLog.builder()
-                .paymentNo(payment.getPaymentNo())
-                .payeeId(payment.getPayeeId())
-                .payerId(payment.getPayerId())
-                .tradeNo(payment.getTradeNo())
-                .paymentMethod(payment.getPaymentMethod())
-                .logType(PaymentLogTypeEnum.PAY_REQUEST.getCode())
-                .data(apiResponse)
-                .build();
-
-        logRepository.add(log);
     }
 
     @Override
@@ -99,8 +75,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         return response;
     }
 
-    private boolean checkExistence() {
-        String tradeNo = request.getTradeNo();
+    protected boolean checkExistence(String tradeNo) {
         Integer state = PaymentStateEnum.WAIT_TO_PAY.getCode();
 
         List<Payment> payments = paymentRepository.findByTradeNo(tradeNo, state);
@@ -112,7 +87,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         return true;
     }
 
-    private void createPayment() {
+    protected void createPayment(PaymentCreateRequest request) {
         payment = new Payment();
         BeanUtils.copyProperties(request, payment);
 
@@ -122,6 +97,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
                 .build()
                 .create();
 
+        payment.setId(null);
         payment.setPaymentNo(paymentNo);
         payment.setPaymentMethod(request.getPaymentMethod());
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());

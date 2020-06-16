@@ -56,7 +56,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     }
 
     @Override
-    public void parseEpiResponse() {
+    public void parseCreateResponse() {
         parseOrder(order);
     }
 
