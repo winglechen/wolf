@@ -119,9 +119,9 @@ public class TradeNo implements ID {
     }
 
     private long getNano() {
-        if (0 != nano) {
-            return nano;
-        }
+//        if (0 != nano) {
+//            return nano;
+//        }
 
         nano = System.nanoTime();
         return nano;
