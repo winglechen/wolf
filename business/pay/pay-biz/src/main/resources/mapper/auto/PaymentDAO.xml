@@ -24,11 +24,13 @@
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="paid_at" jdbcType="TIMESTAMP" property="paidAt" />
+    <result column="out_paid_at" jdbcType="TIMESTAMP" property="outPaidAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, currency, `state`, 
     payment_type, payment_method, trade_no, out_trade_no, goods_id, goods_name, tags, 
-    attachment, version, delete_flag, last_editor, created_at, updated_at
+    attachment, version, delete_flag, last_editor, created_at, updated_at, paid_at, out_paid_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -48,7 +50,8 @@
       out_trade_no, goods_id, goods_name, 
       tags, attachment, version, 
       delete_flag, last_editor, created_at, 
-      updated_at)
+      updated_at, paid_at, out_paid_at
+      )
     values (#{id,jdbcType=BIGINT}, #{paymentNo,jdbcType=VARCHAR}, #{payerId,jdbcType=BIGINT}, 
       #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
@@ -56,7 +59,8 @@
       #{outTradeNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{updatedAt,jdbcType=TIMESTAMP}, #{paidAt,jdbcType=TIMESTAMP}, #{outPaidAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment
@@ -127,6 +131,12 @@
       <if test="updatedAt != null">
         updated_at,
       </if>
+      <if test="paidAt != null">
+        paid_at,
+      </if>
+      <if test="outPaidAt != null">
+        out_paid_at,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -194,6 +204,12 @@
       </if>
       <if test="updatedAt != null">
         #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paidAt != null">
+        #{paidAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outPaidAt != null">
+        #{outPaidAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -263,6 +279,12 @@
       <if test="updatedAt != null">
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="paidAt != null">
+        paid_at = #{paidAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outPaidAt != null">
+        out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -288,7 +310,9 @@
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      paid_at = #{paidAt,jdbcType=TIMESTAMP},
+      out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

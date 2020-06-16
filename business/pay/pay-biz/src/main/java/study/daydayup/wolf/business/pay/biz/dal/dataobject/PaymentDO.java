@@ -51,6 +51,10 @@ public class PaymentDO implements Serializable {
 
     private LocalDateTime updatedAt;
 
+    private LocalDateTime paidAt;
+
+    private LocalDateTime outPaidAt;
+
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -81,6 +85,8 @@ public class PaymentDO implements Serializable {
         sb.append(", lastEditor=").append(lastEditor);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", paidAt=").append(paidAt);
+        sb.append(", outPaidAt=").append(outPaidAt);
         sb.append("]");
         return sb.toString();
     }
@@ -118,7 +124,9 @@ public class PaymentDO implements Serializable {
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getLastEditor() == null ? other.getLastEditor() == null : this.getLastEditor().equals(other.getLastEditor()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
+            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
+            && (this.getPaidAt() == null ? other.getPaidAt() == null : this.getPaidAt().equals(other.getPaidAt()))
+            && (this.getOutPaidAt() == null ? other.getOutPaidAt() == null : this.getOutPaidAt().equals(other.getOutPaidAt()));
     }
 
     @Override
@@ -147,6 +155,8 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getLastEditor() == null) ? 0 : getLastEditor().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
+        result = prime * result + ((getPaidAt() == null) ? 0 : getPaidAt().hashCode());
+        result = prime * result + ((getOutPaidAt() == null) ? 0 : getOutPaidAt().hashCode());
         return result;
     }
 }
