@@ -6,12 +6,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
-import study.daydayup.wolf.common.lang.ds.ObjectMap;
-import study.daydayup.wolf.common.util.lang.JsonUtil;
-import study.daydayup.wolf.middleware.notice.api.config.SMSConfig;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
-import study.daydayup.wolf.middleware.notice.api.domain.exception.InvalidSMSConfigException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSEncodeFailException;
 import study.daydayup.wolf.middleware.notice.api.domain.exception.SMSTooLongException;
 import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.AbstractSMSSender;
@@ -19,7 +14,6 @@ import study.daydayup.wolf.middleware.notice.biz.domain.service.sms.SMSSender;
 import study.daydayup.wolf.common.util.encrypt.MD5Util;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -52,7 +46,7 @@ public class SkylineSender extends AbstractSMSSender implements SMSSender {
         this.msg = msg;
         this.smsSendConfig = config;
 
-        validConfig(CONFIG_KEY);
+        initConfig(CONFIG_KEY);
         return sendSms();
     }
 

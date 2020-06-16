@@ -44,7 +44,7 @@ public abstract class AbstractSMSSender implements SMSSender {
     }
 
 
-    protected void validConfig(@NonNull String configKey) {
+    protected void initConfig(@NonNull String configKey) {
         if (null == smsConfig.getSupplier()) {
             throw new InvalidSMSConfigException();
         }

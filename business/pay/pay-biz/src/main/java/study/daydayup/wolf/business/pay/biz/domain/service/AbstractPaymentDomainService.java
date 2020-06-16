@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.domain.service;
 
 import lombok.NonNull;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.config.PayConfig;
 import study.daydayup.wolf.business.pay.api.config.PaySupplier;
@@ -9,10 +8,13 @@ import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.entity.PaymentLog;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayConfigException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentNotFoundException;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentLogRepository;
 import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
+import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
+import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 
@@ -27,16 +29,17 @@ import java.util.List;
  **/
 @Component
 public abstract class AbstractPaymentDomainService implements PaymentDomainService {
-    protected PaySupplier config;
+    protected PaySupplier supplierConfig;
     protected Payment payment;
+
     @Resource
     protected PayConfig payConfig;
-
     @Resource
     protected PaymentRepository paymentRepository;
-
     @Resource
     private PaymentLogRepository logRepository;
+    @Resource
+    protected CompanySettingAgent companySettingAgent;
 
 
     @Override
@@ -45,8 +48,42 @@ public abstract class AbstractPaymentDomainService implements PaymentDomainServi
     }
 
     @Override
-    public void initConfig(@NonNull String configKey, Long payerId) {
-        config = payConfig.getSupplier().get(configKey);
+    public void initConfig(@NonNull String configKey, Long payeeId) {
+        String errorMsg;
+        if (null == payConfig.getSupplier()) {
+            throw new InvalidPayConfigException("payConfig.supplier not found");
+        }
+
+        PaySupplier tmp = payConfig.getSupplier().get(configKey);
+        if (tmp == null) {
+            errorMsg = StringUtil.join("payConfig.supplier: ", configKey, " not found" );
+            throw new InvalidPayConfigException(errorMsg );
+        }
+
+        supplierConfig = tmp;
+        mergeOrgSetting(configKey, payeeId);
+    }
+
+    protected void mergeOrgSetting(@NonNull String configKey, Long orgId) {
+        if (orgId == null) {
+            return;
+        }
+        String errorMsg;
+        companySettingAgent.init(orgId, false);
+        companySettingAgent.namespace(PayConfig.PAY_NAMESPACE);
+        ObjectMap orgSetting = companySettingAgent.getAll();
+        if (orgSetting == null || null == orgSetting.get("supplier")) {
+            errorMsg = StringUtil.join("payConfig for org: ", orgId, " not found");
+            throw new InvalidPayConfigException(errorMsg);
+        }
+
+        PaySupplier supplier = orgSetting.getJSONObject("supplier").getObject(configKey, PaySupplier.class);
+        if (supplier == null) {
+            errorMsg = StringUtil.join("payConfig(", configKey, ") for org: ", orgId , " not found");
+            throw new InvalidPayConfigException(errorMsg);
+        }
+
+        supplierConfig = supplier;
     }
 
     @Override
