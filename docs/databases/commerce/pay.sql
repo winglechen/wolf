@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `payment`
 
     `trade_no`              VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `paid_at`               DATETIME            COMMENT '支付时间',
+    `out_paid_at`           DATETIME            COMMENT '外部支付时间',
 
     `goods_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `goods_name`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
@@ -35,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `payment`
     UNIQUE INDEX `udx_pay_no` (`payment_no` ASC),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
+
+
 
 DROP TABLE IF EXISTS `payment_state_log`;
 CREATE TABLE IF NOT EXISTS `payment_state_log`
