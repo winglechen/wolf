@@ -21,6 +21,7 @@ import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * study.daydayup.wolf.business.account.auth.agent
@@ -141,8 +142,6 @@ public class Session {
         return isLogin(LocalDateTime.now());
     }
 
-
-
     public void changeScope(@NonNull Long orgId) {
         set("orgId", orgId);
         oauthLicenseService.changeScope(sessionId, String.valueOf(orgId));
@@ -220,7 +219,8 @@ public class Session {
         }
 
         //TODO: add batch update when request finished
-        getRedisHashOps().putAll(sessionId, data);
+        redisTemplate.opsForHash().putAll(sessionId, data);
+        redisTemplate.expire(sessionId, 1, TimeUnit.DAYS);
     }
 
     private HashOperations<String, String, Object> getRedisHashOps() {

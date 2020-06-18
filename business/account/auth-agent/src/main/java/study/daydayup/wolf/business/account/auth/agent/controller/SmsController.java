@@ -58,7 +58,7 @@ public class SmsController extends AuthController {
     }
 
     @PostMapping("/auth/sms/code")
-    public Result code(@Validated @RequestBody SmsCodeRequest request) {
+    public Result<Object> code(@Validated @RequestBody SmsCodeRequest request) {
         request.setEnv(null);
         request.setExpiredIn(authConfig.getCodeExpiredIn());
 
@@ -69,7 +69,7 @@ public class SmsController extends AuthController {
     }
 
     @PostMapping("/auth/sms/voice")
-    public Result voice(@RequestBody SmsCodeRequest request) {
+    public Result<Object> voice(@RequestBody SmsCodeRequest request) {
         return Result.ok();
     }
 }

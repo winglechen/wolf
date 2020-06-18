@@ -4,9 +4,9 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "18067966015",
-  "code": "123",
-  "orgId": 2
+  "mobile": "180679620012",
+  "code": "778899",
+  "orgId": 1
 }
 
 ###
@@ -16,8 +16,8 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "mobile": "919532391092",
-  "orgId": 2
+  "mobile": "180679620012",
+  "orgId": 1
 }
 
 ###
@@ -40,7 +40,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "account": "18067968001",
+  "account": "180679620013",
   "password": "123456",
   "orgId": 1
 }
@@ -53,7 +53,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "account": "18067968001",
+  "account": "180679620013",
   "password": "123456",
   "orgId": 1
 }

@@ -35,12 +35,16 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
         Long requestAccountId = request.getAccountId();
         Long dbAccountId = accessTokenDO.getAccountId();
-        if (dbAccountId == null) {
-            return createLicense(request, true);
+
+        //从未登录状态到已登录状态
+        if (null == dbAccountId || dbAccountId.equals(0L)) {
+            changeAccount(accessTokenDO, request.getExpiredIn(), requestAccountId);
+            return doToLicense(accessTokenDO);
         }
 
+        //已存在，刷新expiredAt
         if (requestAccountId.equals(dbAccountId)) {
-            refreshById(accessTokenDO.getId(), request.getExpiredIn());
+            refresh(accessTokenDO, request.getExpiredIn());
             return doToLicense(accessTokenDO);
         }
 
@@ -90,6 +94,23 @@ public class AccessTokenServiceImpl implements AccessTokenService {
         LocalDateTime expiredAt = now.plusSeconds(seconds);
 
         accessTokenDAO.updateExpiredAtByRefreshToken(refreshToken, expiredAt, now);
+    }
+
+    public void refresh(AccessTokenDO accessTokenDO, int seconds) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusSeconds(seconds);
+
+        accessTokenDO.setExpiredAt(expiredAt);
+        accessTokenDAO.updateExpiredAtById(accessTokenDO.getId(), expiredAt, now);
+    }
+
+    public void changeAccount(AccessTokenDO accessTokenDO, int seconds, Long accountId) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusSeconds(seconds);
+
+        accessTokenDO.setExpiredAt(expiredAt);
+        accessTokenDO.setAccountId(accountId);
+        accessTokenDAO.updateAccountById(accessTokenDO.getId(), expiredAt, now, accountId);
     }
 
     @Override

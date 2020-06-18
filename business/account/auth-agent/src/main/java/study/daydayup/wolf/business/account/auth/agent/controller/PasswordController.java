@@ -52,8 +52,6 @@ public class PasswordController extends AuthController {
         return Result.ok(filterLicense(license));
     }
 
-
-
     @PostMapping("/auth/password/registerAndLogin")
     public Result<OauthLicense> registerAndLogin(HttpServletRequest httpRequest, @Valid @RequestBody PasswordRequest request) {
 //        if(isLogin()) {

@@ -126,8 +126,10 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
             return 0;
         }
 
+        //set password if original password is blank
         if (StringUtil.isBlank(accountDO.getPassword()) && StringUtil.notBlank(request.getNewPassword())) {
             saveNewPassword(request, accountDO);
+            return accountDO.getId();
         }
 
         if (!verifyPassword(accountDO.getSalt(), accountDO.getPassword(), password)) {
