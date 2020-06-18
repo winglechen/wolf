@@ -52,7 +52,7 @@ public class PaymentRepository extends AbstractRepository implements Repository 
     }
 
     public long save(@NonNull Payment payment) {
-        if (null != payment.getId()) {
+        if (null == payment.getId()) {
             return add(payment);
         }
 
