@@ -35,8 +35,6 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
     private static final int PAYMENT_METHOD = PaymentChannelEnum.CASHFREE.getCode();
     private static final String CONFIG_KEY = "cashfree";
 
-    private String paymentNo;
-
     private JSONObject response;
 
     @Resource

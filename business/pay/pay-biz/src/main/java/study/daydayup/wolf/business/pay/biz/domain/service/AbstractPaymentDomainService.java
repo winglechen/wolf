@@ -30,6 +30,7 @@ import java.util.List;
 @Component
 public abstract class AbstractPaymentDomainService implements PaymentDomainService {
     protected PaySupplier supplierConfig;
+    protected String paymentNo;
     protected Payment payment;
 
     @Resource
