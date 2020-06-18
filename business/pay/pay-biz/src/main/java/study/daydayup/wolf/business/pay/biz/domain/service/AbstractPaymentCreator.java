@@ -7,14 +7,9 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
-import study.daydayup.wolf.business.pay.biz.domain.repository.PaymentRepository;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.string.id.TradeNo;
-import study.daydayup.wolf.common.util.collection.CollectionUtil;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service
@@ -24,25 +19,25 @@ import java.util.List;
  **/
 @Component
 public abstract class AbstractPaymentCreator extends AbstractPaymentDomainService implements PaymentCreator {
-    protected PaymentCreateRequest request;
-    private ObjectMap attachment;
+    protected PaymentCreateRequest createRequest;
+    protected ObjectMap attachment;
     protected String apiResponse;
 
     @Override
     public void initPayment(boolean duplicateCheck) {
         if (!duplicateCheck) {
-            createPayment(request);
+            createPayment(createRequest);
             return;
         }
 
-        if (!checkExistence(request.getTradeNo())) {
-            createPayment(request);
+        if (!checkExistence(createRequest.getTradeNo())) {
+            createPayment(createRequest);
         }
     }
 
     @Override
     public PaymentCreateResponse create(@Validated PaymentCreateRequest request) {
-        this.request = request;
+        this.createRequest = request;
 
         validateRequest();
         initPayment(request.isDuplicateCheck());

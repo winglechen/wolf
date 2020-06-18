@@ -63,6 +63,11 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         return dao.updateByPaymentNo(paymentDO, paymentNo);
     }
 
+    private void filterReadOnlyAttributes(PaymentDO paymentDO) {
+        
+
+    }
+
     public int save(@NonNull PaymentEntity entity) {
         String paymentNo = entity.getKey().getPaymentNo();
         Payment changes = entity.getChanges();
