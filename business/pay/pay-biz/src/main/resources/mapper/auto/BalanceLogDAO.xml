@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.pay.biz.dal.dao.BalanceLogDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.pay.biz.dal.dataobject.BalanceLogDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="source_amount" jdbcType="DECIMAL" property="sourceAmount" />
+    <result column="target_amount" jdbcType="DECIMAL" property="targetAmount" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, currency, source_amount, target_amount, memo, delete_flag, created_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from balance_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from balance_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.BalanceLogDO">
+    insert into balance_log (id, account_id, currency, 
+      source_amount, target_amount, memo, 
+      delete_flag, created_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{currency,jdbcType=INTEGER}, 
+      #{sourceAmount,jdbcType=DECIMAL}, #{targetAmount,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.BalanceLogDO">
+    insert into balance_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="sourceAmount != null">
+        source_amount,
+      </if>
+      <if test="targetAmount != null">
+        target_amount,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="sourceAmount != null">
+        #{sourceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="targetAmount != null">
+        #{targetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.BalanceLogDO">
+    update balance_log
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="sourceAmount != null">
+        source_amount = #{sourceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="targetAmount != null">
+        target_amount = #{targetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.BalanceLogDO">
+    update balance_log
+    set account_id = #{accountId,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=INTEGER},
+      source_amount = #{sourceAmount,jdbcType=DECIMAL},
+      target_amount = #{targetAmount,jdbcType=DECIMAL},
+      memo = #{memo,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

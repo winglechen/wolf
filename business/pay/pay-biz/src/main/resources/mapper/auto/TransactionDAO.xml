@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.pay.biz.dal.dao.TransactionDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="payee_id" jdbcType="BIGINT" property="payeeId" />
+    <result column="payment_no" jdbcType="VARCHAR" property="paymentNo" />
+    <result column="transaction_type" jdbcType="TINYINT" property="transactionType" />
+    <result column="payment_channel" jdbcType="SMALLINT" property="paymentChannel" />
+    <result column="currency" jdbcType="INTEGER" property="currency" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="settlement_no" jdbcType="VARCHAR" property="settlementNo" />
+    <result column="settlement_state" jdbcType="TINYINT" property="settlementState" />
+    <result column="settled_at" jdbcType="TIMESTAMP" property="settledAt" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account_id, payee_id, payment_no, transaction_type, payment_channel, currency, 
+    amount, settlement_no, settlement_state, settled_at, delete_flag, created_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from transaction
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from transaction
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
+    insert into transaction (id, account_id, payee_id, 
+      payment_no, transaction_type, payment_channel, 
+      currency, amount, settlement_no, 
+      settlement_state, settled_at, delete_flag, 
+      created_at)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{payeeId,jdbcType=BIGINT}, 
+      #{paymentNo,jdbcType=VARCHAR}, #{transactionType,jdbcType=TINYINT}, #{paymentChannel,jdbcType=SMALLINT}, 
+      #{currency,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{settlementNo,jdbcType=VARCHAR}, 
+      #{settlementState,jdbcType=TINYINT}, #{settledAt,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
+    insert into transaction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="payeeId != null">
+        payee_id,
+      </if>
+      <if test="paymentNo != null">
+        payment_no,
+      </if>
+      <if test="transactionType != null">
+        transaction_type,
+      </if>
+      <if test="paymentChannel != null">
+        payment_channel,
+      </if>
+      <if test="currency != null">
+        currency,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="settlementNo != null">
+        settlement_no,
+      </if>
+      <if test="settlementState != null">
+        settlement_state,
+      </if>
+      <if test="settledAt != null">
+        settled_at,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="payeeId != null">
+        #{payeeId,jdbcType=BIGINT},
+      </if>
+      <if test="paymentNo != null">
+        #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionType != null">
+        #{transactionType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentChannel != null">
+        #{paymentChannel,jdbcType=SMALLINT},
+      </if>
+      <if test="currency != null">
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="settlementNo != null">
+        #{settlementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementState != null">
+        #{settlementState,jdbcType=TINYINT},
+      </if>
+      <if test="settledAt != null">
+        #{settledAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
+    update transaction
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="payeeId != null">
+        payee_id = #{payeeId,jdbcType=BIGINT},
+      </if>
+      <if test="paymentNo != null">
+        payment_no = #{paymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionType != null">
+        transaction_type = #{transactionType,jdbcType=TINYINT},
+      </if>
+      <if test="paymentChannel != null">
+        payment_channel = #{paymentChannel,jdbcType=SMALLINT},
+      </if>
+      <if test="currency != null">
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="settlementNo != null">
+        settlement_no = #{settlementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementState != null">
+        settlement_state = #{settlementState,jdbcType=TINYINT},
+      </if>
+      <if test="settledAt != null">
+        settled_at = #{settledAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
+    update transaction
+    set account_id = #{accountId,jdbcType=BIGINT},
+      payee_id = #{payeeId,jdbcType=BIGINT},
+      payment_no = #{paymentNo,jdbcType=VARCHAR},
+      transaction_type = #{transactionType,jdbcType=TINYINT},
+      payment_channel = #{paymentChannel,jdbcType=SMALLINT},
+      currency = #{currency,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      settlement_no = #{settlementNo,jdbcType=VARCHAR},
+      settlement_state = #{settlementState,jdbcType=TINYINT},
+      settled_at = #{settledAt,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
