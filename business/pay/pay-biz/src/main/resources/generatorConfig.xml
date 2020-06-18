@@ -106,6 +106,29 @@
         </table>
 
 
+        <table tableName="transaction" domainObjectName="TransactionDO" mapperName="TransactionDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="settlement_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="transaction_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="payment_channel" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+        </table>
+
+        <table tableName="settlement" domainObjectName="SettlementDO" mapperName="SettlementDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="settlement_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="payment_channel" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+        </table>
+
+        <table tableName="balance" domainObjectName="BalanceDO" mapperName="BalanceDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="locker_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+        </table>
+
+        <table tableName="balance_log" domainObjectName="BalanceLogDO" mapperName="BalanceLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+        </table>
+
 
     </context>
 </generatorConfiguration>

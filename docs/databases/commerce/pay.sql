@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `transaction`
 
     `payment_no`            VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `transaction_type`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '1, 入帐； 2，退款；...',
-    `payment_channel`       TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+    `payment_channel`       SMALLINT(6) UNSIGNED NOT NULL DEFAULT 0,
 
     `currency`              INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0.00,
