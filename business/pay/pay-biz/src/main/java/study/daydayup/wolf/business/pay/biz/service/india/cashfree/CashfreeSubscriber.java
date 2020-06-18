@@ -35,6 +35,8 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
     private static final int PAYMENT_METHOD = PaymentChannelEnum.CASHFREE.getCode();
     private static final String CONFIG_KEY = "cashfree";
 
+    private String paymentNo;
+
     private JSONObject response;
 
     @Resource
@@ -42,11 +44,13 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
 
     public int subscribe(@NonNull String data) {
         logSubscribeResponse(LOG_TYPE, PAYMENT_METHOD, data);
-        initConfig(CONFIG_KEY);
 
         if (!parseResponse(data)) {
             return NotifyReturnEnum.PARSE_ERROR.getCode();
         }
+
+        loadPayment(paymentNo);
+        initConfig(CONFIG_KEY, payment.getPayeeId());
 
         if (!isResponseValid()) {
             return NotifyReturnEnum.INVALID_SIGN.getCode();
@@ -70,6 +74,11 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
             return false;
         }
 
+        if (json.getString("orderId") == null) {
+            return false;
+        }
+        paymentNo = json.getString("orderId");
+
         String status = json.getString("txStatus");
         return null != status;
     }
@@ -88,6 +97,7 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
 
     private int handlePayment() {
         PayNotification notification = PayNotification.builder()
+                .payment(payment)
                 .amount(getAmount())
                 .paymentNo(response.getString("orderId"))
                 .outOrderNo(response.getString("referenceId"))
