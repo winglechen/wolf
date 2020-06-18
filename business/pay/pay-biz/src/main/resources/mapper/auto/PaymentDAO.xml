@@ -42,7 +42,7 @@
     delete from payment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment (id, payment_no, payer_id, 
       payer_name, payee_id, payee_name, 
       amount, currency, `state`, 
@@ -62,7 +62,7 @@
       #{updatedAt,jdbcType=TIMESTAMP}, #{paidAt,jdbcType=TIMESTAMP}, #{outPaidAt,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

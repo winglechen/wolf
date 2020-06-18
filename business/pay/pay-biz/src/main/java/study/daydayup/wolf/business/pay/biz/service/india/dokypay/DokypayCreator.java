@@ -42,7 +42,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 
     @Override
     public void callPayEpi() {
-        initConfig(CONFIG_KEY);
+        initConfig(CONFIG_KEY, createRequest.getPayeeId());
         Request payRequest = createRequest();
 
         try {
@@ -166,7 +166,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 //        args.put("payerMobile", "123456789");
 //        return;
 
-        IndianBankCard card = indianCustomerEpi.findContact(request.getPayerId(), request.getPayeeId());
+        IndianBankCard card = indianCustomerEpi.findContact(createRequest.getPayerId(), createRequest.getPayeeId());
         if (card == null) {
             return;
         }
@@ -185,7 +185,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     private String getAmount() {
-        BigDecimal amount = request.getAmount();
+        BigDecimal amount = createRequest.getAmount();
         amount = DecimalUtil.scale(amount, 2);
 
         return amount.toString();

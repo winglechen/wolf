@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
 import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
@@ -38,29 +36,25 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
     private static final String CONFIG_KEY = "cashfree";
 
     private JSONObject response;
-    private PaySupplier config;
-    @Resource
-    private PayConfig payConfig;
+
     @Resource
     private CashfreePaidHandler cashfreePaidHandler;
 
     public int subscribe(@NonNull String data) {
         logSubscribeResponse(LOG_TYPE, PAYMENT_METHOD, data);
-        initConfig();
 
         if (!parseResponse(data)) {
             return NotifyReturnEnum.PARSE_ERROR.getCode();
         }
 
+        loadPayment(paymentNo);
+        initConfig(CONFIG_KEY, payment.getPayeeId());
+
         if (!isResponseValid()) {
             return NotifyReturnEnum.INVALID_SIGN.getCode();
         }
 
-        return savePayment();
-    }
-
-    private void initConfig() {
-        config = payConfig.getSupplier().get(CONFIG_KEY);
+        return handlePayment();
     }
 
     private boolean parseResponse(@NonNull String data) {
@@ -69,9 +63,7 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
             return false;
         }
 
-        Map<String, Object> objMap = new HashMap<>(map);
-        response = new JSONObject(objMap);
-
+        Map<String, Object> objMap = new HashMap<>(map); response = new JSONObject(objMap);
         return isResponseSuccess(response);
     }
 
@@ -79,6 +71,11 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
         if (null == json) {
             return false;
         }
+
+        if (json.getString("orderId") == null) {
+            return false;
+        }
+        paymentNo = json.getString("orderId");
 
         String status = json.getString("txStatus");
         return null != status;
@@ -91,13 +88,14 @@ public class CashfreeSubscriber extends AbstractPaymentSubscriber implements Pay
         }
 
         Map<String, Object> data = response.getInnerMap();
-        String sign = SignUtil.create(config.getAppSecret(), data);
+        String sign = SignUtil.create(supplierConfig.getAppSecret(), data);
 
         return responseSign.equals(sign);
     }
 
-    private int savePayment() {
+    private int handlePayment() {
         PayNotification notification = PayNotification.builder()
+                .payment(payment)
                 .amount(getAmount())
                 .paymentNo(response.getString("orderId"))
                 .outOrderNo(response.getString("referenceId"))

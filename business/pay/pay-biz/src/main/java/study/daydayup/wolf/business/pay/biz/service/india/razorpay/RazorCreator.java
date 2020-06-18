@@ -32,6 +32,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
             "created", "attempted", "paid"
     };
 
+    //TODO use PayConfig
     @Resource
     private RazorConfig razorConfig;
 
@@ -125,7 +126,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
     }
 
     private int getAmount() {
-        BigDecimal amount = request.getAmount();
+        BigDecimal amount = createRequest.getAmount();
         amount = amount.multiply(BigDecimal.valueOf(100));
 
         this.amount = DecimalUtil.toInt(amount);

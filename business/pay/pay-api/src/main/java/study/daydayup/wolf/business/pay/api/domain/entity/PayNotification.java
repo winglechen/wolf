@@ -24,6 +24,7 @@ public class PayNotification implements Model {
      * order.paid or payout.processed or ...
      */
     private String event;
+    private Payment payment;
 
     private Integer paymentMethod;
     private String paymentNo;

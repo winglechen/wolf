@@ -32,14 +32,13 @@ import java.util.Objects;
 public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCreator {
     private static final String CONFIG_KEY = "cashfree";
     private static final OkHttpClient CLIENT = new OkHttpClient();
-    private static final MediaType JSON_CONTENT_TYPE = MediaType.parse("application/json; charset=utf-8");
 
     @Resource
     private IndianCustomerEpi indianCustomerEpi;
 
     @Override
     public void callPayEpi() {
-        initConfig(CONFIG_KEY);
+        initConfig(CONFIG_KEY, createRequest.getPayeeId());
         Request payRequest = createRequest();
 
         try {
@@ -99,8 +98,6 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         return new Request.Builder()
                 .url(supplierConfig.getCreateUrl())
                 .header("Content-Type", "application/x-www-form-urlencoded")
-//                .header("x-client-id", config.getAppId())
-//                .header("x-client-secret", config.getAppSecret())
                 .post(requestBody)
                 .build();
     }
@@ -112,7 +109,7 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 //        args.put("customerPhone", "123456789");
 //        return args;
 
-        IndianBankCard card = indianCustomerEpi.findContact(request.getPayerId(), request.getPayeeId());
+        IndianBankCard card = indianCustomerEpi.findContact(createRequest.getPayerId(), createRequest.getPayeeId());
         if (card == null) {
             throw new InvalidPayConfigException("lack of customer info(name,email,mobile)");
         }
@@ -156,7 +153,7 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
     }
 
     private BigDecimal getAmount() {
-        BigDecimal amount = request.getAmount();
+        BigDecimal amount = createRequest.getAmount();
         amount = DecimalUtil.scale(amount, 2);
 
         return amount;

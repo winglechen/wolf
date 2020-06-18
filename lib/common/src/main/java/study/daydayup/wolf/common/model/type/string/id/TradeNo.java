@@ -2,6 +2,7 @@ package study.daydayup.wolf.common.model.type.string.id;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.contract.ID;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -40,6 +41,25 @@ public class TradeNo implements ID {
     private long accountId;
     private long uuid;
     private long nano;
+
+    public static String recreate(@NonNull String tradeNo) {
+        int len = tradeNo.length();
+        if (len < 5) {
+            return null;
+        }
+
+        String suffix = tradeNo.substring(len - 3);
+        int num = Integer.parseInt(suffix);
+        int random = ThreadLocalRandom.current().nextInt(10);
+
+        if (num <= 950) {
+            num += random;
+        } else {
+            num -= random;
+        }
+
+        return StringUtil.join(tradeNo.substring(0, len-3), num);
+    }
 
     public static TradeNo of(String stringNo) {
         return of(stringNo, 0);

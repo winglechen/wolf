@@ -23,6 +23,27 @@ public class BeanUtil {
         return a.equals(b);
     }
 
+    public static boolean isEmpty(Object object) {
+        if (null == object) {
+            return true;
+        }
+
+        Field[] fields = object.getClass().getDeclaredFields();
+
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+                if (null != field.get(object)) {
+                    return false;
+                }
+            }
+        } catch (IllegalAccessException e) {
+            return true;
+        }
+
+        return true;
+    }
+
     public static Map<String, Object> toMap(@NonNull Object object) {
         Map<String, Object> map = new HashMap<>();
         Field[] fields = object.getClass().getDeclaredFields();

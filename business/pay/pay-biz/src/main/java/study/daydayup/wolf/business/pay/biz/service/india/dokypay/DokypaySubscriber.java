@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.PayNotification;
 import study.daydayup.wolf.business.pay.api.domain.enums.NotifyReturnEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentLogTypeEnum;
@@ -37,26 +35,25 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     private static final int PAYMENT_METHOD = PaymentChannelEnum.DOKYPAY.getCode();
     private static final String CONFIG_KEY = "dokypay";
     private JSONObject response;
-    private PaySupplier config;
 
-    @Resource
-    private PayConfig payConfig;
     @Resource
     private DokypayPaidHandler dokypayPaidHandler;
 
     public int subscribe(@NonNull String data) {
         logSubscribeResponse(LOG_TYPE, PAYMENT_METHOD, data);
-        initConfig();
 
         if (!parseResponse(data)) {
             return NotifyReturnEnum.PARSE_ERROR.getCode();
         }
 
+        loadPayment(paymentNo);
+        initConfig(CONFIG_KEY, payment.getPayeeId());
+
         if (!isResponseValid()) {
             return NotifyReturnEnum.INVALID_SIGN.getCode();
         }
 
-        return savePayment();
+        return handlePayment();
     }
 
     private boolean parseResponse(@NonNull String data) {
@@ -76,6 +73,11 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
             return false;
         }
 
+        if (null == response.getString("merTransNo")) {
+            return false;
+        }
+        paymentNo = response.getString("merTransNo");
+
         String status = json.getString("transStatus");
         return null != status;
     }
@@ -87,17 +89,14 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
         }
 
         Map<String, Object> data = response.getInnerMap();
-        String sign = SignUtil.create(config.getAppSecret(), data);
+        String sign = SignUtil.create(supplierConfig.getAppSecret(), data);
 
         return responseSign.equals(sign);
     }
 
-    private void initConfig() {
-        config = payConfig.getSupplier().get(CONFIG_KEY);
-    }
-
-    private int savePayment() {
+    private int handlePayment() {
         PayNotification notification = PayNotification.builder()
+                .payment(payment)
                 .amount(getAmount())
                 .paymentNo(response.getString("merTransNo"))
                 .outOrderNo(response.getString("transNo"))

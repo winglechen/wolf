@@ -36,7 +36,7 @@ public abstract class AbstractNotificationHandler implements NotificationHandler
             return NotifyReturnEnum.USELESS.getCode();
         }
 
-        if (!initPayment()) {
+        if (!loadPayment()) {
             return NotifyReturnEnum.FAIL.getCode();
         }
 
@@ -64,8 +64,14 @@ public abstract class AbstractNotificationHandler implements NotificationHandler
         return tradeNotifier.notify(paymentEntity);
     }
 
-    protected boolean initPayment() {
-        Payment payment = paymentRepository.find(notification.getPaymentNo());
+    protected boolean loadPayment() {
+        Payment payment;
+        if (null != notification.getPayment()) {
+            payment = notification.getPayment();
+        } else {
+            payment = paymentRepository.find(notification.getPaymentNo());
+        }
+
         if (payment == null) {
             return false;
         }

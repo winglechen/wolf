@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
 import study.daydayup.wolf.business.pay.biz.domain.entity.PaymentEntity;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
@@ -39,14 +40,18 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         return CollectionUtil.to(paymentDOS, this::toModel);
     }
 
-    public int add(@NonNull Payment payment) {
+    public long add(@NonNull Payment payment) {
         PaymentDO paymentDO = toDo(payment);
         paymentDO.setCreatedAt(context.getRequestTime());
 
-        return dao.insertSelective(paymentDO);
+        dao.insertSelective(paymentDO);
+        if (null != paymentDO.getId()) {
+            return paymentDO.getId();
+        }
+        return 0;
     }
 
-    public int save(@NonNull Payment payment) {
+    public long save(@NonNull Payment payment) {
         if (null != payment.getId()) {
             return add(payment);
         }
@@ -57,9 +62,13 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         String paymentNo = payment.getPaymentNo();
 
         PaymentDO paymentDO = toDo(payment);
-        clearReadOnlyProperties(paymentDO);
-        paymentDO.setUpdatedAt(context.getRequestTime());
 
+        clearReadOnlyProperties(paymentDO);
+        if (BeanUtil.isEmpty(paymentDO)) {
+            return 0;
+        }
+
+        paymentDO.setUpdatedAt(context.getRequestTime());
         return dao.updateByPaymentNo(paymentDO, paymentNo);
     }
 
