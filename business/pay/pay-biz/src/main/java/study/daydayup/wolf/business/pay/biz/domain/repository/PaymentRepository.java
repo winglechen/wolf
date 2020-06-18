@@ -40,14 +40,18 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         return CollectionUtil.to(paymentDOS, this::toModel);
     }
 
-    public int add(@NonNull Payment payment) {
+    public long add(@NonNull Payment payment) {
         PaymentDO paymentDO = toDo(payment);
         paymentDO.setCreatedAt(context.getRequestTime());
 
-        return dao.insertSelective(paymentDO);
+        dao.insertSelective(paymentDO);
+        if (null != paymentDO.getId()) {
+            return paymentDO.getId();
+        }
+        return 0;
     }
 
-    public int save(@NonNull Payment payment) {
+    public long save(@NonNull Payment payment) {
         if (null != payment.getId()) {
             return add(payment);
         }

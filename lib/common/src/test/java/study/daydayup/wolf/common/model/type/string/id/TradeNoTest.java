@@ -21,6 +21,14 @@ import static org.junit.Assert.*;
 public class TradeNoTest {
 
 //    @Test
+    public void recreate() {
+        String tradeNo = createTradeNo();
+        String newTradeNo = TradeNo.recreate(tradeNo);
+
+        System.out.println(tradeNo);
+        System.out.println(newTradeNo);
+    }
+//    @Test
     public void create() {
         create2();
 //        create3();

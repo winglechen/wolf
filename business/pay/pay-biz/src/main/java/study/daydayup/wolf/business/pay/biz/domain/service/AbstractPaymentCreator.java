@@ -1,8 +1,10 @@
 package study.daydayup.wolf.business.pay.biz.domain.service;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.pay.api.domain.exception.TradeNoCreateFailException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
@@ -19,6 +21,7 @@ import study.daydayup.wolf.common.model.type.string.id.TradeNo;
  **/
 @Component
 public abstract class AbstractPaymentCreator extends AbstractPaymentDomainService implements PaymentCreator {
+    protected static final int INSERT_RETRY_TIMES = 3;
     protected PaymentCreateRequest createRequest;
     protected ObjectMap attachment;
     protected String apiResponse;
@@ -90,6 +93,46 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         payment.setPaymentMethod(request.getPaymentMethod());
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
         attachment = new ObjectMap();
+
+        addPayment();
+    }
+
+    protected void addPayment() {
+        Long id = null;
+        for (int i = 0; i < INSERT_RETRY_TIMES; i++) {
+            id = doAdding();
+            if (id == null) {
+                changePaymentNo();
+                continue;
+            }
+        }
+
+        if (id == null) {
+            throw new TradeNoCreateFailException();
+        }
+        payment.setId(id);
+    }
+
+    protected void changePaymentNo() {
+        String tradeNo = payment.getTradeNo();
+        if (tradeNo == null) {
+            throw new TradeNoCreateFailException("payment.tradeNo is null");
+        }
+
+        String newTradeNo = TradeNo.recreate(tradeNo);
+        if (newTradeNo == null) {
+            throw new TradeNoCreateFailException("recreate tradeNo fail");
+        }
+
+        payment.setPaymentNo(newTradeNo);
+    }
+
+    protected Long doAdding() {
+        try {
+            return paymentRepository.add(payment);
+        } catch (DuplicateKeyException e) {
+            return null;
+        }
     }
 
 }
