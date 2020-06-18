@@ -8,6 +8,7 @@ import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
 import study.daydayup.wolf.business.pay.biz.domain.entity.PaymentEntity;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.context.RpcContext;
 import study.daydayup.wolf.framework.layer.domain.AbstractRepository;
@@ -57,15 +58,14 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         String paymentNo = payment.getPaymentNo();
 
         PaymentDO paymentDO = toDo(payment);
+
         clearReadOnlyProperties(paymentDO);
+        if (BeanUtil.isEmpty(paymentDO)) {
+            return 0;
+        }
+
         paymentDO.setUpdatedAt(context.getRequestTime());
-
         return dao.updateByPaymentNo(paymentDO, paymentNo);
-    }
-
-    private void filterReadOnlyAttributes(PaymentDO paymentDO) {
-        
-
     }
 
     public int save(@NonNull PaymentEntity entity) {
