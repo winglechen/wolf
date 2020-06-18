@@ -141,8 +141,6 @@ public class Session {
         return isLogin(LocalDateTime.now());
     }
 
-
-
     public void changeScope(@NonNull Long orgId) {
         set("orgId", orgId);
         oauthLicenseService.changeScope(sessionId, String.valueOf(orgId));
