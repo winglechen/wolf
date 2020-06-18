@@ -32,6 +32,7 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
             "created", "attempted", "paid"
     };
 
+    //TODO use PayConfig
     @Resource
     private RazorConfig razorConfig;
 

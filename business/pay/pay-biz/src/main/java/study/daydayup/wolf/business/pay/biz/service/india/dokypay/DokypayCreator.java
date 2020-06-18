@@ -42,7 +42,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 
     @Override
     public void callPayEpi() {
-        initConfig(CONFIG_KEY);
+        initConfig(CONFIG_KEY, createRequest.getPayeeId());
         Request payRequest = createRequest();
 
         try {
