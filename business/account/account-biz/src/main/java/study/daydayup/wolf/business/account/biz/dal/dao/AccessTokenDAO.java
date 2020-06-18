@@ -23,6 +23,8 @@ public interface AccessTokenDAO {
 
     int updateExpiredAtByAccountId(@Param("accountId")Long accountId, @Param("updatedExpiredAt")LocalDateTime updatedExpiredAt,@Param("updatedAt") LocalDateTime updatedAt);
 
+    int updateAccountById(@Param("id")Long id, @Param("updatedExpiredAt")LocalDateTime updatedExpiredAt, @Param("updatedAt") LocalDateTime updatedAt, @Param("accountId")Long accountId);
+
     int updateExpiredAtById(@Param("id")Long id, @Param("updatedExpiredAt")LocalDateTime updatedExpiredAt, @Param("updatedAt") LocalDateTime updatedAt);
 
     int updateExpiredAtByAccessToken(@Param("accessToken")String accessToken, @Param("updatedExpiredAt") LocalDateTime updatedExpiredAt);
