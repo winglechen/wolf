@@ -16,7 +16,6 @@ import study.daydayup.wolf.business.account.api.service.licenser.OauthLicenseSer
 import study.daydayup.wolf.business.account.biz.dal.dao.AccountDAO;
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
-import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.exception.LocaleNotFoundException;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -25,7 +24,7 @@ import study.daydayup.wolf.middleware.notice.agent.service.SMSAgent;
 import study.daydayup.wolf.middleware.notice.api.config.SMSSendConfig;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -89,9 +88,9 @@ public class SmsAuthServiceImpl implements SmsAuthService {
     public Result<Object> sendCode(SmsCodeRequest request) {
         String mobile = request.getMobile();
         String code = createCode();
-        Date expiredAt = DateUtil.secondsLater(request.getExpiredIn());
+        LocalDateTime expiredAt = LocalDateTime.now().plusSeconds(request.getExpiredIn());
 
-        verifyCodeService.send(mobile, code, expiredAt);
+        verifyCodeService.send(mobile, code, expiredAt, request.getOrgId());
         sendSms(mobile, code, request.getOrgId());
 
         return Result.ok();
@@ -106,7 +105,7 @@ public class SmsAuthServiceImpl implements SmsAuthService {
         accountDO.setAccount(mobile);
         accountDO.setSource(source);
         accountDO.setAccountType((byte) AccountTypeEnum.MOBILE.getCode());
-        accountDO.setCreatedAt(new Date());
+        accountDO.setCreatedAt(LocalDateTime.now());
 
         accountDAO.insertSelective(accountDO);
         if (null == accountDO.getId()) {

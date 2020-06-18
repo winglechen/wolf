@@ -45,7 +45,7 @@ public class DokypaySubscriber extends AbstractPaymentSubscriber implements Paym
     private DokypayPaidHandler dokypayPaidHandler;
 
     public int subscribe(@NonNull String data) {
-        logResponse(LOG_TYPE, PAYMENT_METHOD, data);
+        logSubscribeResponse(LOG_TYPE, PAYMENT_METHOD, data);
         initConfig();
 
         if (!parseResponse(data)) {

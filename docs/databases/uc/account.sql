@@ -103,6 +103,7 @@ DROP TABLE IF EXISTS `verify_code`;
 CREATE TABLE `verify_code`
 (
     `id`         bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `org_id`     BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'orgId',
     `mobile`     varchar(20)         NOT NULL DEFAULT '',
     `code`       varchar(20)          NOT NULL DEFAULT '',
     `expired_at` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -111,6 +112,8 @@ CREATE TABLE `verify_code`
     `created_at` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` datetime            ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_mobile(`mobile`),
+    INDEX idx_org(`org_id`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT = '手机验证码';
+

@@ -41,6 +41,10 @@ public class DateUtil {
         return LocalDateTime.parse(str, formatter);
     }
 
+    public static LocalDateTime asLocalDateTime(@NonNull Long ts) {
+        return LocalDateTime.ofEpochSecond(ts, 0, ZoneOffset.UTC);
+    }
+
     public static LocalDateTime asLocalDateTime(@NonNull Date date) {
         return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }

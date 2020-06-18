@@ -24,7 +24,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -100,7 +100,7 @@ public class PasswordAuthServiceImpl implements PasswordAuthService {
         BeanUtils.copyProperties(request, accountDO);
 
         accountDO.setAccountType((byte) AccountTypeEnum.NAME.getCode());
-        accountDO.setCreatedAt(new Date());
+        accountDO.setCreatedAt(LocalDateTime.now());
 
         String salt = Password.createSalt();
         String pass = Password.encrypt(request.getPassword(), salt);

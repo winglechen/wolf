@@ -6,7 +6,7 @@ import study.daydayup.wolf.business.account.biz.dal.dataobject.VerifyCodeDO;
 import study.daydayup.wolf.business.account.biz.service.VerifyCodeService;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.account.biz.service.impl
@@ -20,13 +20,19 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
     private VerifyCodeDAO verifyCodeDAO;
 
     @Override
-    public void send(String mobile, String code, Date expiredAt) {
+    public void send(String mobile, String code, LocalDateTime expiredAt) {
+        send(mobile, code, expiredAt, null);
+    }
+
+    @Override
+    public void send(String mobile, String code, LocalDateTime expiredAt, Long orgId) {
         VerifyCodeDO verifyCodeDO = new VerifyCodeDO();
 
         verifyCodeDO.setMobile(mobile);
         verifyCodeDO.setCode(code);
         verifyCodeDO.setExpiredAt(expiredAt);
-        verifyCodeDO.setCreatedAt(new Date());
+        verifyCodeDO.setOrgId(orgId);
+        verifyCodeDO.setCreatedAt(LocalDateTime.now());
 
         verifyCodeDAO.insertSelective(verifyCodeDO);
     }
@@ -43,16 +49,16 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
             return false;
         }
 
-        Date now = new Date();
-        if (verifyCodeDO.getExpiredAt().before(now)) {
+        LocalDateTime now = LocalDateTime.now();
+        if (verifyCodeDO.getExpiredAt().isBefore(now)) {
             return false;
         }
-        deactivate(verifyCodeDO.getId(), now);
 
+        deactivate(verifyCodeDO.getId(), now);
         return true;
     }
 
-    private void deactivate(Long id, Date expiredAt) {
+    private void deactivate(Long id, LocalDateTime expiredAt) {
         verifyCodeDAO.updateExpiredAtById(id, expiredAt);
     }
 

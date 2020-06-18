@@ -14,7 +14,7 @@ import study.daydayup.wolf.framework.rpc.RpcService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.account.biz.api
@@ -45,8 +45,7 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
             return ;
         }
 
-        Date expiredAt = new Date();
-        expire(accessToken, expiredAt);
+        expire(accessToken, LocalDateTime.now());
     }
 
     @Override
@@ -55,13 +54,13 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
     }
 
     @Override
-    public void expire(String accessToken, Date expiredAt) {
+    public void expire(String accessToken, LocalDateTime expiredAt) {
         if (!StringUtil.notEmpty(accessToken)) {
             return;
         }
 
         if (null == expiredAt) {
-            expiredAt = new Date();
+            expiredAt = LocalDateTime.now();
         }
         accessTokenService.expire(accessToken, expiredAt);
     }
@@ -84,7 +83,7 @@ public class OauthLicenseServiceImpl implements OauthLicenseService {
     }
 
     @Override
-    public void refresh(String refreshToken, Date expiredAt) {
+    public void refresh(String refreshToken, LocalDateTime expiredAt) {
 
     }
 

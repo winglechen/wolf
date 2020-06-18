@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.account.biz.dal.dao;
-import java.util.Date;
+import java.time.LocalDateTime;
 import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 import study.daydayup.wolf.business.account.biz.dal.dataobject.AccessTokenDO;
 
@@ -20,13 +19,13 @@ public interface AccessTokenDAO {
 
     AccessTokenDO selectByAccessToken(@Param("accessToken")String accessToken);
 
-    int updateExpiredAtByRefreshToken(@Param("refreshToken")String refreshToken,@Param("updatedExpiredAt")Date updatedExpiredAt,@Param("updatedAt") Date updatedAt);
+    int updateExpiredAtByRefreshToken(@Param("refreshToken")String refreshToken,@Param("updatedExpiredAt")LocalDateTime updatedExpiredAt,@Param("updatedAt") LocalDateTime updatedAt);
 
-    int updateExpiredAtByAccountId(@Param("accountId")Long accountId, @Param("updatedExpiredAt")Date updatedExpiredAt,@Param("updatedAt") Date updatedAt);
+    int updateExpiredAtByAccountId(@Param("accountId")Long accountId, @Param("updatedExpiredAt")LocalDateTime updatedExpiredAt,@Param("updatedAt") LocalDateTime updatedAt);
 
-    int updateExpiredAtById(@Param("id")Long id, @Param("updatedExpiredAt")Date updatedExpiredAt, @Param("updatedAt") Date updatedAt);
+    int updateExpiredAtById(@Param("id")Long id, @Param("updatedExpiredAt")LocalDateTime updatedExpiredAt, @Param("updatedAt") LocalDateTime updatedAt);
 
-    int updateExpiredAtByAccessToken(@Param("accessToken")String accessToken, @Param("updatedExpiredAt")Date updatedExpiredAt);
+    int updateExpiredAtByAccessToken(@Param("accessToken")String accessToken, @Param("updatedExpiredAt") LocalDateTime updatedExpiredAt);
 
     int updateScopeByAccessToken(@Param("accessToken")String accessToken, @Param("scope")String scope);
 

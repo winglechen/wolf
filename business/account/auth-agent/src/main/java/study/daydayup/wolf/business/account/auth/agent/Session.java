@@ -16,7 +16,8 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -113,31 +114,31 @@ public class Session {
     }
 
     public void destroy() {
-        Date now = new Date();
+        LocalDateTime now = LocalDateTime.now();
         if ( !isLogin(now) ) {
             return;
         }
 
-        set("expiredAt", now.getTime()-60);
+        set("expiredAt", now.toEpochSecond(ZoneOffset.UTC)-60);
         oauthLicenseService.expire(sessionId, now);
     }
 
     // account & orgId operations
-    public boolean isLogin(Date now) {
+    public boolean isLogin(LocalDateTime now) {
         if(null == get("accountId")) {
             return false;
         }
 
         if (null == now) {
-            now = new Date();
+            now = LocalDateTime.now();
         }
 
         Long expiredAt = get("expiredAt", Long.class);
-        return expiredAt >= now.getTime();
+        return expiredAt >= now.toEpochSecond(ZoneOffset.UTC);
     }
 
     public boolean isLogin() {
-        return isLogin(new Date());
+        return isLogin(LocalDateTime.now());
     }
 
 
@@ -273,8 +274,8 @@ public class Session {
         set("accessToken", license.getAccessToken(), false);
         set("refreshToken", license.getRefreshToken(), false);
         set("scope", license.getScope(), false);
-        set("expiredAt", license.getExpiredAt().getTime(), false);
-        set("refreshExpiredAt", license.getRefreshExpiredAt().getTime(), false);
+        set("expiredAt", license.getExpiredAt().toEpochSecond(ZoneOffset.UTC), false);
+        set("refreshExpiredAt", license.getRefreshExpiredAt().toEpochSecond(ZoneOffset.UTC), false);
 
         Long orgId = parseOrgId(license.getScope());
         if (orgId != null) {

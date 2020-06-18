@@ -6,8 +6,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayConfigException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
@@ -54,7 +52,7 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
     }
 
     @Override
-    public void parseEpiResponse() {
+    public void parseCreateResponse() {
         JSONObject json = JSON.parseObject(apiResponse);
         if (!isResponseSuccess(json)) {
             throw new InvalidEpiResponseException("Dokypay create response parse error");
@@ -99,7 +97,7 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         RequestBody requestBody = initArgs();
 
         return new Request.Builder()
-                .url(config.getCreateUrl())
+                .url(supplierConfig.getCreateUrl())
                 .header("Content-Type", "application/x-www-form-urlencoded")
 //                .header("x-client-id", config.getAppId())
 //                .header("x-client-secret", config.getAppSecret())
@@ -121,6 +119,8 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 
         if (StringUtil.notBlank(card.getAadhaarName())) {
             args.put("customerName", card.getAadhaarName());
+        } else {
+            args.put("customerName", "");
         }
 
         if (StringUtil.notBlank(card.getEmail())) {
@@ -131,6 +131,8 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
 
         if (StringUtil.notBlank(card.getMobile())) {
             args.put("customerPhone", card.getMobile());
+        } else {
+            args.put("customerPhone", "");
         }
 
         return args;
@@ -140,16 +142,16 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
         Map<String, Object> args = initPayerInfo();
 
         return new FormBody.Builder()
-                .add("appId", config.getAppId())
-                .add("secretKey", config.getAppSecret())
+                .add("appId", supplierConfig.getAppId())
+                .add("secretKey", supplierConfig.getAppSecret())
                 .add("orderId", payment.getPaymentNo())
                 .add("orderAmount", getAmount().toString())
                 .add("orderCurrency", "INR")
                 .add("customerName", (String) args.get("customerName"))
                 .add("customerEmail", (String) args.get("customerEmail"))
                 .add("customerPhone", (String) args.get("customerPhone"))
-                .add("returnUrl", config.getReturnUrl())
-                .add("notifyUrl", config.getNotifyUrl())
+                .add("returnUrl", supplierConfig.getReturnUrl())
+                .add("notifyUrl", supplierConfig.getNotifyUrl())
                 .build();
     }
 

@@ -11,15 +11,10 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
  **/
 public interface PaymentCreator extends PaymentDomainService {
     PaymentCreateResponse create(PaymentCreateRequest request);
-
+    void initPayment(boolean duplicateCheck);
 
     void validateRequest();
-    void initPayment();
-
     void callPayEpi();
-    void logEpiResponse();
-
-    void parseEpiResponse();
-    void savePayment();
+    void parseCreateResponse();
     PaymentCreateResponse formatResponse();
 }

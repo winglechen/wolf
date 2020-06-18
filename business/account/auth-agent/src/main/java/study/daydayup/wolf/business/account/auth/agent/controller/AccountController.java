@@ -5,13 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import study.daydayup.wolf.business.account.api.entity.Account;
 import study.daydayup.wolf.business.account.api.service.AccountService;
 import study.daydayup.wolf.business.account.auth.agent.Session;
-import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.time.DateUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * study.daydayup.wolf.demo.ali.consumer
@@ -46,14 +44,13 @@ public class AccountController {
     public String show() {
         Object accountId = session.get("accountId");
         Object orgId = session.get("orgId");
-        LocalDateTime expiredAt = DateUtil.asLocalDateTime((Date)session.get("expiredAt"));
+        LocalDateTime expiredAt = DateUtil.asLocalDateTime(session.get("expiredAt", Long.class));
         LocalDateTime now = LocalDateTime.now();
-        Date dNow = new Date();
 
         return "accountId:" + accountId + "; orgId:" + orgId
                 + "\nexpiredAt:" + expiredAt
                 + "\nnow:" + now
-                + "\ndateNow:" + DateUtil.asLocalDateTime(dNow);
+                ;
     }
 
 

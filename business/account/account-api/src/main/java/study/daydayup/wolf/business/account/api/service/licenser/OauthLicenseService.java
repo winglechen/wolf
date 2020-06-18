@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.account.api.service.licenser;
 import study.daydayup.wolf.business.account.api.dto.request.LicenseRequest;
 import study.daydayup.wolf.business.account.api.entity.license.OauthLicense;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * study.daydayup.wolf.business.account.api.service.licenser
@@ -18,8 +18,8 @@ public interface OauthLicenseService {
     OauthLicense grant(LicenseRequest request);
 
     void create(OauthLicense license);
-    void refresh(String refreshToken, Date expiredAt);
-    void expire(String accessToken, Date expiredAt);
+    void refresh(String refreshToken, LocalDateTime expiredAt);
+    void expire(String accessToken, LocalDateTime expiredAt);
     void expire(String accessToken);
     void changeScope(String accessToken, String scope);
 

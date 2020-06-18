@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.account.biz.dal.dataobject;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
@@ -18,9 +18,9 @@ public class AccessTokenDO implements Serializable {
 
     private String scope;
 
-    private Date expiredAt;
+    private LocalDateTime expiredAt;
 
-    private Date refreshExpiredAt;
+    private LocalDateTime refreshExpiredAt;
 
     private Integer version;
 
@@ -28,9 +28,9 @@ public class AccessTokenDO implements Serializable {
 
     private Long lastEditor;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     private static final long serialVersionUID = 1L;
 

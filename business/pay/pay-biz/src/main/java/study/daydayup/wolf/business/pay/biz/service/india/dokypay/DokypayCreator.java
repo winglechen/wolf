@@ -6,8 +6,6 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
@@ -70,7 +68,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     @Override
-    public void parseEpiResponse() {
+    public void parseCreateResponse() {
         JSONObject json = JSON.parseObject(apiResponse);
         if (!isResponseSuccess(json)) {
             throw new InvalidEpiResponseException("Dokypay create response parse error");
@@ -94,8 +92,8 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
     }
 
     /**
-     * @param json
-     * @return
+     * @param json json request
+     * @return boolean response is value
      */
     private boolean isResponseValid(JSONObject json) {
         String responseSign = json.getJSONObject("data").getString("sign");
@@ -104,7 +102,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         }
 
         Map<String, Object> data = json.getJSONObject("data").getInnerMap();
-        String sign = SignUtil.create(config.getAppSecret(), data);
+        String sign = SignUtil.create(supplierConfig.getAppSecret(), data);
 
         return responseSign.equals(sign);
     }
@@ -131,7 +129,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         RequestBody requestBody = RequestBody.create(args, JSON_CONTENT_TYPE);
 
         return new Request.Builder()
-                .url(config.getCreateUrl())
+                .url(supplierConfig.getCreateUrl())
                 .header("Content-Type", "application/json")
                 .post(requestBody)
                 .build();
@@ -139,11 +137,11 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
 
     private String initArgs() {
         Map<String, Object> args = new HashMap<>(8);
-        args.put("appId", config.getAppId());
+        args.put("appId", supplierConfig.getAppId());
         args.put("prodName", PROD_NAME);
-        args.put("version", config.getVersion());
-        args.put("returnUrl", config.getReturnUrl());
-        args.put("notifyUrl", config.getNotifyUrl());
+        args.put("version", supplierConfig.getVersion());
+        args.put("returnUrl", supplierConfig.getReturnUrl());
+        args.put("notifyUrl", supplierConfig.getNotifyUrl());
 
         args.put("merTransNo", payment.getPaymentNo());
         args.put("country", "IN");
@@ -156,7 +154,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         args.put("extInfo", extInfo);
 
 
-        String sign = SignUtil.create(config.getAppSecret(), args);
+        String sign = SignUtil.create(supplierConfig.getAppSecret(), args);
         args.put("sign", sign);
 
         return JSON.toJSONString(args);

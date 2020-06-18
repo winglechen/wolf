@@ -47,10 +47,13 @@ public class PaymentRepository extends AbstractRepository implements Repository 
     }
 
     public int save(@NonNull Payment payment) {
+        if (null != payment.getId()) {
+            return add(payment);
+        }
+
         if (null == payment.getPaymentNo()) {
             return 0;
         }
-
         String paymentNo = payment.getPaymentNo();
 
         PaymentDO paymentDO = toDo(payment);
@@ -73,7 +76,6 @@ public class PaymentRepository extends AbstractRepository implements Repository 
         paymentDO.setUpdatedAt(context.getRequestTime());
 
         return dao.updateByPaymentNo(paymentDO, paymentNo);
-
     }
 
     public void clearReadOnlyProperties(PaymentDO paymentDO) {

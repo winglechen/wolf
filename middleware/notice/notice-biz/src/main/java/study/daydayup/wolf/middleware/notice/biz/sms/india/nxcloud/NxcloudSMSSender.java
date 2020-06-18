@@ -35,7 +35,7 @@ public class NxcloudSMSSender extends AbstractSMSSender implements SMSSender {
         this.msg = msg;
         this.smsSendConfig = config;
 
-        validConfig(CONFIG_KEY);
+        initConfig(CONFIG_KEY);
         return sendSms();
     }
 
