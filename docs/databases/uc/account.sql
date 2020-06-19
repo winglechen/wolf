@@ -42,6 +42,29 @@ CREATE TABLE IF NOT EXISTS `organization`
   DEFAULT CHARACTER SET = utf8mb4
   AUTO_INCREMENT = 100000001 COMMENT = '组织表';
 
+DROP TABLE IF EXISTS `open_app`;
+CREATE TABLE IF NOT EXISTS `open_app`
+(
+    `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `org_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'orgId',
+
+    `app_type`          TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '默认0 未定义， 1 测试， 2默认',
+    `app_id`            VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'appId',
+    `app_secret`        VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'appId',
+    `memo`              VARCHAR(500) NOT NULL DEFAULT '' COMMENT 'memo',
+
+    `version`           INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
+    `delete_flag`       TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `last_editor`       BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
+    `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`        DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX udx_app(`app_id`),
+    INDEX idx_org(`org_id`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '开放授权';
+
 
 DROP TABLE IF EXISTS `account_alipay`;
 CREATE TABLE IF NOT EXISTS `account_alipay`
