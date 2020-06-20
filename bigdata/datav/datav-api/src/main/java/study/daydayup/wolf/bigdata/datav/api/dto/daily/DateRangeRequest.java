@@ -17,10 +17,10 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class DateRangeRequest implements Request {
-    @NotNull @Positive
     private Long orgId;
     private String source;
 
+    private LocalDate date;
     private LocalDate startDate;
     private LocalDate endDate;
 

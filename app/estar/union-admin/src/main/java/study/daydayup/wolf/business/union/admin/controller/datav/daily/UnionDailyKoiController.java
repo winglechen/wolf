@@ -60,6 +60,7 @@ public class UnionDailyKoiController {
 
     @GetMapping("/datav/daily/audit")
     public Result<Page<DailyAudit>> findAuditByDate(
+            @RequestParam(value = "date", required=false ) String date,
             @RequestParam(value = "startDate", required=false ) String startDate,
             @RequestParam(value = "endDate", required=false ) String endDate,
             @RequestParam(value = "pageNum", required=false ) Integer pageNum) {
@@ -75,10 +76,12 @@ public class UnionDailyKoiController {
                 .orgId(orgId)
                 .build();
 
+        if (null != date) {
+            request.setDate(LocalDate.parse(date, DateUtil.DEFAULT_DATE_FORMATTER));
+        }
         if (null != startDate) {
             request.setStartDate(LocalDate.parse(startDate, DateUtil.DEFAULT_DATE_FORMATTER));
         }
-
         if (null != endDate) {
             request.setEndDate(LocalDate.parse(endDate, DateUtil.DEFAULT_DATE_FORMATTER));
         }
