@@ -26,14 +26,14 @@ public class DailyKoiServiceImpl implements DailyKoiService {
     @Resource
     private UserSource userSource;
     @Resource
-    private DailyKoiSink koiSink;
+    private DailyKoiSink dailyKoiSink;
     @Resource
     private UserTransformation userTransformation;
 
     @Resource
-    private UserCreditLogSource creditLogSource;
+    private UserCreditLogSource userCreditLogSource;
     @Resource
-    private UserCreditLogTransformation creditLogTransformation;
+    private UserCreditLogTransformation userCreditLogTransformation;
 
     @Override
     public void countPvAndUv() {
@@ -46,7 +46,7 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         MysqlSource source = userSource.findLatestUser();
         Table stream = source.getStream(taskName);
 
-        MysqlSink sink = koiSink.create(taskName, source);
+        MysqlSink sink = dailyKoiSink.create(taskName, source);
         Statistics statistics = userTransformation.latest(stream, sink);
         sink.save(statistics);
     }
@@ -54,11 +54,11 @@ public class DailyKoiServiceImpl implements DailyKoiService {
     @Override
     public void countIndianInfoState() {
         String taskName = "indian-info-count";
-        MysqlSource source = creditLogSource.findLatestLog();
+        MysqlSource source = userCreditLogSource.findLatestLog();
         Table stream = source.getStream(taskName);
 
-        MysqlSink sink = koiSink.create(taskName, source);
-        Statistics statistics = creditLogTransformation.latest(stream, sink);
+        MysqlSink sink = dailyKoiSink.create(taskName, source);
+        Statistics statistics = userCreditLogTransformation.latest(stream, sink);
         sink.save(statistics);
     }
 }
