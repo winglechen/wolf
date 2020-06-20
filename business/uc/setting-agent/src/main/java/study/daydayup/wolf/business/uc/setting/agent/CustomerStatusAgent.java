@@ -49,7 +49,6 @@ public class CustomerStatusAgent {
 //        }
 
         CustomerStatus status = customerStatusService.find(accountId, orgId).notNullData();
-        log.info("init customerStatus agent: {}", status);
 
         this.accountId = accountId;
         this.orgId = orgId;
