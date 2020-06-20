@@ -1,11 +1,17 @@
 package study.daydayup.wolf.business.account.api.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OpenApp implements Model {
     private Long orgId;
 

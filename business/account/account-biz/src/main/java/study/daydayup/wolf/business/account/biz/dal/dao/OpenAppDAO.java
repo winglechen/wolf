@@ -23,4 +23,8 @@ public interface OpenAppDAO {
 
     int updateByOrgIdAndAppType(@Param("updated")OpenAppDO updated,@Param("orgId")Long orgId,@Param("appType")Integer appType);
 
+    Long countByOrgIdAndAppType(@Param("orgId")Long orgId,@Param("appType")Integer appType);
+
+
+
 }
