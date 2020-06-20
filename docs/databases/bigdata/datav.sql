@@ -58,6 +58,24 @@ CREATE TABLE IF NOT EXISTS `daily_trade`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '交易日报';
 
+DROP TABLE IF EXISTS `daily_sms`;
+CREATE TABLE IF NOT EXISTS `daily_sms`
+(
+    `id`                        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `org_id`                    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
+    `date`                      DATE                NOT NULL COMMENT '统计日期',
+    `sms_type`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单类型',
+
+    `sms_count`                 INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易数',
+
+    `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
+    `created_at`                DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_org (`org_id`, `date`, `sms_type`),
+    INDEX idx_date(`date`, `sms_type`, `sms_count`),
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
+    COMMENT = 'sms日报';
+
 
 -- 放款概况日报
 DROP TABLE IF EXISTS `daily_loan`;
