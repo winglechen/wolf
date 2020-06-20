@@ -1,0 +1,27 @@
+###
+GET http://localhost:8200/open/app/test
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/open/app/production
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/open/app/test/recreate
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+GET http://localhost:8200/open/app/production/recreate
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8200/open/app/all
+Accept: */*
+Cache-Control: no-cache
