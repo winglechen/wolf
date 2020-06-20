@@ -6,6 +6,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterators;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 /**
  * study.daydayup.wolf.common.util
@@ -300,4 +301,9 @@ public class StringUtil {
         Iterable<String> i = Splitter.on(separator).split(s);
         return Iterators.toArray(i.iterator(), String.class);
     }
+
+    public static String uuid() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
 }
