@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailySmsDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="sms_type" jdbcType="INTEGER" property="smsType" />
+    <result column="sms_count" jdbcType="INTEGER" property="smsCount" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_id, `date`, sms_type, sms_count, delete_flag, created_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from daily_sms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from daily_sms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
+    insert into daily_sms (id, org_id, `date`, sms_type, 
+      sms_count, delete_flag, created_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{smsType,jdbcType=INTEGER}, 
+      #{smsCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
+    insert into daily_sms
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="smsType != null">
+        sms_type,
+      </if>
+      <if test="smsCount != null">
+        sms_count,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="smsType != null">
+        #{smsType,jdbcType=INTEGER},
+      </if>
+      <if test="smsCount != null">
+        #{smsCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
+    update daily_sms
+    <set>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
+      </if>
+      <if test="smsType != null">
+        sms_type = #{smsType,jdbcType=INTEGER},
+      </if>
+      <if test="smsCount != null">
+        sms_count = #{smsCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
+    update daily_sms
+    set org_id = #{orgId,jdbcType=BIGINT},
+      `date` = #{date,jdbcType=DATE},
+      sms_type = #{smsType,jdbcType=INTEGER},
+      sms_count = #{smsCount,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
