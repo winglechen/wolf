@@ -10,20 +10,16 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  * @since 2019/10/18 5:44 下午
  **/
 @Getter
-public enum AccountTypeEnum implements CodeBasedEnum {
-    ORG(50, "organization"),
-    ALIPAY(5, "alipay appid"),
-    WECHAT(4, "wechat appid"),
-    EMAIL(3, "email"),
-    MOBILE(2, "mobile phone"),
-    NAME(1, "name"),
+public enum OpenAppTypeEnum implements CodeBasedEnum {
+    PRODUCTION(2, "production"),
+    TEST(1, "test"),
     UNKNOWN(0, "unknown")
     ;
 
     private final int code;
     private final String name;
 
-    AccountTypeEnum(int code, String name) {
+    OpenAppTypeEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }
