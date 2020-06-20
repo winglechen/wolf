@@ -13,7 +13,5 @@ public interface PaymentLogDAO {
 
     int updateByIdSelective(PaymentLogDO record);
 
-    int updateByPrimaryKeyWithBLOBs(PaymentLogDO record);
-
     int updateById(PaymentLogDO record);
 }
