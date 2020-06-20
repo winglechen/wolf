@@ -26,6 +26,7 @@ public class SmsDateRequest implements Request {
 
     private Integer smsType;
     private Integer state;
+    private String source;
 
     private Set<LocalDate> dateList;
 

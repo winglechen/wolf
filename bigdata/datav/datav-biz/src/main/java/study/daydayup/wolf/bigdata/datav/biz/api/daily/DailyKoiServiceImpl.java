@@ -3,15 +3,17 @@ package study.daydayup.wolf.bigdata.datav.biz.api.daily;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
+import study.daydayup.wolf.bigdata.datav.api.dto.daily.SmsDateRequest;
 import study.daydayup.wolf.bigdata.datav.api.dto.daily.TradeDateRequest;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyAudit;
 import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyKoi;
-import study.daydayup.wolf.bigdata.datav.api.entity.daily.DailyTrade;
 import study.daydayup.wolf.bigdata.datav.api.service.daily.DailyKoiService;
 import study.daydayup.wolf.bigdata.datav.biz.converter.daily.DailyKoiConverter;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailyKoiDAO;
+import study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailySmsDAO;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dao.DailyTradeDAO;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyKoiDO;
+import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailyTradeDO;
 import study.daydayup.wolf.business.trade.api.domain.enums.TradeTypeEnum;
 import study.daydayup.wolf.business.trade.api.domain.state.NewState;
@@ -24,7 +26,6 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -39,9 +40,11 @@ import java.util.function.Function;
 @RpcService
 public class DailyKoiServiceImpl implements DailyKoiService {
     @Resource
-    private DailyKoiDAO koiDAO;
+    private DailyKoiDAO dailyKoiDAO;
     @Resource
-    private DailyTradeDAO tradeDAO;
+    private DailyTradeDAO dailyTradeDAO;
+    @Resource
+    private DailySmsDAO dailySmsDAO;
 
     @Override
     public Result<Page<DailyKoi>> findByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
@@ -75,6 +78,16 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         mergeAuditPreviewCount(auditList, dateList, orgId, source);
         mergeAuditRequestCount(auditList, dateList, orgId, source);
         mergeAuditPaidCount(auditList, dateList, orgId, source);
+
+        mergeVerifyCodeCount(auditList, dateList, orgId, source);
+    }
+
+    private void mergeVerifyCodeCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId, String source) {
+        int smsType = 1;
+        SmsDateRequest request = createSmsDateRequest(dateList, orgId, smsType, source);
+        List<DailySmsDO> smsList = dailySmsDAO.selectByDateIn(request);
+
+        mergeSmsColumnToAudit(auditList, smsList, DailySmsDO::getSmsCount, DailyAudit::setVerifyCodeCount);
     }
 
     private void mergeAuditPreviewCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId, String source) {
@@ -82,9 +95,9 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         int state = (new NewState()).getCode();
 
         TradeDateRequest request = createTradeDateRequest(dateList, orgId, tradeType, state, source);
-        List<DailyTradeDO> tradeList = tradeDAO.selectByDateIn(request);
+        List<DailyTradeDO> tradeList = dailyTradeDAO.selectByDateIn(request);
 
-        mergeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditPreviewCount );
+        mergeTradeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditPreviewCount );
     }
 
     private void mergeAuditRequestCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId, String source) {
@@ -92,9 +105,9 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         int state = (new NewState()).getCode();
 
         TradeDateRequest request = createTradeDateRequest(dateList, orgId, tradeType, state, source);
-        List<DailyTradeDO> tradeList = tradeDAO.selectByDateIn(request);
+        List<DailyTradeDO> tradeList = dailyTradeDAO.selectByDateIn(request);
 
-        mergeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditRequestCount );
+        mergeTradeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditRequestCount );
     }
 
     private void mergeAuditPaidCount(List<DailyAudit> auditList, List<LocalDate> dateList, @NonNull Long orgId, String source) {
@@ -102,13 +115,13 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         int state = (new PaidState()).getCode();
 
         TradeDateRequest request = createTradeDateRequest(dateList, orgId, tradeType, state, source);
-        List<DailyTradeDO> tradeList = tradeDAO.selectByDateIn(request);
+        List<DailyTradeDO> tradeList = dailyTradeDAO.selectByDateIn(request);
 
-        mergeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditPaidCount);
-        mergeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeAmount, DailyAudit::setAuditPaidAmount);
+        mergeTradeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeCount, DailyAudit::setAuditPaidCount);
+        mergeTradeColumnToAudit(auditList, tradeList, DailyTradeDO::getTradeAmount, DailyAudit::setAuditPaidAmount);
     }
 
-    private <V> void mergeColumnToAudit(List<DailyAudit> auditList, List<DailyTradeDO> tradeList, Function<DailyTradeDO, V> getter, BiConsumer<DailyAudit, V> setter) {
+    private <V> void mergeTradeColumnToAudit(List<DailyAudit> auditList, List<DailyTradeDO> tradeList, Function<DailyTradeDO, V> getter, BiConsumer<DailyAudit, V> setter) {
         if (CollectionUtil.isEmpty(tradeList)) {
             return;
         }
@@ -116,6 +129,25 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         Map<Object, DailyTradeDO> tradeMap = CollectionUtil.map(tradeList,  DailyTradeDO::getDate);
         LocalDate k;
         DailyTradeDO v;
+        for (DailyAudit audit : auditList) {
+            k = audit.getDate();
+            v = tradeMap.get(k);
+            if (null == v) {
+                continue;
+            }
+
+            setter.accept(audit, getter.apply(v));
+        }
+    }
+
+    private <V> void mergeSmsColumnToAudit(List<DailyAudit> auditList, List<DailySmsDO> smsList, Function<DailySmsDO, V> getter, BiConsumer<DailyAudit, V> setter) {
+        if (CollectionUtil.isEmpty(smsList)) {
+            return;
+        }
+
+        Map<Object, DailySmsDO> tradeMap = CollectionUtil.map(smsList,  DailySmsDO::getDate);
+        LocalDate k;
+        DailySmsDO v;
         for (DailyAudit audit : auditList) {
             k = audit.getDate();
             v = tradeMap.get(k);
@@ -139,9 +171,20 @@ public class DailyKoiServiceImpl implements DailyKoiService {
         return request;
     }
 
+    private SmsDateRequest createSmsDateRequest(List<LocalDate> dateList, @NonNull Long orgId, int smsType, String source) {
+        SmsDateRequest request = SmsDateRequest.builder()
+                .orgId(orgId)
+                .smsType(smsType)
+                .source(source)
+                .build();
+        request.addAll(dateList);
+
+        return request;
+    }
+
     private Page<DailyKoi> selectByRange(@Validated DateRangeRequest request, @NonNull PageRequest pageReq) {
         Page.startPage(pageReq.getPageNum(), pageReq.getPageSize());
-        List<DailyKoiDO> koiDOList = koiDAO.selectByDate(request);
+        List<DailyKoiDO> koiDOList = dailyKoiDAO.selectByDate(request);
         if (CollectionUtil.isEmpty(koiDOList)) {
             return Page.empty(pageReq.getPageNum(), pageReq.getPageSize());
         }
