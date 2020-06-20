@@ -10,7 +10,7 @@ public class OpenAppDO implements Serializable {
 
     private Long orgId;
 
-    private Boolean appType;
+    private Integer appType;
 
     private String appId;
 
