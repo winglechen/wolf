@@ -88,6 +88,8 @@
             <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="log_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="payment_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="data" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <columnOverride column="context" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
         </table>
 
@@ -107,9 +109,10 @@
 
 
         <table tableName="transaction" domainObjectName="TransactionDO" mapperName="TransactionDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="settlement_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="transaction_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="payment_channel" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="settlement_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="notify_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
         </table>
 
@@ -125,6 +128,11 @@
         </table>
 
         <table tableName="balance_log" domainObjectName="BalanceLogDO" mapperName="BalanceLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+        </table>
+
+        <table tableName="notify_queue" domainObjectName="NotifyQueueDO" mapperName="NotifyQueueDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
         </table>
 

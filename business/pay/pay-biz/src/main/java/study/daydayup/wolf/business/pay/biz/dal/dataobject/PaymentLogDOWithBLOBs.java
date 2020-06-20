@@ -1,36 +1,11 @@
 package study.daydayup.wolf.business.pay.biz.dal.dataobject;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class PaymentLogDO implements Serializable {
-    private Long id;
-
-    private String paymentNo;
-
-    private Long payerId;
-
-    private Long payeeId;
-
-    private String tradeNo;
-
-    private String outTradeNo;
-
-    private Integer state;
-
-    private Integer logType;
-
-    private Integer paymentMethod;
-
+public class PaymentLogDOWithBLOBs extends PaymentLogDO implements Serializable {
     private String data;
-
-    private String tags;
-
-    private Boolean deleteFlag;
-
-    private LocalDateTime createdAt;
 
     private String context;
 
@@ -42,19 +17,7 @@ public class PaymentLogDO implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", paymentNo=").append(paymentNo);
-        sb.append(", payerId=").append(payerId);
-        sb.append(", payeeId=").append(payeeId);
-        sb.append(", tradeNo=").append(tradeNo);
-        sb.append(", outTradeNo=").append(outTradeNo);
-        sb.append(", state=").append(state);
-        sb.append(", logType=").append(logType);
-        sb.append(", paymentMethod=").append(paymentMethod);
         sb.append(", data=").append(data);
-        sb.append(", tags=").append(tags);
-        sb.append(", deleteFlag=").append(deleteFlag);
-        sb.append(", createdAt=").append(createdAt);
         sb.append(", context=").append(context);
         sb.append("]");
         return sb.toString();
@@ -71,7 +34,7 @@ public class PaymentLogDO implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        PaymentLogDO other = (PaymentLogDO) that;
+        PaymentLogDOWithBLOBs other = (PaymentLogDOWithBLOBs) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getPaymentNo() == null ? other.getPaymentNo() == null : this.getPaymentNo().equals(other.getPaymentNo()))
             && (this.getPayerId() == null ? other.getPayerId() == null : this.getPayerId().equals(other.getPayerId()))
@@ -81,10 +44,10 @@ public class PaymentLogDO implements Serializable {
             && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
             && (this.getLogType() == null ? other.getLogType() == null : this.getLogType().equals(other.getLogType()))
             && (this.getPaymentMethod() == null ? other.getPaymentMethod() == null : this.getPaymentMethod().equals(other.getPaymentMethod()))
-            && (this.getData() == null ? other.getData() == null : this.getData().equals(other.getData()))
             && (this.getTags() == null ? other.getTags() == null : this.getTags().equals(other.getTags()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
+            && (this.getData() == null ? other.getData() == null : this.getData().equals(other.getData()))
             && (this.getContext() == null ? other.getContext() == null : this.getContext().equals(other.getContext()));
     }
 
@@ -101,10 +64,10 @@ public class PaymentLogDO implements Serializable {
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         result = prime * result + ((getLogType() == null) ? 0 : getLogType().hashCode());
         result = prime * result + ((getPaymentMethod() == null) ? 0 : getPaymentMethod().hashCode());
-        result = prime * result + ((getData() == null) ? 0 : getData().hashCode());
         result = prime * result + ((getTags() == null) ? 0 : getTags().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
+        result = prime * result + ((getData() == null) ? 0 : getData().hashCode());
         result = prime * result + ((getContext() == null) ? 0 : getContext().hashCode());
         return result;
     }

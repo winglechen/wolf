@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `goods_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `goods_name`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
-    `attachment`            VARCHAR(1000)        NOT NULL DEFAULT '' COMMENT '',
+    `attachment`            VARCHAR(5000)        NOT NULL DEFAULT '' COMMENT '',
 
     `version`               INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction`
 (
     `id`                    BIGINT(20) UNSIGNED     NOT NULL AUTO_INCREMENT,
-    `account_id`            BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `payer_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `payee_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
 
     `payment_no`            VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
@@ -79,6 +79,9 @@ CREATE TABLE IF NOT EXISTS `transaction`
     `settlement_no`         VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `settlement_state`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `settled_at`            DATETIME            COMMENT '结算时间',
+    `notify_state`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+
+    `attachment`            VARCHAR(5000)        NOT NULL DEFAULT '' COMMENT '',
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -112,13 +115,14 @@ CREATE TABLE IF NOT EXISTS `settlement`
     `tax_amount`            DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0.00 COMMENT '税费金额',
 
     `settled_at`            DATETIME            COMMENT '结算时间',
+    `start_at`              DATETIME            NOT NULL  COMMENT '结算开始时间',
+    `end_at`                DATETIME            NOT NULL  COMMENT '结算开始时间',
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     INDEX idx_account(`account_id`, `settled_at`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'settlement';
-
 
 DROP TABLE IF EXISTS `balance`;
 CREATE TABLE IF NOT EXISTS `balance`
@@ -145,7 +149,6 @@ CREATE TABLE IF NOT EXISTS `balance`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '余额';
 
-
 DROP TABLE IF EXISTS `balance_log`;
 CREATE TABLE IF NOT EXISTS `balance_log`
 (
@@ -163,6 +166,27 @@ CREATE TABLE IF NOT EXISTS `balance_log`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '余额日志';
 
+DROP TABLE IF EXISTS `notify_queue`;
+CREATE TABLE IF NOT EXISTS `notify_queue`
+(
+    `id`                    BIGINT(20) UNSIGNED     NOT NULL AUTO_INCREMENT,
+    `payer_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `payee_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+
+    `payment_no`            VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
+    `out_trade_no`          VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
+    `state`                 TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+
+    `notify_url`            VARCHAR(500)            NOT NULL DEFAULT '' COMMENT '',
+    `notify_data`           VARCHAR(5000)           NOT NULL DEFAULT '' COMMENT '',
+    `notify_response`       VARCHAR(5000)           NOT NULL DEFAULT '' COMMENT '',
+
+    `notify_at`             DATETIME            COMMENT '创建时间',
+    `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    INDEX `idx_pay` ( `payment_no`),
+    INDEX `idx_trade` ( `out_trade_no`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'notify_queue';
 
 
 DROP TABLE IF EXISTS `trade_merge`;
@@ -187,11 +211,11 @@ DROP TABLE IF EXISTS `payment_log`;
 CREATE TABLE IF NOT EXISTS `payment_log`
 (
     `id`                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `payment_no`        VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
     `payer_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `payee_id`          BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
 
+    `payment_no`        VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `trade_no`          VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`      VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
@@ -200,12 +224,14 @@ CREATE TABLE IF NOT EXISTS `payment_log`
     `payment_method`    TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
 
     `data`              TEXT,
+    `context`           TEXT,
     `tags`              VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`        DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付日志';
+
 
 
 DROP TABLE IF EXISTS `razorpay_account`;

@@ -15,6 +15,9 @@
         <if test="request.endDate != null">
             <![CDATA[ and `date` <= #{request.endDate,jdbcType=DATE} ]]>
         </if>
+        <if test="request.date != null">
+            <![CDATA[ and `date` = #{request.date,jdbcType=DATE} ]]>
+        </if>
         order by date desc
     </select>
 </mapper>

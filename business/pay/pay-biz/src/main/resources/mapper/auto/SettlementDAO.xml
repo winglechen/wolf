@@ -17,13 +17,15 @@
     <result column="tax_count" jdbcType="INTEGER" property="taxCount" />
     <result column="tax_amount" jdbcType="DECIMAL" property="taxAmount" />
     <result column="settled_at" jdbcType="TIMESTAMP" property="settledAt" />
+    <result column="start_at" jdbcType="TIMESTAMP" property="startAt" />
+    <result column="end_at" jdbcType="TIMESTAMP" property="endAt" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, account_id, settlement_no, settlement_type, `state`, currency, transaction_count, 
     transaction_amount, deduct_count, deduct_amount, fee_count, fee_amount, tax_count, 
-    tax_amount, settled_at, delete_flag, created_at
+    tax_amount, settled_at, start_at, end_at, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -41,13 +43,15 @@
       transaction_count, transaction_amount, deduct_count, 
       deduct_amount, fee_count, fee_amount, 
       tax_count, tax_amount, settled_at, 
-      delete_flag, created_at)
+      start_at, end_at, delete_flag, 
+      created_at)
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{settlementNo,jdbcType=VARCHAR}, 
       #{settlementType,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{currency,jdbcType=INTEGER}, 
       #{transactionCount,jdbcType=INTEGER}, #{transactionAmount,jdbcType=DECIMAL}, #{deductCount,jdbcType=INTEGER}, 
       #{deductAmount,jdbcType=DECIMAL}, #{feeCount,jdbcType=INTEGER}, #{feeAmount,jdbcType=DECIMAL}, 
       #{taxCount,jdbcType=INTEGER}, #{taxAmount,jdbcType=DECIMAL}, #{settledAt,jdbcType=TIMESTAMP}, 
-      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
+      #{startAt,jdbcType=TIMESTAMP}, #{endAt,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.SettlementDO">
     insert into settlement
@@ -96,6 +100,12 @@
       </if>
       <if test="settledAt != null">
         settled_at,
+      </if>
+      <if test="startAt != null">
+        start_at,
+      </if>
+      <if test="endAt != null">
+        end_at,
       </if>
       <if test="deleteFlag != null">
         delete_flag,
@@ -150,6 +160,12 @@
       <if test="settledAt != null">
         #{settledAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="startAt != null">
+        #{startAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endAt != null">
+        #{endAt,jdbcType=TIMESTAMP},
+      </if>
       <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -203,6 +219,12 @@
       <if test="settledAt != null">
         settled_at = #{settledAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="startAt != null">
+        start_at = #{startAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endAt != null">
+        end_at = #{endAt,jdbcType=TIMESTAMP},
+      </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=TINYINT},
       </if>
@@ -228,6 +250,8 @@
       tax_count = #{taxCount,jdbcType=INTEGER},
       tax_amount = #{taxAmount,jdbcType=DECIMAL},
       settled_at = #{settledAt,jdbcType=TIMESTAMP},
+      start_at = #{startAt,jdbcType=TIMESTAMP},
+      end_at = #{endAt,jdbcType=TIMESTAMP},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

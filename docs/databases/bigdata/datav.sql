@@ -29,10 +29,13 @@ CREATE TABLE IF NOT EXISTS `daily_koi`
     `delete_flag`           TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     UNIQUE INDEX udx_date (`org_id`, `date`, `source`),
+    INDEX idx_range(`date`, `source`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8mb4
     COMMENT = '运营日报';
+
+
 
 
 -- 通用交易日报
