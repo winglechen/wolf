@@ -7,7 +7,7 @@
     <select id="selectByDate" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from daily_koi
+        from daily_trade
         where org_id = #{request.orgId, jdbcType=BIGINT}
         <if test="request.startDate != null">
             <![CDATA[ and `date` >= #{request.startDate,jdbcType=DATE} ]]>
