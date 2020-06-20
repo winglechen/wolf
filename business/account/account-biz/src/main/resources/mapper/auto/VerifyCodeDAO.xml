@@ -50,7 +50,9 @@
       <if test="expiredAt != null">
         expired_at,
       </if>
-      delete_flag,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
       <if test="lastEditor != null">
         last_editor,
       </if>
@@ -77,7 +79,9 @@
       <if test="expiredAt != null">
         #{expiredAt,jdbcType=TIMESTAMP},
       </if>
-      #{deleteFlag,jdbcType=TINYINT},
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
       <if test="lastEditor != null">
         #{lastEditor,jdbcType=BIGINT},
       </if>
