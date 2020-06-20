@@ -18,6 +18,7 @@ spring:
         account_wechat.actual-data-nodes: account.account_wechat
         organiztion.actual-data-nodes: account.organiztion
         verify_code.actual-data-nodes: account.verify_code
+        open_app.actual-data-nodes: account.open_app
         #goods
         goods.actual-data-nodes: goods.goods
         goods_detail.actual-data-nodes: goods.goods_detail
@@ -66,6 +67,7 @@ spring:
         credit_log.actual-data-nodes: credit.credit_log
         #datav
         daily_koi.actual-data-nodes: datav.daily_koi
+        daily_sms.actual-data-nodes: datav.daily_sms
         daily_loan.actual-data-nodes: datav.daily_loan
         daily_trade.actual-data-nodes: datav.daily_trade
         daily_repay.actual-data-nodes: datav.daily_repay
