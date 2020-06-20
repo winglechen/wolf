@@ -32,5 +32,4 @@ public class OpenApp implements Model {
 
     private static final long serialVersionUID = 1L;
 
-   
 }
