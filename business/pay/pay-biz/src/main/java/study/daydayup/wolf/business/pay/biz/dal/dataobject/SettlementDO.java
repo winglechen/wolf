@@ -37,6 +37,10 @@ public class SettlementDO implements Serializable {
 
     private LocalDateTime settledAt;
 
+    private LocalDateTime startAt;
+
+    private LocalDateTime endAt;
+
     private Boolean deleteFlag;
 
     private LocalDateTime createdAt;
@@ -64,6 +68,8 @@ public class SettlementDO implements Serializable {
         sb.append(", taxCount=").append(taxCount);
         sb.append(", taxAmount=").append(taxAmount);
         sb.append(", settledAt=").append(settledAt);
+        sb.append(", startAt=").append(startAt);
+        sb.append(", endAt=").append(endAt);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
         sb.append("]");
@@ -97,6 +103,8 @@ public class SettlementDO implements Serializable {
             && (this.getTaxCount() == null ? other.getTaxCount() == null : this.getTaxCount().equals(other.getTaxCount()))
             && (this.getTaxAmount() == null ? other.getTaxAmount() == null : this.getTaxAmount().equals(other.getTaxAmount()))
             && (this.getSettledAt() == null ? other.getSettledAt() == null : this.getSettledAt().equals(other.getSettledAt()))
+            && (this.getStartAt() == null ? other.getStartAt() == null : this.getStartAt().equals(other.getStartAt()))
+            && (this.getEndAt() == null ? other.getEndAt() == null : this.getEndAt().equals(other.getEndAt()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
     }
@@ -120,6 +128,8 @@ public class SettlementDO implements Serializable {
         result = prime * result + ((getTaxCount() == null) ? 0 : getTaxCount().hashCode());
         result = prime * result + ((getTaxAmount() == null) ? 0 : getTaxAmount().hashCode());
         result = prime * result + ((getSettledAt() == null) ? 0 : getSettledAt().hashCode());
+        result = prime * result + ((getStartAt() == null) ? 0 : getStartAt().hashCode());
+        result = prime * result + ((getEndAt() == null) ? 0 : getEndAt().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         return result;
