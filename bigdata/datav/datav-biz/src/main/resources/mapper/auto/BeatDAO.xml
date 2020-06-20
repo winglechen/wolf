@@ -11,6 +11,9 @@
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
     <result column="event_type" jdbcType="VARCHAR" property="eventType" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="object_id" jdbcType="BIGINT" property="objectId" />
+    <result column="object_type" jdbcType="INTEGER" property="objectType" />
     <result column="event" jdbcType="VARCHAR" property="event" />
     <result column="event_context" jdbcType="VARCHAR" property="eventContext" />
     <result column="event_memo" jdbcType="VARCHAR" property="eventMemo" />
@@ -18,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, org_id, account_id, device_id, device_type, ip, latitude, longitude, event_type, 
-    event, event_context, event_memo, created_at
+    `source`, object_id, object_type, event, event_context, event_memo, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -34,11 +37,13 @@
     insert into beat (id, org_id, account_id, 
       device_id, device_type, ip, 
       latitude, longitude, event_type, 
+      `source`, object_id, object_type, 
       event, event_context, event_memo, 
       created_at)
     values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, 
       #{deviceId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{eventType,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{objectId,jdbcType=BIGINT}, #{objectType,jdbcType=INTEGER}, 
       #{event,jdbcType=VARCHAR}, #{eventContext,jdbcType=VARCHAR}, #{eventMemo,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP})
   </insert>
@@ -71,6 +76,15 @@
       </if>
       <if test="eventType != null">
         event_type,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="objectId != null">
+        object_id,
+      </if>
+      <if test="objectType != null">
+        object_type,
       </if>
       <if test="event != null">
         event,
@@ -113,6 +127,15 @@
       <if test="eventType != null">
         #{eventType,jdbcType=VARCHAR},
       </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectType != null">
+        #{objectType,jdbcType=INTEGER},
+      </if>
       <if test="event != null">
         #{event,jdbcType=VARCHAR},
       </if>
@@ -154,6 +177,15 @@
       <if test="eventType != null">
         event_type = #{eventType,jdbcType=VARCHAR},
       </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="objectId != null">
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectType != null">
+        object_type = #{objectType,jdbcType=INTEGER},
+      </if>
       <if test="event != null">
         event = #{event,jdbcType=VARCHAR},
       </if>
@@ -179,6 +211,9 @@
       latitude = #{latitude,jdbcType=DECIMAL},
       longitude = #{longitude,jdbcType=DECIMAL},
       event_type = #{eventType,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
+      object_id = #{objectId,jdbcType=BIGINT},
+      object_type = #{objectType,jdbcType=INTEGER},
       event = #{event,jdbcType=VARCHAR},
       event_context = #{eventContext,jdbcType=VARCHAR},
       event_memo = #{eventMemo,jdbcType=VARCHAR},

@@ -25,6 +25,12 @@ public class BeatDO implements Serializable {
 
     private String eventType;
 
+    private String source;
+
+    private Long objectId;
+
+    private Integer objectType;
+
     private String event;
 
     private String eventContext;
@@ -50,6 +56,9 @@ public class BeatDO implements Serializable {
         sb.append(", latitude=").append(latitude);
         sb.append(", longitude=").append(longitude);
         sb.append(", eventType=").append(eventType);
+        sb.append(", source=").append(source);
+        sb.append(", objectId=").append(objectId);
+        sb.append(", objectType=").append(objectType);
         sb.append(", event=").append(event);
         sb.append(", eventContext=").append(eventContext);
         sb.append(", eventMemo=").append(eventMemo);
@@ -79,6 +88,9 @@ public class BeatDO implements Serializable {
             && (this.getLatitude() == null ? other.getLatitude() == null : this.getLatitude().equals(other.getLatitude()))
             && (this.getLongitude() == null ? other.getLongitude() == null : this.getLongitude().equals(other.getLongitude()))
             && (this.getEventType() == null ? other.getEventType() == null : this.getEventType().equals(other.getEventType()))
+            && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
+            && (this.getObjectId() == null ? other.getObjectId() == null : this.getObjectId().equals(other.getObjectId()))
+            && (this.getObjectType() == null ? other.getObjectType() == null : this.getObjectType().equals(other.getObjectType()))
             && (this.getEvent() == null ? other.getEvent() == null : this.getEvent().equals(other.getEvent()))
             && (this.getEventContext() == null ? other.getEventContext() == null : this.getEventContext().equals(other.getEventContext()))
             && (this.getEventMemo() == null ? other.getEventMemo() == null : this.getEventMemo().equals(other.getEventMemo()))
@@ -98,6 +110,9 @@ public class BeatDO implements Serializable {
         result = prime * result + ((getLatitude() == null) ? 0 : getLatitude().hashCode());
         result = prime * result + ((getLongitude() == null) ? 0 : getLongitude().hashCode());
         result = prime * result + ((getEventType() == null) ? 0 : getEventType().hashCode());
+        result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
+        result = prime * result + ((getObjectId() == null) ? 0 : getObjectId().hashCode());
+        result = prime * result + ((getObjectType() == null) ? 0 : getObjectType().hashCode());
         result = prime * result + ((getEvent() == null) ? 0 : getEvent().hashCode());
         result = prime * result + ((getEventContext() == null) ? 0 : getEventContext().hashCode());
         result = prime * result + ((getEventMemo() == null) ? 0 : getEventMemo().hashCode());
