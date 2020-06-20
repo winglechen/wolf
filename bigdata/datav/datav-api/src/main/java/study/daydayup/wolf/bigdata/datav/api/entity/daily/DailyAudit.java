@@ -1,6 +1,7 @@
 package study.daydayup.wolf.bigdata.datav.api.entity.daily;
 
 import lombok.Data;
+import study.daydayup.wolf.common.model.type.number.base.Int;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class DailyAudit implements Model {
 
     private Integer installCount;
     private Integer registerCount;
+    private Integer verifyCodeCount;
 
     private Integer basicInfoCount;
     private Integer aadhaarCount;

@@ -24,7 +24,7 @@ public class DailySmsSink {
                 .tableName("daily_sms")
                 .source(mysqlSource)
                 .build()
-                .setKeyColumns("org_id", "date");
+                .setKeyColumns("org_id", "date", "sms_type");
         mysqlSink.init(sinkConfig);
 
         return mysqlSink;

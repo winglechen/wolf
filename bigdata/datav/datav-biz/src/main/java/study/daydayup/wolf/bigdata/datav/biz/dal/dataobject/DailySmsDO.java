@@ -13,6 +13,8 @@ public class DailySmsDO implements Serializable {
 
     private LocalDate date;
 
+    private String source;
+
     private Integer smsType;
 
     private Integer smsCount;
@@ -32,6 +34,7 @@ public class DailySmsDO implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orgId=").append(orgId);
         sb.append(", date=").append(date);
+        sb.append(", source=").append(source);
         sb.append(", smsType=").append(smsType);
         sb.append(", smsCount=").append(smsCount);
         sb.append(", deleteFlag=").append(deleteFlag);
@@ -55,6 +58,7 @@ public class DailySmsDO implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
+            && (this.getSource() == null ? other.getSource() == null : this.getSource().equals(other.getSource()))
             && (this.getSmsType() == null ? other.getSmsType() == null : this.getSmsType().equals(other.getSmsType()))
             && (this.getSmsCount() == null ? other.getSmsCount() == null : this.getSmsCount().equals(other.getSmsCount()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
@@ -68,6 +72,7 @@ public class DailySmsDO implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrgId() == null) ? 0 : getOrgId().hashCode());
         result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
+        result = prime * result + ((getSource() == null) ? 0 : getSource().hashCode());
         result = prime * result + ((getSmsType() == null) ? 0 : getSmsType().hashCode());
         result = prime * result + ((getSmsCount() == null) ? 0 : getSmsCount().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());

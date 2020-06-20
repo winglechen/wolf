@@ -64,8 +64,9 @@ CREATE TABLE IF NOT EXISTS `daily_sms`
     `id`                        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `org_id`                    BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组织ID',
     `date`                      DATE                NOT NULL COMMENT '统计日期',
-    `sms_type`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单类型',
+    `source`                    VARCHAR(50) NOT NULL DEFAULT '' COMMENT '渠道',
 
+    `sms_type`                  INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '订单类型',
     `sms_count`                 INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '交易数',
 
     `delete_flag`               TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

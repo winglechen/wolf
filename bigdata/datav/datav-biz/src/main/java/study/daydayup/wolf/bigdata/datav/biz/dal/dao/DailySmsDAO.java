@@ -2,6 +2,7 @@ package study.daydayup.wolf.bigdata.datav.biz.dal.dao;
 
 import org.apache.ibatis.annotations.Param;
 import study.daydayup.wolf.bigdata.datav.api.dto.daily.DateRangeRequest;
+import study.daydayup.wolf.bigdata.datav.api.dto.daily.SmsDateRequest;
 import study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface DailySmsDAO {
 
     List<DailySmsDO> selectByDate(@Param("request") DateRangeRequest request);
 
+    List<DailySmsDO> selectByDateIn(@Param("request") SmsDateRequest request);
 }

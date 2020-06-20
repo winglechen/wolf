@@ -5,13 +5,14 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="date" jdbcType="DATE" property="date" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
     <result column="sms_type" jdbcType="INTEGER" property="smsType" />
     <result column="sms_count" jdbcType="INTEGER" property="smsCount" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_id, `date`, sms_type, sms_count, delete_flag, created_at
+    id, org_id, `date`, `source`, sms_type, sms_count, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,12 +25,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
-    insert into daily_sms (id, org_id, `date`, sms_type, 
-      sms_count, delete_flag, created_at
-      )
-    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{smsType,jdbcType=INTEGER}, 
-      #{smsCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+    insert into daily_sms (id, org_id, `date`, `source`, 
+      sms_type, sms_count, delete_flag, 
+      created_at)
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{source,jdbcType=VARCHAR}, 
+      #{smsType,jdbcType=INTEGER}, #{smsCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.bigdata.datav.biz.dal.dataobject.DailySmsDO">
     insert into daily_sms
@@ -42,6 +43,9 @@
       </if>
       <if test="date != null">
         `date`,
+      </if>
+      <if test="source != null">
+        `source`,
       </if>
       <if test="smsType != null">
         sms_type,
@@ -66,6 +70,9 @@
       <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
       <if test="smsType != null">
         #{smsType,jdbcType=INTEGER},
       </if>
@@ -89,6 +96,9 @@
       <if test="date != null">
         `date` = #{date,jdbcType=DATE},
       </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=VARCHAR},
+      </if>
       <if test="smsType != null">
         sms_type = #{smsType,jdbcType=INTEGER},
       </if>
@@ -108,6 +118,7 @@
     update daily_sms
     set org_id = #{orgId,jdbcType=BIGINT},
       `date` = #{date,jdbcType=DATE},
+      `source` = #{source,jdbcType=VARCHAR},
       sms_type = #{smsType,jdbcType=INTEGER},
       sms_count = #{smsCount,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
