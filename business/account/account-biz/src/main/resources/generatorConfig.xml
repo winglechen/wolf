@@ -102,7 +102,7 @@
         </table>
 
         <table tableName="open_app" domainObjectName="OpenAppDO" mapperName="OpenAppDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="app_type" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+            <columnOverride column="app_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
         </table>
 

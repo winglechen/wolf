@@ -19,8 +19,8 @@ public interface OpenAppDAO {
 
     List<OpenAppDO> selectByOrgId(@Param("orgId")Long orgId);
 
-    OpenAppDO selectByOrgIdAndAppType(@Param("orgId")Long orgId,@Param("appType")Boolean appType);
+    OpenAppDO selectByOrgIdAndAppType(@Param("orgId")Long orgId,@Param("appType")Integer appType);
 
-    int updateByOrgIdAndAppType(@Param("updated")OpenAppDO updated,@Param("orgId")Long orgId,@Param("appType")Boolean appType);
+    int updateByOrgIdAndAppType(@Param("updated")OpenAppDO updated,@Param("orgId")Long orgId,@Param("appType")Integer appType);
 
 }
