@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.business.account.biz.dal.dao.OrganizationDAO">
-  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
+<mapper namespace="study.daydayup.wolf.business.account.biz.dal.dao.OpenAppDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.account.biz.dal.dataobject.OpenAppDO">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
-    <result column="org_type" jdbcType="TINYINT" property="orgType" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="app_type" jdbcType="TINYINT" property="appType" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_secret" jdbcType="VARCHAR" property="appSecret" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
@@ -12,37 +15,49 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, org_name, org_type, version, delete_flag, last_editor, created_at, updated_at
+    id, org_id, app_type, app_id, app_secret, memo, version, delete_flag, last_editor, 
+    created_at, updated_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from organization
+    from open_app
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteById" parameterType="java.lang.Long">
-    delete from organization
+    delete from open_app
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
-    insert into organization (id, org_name, org_type, 
+  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OpenAppDO">
+    insert into open_app (id, org_id, app_type, 
+      app_id, app_secret, memo, 
       version, delete_flag, last_editor, 
       created_at, updated_at)
-    values (#{id,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{appType,jdbcType=TINYINT}, 
+      #{appId,jdbcType=VARCHAR}, #{appSecret,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
       #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
-    insert into organization
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OpenAppDO">
+    insert into open_app
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="orgName != null">
-        org_name,
+      <if test="orgId != null">
+        org_id,
       </if>
-      <if test="orgType != null">
-        org_type,
+      <if test="appType != null">
+        app_type,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="appSecret != null">
+        app_secret,
+      </if>
+      <if test="memo != null">
+        memo,
       </if>
       <if test="version != null">
         version,
@@ -64,11 +79,20 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orgName != null">
-        #{orgName,jdbcType=VARCHAR},
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="orgType != null">
-        #{orgType,jdbcType=TINYINT},
+      <if test="appType != null">
+        #{appType,jdbcType=TINYINT},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null">
+        #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -87,14 +111,23 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
-    update organization
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OpenAppDO">
+    update open_app
     <set>
-      <if test="orgName != null">
-        org_name = #{orgName,jdbcType=VARCHAR},
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
       </if>
-      <if test="orgType != null">
-        org_type = #{orgType,jdbcType=TINYINT},
+      <if test="appType != null">
+        app_type = #{appType,jdbcType=TINYINT},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null">
+        app_secret = #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -114,10 +147,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateById" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OrganizationDO">
-    update organization
-    set org_name = #{orgName,jdbcType=VARCHAR},
-      org_type = #{orgType,jdbcType=TINYINT},
+  <update id="updateById" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.OpenAppDO">
+    update open_app
+    set org_id = #{orgId,jdbcType=BIGINT},
+      app_type = #{appType,jdbcType=TINYINT},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_secret = #{appSecret,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       last_editor = #{lastEditor,jdbcType=BIGINT},

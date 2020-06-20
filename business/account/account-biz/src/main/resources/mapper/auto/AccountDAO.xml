@@ -29,7 +29,7 @@
     delete from account
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
+  <insert id="insert" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
     insert into account (id, account, `password`, 
       salt, account_type, roles, 
       `source`, version, delete_flag, 
@@ -41,7 +41,7 @@
       #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.account.biz.dal.dataobject.AccountDO">
     insert into account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -68,7 +68,9 @@
       <if test="version != null">
         version,
       </if>
-      delete_flag,
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
       <if test="lastEditor != null">
         last_editor,
       </if>
@@ -104,7 +106,9 @@
       <if test="version != null">
         #{version,jdbcType=INTEGER},
       </if>
-      #{deleteFlag,jdbcType=TINYINT},
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
       <if test="lastEditor != null">
         #{lastEditor,jdbcType=BIGINT},
       </if>
