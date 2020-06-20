@@ -11,15 +11,13 @@ public class DailySms implements Model {
     private Long id;
 
     private Long orgId;
-
     private LocalDate date;
+    private String source;
 
     private Integer smsType;
-
     private Integer smsCount;
 
     private Boolean deleteFlag;
-
     private LocalDateTime createdAt;
 
     private static final long serialVersionUID = 1L;
