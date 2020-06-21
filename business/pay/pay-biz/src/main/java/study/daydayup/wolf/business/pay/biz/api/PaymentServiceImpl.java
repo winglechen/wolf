@@ -31,15 +31,15 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Result<Page<Payment>> query(@Validated PaymentQuery query, PageRequest pageRequest) {
         if (StringUtil.notBlank(query.getPaymentNo())) {
-            return byPaymentNo(query.getPaymentNo(), query.getPayeeId(), pageRequest);
+            return byPaymentNo(query.getPaymentNo(), query.getPayeeId());
         }
 
         if (StringUtil.notBlank(query.getTradeNo())) {
-            return byTradeNo(query.getTradeNo(), query.getPayeeId(), pageRequest);
+            return byTradeNo(query.getTradeNo(), query.getPayeeId());
         }
 
         if (StringUtil.notBlank(query.getOutTradeNo())) {
-            return byOutTradeNo(query.getOutTradeNo(), query.getPayeeId(), pageRequest);
+            return byOutTradeNo(query.getOutTradeNo(), query.getPayeeId());
         }
 
         if (null != query.getCreatedStart() || null != query.getCreatedEnd()) {
@@ -49,7 +49,7 @@ public class PaymentServiceImpl implements PaymentService {
         return byState(query, pageRequest);
     }
 
-    private Result<Page<Payment>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId, PageRequest pageRequest) {
+    public Result<Page<Payment>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId) {
         PaymentDO paymentDO = paymentDAO.selectByPaymentNoAndPayeeId(paymentNo, payeeId);
         if (paymentDO == null) {
             return Result.ok(Page.empty());
@@ -59,7 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
         return Result.ok(Page.one(payment));
     }
 
-    private Result<Page<Payment>> byTradeNo(@NonNull String tradeNo, @NonNull Long payeeId, PageRequest pageRequest) {
+    public Result<Page<Payment>> byTradeNo(@NonNull String tradeNo, @NonNull Long payeeId) {
         List<PaymentDO> paymentDOList = paymentDAO.selectByTradeNoAndPayeeId(tradeNo, payeeId);
         if (CollectionUtil.isEmpty(paymentDOList)) {
             return Result.ok(Page.empty());
@@ -69,7 +69,7 @@ public class PaymentServiceImpl implements PaymentService {
         return Result.ok(Page.one(paymentList));
     }
 
-    private Result<Page<Payment>> byOutTradeNo(@NonNull String outTradeNo, @NonNull Long payeeId, PageRequest pageRequest) {
+    public Result<Page<Payment>> byOutTradeNo(@NonNull String outTradeNo, @NonNull Long payeeId) {
         List<PaymentDO> paymentDOList = paymentDAO.selectByOutTradeNoAndPayeeId(outTradeNo, payeeId);
         if (CollectionUtil.isEmpty(paymentDOList)) {
             return Result.ok(Page.empty());
@@ -79,7 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
         return Result.ok(Page.one(paymentList));
     }
 
-    private Result<Page<Payment>> byState(@Validated PaymentQuery query, PageRequest pageRequest) {
+    public Result<Page<Payment>> byState(@Validated PaymentQuery query, PageRequest pageRequest) {
         Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
         List<PaymentDO> paymentDOList = paymentDAO.selectByPayeeId(query.getPayeeId(), query.getState());
         if (CollectionUtil.isEmpty(paymentDOList)) {
@@ -91,7 +91,7 @@ public class PaymentServiceImpl implements PaymentService {
         return Result.ok(paymentPage);
     }
 
-    private Result<Page<Payment>> byRange(@Validated PaymentQuery query, PageRequest pageRequest) {
+    public Result<Page<Payment>> byRange(@Validated PaymentQuery query, PageRequest pageRequest) {
         Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
         List<PaymentDO> paymentDOList = paymentDAO.selectByRange(query);
         if (CollectionUtil.isEmpty(paymentDOList)) {
