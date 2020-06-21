@@ -9,9 +9,15 @@ import lombok.Data;
 public class TransactionDO implements Serializable {
     private Long id;
 
+    private Long payeeId;
+
     private Long payerId;
 
-    private Long payeeId;
+    private String payerName;
+
+    private String payerPhone;
+
+    private String payerEmail;
 
     private String paymentNo;
 
@@ -46,8 +52,11 @@ public class TransactionDO implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", payerId=").append(payerId);
         sb.append(", payeeId=").append(payeeId);
+        sb.append(", payerId=").append(payerId);
+        sb.append(", payerName=").append(payerName);
+        sb.append(", payerPhone=").append(payerPhone);
+        sb.append(", payerEmail=").append(payerEmail);
         sb.append(", paymentNo=").append(paymentNo);
         sb.append(", transactionType=").append(transactionType);
         sb.append(", paymentChannel=").append(paymentChannel);
@@ -77,8 +86,11 @@ public class TransactionDO implements Serializable {
         }
         TransactionDO other = (TransactionDO) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPayerId() == null ? other.getPayerId() == null : this.getPayerId().equals(other.getPayerId()))
             && (this.getPayeeId() == null ? other.getPayeeId() == null : this.getPayeeId().equals(other.getPayeeId()))
+            && (this.getPayerId() == null ? other.getPayerId() == null : this.getPayerId().equals(other.getPayerId()))
+            && (this.getPayerName() == null ? other.getPayerName() == null : this.getPayerName().equals(other.getPayerName()))
+            && (this.getPayerPhone() == null ? other.getPayerPhone() == null : this.getPayerPhone().equals(other.getPayerPhone()))
+            && (this.getPayerEmail() == null ? other.getPayerEmail() == null : this.getPayerEmail().equals(other.getPayerEmail()))
             && (this.getPaymentNo() == null ? other.getPaymentNo() == null : this.getPaymentNo().equals(other.getPaymentNo()))
             && (this.getTransactionType() == null ? other.getTransactionType() == null : this.getTransactionType().equals(other.getTransactionType()))
             && (this.getPaymentChannel() == null ? other.getPaymentChannel() == null : this.getPaymentChannel().equals(other.getPaymentChannel()))
@@ -98,8 +110,11 @@ public class TransactionDO implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getPayerId() == null) ? 0 : getPayerId().hashCode());
         result = prime * result + ((getPayeeId() == null) ? 0 : getPayeeId().hashCode());
+        result = prime * result + ((getPayerId() == null) ? 0 : getPayerId().hashCode());
+        result = prime * result + ((getPayerName() == null) ? 0 : getPayerName().hashCode());
+        result = prime * result + ((getPayerPhone() == null) ? 0 : getPayerPhone().hashCode());
+        result = prime * result + ((getPayerEmail() == null) ? 0 : getPayerEmail().hashCode());
         result = prime * result + ((getPaymentNo() == null) ? 0 : getPaymentNo().hashCode());
         result = prime * result + ((getTransactionType() == null) ? 0 : getTransactionType().hashCode());
         result = prime * result + ((getPaymentChannel() == null) ? 0 : getPaymentChannel().hashCode());

@@ -55,6 +55,10 @@ public class PaymentDO implements Serializable {
 
     private LocalDateTime outPaidAt;
 
+    private String payerPhone;
+
+    private String payerEmail;
+
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -87,6 +91,8 @@ public class PaymentDO implements Serializable {
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", paidAt=").append(paidAt);
         sb.append(", outPaidAt=").append(outPaidAt);
+        sb.append(", payerPhone=").append(payerPhone);
+        sb.append(", payerEmail=").append(payerEmail);
         sb.append("]");
         return sb.toString();
     }
@@ -126,7 +132,9 @@ public class PaymentDO implements Serializable {
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
             && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
             && (this.getPaidAt() == null ? other.getPaidAt() == null : this.getPaidAt().equals(other.getPaidAt()))
-            && (this.getOutPaidAt() == null ? other.getOutPaidAt() == null : this.getOutPaidAt().equals(other.getOutPaidAt()));
+            && (this.getOutPaidAt() == null ? other.getOutPaidAt() == null : this.getOutPaidAt().equals(other.getOutPaidAt()))
+            && (this.getPayerPhone() == null ? other.getPayerPhone() == null : this.getPayerPhone().equals(other.getPayerPhone()))
+            && (this.getPayerEmail() == null ? other.getPayerEmail() == null : this.getPayerEmail().equals(other.getPayerEmail()));
     }
 
     @Override
@@ -157,6 +165,8 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         result = prime * result + ((getPaidAt() == null) ? 0 : getPaidAt().hashCode());
         result = prime * result + ((getOutPaidAt() == null) ? 0 : getOutPaidAt().hashCode());
+        result = prime * result + ((getPayerPhone() == null) ? 0 : getPayerPhone().hashCode());
+        result = prime * result + ((getPayerEmail() == null) ? 0 : getPayerEmail().hashCode());
         return result;
     }
 }

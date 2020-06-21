@@ -10,8 +10,11 @@ import java.time.LocalDateTime;
 public class Transaction implements Serializable {
     private Long id;
 
-    private Long accountId;
     private Long payeeId;
+    private Long payerId;
+    private String payerName;
+    private String payerPhone;
+    private String payerEmail;
 
     private String paymentNo;
     private Integer transactionType;
@@ -23,6 +26,9 @@ public class Transaction implements Serializable {
     private String settlementNo;
     private Integer settlementState;
     private LocalDateTime settledAt;
+
+    private Integer notifyState;
+    private String attachment;
 
     private Boolean deleteFlag;
     private LocalDateTime createdAt;
