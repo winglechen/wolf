@@ -26,11 +26,14 @@
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="paid_at" jdbcType="TIMESTAMP" property="paidAt" />
     <result column="out_paid_at" jdbcType="TIMESTAMP" property="outPaidAt" />
+    <result column="payer_phone" jdbcType="VARCHAR" property="payerPhone" />
+    <result column="payer_email" jdbcType="VARCHAR" property="payerEmail" />
   </resultMap>
   <sql id="Base_Column_List">
     id, payment_no, payer_id, payer_name, payee_id, payee_name, amount, currency, `state`, 
     payment_type, payment_method, trade_no, out_trade_no, goods_id, goods_name, tags, 
-    attachment, version, delete_flag, last_editor, created_at, updated_at, paid_at, out_paid_at
+    attachment, version, delete_flag, last_editor, created_at, updated_at, paid_at, out_paid_at, 
+    payer_phone, payer_email
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -50,8 +53,8 @@
       out_trade_no, goods_id, goods_name, 
       tags, attachment, version, 
       delete_flag, last_editor, created_at, 
-      updated_at, paid_at, out_paid_at
-      )
+      updated_at, paid_at, out_paid_at, 
+      payer_phone, payer_email)
     values (#{id,jdbcType=BIGINT}, #{paymentNo,jdbcType=VARCHAR}, #{payerId,jdbcType=BIGINT}, 
       #{payerName,jdbcType=VARCHAR}, #{payeeId,jdbcType=BIGINT}, #{payeeName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
@@ -59,10 +62,10 @@
       #{outTradeNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{paidAt,jdbcType=TIMESTAMP}, #{outPaidAt,jdbcType=TIMESTAMP}
-      )
+      #{updatedAt,jdbcType=TIMESTAMP}, #{paidAt,jdbcType=TIMESTAMP}, #{outPaidAt,jdbcType=TIMESTAMP}, 
+      #{payerPhone,jdbcType=VARCHAR}, #{payerEmail,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
     insert into payment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -136,6 +139,12 @@
       </if>
       <if test="outPaidAt != null">
         out_paid_at,
+      </if>
+      <if test="payerPhone != null">
+        payer_phone,
+      </if>
+      <if test="payerEmail != null">
+        payer_email,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -211,6 +220,12 @@
       <if test="outPaidAt != null">
         #{outPaidAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="payerPhone != null">
+        #{payerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="payerEmail != null">
+        #{payerEmail,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO">
@@ -285,6 +300,12 @@
       <if test="outPaidAt != null">
         out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="payerPhone != null">
+        payer_phone = #{payerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="payerEmail != null">
+        payer_email = #{payerEmail,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -312,7 +333,9 @@
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       paid_at = #{paidAt,jdbcType=TIMESTAMP},
-      out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP}
+      out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP},
+      payer_phone = #{payerPhone,jdbcType=VARCHAR},
+      payer_email = #{payerEmail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
