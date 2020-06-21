@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `payment`
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
 
 
-
 DROP TABLE IF EXISTS `payment_state_log`;
 CREATE TABLE IF NOT EXISTS `payment_state_log`
 (
