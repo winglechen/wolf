@@ -80,14 +80,27 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private Result<Page<Payment>> byState(@Validated PaymentQuery query, PageRequest pageRequest) {
-        return null;
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<PaymentDO> paymentDOList = paymentDAO.selectByPayeeId(query.getPayeeId(), query.getState());
+        if (CollectionUtil.isEmpty(paymentDOList)) {
+            return Result.ok(Page.empty());
+        }
+
+        List<Payment> paymentList = PaymentConverter.toModel(paymentDOList);
+        Page<Payment> paymentPage =  Page.of(paymentDOList).to(paymentList);
+        return Result.ok(paymentPage);
     }
 
     private Result<Page<Payment>> byRange(@Validated PaymentQuery query, PageRequest pageRequest) {
-        return null;
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<PaymentDO> paymentDOList = paymentDAO.selectByRange(query);
+        if (CollectionUtil.isEmpty(paymentDOList)) {
+            return Result.ok(Page.empty());
+        }
+
+        List<Payment> paymentList = PaymentConverter.toModel(paymentDOList);
+        Page<Payment> paymentPage =  Page.of(paymentDOList).to(paymentList);
+        return Result.ok(paymentPage);
     }
-
-
-
 
 }

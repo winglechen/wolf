@@ -18,6 +18,7 @@ public class PaymentQuery implements Request {
     @NotNull @Positive
     protected Long payeeId;
     protected Integer paymentChannel;
+    protected Integer state;
 
     protected String payerId;
     protected String payerName;
