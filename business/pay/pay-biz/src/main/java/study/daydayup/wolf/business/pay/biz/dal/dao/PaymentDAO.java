@@ -1,7 +1,9 @@
 package study.daydayup.wolf.business.pay.biz.dal.dao;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentQuery;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
 
 public interface PaymentDAO {
@@ -28,6 +30,10 @@ public interface PaymentDAO {
     List<PaymentDO> selectByOutTradeNo(@Param("outTradeNo")String outTradeNo, @Param("payeeId")Long payeeId);
 
     List<PaymentDO> selectByPayeeId(@Param("payeeId")Long payeeId, @Param("state")Integer state);
+
+    List<PaymentDO> selectByRange(@Param("query") PaymentQuery query);
+
+
 
 
 
