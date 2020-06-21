@@ -28,15 +28,15 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Result<Page<Payment>> query(@Validated PaymentQuery query, PageRequest pageRequest) {
         if (StringUtil.notBlank(query.getPaymentNo())) {
-            return byPaymentNo(query.getPaymentNo(), query.getPayeeId());
+            return byPaymentNo(query.getPaymentNo(), query.getPayeeId(), pageRequest);
         }
 
         if (StringUtil.notBlank(query.getTradeNo())) {
-            return byPaymentNo(query.getTradeNo(), query.getPayeeId());
+            return byPaymentNo(query.getTradeNo(), query.getPayeeId(), pageRequest);
         }
 
         if (StringUtil.notBlank(query.getOutTradeNo())) {
-            return byPaymentNo(query.getOutTradeNo(), query.getPayeeId());
+            return byPaymentNo(query.getOutTradeNo(), query.getPayeeId(), pageRequest);
         }
 
         if (null != query.getCreatedStart() || null != query.getCreatedEnd()) {
@@ -46,15 +46,15 @@ public class PaymentServiceImpl implements PaymentService {
         return byState(query, pageRequest);
     }
 
-    private Result<Page<Payment>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId) {
+    private Result<Page<Payment>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId, PageRequest pageRequest) {
         return null;
     }
 
-    private Result<Page<Payment>> byTradeNo(@NonNull String tradeNo, @NonNull Long payeeId) {
+    private Result<Page<Payment>> byTradeNo(@NonNull String tradeNo, @NonNull Long payeeId, PageRequest pageRequest) {
         return null;
     }
 
-    private Result<Page<Payment>> byOutTradeNo(@NonNull String outTradeNo, @NonNull Long payeeId) {
+    private Result<Page<Payment>> byOutTradeNo(@NonNull String outTradeNo, @NonNull Long payeeId, PageRequest pageRequest) {
         return null;
     }
 
