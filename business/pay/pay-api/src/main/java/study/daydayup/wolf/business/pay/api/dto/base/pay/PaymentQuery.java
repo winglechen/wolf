@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.pay.api.dto.base.pay;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 /**
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
  **/
 @Data
 public class PaymentQuery implements Request {
-
+    @NotNull @Positive
     protected Long payeeId;
     protected Integer paymentChannel;
 

@@ -30,13 +30,13 @@ public class OpenAppConverter implements Converter {
         return CollectionUtil.to(appDOList, OpenAppConverter::toModel);
     }
 
-    public static OpenAppDO toDO(OpenApp credit) {
-        if (credit == null) {
+    public static OpenAppDO toDO(OpenApp app) {
+        if (app == null) {
             return null;
         }
 
         OpenAppDO appDO = new OpenAppDO();
-        BeanUtils.copyProperties(credit, appDO);
+        BeanUtils.copyProperties(app, appDO);
         return appDO;
     }
 }

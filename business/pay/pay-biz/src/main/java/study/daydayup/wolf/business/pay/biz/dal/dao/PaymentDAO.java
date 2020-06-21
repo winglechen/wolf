@@ -25,7 +25,7 @@ public interface PaymentDAO {
 
     PaymentDO selectByPaymentNo(@Param("paymentNo")String paymentNo);
 
-    List<PaymentDO> selectByPaymentNoAndPayeeId(@Param("paymentNo")String paymentNo,@Param("payeeId")Long payeeId);
+    PaymentDO selectByPaymentNoAndPayeeId(@Param("paymentNo")String paymentNo,@Param("payeeId")Long payeeId);
 
     List<PaymentDO> selectByOutTradeNo(@Param("outTradeNo")String outTradeNo, @Param("payeeId")Long payeeId);
 
