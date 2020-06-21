@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.pay.api.dto.base.pay;
+package study.daydayup.wolf.business.pay.api.dto.base.manage;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
@@ -18,6 +18,7 @@ public class PaymentQuery implements Request {
     @NotNull @Positive
     protected Long payeeId;
     protected Integer paymentChannel;
+    protected Integer state;
 
     protected String payerId;
     protected String payerName;
