@@ -77,7 +77,7 @@ public class Page<T> implements Serializable {
     }
 
     public static <T> Page<T> empty() {
-        return empty(null, null);
+        return empty(1, 10);
     }
 
     public static <T> Page<T> empty(Integer pageNum, Integer pageSize) {
@@ -87,6 +87,18 @@ public class Page<T> implements Serializable {
                 .pageSize(pageSize)
                 .pages(0)
                 .pageNum(pageNum)
+                .hasNextPage(false)
+                .hasPrePage(false)
+                .build();
+    }
+
+    public static <T> Page<T> one(int total) {
+        return Page.<T>builder()
+                .data(new ArrayList<>())
+                .total(Long.valueOf(total))
+                .pageSize(total)
+                .pages(1)
+                .pageNum(1)
                 .hasNextPage(false)
                 .hasPrePage(false)
                 .build();
