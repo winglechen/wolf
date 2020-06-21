@@ -23,10 +23,12 @@ public class Payment implements Model {
     private Long id;
     private String paymentNo;
 
-    private Long payerId;
-    private String payerName;
     private Long payeeId;
     private String payeeName;
+    private Long payerId;
+    private String payerName;
+    private String payerPhone;
+    private String payerEmail;
 
     private String tradeNo;
     private String outTradeNo;
