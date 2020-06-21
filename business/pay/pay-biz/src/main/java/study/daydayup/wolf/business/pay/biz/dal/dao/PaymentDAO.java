@@ -1,9 +1,8 @@
 package study.daydayup.wolf.business.pay.biz.dal.dao;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentQuery;
+import study.daydayup.wolf.business.pay.api.dto.base.manage.PaymentQuery;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
 
 public interface PaymentDAO {

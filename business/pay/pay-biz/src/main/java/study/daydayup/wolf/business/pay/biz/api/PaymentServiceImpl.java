@@ -3,7 +3,7 @@ package study.daydayup.wolf.business.pay.biz.api;
 import lombok.NonNull;
 import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentQuery;
+import study.daydayup.wolf.business.pay.api.dto.base.manage.PaymentQuery;
 import study.daydayup.wolf.business.pay.api.service.PaymentService;
 import study.daydayup.wolf.business.pay.biz.converter.PaymentConverter;
 import study.daydayup.wolf.business.pay.biz.dal.dao.PaymentDAO;

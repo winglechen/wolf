@@ -1,7 +1,7 @@
 package study.daydayup.wolf.business.pay.api.service;
 
 import study.daydayup.wolf.business.pay.api.domain.entity.Transaction;
-import study.daydayup.wolf.business.pay.api.dto.base.pay.TransactionQuery;
+import study.daydayup.wolf.business.pay.api.dto.base.manage.TransactionQuery;
 import study.daydayup.wolf.framework.layer.domain.Service;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.page.Page;
