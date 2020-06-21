@@ -92,10 +92,19 @@ public class Page<T> implements Serializable {
                 .build();
     }
 
-    public static <T> Page<T> one(int total) {
+    public static <T> Page<T> one(T t) {
+        List<T> tList = new ArrayList<>();
+        tList.add(t);
+
+        return one(tList);
+    }
+
+    public static <T> Page<T> one(List<T> data) {
+        int total = data.size();
+
         return Page.<T>builder()
-                .data(new ArrayList<>())
-                .total(Long.valueOf(total))
+                .data(data)
+                .total((long) total)
                 .pageSize(total)
                 .pages(1)
                 .pageNum(1)
