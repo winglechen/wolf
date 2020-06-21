@@ -3,6 +3,8 @@ package study.daydayup.wolf.business.pay.api.dto.base.pay;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Request;
 
+import java.time.LocalDateTime;
+
 /**
  * study.daydayup.wolf.business.pay.api.dto
  *
@@ -12,12 +14,21 @@ import study.daydayup.wolf.framework.layer.api.Request;
 @Data
 public class PaymentQuery implements Request {
 
-    private Long payeeId;
-    private Integer paymentChannel;
+    protected Long payeeId;
+    protected Integer paymentChannel;
 
-    private String paymentNo;
-    private String tradeNo;
-    private String outTradeNo;
+    protected String payerId;
+    protected String payerName;
+    protected String payerPhone;
+    protected String payerEmail;
 
-    
+    protected String paymentNo;
+    protected String tradeNo;
+    protected String outTradeNo;
+
+    protected String createdBefore;
+    protected String createdAfter;
+    protected LocalDateTime createdStart;
+    protected LocalDateTime createdEnd;
+
 }

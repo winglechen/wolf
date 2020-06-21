@@ -7,10 +7,12 @@ CREATE TABLE IF NOT EXISTS `payment`
     `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `payment_no`            VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
-    `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
-    `payer_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
     `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
-    `payee_name`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `payee_name`            VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `payer_name`            VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_phone`           VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_email`           VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
 
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0,
     `currency`              INT(11) NOT NULL DEFAULT 0 COMMENT '币种',
@@ -33,8 +35,11 @@ CREATE TABLE IF NOT EXISTS `payment`
     `last_editor`           BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后编辑者',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`            DATETIME            ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
+    UNIQUE INDEX `udx_pay_no` (`payment_no`),
     INDEX `idx_trade_no` (`trade_no`, `state`) COMMENT '覆盖索引：检查重复支付问题',
-    UNIQUE INDEX `udx_pay_no` (`payment_no` ASC),
+    INDEX `idx_out_trade_no` (`out_trade_no`),
+    INDEX `idx_payee` (`payee_id`, `state`, `created_at`),
+    INDEX `idx_payer` (`payer_id`, `payee_id`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
 
@@ -66,8 +71,12 @@ DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction`
 (
     `id`                    BIGINT(20) UNSIGNED     NOT NULL AUTO_INCREMENT,
-    `payer_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
     `payee_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '卖家ID',
+
+    `payer_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0 COMMENT '买家ID',
+    `payer_name`            VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_phone`           VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_email`           VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
 
     `payment_no`            VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `transaction_type`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '1, 入帐； 2，退款；...',
@@ -85,9 +94,10 @@ CREATE TABLE IF NOT EXISTS `transaction`
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    PRIMARY KEY (`id`),
     INDEX `idx_payee` (`payee_id`, `created_at`, `transaction_type`),
-    INDEX `idx_pay` ( `payment_no`)
+    INDEX `idx_pay` ( `payment_no`),
+    INDEX `idx_settle` (`settlement_no`, `transaction_type`),
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = 'transaction';
 
 DROP TABLE IF EXISTS `settlement`;
