@@ -25,10 +25,13 @@ public class Transaction implements Serializable {
 
     private String settlementNo;
     private Integer settlementState;
-    private LocalDateTime settledAt;
 
     private Integer notifyState;
     private String attachment;
+
+    private LocalDateTime settledAt;
+    private LocalDateTime paidAt;
+    private LocalDateTime outPaidAt;
 
     private Boolean deleteFlag;
     private LocalDateTime createdAt;
