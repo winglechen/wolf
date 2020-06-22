@@ -88,8 +88,11 @@ CREATE TABLE IF NOT EXISTS `transaction`
 
     `settlement_no`         VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `settlement_state`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
-    `settled_at`            DATETIME            COMMENT '结算时间',
     `notify_state`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+
+    `settled_at`            DATETIME            COMMENT '结算时间',
+    `paid_at`               DATETIME            COMMENT '支付时间',
+    `out_paid_at`           DATETIME            COMMENT '外部支付时间',
 
     `attachment`            VARCHAR(5000)        NOT NULL DEFAULT '' COMMENT '',
 
