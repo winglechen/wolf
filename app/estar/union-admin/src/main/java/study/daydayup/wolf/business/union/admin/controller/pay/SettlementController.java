@@ -29,7 +29,7 @@ public class SettlementController implements Controller {
     @Resource
     private Session session;
 
-    @GetMapping("/pay/payment/query")
+    @GetMapping("/pay/settlement/query")
     public Result<Page<Settlement>> find(@Validated @ModelAttribute SettlementQuery query) {
         Long orgId = session.get("orgId", Long.class);
         query.setAccountId(orgId);
