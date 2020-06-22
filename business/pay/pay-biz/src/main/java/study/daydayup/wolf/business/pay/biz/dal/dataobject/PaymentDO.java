@@ -59,6 +59,8 @@ public class PaymentDO implements Serializable {
 
     private String payerEmail;
 
+    private String paymentMode;
+
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -93,6 +95,7 @@ public class PaymentDO implements Serializable {
         sb.append(", outPaidAt=").append(outPaidAt);
         sb.append(", payerPhone=").append(payerPhone);
         sb.append(", payerEmail=").append(payerEmail);
+        sb.append(", paymentMode=").append(paymentMode);
         sb.append("]");
         return sb.toString();
     }
@@ -134,7 +137,8 @@ public class PaymentDO implements Serializable {
             && (this.getPaidAt() == null ? other.getPaidAt() == null : this.getPaidAt().equals(other.getPaidAt()))
             && (this.getOutPaidAt() == null ? other.getOutPaidAt() == null : this.getOutPaidAt().equals(other.getOutPaidAt()))
             && (this.getPayerPhone() == null ? other.getPayerPhone() == null : this.getPayerPhone().equals(other.getPayerPhone()))
-            && (this.getPayerEmail() == null ? other.getPayerEmail() == null : this.getPayerEmail().equals(other.getPayerEmail()));
+            && (this.getPayerEmail() == null ? other.getPayerEmail() == null : this.getPayerEmail().equals(other.getPayerEmail()))
+            && (this.getPaymentMode() == null ? other.getPaymentMode() == null : this.getPaymentMode().equals(other.getPaymentMode()));
     }
 
     @Override
@@ -167,6 +171,7 @@ public class PaymentDO implements Serializable {
         result = prime * result + ((getOutPaidAt() == null) ? 0 : getOutPaidAt().hashCode());
         result = prime * result + ((getPayerPhone() == null) ? 0 : getPayerPhone().hashCode());
         result = prime * result + ((getPayerEmail() == null) ? 0 : getPayerEmail().hashCode());
+        result = prime * result + ((getPaymentMode() == null) ? 0 : getPaymentMode().hashCode());
         return result;
     }
 }
