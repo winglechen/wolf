@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     `state`                 TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `payment_type`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
     `payment_method`        TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+    `payment_mode`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
 
     `trade_no`              VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
     `out_trade_no`          VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     INDEX `idx_payer` (`payer_id`, `payee_id`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
+
 
 
 DROP TABLE IF EXISTS `payment_state_log`;
@@ -86,8 +88,11 @@ CREATE TABLE IF NOT EXISTS `transaction`
 
     `settlement_no`         VARCHAR(32)             NOT NULL DEFAULT '' COMMENT '',
     `settlement_state`      TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
-    `settled_at`            DATETIME            COMMENT '结算时间',
     `notify_state`          TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+
+    `settled_at`            DATETIME            COMMENT '结算时间',
+    `paid_at`               DATETIME            COMMENT '支付时间',
+    `out_paid_at`           DATETIME            COMMENT '外部支付时间',
 
     `attachment`            VARCHAR(5000)        NOT NULL DEFAULT '' COMMENT '',
 
