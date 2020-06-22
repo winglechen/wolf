@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.union.task.dts.transformation;
 
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.common.io.db.Table;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.dts.sink.MysqlSink;
@@ -13,6 +14,7 @@ import study.daydayup.wolf.dts.transformation.Statistics;
  * @author Wingle
  * @since 2020/6/20 10:23 下午
  **/
+@Component
 public class VerifyCodeTransformation {
     public Statistics latest(Table stream, MysqlSink mysqlSink) {
         if (CollectionUtil.isEmpty(stream)) {
