@@ -28,6 +28,7 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService {
     @Resource
     private PaymentDAO paymentDAO;
+
     @Override
     public Result<Page<Payment>> query(@Validated PaymentQuery query, PageRequest pageRequest) {
         if (StringUtil.notBlank(query.getPaymentNo())) {
