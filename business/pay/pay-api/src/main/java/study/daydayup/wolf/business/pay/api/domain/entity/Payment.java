@@ -40,6 +40,7 @@ public class Payment implements Model {
     private Integer state;
     private Integer paymentType;
     private Integer paymentMethod;
+    private String paymentMode;
 
     private String attachment;
     private String tags;
