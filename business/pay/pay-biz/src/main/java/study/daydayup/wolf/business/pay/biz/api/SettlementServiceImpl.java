@@ -1,14 +1,11 @@
 package study.daydayup.wolf.business.pay.biz.api;
 
 import lombok.NonNull;
-import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.entity.Settlement;
 import study.daydayup.wolf.business.pay.api.dto.base.manage.SettlementQuery;
 import study.daydayup.wolf.business.pay.api.service.SettlementService;
-import study.daydayup.wolf.business.pay.biz.converter.PaymentConverter;
 import study.daydayup.wolf.business.pay.biz.converter.SettlementConverter;
 import study.daydayup.wolf.business.pay.biz.dal.dao.SettlementDAO;
-import study.daydayup.wolf.business.pay.biz.dal.dataobject.PaymentDO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.SettlementDO;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -37,7 +34,7 @@ public class SettlementServiceImpl implements SettlementService {
             return bySettlementNo(query.getSettlementNo(), query.getAccountId());
         }
 
-        return byRange(query, pageRequest)
+        return byRange(query, pageRequest);
     }
 
     public Result<Page<Settlement>> bySettlementNo(@NonNull String settlementNo, @NonNull Long accountId) {
