@@ -15,16 +15,18 @@
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="settlement_no" jdbcType="VARCHAR" property="settlementNo" />
     <result column="settlement_state" jdbcType="TINYINT" property="settlementState" />
-    <result column="settled_at" jdbcType="TIMESTAMP" property="settledAt" />
     <result column="notify_state" jdbcType="TINYINT" property="notifyState" />
+    <result column="settled_at" jdbcType="TIMESTAMP" property="settledAt" />
+    <result column="paid_at" jdbcType="TIMESTAMP" property="paidAt" />
+    <result column="out_paid_at" jdbcType="TIMESTAMP" property="outPaidAt" />
     <result column="attachment" jdbcType="VARCHAR" property="attachment" />
     <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, payee_id, payer_id, payer_name, payer_phone, payer_email, payment_no, transaction_type, 
-    payment_channel, currency, amount, settlement_no, settlement_state, settled_at, notify_state, 
-    attachment, delete_flag, created_at
+    payment_channel, currency, amount, settlement_no, settlement_state, notify_state, 
+    settled_at, paid_at, out_paid_at, attachment, delete_flag, created_at
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -41,16 +43,16 @@
       payer_name, payer_phone, payer_email, 
       payment_no, transaction_type, payment_channel, 
       currency, amount, settlement_no, 
-      settlement_state, settled_at, notify_state, 
-      attachment, delete_flag, created_at
-      )
+      settlement_state, notify_state, settled_at, 
+      paid_at, out_paid_at, attachment, 
+      delete_flag, created_at)
     values (#{id,jdbcType=BIGINT}, #{payeeId,jdbcType=BIGINT}, #{payerId,jdbcType=BIGINT}, 
       #{payerName,jdbcType=VARCHAR}, #{payerPhone,jdbcType=VARCHAR}, #{payerEmail,jdbcType=VARCHAR}, 
       #{paymentNo,jdbcType=VARCHAR}, #{transactionType,jdbcType=TINYINT}, #{paymentChannel,jdbcType=SMALLINT}, 
       #{currency,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{settlementNo,jdbcType=VARCHAR}, 
-      #{settlementState,jdbcType=TINYINT}, #{settledAt,jdbcType=TIMESTAMP}, #{notifyState,jdbcType=TINYINT}, 
-      #{attachment,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{settlementState,jdbcType=TINYINT}, #{notifyState,jdbcType=TINYINT}, #{settledAt,jdbcType=TIMESTAMP}, 
+      #{paidAt,jdbcType=TIMESTAMP}, #{outPaidAt,jdbcType=TIMESTAMP}, #{attachment,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO">
     insert into transaction
@@ -94,11 +96,17 @@
       <if test="settlementState != null">
         settlement_state,
       </if>
+      <if test="notifyState != null">
+        notify_state,
+      </if>
       <if test="settledAt != null">
         settled_at,
       </if>
-      <if test="notifyState != null">
-        notify_state,
+      <if test="paidAt != null">
+        paid_at,
+      </if>
+      <if test="outPaidAt != null">
+        out_paid_at,
       </if>
       <if test="attachment != null">
         attachment,
@@ -150,11 +158,17 @@
       <if test="settlementState != null">
         #{settlementState,jdbcType=TINYINT},
       </if>
+      <if test="notifyState != null">
+        #{notifyState,jdbcType=TINYINT},
+      </if>
       <if test="settledAt != null">
         #{settledAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="notifyState != null">
-        #{notifyState,jdbcType=TINYINT},
+      <if test="paidAt != null">
+        #{paidAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outPaidAt != null">
+        #{outPaidAt,jdbcType=TIMESTAMP},
       </if>
       <if test="attachment != null">
         #{attachment,jdbcType=VARCHAR},
@@ -206,11 +220,17 @@
       <if test="settlementState != null">
         settlement_state = #{settlementState,jdbcType=TINYINT},
       </if>
+      <if test="notifyState != null">
+        notify_state = #{notifyState,jdbcType=TINYINT},
+      </if>
       <if test="settledAt != null">
         settled_at = #{settledAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="notifyState != null">
-        notify_state = #{notifyState,jdbcType=TINYINT},
+      <if test="paidAt != null">
+        paid_at = #{paidAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outPaidAt != null">
+        out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP},
       </if>
       <if test="attachment != null">
         attachment = #{attachment,jdbcType=VARCHAR},
@@ -238,8 +258,10 @@
       amount = #{amount,jdbcType=DECIMAL},
       settlement_no = #{settlementNo,jdbcType=VARCHAR},
       settlement_state = #{settlementState,jdbcType=TINYINT},
-      settled_at = #{settledAt,jdbcType=TIMESTAMP},
       notify_state = #{notifyState,jdbcType=TINYINT},
+      settled_at = #{settledAt,jdbcType=TIMESTAMP},
+      paid_at = #{paidAt,jdbcType=TIMESTAMP},
+      out_paid_at = #{outPaidAt,jdbcType=TIMESTAMP},
       attachment = #{attachment,jdbcType=VARCHAR},
       delete_flag = #{deleteFlag,jdbcType=TINYINT},
       created_at = #{createdAt,jdbcType=TIMESTAMP}

@@ -33,9 +33,13 @@ public class TransactionDO implements Serializable {
 
     private Integer settlementState;
 
+    private Integer notifyState;
+
     private LocalDateTime settledAt;
 
-    private Integer notifyState;
+    private LocalDateTime paidAt;
+
+    private LocalDateTime outPaidAt;
 
     private String attachment;
 
@@ -64,8 +68,10 @@ public class TransactionDO implements Serializable {
         sb.append(", amount=").append(amount);
         sb.append(", settlementNo=").append(settlementNo);
         sb.append(", settlementState=").append(settlementState);
-        sb.append(", settledAt=").append(settledAt);
         sb.append(", notifyState=").append(notifyState);
+        sb.append(", settledAt=").append(settledAt);
+        sb.append(", paidAt=").append(paidAt);
+        sb.append(", outPaidAt=").append(outPaidAt);
         sb.append(", attachment=").append(attachment);
         sb.append(", deleteFlag=").append(deleteFlag);
         sb.append(", createdAt=").append(createdAt);
@@ -98,8 +104,10 @@ public class TransactionDO implements Serializable {
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getSettlementNo() == null ? other.getSettlementNo() == null : this.getSettlementNo().equals(other.getSettlementNo()))
             && (this.getSettlementState() == null ? other.getSettlementState() == null : this.getSettlementState().equals(other.getSettlementState()))
-            && (this.getSettledAt() == null ? other.getSettledAt() == null : this.getSettledAt().equals(other.getSettledAt()))
             && (this.getNotifyState() == null ? other.getNotifyState() == null : this.getNotifyState().equals(other.getNotifyState()))
+            && (this.getSettledAt() == null ? other.getSettledAt() == null : this.getSettledAt().equals(other.getSettledAt()))
+            && (this.getPaidAt() == null ? other.getPaidAt() == null : this.getPaidAt().equals(other.getPaidAt()))
+            && (this.getOutPaidAt() == null ? other.getOutPaidAt() == null : this.getOutPaidAt().equals(other.getOutPaidAt()))
             && (this.getAttachment() == null ? other.getAttachment() == null : this.getAttachment().equals(other.getAttachment()))
             && (this.getDeleteFlag() == null ? other.getDeleteFlag() == null : this.getDeleteFlag().equals(other.getDeleteFlag()))
             && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()));
@@ -122,8 +130,10 @@ public class TransactionDO implements Serializable {
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getSettlementNo() == null) ? 0 : getSettlementNo().hashCode());
         result = prime * result + ((getSettlementState() == null) ? 0 : getSettlementState().hashCode());
-        result = prime * result + ((getSettledAt() == null) ? 0 : getSettledAt().hashCode());
         result = prime * result + ((getNotifyState() == null) ? 0 : getNotifyState().hashCode());
+        result = prime * result + ((getSettledAt() == null) ? 0 : getSettledAt().hashCode());
+        result = prime * result + ((getPaidAt() == null) ? 0 : getPaidAt().hashCode());
+        result = prime * result + ((getOutPaidAt() == null) ? 0 : getOutPaidAt().hashCode());
         result = prime * result + ((getAttachment() == null) ? 0 : getAttachment().hashCode());
         result = prime * result + ((getDeleteFlag() == null) ? 0 : getDeleteFlag().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
