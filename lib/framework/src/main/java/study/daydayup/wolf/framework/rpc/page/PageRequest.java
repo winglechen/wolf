@@ -1,9 +1,9 @@
 package study.daydayup.wolf.framework.rpc.page;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.Min;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
  * @since 2020/1/4 5:09 下午
  **/
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequest implements Request {

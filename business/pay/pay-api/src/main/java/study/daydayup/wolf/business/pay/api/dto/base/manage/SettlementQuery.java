@@ -21,19 +21,12 @@ import java.time.LocalDateTime;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class TransactionQuery extends PageRequest implements Request {
+public class SettlementQuery extends PageRequest implements Request {
     @NotNull @Positive
-    protected Long payeeId;
-    protected Integer transactionType;
-    protected Integer paymentChannel;
-    protected Integer settlementState;
+    protected Long accountId;
+    protected Integer settlementType;
+    protected Integer state;
 
-    protected String payerId;
-    protected String payerName;
-    protected String payerPhone;
-    protected String payerEmail;
-
-    protected String paymentNo;
     protected String settlementNo;
 
     protected String createdBefore;
