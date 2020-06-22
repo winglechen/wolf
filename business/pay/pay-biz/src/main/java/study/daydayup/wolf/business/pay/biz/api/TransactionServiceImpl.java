@@ -4,8 +4,10 @@ import lombok.NonNull;
 import study.daydayup.wolf.business.pay.api.domain.entity.Transaction;
 import study.daydayup.wolf.business.pay.api.dto.base.manage.TransactionQuery;
 import study.daydayup.wolf.business.pay.api.service.TransactionService;
+import study.daydayup.wolf.business.pay.biz.converter.TransactionConverter;
 import study.daydayup.wolf.business.pay.biz.dal.dao.TransactionDAO;
 import study.daydayup.wolf.business.pay.biz.dal.dataobject.TransactionDO;
+import study.daydayup.wolf.common.util.collection.CollectionUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 import study.daydayup.wolf.framework.rpc.RpcService;
@@ -40,15 +42,36 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public Result<Page<Transaction>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId) {
-        List<TransactionDO> transactionDOList;
-        return null;
+        List<TransactionDO> transactionDOList = transactionDAO.selectByPaymentNoAndPayeeId(paymentNo, payeeId);
+        if (CollectionUtil.isEmpty(transactionDOList)) {
+            return Result.ok(Page.empty());
+        }
+
+        List<Transaction> transactionList = TransactionConverter.toModel(transactionDOList);
+        return Result.ok(Page.one(transactionList));
     }
 
     public Result<Page<Transaction>> bySettlementNo(TransactionQuery query, PageRequest pageRequest) {
-        return null;
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TransactionDO> transactionDOList = transactionDAO.selectBySettlementNoAndPayeeId(query.getSettlementNo(),query.getTransactionType(), query.getPayeeId());
+        if (CollectionUtil.isEmpty(transactionDOList)) {
+            return Result.ok(Page.empty());
+        }
+
+        List<Transaction> transactionList = TransactionConverter.toModel(transactionDOList);
+        Page<Transaction> transactionPage = Page.of(transactionDOList).to(transactionList);
+        return Result.ok(transactionPage);
     }
 
     public Result<Page<Transaction>> byType(TransactionQuery query, PageRequest pageRequest) {
-        return null;
+        Page.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        List<TransactionDO> transactionDOList = transactionDAO.selectByRange(query);
+        if (CollectionUtil.isEmpty(transactionDOList)) {
+            return Result.ok(Page.empty());
+        }
+
+        List<Transaction> transactionList = TransactionConverter.toModel(transactionDOList);
+        Page<Transaction> transactionPage = Page.of(transactionDOList).to(transactionList);
+        return Result.ok(transactionPage);
     }
 }
