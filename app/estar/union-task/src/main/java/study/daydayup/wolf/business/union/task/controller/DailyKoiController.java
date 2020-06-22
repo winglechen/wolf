@@ -3,6 +3,7 @@ package study.daydayup.wolf.business.union.task.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.union.task.service.DailyKoiService;
+import study.daydayup.wolf.business.union.task.service.DailySmsService;
 import study.daydayup.wolf.business.union.task.service.DailyTradeService;
 
 import javax.annotation.Resource;
@@ -16,28 +17,32 @@ import javax.annotation.Resource;
 @RestController
 public class DailyKoiController {
     @Resource
-    private DailyKoiService koiService;
+    private DailyKoiService dailyKoiService;
     @Resource
-    private DailyTradeService tradeService;
+    private DailyTradeService dailyTradeService;
+    @Resource
+    private DailySmsService dailySmsService;
 
     @GetMapping("/daily/koi")
     public String koi() {
-        koiService.countPvAndUv();
-        koiService.countRegister();
-        koiService.countIndianInfoState();
+        dailyKoiService.countPvAndUv();
+        dailyKoiService.countRegister();
+        dailyKoiService.countIndianInfoState();
 
         return "daily koi data creating ...";
     }
 
     @GetMapping("/daily/koi/audit")
     public String audit() {
-        koiService.countPvAndUv();
-        koiService.countRegister();
-        koiService.countIndianInfoState();
+        dailyKoiService.countPvAndUv();
+        dailyKoiService.countRegister();
+        dailyKoiService.countIndianInfoState();
 
-        tradeService.countNewContract();
-        tradeService.countNewOrder();
-        tradeService.countTradeStateChange();
+        dailyTradeService.countNewContract();
+        dailyTradeService.countNewOrder();
+        dailyTradeService.countTradeStateChange();
+
+        dailySmsService.countVerifyCodeSms();
 
         return "daily audit data creating ...";
     }

@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * @since 2019/12/16 4:08 下午
  **/
 @Data
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 public class Trade implements Model {
     @NotBlank
