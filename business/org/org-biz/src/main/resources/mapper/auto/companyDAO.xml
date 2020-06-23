@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="study.daydayup.wolf.business.org.biz.task.dal.dao.companyDAO">
-  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+<mapper namespace="study.daydayup.wolf.business.org.biz.info.dal.dao.companyDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO">
     <id column="org_id" jdbcType="BIGINT" property="orgId" />
     <result column="org_type" jdbcType="SMALLINT" property="orgType" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
@@ -37,7 +37,7 @@
     delete from company
     where org_id = #{orgId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO">
     insert into company (org_id, org_type, company_name, 
       company_logo, main_business, country, 
       province, city, district, 
@@ -53,7 +53,7 @@
       #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO">
     insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orgId != null">
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO">
     update company
     <set>
       <if test="orgType != null">
@@ -234,7 +234,7 @@
     </set>
     where org_id = #{orgId,jdbcType=BIGINT}
   </update>
-  <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+  <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO">
     update company
     set org_type = #{orgType,jdbcType=SMALLINT},
       company_name = #{companyName,jdbcType=VARCHAR},

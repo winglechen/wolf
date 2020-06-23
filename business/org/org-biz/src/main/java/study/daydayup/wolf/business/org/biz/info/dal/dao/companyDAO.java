@@ -1,6 +1,6 @@
-package study.daydayup.wolf.business.org.biz.task.dal.dao;
+package study.daydayup.wolf.business.org.biz.info.dal.dao;
 
-import study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO;
+import study.daydayup.wolf.business.org.biz.info.dal.dataobject.companyDO;
 
 public interface companyDAO {
     int deleteById(Long orgId);

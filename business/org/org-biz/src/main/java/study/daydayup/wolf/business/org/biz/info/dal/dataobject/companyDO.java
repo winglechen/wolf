@@ -1,4 +1,4 @@
-package study.daydayup.wolf.business.org.biz.task.dal.dataobject;
+package study.daydayup.wolf.business.org.biz.info.dal.dataobject;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
