@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS `wolf_uc` DEFAULT CHARACTER SET utf8mb4;
 USE `wolf_uc`;
 
-DROP TABLE IF EXISTS `staff`;
-CREATE TABLE IF NOT EXISTS `staff`
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer`
 (
     `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '账号id',
     `account_id`            BIGINT(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'accountID',
@@ -40,4 +40,4 @@ CREATE TABLE IF NOT EXISTS `staff`
     `updated_at`   DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '编辑时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4
-    COMMENT = 'staff';
+    COMMENT = 'customer';
