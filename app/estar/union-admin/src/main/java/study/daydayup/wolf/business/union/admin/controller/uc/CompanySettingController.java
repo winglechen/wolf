@@ -93,9 +93,9 @@ public class CompanySettingController {
         }
 
         List<Long> orgIds = new ArrayList<>(8);
-        Long orgId;
+        long orgId;
         for (String s : orgArr) {
-            orgId = Long.valueOf(s);
+            orgId = Long.parseLong(s);
             if (orgId <= 0) {
                 continue;
             }

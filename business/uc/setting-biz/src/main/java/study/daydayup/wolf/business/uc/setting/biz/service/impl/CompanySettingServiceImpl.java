@@ -97,6 +97,14 @@ public class CompanySettingServiceImpl implements CompanySettingService {
         return Result.ok(companySettingList);
     }
 
+    @Override
+    public Result<List<CompanySetting>> findAllDefaultSetting() {
+        List<CompanySettingDO> companySettingDOList = companySettingDAO.selectAllByNamespace(KvData.DEFAULT_NAMESPACE);
+        List<CompanySetting> companySettingList = toModel(companySettingDOList);
+
+        return Result.ok(companySettingList);
+    }
+
     private Result<CompanySetting> initSetting(Long companyId, String namespace) {
         CompanySetting status = new CompanySetting();
         status.setOrgId(companyId);

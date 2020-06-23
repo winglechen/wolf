@@ -31,5 +31,8 @@ public interface CompanySettingDAO {
 
     List<CompanySettingDO> findByOrgIdIn(@Param("namespace")String namespace, @Param("orgIdCollection")Collection<Long> orgIdCollection);
 
+    List<CompanySettingDO> selectAllByNamespace(@Param("namespace")String namespace);
+
+
 
 }

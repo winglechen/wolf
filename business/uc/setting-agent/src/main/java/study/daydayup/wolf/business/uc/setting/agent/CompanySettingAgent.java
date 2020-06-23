@@ -38,7 +38,7 @@ public class CompanySettingAgent {
     private CompanySettingService companySettingService;
 
     public void init(long orgId) {
-        init(orgId, true);
+        init(orgId, false);
     }
 
     public void init(long orgId, boolean init) {
