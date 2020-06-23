@@ -1,7 +1,6 @@
 package study.daydayup.wolf.bigdata.datav.api.entity.daily;
 
 import lombok.Data;
-import study.daydayup.wolf.common.model.type.number.base.Int;
 import study.daydayup.wolf.framework.layer.api.Model;
 
 import java.math.BigDecimal;
@@ -20,17 +19,17 @@ public class DailyAudit implements Model {
     private LocalDate date;
     private String source;
 
-    private Integer installCount;
-    private Integer registerCount;
-    private Integer verifyCodeCount;
+    private Integer installCount = 0;
+    private Integer registerCount = 0;
+    private Integer verifyCodeCount = 0;
 
-    private Integer basicInfoCount;
-    private Integer aadhaarCount;
-    private Integer bankCardCount;
+    private Integer basicInfoCount = 0;
+    private Integer aadhaarCount = 0;
+    private Integer bankCardCount = 0;
 
-    private Integer auditPreviewCount;
-    private Integer auditRequestCount;
-    private Integer auditPaidCount;
+    private Integer auditPreviewCount = 0;
+    private Integer auditRequestCount = 0;
+    private Integer auditPaidCount = 0;
     private BigDecimal auditPaidAmount;
 
 }
