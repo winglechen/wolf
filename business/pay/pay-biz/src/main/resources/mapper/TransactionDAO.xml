@@ -36,10 +36,10 @@
             and transaction_type = #{query.transactionType,jdbcType=TINYINT}
         </if>
         <if test="query.createdAfter != null">
-            <![CDATA[ and created_at >= #{query.createdAfter,jdbcType=TIMESTAMP} ]]>
+            <![CDATA[ and out_paid_at >= #{query.createdAfter,jdbcType=TIMESTAMP} ]]>
         </if>
         <if test="query.createdBefore != null">
-            <![CDATA[ and created_at <= #{query.createdBefore,jdbcType=TIMESTAMP} ]]>
+            <![CDATA[ and out_paid_at <= #{query.createdBefore,jdbcType=TIMESTAMP} ]]>
         </if>
         ORDER BY id desc
     </select>
