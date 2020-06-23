@@ -23,4 +23,5 @@ public interface CompanySettingService extends Service {
     Result<List<CompanySetting>> findByOrgIds(Collection<Long> companyIds);
     Result<List<CompanySetting>> findByOrgIds(String namespace, Collection<Long> companyIds);
 
+    Result<List<CompanySetting>> findAllDefaultSetting();
 }
