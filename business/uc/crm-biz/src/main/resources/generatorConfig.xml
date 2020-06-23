@@ -59,7 +59,7 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dataobject"
+        <javaModelGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.staff.info.dal.dataobject"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -70,115 +70,123 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.customer.info.dal.dao"
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.uc.crm.biz.staff.info.dal.dao"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-
-        <table tableName="aadhaar" domainObjectName="AadhaarDO" mapperName="AadhaarDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
+        <table tableName="staff" domainObjectName="StaffDO" mapperName="StaffDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="gender" javaType="java.lang.Boolean" jdbcType="TINYINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />
         </table>
 
-        <table tableName="address_book" domainObjectName="AddressBookDO" mapperName="AddressBookDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="customer" domainObjectName="CustomerDO" mapperName="CustomerDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="gender" javaType="java.lang.Boolean" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="app_installed" domainObjectName="AppInstalledDO" mapperName="AppInstalledDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="aadhaar" domainObjectName="AadhaarDO" mapperName="AadhaarDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="bank_card" domainObjectName="BankCardDO" mapperName="BankCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="is_loan" javaType="java.lang.Boolean"/>
-            <columnOverride column="is_pay" javaType="java.lang.Boolean"/>
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="address_book" domainObjectName="AddressBookDO" mapperName="AddressBookDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="basic_info" domainObjectName="BasicInfoDO" mapperName="BasicInfoDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="marital_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="app_installed" domainObjectName="AppInstalledDO" mapperName="AppInstalledDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="device" domainObjectName="DeviceDO" mapperName="DeviceDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="root_flag" javaType="java.lang.Boolean"/>
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="bank_card" domainObjectName="BankCardDO" mapperName="BankCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="is_loan" javaType="java.lang.Boolean"/>-->
+<!--            <columnOverride column="is_pay" javaType="java.lang.Boolean"/>-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="driving_license" domainObjectName="DrivingLicenseDO" mapperName="DrivingLicenseDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="basic_info" domainObjectName="BasicInfoDO" mapperName="BasicInfoDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="marital_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="emergency_contact" domainObjectName="EmergencyContactDO" mapperName="EmergencyContactDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="relationship" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="device" domainObjectName="DeviceDO" mapperName="DeviceDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="root_flag" javaType="java.lang.Boolean"/>-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="gps" domainObjectName="GpsDO" mapperName="GpsDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="driving_license" domainObjectName="DrivingLicenseDO" mapperName="DrivingLicenseDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="liveness_auth_info" domainObjectName="LivenessAuthInfoDO" mapperName="LivenessAuthInfoDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="emergency_contact" domainObjectName="EmergencyContactDO" mapperName="EmergencyContactDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="relationship" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
+<!--        <table tableName="gps" domainObjectName="GpsDO" mapperName="GpsDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
-        <table tableName="pan_card" domainObjectName="PanCardDO" mapperName="PanCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
-
-        <table tableName="passport" domainObjectName="PassportDO" mapperName="PassportDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
-        </table>
-
-
-        <table tableName="user" domainObjectName="UserDO" mapperName="UserDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="basic_info_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="liveness_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="aadhaar_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="pan_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="passport_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="dl_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="voter_card_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="bank_card_bind_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="kyc_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="liveness_auth_info" domainObjectName="LivenessAuthInfoDO" mapperName="LivenessAuthInfoDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
 
-        <table tableName="user_black" domainObjectName="UserBlackDO" mapperName="UserBlackDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="pan_card" domainObjectName="PanCardDO" mapperName="PanCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="passport" domainObjectName="PassportDO" mapperName="PassportDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            &lt;!&ndash;            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>&ndash;&gt;-->
+<!--        </table>-->
+
+
+<!--        <table tableName="user" domainObjectName="UserDO" mapperName="UserDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="basic_info_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="liveness_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="aadhaar_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="pan_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="passport_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="dl_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="voter_card_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="bank_card_bind_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="kyc_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
+
+
+<!--        <table tableName="user_black" domainObjectName="UserBlackDO" mapperName="UserBlackDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="type" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
 
 
-        <table tableName="user_credit" domainObjectName="UserCreditDO" mapperName="UserCreditDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="basic_info_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="liveness_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="aadhaar_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="pan_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="passport_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="dl_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="voter_card_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="bank_card_bind_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="kyc_status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>
-        </table>
+<!--        <table tableName="user_credit" domainObjectName="UserCreditDO" mapperName="UserCreditDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="basic_info_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="liveness_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="aadhaar_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="pan_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="passport_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="dl_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="voter_card_auth_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="bank_card_bind_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="kyc_status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Boolean"/>-->
+<!--        </table>-->
 
 
-        <table tableName="user_credit_log" domainObjectName="UserCreditLogDO" mapperName="UserCreditLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="auth_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="user_credit_log" domainObjectName="UserCreditLogDO" mapperName="UserCreditLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="auth_type" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="voter_card" domainObjectName="VoterCardDO" mapperName="VoterCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="voter_card" domainObjectName="VoterCardDO" mapperName="VoterCardDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
 
 

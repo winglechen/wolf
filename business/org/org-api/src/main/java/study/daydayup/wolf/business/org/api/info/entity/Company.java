@@ -1,40 +1,22 @@
-package study.daydayup.wolf.business.uc.api.crm.customer.info.entity;
+package study.daydayup.wolf.business.org.api.info.entity;
 
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.Model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class Customer implements Model {
-    private Long id;
-
-    private Long accountId;
-
+public class Company implements Model {
     private Long orgId;
 
-    private Long departmentId;
+    private Integer orgType;
 
-    private String realName;
+    private String companyName;
 
-    private String nickName;
+    private String companyLogo;
 
-    private String avatar;
-
-    private LocalDate birthday;
-
-    private Boolean gender;
-
-    private String mobile;
-
-    private String tel;
-
-    private String email;
-
-    private String nationalId;
+    private Integer mainBusiness;
 
     private Integer country;
 
@@ -54,13 +36,9 @@ public class Customer implements Model {
 
     private String intro;
 
-    private String source;
-
-    private String deviceId;
-
     private Integer version;
 
-    private Boolean deleteFlag;
+    private Integer deleteFlag;
 
     private Long lastEditor;
 
