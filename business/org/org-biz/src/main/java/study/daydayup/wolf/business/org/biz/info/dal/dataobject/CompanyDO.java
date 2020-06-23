@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class companyDO implements Serializable {
+public class CompanyDO implements Serializable {
     private Long orgId;
 
     private Integer orgType;
@@ -87,7 +87,7 @@ public class companyDO implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        companyDO other = (companyDO) that;
+        CompanyDO other = (CompanyDO) that;
         return (this.getOrgId() == null ? other.getOrgId() == null : this.getOrgId().equals(other.getOrgId()))
             && (this.getOrgType() == null ? other.getOrgType() == null : this.getOrgType().equals(other.getOrgType()))
             && (this.getCompanyName() == null ? other.getCompanyName() == null : this.getCompanyName().equals(other.getCompanyName()))

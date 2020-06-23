@@ -59,7 +59,7 @@
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="study.daydayup.wolf.business.org.biz.task.dal.dataobject"
+        <javaModelGenerator targetPackage="study.daydayup.wolf.business.org.biz.info.dal.dataobject"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -70,71 +70,71 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="study.daydayup.wolf.business.org.biz.task.dal.dao"
+        <javaClientGenerator targetPackage="study.daydayup.wolf.business.org.biz.info.dal.dao"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="company" domainObjectName="companyDO" mapperName="companyDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+        <table tableName="company" domainObjectName="CompanyDO" mapperName="CompanyDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="org_type" javaType="java.lang.Integer" jdbcType="SMALLINT" />
             <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
         </table>
 
-        <table tableName="task" domainObjectName="TaskDO" mapperName="TaskDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="task_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="priority" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="story_points" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="task" domainObjectName="TaskDO" mapperName="TaskDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="task_type" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="priority" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="story_points" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="task_detail" domainObjectName="TaskDetailDO" mapperName="TaskDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="extend_fields" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
+<!--        <table tableName="task_detail" domainObjectName="TaskDetailDO" mapperName="TaskDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="memo" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="extend_fields" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--        </table>-->
 
-        <table tableName="project" domainObjectName="ProjectDO" mapperName="ProjectDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="project" domainObjectName="ProjectDO" mapperName="ProjectDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="project_detail" domainObjectName="ProjectDetailDO" mapperName="ProjectDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-
-
-        <table tableName="task_scheduler" domainObjectName="TaskSchedulerDO" mapperName="TaskSchedulerDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
-
-        <table tableName="task_contact" domainObjectName="TaskContactDO" mapperName="TaskContactDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="contact_person" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="contact_method" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="contact_state" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="contact_result" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
-
-        <table tableName="task_trade" domainObjectName="TaskTradeDO" mapperName="TaskTradeDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="installment_no" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="trade_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="project_detail" domainObjectName="ProjectDetailDO" mapperName="ProjectDetailDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--        </table>-->
 
 
+<!--        <table tableName="task_scheduler" domainObjectName="TaskSchedulerDO" mapperName="TaskSchedulerDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="task_state_log" domainObjectName="TaskStateLogDO" mapperName="TaskStateLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="source_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="target_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="task_contact" domainObjectName="TaskContactDO" mapperName="TaskContactDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="contact_person" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="contact_method" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="contact_state" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="contact_result" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="task_assignment_log" domainObjectName="TaskAssignmentLogDO" mapperName="TaskAssignmentLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+<!--        <table tableName="task_trade" domainObjectName="TaskTradeDO" mapperName="TaskTradeDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="installment_no" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="trade_type" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
-        <table tableName="task_progress" domainObjectName="TaskProgressDO" mapperName="TaskProgressDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
-            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
-        </table>
+
+
+<!--        <table tableName="task_state_log" domainObjectName="TaskStateLogDO" mapperName="TaskStateLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="source_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="target_state" javaType="java.lang.Integer" jdbcType="SMALLINT" />-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
+
+<!--        <table tableName="task_assignment_log" domainObjectName="TaskAssignmentLogDO" mapperName="TaskAssignmentLogDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
+
+<!--        <table tableName="task_progress" domainObjectName="TaskProgressDO" mapperName="TaskProgressDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >-->
+<!--            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+<!--        </table>-->
 
 
 
