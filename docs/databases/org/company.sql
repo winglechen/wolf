@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `company`
     `longitude`             DECIMAL(10, 4)        NOT NULL DEFAULT '0.0000' COMMENT '经度',
 
     `tags`                  VARCHAR(500)            NOT NULL DEFAULT '' COMMENT 'tags',
-    `intro`                  VARCHAR(500)            NOT NULL DEFAULT '' COMMENT 'tags',
+    `intro`                 VARCHAR(500)            NOT NULL DEFAULT '' COMMENT 'tags',
 
     `version`      INT(11) UNSIGNED    NOT NULL DEFAULT 0 COMMENT '版本号',
     `delete_flag`  TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',

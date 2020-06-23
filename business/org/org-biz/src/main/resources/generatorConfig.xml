@@ -75,7 +75,10 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
+        <table tableName="company" domainObjectName="companyDO" mapperName="companyDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
+            <columnOverride column="org_type" javaType="java.lang.Integer" jdbcType="SMALLINT" />
+            <columnOverride column="delete_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
 
         <table tableName="task" domainObjectName="TaskDO" mapperName="TaskDAO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByPrimaryKey="false" enableDeleteByExample="false" enableSelectByExample="false" >
             <columnOverride column="task_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
