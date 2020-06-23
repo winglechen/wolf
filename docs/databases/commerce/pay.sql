@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `payment`
     UNIQUE INDEX `udx_pay_no` (`payment_no`),
     INDEX `idx_trade_no` (`trade_no`, `state`) COMMENT '覆盖索引：检查重复支付问题',
     INDEX `idx_out_trade_no` (`out_trade_no`),
-    INDEX `idx_payee` (`payee_id`, `state`, `created_at`),
+    INDEX `idx_payee` (`payee_id`, `state`, `out_paid_at`),
     INDEX `idx_payer` (`payer_id`, `payee_id`, `state`),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COMMENT = '支付';
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `transaction`
 
     `delete_flag`           TINYINT(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0未删除，1已删除',
     `created_at`            DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    INDEX `idx_payee` (`payee_id`, `created_at`, `transaction_type`),
+    INDEX `idx_payee` (`payee_id`, `out_paid_at`, `transaction_type`),
     INDEX `idx_pay` ( `payment_no`),
     INDEX `idx_settle` (`settlement_no`, `transaction_type`),
     PRIMARY KEY (`id`)

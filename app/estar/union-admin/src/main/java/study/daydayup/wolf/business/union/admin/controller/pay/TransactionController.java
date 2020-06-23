@@ -29,7 +29,7 @@ public class TransactionController implements Controller {
     @Resource
     private Session session;
 
-    @GetMapping("/pay/payment/query")
+    @GetMapping("/pay/transaction/query")
     public Result<Page<Transaction>> find(@Validated @ModelAttribute TransactionQuery query) {
         Long orgId = session.get("orgId", Long.class);
         query.setPayeeId(orgId);
