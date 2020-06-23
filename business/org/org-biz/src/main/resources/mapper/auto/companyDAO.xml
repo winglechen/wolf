@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study.daydayup.wolf.business.org.biz.task.dal.dao.companyDAO">
+  <resultMap id="BaseResultMap" type="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+    <id column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="org_type" jdbcType="SMALLINT" property="orgType" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_logo" jdbcType="VARCHAR" property="companyLogo" />
+    <result column="main_business" jdbcType="INTEGER" property="mainBusiness" />
+    <result column="country" jdbcType="INTEGER" property="country" />
+    <result column="province" jdbcType="INTEGER" property="province" />
+    <result column="city" jdbcType="INTEGER" property="city" />
+    <result column="district" jdbcType="INTEGER" property="district" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="last_editor" jdbcType="BIGINT" property="lastEditor" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    org_id, org_type, company_name, company_logo, main_business, country, province, city, 
+    district, address, latitude, longitude, tags, intro, version, delete_flag, last_editor, 
+    created_at, updated_at
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from company
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+    insert into company (org_id, org_type, company_name, 
+      company_logo, main_business, country, 
+      province, city, district, 
+      address, latitude, longitude, 
+      tags, intro, version, 
+      delete_flag, last_editor, created_at, 
+      updated_at)
+    values (#{orgId,jdbcType=BIGINT}, #{orgType,jdbcType=SMALLINT}, #{companyName,jdbcType=VARCHAR}, 
+      #{companyLogo,jdbcType=VARCHAR}, #{mainBusiness,jdbcType=INTEGER}, #{country,jdbcType=INTEGER}, 
+      #{province,jdbcType=INTEGER}, #{city,jdbcType=INTEGER}, #{district,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, 
+      #{tags,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{lastEditor,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="orgType != null">
+        org_type,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyLogo != null">
+        company_logo,
+      </if>
+      <if test="mainBusiness != null">
+        main_business,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="district != null">
+        district,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="lastEditor != null">
+        last_editor,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=SMALLINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLogo != null">
+        #{companyLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null">
+        #{mainBusiness,jdbcType=INTEGER},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+    update company
+    <set>
+      <if test="orgType != null">
+        org_type = #{orgType,jdbcType=SMALLINT},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLogo != null">
+        company_logo = #{companyLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null">
+        main_business = #{mainBusiness,jdbcType=INTEGER},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="district != null">
+        district = #{district,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lastEditor != null">
+        last_editor = #{lastEditor,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="study.daydayup.wolf.business.org.biz.task.dal.dataobject.companyDO">
+    update company
+    set org_type = #{orgType,jdbcType=SMALLINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_logo = #{companyLogo,jdbcType=VARCHAR},
+      main_business = #{mainBusiness,jdbcType=INTEGER},
+      country = #{country,jdbcType=INTEGER},
+      province = #{province,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER},
+      district = #{district,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      tags = #{tags,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      last_editor = #{lastEditor,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </update>
+</mapper>
