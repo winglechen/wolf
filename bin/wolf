@@ -36,17 +36,7 @@ function deploy_union_test() {
     ssh -A smapp "/home/app/bin/wolf release-union"
 }
 
-function deploy_union_cr() {
-    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
-    cd ${dir} && mvn clean package -Pcr
 
-    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
-        app@crapp:/home/app/tmp
-    echo "union-deploy-dubbo.tar.gz transporting..."
-
-    echo "union restart ..."
-    ssh -A crapp "/home/app/bin/wolf release-union"
-}
 
 function deploy_task_test() {
     dir="${PROJECT_DIR}/app/estar/union-task/"
@@ -60,19 +50,16 @@ function deploy_task_test() {
     ssh -A smapp "/home/app/bin/wolf release-task"
 }
 
-function deploy_task_cr() {
-    dir="${PROJECT_DIR}/app/estar/union-task/"
+function scp_union_cr() {
+    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
     cd ${dir} && mvn clean package -Pcr
 
-    scp /Users/wingle/code/github/wolf/app/estar/union-task/target/union-task.tar.gz \
+    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
         app@crapp:/home/app/tmp
-    echo "union-task.tar.gz transporting..."
-
-    echo "task restart ..."
-    ssh -A crapp "/home/app/bin/wolf release-task"
+    echo "union-deploy-dubbo.tar.gz transporting..."
 }
 
-function deploy_onion_cr() {
+function scp_onion_cr() {
     dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
     cd ${dir} && mvn clean package -Pcr
 
@@ -87,9 +74,36 @@ function deploy_onion_cr() {
     scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
         app@crapp:/home/app/tmp
     echo "onion-user.tar.gz transporting..."
+}
+
+function scp_task_cr() {
+    dir="${PROJECT_DIR}/app/estar/union-task/"
+    cd ${dir} && mvn clean package -Pcr
+
+    scp /Users/wingle/code/github/wolf/app/estar/union-task/target/union-task.tar.gz \
+        app@crapp:/home/app/tmp
+    echo "union-task.tar.gz transporting..."
+}
+
+function deploy_union_cr() {
+    scp_union_cr
+
+    echo "union restart ..."
+    ssh -A crapp "/home/app/bin/wolf release-union"
+}
+
+function deploy_onion_cr() {
+    scp_onion_cr
 
     echo "onion restart ..."
     ssh -A crapp "source /etc/profile; /home/app/bin/wolf release-onion"
+}
+
+function deploy_task_cr() {
+    scp_task_cr
+
+    echo "task restart ..."
+    ssh -A crapp "/home/app/bin/wolf release-task"
 }
 
 function deploy_onion_test() {
@@ -154,6 +168,14 @@ case "$command" in
       deploy_onion_cr ;;
   deploy-task-cr)
       deploy_task_cr ;;
+
+  scp-union-cr)
+      scp_union_cr ;;
+  scp-onion-cr)
+      scp_onion_cr ;;
+  scp-task-cr)
+      scp_task_cr ;;
+
   redis-test)
       conn_test_redis ;;
   install)
