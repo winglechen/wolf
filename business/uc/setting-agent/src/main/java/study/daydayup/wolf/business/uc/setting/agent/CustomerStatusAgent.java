@@ -41,7 +41,7 @@ public class CustomerStatusAgent {
 
     public void init(long accountId, long orgId) {
         if (accountId <= 0 || orgId <= 0) {
-            throw new IllegalArgumentException("accountId and orgId can not less than 0");
+            throw new IllegalArgumentException("accountId and orgId can not less than 0: accountId= " + accountId + "; orgId= " + orgId);
         }
 
 //        if (isInit) {
