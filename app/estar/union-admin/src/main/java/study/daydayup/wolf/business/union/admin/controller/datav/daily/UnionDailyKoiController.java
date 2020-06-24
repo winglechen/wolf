@@ -26,7 +26,7 @@ import java.time.LocalDate;
 @RestController
 public class UnionDailyKoiController {
     @Reference
-    private DailyKoiService koiService;
+    private DailyKoiService dailyKoiService;
     @Resource
     private Session session;
 
@@ -55,7 +55,7 @@ public class UnionDailyKoiController {
             request.setEndDate(LocalDate.parse(endDate, DateUtil.DEFAULT_DATE_FORMATTER));
         }
 
-        return koiService.findByRange(request, pageRequest);
+        return dailyKoiService.findByRange(request, pageRequest);
     }
 
     @GetMapping("/datav/daily/audit")
@@ -86,7 +86,7 @@ public class UnionDailyKoiController {
             request.setEndDate(LocalDate.parse(endDate, DateUtil.DEFAULT_DATE_FORMATTER));
         }
 
-        return koiService.findAuditByRange(request, pageRequest);
+        return dailyKoiService.findAuditByRange(request, pageRequest);
     }
 
 
