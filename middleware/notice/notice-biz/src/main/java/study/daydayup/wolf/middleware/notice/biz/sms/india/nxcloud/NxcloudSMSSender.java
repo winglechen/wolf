@@ -68,7 +68,7 @@ public class NxcloudSMSSender extends AbstractSMSSender implements SMSSender {
     }
 
     private Request createRequest() {
-        msg = msg.replace("for " + SMSConfig.BRAND_PLACEHOLDER, "");
+        msg = msg.replace(" for " + SMSConfig.BRAND_PLACEHOLDER, "");
 
         RequestBody body = new FormBody.Builder()
                 .add("appkey", supplierConfig.getAppId())
