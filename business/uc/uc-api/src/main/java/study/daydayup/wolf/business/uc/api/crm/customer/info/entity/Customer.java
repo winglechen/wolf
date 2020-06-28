@@ -34,7 +34,7 @@ public class Customer implements Model {
 
     private String email;
 
-    private String nationalId;
+    private String citizenId;
 
     private Integer country;
 
