@@ -29,8 +29,8 @@ public class IndiaSMSSender implements SMSSender {
             return 0;
         }
 
-//        return nxcloudSMSSender.send(mobile, msg, config);
-        return skylineSender.send(mobile, msg, config);
+        return nxcloudSMSSender.send(mobile, msg, config);
+//        return skylineSender.send(mobile, msg, config);
     }
 
     @Override

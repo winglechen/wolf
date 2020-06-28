@@ -30,9 +30,9 @@ public class AuthConfig {
     private String authPath = "/auth/**/*";
     private String excludedPaths = "/auth/**/*";
 
-    private int codeExpiredIn = 5*60;
-    private int expiredIn = 60*60*24;
-    private int refreshExpiredIn = 60*60*24*7;
+    private int codeExpiredIn = 15*60;
+    private int expiredIn = 60*60*24*30;
+    private int refreshExpiredIn = 60*60*24*30;
 
     public CaptchaConfig getCaptcha() {
         if (captcha != null) {
