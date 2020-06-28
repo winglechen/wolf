@@ -32,7 +32,7 @@ public class CustomerDO implements Serializable {
 
     private String email;
 
-    private String nationalId;
+    private String citizenId;
 
     private Integer country;
 
@@ -86,7 +86,7 @@ public class CustomerDO implements Serializable {
         sb.append(", mobile=").append(mobile);
         sb.append(", tel=").append(tel);
         sb.append(", email=").append(email);
-        sb.append(", nationalId=").append(nationalId);
+        sb.append(", citizenId=").append(citizenId);
         sb.append(", country=").append(country);
         sb.append(", province=").append(province);
         sb.append(", city=").append(city);
@@ -131,7 +131,7 @@ public class CustomerDO implements Serializable {
             && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
             && (this.getTel() == null ? other.getTel() == null : this.getTel().equals(other.getTel()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getNationalId() == null ? other.getNationalId() == null : this.getNationalId().equals(other.getNationalId()))
+            && (this.getCitizenId() == null ? other.getCitizenId() == null : this.getCitizenId().equals(other.getCitizenId()))
             && (this.getCountry() == null ? other.getCountry() == null : this.getCountry().equals(other.getCountry()))
             && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
             && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
@@ -166,7 +166,7 @@ public class CustomerDO implements Serializable {
         result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
         result = prime * result + ((getTel() == null) ? 0 : getTel().hashCode());
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getNationalId() == null) ? 0 : getNationalId().hashCode());
+        result = prime * result + ((getCitizenId() == null) ? 0 : getCitizenId().hashCode());
         result = prime * result + ((getCountry() == null) ? 0 : getCountry().hashCode());
         result = prime * result + ((getProvince() == null) ? 0 : getProvince().hashCode());
         result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());

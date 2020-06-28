@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `customer`
     `mobile`                VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'mobile',
     `tel`                   VARCHAR(50)         NOT NULL DEFAULT '' COMMENT 'tel',
     `email`                 VARCHAR(100)         NOT NULL DEFAULT '' COMMENT 'email',
-    `national_id`           VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '身份证号',
+    `citizen_id`            VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '身份证号',
 
     `country`               INT(10) UNSIGNED NOT NULL DEFAULT 0,
     `province`              INT(10) UNSIGNED NOT NULL DEFAULT 0,

@@ -14,7 +14,7 @@
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="national_id" jdbcType="VARCHAR" property="nationalId" />
+    <result column="citizen_id" jdbcType="VARCHAR" property="citizenId" />
     <result column="country" jdbcType="INTEGER" property="country" />
     <result column="province" jdbcType="INTEGER" property="province" />
     <result column="city" jdbcType="INTEGER" property="city" />
@@ -34,7 +34,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, account_id, org_id, department_id, real_name, nick_name, avatar, birthday, gender, 
-    mobile, tel, email, national_id, country, province, city, district, address, latitude, 
+    mobile, tel, email, citizen_id, country, province, city, district, address, latitude, 
     longitude, tags, intro, `source`, device_id, version, delete_flag, last_editor, created_at, 
     updated_at
   </sql>
@@ -53,7 +53,7 @@
       department_id, real_name, nick_name, 
       avatar, birthday, gender, 
       mobile, tel, email, 
-      national_id, country, province, 
+      citizen_id, country, province, 
       city, district, address, 
       latitude, longitude, tags, 
       intro, `source`, device_id, 
@@ -63,7 +63,7 @@
       #{departmentId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
       #{avatar,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=TINYINT}, 
       #{mobile,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{nationalId,jdbcType=VARCHAR}, #{country,jdbcType=INTEGER}, #{province,jdbcType=INTEGER}, 
+      #{citizenId,jdbcType=VARCHAR}, #{country,jdbcType=INTEGER}, #{province,jdbcType=INTEGER}, 
       #{city,jdbcType=INTEGER}, #{district,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{tags,jdbcType=VARCHAR}, 
       #{intro,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
@@ -109,8 +109,8 @@
       <if test="email != null">
         email,
       </if>
-      <if test="nationalId != null">
-        national_id,
+      <if test="citizenId != null">
+        citizen_id,
       </if>
       <if test="country != null">
         country,
@@ -198,8 +198,8 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="nationalId != null">
-        #{nationalId,jdbcType=VARCHAR},
+      <if test="citizenId != null">
+        #{citizenId,jdbcType=VARCHAR},
       </if>
       <if test="country != null">
         #{country,jdbcType=INTEGER},
@@ -287,8 +287,8 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="nationalId != null">
-        national_id = #{nationalId,jdbcType=VARCHAR},
+      <if test="citizenId != null">
+        citizen_id = #{citizenId,jdbcType=VARCHAR},
       </if>
       <if test="country != null">
         country = #{country,jdbcType=INTEGER},
@@ -354,7 +354,7 @@
       mobile = #{mobile,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      national_id = #{nationalId,jdbcType=VARCHAR},
+      citizen_id = #{citizenId,jdbcType=VARCHAR},
       country = #{country,jdbcType=INTEGER},
       province = #{province,jdbcType=INTEGER},
       city = #{city,jdbcType=INTEGER},
