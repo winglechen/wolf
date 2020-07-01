@@ -43,8 +43,8 @@ public class PayServiceImpl implements PayService, PayoutService {
     }
 
     private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
-        request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
-//        request.setPaymentMethod(PaymentChannelEnum.DOKYPAY.getCode());
+//        request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
+        request.setPaymentMethod(PaymentChannelEnum.DOKYPAY.getCode());
         return;
 
 //        Long payerId = request.getPayerId();
