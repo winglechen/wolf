@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>study.daydayup.wolf.onion</groupId>
+    <groupId>net.onionpay</groupId>
     <artifactId>onion-pay-gateway</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
