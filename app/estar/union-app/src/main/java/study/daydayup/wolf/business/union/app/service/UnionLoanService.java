@@ -68,7 +68,7 @@ public class UnionLoanService implements Service {
                 .paymentNo(paymentCreateResponse.getPaymentNo())
                 .amount(paymentCreateResponse.getAmount())
 
-                .payArgs(paymentCreateResponse.getAttachment())
+                .payArgs(paymentCreateResponse.getPayArgs())
                 .build();
     }
 
