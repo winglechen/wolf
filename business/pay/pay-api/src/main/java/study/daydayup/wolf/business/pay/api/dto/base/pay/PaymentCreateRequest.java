@@ -2,12 +2,14 @@ package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,4 +49,31 @@ public class PaymentCreateRequest implements Request {
 
     private Map<String, Object> args;
     private String tags;
+
+    private void initArgs() {
+        if (args != null) {
+            return;
+        }
+
+        args = new HashMap<>(8);
+    }
+
+    public Object get(@NonNull String key) {
+        initArgs();
+        return args.get(key);
+    }
+
+    public void put(@NonNull String key, Object value) {
+        initArgs();
+        args.put(key, value);
+    }
+
+    public void putAll(@NonNull Map<String, Object> kvs) {
+        initArgs();
+        args.putAll(kvs);
+    }
+
+
+
+
 }
