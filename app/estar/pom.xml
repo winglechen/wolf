@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>study.daydayup.wolf.business</groupId>
-    <artifactId>union</artifactId>
+    <artifactId>estar</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
@@ -23,6 +23,7 @@
         <module>union-deploy-dubbo</module>
         <module>union-deploy-app</module>
         <module>union-deploy-admin</module>
+        <module>onion-pay</module>
 
     </modules>
 
@@ -33,23 +34,23 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-common</artifactId>
                 <version>${union.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-admin</artifactId>
                 <version>${union.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-app</artifactId>
                 <version>${union.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-depoly-dubbo</artifactId>
                 <version>${union.version}</version>
             </dependency>
