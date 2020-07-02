@@ -8,6 +8,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * study.daydayup.wolf.business.pay.api.dto
@@ -22,6 +23,7 @@ public class PaymentCreateRequest implements Request {
 
     private String tradeNo;
     private String paymentNo;
+    private String paymentToken;
     private boolean duplicateCheck;
 
     @NotNull @Min(1)
@@ -40,5 +42,9 @@ public class PaymentCreateRequest implements Request {
     private String goodsName;
     private String goodsDesc;
 
+    private String returnUrl;
+    private String notifyUrl;
+
+    private Map<String, Object> args;
     private String tags;
 }
