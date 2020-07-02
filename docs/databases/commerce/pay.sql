@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `payment`
 
     `goods_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
     `goods_name`            VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
+    `goods_description`     VARCHAR(200)        NOT NULL DEFAULT '' COMMENT '',
     `tags`                  VARCHAR(100)        NOT NULL DEFAULT '' COMMENT '',
     `attachment`            VARCHAR(5000)        NOT NULL DEFAULT '' COMMENT '',
 

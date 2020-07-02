@@ -35,6 +35,10 @@ public class Payment implements Model {
     private LocalDateTime paidAt;
     private LocalDateTime outPaidAt;
 
+    private Long goodsId;
+    private String goodsName;
+    private String goodsDescription;
+
     private BigDecimal amount;
     private Integer currency;
     private Integer state;

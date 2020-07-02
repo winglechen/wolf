@@ -42,7 +42,7 @@ public class PaymentCreateRequest implements Request {
 
     private Long goodsId;
     private String goodsName;
-    private String goodsDesc;
+    private String goodsDescription;
 
     private String returnUrl;
     private String notifyUrl;
