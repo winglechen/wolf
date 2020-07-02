@@ -1,7 +1,6 @@
 package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
 import lombok.Data;
-import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.framework.layer.api.Response;
 
 import java.math.BigDecimal;
@@ -20,10 +19,10 @@ public class PaymentCreateResponse implements Response {
 
     private String paymentNo;
     private BigDecimal amount;
-    private Map<String, Object> attachment;
+    private Map<String, Object> payArgs;
 
     public PaymentCreateResponse() {
-        attachment = new HashMap<>();
+        payArgs = new HashMap<>();
     }
 
 

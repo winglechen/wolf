@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
-import study.daydayup.wolf.business.trade.api.dto.buy.base.response.PayResponse;
+import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.framework.rpc.Result;
 
 /**
@@ -22,7 +22,7 @@ public class PaymentGatewayController {
     }
 
     @PostMapping("/pg/payment/checkout")
-    public Result<PayResponse> checkout() {
+    public Result<PaymentCreateResponse> checkout() {
         return null;
     }
 
