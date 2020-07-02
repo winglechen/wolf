@@ -19,6 +19,7 @@
         <module>dts</module>
         <module>mock</module>
         <module>sdk</module>
+        <module>alogrithm</module>
     </modules>
 
     <properties>

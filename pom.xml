@@ -16,7 +16,6 @@
         <module>lib</module>
         <module>middleware</module>
         <module>bigdata</module>
-        <module>alogrithm</module>
     </modules>
 
     <properties>
