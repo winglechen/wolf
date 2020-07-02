@@ -9,14 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>study.daydayup.wolf.business.union</groupId>
+    <groupId>study.daydayup.wolf.business.estar</groupId>
     <artifactId>union-deploy-admin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
 
         <dependency>
-            <groupId>study.daydayup.wolf.business.union</groupId>
+            <groupId>study.daydayup.wolf.business.estar</groupId>
             <artifactId>union-admin</artifactId>
         </dependency>
         <dependency>

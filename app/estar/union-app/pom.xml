@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>study.daydayup.wolf.business.union</groupId>
+    <groupId>study.daydayup.wolf.business.estar</groupId>
     <artifactId>union-app</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>study.daydayup.wolf.business.union</groupId>
+            <groupId>study.daydayup.wolf.business.estar</groupId>
             <artifactId>union-common</artifactId>
         </dependency>
 

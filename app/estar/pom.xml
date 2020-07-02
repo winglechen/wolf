@@ -34,23 +34,23 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-common</artifactId>
                 <version>${union.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-admin</artifactId>
                 <version>${union.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-app</artifactId>
                 <version>${union.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf.business.union</groupId>
+                <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-depoly-dubbo</artifactId>
                 <version>${union.version}</version>
             </dependency>
