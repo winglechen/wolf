@@ -44,7 +44,7 @@ public class PaymentGatewayService implements Service {
         createRequest.setPaymentChannel(DEFAULT_PAYMENT_CHANNEL);
         createRequest.setPaymentMode(checkoutRequest.getPaymentMode());
 
-        return null;
+        return payService.create(createRequest).notNullData();
     }
 
 
