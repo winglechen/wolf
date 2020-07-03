@@ -12,6 +12,9 @@ import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.string.id.TradeNo;
+import study.daydayup.wolf.common.util.lang.DecimalUtil;
+
+import java.math.BigDecimal;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service
@@ -62,7 +65,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         PaymentCreateResponse response = new PaymentCreateResponse();
         response.setPaymentNo(payment.getPaymentNo());
         response.setAmount(payment.getAmount());
-        response.setPaymentMethod(payment.getPaymentMethod());
+        response.setPaymentChannel(payment.getPaymentMethod());
         response.setPayArgs(attachment.getMap());
 
         return response;
@@ -90,7 +93,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
 
         payment.setId(null);
         payment.setPaymentNo(paymentNo);
-        payment.setPaymentMethod(request.getPaymentMethod());
+        payment.setPaymentMethod(request.getPaymentChannel());
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
         attachment = new ObjectMap();
 
@@ -133,6 +136,13 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         } catch (DuplicateKeyException e) {
             return null;
         }
+    }
+
+    protected BigDecimal getAmount() {
+        BigDecimal amount = createRequest.getAmount();
+        amount = DecimalUtil.scale(amount, 2);
+
+        return amount;
     }
 
 }

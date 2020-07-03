@@ -21,11 +21,11 @@ import java.util.Map;
 @Data
 @Builder
 public class PaymentCreateRequest implements Request {
-    private Integer paymentMethod;
+    private Integer paymentChannel;
+    private String paymentMode;
 
     private String tradeNo;
     private String paymentNo;
-    private String paymentToken;
     private boolean duplicateCheck;
 
     @NotNull @Min(1)
@@ -39,6 +39,7 @@ public class PaymentCreateRequest implements Request {
     private BigDecimal amount;
     @NotNull
     private Integer currency;
+    private String currencyCode;
 
     private Long goodsId;
     private String goodsName;

@@ -15,7 +15,7 @@ import java.util.Map;
  **/
 @Data
 public class PaymentCreateResponse implements Response {
-    private Integer paymentMethod;
+    private Integer paymentChannel;
 
     private String paymentNo;
     private BigDecimal amount;

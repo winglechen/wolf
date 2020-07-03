@@ -64,7 +64,7 @@ public class UnionLoanService implements Service {
         return PayResponse.builder()
                 .tradeNo(order.getTradeNo())
 
-                .paymentMethod(paymentCreateResponse.getPaymentMethod())
+                .paymentMethod(paymentCreateResponse.getPaymentChannel())
                 .paymentNo(paymentCreateResponse.getPaymentNo())
                 .amount(paymentCreateResponse.getAmount())
 
@@ -74,7 +74,7 @@ public class UnionLoanService implements Service {
 
     private PaymentCreateRequest formatPaymentCreateRequest(Order order, Integer paymentMethod) {
         return PaymentCreateRequest.builder()
-                .paymentMethod(paymentMethod)
+                .paymentChannel(paymentMethod)
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(false)
 

@@ -125,12 +125,4 @@ public class RazorCreator extends AbstractPaymentCreator implements PaymentCreat
         return true;
     }
 
-    private int getAmount() {
-        BigDecimal amount = createRequest.getAmount();
-        amount = amount.multiply(BigDecimal.valueOf(100));
-
-        this.amount = DecimalUtil.toInt(amount);
-        return this.amount;
-    }
-
 }

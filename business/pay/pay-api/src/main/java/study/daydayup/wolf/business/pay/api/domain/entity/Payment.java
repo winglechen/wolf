@@ -41,6 +41,7 @@ public class Payment implements Model {
 
     private BigDecimal amount;
     private Integer currency;
+    private String currencyCode;
     private Integer state;
     private Integer paymentType;
     private Integer paymentMethod;
