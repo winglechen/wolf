@@ -108,10 +108,4 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         }
     }
 
-    private String getAmount() {
-        BigDecimal amount = createRequest.getAmount();
-        amount = DecimalUtil.scale(amount, 2);
-
-        return amount.toString();
-    }
 }
