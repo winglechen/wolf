@@ -74,7 +74,7 @@ public class UnionLoanService implements Service {
 
     private PaymentCreateRequest formatPaymentCreateRequest(Order order, Integer paymentMethod) {
         return PaymentCreateRequest.builder()
-                .paymentMethod(paymentMethod)
+                .paymentChannel(paymentMethod)
                 .tradeNo(order.getTradeNo())
                 .duplicateCheck(false)
 

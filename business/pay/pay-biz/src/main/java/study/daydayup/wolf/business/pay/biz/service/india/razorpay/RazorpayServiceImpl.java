@@ -36,7 +36,7 @@ public class RazorpayServiceImpl implements RazorpayService {
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
-        request.setPaymentMethod(PaymentChannelEnum.RAZORPAY.getCode());
+        request.setPaymentChannel(PaymentChannelEnum.RAZORPAY.getCode());
 
         PaymentCreateResponse response = razorCreator.create(request);
         return Result.ok(response);

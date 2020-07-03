@@ -31,17 +31,17 @@ public class PgDomainService implements PayService {
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
         paymentChannelWithList(request);
-        if (null == request.getPaymentMethod()) {
+        if (null == request.getPaymentChannel()) {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
 
-        PayService service = factory.create(request.getPaymentMethod());
+        PayService service = factory.create(request.getPaymentChannel());
         return service.create(request);
     }
 
     private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
 //        request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
-        request.setPaymentMethod(PaymentChannelEnum.DOKYPAY.getCode());
+        request.setPaymentChannel(PaymentChannelEnum.DOKYPAY.getCode());
         return;
 
 //        Long payerId = request.getPayerId();

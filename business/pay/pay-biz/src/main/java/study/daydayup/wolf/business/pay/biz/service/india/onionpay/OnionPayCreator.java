@@ -57,8 +57,8 @@ public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCr
 
     private PaymentCreateResponse createResponse() {
         PaymentCreateResponse response = new PaymentCreateResponse();
-        response.setPaymentNo(payment.getPaymentNo());
-        response.setAmount(payment.getAmount());
+        response.setPaymentNo(null);
+        response.setAmount(getAmount());
         response.setPaymentChannel(PaymentChannelEnum.DLOCAL.getCode());
         response.setPayArgs(attachment.getMap());
 
@@ -67,12 +67,13 @@ public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCr
 
     private void setResponseAttachment() {
         attachment.put("payUrl", "url");
-        attachment.put("paymentNo", payment.getPaymentNo());
         attachment.put("amount", getAmount());
         attachment.put("currencyCode", "INR");
     }
 
     private void storeCreateRequest() {
+        createRequest.setCurrencyCode("INR");
+
         String json = JSON.toJSONString(createRequest);
         String key;
         Boolean status;
