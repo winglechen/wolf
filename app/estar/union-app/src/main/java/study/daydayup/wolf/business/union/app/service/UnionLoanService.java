@@ -64,7 +64,7 @@ public class UnionLoanService implements Service {
         return PayResponse.builder()
                 .tradeNo(order.getTradeNo())
 
-                .paymentMethod(paymentCreateResponse.getPaymentMethod())
+                .paymentMethod(paymentCreateResponse.getPaymentChannel())
                 .paymentNo(paymentCreateResponse.getPaymentNo())
                 .amount(paymentCreateResponse.getAmount())
 

@@ -184,10 +184,4 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         }
     }
 
-    private String getAmount() {
-        BigDecimal amount = createRequest.getAmount();
-        amount = DecimalUtil.scale(amount, 2);
-
-        return amount.toString();
-    }
 }

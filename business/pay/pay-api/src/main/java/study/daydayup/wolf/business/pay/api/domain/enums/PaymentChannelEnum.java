@@ -11,6 +11,9 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PaymentChannelEnum implements CodeBasedEnum {
+    ONIONPAY(200, "onionPay"),
+
+    DLOCAL(125, "dLocal"),
     DOKYPAY(120, "dokypay"),
 
     CASHFREE_PAYOUT(111, "cashfreePayout"),
