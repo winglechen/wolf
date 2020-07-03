@@ -3,6 +3,8 @@ package net.onionpay.gateway.pg.dto;
 import lombok.Data;
 import study.daydayup.wolf.framework.layer.api.DTO;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * net.onionpay.gateway.pg.dto
  *
@@ -11,6 +13,8 @@ import study.daydayup.wolf.framework.layer.api.DTO;
  **/
 @Data
 public class CheckoutRequest implements DTO {
+    @NotBlank
     private String token;
+    @NotBlank
     private String paymentMode;
 }

@@ -11,10 +11,10 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
  **/
 public class PaymentExpiredException extends SystemException {
     public PaymentExpiredException() {
-        super(170000, "payment expired");
+        super(170500, "payment expired");
     }
 
     public PaymentExpiredException(String msg) {
-        super(170000, StringUtil.join("payment expired : ", msg));
+        super(170500, StringUtil.join("payment expired : ", msg));
     }
 }
