@@ -39,6 +39,7 @@ public class PaymentCreateRequest implements Request {
     private BigDecimal amount;
     @NotNull
     private Integer currency;
+    private String currencyCode;
 
     private Long goodsId;
     private String goodsName;

@@ -7,11 +7,11 @@ CREATE TABLE IF NOT EXISTS `payment`
     `id`                    BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     `payment_no`            VARCHAR(32)         NOT NULL DEFAULT '' COMMENT '',
 
-    `payee_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `payee_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0,
     `payee_name`            VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
-    `payer_id`              BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    `payer_id`              BIGINT(20) UNSIGNED  NOT NULL DEFAULT 0,
     `payer_name`            VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
-    `payer_phone`           VARCHAR(50)         NOT NULL DEFAULT '' COMMENT '',
+    `payer_phone`           VARCHAR(50)          NOT NULL DEFAULT '' COMMENT '',
     `payer_email`           VARCHAR(100)         NOT NULL DEFAULT '' COMMENT '',
 
     `amount`                DECIMAL(15, 4) UNSIGNED    NOT NULL DEFAULT 0,
