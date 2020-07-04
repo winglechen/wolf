@@ -1,6 +1,7 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dlocal;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
@@ -22,4 +23,8 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
     private static final String CONFIG_KEY = "dLocal";
 
     private JSONObject response;
+
+    public int subscribe(@NonNull String data) {
+        return 0;
+    }
 }
