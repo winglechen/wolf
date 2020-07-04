@@ -42,6 +42,8 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
     @Override
     public void callPayEpi() {
         initConfig(CONFIG_KEY, createRequest.getPayeeId());
+        Request payRequest = createRequest();
+
     }
 
     @Override
