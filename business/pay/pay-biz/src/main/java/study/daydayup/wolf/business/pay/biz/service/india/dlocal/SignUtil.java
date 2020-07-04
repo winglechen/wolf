@@ -20,7 +20,7 @@ import java.util.Formatter;
 public class SignUtil {
     private static final String HMAC_ALGORITHM = "HmacSHA256";
 
-    private static String create(String appSecret, String appName, String xDate, String body) {
+    public static String create(String appSecret, String appName, String xDate, String body) {
         ByteArrayOutputStream bout = initStream(appName, xDate, body);
         if (bout == null) {
             return null;
