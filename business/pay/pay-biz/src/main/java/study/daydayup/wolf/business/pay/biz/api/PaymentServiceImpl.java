@@ -50,6 +50,14 @@ public class PaymentServiceImpl implements PaymentService {
         return byState(query, pageRequest);
     }
 
+    @Override
+    public Result<Payment> findStatus(@NonNull String paymentNo, @NonNull Long payeeId) {
+        PaymentDO paymentDO = paymentDAO.selectStatusByPaymentNoAndPayeeId(paymentNo, payeeId);
+        Payment payment = PaymentConverter.toModel(paymentDO);
+
+        return Result.ok(payment);
+    }
+
     public Result<Page<Payment>> byPaymentNo(@NonNull String paymentNo, @NonNull Long payeeId) {
         PaymentDO paymentDO = paymentDAO.selectByPaymentNoAndPayeeId(paymentNo, payeeId);
         if (paymentDO == null) {
