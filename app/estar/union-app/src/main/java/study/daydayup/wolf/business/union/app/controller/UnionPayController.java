@@ -45,7 +45,7 @@ public class UnionPayController {
     public Result<String> razorpaySubscribe(HttpServletResponse servletResponse, @RequestHeader(value = "X-Razorpay-Event-Id", required = false) String eventId, @RequestHeader("X-Razorpay-Signature") String signature, @RequestBody String data) {
         log.info("razorpay subscribe:{}, {}, {}", eventId, signature, data);
 
-        Map<String, Object> header = new HashMap<>(2);
+        Map<String, String> header = new HashMap<>(2);
         header.put("eventId", eventId);
         header.put("signature", signature);
 
@@ -103,12 +103,18 @@ public class UnionPayController {
 
     @PostMapping("/pay/dLocal/subscribe")
     public String dLocalSubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
-        log.info("dLocal subscribe: {}", data);
+
+        Map<String, String> header = new HashMap<>(2);
+        header.put("Authorization", servletResponse.getHeader("Authorization"));
+        header.put("X-Date", servletResponse.getHeader("X-Date"));
 
         SubscribeRequest request = SubscribeRequest.builder()
                 .paymentMethod(PaymentChannelEnum.DLOCAL.getCode())
                 .data(data)
+                .header(header)
                 .build();
+
+        log.info("dLocal subscribe: {}", request.getPayData());
 
         SubscribeResponse response = payService.subscribe(request).getData();
         if (!BeanUtil.equals(response.getCode(), 1)) {

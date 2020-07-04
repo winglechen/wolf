@@ -45,7 +45,7 @@ public class DLocalServiceImpl implements CashfreeService {
         if (StringUtil.isBlank(request.getData())) {
             throw  new InvalidPayRequestException("cashfree data can't be blank");
         }
-        int code = dLocalSubscriber.subscribe(request.getData());
+        int code = dLocalSubscriber.subscribe(request);
         SubscribeResponse response = SubscribeResponse.builder()
                 .code(code)
                 .build();
