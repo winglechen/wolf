@@ -1,13 +1,12 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dlocal;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import okhttp3.*;
 import org.springframework.stereotype.Component;
+import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentCreateFailException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
@@ -20,6 +19,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * study.daydayup.wolf.business.pay.biz.service.india.dlocal
@@ -44,11 +44,56 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         initConfig(CONFIG_KEY, createRequest.getPayeeId());
         Request payRequest = createRequest();
 
+        try {
+            Response response = CLIENT.newCall(payRequest).execute();
+            parseResponse(response);
+        } catch (Exception e) {
+            log.error("dLocal create exception ", e);
+            throw new InvalidEpiResponseException("dLocal creator call epi failed");
+        }
     }
 
     @Override
     public void parseCreateResponse() {
+        JSONObject json = JSON.parseObject(apiResponse);
 
+        if (!isResponseSuccess(json)) {
+            throw new InvalidEpiResponseException("dLocal create response parse error");
+        }
+
+        setResponseAttachment(json);
+    }
+
+    private void setResponseAttachment(@NonNull JSONObject data) {
+        attachment.put("payUrl", data.getString("redirect_url"));
+        attachment.put("paymentNo", payment.getPaymentNo());
+        attachment.put("amount", getAmount());
+        attachment.put("currencyCode", "INR");
+    }
+
+    private void parseResponse(Response response) {
+        if (null == response || !response.isSuccessful()) {
+            throw new InvalidEpiResponseException("dLocal create response is invalid");
+        }
+
+        try {
+            apiResponse = Objects.requireNonNull(response.body()).string();
+            log.info("dLocal create response: {}", apiResponse);
+        } catch (Exception e) {
+            throw new InvalidEpiResponseException("dLocal create responseBody is invalid");
+        }
+    }
+
+    private boolean isResponseSuccess(JSONObject json) {
+        if (null == json) {
+            return false;
+        }
+
+        if (StringUtil.isBlank(json.getString("redirect_url"))) {
+            return false;
+        }
+
+        return "100".equalsIgnoreCase(json.getString("status_code"));
     }
 
     private Request createRequest() {
@@ -69,6 +114,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
                 .header("X-Version", "2.1")
                 .header("User-Agent", "onionPay / 1.0")
                 .header("Authorization", "V2-HMAC-SHA256, Signature: " + sign)
+                .header("X-Idempotency-Key", payment.getPaymentNo())
                 .post(requestBody)
                 .build();
     }
