@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentExpiredException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentNotFoundException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
@@ -23,6 +24,7 @@ import study.daydayup.wolf.framework.layer.domain.Service;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 
 /**
  * net.onionpay.gateway.pg.service
@@ -46,9 +48,13 @@ public class PaymentGatewayService implements Service {
         return PaymentConverter.fromCreateRequest(createRequest);
     }
 
-    public PaymentStatusDTO findStatus(@NonNull String paymentNo, @NonNull String token) {
+    public PaymentStatusDTO findStatus(@NonNull String token) {
         PaymentCreateRequest createRequest = loadRequestByToken(token);
-        Payment payment = paymentService.findStatus(paymentNo, createRequest.getPayeeId()).getData();
+        if (StringUtil.isBlank(createRequest.getPaymentNo())) {
+            throw new PaymentNotFoundException();
+        }
+
+        Payment payment = paymentService.findStatus(createRequest.getPaymentNo(), createRequest.getPayeeId()).getData();
 
         return toStatus(payment);
     }
@@ -74,7 +80,12 @@ public class PaymentGatewayService implements Service {
         createRequest.setPaymentChannel(DEFAULT_PAYMENT_CHANNEL);
         createRequest.setPaymentMode(checkoutRequest.getPaymentMode());
 
-        return payService.create(createRequest).notNullData();
+        PaymentCreateResponse response = payService.create(createRequest).notNullData();
+
+        createRequest.setPaymentMode(response.getPaymentNo());
+        resetRequestByToken(checkoutRequest.getToken(), createRequest);
+
+        return response;
     }
 
 
@@ -85,5 +96,10 @@ public class PaymentGatewayService implements Service {
         }
 
         return JSON.parseObject(data, PaymentCreateRequest.class);
+    }
+
+    private void resetRequestByToken(@NonNull String token, @NonNull PaymentCreateRequest createRequest) {
+        String value = JSON.toJSONString(createRequest);
+        stringRedisTemplate.opsForValue().set(token, value, Duration.ofMinutes(15));
     }
 }
