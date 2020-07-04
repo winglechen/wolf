@@ -14,7 +14,7 @@ public class PaySupplier {
     private boolean useGlobal = false;
     private int order = 9999;
 
-
+    private String appName;
     private String appId;
     private String appSecret;
 

@@ -99,6 +99,26 @@ public class UnionPayController {
         }
 
         return "success";
-
     }
+
+    @PostMapping("/pay/dLocal/subscribe")
+    public String dLocalSubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
+        log.info("dLocal subscribe: {}", data);
+
+        SubscribeRequest request = SubscribeRequest.builder()
+                .paymentMethod(PaymentChannelEnum.DLOCAL.getCode())
+                .data(data)
+                .build();
+
+        SubscribeResponse response = payService.subscribe(request).getData();
+        if (!BeanUtil.equals(response.getCode(), 1)) {
+            servletResponse.setStatus(500);
+            return "fail";
+        }
+
+        return "success";
+    }
+
+
+
 }
