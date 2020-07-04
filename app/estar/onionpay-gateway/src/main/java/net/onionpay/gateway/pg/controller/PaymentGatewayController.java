@@ -1,5 +1,6 @@
 package net.onionpay.gateway.pg.controller;
 
+import net.onionpay.gateway.pg.dto.PaymentStatusDTO;
 import net.onionpay.gateway.pg.service.PaymentGatewayService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,16 @@ public class PaymentGatewayController {
     public Result<PaymentCreateResponse> checkout(@Validated @RequestBody CheckoutRequest request) {
         PaymentCreateResponse response = paymentGatewayService.checkout(request);
         return Result.ok(response);
+    }
+
+    @GetMapping("/pg/payment/status/{token}")
+    public Result<PaymentStatusDTO> status(@PathVariable("token") String token) {
+        if (StringUtil.isBlank(token)) {
+            throw new IllegalArgumentException("token can't be blank");
+        }
+
+        PaymentStatusDTO status = paymentGatewayService.findStatus(token);
+        return Result.ok(status);
     }
 
 }

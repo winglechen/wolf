@@ -15,4 +15,5 @@ import study.daydayup.wolf.framework.rpc.page.PageRequest;
  **/
 public interface PaymentService extends Service {
     Result<Page<Payment>> query(PaymentQuery query, PageRequest pageRequest);
+    Result<Payment> findStatus(String paymentNo, Long payeeId);
 }
