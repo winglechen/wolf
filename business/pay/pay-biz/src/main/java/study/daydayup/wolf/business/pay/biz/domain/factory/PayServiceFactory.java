@@ -1,9 +1,12 @@
 package study.daydayup.wolf.business.pay.biz.domain.factory;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PayServiceNotFoundException;
 import study.daydayup.wolf.business.pay.api.service.PayService;
+import study.daydayup.wolf.business.pay.biz.service.india.dlocal.DLocalService;
+import study.daydayup.wolf.business.pay.biz.service.india.onionpay.OnionPayService;
 import study.daydayup.wolf.business.pay.biz.service.india.razorpay.RazorpayService;
 import study.daydayup.wolf.business.pay.biz.service.india.cashfree.CashfreeService;
 import study.daydayup.wolf.business.pay.biz.service.india.dokypay.DokypayService;
@@ -25,6 +28,10 @@ public class PayServiceFactory {
     private DokypayService dokypayService;
     @Resource
     private RazorpayService razorpayService;
+    @Resource
+    private DLocalService dLocalService;
+    @Resource
+    private OnionPayService onionPayService;
 
 
     public PayService create(int paymentCode) {
@@ -37,6 +44,10 @@ public class PayServiceFactory {
                 return dokypayService;
             case RAZORPAY:
                 return razorpayService;
+            case DLOCAL:
+                return dLocalService;
+            case ONIONPAY:
+                return onionPayService;
             default:
                 throw new PayServiceNotFoundException();
         }
