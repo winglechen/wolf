@@ -46,9 +46,9 @@ public class PaymentGatewayService implements Service {
         return PaymentConverter.fromCreateRequest(createRequest);
     }
 
-    public PaymentStatusDTO findStatus(@NonNull String paymentNo, @NonNull Long payeeId, @NonNull String token) {
-        loadRequestByToken(token);
-        Payment payment = paymentService.findStatus(paymentNo, payeeId).getData();
+    public PaymentStatusDTO findStatus(@NonNull String paymentNo, @NonNull String token) {
+        PaymentCreateRequest createRequest = loadRequestByToken(token);
+        Payment payment = paymentService.findStatus(paymentNo, createRequest.getPayeeId()).getData();
 
         return toStatus(payment);
     }

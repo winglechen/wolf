@@ -40,13 +40,13 @@ public class PaymentGatewayController {
         return Result.ok(response);
     }
 
-    @GetMapping("/pg/payment/status/{paymentNo}/{payeeId}/{token}")
-    public Result<PaymentStatusDTO> status(@PathVariable("paymentNo") String paymentNo, @PathVariable("payeeId") Long payeeId, @PathVariable("token") String token) {
+    @GetMapping("/pg/payment/status/{paymentNo}/{token}")
+    public Result<PaymentStatusDTO> status(@PathVariable("paymentNo") String paymentNo, @PathVariable("token") String token) {
         if (StringUtil.isBlank(token)) {
             throw new IllegalArgumentException("token can't be blank");
         }
 
-        PaymentStatusDTO status = paymentGatewayService.findStatus(paymentNo, payeeId, token);
+        PaymentStatusDTO status = paymentGatewayService.findStatus(paymentNo, token);
         return Result.ok(status);
     }
 
