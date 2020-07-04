@@ -61,7 +61,12 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
             throw new InvalidEpiResponseException("dLocal create response parse error");
         }
 
+        updateOutTradeNo(json);
         setResponseAttachment(json);
+    }
+
+    private void updateOutTradeNo(@NonNull JSONObject data) {
+        payment.setOutTradeNo(data.getString("id"));
     }
 
     private void setResponseAttachment(@NonNull JSONObject data) {

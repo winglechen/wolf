@@ -23,7 +23,7 @@
         <module>union-deploy-dubbo</module>
         <module>union-deploy-app</module>
         <module>union-deploy-admin</module>
-        <module>onion-pay</module>
+        <module>onionpay-gateway</module>
 
     </modules>
 
