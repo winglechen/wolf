@@ -153,10 +153,4 @@ public class CashfreeRnCreator extends AbstractPaymentCreator implements Payment
         return JSON.toJSONString(args);
     }
 
-    private BigDecimal getAmount() {
-        BigDecimal amount = createRequest.getAmount();
-        amount = DecimalUtil.scale(amount, 2);
-
-        return amount;
-    }
 }

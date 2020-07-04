@@ -18,6 +18,10 @@ import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +67,9 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
     }
 
     private String initArgs() {
+        ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+        String xDate = now.toString();
+
         Map<String, Object> args = new HashMap<>(8);
         args.put("appId", supplierConfig.getAppId());
         args.put("version", supplierConfig.getVersion());
