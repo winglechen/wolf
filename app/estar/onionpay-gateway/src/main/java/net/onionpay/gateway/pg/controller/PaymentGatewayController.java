@@ -50,4 +50,14 @@ public class PaymentGatewayController {
         return Result.ok(status);
     }
 
+    @GetMapping("/pg/payment/cancel/{token}")
+    public Result<PaymentStatusDTO> cancel(@PathVariable("token") String token) {
+        if (StringUtil.isBlank(token)) {
+            throw new IllegalArgumentException("token can't be blank");
+        }
+
+        PaymentStatusDTO status = paymentGatewayService.cancel(token);
+        return Result.ok(status);
+    }
+
 }

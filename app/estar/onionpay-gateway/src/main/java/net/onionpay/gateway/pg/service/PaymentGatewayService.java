@@ -69,6 +69,13 @@ public class PaymentGatewayService implements Service {
         return toStatus(payment);
     }
 
+    public PaymentStatusDTO cancel(@NonNull String token) {
+        PaymentCreateRequest createRequest = loadRequestByToken(token);
+        Payment payment = PaymentConverter.fromCreateRequest(createRequest);
+
+        return toStatus(payment);
+    }
+
     public PaymentCreateResponse checkout(@Validated CheckoutRequest checkoutRequest) {
         PaymentCreateRequest createRequest = loadRequestByToken(checkoutRequest.getToken());
         createRequest.setPaymentChannel(DEFAULT_PAYMENT_CHANNEL);
@@ -83,8 +90,6 @@ public class PaymentGatewayService implements Service {
 
         return response;
     }
-
-
 
     protected PaySupplier getSupplierConfig(int paymentChannel) {
         PaymentChannelEnum channelEnum = EnumUtil.codeOf(paymentChannel, PaymentChannelEnum.class);
@@ -165,6 +170,7 @@ public class PaymentGatewayService implements Service {
 
         statusDTO.setPaymentChannel(payment.getPaymentMethod());
         statusDTO.setStateCode(getStateCode(payment.getState()));
+        statusDTO.setReturnUrl(getReturnUrl(payment.getPaymentMethod(), payment.getState()));
 
         return statusDTO;
     }

@@ -2,6 +2,7 @@ package net.onionpay.gateway.pg.util;
 
 import org.springframework.beans.BeanUtils;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 
 /**
@@ -18,6 +19,7 @@ public class PaymentConverter {
 
         Payment payment = new Payment();
         BeanUtils.copyProperties(createRequest, payment);
+        payment.setState(PaymentStateEnum.PAYING.getCode());
 
         return payment;
     }
