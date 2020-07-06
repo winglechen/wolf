@@ -13,6 +13,7 @@ import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.lang.enums.trade.TradePhaseEnum;
 import study.daydayup.wolf.common.model.type.string.id.TradeNo;
 import study.daydayup.wolf.common.util.lang.DecimalUtil;
+import study.daydayup.wolf.common.util.lang.StringUtil;
 
 import java.math.BigDecimal;
 
@@ -144,6 +145,14 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         amount = DecimalUtil.scale(amount, 2);
 
         return amount;
+    }
+
+    protected String getReturnUrl() {
+        if (StringUtil.notBlank(createRequest.getReturnUrl())) {
+            return createRequest.getReturnUrl();
+        }
+
+        return supplierConfig.getReturnUrl();
     }
 
 }

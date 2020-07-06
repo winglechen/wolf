@@ -147,7 +147,7 @@ public class CashfreeCreator extends AbstractPaymentCreator implements PaymentCr
                 .add("customerName", (String) args.get("customerName"))
                 .add("customerEmail", (String) args.get("customerEmail"))
                 .add("customerPhone", (String) args.get("customerPhone"))
-                .add("returnUrl", supplierConfig.getReturnUrl())
+                .add("returnUrl", getReturnUrl())
                 .add("notifyUrl", supplierConfig.getNotifyUrl())
                 .build();
     }

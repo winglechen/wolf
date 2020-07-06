@@ -140,7 +140,7 @@ public class DokypayCreator extends AbstractPaymentCreator implements PaymentCre
         args.put("appId", supplierConfig.getAppId());
         args.put("prodName", PROD_NAME);
         args.put("version", supplierConfig.getVersion());
-        args.put("returnUrl", supplierConfig.getReturnUrl());
+        args.put("returnUrl", getReturnUrl());
         args.put("notifyUrl", supplierConfig.getNotifyUrl());
 
         args.put("merTransNo", payment.getPaymentNo());

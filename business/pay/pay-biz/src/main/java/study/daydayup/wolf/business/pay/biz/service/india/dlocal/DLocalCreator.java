@@ -132,7 +132,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         args.put("country", "IN");
         args.put("payment_method_id", "IN");
         args.put("payment_method_flow", "IN");
-        args.put("callback_url", supplierConfig.getReturnUrl());
+        args.put("callback_url", getReturnUrl());
         args.put("notification_url", supplierConfig.getNotifyUrl());
         args.put("order_id", payment.getPaymentNo());
         initPayerInfo(args);
