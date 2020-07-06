@@ -50,6 +50,12 @@
                 <version>${union.version}</version>
             </dependency>
             <dependency>
+                <groupId>net.onionpay.onionpay</groupId>
+                <artifactId>onionpay-gateway</artifactId>
+                <version>${union.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>study.daydayup.wolf.business.estar</groupId>
                 <artifactId>union-depoly-dubbo</artifactId>
                 <version>${union.version}</version>

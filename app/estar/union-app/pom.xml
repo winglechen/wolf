@@ -27,6 +27,12 @@
             <artifactId>uc-agent</artifactId>
         </dependency>
         <dependency>
+            <groupId>net.onionpay.onionpay</groupId>
+            <artifactId>onionpay-gateway</artifactId>
+        </dependency>
+
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>

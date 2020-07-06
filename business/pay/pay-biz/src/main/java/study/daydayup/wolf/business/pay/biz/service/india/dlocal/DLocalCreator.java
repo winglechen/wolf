@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.domain.exception.epi.InvalidEpiResponseException;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayRequestException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentCreateFailException;
 import study.daydayup.wolf.business.pay.api.dto.india.IndianBankCard;
 import study.daydayup.wolf.business.pay.biz.domain.service.AbstractPaymentCreator;
@@ -95,11 +96,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
             return false;
         }
 
-        if (StringUtil.isBlank(json.getString("redirect_url"))) {
-            return false;
-        }
-
-        return "100".equalsIgnoreCase(json.getString("status_code"));
+        return !StringUtil.isBlank(json.getString("redirect_url"));
     }
 
     private Request createRequest() {
@@ -131,14 +128,27 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         args.put("amount", getAmount());
         args.put("currency", "INR");
         args.put("country", "IN");
-        args.put("payment_method_id", "IN");
-        args.put("payment_method_flow", "IN");
+        args.put("payment_method_id", getPaymentMode());
+        args.put("payment_method_flow", "REDIRECT");
         args.put("callback_url", getReturnUrl());
         args.put("notification_url", supplierConfig.getNotifyUrl());
         args.put("order_id", payment.getPaymentNo());
         initPayerInfo(args);
 
         return JSON.toJSONString(args);
+    }
+
+    private String getPaymentMode() {
+        switch (createRequest.getPaymentMode()) {
+            case "UPI":
+                return "UI";
+            case "PayTM":
+                return "PW";
+            case "Netbanking":
+                return "NB";
+        }
+
+        throw new InvalidPayRequestException("PaymentMode can't be blank");
     }
 
     private void initPayerInfo(@NonNull Map<String, Object> args) {

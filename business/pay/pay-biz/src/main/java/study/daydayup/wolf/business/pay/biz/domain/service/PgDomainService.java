@@ -40,8 +40,8 @@ public class PgDomainService implements PayService {
     }
 
     private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
-//        request.setPaymentMethod(PaymentChannelEnum.CASHFREE.getCode());
-        request.setPaymentChannel(PaymentChannelEnum.DOKYPAY.getCode());
+        request.setPaymentChannel(PaymentChannelEnum.ONIONPAY.getCode());
+//        request.setPaymentChannel(PaymentChannelEnum.DOKYPAY.getCode());
         return;
 
 //        Long payerId = request.getPayerId();
