@@ -1,10 +1,10 @@
 ###
-GET http://localhost:8100/pg/payment/detailByToken/f7112179f05e41998ae69f6d21ffe032
+GET http://localhost:8100/pg/payment/detailByToken/5ad32ab402624594ba521814dde5a859
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8100/pg/payment/cancel/f7112179f05e41998ae69f6d21ffe032
+GET http://localhost:8100/pg/payment/cancel/5ad32ab402624594ba521814dde5a859
 Accept: */*
 Cache-Control: no-cache
 
@@ -15,11 +15,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "token": "f7112179f05e41998ae69f6d21ffe032",
-  "paymentMode": "UPI"
+  "token": "406e5b2dea16468ab9331917f77e30c4",
+  "paymentMode": "PW"
 }
 
-###
-GET http://localhost:8100/wingle/demo
-Accept: */*
-Cache-Control: no-cache

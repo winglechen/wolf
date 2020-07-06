@@ -1,8 +1,6 @@
 package study.daydayup.wolf.business.pay.api.dto.base.pay;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import study.daydayup.wolf.framework.layer.api.Request;
 
 import javax.validation.constraints.DecimalMin;
@@ -20,6 +18,8 @@ import java.util.Map;
  **/
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentCreateRequest implements Request {
     private Integer paymentChannel;
     private String paymentMode;

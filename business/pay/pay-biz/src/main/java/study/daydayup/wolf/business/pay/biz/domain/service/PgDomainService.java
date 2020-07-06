@@ -13,6 +13,7 @@ import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.subscribe.SubscribeResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.biz.domain.factory.PayServiceFactory;
+import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
@@ -40,6 +41,10 @@ public class PgDomainService implements PayService {
     }
 
     private void paymentChannelWithList(@NonNull PaymentCreateRequest request) {
+        if (BeanUtil.equals(PaymentChannelEnum.DLOCAL.getCode(), request.getPaymentChannel())) {
+            return;
+        }
+
         request.setPaymentChannel(PaymentChannelEnum.ONIONPAY.getCode());
 //        request.setPaymentChannel(PaymentChannelEnum.DOKYPAY.getCode());
         return;

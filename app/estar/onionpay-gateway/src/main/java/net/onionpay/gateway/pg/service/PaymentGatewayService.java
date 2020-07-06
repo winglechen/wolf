@@ -91,7 +91,11 @@ public class PaymentGatewayService implements Service {
         return returnUrl.replace("{token}",  token);
     }
 
-    private String getReturnUrl(int paymentChannel, int state) {
+    private String getReturnUrl(Integer paymentChannel, int state) {
+        if (paymentChannel == null) {
+            paymentChannel = PaymentChannelEnum.DLOCAL.getCode();
+        }
+
         String returnUrl = onionPayConfigService.findReturnUrl(paymentChannel).notNullData();
         String params = getReturnUrlParams(paymentChannel, state);
 
