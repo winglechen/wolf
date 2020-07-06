@@ -37,6 +37,10 @@
             <artifactId>uc-agent</artifactId>
         </dependency>
         <dependency>
+            <groupId>study.daydayup.wolf.business.uc</groupId>
+            <artifactId>setting-agent</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>

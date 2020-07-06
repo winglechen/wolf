@@ -10,15 +10,22 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+import study.daydayup.wolf.business.pay.api.config.PayConfig;
+import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
+import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
+import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayConfigException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentExpiredException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentNotFoundException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.PaymentService;
+import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
+import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
+import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
 
@@ -41,7 +48,10 @@ public class PaymentGatewayService implements Service {
     private PayService payService;
     @Reference
     private PaymentService paymentService;
-
+    @Resource
+    private PayConfig payConfig;
+    @Resource
+    protected CompanySettingAgent companySettingAgent;
 
     public Payment loadByToken(@NonNull String token) {
         PaymentCreateRequest createRequest = loadRequestByToken(token);
@@ -59,6 +69,92 @@ public class PaymentGatewayService implements Service {
         return toStatus(payment);
     }
 
+    public PaymentCreateResponse checkout(@Validated CheckoutRequest checkoutRequest) {
+        PaymentCreateRequest createRequest = loadRequestByToken(checkoutRequest.getToken());
+        createRequest.setPaymentChannel(DEFAULT_PAYMENT_CHANNEL);
+        createRequest.setPaymentMode(checkoutRequest.getPaymentMode());
+        createRequest.setReturnUrl(getOnionPayReturnUrl(checkoutRequest.getToken()));
+
+        PaymentCreateResponse response = payService.create(createRequest).notNullData();
+
+        createRequest.setPaymentMode(response.getPaymentNo());
+        resetRequestByToken(checkoutRequest.getToken(), createRequest);
+        response.setReturnUrl(getReturnUrl(createRequest.getPaymentChannel(), PaymentStateEnum.PAYING.getCode()));
+
+        return response;
+    }
+
+
+
+    protected PaySupplier getSupplierConfig(int paymentChannel) {
+        PaymentChannelEnum channelEnum = EnumUtil.codeOf(paymentChannel, PaymentChannelEnum.class);
+
+        return getSupplierConfig(channelEnum);
+    }
+
+    protected PaySupplier getSupplierConfig(PaymentChannelEnum paymentChannel) {
+        String configKey = paymentChannel.getName();
+
+        String errorMsg;
+        if (null == payConfig.getSupplier()) {
+            throw new InvalidPayConfigException("payConfig.supplier not found");
+        }
+
+        PaySupplier supplier = payConfig.getSupplier().get(configKey);
+        if (supplier == null) {
+            errorMsg = StringUtil.join("payConfig.supplier: ", configKey, " not found" );
+            throw new InvalidPayConfigException(errorMsg );
+        }
+
+        return supplier;
+    }
+
+    private String getOnionPayReturnUrl(String token) {
+        PaySupplier supplier = getSupplierConfig(PaymentChannelEnum.ONIONPAY);
+        String returnUrl = supplier.getReturnUrl();
+        return returnUrl.replace("{token}",  token);
+    }
+
+    private String getReturnUrl(int paymentChannel, int state) {
+        PaySupplier supplier = getSupplierConfig(paymentChannel);
+        String returnUrl = supplier.getReturnUrl();
+        String params = getReturnUrlParams(paymentChannel, state);
+
+        return StringUtil.join(returnUrl, params);
+    }
+
+    private String getReturnUrlParams(int paymentChannel, int state) {
+        PaymentChannelEnum channelEnum = EnumUtil.codeOf(paymentChannel, PaymentChannelEnum.class);
+        switch (channelEnum) {
+            case DLOCAL:
+                return getDLocalParams(state);
+            case DOKYPAY:
+                return getDokypayParams(state);
+            case CASHFREE:
+                return getCashfreeParams(state);
+        }
+        return null;
+    }
+
+    private String getDLocalParams(int state) {
+        String stateCode = getStateCode(state);
+
+        return StringUtil.join("?status=", stateCode);
+    }
+
+
+    private String getCashfreeParams(int state) {
+        String stateCode = getStateCode(state);
+
+        return StringUtil.join("?txStatus=", stateCode);
+    }
+
+    private String getDokypayParams(int state) {
+        String stateCode = getDokypayStateCode(state);
+
+        return StringUtil.join("?transStatus=", stateCode);
+    }
+
     private PaymentStatusDTO toStatus(Payment payment) {
         if (payment == null) {
             return null;
@@ -66,28 +162,32 @@ public class PaymentGatewayService implements Service {
 
         PaymentStatusDTO statusDTO = new PaymentStatusDTO();
         BeanUtils.copyProperties(payment, statusDTO);
-        if (BeanUtil.equals(4, payment.getState())) {
-            statusDTO.setStateCode("SUCCESS");
-        } else {
-            statusDTO.setStateCode("PAYING");
-        }
+
+        statusDTO.setPaymentChannel(payment.getPaymentMethod());
+        statusDTO.setStateCode(getStateCode(payment.getState()));
 
         return statusDTO;
     }
 
-    public PaymentCreateResponse checkout(@Validated CheckoutRequest checkoutRequest) {
-        PaymentCreateRequest createRequest = loadRequestByToken(checkoutRequest.getToken());
-        createRequest.setPaymentChannel(DEFAULT_PAYMENT_CHANNEL);
-        createRequest.setPaymentMode(checkoutRequest.getPaymentMode());
-
-        PaymentCreateResponse response = payService.create(createRequest).notNullData();
-
-        createRequest.setPaymentMode(response.getPaymentNo());
-        resetRequestByToken(checkoutRequest.getToken(), createRequest);
-
-        return response;
+    private String getStateCode(Integer state) {
+        if (BeanUtil.equals(4, state)) {
+            return "SUCCESS";
+        } else if(BeanUtil.equals(101, state)) {
+            return "CANCELLED";
+        } else {
+            return "PENDING";
+        }
     }
 
+    private String getDokypayStateCode(Integer state) {
+        if (BeanUtil.equals(4, state)) {
+            return "success";
+        } else if(BeanUtil.equals(101, state)) {
+            return "cancel";
+        } else {
+            return "pending";
+        }
+    }
 
     private PaymentCreateRequest loadRequestByToken(@NonNull String token) {
         String data = stringRedisTemplate.opsForValue().get(token);

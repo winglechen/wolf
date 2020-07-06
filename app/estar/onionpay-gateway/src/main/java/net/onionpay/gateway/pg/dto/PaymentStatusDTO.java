@@ -12,6 +12,8 @@ import study.daydayup.wolf.framework.layer.api.DTO;
 @Data
 public class PaymentStatusDTO implements DTO {
     private String paymentNo;
+    private Integer paymentChannel;
+
     private Long payerId;
     private Long payeeId;
 

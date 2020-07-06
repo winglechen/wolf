@@ -11,6 +11,7 @@ import study.daydayup.wolf.common.lang.enums.CodeBasedEnum;
  **/
 @Getter
 public enum PaymentStateEnum implements CodeBasedEnum {
+    CANCELED(101, "支付取消"),
 
     PARTIAL_REFUNDED(6, "部分退款"),
     REFUNDED(5, "已退款"),
