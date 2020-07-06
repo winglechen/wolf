@@ -22,8 +22,6 @@ import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.PaymentService;
-import study.daydayup.wolf.business.uc.setting.agent.CompanySettingAgent;
-import study.daydayup.wolf.common.lang.ds.ObjectMap;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.common.util.lang.EnumUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -50,8 +48,7 @@ public class PaymentGatewayService implements Service {
     private PaymentService paymentService;
     @Resource
     private PayConfig payConfig;
-    @Resource
-    protected CompanySettingAgent companySettingAgent;
+
 
     public Payment loadByToken(@NonNull String token) {
         PaymentCreateRequest createRequest = loadRequestByToken(token);

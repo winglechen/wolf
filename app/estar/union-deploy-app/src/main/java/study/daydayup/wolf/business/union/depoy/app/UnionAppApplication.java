@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author Wingle
  * @since 2020/1/1 5:24 下午
  **/
-@SpringBootApplication(scanBasePackages = {"study.daydayup.wolf.business.union"})
+@SpringBootApplication(scanBasePackages = {"study.daydayup.wolf.business.union","net.onionpay.gateway"})
 @EnableDiscoveryClient
 public class UnionAppApplication {
     public static void main(String[] args) {

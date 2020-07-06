@@ -1,0 +1,25 @@
+###
+GET http://localhost:8100/pg/payment/detailByToken/f7112179f05e41998ae69f6d21ffe032
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET http://localhost:8100/pg/payment/cancel/f7112179f05e41998ae69f6d21ffe032
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST http://localhost:8100/pg/payment/checkout
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "token": "f7112179f05e41998ae69f6d21ffe032",
+  "paymentMode": "UPI"
+}
+
+###
+GET http://localhost:8100/wingle/hello
+Accept: */*
+Cache-Control: no-cache

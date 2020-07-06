@@ -27,7 +27,7 @@
             <artifactId>uc-agent</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.onionpay.onionpay</groupId>
+            <groupId>net.onionpay</groupId>
             <artifactId>onionpay-gateway</artifactId>
         </dependency>
 
