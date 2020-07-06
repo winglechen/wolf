@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 @Component
 public class PgDomainService implements PayService {
     @Resource
-    private PayServiceFactory factory;
+    private PayServiceFactory payServiceFactory;
 
     @Override
     public Result<PaymentCreateResponse> create(@Validated PaymentCreateRequest request) {
@@ -35,7 +35,7 @@ public class PgDomainService implements PayService {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
 
-        PayService service = factory.create(request.getPaymentChannel());
+        PayService service = payServiceFactory.create(request.getPaymentChannel());
         return service.create(request);
     }
 
@@ -60,7 +60,7 @@ public class PgDomainService implements PayService {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
 
-        PayService service = factory.create(request.getPaymentMethod());
+        PayService service = payServiceFactory.create(request.getPaymentMethod());
         return service.verify(request);
     }
 
@@ -70,7 +70,7 @@ public class PgDomainService implements PayService {
             throw new InvalidPayRequestException("PaymentMethod can't be null");
         }
 
-        PayService service = factory.create(request.getPaymentMethod());
+        PayService service = payServiceFactory.create(request.getPaymentMethod());
         return service.subscribe(request);
     }
 

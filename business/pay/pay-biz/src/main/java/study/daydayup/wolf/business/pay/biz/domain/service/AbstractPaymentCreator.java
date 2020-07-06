@@ -97,9 +97,17 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         payment.setPaymentNo(paymentNo);
         payment.setPaymentMethod(request.getPaymentChannel());
         payment.setState(PaymentStateEnum.WAIT_TO_PAY.getCode());
-        attachment = new ObjectMap();
 
+        initAttachment();
         addPayment();
+    }
+
+    public void initAttachment() {
+        if (attachment != null) {
+            return;
+        }
+
+        attachment = new ObjectMap();
     }
 
     protected void addPayment() {
