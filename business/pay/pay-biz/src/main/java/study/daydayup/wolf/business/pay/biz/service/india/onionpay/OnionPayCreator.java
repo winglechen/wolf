@@ -78,10 +78,10 @@ public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCr
     }
 
     private void setResponseAttachment(String token) {
-        String returnUrl = supplierConfig.getReturnUrl();
-        returnUrl = returnUrl.replace("{token}", token);
+        String createUrl = supplierConfig.getCreateUrl();
+        createUrl = createUrl.replace("{token}", token);
 
-        attachment.put("payUrl", returnUrl);
+        attachment.put("payUrl", createUrl);
         attachment.put("amount", getAmount());
         attachment.put("currencyCode", "INR");
     }

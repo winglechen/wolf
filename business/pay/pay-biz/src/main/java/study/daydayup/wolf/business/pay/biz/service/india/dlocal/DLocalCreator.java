@@ -41,7 +41,8 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
 
     @Override
     public void callPayEpi() {
-        initConfig(CONFIG_KEY, createRequest.getPayeeId());
+        //dLocal暂不开放
+        initConfig(CONFIG_KEY);
         Request payRequest = createRequest();
 
         try {
