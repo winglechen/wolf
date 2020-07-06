@@ -23,6 +23,8 @@ import java.time.Duration;
 @Slf4j
 @Component
 public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCreator {
+    private static final String CONFIG_KEY = "onionPay";
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -49,29 +51,15 @@ public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCr
 
     @Override
     public PaymentCreateResponse formatResponse() {
-        storeCreateRequest();
-        setResponseAttachment();
+        initConfig(CONFIG_KEY);
 
-        return createResponse();
+        String token = storeCreateRequest();
+        setResponseAttachment(token);
+
+        return createPaymentCreateResponse();
     }
 
-    private PaymentCreateResponse createResponse() {
-        PaymentCreateResponse response = new PaymentCreateResponse();
-        response.setPaymentNo(null);
-        response.setAmount(getAmount());
-        response.setPaymentChannel(PaymentChannelEnum.DLOCAL.getCode());
-        response.setPayArgs(attachment.getMap());
-
-        return response;
-    }
-
-    private void setResponseAttachment() {
-        attachment.put("payUrl", "url");
-        attachment.put("amount", getAmount());
-        attachment.put("currencyCode", "INR");
-    }
-
-    private void storeCreateRequest() {
+    private String storeCreateRequest() {
         createRequest.setCurrencyCode("INR");
 
         String json = JSON.toJSONString(createRequest);
@@ -81,14 +69,37 @@ public class OnionPayCreator extends AbstractPaymentCreator implements PaymentCr
         for (int i = 0; i < 3; i++) {
             key  = StringUtil.uuid();
             status = stringRedisTemplate.opsForValue().setIfAbsent(key, json, Duration.ofMinutes(15));
-
-            if (status.equals(true)) {
-                break;
+            if (null != status && status.equals(true)) {
+                return key;
             }
         }
 
         throw new PaymentCreateFailException("create payment token fail");
     }
+
+    private void setResponseAttachment(String token) {
+        String returnUrl = supplierConfig.getReturnUrl();
+        returnUrl = returnUrl.replace("{token}", token);
+
+        attachment.put("payUrl", returnUrl);
+        attachment.put("amount", getAmount());
+        attachment.put("currencyCode", "INR");
+    }
+
+    private PaymentCreateResponse createPaymentCreateResponse() {
+        PaymentCreateResponse response = new PaymentCreateResponse();
+        response.setPaymentNo(null);
+        response.setAmount(getAmount());
+        response.setPaymentChannel(PaymentChannelEnum.DLOCAL.getCode());
+        response.setPayArgs(attachment.getMap());
+
+        return response;
+    }
+
+
+
+
+
 
 
 
