@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  * @since 2020/4/26 6:40 下午
  **/
 @Component
-public class DLocalServiceImpl implements CashfreeService {
+public class DLocalServiceImpl implements DLocalService {
     @Resource
     private DLocalCreator dLocalCreator;
     @Resource

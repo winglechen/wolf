@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.service.india.onionpay;
 
+import org.springframework.stereotype.Component;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PayVerifyResponse;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
  * @author Wingle
  * @since 2020/7/4 5:37 下午
  **/
+@Component
 public class OnionPayServiceImpl implements OnionPayService {
     @Resource
     private OnionPayCreator onionPayCreator;
