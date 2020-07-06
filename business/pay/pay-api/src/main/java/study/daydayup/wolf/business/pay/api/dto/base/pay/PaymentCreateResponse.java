@@ -21,6 +21,8 @@ public class PaymentCreateResponse implements Response {
     private BigDecimal amount;
     private Map<String, Object> payArgs;
 
+    private String returnUrl;
+
     public PaymentCreateResponse() {
         payArgs = new HashMap<>();
     }

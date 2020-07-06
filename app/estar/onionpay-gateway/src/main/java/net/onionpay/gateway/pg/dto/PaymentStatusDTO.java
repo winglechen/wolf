@@ -17,4 +17,6 @@ public class PaymentStatusDTO implements DTO {
 
     private String stateCode;
     private Integer state;
+
+    private String returnUrl;
 }

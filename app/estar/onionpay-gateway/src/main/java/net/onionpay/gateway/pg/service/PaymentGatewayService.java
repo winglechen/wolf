@@ -21,7 +21,6 @@ import study.daydayup.wolf.business.pay.api.service.PaymentService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.domain.Service;
-import study.daydayup.wolf.framework.rpc.Result;
 
 import javax.annotation.Resource;
 import java.time.Duration;
@@ -42,6 +41,7 @@ public class PaymentGatewayService implements Service {
     private PayService payService;
     @Reference
     private PaymentService paymentService;
+
 
     public Payment loadByToken(@NonNull String token) {
         PaymentCreateRequest createRequest = loadRequestByToken(token);

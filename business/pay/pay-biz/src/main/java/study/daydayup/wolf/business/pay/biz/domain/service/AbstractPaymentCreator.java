@@ -66,6 +66,7 @@ public abstract class AbstractPaymentCreator extends AbstractPaymentDomainServic
         response.setPaymentNo(payment.getPaymentNo());
         response.setAmount(payment.getAmount());
         response.setPaymentChannel(payment.getPaymentMethod());
+        response.setReturnUrl(supplierConfig.getReturnUrl());
         response.setPayArgs(attachment.getMap());
 
         return response;
