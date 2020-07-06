@@ -20,6 +20,6 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8100/wingle/hello
+GET http://localhost:8100/wingle/demo
 Accept: */*
 Cache-Control: no-cache

@@ -10,16 +10,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-import study.daydayup.wolf.business.pay.api.config.PayConfig;
-import study.daydayup.wolf.business.pay.api.config.PaySupplier;
 import study.daydayup.wolf.business.pay.api.domain.entity.Payment;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentChannelEnum;
 import study.daydayup.wolf.business.pay.api.domain.enums.PaymentStateEnum;
-import study.daydayup.wolf.business.pay.api.domain.exception.pay.InvalidPayConfigException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentExpiredException;
 import study.daydayup.wolf.business.pay.api.domain.exception.pay.PaymentNotFoundException;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateRequest;
 import study.daydayup.wolf.business.pay.api.dto.base.pay.PaymentCreateResponse;
+import study.daydayup.wolf.business.pay.api.service.OnionPayConfigService;
 import study.daydayup.wolf.business.pay.api.service.PayService;
 import study.daydayup.wolf.business.pay.api.service.PaymentService;
 import study.daydayup.wolf.common.util.lang.BeanUtil;
@@ -46,8 +44,8 @@ public class PaymentGatewayService implements Service {
     private PayService payService;
     @Reference
     private PaymentService paymentService;
-    @Resource
-    private PayConfig payConfig;
+    @Reference
+    private OnionPayConfigService onionPayConfigService;
 
 
     public Payment loadByToken(@NonNull String token) {
@@ -88,38 +86,13 @@ public class PaymentGatewayService implements Service {
         return response;
     }
 
-    protected PaySupplier getSupplierConfig(int paymentChannel) {
-        PaymentChannelEnum channelEnum = EnumUtil.codeOf(paymentChannel, PaymentChannelEnum.class);
-
-        return getSupplierConfig(channelEnum);
-    }
-
-    protected PaySupplier getSupplierConfig(PaymentChannelEnum paymentChannel) {
-        String configKey = paymentChannel.getName();
-
-        String errorMsg;
-        if (null == payConfig.getSupplier()) {
-            throw new InvalidPayConfigException("payConfig.supplier not found");
-        }
-
-        PaySupplier supplier = payConfig.getSupplier().get(configKey);
-        if (supplier == null) {
-            errorMsg = StringUtil.join("payConfig.supplier: ", configKey, " not found" );
-            throw new InvalidPayConfigException(errorMsg );
-        }
-
-        return supplier;
-    }
-
     private String getOnionPayReturnUrl(String token) {
-        PaySupplier supplier = getSupplierConfig(PaymentChannelEnum.ONIONPAY);
-        String returnUrl = supplier.getReturnUrl();
+        String returnUrl = onionPayConfigService.findReturnUrl().notNullData();
         return returnUrl.replace("{token}",  token);
     }
 
     private String getReturnUrl(int paymentChannel, int state) {
-        PaySupplier supplier = getSupplierConfig(paymentChannel);
-        String returnUrl = supplier.getReturnUrl();
+        String returnUrl = onionPayConfigService.findReturnUrl(paymentChannel).notNullData();
         String params = getReturnUrlParams(paymentChannel, state);
 
         return StringUtil.join(returnUrl, params);

@@ -53,7 +53,6 @@
         <dependency>
             <groupId>study.daydayup.wolf.business.pay</groupId>
             <artifactId>pay-api</artifactId>
-
         </dependency>
         <!-- business api end -->
 

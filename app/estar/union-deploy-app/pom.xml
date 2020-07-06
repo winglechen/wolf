@@ -30,6 +30,10 @@
             <artifactId>uc-agent</artifactId>
         </dependency>
         <dependency>
+            <groupId>study.daydayup.wolf.business.pay</groupId>
+            <artifactId>pay-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>net.onionpay</groupId>
             <artifactId>onionpay-gateway</artifactId>
         </dependency>

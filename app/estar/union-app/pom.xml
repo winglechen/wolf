@@ -26,11 +26,6 @@
             <groupId>study.daydayup.wolf.business.uc</groupId>
             <artifactId>uc-agent</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.onionpay</groupId>
-            <artifactId>onionpay-gateway</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>javax.servlet</groupId>

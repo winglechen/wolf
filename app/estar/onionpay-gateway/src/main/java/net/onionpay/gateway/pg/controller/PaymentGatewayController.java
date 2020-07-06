@@ -27,14 +27,12 @@ public class PaymentGatewayController implements Controller {
 
     @GetMapping("/pg/payment/detailByToken/{token}")
     public Result<Payment> detailByToken(@PathVariable("token") String token) {
-        System.out.println("detailByToken");
-        return null;
-//        if (StringUtil.isBlank(token)) {
-//            throw new IllegalArgumentException("token can't be blank");
-//        }
-//
-//        Payment payment = paymentGatewayService.loadByToken(token);
-//        return Result.ok(payment);
+        if (StringUtil.isBlank(token)) {
+            throw new IllegalArgumentException("token can't be blank");
+        }
+
+        Payment payment = paymentGatewayService.loadByToken(token);
+        return Result.ok(payment);
     }
 
     @PostMapping("/pg/payment/checkout")
