@@ -47,6 +47,10 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
         this.request = request;
         logSubscribeResponse(LOG_TYPE, PAYMENT_METHOD, request.getPayData());
 
+        if (!parseSignature()) {
+            return NotifyReturnEnum.PARSE_ERROR.getCode();
+        }
+
         if (!parseResponse(request.getData())) {
             return NotifyReturnEnum.PARSE_ERROR.getCode();
         }
@@ -59,6 +63,22 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
         }
 
         return handlePayment();
+    }
+
+    private boolean parseSignature() {
+        String authorization = request.getHeader().get("Authorization");
+        String xDate = request.getHeader().get("X-Date");
+        if (StringUtil.isBlank(authorization) || StringUtil.isBlank(xDate)) {
+            return false;
+        }
+
+        String[] arr = authorization.split(":");
+        if (2 != arr.length) {
+            return false;
+        }
+
+        request.getHeader().put("Signature", arr[1].trim());
+        return true;
     }
 
     private int handlePayment() {
@@ -99,7 +119,7 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
     }
 
     private boolean isResponseValid(){
-        String responseSign = request.getHeader().get("Authorization");
+        String responseSign = request.getHeader().get("Signature");
         String xDate = request.getHeader().get("X-Date");
         if (StringUtil.isBlank(responseSign) || StringUtil.isBlank(xDate)) {
             return false;
