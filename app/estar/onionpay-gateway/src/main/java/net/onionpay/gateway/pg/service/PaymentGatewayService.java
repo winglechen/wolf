@@ -79,7 +79,7 @@ public class PaymentGatewayService implements Service {
 
         PaymentCreateResponse response = payService.create(createRequest).notNullData();
 
-        createRequest.setPaymentMode(response.getPaymentNo());
+        createRequest.setPaymentNo(response.getPaymentNo());
         resetRequestByToken(checkoutRequest.getToken(), createRequest);
         response.setReturnUrl(getReturnUrl(createRequest.getPaymentChannel(), PaymentStateEnum.PAYING.getCode()));
 

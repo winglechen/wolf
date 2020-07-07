@@ -1,0 +1,21 @@
+###
+GET https://onionwallet.net/api/pg/payment/detailByToken/5ad32ab402624594ba521814dde5a859
+Accept: */*
+Cache-Control: no-cache
+
+###
+GET https://onionwallet.net/api/pg/payment/cancel/5ad32ab402624594ba521814dde5a859
+Accept: */*
+Cache-Control: no-cache
+
+###
+POST https://onionwallet.net/api/pg/payment/checkout
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "token": "c76bf43f06ab40e4a535408b50a0c2a9",
+  "paymentMode": "PW"
+}
+
