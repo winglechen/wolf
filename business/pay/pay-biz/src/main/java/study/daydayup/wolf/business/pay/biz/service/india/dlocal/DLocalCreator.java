@@ -85,7 +85,6 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
 
         try {
             apiResponse = Objects.requireNonNull(response.body()).string();
-            System.out.println("dLocal:" + apiResponse);
             log.info("dLocal create response: {}", apiResponse);
         } catch (Exception e) {
             throw new InvalidEpiResponseException("dLocal create responseBody is invalid");
@@ -116,7 +115,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
                 .header("X-Login", supplierConfig.getAppName())
                 .header("X-Trans-Key", supplierConfig.getAppId())
                 .header("X-Version", "2.1")
-                .header("User-Agent", "onionPay / 1.0")
+                .header("User-Agent", "onionPay/1.0")
                 .header("Authorization", "V2-HMAC-SHA256, Signature: " + sign)
                 .header("X-Idempotency-Key", payment.getPaymentNo())
                 .post(requestBody)
@@ -129,8 +128,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         args.put("amount", getAmount());
         args.put("currency", "INR");
         args.put("country", "IN");
-        args.put("payment_method_id", "PW");
-//        args.put("payment_method_id", getPaymentMode());
+        args.put("payment_method_id", getPaymentMode());
         args.put("payment_method_flow", "REDIRECT");
         args.put("callback_url", getReturnUrl());
         args.put("notification_url", supplierConfig.getNotifyUrl());
@@ -150,7 +148,7 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
                 return "NB";
         }
 
-        throw new InvalidPayRequestException("PaymentMode can't be blank");
+        throw new InvalidPayRequestException("Invalid PaymentMode: " + createRequest.getPaymentMode());
     }
 
     private void initPayerInfo(@NonNull Map<String, Object> args) {
@@ -161,11 +159,11 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         payer.put("phone", "7338198975");
         payer.put("document", "EHFGA5967A");
 
-//        Map<String, Object> address = new HashMap<>();
-//        address.put("city", "Goa");
-//        address.put("street", "Maddo Vaddo");
-//        address.put("number", "1207");
-//        payer.put("address", address);
+        Map<String, Object> address = new HashMap<>();
+        address.put("city", "Goa");
+        address.put("street", "Maddo Vaddo");
+        address.put("number", "1207");
+        payer.put("address", address);
 
         args.put("payer", payer);
 

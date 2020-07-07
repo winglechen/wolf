@@ -16,6 +16,6 @@ Content-Type: application/json
 
 {
   "token": "c76bf43f06ab40e4a535408b50a0c2a9",
-  "paymentMode": "PW"
+  "paymentMode": "PayTM"
 }
 

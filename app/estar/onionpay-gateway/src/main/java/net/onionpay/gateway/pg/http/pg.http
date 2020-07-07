@@ -20,7 +20,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "token": "a2897faafa514d9da4d3a35665d691e6",
-  "paymentMode": "PW"
+  "token": "769bec69a7ee419598ff0500a0e5ef46",
+  "paymentMode": "PayTM"
 }
 

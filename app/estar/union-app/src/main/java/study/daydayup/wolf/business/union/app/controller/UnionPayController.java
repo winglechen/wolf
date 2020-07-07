@@ -102,12 +102,14 @@ public class UnionPayController {
     }
 
     @PostMapping("/pay/dLocal/subscribe")
-    public String dLocalSubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
-        debugHeaders(servletResponse);
+    public String dLocalSubscribe(HttpServletResponse servletResponse,
+                                  @RequestHeader(value = "Authorization") String authorization,
+                                  @RequestHeader(value = "X-Date") String xDate,
+                                  @RequestBody String data) {
 
         Map<String, String> header = new HashMap<>(2);
-        header.put("Authorization", servletResponse.getHeader("Authorization"));
-        header.put("X-Date", servletResponse.getHeader("X-Date"));
+        header.put("Authorization", authorization);
+        header.put("X-Date", xDate);
 
         SubscribeRequest request = SubscribeRequest.builder()
                 .paymentMethod(PaymentChannelEnum.DLOCAL.getCode())
