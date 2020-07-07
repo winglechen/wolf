@@ -1,15 +1,15 @@
 ###
-GET http://localhost:8100/pg/payment/detailByToken/d48d7d239b6143c2bc7f2fa0d3b322e3
+GET http://localhost:8100/pg/payment/detailByToken/a2897faafa514d9da4d3a35665d691e6
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8100/pg/payment/cancel/d48d7d239b6143c2bc7f2fa0d3b322e3
+GET http://localhost:8100/pg/payment/cancel/a2897faafa514d9da4d3a35665d691e6
 Accept: */*
 Cache-Control: no-cache
 
 ###
-GET http://localhost:8100/pg/payment/status/d48d7d239b6143c2bc7f2fa0d3b322e3
+GET http://localhost:8100/pg/payment/status/a2897faafa514d9da4d3a35665d691e6
 Accept: */*
 Cache-Control: no-cache
 
@@ -20,7 +20,7 @@ Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "token": "d48d7d239b6143c2bc7f2fa0d3b322e3",
+  "token": "a2897faafa514d9da4d3a35665d691e6",
   "paymentMode": "PW"
 }
 

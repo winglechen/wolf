@@ -1,5 +1,6 @@
 package study.daydayup.wolf.business.pay.biz.service.india.dlocal;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -75,12 +76,11 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
     }
 
     private boolean parseResponse(@NonNull String data) {
-        Map<String, String> map = URLUtil.parseQuery(data);
-        if (MapUtil.isEmpty(map)) {
+        response = JSON.parseObject(data);
+        if (response.isEmpty()) {
             return false;
         }
 
-        Map<String, Object> objMap = new HashMap<>(map); response = new JSONObject(objMap);
         return isResponseSuccess(response);
     }
 

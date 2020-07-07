@@ -103,6 +103,7 @@ public class UnionPayController {
 
     @PostMapping("/pay/dLocal/subscribe")
     public String dLocalSubscribe(HttpServletResponse servletResponse, @RequestBody String data) {
+        debugHeaders(servletResponse);
 
         Map<String, String> header = new HashMap<>(2);
         header.put("Authorization", servletResponse.getHeader("Authorization"));
@@ -123,6 +124,16 @@ public class UnionPayController {
         }
 
         return "success";
+    }
+
+    private void debugHeaders(HttpServletResponse servletResponse) {
+        System.out.println("headers----------------------------");
+
+        for (String name: servletResponse.getHeaderNames()) {
+            System.out.println(name + " : " + servletResponse.getHeader(name));
+        }
+
+        System.out.println("headers*****************************");
     }
 
 

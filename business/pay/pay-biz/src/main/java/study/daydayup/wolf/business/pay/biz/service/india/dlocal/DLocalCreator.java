@@ -116,9 +116,9 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
                 .header("X-Login", supplierConfig.getAppName())
                 .header("X-Trans-Key", supplierConfig.getAppId())
                 .header("X-Version", "2.1")
-//                .header("User-Agent", "onionPay / 1.0")
+                .header("User-Agent", "onionPay / 1.0")
                 .header("Authorization", "V2-HMAC-SHA256, Signature: " + sign)
-//                .header("X-Idempotency-Key", payment.getPaymentNo())
+                .header("X-Idempotency-Key", payment.getPaymentNo())
                 .post(requestBody)
                 .build();
     }
@@ -161,11 +161,11 @@ public class DLocalCreator extends AbstractPaymentCreator implements PaymentCrea
         payer.put("phone", "7338198975");
         payer.put("document", "EHFGA5967A");
 
-        Map<String, Object> address = new HashMap<>();
-        address.put("city", "Goa");
-        address.put("street", "Maddo Vaddo");
-        address.put("number", "1207");
-        payer.put("address", address);
+//        Map<String, Object> address = new HashMap<>();
+//        address.put("city", "Goa");
+//        address.put("street", "Maddo Vaddo");
+//        address.put("number", "1207");
+//        payer.put("address", address);
 
         args.put("payer", payer);
 

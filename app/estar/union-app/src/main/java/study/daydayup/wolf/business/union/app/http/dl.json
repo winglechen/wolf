@@ -1,0 +1,28 @@
+{
+  "id": "D-155168-f568e7a2-079a-45cd-ac8c-ee136eee474d",
+  "amount": 100.00,
+  "status": "PAID",
+  "status_detail": "The payment was paid.",
+  "status_code": "200",
+  "currency": "INR",
+  "country": "IN",
+  "payment_method_id": "PW",
+  "payment_method_type": "BANK_TRANSFER",
+  "payment_method_flow": "REDIRECT",
+  "payer": {
+    "name": "Rajesh Koothrappali",
+    "user_reference": "DL_NOT_PROVIDED_846168",
+    "email": "rajesh@acme.com",
+    "phone": "7338198975",
+    "document": "EHFGA5967A",
+    "address": {
+      "city": "Goa",
+      "street": "Maddo Vaddo",
+      "empty": false
+    }
+  },
+  "order_id": "20200707162535000189401265885689",
+  "notification_url": "https://onionwallet.net/api/pay/dLocal/subscribe",
+  "callback_url": "http://sandbox.onionwallet.net/result/a2897faafa514d9da4d3a35665d691e6",
+  "created_date": "2020-07-07T08:26:08.000+0000"
+}
