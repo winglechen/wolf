@@ -21,6 +21,9 @@ import study.daydayup.wolf.common.util.time.DateUtil;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +36,7 @@ import java.util.Map;
 @Slf4j
 @Component
 public class DLocalSubscriber extends AbstractPaymentSubscriber implements PaymentSubscriber {
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
     private static final int LOG_TYPE = PaymentLogTypeEnum.PAY_RETURN.getCode();
     private static final int PAYMENT_METHOD = PaymentChannelEnum.DLOCAL.getCode();
     private static final String CONFIG_KEY = "dLocal";
@@ -88,11 +92,20 @@ public class DLocalSubscriber extends AbstractPaymentSubscriber implements Payme
                 .paymentNo(response.getString("order_id"))
                 .outOrderNo(payment.getOutTradeNo())
                 .status(response.getString("status"))
-                .outPaidAt(DateUtil.asLocalDateTime(response.getString("approved_date")))
+                .outPaidAt(parseCreatedDate(response.getString("created_date")))
                 .paymentMethod(PAYMENT_METHOD)
                 .build();
 
         return dLocalPaidHandler.handle(notification);
+    }
+
+    private LocalDateTime parseCreatedDate(String date) {
+        if (StringUtil.isBlank(date)) {
+            return LocalDateTime.now();
+        }
+
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return zonedDateTime.toLocalDateTime();
     }
 
     private boolean parseResponse(@NonNull String data) {
