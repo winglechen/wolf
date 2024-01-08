@@ -3,6 +3,7 @@
 target/
 crhttp/
 testhttp/
+.bak/
 
 # Log file
 *.log
@@ -11,14 +12,26 @@ testhttp/
 .idea/
 *.iml
 .DS_Store
-
+*.classpath
+*.project
+*.settings
+*.factorypath
+.vscode/
+*.ipr
+*.iws
 # BlueJ files
 *.ctxt
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+#cert
+*.jks
+*.crt
+
+
 # Package Files #
+
 *.jar
 *.war
 *.nar
@@ -27,12 +40,11 @@ testhttp/
 *.tar.gz
 *.rar
 
+# rebel #
+**/rebel.xml
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+dump.rdb
+application-local.yml
 
-#profiles
-application-dev.yml
-application-test.yml
-application-release.yml
-application-cr.yml
-application-prod.yml

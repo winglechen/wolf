@@ -1,222 +1,207 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-CURRENT_DIR=$(cd `dirname $0`; pwd)
-PROJECT_DIR=$(cd ${CURRENT_DIR}; cd ../; pwd)
+# 指定需要的 Bash 最小版本号
+MIN_BASH_VERSION=4.4.20
 
-line="--------------------------------------------"
+# 获取当前系统 Bash 版本号
+CURRENT_BASH_VERSION=$(/usr/bin/env bash -c 'echo $BASH_VERSION' | cut -d' ' -f1 | cut -d'-' -f1)
 
-if [ -n "$1" ]; then
-    command=$1
-else
-    command="init"
+# 比较 Bash 版本号与最小版本号
+if awk 'BEGIN{exit !('$CURRENT_BASH_VERSION' < '$MIN_BASH_VERSION')};'; then
+    echo "Bash version $MIN_BASH_VERSION or later is required. Please run [brew install bash] to update."
+    exit 1
 fi
 
-function init() {
-    echo "wolf init .... " 
-    echo $line
+# 关联数组在函数内定义，无法正常导出到外部使用
+# define global wolf app config
+declare -A wolf_app_final_name
+declare -A wolf_app_dir
+declare -A wolf_app_deploy_dir
+declare -A wolf_app_test_dir
+declare -A wolf_app_scp_host
+declare -A wolf_app_sync_env
+declare -A wolf_app_sync_command
 
-    echo "start nacos"
-    echo $line
-    sh /Users/wingle/code/software/nacos/bin//startup.sh -m standalone > /Users/wingle/logs/wolf/wolf.log 2>&1  &
+export wolf_app_final_name
+export wolf_app_dir
+export wolf_app_deploy_dir
+export wolf_app_test_dir
+export wolf_app_scp_host
+export wolf_app_sync_command
+export wolf_app_sync_env
 
-    echo "start redis" 
-    echo $line
-    /usr/local/redis/bin/redis-server > /Users/wingle/logs/wolf/wolf.log 2>&1 &
+function define_common_const() {
+    # define framework project dir
+    local SCRIPT_DIR
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+
+    WOLF_FRAMEWORK_DIR=$(
+        cd "${SCRIPT_DIR}" || exit
+        cd ../
+        pwd
+    )
+    export WOLF_FRAMEWORK_DIR
+
+    # define lib path
+    export LIB_INSTALL_PATH="$WOLF_FRAMEWORK_DIR/bin/install.sh"
+    export LIB_TEST_PATH="$WOLF_FRAMEWORK_DIR/bin/test.sh"
+    export LIB_SCP_PATH="$WOLF_FRAMEWORK_DIR/bin/scp.sh"
+
+    # define wolf framework based project dir
+    WOLF_PROJECT_PARENT_DIR=$(
+        cd "${WOLF_FRAMEWORK_DIR}" || exit
+        cd ../
+        pwd
+    )
+    WOLF_PROJECT_CONFIG_RELATIVE_PATH="bin/config.sh"
+
+    export WOLF_PROJECT_PARENT_DIR
+    export WOLF_PROJECT_CONFIG_RELATIVE_PATH
 }
 
-function deploy_union_test() {
-    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
-    cd ${dir} && mvn clean package -Ptest
+# search and load project config
+function load_project_config() {
+    local dirs=()
+    while read -r dir; do
+        if [ -e "$dir/$WOLF_PROJECT_CONFIG_RELATIVE_PATH" ]; then
+            dirs+=("$dir")
+        fi
+    done < <(find "$WOLF_PROJECT_PARENT_DIR" -maxdepth 1 -type d)
 
-    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
-        app@47.111.7.95:/home/app/tmp
-    echo "union-deploy-dubbo.tar.gz transporting..."
+    for dir in "${dirs[@]}"; do
+        CURRENT_PROJECT_DIR=$dir
+        export CURRENT_PROJECT_DIR
 
-    echo "union restart ..."
-    ssh -A smapp "/home/app/bin/wolf release-union"
+        config_file="$dir/$WOLF_PROJECT_CONFIG_RELATIVE_PATH"
+        if [ -e "$config_file" ]; then
+            #echo "config file: $config_file";
+            source "$config_file"
+        fi
+
+        # This is may not necessary.
+        install_file="$dir/bin/install.sh"
+        if [ -e "$install_file" ]; then
+            #echo "install_file: $install_file";
+            source "$install_file"
+        fi
+
+        # This is may not necessary.
+        test_file="$dir/bin/test.sh"
+        if [ -e "$install_file" ]; then
+            #echo "test_file: $test_file";
+            source "$test_file"
+        fi
+    done
 }
 
-
-
-function deploy_task_test() {
-    dir="${PROJECT_DIR}/app/estar/union-task/"
-    cd ${dir} && mvn clean package -Ptest
-
-    scp /Users/wingle/code/github/wolf/app/estar/union-task/target/union-task.tar.gz \
-        app@47.111.7.95:/home/app/tmp
-    echo "union-task.tar.gz transporting..."
-
-    echo "task restart ..."
-    ssh -A smapp "/home/app/bin/wolf release-task"
+### PRINT FUNCTION
+_red() {
+    printf '\033[1;31;31m%b\033[0m' "$1"
 }
 
-function scp_union_cr() {
-    dir="${PROJECT_DIR}/app/estar/union-deploy-dubbo/"
-    cd ${dir} && mvn clean package -Pcr
-
-    scp /Users/wingle/code/github/wolf/app/estar/union-deploy-dubbo/target/union-deploy-dubbo.tar.gz \
-        app@crapp:/home/app/tmp
-    echo "union-deploy-dubbo.tar.gz transporting..."
+_green() {
+    printf '\033[1;31;32m%b\033[0m' "$1"
 }
 
-function scp_onion_cr() {
-    dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
-    cd ${dir} && mvn clean package -Pcr
-
-    scp /Users/wingle/code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
-        app@crapp:/home/app/tmp
-    echo "onion-admin.tar.gz transporting..."
-
-
-    dir="/Users/wingle/code/work/onion/onion-api/onion-user/"
-    cd ${dir} && mvn clean package -Pcr
-
-    scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
-        app@crapp:/home/app/tmp
-    echo "onion-user.tar.gz transporting..."
+_yellow() {
+    printf '\033[1;31;33m%b\033[0m' "$1"
 }
 
-function scp_task_cr() {
-    dir="${PROJECT_DIR}/app/estar/union-task/"
-    cd ${dir} && mvn clean package -Pcr
-
-    scp /Users/wingle/code/github/wolf/app/estar/union-task/target/union-task.tar.gz \
-        app@crapp:/home/app/tmp
-    echo "union-task.tar.gz transporting..."
+_info() {
+    _green "[INFO] "
+    printf -- "%s" "$1"
+    printf "\n"
 }
 
-function deploy_union_cr() {
-    scp_union_cr
-
-    echo "union restart ..."
-    ssh -A crapp "/home/app/bin/wolf release-union"
+_warn() {
+    _yellow "[WARN] "
+    printf -- "%s" "$1"
+    printf "\n"
 }
 
-function deploy_onion_cr() {
-    scp_onion_cr
-
-    echo "onion restart ..."
-    ssh -A crapp "source /etc/profile; /home/app/bin/wolf release-onion"
+_error() {
+    _red "[ ERR] "
+    printf -- "%s" "$1"
+    printf "\n"
+    exit 1
 }
 
-function deploy_task_cr() {
-    scp_task_cr
+function parse_opts() {
+    dry_run=false
+    debug_mode=false
 
-    echo "task restart ..."
-    ssh -A crapp "/home/app/bin/wolf release-task"
+    export dry_run
+    export debug_mode
+
+    for arg in "$@"; do
+        case $arg in
+        --dry-run)
+            dry_run=true
+            ;;
+        --debug)
+            debug_mode=true
+            ;;
+        *) ;;
+
+        esac
+    done
 }
 
-function deploy_onion_test() {
-    dir="/Users/wingle/code/work/onion/onion-api/onion-admin/"
-    cd ${dir} && mvn clean package -Ptest
-
-    scp /Users/wingle/code/work/onion/onion-api/onion-admin/target/onion-admin.tar.gz \
-        app@47.111.7.95:/home/app/tmp
-    echo "onion-admin.tar.gz transporting..."
-
-
-    dir="/Users/wingle/code/work/onion/onion-api/onion-user/"
-    cd ${dir} && mvn clean package -Ptest
-
-    scp /Users/wingle/code/work/onion/onion-api/onion-user/target/onion-user.tar.gz \
-        app@47.111.7.95:/home/app/tmp
-    echo "onion-user.tar.gz transporting..."
-
-    echo "onion restart ..."
-    ssh -A smapp "source /etc/profile; /home/app/bin/wolf release-onion"
+function clean() {
+  echo "rm -rf ~/.m2/repository/study"
+  rm -rf ~/.m2/repository/study
+  echo "rm -rf ~/.m2/repository/shared"
+  rm -rf ~/.m2/repository/shared
+  echo "Done."
 }
 
-function conn_test_redis() {
-  redis-cli -h 47.111.7.95 -a estar
+function help() {
+    echo "Usage:"
+    echo "  wolf install {app_name}"
+    echo "  wolf install {app_name/module_name}"
+    echo ""
+    echo "  wolf scp|sync {app_name}"
+    echo ""
+    echo "  wolf clean"
 }
 
-function clear() {
-    echo "wolf clear ..."
-    echo $line
-
-    echo "stop nacos"
-    echo $line
-    sh /Users/wingle/code/software/nacos/bin//shutdown.sh > /Users/wingle/logs/wolf/wolf.log 2>&1 &
-
-    echo "stop redis"
-    echo $line
-    /usr/local/redis/bin/redis-cli shutdown > /Users/wingle/logs/wolf/wolf.log 2>&1 &
+function debug {
+    local var_name="$1"
+    declare -p "$var_name"
+    exit
 }
 
-function start() {
-    echo "wolf starting ... "    
+function main() {
+    define_common_const
+    parse_opts "$@"
+
+    if [ -n "$1" ]; then
+        command=$1
+    else
+        command="help"
+    fi
+
+    if [ "$1" != "help" ]; then
+        load_project_config
+    fi
+
+    case "$command" in
+    install)
+        source "$LIB_INSTALL_PATH"
+        ;;
+    test)
+        source "$LIB_TEST_PATH"
+        ;;
+    scp)
+        source "$LIB_SCP_PATH"
+        ;;
+    clean)
+        clean
+        ;;
+    help | *)
+        help
+        ;;
+    esac
 }
 
-. ${PROJECT_DIR}/bin/install.sh
-
-case "$command" in
-  init)
-      init ;;
-  start)
-      start ;;
-  clear)
-      clear ;;
-  deploy-union-test)
-      deploy_union_test ;;
-  deploy-onion-test)
-      deploy_onion_test ;;
-  deploy-task-test)
-      deploy_task_test ;;
-  deploy-union-cr)
-      deploy_union_cr ;;
-  deploy-onion-cr)
-      deploy_onion_cr ;;
-  deploy-task-cr)
-      deploy_task_cr ;;
-
-  scp-union-cr)
-      scp_union_cr ;;
-  scp-onion-cr)
-      scp_onion_cr ;;
-  scp-task-cr)
-      scp_task_cr ;;
-
-  redis-test)
-      conn_test_redis ;;
-  install)
-      install_all ;;
-  install-boot)
-      install_boot ;;
-  install-lib)
-      install_libs ;;
-  install-dts)
-      install_dts ;;
-  install-business)
-      install_business ;;
-  install-business-stater)
-      install_business_stater ;;
-  install-union)
-      install_union ;;
-  install-middleware)
-      install_middleware ;;
-  install-notice)
-      install_notice ;;
-
-  install-account)
-    install_account ;;
-  install-uc)
-    install_uc ;;
-  install-org)
-    install_org ;;
-  install-knowledge)
-    install_knowledge ;;
-  install-goods)
-    install_goods ;;
-  install-trade)
-    install_trade ;;
-  install-pay)
-    install_pay ;;
-  install-content)
-    install_content ;;
-  install-onion)
-    install_onion ;;
-  install-datav)
-    install_datav ;;
-esac
-
-
+main "$@"

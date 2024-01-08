@@ -1,7 +1,0 @@
-create model goods(
-    id AutoIncUInt primaryKey "id",
-    goodsId ULong bizKey "商品ID",
-    categoryId ULong foreignKey(category) "categoryID",
-
-    name Name "商品名"
-);

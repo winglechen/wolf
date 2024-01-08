@@ -1,8 +1,0 @@
-# hello world
-GET http://localhost:8200/show
-Accept: */*
-Cache-Control: no-cache
-
-###
-
-

@@ -1,8 +1,0 @@
-model: version
-
-schema:
-  - isDeleted Boolean "删除状态"
-  - creator ULong "创建人"
-  - lastEditor ULong "最后编辑人"
-  - createdAt Date "创建时间"
-  - updatedAt Date "更新时间"
