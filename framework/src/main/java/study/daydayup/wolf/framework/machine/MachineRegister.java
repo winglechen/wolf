@@ -4,7 +4,7 @@ import study.daydayup.wolf.common.util.net.IPAddressUtil;
 
 
 /**
- * @author: yik
+ * @author yik
  */
 public interface MachineRegister {
     default int getLocalMachineId() {
