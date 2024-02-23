@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
  */
 public class TagFilterExpressionConverter {
 
-    public static FilterExpression to(MQConsumerConfig config) {
-        return to(config.getTags(), "*");
+    public static FilterExpression to(MQConsumerConfig config, String topic) {
+        Set<String> tags = config.getTopicTags().get(topic);
+        return to(tags, "*");
     }
 
     private static FilterExpression to(Set<String> tags, String defaultTag) {

@@ -101,6 +101,6 @@ public class MQTemplate {
     }
 
     public void start(MQConsumerConfig config) {
-        consumerManager.start(config.getConsumer().getClass().getSimpleName(), config);
+        consumerManager.start(config);
     }
 }

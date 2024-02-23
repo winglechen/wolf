@@ -73,7 +73,7 @@ public class MessageConverter {
         setUserProperties(messageBuilder, message);
 
         long currentTimestamp = System.currentTimeMillis();
-        if (delayTimestamp - currentTimestamp > MAX_DELAY_MILLISECONDS) {
+        if (delayTimestamp - currentTimestamp >= MAX_DELAY_MILLISECONDS) {
             messageBuilder.addProperty(MQDefaultConst.MESSAGE_PROPERTY_DELIVERY_TIMESTAMP, String.valueOf(delayTimestamp));
             delayTimestamp = currentTimestamp + MAX_DELAY_MILLISECONDS;
 

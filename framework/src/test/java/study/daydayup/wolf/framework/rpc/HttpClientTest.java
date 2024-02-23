@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.rpc;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import study.daydayup.wolf.framework.rpc.http.client.HttpClient;
@@ -7,6 +8,7 @@ import study.daydayup.wolf.framework.rpc.http.client.HttpClientConfig;
 import study.daydayup.wolf.framework.rpc.http.client.HttpRequestBuilder;
 import study.daydayup.wolf.framework.rpc.http.client.Response;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +30,8 @@ public class HttpClientTest {
         params.put("limit", 10);
 
         HttpRequestBuilder requestBuilder = HttpClient.builder()
-                //.header("accept", "*/*")
-                .header("a", "b").get(url, params);
+            //.header("accept", "*/*")
+            .header("a", "b").get(url, params);
         //.url(url);
 
         HttpClient.execute(requestBuilder);
@@ -46,7 +48,36 @@ public class HttpClientTest {
         HttpClient.init(config);
     }
 
-//    @Test
+    @Test
+    public void test_on_response_timeout() {
+        int serverSleepInMillis = 3000;
+        String host = "https://httpstat.us/200?sleep=" + serverSleepInMillis;
+        HttpRequestBuilder timeoutRequestBuilder = HttpClient.builder().timeout(Duration.ofMillis(serverSleepInMillis - 1000)).get(host);
+        //call execute() never throw exception
+        Response response = HttpClient.execute(timeoutRequestBuilder);
+        if (response.isSuccess()) {
+            Assert.fail("Should timeout");
+        } else {
+            System.out.println(response);
+        }
+    }
+
+    @Test
+    public void test_on_response_not_timeout() {
+        int serverSleepInMillis = 200;
+        String host = "https://httpstat.us/200?sleep=" + serverSleepInMillis;
+        HttpRequestBuilder timeoutRequestBuilder = HttpClient.builder().timeout(Duration.ofMillis(serverSleepInMillis + 1000)).get(host);
+        //call execute() never throw exception
+        Response response = HttpClient.execute(timeoutRequestBuilder);
+        if (response.isSuccess()) {
+            System.out.println(response);
+        } else {
+            Assert.fail("Should not timeout");
+        }
+    }
+
+
+    //    @Test
     public void test_on_connection_timeout() {
         String lostConnectionHost = "https://www.google.com/";
         HttpRequestBuilder requestBuilder = HttpClient.builder().get(lostConnectionHost);
@@ -59,7 +90,7 @@ public class HttpClientTest {
             //do your business fallback here
             System.out.println(response.getErrorMessage());
             //or by specific error code
-            if(504==response.getCode()){
+            if (504 == response.getCode()) {
                 // do something
             }
         }

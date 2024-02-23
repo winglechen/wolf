@@ -66,18 +66,18 @@ public class ReactorNettyHttpClientExecutor {
         int keepAlive = Integer.parseInt(System.getProperty("httpclient.keepAlive", "3600"));
 
         ConnectionProvider provider = ConnectionProvider.builder("custom")
-                .maxConnections(poolSize)
-                .maxIdleTime(Duration.ofSeconds(keepAlive - 120L))
-                .maxLifeTime(Duration.ofSeconds(keepAlive))
-                .pendingAcquireTimeout(Duration.ofSeconds(60L))
-                .evictInBackground(Duration.ofSeconds(120L)).build();
+            .maxConnections(poolSize)
+            .maxIdleTime(Duration.ofSeconds(keepAlive - 120L))
+            .maxLifeTime(Duration.ofSeconds(keepAlive))
+            .pendingAcquireTimeout(Duration.ofSeconds(60L))
+            .evictInBackground(Duration.ofSeconds(120L)).build();
 
         commonClient = reactor.netty.http.client.HttpClient.create(provider)
-                .responseTimeout(Duration.ofSeconds(10))
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
-                .option(EpollChannelOption.TCP_KEEPIDLE, 300)
-                .option(EpollChannelOption.TCP_KEEPINTVL, 60)
-                .option(EpollChannelOption.TCP_KEEPCNT, 8);
+            .responseTimeout(Duration.ofSeconds(10))
+            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
+            .option(EpollChannelOption.TCP_KEEPIDLE, 300)
+            .option(EpollChannelOption.TCP_KEEPINTVL, 60)
+            .option(EpollChannelOption.TCP_KEEPCNT, 8);
 
         commonClient.keepAlive(true);
         commonClient.warmup().block();
@@ -87,15 +87,15 @@ public class ReactorNettyHttpClientExecutor {
             TrustManager trustManager = SSLConfiguration.getTrustManager(clientConfig.getKeyStore(), clientConfig.getKeyStorePassword());
             KeyManagerFactory keyManagerFactory = SSLConfiguration.getKeyManagerFactory(clientConfig.getKeyStore(), clientConfig.getKeyStorePassword());
             Http11SslContextSpec yesBankHttp11SslContextSpec = Http11SslContextSpec.forClient()
-                    .configure(builder -> builder
-                            .trustManager(trustManager)
-                            .keyManager(keyManagerFactory)
-                    );
+                .configure(builder -> builder
+                    .trustManager(trustManager)
+                    .keyManager(keyManagerFactory)
+                );
             yesBankClient = commonClient.secure(spec -> spec.sslContext(yesBankHttp11SslContextSpec)
-                            .handshakeTimeout(Duration.ofSeconds(30))
-                            .closeNotifyFlushTimeout(Duration.ofSeconds(10))
-                            .closeNotifyReadTimeout(Duration.ofSeconds(10)))
-                    .responseTimeout(Duration.ofSeconds(30));
+                    .handshakeTimeout(Duration.ofSeconds(30))
+                    .closeNotifyFlushTimeout(Duration.ofSeconds(10))
+                    .closeNotifyReadTimeout(Duration.ofSeconds(10)))
+                .responseTimeout(Duration.ofSeconds(30));
         } else {
             log.warn("missing yesbank ssl configuration file, you may not be able to access yesbank via ssl");
         }
@@ -104,6 +104,13 @@ public class ReactorNettyHttpClientExecutor {
 
     public static Response call(final OkHttpPool pool, HttpRequestBuilder requestBuilder) {
         reactor.netty.http.client.HttpClient client = chooseClient(requestBuilder);
+
+        if (null != requestBuilder.getTimeout()) {
+            //Maybe you should cache the client to the hashmap
+            //This is because a new client will be created after the timeout is changed
+            client =  client.responseTimeout(requestBuilder.getTimeout());
+        }
+
         client = buildHeader(client, requestBuilder);
         HttpMethod method = chooseMethod(requestBuilder);
         final String body = buildBody(requestBuilder);
@@ -127,13 +134,13 @@ public class ReactorNettyHttpClientExecutor {
 
         long requestAtMillis = System.currentTimeMillis();
         Mono<Response> monoResponse = receiver.responseSingle((resp, bytes) -> {
-                    int statusCode = resp.status().code();
-                    boolean isSuccess = statusCode >= 200 && statusCode <= 299;
-                    List<Cookie> cookies = CookieConverter.to(resp.cookies());
-                    return isSuccess ? justSuccess(resp, bytes, statusCode, cookies) : justError(statusCode, bytes, cookies);
-                })
-                .onErrorResume(ConnectException.class, e -> justError(504, "ERR_CONNECTION_TIMED_OUT"))
-                .onErrorResume(Throwable.class, e -> justError(504, e.getMessage()));
+                int statusCode = resp.status().code();
+                boolean isSuccess = statusCode >= 200 && statusCode <= 299;
+                List<Cookie> cookies = CookieConverter.to(resp.cookies());
+                return isSuccess ? justSuccess(resp, bytes, statusCode, cookies) : justError(statusCode, bytes, cookies);
+            })
+            .onErrorResume(ConnectException.class, e -> justError(504, "ERR_CONNECTION_TIMED_OUT"))
+            .onErrorResume(Throwable.class, e -> justError(504, e.getMessage()));
 
         Response response = monoResponse.block();
 
@@ -151,52 +158,52 @@ public class ReactorNettyHttpClientExecutor {
     @NotNull
     private static Mono<Response> justError(int statusCode, String errorMessage) {
         return Mono.just(Response.builder()
-                .successFlag(false)
-                .code(statusCode)
-                .body(errorMessage)
-                .errorMessage(errorMessage)
-                .build()
+            .successFlag(false)
+            .code(statusCode)
+            .body(errorMessage)
+            .errorMessage(errorMessage)
+            .build()
         );
     }
 
     @NotNull
     private static Mono<Response> justError(int statusCode, ByteBufMono bytes, List<Cookie> cookies) {
         return bytes.asString()
-                .switchIfEmpty(Mono.just("{}"))
-                .map(
-                        respBodyString -> Response
-                                .builder()
-                                .successFlag(false)
-                                .code(statusCode)
-                                .body(respBodyString)
-                                .errorMessage(respBodyString)
-                                .cookies(cookies)
-                                .build()
-                );
+            .switchIfEmpty(Mono.just("{}"))
+            .map(
+                respBodyString -> Response
+                    .builder()
+                    .successFlag(false)
+                    .code(statusCode)
+                    .body(respBodyString)
+                    .errorMessage(respBodyString)
+                    .cookies(cookies)
+                    .build()
+            );
     }
 
     @NotNull
     private static Mono<Response> justSuccess(HttpClientResponse resp, ByteBufMono bytes, int statusCode, List<Cookie> cookies) {
         if (resp.responseHeaders().contains("Content-Type") && resp.responseHeaders().get("Content-Type").startsWith(ContentTypeEnum.PDF.getHeader())) {
             return bytes.asByteArray().map(respBody -> Response
+                .builder()
+                .successFlag(true)
+                .code(statusCode)
+                .byteBody(respBody)
+                .cookies(cookies)
+                .build());
+        }
+        return bytes.asString()
+            .switchIfEmpty(Mono.just("{}"))
+            .map(
+                respBodyString -> Response
                     .builder()
                     .successFlag(true)
                     .code(statusCode)
-                    .byteBody(respBody)
+                    .body(respBodyString)
                     .cookies(cookies)
-                    .build());
-        }
-        return bytes.asString()
-                .switchIfEmpty(Mono.just("{}"))
-                .map(
-                        respBodyString -> Response
-                                .builder()
-                                .successFlag(true)
-                                .code(statusCode)
-                                .body(respBodyString)
-                                .cookies(cookies)
-                                .build()
-                );
+                    .build()
+            );
     }
 
     private Map<String, String> parseResponseHeader() {
@@ -344,10 +351,10 @@ public class ReactorNettyHttpClientExecutor {
         final String host = url.getHost();
         reactor.netty.http.client.HttpClient client = commonClient;
         if (ArrayUtil.inArray(host
-                , "sky.yesbank.in"
-                , "uatsky.yesbank.in"
-                , "skyway.yesbank.in"
-                , "uatskyway.yesbank.in"
+            , "sky.yesbank.in"
+            , "uatsky.yesbank.in"
+            , "skyway.yesbank.in"
+            , "uatskyway.yesbank.in"
         )) {
             if (yesBankClient != null) {
                 client = yesBankClient;

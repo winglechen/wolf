@@ -15,11 +15,11 @@ public class ConsumerSubscriptionConflictException extends SystemException {
         super(110, message);
     }
 
-    public ConsumerSubscriptionConflictException(String group, String topic, String[] tags) {
+    public ConsumerSubscriptionConflictException(String group, String[] topics, String[] tags) {
         super(
             StringUtil.format("Consumer subscription conflict [group=%s topic=%s tag=%s]",
                 group,
-                topic,
+                CollectionUtil.join("|", Arrays.asList(topics)),
                 CollectionUtil.join("|", Arrays.asList(tags))
             )
         );

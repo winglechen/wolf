@@ -19,6 +19,10 @@ import study.daydayup.wolf.framework.config.ThreadConfig;
 @NoArgsConstructor
 public class MQConsumerGroupConfig extends ThreadConfig {
     protected boolean enabled;
+    /**
+     * support subscribe multi topics and tags
+     */
+    protected boolean proxyMode;
     protected String group;
 
     @Builder.Default

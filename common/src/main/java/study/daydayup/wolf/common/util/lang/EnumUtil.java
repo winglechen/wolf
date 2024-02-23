@@ -33,7 +33,10 @@ public class EnumUtil {
         throw new UnsupportedEnumCodeException("code: " + code + " is not supported");
     }
 
-    public static <T extends CodeBasedEnum> T codeOfAllowReturnNull(int code, Class<T> enumType) {
+    public static <T extends CodeBasedEnum> T codeOfAllowReturnNull(Integer code, Class<T> enumType) {
+        if (code == null) {
+            return null;
+        }
         for (T e : enumType.getEnumConstants()) {
             if (code == e.getCode()) {
                 return e;

@@ -3,6 +3,7 @@ package study.daydayup.wolf.common.util.collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * study.daydayup.wolf.common.util.collection
@@ -43,5 +44,14 @@ public class SetUtil {
         }
 
         return last;
+    }
+
+    public static Set<String> filterEmpty(Set<String> collection) {
+        if (isEmpty(collection)) {
+            return SetUtil.empty();
+        }
+        return collection.stream()
+            .filter(s -> s != null && !s.isEmpty())
+            .collect(Collectors.toSet());
     }
 }

@@ -1,5 +1,6 @@
 package study.daydayup.wolf.framework.middleware.mq.vendor.rocketmq5.consumer;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.apis.consumer.PushConsumer;
 import study.daydayup.wolf.common.util.lang.StringUtil;
@@ -18,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 public class Rocket5Consumer implements VendorConsumer {
-    //@Getter
+    @Getter
     private final MQConsumerConfig config;
 
     private PushConsumer consumer;
@@ -58,7 +59,7 @@ public class Rocket5Consumer implements VendorConsumer {
                 config.getVendorConfig().getVendorId(),
                 config.getGroup(),
                 config.getTopics(),
-                config.getTags(),
+                config.getTopicTags(),
                 config.getGroupConfig().getMinThreadNum(),
                 config.getGroupConfig().getMaxThreadNum(),
                 e.getMessage(),
@@ -86,7 +87,7 @@ public class Rocket5Consumer implements VendorConsumer {
     public void resume() {
         try {
             for (String topic : config.getTopics()) {
-                consumer.subscribe(topic, TagFilterExpressionConverter.to(config));
+                consumer.subscribe(topic, TagFilterExpressionConverter.to(config, topic));
             }
             log.info("[MQ] rocketmq5 consumer [{}] resume successfully.", instanceName);
         } catch (Exception e) {

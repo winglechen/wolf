@@ -13,9 +13,11 @@ import study.daydayup.wolf.framework.middleware.mq.config.exception.MQConfigExce
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * study.daydayup.wolf.framework.middleware.mq
@@ -177,13 +179,41 @@ public class MQConfig implements InitializingBean {
         List<String> topics = annotation.topics().length > 0
             ? Arrays.asList(annotation.topics())
             : Collections.singletonList(annotation.topic());
+
+        // topic -> tags map
+        Map<String, Set<String>> topicTags = new HashMap<>();
+        for (String topic : topics) {
+            topicTags.put(topic, new HashSet<>(Arrays.asList(annotation.tag())));
+        }
+
         consumerConfig.setGroup(annotation.group());
         consumerConfig.setTopics(topics);
-        consumerConfig.setTags(new HashSet<>(Arrays.asList(annotation.tag())));
+        consumerConfig.setTopicTags(topicTags);
         consumerConfig.setMessageClass(annotation.messageClass());
 
         // override default vendor config
         MQVendorConfig vendorConfig = getVendorConfig(topics.get(0));
+        if (null == vendorConfig) {
+            throw new MQConfigException("The vendor was not found.");
+        }
+        consumerConfig.setVendorConfig(vendorConfig);
+
+        return consumerConfig;
+    }
+
+    public MQConsumerConfig getConsumerConfig(String group, Map<String, Set<String>> subscriptions) {
+        MQConsumerConfig consumerConfig = new MQConsumerConfig();
+
+        // group config
+        MQConsumerGroupConfig groupConfig = getConsumerGroupConfig(group);
+        consumerConfig.setGroupConfig(groupConfig);
+
+        consumerConfig.setGroup(group);
+        consumerConfig.setTopics(subscriptions.keySet().stream().toList());
+        consumerConfig.setTopicTags(subscriptions);
+
+        // override default vendor config
+        MQVendorConfig vendorConfig = getVendorConfig(consumerConfig.getTopics().get(0));
         if (null == vendorConfig) {
             throw new MQConfigException("The vendor was not found.");
         }

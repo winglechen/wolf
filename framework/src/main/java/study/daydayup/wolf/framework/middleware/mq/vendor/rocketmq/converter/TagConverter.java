@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
  **/
 public class TagConverter {
 
-    public static String to(MQConsumerConfig config) {
-        return to(config.getTags(), "*");
+    public static String to(MQConsumerConfig config, String topic) {
+        Set<String> tags = config.getTopicTags().get(topic);
+        return to(tags, "*");
     }
 
     public static String to(ProduceRequest produceRequest) {

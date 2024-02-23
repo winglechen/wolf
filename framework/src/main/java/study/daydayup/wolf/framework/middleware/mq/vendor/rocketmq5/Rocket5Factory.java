@@ -93,7 +93,7 @@ public class Rocket5Factory {
 
         Map<String, FilterExpression> subscriptions = new HashMap<>();
         for (String topic : config.getTopics()) {
-            subscriptions.put(topic, TagFilterExpressionConverter.to(config));
+            subscriptions.put(topic, TagFilterExpressionConverter.to(config, topic));
         }
 
         consumer = provider.newPushConsumerBuilder()

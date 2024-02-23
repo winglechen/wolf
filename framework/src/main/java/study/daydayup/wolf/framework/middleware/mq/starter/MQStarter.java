@@ -182,5 +182,8 @@ public class MQStarter implements InitializingBean, ApplicationListener<Applicat
         consumerMap.forEach((name, consumer) -> {
             consumerManager.startWithAnnotation(name, (Consumer) consumer);
         });
+
+        // start multi topic subscription consumer
+        consumerManager.startConsumerProxies();
     }
 }

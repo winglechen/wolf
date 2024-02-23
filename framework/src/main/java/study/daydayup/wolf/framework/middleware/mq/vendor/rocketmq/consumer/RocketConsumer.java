@@ -43,7 +43,7 @@ public class RocketConsumer implements VendorConsumer {
     public void start() {
         try {
             for (String topic : config.getTopics()) {
-                consumer.subscribe(topic, TagConverter.to(config));
+                consumer.subscribe(topic, TagConverter.to(config, topic));
             }
             consumer.start();
 
@@ -54,7 +54,7 @@ public class RocketConsumer implements VendorConsumer {
                 config.getVendorConfig().getVendorId(),
                 config.getGroup(),
                 config.getTopics(),
-                config.getTags(),
+                config.getTopicTags(),
                 config.getGroupConfig().getMinThreadNum(),
                 config.getGroupConfig().getMaxThreadNum(),
                 e.getMessage(),

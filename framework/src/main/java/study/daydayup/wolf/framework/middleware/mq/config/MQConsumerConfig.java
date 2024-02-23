@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import study.daydayup.wolf.common.util.collection.CollectionUtil;
+import study.daydayup.wolf.common.util.collection.SetUtil;
 import study.daydayup.wolf.common.util.lang.StringUtil;
 import study.daydayup.wolf.framework.layer.api.Config;
 import study.daydayup.wolf.framework.middleware.mq.MQTemplate;
@@ -13,8 +14,10 @@ import study.daydayup.wolf.framework.middleware.mq.core.consumer.Consumer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,6 +29,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class MQConsumerConfig implements Config {
 
+    private String name;
+
     private MQVendorConfig vendorConfig;
 
     private MQConsumerGroupConfig groupConfig;
@@ -36,7 +41,7 @@ public class MQConsumerConfig implements Config {
 
     private List<String> topics;
 
-    private Set<String> tags;
+    private Map<String/*topic*/, Set<String/*tag*/>> topicTags;
 
     private CheckPoint checkPoint;
 
@@ -45,11 +50,12 @@ public class MQConsumerConfig implements Config {
     private Consumer consumer;
 
     public MQConsumerConfig(Builder builder) {
+        name = builder.consumer.getClass().getSimpleName();
         vendorConfig = builder.vendorConfig;
         groupConfig = builder.groupConfig;
         group = builder.group;
         topics = builder.topics;
-        tags = builder.tags;
+        topicTags = builder.topicTags;
         checkPoint = builder.checkPoint;
         consumer = builder.consumer;
     }
@@ -68,7 +74,7 @@ public class MQConsumerConfig implements Config {
         private MQConsumerGroupConfig groupConfig;
         private String group;
         private List<String> topics;
-        private Set<String> tags;
+        private Map<String, Set<String>> topicTags;
         private CheckPoint checkPoint;
         private Class<?> messageClass;
         private Consumer consumer;
@@ -80,7 +86,8 @@ public class MQConsumerConfig implements Config {
 
         public Builder(MQTemplate template) {
             this.template = template;
-            this.tags = new HashSet<>();
+            this.topics = new ArrayList<>();
+            this.topicTags = new HashMap<>();
         }
 
         public Builder vendor(MQVendorConfig config) {
@@ -105,10 +112,64 @@ public class MQConsumerConfig implements Config {
         }
 
         public Builder topic(String topic) {
-            if (CollectionUtil.isEmpty(this.topics)) {
-                this.topics = new ArrayList<>();
+            if (StringUtil.isBlank(topic)) {
+                return this;
             }
-            this.topics.add(topic);
+            if (!this.topics.contains(topic)) {
+                this.topics.add(topic);
+
+                this.topicTags.put(topic, new HashSet<>());
+            }
+            return this;
+        }
+
+        public Builder topicWithTags(String topic, Set<String> tags) {
+            if (CollectionUtil.isEmpty(tags) || StringUtil.isBlank(topic)) {
+                return this;
+            }
+
+            tags = SetUtil.filterEmpty(tags);
+            if (CollectionUtil.isEmpty(tags)) {
+                return this;
+            }
+
+            if (!this.topics.contains(topic)) {
+                this.topics.add(topic);
+            }
+
+            Set<String> curTags = this.topicTags.get(topic);
+            if (null == curTags) {
+                this.topicTags.put(topic, tags);
+            } else {
+                curTags.addAll(tags);
+            }
+
+            return this;
+        }
+
+        public Builder topicWithTags(String topic, String... tags) {
+            if (tags.length <= 0 || StringUtil.isBlank(topic)) {
+                return this;
+            }
+
+            List<String> tagList = new ArrayList<>(Arrays.asList(tags));
+            tagList.removeIf(s -> s == null || s.isEmpty());
+            if (CollectionUtil.isEmpty(tagList)) {
+                return this;
+            }
+
+            if (!this.topics.contains(topic)) {
+                this.topics.add(topic);
+            }
+
+            Set<String> curTags = this.topicTags.get(topic);
+            Set<String> addTags = new HashSet<>(tagList);
+            if (null == curTags) {
+                this.topicTags.put(topic, addTags);
+            } else {
+                curTags.addAll(addTags);
+            }
+
             return this;
         }
 
@@ -117,7 +178,10 @@ public class MQConsumerConfig implements Config {
                 return this;
             }
 
-            this.tags.add(tag);
+            for (Map.Entry<String, Set<String>> entry : this.topicTags.entrySet()) {
+                entry.getValue().add(tag);
+            }
+
             return this;
         }
 
@@ -125,7 +189,9 @@ public class MQConsumerConfig implements Config {
             if (CollectionUtil.isEmpty(tags)) {
                 return this;
             }
-            this.tags.addAll(tags);
+            for (Map.Entry<String, Set<String>> entry : this.topicTags.entrySet()) {
+                entry.getValue().addAll(tags);
+            }
             return this;
         }
 
@@ -133,7 +199,9 @@ public class MQConsumerConfig implements Config {
             if (tags.length <= 0) {
                 return this;
             }
-            this.tags.addAll(Arrays.asList(tags));
+            for (Map.Entry<String, Set<String>> entry : this.topicTags.entrySet()) {
+                entry.getValue().addAll(Arrays.asList(tags));
+            }
             return this;
         }
 

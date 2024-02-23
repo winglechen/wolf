@@ -13,6 +13,7 @@ import study.daydayup.wolf.framework.rpc.http.client.cookie.CookieBuilder;
 import study.daydayup.wolf.framework.rpc.http.client.cookie.CookiePolicyEnum;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedHashMap;
@@ -48,10 +49,10 @@ public class HttpRequestBuilder {
     @Deprecated
     private Map<String, Object> formBody;
 
-    private Integer timeout;
-    private Integer connectTimeout;
-    private Integer readTimeout;
-    private Integer writeTimeout;
+    private Duration timeout;
+    private Duration connectTimeout;
+    private Duration readTimeout;
+    private Duration writeTimeout;
 
     private String keyStore;
     private String keyPassword;
@@ -102,8 +103,8 @@ public class HttpRequestBuilder {
         return this;
     }
 
-    public HttpRequestBuilder timeout(int timeout) {
-        if (timeout < 0) {
+    public HttpRequestBuilder timeout(Duration timeout) {
+        if (timeout == null || timeout.isNegative() || timeout.isZero()) {
             throw new IllegalArgumentException("invalid timeout for HttpClient: " + timeout);
         }
 
@@ -111,8 +112,8 @@ public class HttpRequestBuilder {
         return this;
     }
 
-    public HttpRequestBuilder connectTimeout(int timeout) {
-        if (timeout < 0) {
+    public HttpRequestBuilder connectTimeout(Duration timeout) {
+        if (timeout == null || timeout.isNegative() || timeout.isZero()) {
             throw new IllegalArgumentException("invalid connectTimeout for HttpClient: " + timeout);
         }
 
@@ -120,8 +121,8 @@ public class HttpRequestBuilder {
         return this;
     }
 
-    public HttpRequestBuilder readTimeout(int timeout) {
-        if (timeout < 0) {
+    public HttpRequestBuilder readTimeout(Duration timeout) {
+        if (timeout == null || timeout.isNegative() || timeout.isZero()) {
             throw new IllegalArgumentException("invalid readTimeout for HttpClient: " + timeout);
         }
 
@@ -129,8 +130,8 @@ public class HttpRequestBuilder {
         return this;
     }
 
-    public HttpRequestBuilder writeTimeout(int timeout) {
-        if (timeout < 0) {
+    public HttpRequestBuilder writeTimeout(Duration timeout) {
+        if (timeout == null || timeout.isNegative() || timeout.isZero()) {
             throw new IllegalArgumentException("invalid writeTimeout for HttpClient: " + timeout);
         }
 
@@ -239,11 +240,7 @@ public class HttpRequestBuilder {
             throw new IllegalArgumentException("Http header value can't be null");
         }
 
-        Cookie cookie = CookieBuilder.newInstance()
-                .nameValue(key, value)
-                .maxAge(maxAge)
-                .domain(domain)
-                .build();
+        Cookie cookie = CookieBuilder.newInstance().nameValue(key, value).maxAge(maxAge).domain(domain).build();
         return addCookie(cookie);
     }
 
@@ -535,13 +532,7 @@ public class HttpRequestBuilder {
     }
 
     public Object getRawBody() {
-        return null != formBody ? formBody : (
-                null != mapBody ? mapBody : (
-                        null != stringBody ? stringBody : (
-                                null != objectBody ? objectBody : null
-                        )
-                )
-        );
+        return null != formBody ? formBody : (null != mapBody ? mapBody : (null != stringBody ? stringBody : (null != objectBody ? objectBody : null)));
     }
 
 }
