@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>study.daydayup.wolf</groupId>
+    <groupId>com.onedot.win</groupId>
     <artifactId>framework-boot</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -11,7 +11,7 @@
     <description>wolf framework boot pom</description>
 
     <parent>
-        <groupId>study.daydayup.wolf</groupId>
+        <groupId>com.onedot.win</groupId>
         <artifactId>wolf-framework</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -133,44 +133,44 @@
             </dependency>
 
             <dependency>
-                <groupId>study.daydayup.wolf.boot</groupId>
+                <groupId>com.onedot.win.boot</groupId>
                 <artifactId>wolf-boot-starter</artifactId>
                 <version>${wolf-framework-boot.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>principle</artifactId>
                 <version>${wolf-principle.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>common</artifactId>
                 <version>${wolf-common.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>framework</artifactId>
                 <version>${wolf-framework.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>dts</artifactId>
                 <version>${wolf-dts.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>mock</artifactId>
                 <version>${wolf-mock.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>sdk</artifactId>
                 <version>${wolf-sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>study.daydayup.wolf</groupId>
+                <groupId>com.onedot.win</groupId>
                 <artifactId>model</artifactId>
                 <version>${wolf-model.version}</version>
             </dependency>

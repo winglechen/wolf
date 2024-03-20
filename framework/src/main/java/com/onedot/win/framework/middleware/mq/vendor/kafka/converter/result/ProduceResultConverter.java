@@ -1,0 +1,20 @@
+package com.onedot.win.framework.middleware.mq.vendor.kafka.converter.result;
+
+import org.apache.kafka.clients.producer.RecordMetadata;
+import com.onedot.win.common.lang.contract.worker.Converter;
+import com.onedot.win.framework.middleware.mq.core.producer.ProduceResult;
+import com.onedot.win.framework.middleware.mq.core.producer.ProduceStateEnum;
+
+/**
+ * @author weixing
+ * @since 2023/4/18 10:19
+ */
+public class ProduceResultConverter implements Converter {
+    public static ProduceResult from(RecordMetadata metadata, String key) {
+        return ProduceResult.builder()
+            .state(ProduceStateEnum.SUCCESS)
+            .messageId(key)
+            .offset(metadata.offset())
+            .build();
+    }
+}

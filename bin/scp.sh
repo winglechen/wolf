@@ -128,7 +128,7 @@ function check_need_sync() {
     done
 
     #_info "no host to sync."
-    exit 1
+    exit 0
 }
 
 function get_sync_command() {
