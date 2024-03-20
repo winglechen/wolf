@@ -148,10 +148,8 @@ function parse_opts() {
 }
 
 function clean() {
-  echo "rm -rf ~/.m2/repository/study"
-  rm -rf ~/.m2/repository/study
-  echo "rm -rf ~/.m2/repository/shared"
-  rm -rf ~/.m2/repository/shared
+  echo "rm -rf ~/.m2/repository/com/onedot/win"
+  rm -rf ~/.m2/repository/com/onedot/win
   echo "Done."
 }
 

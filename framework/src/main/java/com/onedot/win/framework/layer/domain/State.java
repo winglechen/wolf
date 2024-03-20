@@ -1,7 +1,7 @@
 package com.onedot.win.framework.layer.domain;
 
 /**
- * study.daydayup.common.framework.layer.domain
+ * com.onedot.win.common.framework.layer.domain
  *
  * @author Wingle
  * @since 2018/12/26 11:45 PM
