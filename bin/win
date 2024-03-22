@@ -155,12 +155,12 @@ function clean() {
 
 function help() {
     echo "Usage:"
-    echo "  wolf install {app_name}"
-    echo "  wolf install {app_name/module_name}"
+    echo "  win install {app_name}"
+    echo "  win install {app_name/module_name}"
     echo ""
-    echo "  wolf scp|sync {app_name}"
+    echo "  win scp|sync {app_name}"
     echo ""
-    echo "  wolf clean"
+    echo "  win clean"
 }
 
 function debug {

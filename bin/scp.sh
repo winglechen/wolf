@@ -98,10 +98,10 @@ function do_sync() {
     _info "scp log: $file_name $env from server: $host sync to other servers..."
 
     if $dry_run; then
-        _info "will execute: ssh -A app@$host /home/app/bin/wolf $cmd"
+        _info "will execute: ssh -A app@$host /home/app/bin/win $cmd"
         _info "will execute: ssh -A app@$host echo -e $(date '+%Y-%m-%d %H:%M:%S') $USER  $cmd finished $file_name>>/home/app/target/deploy.log"
     else
-        ssh -A app@"$host" "/home/app/bin/wolf $cmd"
+        ssh -A app@"$host" "/home/app/bin/win $cmd"
         ssh -A app@"$host" "echo -e $(date '+%Y-%m-%d %H:%M:%S') $USER  $cmd  finished   $file_name>>/home/app/target/deploy.log"
     fi
 }
@@ -160,17 +160,17 @@ function get_app_final_name() {
 
 function main() {
     if [ -z "$1" ] || { [ "$1" != "scp" ] && [ "$1" != "sync" ]; }; then
-        _error "Error: Invalid argument. Usage: wolf scp {app_name} {env}"
+        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
         exit 1
     fi
 
     if [ -z "$2" ]; then
-        _error "Error: Invalid argument. Usage: wolf scp {app_name} {env}"
+        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
         exit
     fi
 
     if [ -z "$3" ]; then
-        _error "Error: Invalid argument. Usage: wolf scp {app_name} {env}"
+        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
         exit
     fi
 

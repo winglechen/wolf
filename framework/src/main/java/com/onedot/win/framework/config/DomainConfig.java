@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * com.onedot.win.business.pay.api.config.merchant
+ *
  *
  * @author Wingle
  * @since 2020/10/19 10:19 下午

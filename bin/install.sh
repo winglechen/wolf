@@ -31,7 +31,7 @@ function install_app() {
     fi
 
     local app_dir="${wolf_app_dir[$app]}"
-    # Compatible with wolf monolithic app
+    # Compatible with win monolithic app
     if [ -z "$app_dir" ]; then
         app_dir="${wolf_app_deploy_dir[$app]}"
     fi
@@ -42,7 +42,7 @@ function install_app() {
 
 function main() {
     if [ -z "$1" ] || [ "$1" != "install" ]; then
-        echo "please input the right command: wolf install module-name or wolf install app-name"
+        echo "please input the right command: win install module-name or win install app-name"
         exit
     fi
 

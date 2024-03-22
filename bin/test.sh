@@ -23,7 +23,7 @@ function test_app() {
 
     local test_dir="${wolf_app_dir[$app]}/test"
 
-    # Compatible with wolf monolithic app
+    # Compatible with win monolithic app
     if [ ! -d "$test_dir" ]; then
         test_dir="${wolf_app_test_dir[$app]}"
     fi
@@ -36,10 +36,10 @@ function test_app() {
 }
 
 function main() {
-    # wolf test app-name env suite
+    # win test app-name env suite
     #      $1   $2       $3  $4
     if [ -z "$1" ] || [ "$1" != "test" ]; then
-        echo "please input the right command: wolf test {app-name} {env}"
+        echo "please input the right command: win test {app-name} {env}"
         exit
     fi
 
