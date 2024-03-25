@@ -8,8 +8,8 @@
     <artifactId>principle</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>wolf-principle</name>
-    <description>wolf coding principle</description>
+    <name>win-principle</name>
+    <description>win coding principle</description>
 
     <properties>
         <java.version>17</java.version>
