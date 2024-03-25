@@ -1,6 +1,8 @@
 package com.onedot.win.framework.config;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +18,8 @@ import com.onedot.win.framework.middleware.rdb.RDBTemplate;
  **/
 @Configuration
 @ComponentScan("com.onedot.win.framework")
-public class wolfAutoConfiguration {
+@AutoConfigureAfter(JdbcTemplateAutoConfiguration.class)
+public class WolfAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(JdbcTemplate.class)
