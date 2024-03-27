@@ -48,7 +48,6 @@
         <mapstruct.version>1.3.0.Final</mapstruct.version>
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-        <spring-boot-maven-plugin.version>2.5.15</spring-boot-maven-plugin.version>
 
         <swagger.version>2.9.2</swagger.version>
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
@@ -62,7 +61,7 @@
 
         <pagehelper.version>1.4.0</pagehelper.version>
         <druid.version>1.2.8</druid.version>
-        <mysql.version>8.0.18</mysql.version>
+        <mysql.version>8.0.33</mysql.version>
 
         <velocity.version>2.1</velocity.version>
         <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
@@ -77,10 +76,8 @@
         <javafaker.version>1.0.2</javafaker.version>
         <commons-io.version>2.4</commons-io.version>
 
-        <httpclient.version>4.5.6</httpclient.version>
         <unirest.version>3.13.11</unirest.version>
         <asynchttpclient.version>2.12.3</asynchttpclient.version>
-        <okhttp.version>4.9.3</okhttp.version>
         <kotlin.version>1.5.31</kotlin.version>
 
         <xxljob.version>2.3.0</xxljob.version>
@@ -102,7 +99,7 @@
         <testng.version>6.14.2</testng.version>
 
 
-        <netty.version>4.1.77.Final</netty.version>
+        <netty.version>4.1.107.Final</netty.version>
 
         <commons-codec.version>1.14</commons-codec.version>
         <zxing.version>3.4.1</zxing.version>
@@ -485,10 +482,11 @@
                 <!--                <scope>test</scope>-->
             </dependency>
 
+
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2022.0.0</version>
+                <version>2023.0.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
