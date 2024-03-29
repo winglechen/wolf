@@ -3,6 +3,7 @@ package com.onedot.win.framework.rpc.dubbo.generic;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.utils.SimpleReferenceCache;
 import org.apache.dubbo.rpc.service.GenericService;
 
 /**
@@ -52,14 +53,13 @@ public class GenericServiceFactory {
             referenceConfig.setInterface(cls);
         }
 
-        GenericService gs = referenceConfig.get();
-
-        //GenericService gs = referenceConfig.get();
-
+        SimpleReferenceCache configCache = SimpleReferenceCache.getCache();
+        GenericService gs =  configCache.get(referenceConfig);
         return gs;
     }
 
     public static void destroy(Class<?> interfaceClass) {
-        //TODO 3.1.3
+        SimpleReferenceCache configCache = SimpleReferenceCache.getCache();
+        configCache.destroy(interfaceClass);
     }
 }
