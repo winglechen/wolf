@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 /**
  * 机器实体类
  *
- * @author: yik
- * @date: 2023-1-5
+ * @author yik
  */
 @Data
 @ToString
