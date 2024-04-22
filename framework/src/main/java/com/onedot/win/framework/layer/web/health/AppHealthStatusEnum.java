@@ -1,4 +1,4 @@
-package com.onedot.win.framework.ha.health;
+package com.onedot.win.framework.layer.web.health;
 
 import lombok.Getter;
 import com.onedot.win.common.lang.enums.CodeBasedEnum;

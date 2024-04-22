@@ -1,4 +1,4 @@
-package com.onedot.win.framework.machine;
+package com.onedot.win.framework.util.machine;
 
 import lombok.Data;
 import lombok.ToString;

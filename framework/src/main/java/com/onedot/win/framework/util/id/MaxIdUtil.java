@@ -14,8 +14,8 @@ public class MaxIdUtil {
             return maxId;
         }
 
-        Long diff = maxId - offset;
-        return diff > 0L ? diff : 0L;
+        long diff = maxId - offset;
+        return Math.max(diff, 0L);
     }
 
 }

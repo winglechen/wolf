@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.onedot.win.common.lang.exception.SystemException;
 import com.onedot.win.framework.exception.ClockBackwardsException;
 import com.onedot.win.framework.exception.ClockTooManyBackwardsException;
-import com.onedot.win.framework.machine.MachineRegister;
+import com.onedot.win.framework.util.machine.MachineRegister;
 import com.onedot.win.common.lang.enums.trade.TradePhaseEnum;
 import com.onedot.win.common.model.contract.ID;
 import com.onedot.win.common.util.lang.StringUtil;

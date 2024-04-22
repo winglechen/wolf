@@ -1,10 +1,10 @@
-package com.onedot.win.framework.machine;
+package com.onedot.win.framework.util.machine;
 
 import com.onedot.win.common.util.net.IPAddressUtil;
 
 
 /**
- * @author: yik
+ * @author yik
  */
 public interface MachineRegister {
     default int getLocalMachineId() {
@@ -25,8 +25,7 @@ public interface MachineRegister {
 
     default Machine registerLocalMachine() {
         String ip = IPAddressUtil.getLocalIPV4Address();
-        Machine machine = registerMachine(ip);
-        return machine;
+        return registerMachine(ip);
     }
 
     Machine getMachine(String ip);

@@ -1,4 +1,4 @@
-package com.onedot.win.framework.ha.health;
+package com.onedot.win.framework.layer.web.health;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
