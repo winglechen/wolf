@@ -160,11 +160,11 @@
                 <artifactId>mock</artifactId>
                 <version>${wolf-mock.version}</version>
             </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>com.wolf</groupId>
                 <artifactId>sdk</artifactId>
                 <version>${wolf-sdk.version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.wolf</groupId>
                 <artifactId>model</artifactId>
