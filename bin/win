@@ -150,6 +150,8 @@ function parse_opts() {
 function clean() {
   echo "rm -rf ~/.m2/repository/com/wolf"
   rm -rf ~/.m2/repository/com/wolf
+  echo "rm -rf ~/.m2/repository/com/onedot"
+  rm -rf ~/.m2/repository/com/onedot/
   echo "Done."
 }
 
