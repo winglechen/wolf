@@ -1,7 +1,6 @@
 package com.wolf.common.util.lang;
 
 import lombok.NonNull;
-import com.wolf.common.model.type.number.Decimal;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,10 +17,6 @@ public class DecimalUtil {
     private static final DecimalFormat DECIMAL_4 = new DecimalFormat("### ###.####");
     private static final DecimalFormat DECIMAL_2 = new DecimalFormat("### ###.##");
 
-    public static BigDecimal scale(BigDecimal num) {
-        return scale(num, Decimal.DEFAULT_SCALE);
-    }
-
     public static BigDecimal scale(BigDecimal num, int scale) {
         if (scale <= 0 || scale >= 100) {
             return num;
@@ -30,30 +25,8 @@ public class DecimalUtil {
         return num.setScale(scale, RoundingMode.HALF_UP);
     }
 
-    public static BigDecimal scaleEven(BigDecimal num){
-        return num.setScale(Decimal.DEFAULT_SCALE, RoundingMode.HALF_EVEN);
-    }
-
-    public static BigDecimal add(@NonNull BigDecimal... nums) {
-        return add(Decimal.DEFAULT_SCALE, nums);
-    }
-
-    public static BigDecimal add(int scale, @NonNull BigDecimal... nums) {
-        BigDecimal result = BigDecimal.ZERO;
-
-        for (BigDecimal num : nums) {
-            result = result.add(num);
-        }
-
-        return scale(result);
-    }
-
     public static String to2point(BigDecimal num) {
         return DECIMAL_2.format(num);
-    }
-
-    public static String toString(BigDecimal num) {
-        return toString(num, Decimal.DEFAULT_SCALE);
     }
 
     public static String toString(BigDecimal num, int scale) {
@@ -71,9 +44,9 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &gt; bigDecimal2 return true
      *
-     * @param bigDecimal1
-     * @param bigDecimal2
-     * @return
+     * @param bigDecimal1 l1
+     * @param bigDecimal2 l2
+     * @return bool
      */
     public static boolean isGreater(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
         Assert.notNull(bigDecimal1);
@@ -84,9 +57,9 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &gt;= bigDecimal2 return true
      *
-     * @param bigDecimal1
-     * @param bigDecimal2
-     * @return
+     * @param bigDecimal1 l1
+     * @param bigDecimal2 l2
+     * @return bool
      */
     public static boolean isGreaterOrEqual(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
         Assert.notNull(bigDecimal1);

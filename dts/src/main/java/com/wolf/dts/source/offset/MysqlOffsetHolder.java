@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * com.wolf.framework.layer.dal.scanner
  *
  * @author Wingle
  * @since 2020/2/5 5:26 下午

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * com.wolf.framework.layer.dal.scanner
  *
  * @author Wingle
  * @since 2020/2/4 5:31 下午

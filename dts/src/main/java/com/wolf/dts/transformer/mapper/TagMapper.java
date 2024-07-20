@@ -1,7 +1,7 @@
 package com.wolf.dts.transformer.mapper;
 
 import com.wolf.common.io.db.Row;
-import com.wolf.common.model.type.string.Tag;
+import com.wolf.common.lang.ds.Tag;
 
 /**
  * com.wolf.dts.transformation.mapper

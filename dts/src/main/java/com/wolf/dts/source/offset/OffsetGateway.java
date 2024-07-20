@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * com.wolf.framework.layer.dal.scanner
  *
  * @author Wingle
  * @since 2020/2/5 5:32 下午

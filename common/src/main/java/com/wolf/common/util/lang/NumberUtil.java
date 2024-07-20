@@ -1,7 +1,5 @@
 package com.wolf.common.util.lang;
 
-import com.wolf.common.model.type.number.Decimal;
-
 import java.math.BigDecimal;
 
 /**
@@ -12,7 +10,7 @@ import java.math.BigDecimal;
  **/
 public class NumberUtil {
     public static Number add(Number a, Number b) {
-        return add(a, b, Decimal.DEFAULT_SCALE);
+        return add(a, b, 4);
     }
 
     public static Number add(Number a, Number b, int scale) {

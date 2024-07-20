@@ -7,7 +7,7 @@ import com.wolf.common.io.db.Row;
 import com.wolf.common.util.lang.StringUtil;
 import com.wolf.common.util.time.DateUtil;
 import com.wolf.dts.transformer.Statistics;
-import com.wolf.framework.util.ContextUtil;
+//import com.wolf.framework.util.ContextUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +29,7 @@ public class DistinctCountAggregator extends AbstractAggregator implements Aggre
     public void init(@NonNull Statistics statistics, @NonNull String rowColumn, @NonNull String statisticsColumn) {
         super.init(statistics, rowColumn, statisticsColumn);
 
-        redis = ContextUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
+//        redis = ContextUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
         initHashKey();
     }
 

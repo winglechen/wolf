@@ -50,10 +50,4 @@ public class IPAddressUtil {
         }
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(isIPV4Address("12.12.12.1"));
-        System.out.println(isIPV4Address("12.12.12"));
-        System.out.println(isIPV4Address("abs"));
-    }
 }

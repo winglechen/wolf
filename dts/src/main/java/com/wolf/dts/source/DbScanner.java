@@ -4,7 +4,6 @@ import lombok.NonNull;
 import com.wolf.common.io.db.Table;
 
 /**
- * com.wolf.framework.layer.dal.scanner
  *
  * @author Wingle
  * @since 2020/2/4 5:59 下午

@@ -1,9 +1,0 @@
-wolf:
-  hbase:
-    servers:
-      HBASE-1:
-        server: localhost
-        port: 2181
-#      HBASE-2:
-#        server: 1.1.1.1
-#        port: 2181

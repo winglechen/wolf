@@ -5,7 +5,6 @@ import lombok.NonNull;
 import com.wolf.common.util.lang.StringUtil;
 
 /**
- * com.wolf.framework.layer.dal.scanner
  *
  * @author Wingle
  * @since 2020/2/5 5:27 下午

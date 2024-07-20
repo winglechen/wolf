@@ -20,10 +20,10 @@
             <artifactId>common</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.wolf</groupId>
-            <artifactId>framework</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.wolf</groupId>-->
+<!--            <artifactId>framework</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
