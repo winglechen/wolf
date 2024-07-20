@@ -2,7 +2,6 @@ package com.wolf.framework.rpc;
 
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Method;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ import java.lang.annotation.*;
 @Documented
 @RestController
 @DubboService
-public @interface RpcService {
+public @interface RpcServiceBak {
     @AliasFor( annotation = RestController.class )
     String value() default "";
 

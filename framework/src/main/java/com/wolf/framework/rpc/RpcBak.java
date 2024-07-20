@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @DubboReference
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
-public @interface Rpc {
+public @interface RpcBak {
     @AliasFor( annotation = DubboReference.class )
     Class<?> interfaceClass() default void.class;
 
