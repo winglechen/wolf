@@ -32,7 +32,7 @@ public final class Result<T> implements Serializable {
      */
     private T data;
 
-    private Long total;
+    private Integer total;
     private Integer pageSize;
     private Integer pages;
     private Integer pageNum;
