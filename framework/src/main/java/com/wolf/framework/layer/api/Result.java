@@ -15,20 +15,12 @@ import java.util.Optional;
  **/
 @Data
 public final class Result<T> implements Serializable {
+    private boolean success = false;
     /**
      * 0 is ok
      * non-0 is failed
      */
-    private long code;
-
-    /**
-     * to replace code
-     * because string is more meaningful
-     *
-     * null for correct result
-     * brief exception name for error
-     */
-    private String error;
+    private String code;
 
     /**
      * message
@@ -40,12 +32,21 @@ public final class Result<T> implements Serializable {
      */
     private T data;
 
+    private Long total;
+    private Integer pageSize;
+    private Integer pages;
+    private Integer pageNum;
+
+    private Boolean hasNextPage;
+    private Boolean hasPrePage;
+    private String lastId;
+
     public static Result<Object> ok(){
         return ok("");
     }
 
     public static <T> Result<T> ok(T t){
-        return new Result<>(0, "ok", t);
+        return new Result<>("OK", "ok", t);
     }
 
     public static Result<Object> success(){
@@ -53,22 +54,22 @@ public final class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> success(T t){
-        return new Result<>(0, "ok", t);
+        return new Result<>("OK", "ok", t);
     }
 
-    public static <T> Result<T> fail(long code, String message) {
+    public static <T> Result<T> fail(String code, String message) {
         return fail(code, message, null);
     }
 
-    public static <T> Result<T> fail(long code, String message, T t) {
+    public static <T> Result<T> fail(String code, String message, T t) {
         return new Result<>(code, message, t);
     }
 
-    public static <T> Result<T> create(long code, String message) {
+    public static <T> Result<T> create(String code, String message) {
         return create(code, message, null);
     }
 
-    public static <T> Result<T> create(long code, String message, T t) {
+    public static <T> Result<T> create(String code, String message, T t) {
         return new Result<>(code, message, t);
     }
 
@@ -77,25 +78,25 @@ public final class Result<T> implements Serializable {
     }
 
     Result() {
-        this(0, "", null);
+        this("OK", "", null);
     }
 
     Result(T data) {
-        this(0, "", data);
+        this("OK", "", data);
     }
 
-    Result(long code, String message) {
+    Result(String code, String message) {
         this(code, message, null);
     }
 
-    Result(long code, String message, T data) {
+    Result(String code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
     public boolean hasSuccess() {
-        return 0 == code && null != data;
+        return success && null != data;
     }
 
     public T notNullData() {
@@ -103,7 +104,7 @@ public final class Result<T> implements Serializable {
     }
 
     public T notNullData(String msg) {
-        if (0 != code || null == data) {
+        if (success || null == data) {
             if (msg != null) {
                 throw new NullReturnedException(msg);
             }
@@ -114,6 +115,6 @@ public final class Result<T> implements Serializable {
     }
 
     public void toBusinessException() {
-        throw new BusinessException(code, message);
+        throw new BusinessException(message);
     }
 }

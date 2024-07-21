@@ -4,6 +4,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.18</version>
+        <relativePath />
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -37,10 +38,13 @@
         <wolf-middleware-dependencies.version>1.0.0-SNAPSHOT</wolf-middleware-dependencies.version>
         <wolf-db-dependencies.version>1.0.0-SNAPSHOT</wolf-db-dependencies.version>
         <wolf-dubbo-dependencies.version>1.0.0-SNAPSHOT</wolf-dubbo-dependencies.version>
+        <wolf-sdk-dependencies.version>1.0.0-SNAPSHOT</wolf-sdk-dependencies.version>
 
         <log4j2.version>2.17.0</log4j2.version>
         <logback.version>1.2.10</logback.version>
         <lombok.version>1.18.22</lombok.version>
+        <junit.version>4.13.2</junit.version>
+        <testng.version>6.14.2</testng.version>
 
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
@@ -48,24 +52,20 @@
         <swagger.version>2.9.2</swagger.version>
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
 
-        <velocity.version>2.1</velocity.version>
-        <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <javax-el.version>3.0.0</javax-el.version>
-        <glassfish-el.version>3.0.4</glassfish-el.version>
-        <javax.servlet-api>4.0.1</javax.servlet-api>
-        <freemarker.version>2.3.31</freemarker.version>
-        <kotlin.version>1.5.31</kotlin.version>
-        <nv-i18n.version>1.29</nv-i18n.version>
-        <protobuf.version>2.5.0</protobuf.version>
-        <jasypt.version>3.0.4</jasypt.version>
-        <arms.version>1.7.3</arms.version>
-        <junit.version>4.13.2</junit.version>
-        <testng.version>6.14.2</testng.version>
-        <netty.version>4.1.107.Final</netty.version>
-        <jmh.version>1.36</jmh.version>
-        <oapi-sdk.version>2.0.16</oapi-sdk.version>
-        <oapi-sdk-servlet-ext.version>1.0.0-rc3</oapi-sdk-servlet-ext.version>
+<!--        <velocity.version>2.1</velocity.version>-->
+<!--        <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>-->
+<!--        <validation-api.version>2.0.1.Final</validation-api.version>-->
+
+<!--        <glassfish-el.version>3.0.4</glassfish-el.version>-->
+<!--        <javax.servlet-api>4.0.1</javax.servlet-api>-->
+<!--        <freemarker.version>2.3.31</freemarker.version>-->
+<!--        <kotlin.version>1.5.31</kotlin.version>-->
+
+<!--        <protobuf.version>2.5.0</protobuf.version>-->
+<!--        <jasypt.version>3.0.4</jasypt.version>-->
+<!--        <netty.version>4.1.107.Final</netty.version>-->
+<!--        <jmh.version>1.36</jmh.version>-->
+
     </properties>
 
     <dependencyManagement>
@@ -111,84 +111,13 @@
             </dependency>
 
             <dependency>
-                <groupId>com.neovisionaries</groupId>
-                <artifactId>nv-i18n</artifactId>
-                <version>${nv-i18n.version}</version>
+                <groupId>com.wolf</groupId>
+                <artifactId>sdk-dependencies</artifactId>
+                <type>pom</type>
+                <version>${wolf-sdk-dependencies.version}</version>
+                <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
-            <!-- use spring-boot-starter-validation instead -->
-            <dependency>
-                <groupId>org.hibernate.validator</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate-validator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate.validator</groupId>
-                <artifactId>hibernate-validator-cdi</artifactId>
-                <version>${hibernate-validator.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish</groupId>
-                <artifactId>jakarta.el</artifactId>
-                <version>${glassfish-el.version}</version>
-            </dependency>
-
-            <!-- Deprecated -->
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>${validation-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish.web</groupId>
-                <artifactId>javax.el</artifactId>
-                <version>${javax-el.version}</version>
-            </dependency>
-            <!-- Deprecated -->
-
-            <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>${javax-el.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger-annotations.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>${jasypt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-maven-plugin</artifactId>
-                <version>${jasypt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.arms.apm</groupId>
-                <artifactId>arms-sdk</artifactId>
-                <version>${arms.version}</version>
-            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -203,42 +132,87 @@
                 <!--                <scope>test</scope>-->
             </dependency>
 
-            <dependency>
-                <groupId>io.projectreactor</groupId>
-                <artifactId>reactor-bom</artifactId>
-                <version>2023.0.4</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.apache.velocity</groupId>-->
+<!--                <artifactId>velocity-engine-core</artifactId>-->
+<!--                <version>${velocity.version}</version>-->
+<!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.openjdk.jmh</groupId>
-                <artifactId>jmh-core</artifactId>
-                <version>${jmh.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.openjdk.jmh</groupId>
-                <artifactId>jmh-generator-annprocess</artifactId>
-                <version>${jmh.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; use spring-boot-starter-validation instead &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.hibernate.validator</groupId>-->
+<!--                <artifactId>hibernate-validator</artifactId>-->
+<!--                <version>${hibernate-validator.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.hibernate.validator</groupId>-->
+<!--                <artifactId>hibernate-validator-cdi</artifactId>-->
+<!--                <version>${hibernate-validator.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.glassfish</groupId>-->
+<!--                <artifactId>jakarta.el</artifactId>-->
+<!--                <version>${glassfish-el.version}</version>-->
+<!--            </dependency>-->
 
-            <dependency>
-                <groupId>com.larksuite.oapi</groupId>
-                <artifactId>oapi-sdk</artifactId>
-                <version>${oapi-sdk.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; Deprecated &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>javax.validation</groupId>-->
+<!--                <artifactId>validation-api</artifactId>-->
+<!--                <version>${validation-api.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.glassfish.web</groupId>-->
+<!--                <artifactId>javax.el</artifactId>-->
+<!--                <version>${javax-el.version}</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash; Deprecated &ndash;&gt;-->
 
-            <dependency>
-                <groupId>com.larksuite.oapi</groupId>
-                <artifactId>oapi-sdk-servlet-ext</artifactId>
-                <version>${oapi-sdk-servlet-ext.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.larksuite.oapi</groupId>
-                        <artifactId>oapi-sdk</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.springfox</groupId>-->
+<!--                <artifactId>springfox-swagger2</artifactId>-->
+<!--                <version>${swagger.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.springfox</groupId>-->
+<!--                <artifactId>springfox-swagger-ui</artifactId>-->
+<!--                <version>${swagger.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.swagger</groupId>-->
+<!--                <artifactId>swagger-annotations</artifactId>-->
+<!--                <version>${swagger-annotations.version}</version>-->
+<!--            </dependency>-->
+
+<!--            <dependency>-->
+<!--                <groupId>com.github.ulisesbocchio</groupId>-->
+<!--                <artifactId>jasypt-spring-boot-starter</artifactId>-->
+<!--                <version>${jasypt.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.github.ulisesbocchio</groupId>-->
+<!--                <artifactId>jasypt-maven-plugin</artifactId>-->
+<!--                <version>${jasypt.version}</version>-->
+<!--            </dependency>-->
+
+<!--            <dependency>-->
+<!--                <groupId>io.projectreactor</groupId>-->
+<!--                <artifactId>reactor-bom</artifactId>-->
+<!--                <version>2023.0.4</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+
+<!--            <dependency>-->
+<!--                <groupId>org.openjdk.jmh</groupId>-->
+<!--                <artifactId>jmh-core</artifactId>-->
+<!--                <version>${jmh.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.openjdk.jmh</groupId>-->
+<!--                <artifactId>jmh-generator-annprocess</artifactId>-->
+<!--                <version>${jmh.version}</version>-->
+<!--            </dependency>-->
 
         </dependencies>
     </dependencyManagement>
