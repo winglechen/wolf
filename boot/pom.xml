@@ -21,6 +21,7 @@
         <module>wolf-dependencies</module>
         <module>db-dependencies</module>
         <module>dubbo-dependencies</module>
+        <module>sdk-dependencies</module>
     </modules>
 
     <properties>
@@ -51,20 +52,6 @@
 
         <swagger.version>2.9.2</swagger.version>
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
-
-<!--        <velocity.version>2.1</velocity.version>-->
-<!--        <hibernate-validator.version>6.1.7.Final</hibernate-validator.version>-->
-<!--        <validation-api.version>2.0.1.Final</validation-api.version>-->
-
-<!--        <glassfish-el.version>3.0.4</glassfish-el.version>-->
-<!--        <javax.servlet-api>4.0.1</javax.servlet-api>-->
-<!--        <freemarker.version>2.3.31</freemarker.version>-->
-<!--        <kotlin.version>1.5.31</kotlin.version>-->
-
-<!--        <protobuf.version>2.5.0</protobuf.version>-->
-<!--        <jasypt.version>3.0.4</jasypt.version>-->
-<!--        <netty.version>4.1.107.Final</netty.version>-->
-<!--        <jmh.version>1.36</jmh.version>-->
 
     </properties>
 

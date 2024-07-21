@@ -51,10 +51,6 @@
                 <version>${wolf-dts.version}</version>
             </dependency>
 
-
-
-
-
             <dependency>
                 <artifactId>rest-starter</artifactId>
                 <groupId>com.wolf.starter</groupId>
@@ -66,15 +62,21 @@
                 <version>${version.snapshot}</version>
             </dependency>
             <dependency>
-                <groupId>com.wolf.pangu</groupId>
-                <artifactId>lib</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <artifactId>mybatis-starter</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>
+            <dependency>
+                <artifactId>cache-starter</artifactId>
+                <groupId>com.wolf.starter</groupId>
+                <version>${version.snapshot}</version>
+            </dependency>
+            <dependency>
+                <artifactId>mq-starter</artifactId>
+                <groupId>com.wolf.starter</groupId>
+                <version>${version.snapshot}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

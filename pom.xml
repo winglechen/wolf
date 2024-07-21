@@ -23,7 +23,7 @@
         <module>framework</module>
         <module>mqclient</module>
         <module>sql</module>
-        <module>boot/sdk-dependencies</module>
+
     </modules>
 
     <properties>
