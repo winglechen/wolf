@@ -1,4 +1,4 @@
-package com.wolf.common.rpc;
+package com.wolf.framework.layer.api;
 
 import lombok.Data;
 import com.wolf.common.lang.exception.BusinessException;

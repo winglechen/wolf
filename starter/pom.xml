@@ -18,6 +18,9 @@
 
     <modules>
         <module>wolf-boot-starter</module>
+        <module>rest-starter</module>
+        <module>mybatis-starter</module>
+        <module>dubbo-starter</module>
     </modules>
 
 
