@@ -1,6 +1,5 @@
-package com.wolf.framework.layer.dal.page;
+package com.wolf.framework.layer.api;
 
-import com.wolf.framework.layer.api.Request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
