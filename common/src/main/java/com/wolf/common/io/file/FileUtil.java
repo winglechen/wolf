@@ -1,8 +1,8 @@
 package com.wolf.common.io.file;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONReader;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -74,8 +74,8 @@ public class FileUtil {
     public static JSONObject loadJson(String path) {
         InputStream inputStream = getResourceStream(path);
         try {
-            return JSON.parseObject(inputStream, JSONObject.class, Feature.ErrorOnEnumNotMatch);
-        } catch (IOException e) {
+            return JSON.parseObject(inputStream, JSONObject.class, JSONReader.Feature.ErrorOnEnumNotMatch);
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new MethodExecuteFailException("read file failed : " + path);
         }

@@ -14,32 +14,23 @@ import java.util.Optional;
  * @since 2019/11/6 4:18 下午
  **/
 @Data
-public final class Result<T> implements Serializable {
-    private boolean success = false;
+public class Result<T> implements Serializable {
+    protected boolean success = false;
     /**
      * 0 is ok
      * non-0 is failed
      */
-    private String code;
+    protected String code;
 
     /**
      * message
      */
-    private String message;
+    protected String message;
 
     /**
      * the data
      */
-    private T data;
-
-    private Integer total;
-    private Integer pageSize;
-    private Integer pages;
-    private Integer pageNum;
-
-    private Boolean hasNextPage;
-    private Boolean hasPrePage;
-    private String lastId;
+    protected T data;
 
     public static Result<Object> ok(){
         return ok("");
@@ -74,7 +65,7 @@ public final class Result<T> implements Serializable {
     }
 
     public static <T> T getSuccessDataOrNull(Result<T> result) {
-        return Optional.ofNullable(result).filter(Result::hasSuccess).map(Result::getData).orElse(null);
+        return Optional.ofNullable(result).filter(Result::wasSuccess).map(Result::getData).orElse(null);
     }
 
     Result() {
@@ -95,7 +86,7 @@ public final class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public boolean hasSuccess() {
+    public boolean wasSuccess() {
         return success && null != data;
     }
 

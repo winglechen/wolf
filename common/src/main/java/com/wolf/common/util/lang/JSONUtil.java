@@ -1,14 +1,11 @@
 package com.wolf.common.util.lang;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPath;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.NonNull;
 import com.wolf.common.util.collection.ArrayUtil;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +32,6 @@ public class JSONUtil {
         return !isEmpty(object);
     }
 
-    public static Object read(String json, String path) {
-        return JSONPath.read(json, path);
-    }
-
-    public static <T> T read(String json, String path, Type clazz) {
-        return JSONPath.read(json, path, clazz);
-    }
-
     public static JSONObject parse(@NonNull String str) {
         return JSON.parseObject(str);
     }
@@ -57,10 +46,6 @@ public class JSONUtil {
 
     public static <T> List<T> parseArray(@NonNull String str, Class<T> clazz) {
         return JSON.parseArray(str, clazz);
-    }
-
-    public static <T> T toJavaObject(@NonNull JSONObject object, Class<T> clazz) {
-        return JSONObject.toJavaObject(object, clazz);
     }
 
     public static String[] parseStringArray(@NonNull String str) {
@@ -132,14 +117,6 @@ public class JSONUtil {
         }
 
         return JSON.toJSONString(o);
-    }
-
-    public static String toJSONString(Object o, SerializerFeature... features) {
-        if (o == null) {
-            return "{}";
-        }
-
-        return JSON.toJSONString(o, features);
     }
 
     public static String toPlainString(String str) {

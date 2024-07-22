@@ -1,7 +1,7 @@
 package com.wolf.common.lang.ds;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.wolf.common.lang.contract.Context;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.JSONUtil;
@@ -28,12 +28,12 @@ public class ObjectMap extends JSONObject implements Map<String, Object>, Contex
         super(map);
     }
 
-    public String toJson() {
-        return JSON.toJSONString(getInnerMap());
+    public String toJSONString() {
+        return JSON.toJSONString(this);
     }
 
     public Map<String, Object> toMap() {
-        return getInnerMap();
+        return this;
     }
 
     public ObjectMap kv(String key, Object value) {
@@ -45,40 +45,6 @@ public class ObjectMap extends JSONObject implements Map<String, Object>, Contex
         CollectionUtil.add(get(key), value);
         return this;
     }
-    
-//    @SuppressWarnings("unchecked")
-//    public <T> ObjectMap addToCollection(String key, T value) {
-//        Object target = get(key);
-//
-//        // if target is null init target
-//        if (target == null) {
-//            put(key, Collections.singletonList(value));
-//            return this;
-//        }
-//
-//        // if target is not collection quit
-//        if (!(target instanceof Collection)) {
-//            throw new IllegalArgumentException("can't add item to target whose type is not Collection");
-//        }
-//
-//        Collection<Object> collection = (Collection<Object>) target;
-//        //if collection is empty override with new collection
-//        if (CollectionUtil.isEmpty(collection)) {
-//            put(key, Collections.singletonList(value));
-//            return this;
-//        }
-//
-//        //if the type of first item of the collection not match the type of value quit
-//        Object firstItem = CollectionUtil.first(collection);
-//        assert firstItem != null;
-//        if (!firstItem.getClass().getTypeName().equalsIgnoreCase(value.getClass().getTypeName())) {
-//            throw new IllegalArgumentException("value type doesn't match target element type");
-//        }
-//
-//        //if the type of first item of the collection match the type of value, add the value to the collection
-//        ((Collection<T>) target).add(value);
-//        return this;
-//    }
 
     public JSONObject getJSONObject(String... keys) {
         return JSONUtil.getJSONObject(this, keys);

@@ -1,6 +1,6 @@
 package com.wolf.common.lang.ds;
 
-import com.alibaba.fastjson.util.TypeUtils;
+import com.alibaba.fastjson2.util.TypeUtils;
 import lombok.NonNull;
 import com.wolf.common.lang.exception.lang.IllegalArgumentException;
 
@@ -27,7 +27,7 @@ public class ObjectTree {
             return null;
         }
 
-        return TypeUtils.castToJavaBean(v, clazz);
+        return TypeUtils.cast(v, clazz);
     }
 
     public Object get(@NonNull String... keys) {

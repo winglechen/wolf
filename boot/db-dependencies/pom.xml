@@ -15,6 +15,8 @@
 
         <mybatis.version>2.1.4</mybatis.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <mybatis-generator.version>1.4.2</mybatis-generator.version>
+        <mybatis-lombok.version>1.0</mybatis-lombok.version>
 
         <sharding-jdbc.version>4.1.1</sharding-jdbc.version>
 
@@ -80,6 +82,17 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.softwareloop</groupId>
+                <artifactId>mybatis-generator-lombok-plugin</artifactId>
+                <version>${mybatis-lombok.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
