@@ -10,12 +10,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>wolf-boot-starter</module>
         <module>rest-starter</module>
         <module>mybatis-starter</module>
         <module>dubbo-starter</module>
         <module>mq-starter</module>
         <module>cache-starter</module>
+<!--        <module>wolf-boot-starter</module>-->
     </modules>
 
 

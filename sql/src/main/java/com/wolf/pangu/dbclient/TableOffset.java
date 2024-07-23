@@ -1,4 +1,4 @@
-package com.wolf.framework.middleware.rdb;
+package com.wolf.pangu.dbclient;
 
 import com.wolf.common.io.db.Row;
 import com.wolf.common.io.db.Table;

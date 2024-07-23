@@ -1,4 +1,4 @@
-package com.wolf.framework.middleware.rdb;
+package com.wolf.pangu.dbclient;
 
 import org.springframework.context.annotation.Configuration;
 

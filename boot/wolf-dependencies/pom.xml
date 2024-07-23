@@ -24,7 +24,7 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.wolf.boot</groupId>
+                <groupId>com.wolf.starter</groupId>
                 <artifactId>wolf-boot-starter</artifactId>
                 <version>${wolf-framework-boot.version}</version>
             </dependency>

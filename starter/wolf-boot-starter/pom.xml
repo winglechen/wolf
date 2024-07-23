@@ -6,11 +6,11 @@
         <artifactId>framework-boot</artifactId>
         <groupId>com.wolf</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath />
+        <relativePath>../../boot/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wolf.boot</groupId>
+    <groupId>com.wolf.starter</groupId>
     <artifactId>wolf-boot-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
