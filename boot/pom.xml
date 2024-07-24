@@ -9,19 +9,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wolf</groupId>
-    <artifactId>framework-boot</artifactId>
+    <artifactId>wolf-boot-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>wolf-framework-boot</name>
     <description>wolf framework boot pom</description>
 
     <modules>
-        <module>utils-dependencies</module>
-        <module>middleware-dependencies</module>
-        <module>wolf-dependencies</module>
-        <module>db-dependencies</module>
-        <module>dubbo-dependencies</module>
-        <module>sdk-dependencies</module>
+        <module>wolf-utils-dependencies</module>
+        <module>wolf-middleware-dependencies</module>
+        <module>wolf-framework-dependencies</module>
+        <module>wolf-db-dependencies</module>
+        <module>wolf-dubbo-dependencies</module>
+        <module>wolf-sdk-dependencies</module>
     </modules>
 
     <properties>
@@ -41,25 +41,13 @@
         <wolf-dubbo-dependencies.version>1.0.0-SNAPSHOT</wolf-dubbo-dependencies.version>
         <wolf-sdk-dependencies.version>1.0.0-SNAPSHOT</wolf-sdk-dependencies.version>
 
-<!--        <log4j2.version>2.17.0</log4j2.version>-->
-<!--        <logback.version>1.2.10</logback.version>-->
-<!--        <lombok.version>1.18.22</lombok.version>-->
-<!--        <junit.version>4.13.2</junit.version>-->
-<!--        <testng.version>6.14.2</testng.version>-->
-
-<!--        <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>-->
-<!--        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>-->
-
-<!--        <swagger.version>2.9.2</swagger.version>-->
-<!--        <swagger-annotations.version>1.5.20</swagger-annotations.version>-->
-
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>wolf-dependencies</artifactId>
+                <artifactId>wolf-framework-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-dependencies.version}</version>
                 <scope>import</scope>
@@ -67,7 +55,7 @@
 
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>utils-dependencies</artifactId>
+                <artifactId>wolf-utils-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-utils-dependencies.version}</version>
                 <scope>import</scope>
@@ -75,7 +63,7 @@
 
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>middleware-dependencies</artifactId>
+                <artifactId>wolf-middleware-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-middleware-dependencies.version}</version>
                 <scope>import</scope>
@@ -83,7 +71,7 @@
 
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>db-dependencies</artifactId>
+                <artifactId>wolf-db-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-db-dependencies.version}</version>
                 <scope>import</scope>
@@ -91,7 +79,7 @@
 
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>dubbo-dependencies</artifactId>
+                <artifactId>wolf-dubbo-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-dubbo-dependencies.version}</version>
                 <scope>import</scope>
@@ -99,107 +87,11 @@
 
             <dependency>
                 <groupId>com.wolf</groupId>
-                <artifactId>sdk-dependencies</artifactId>
+                <artifactId>wolf-sdk-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-sdk-dependencies.version}</version>
                 <scope>import</scope>
             </dependency>
-
-<!--            <dependency>-->
-<!--                <groupId>junit</groupId>-->
-<!--                <artifactId>junit</artifactId>-->
-<!--                <version>${junit.version}</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.testng</groupId>-->
-<!--                <artifactId>testng</artifactId>-->
-<!--                <version>${testng.version}</version>-->
-<!--                &lt;!&ndash;                <scope>test</scope>&ndash;&gt;-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.apache.velocity</groupId>-->
-<!--                <artifactId>velocity-engine-core</artifactId>-->
-<!--                <version>${velocity.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; use spring-boot-starter-validation instead &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.hibernate.validator</groupId>-->
-<!--                <artifactId>hibernate-validator</artifactId>-->
-<!--                <version>${hibernate-validator.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.hibernate.validator</groupId>-->
-<!--                <artifactId>hibernate-validator-cdi</artifactId>-->
-<!--                <version>${hibernate-validator.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.glassfish</groupId>-->
-<!--                <artifactId>jakarta.el</artifactId>-->
-<!--                <version>${glassfish-el.version}</version>-->
-<!--            </dependency>-->
-
-<!--            &lt;!&ndash; Deprecated &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>javax.validation</groupId>-->
-<!--                <artifactId>validation-api</artifactId>-->
-<!--                <version>${validation-api.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.glassfish.web</groupId>-->
-<!--                <artifactId>javax.el</artifactId>-->
-<!--                <version>${javax-el.version}</version>-->
-<!--            </dependency>-->
-<!--            &lt;!&ndash; Deprecated &ndash;&gt;-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.springfox</groupId>-->
-<!--                <artifactId>springfox-swagger2</artifactId>-->
-<!--                <version>${swagger.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.springfox</groupId>-->
-<!--                <artifactId>springfox-swagger-ui</artifactId>-->
-<!--                <version>${swagger.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.swagger</groupId>-->
-<!--                <artifactId>swagger-annotations</artifactId>-->
-<!--                <version>${swagger-annotations.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>com.github.ulisesbocchio</groupId>-->
-<!--                <artifactId>jasypt-spring-boot-starter</artifactId>-->
-<!--                <version>${jasypt.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>com.github.ulisesbocchio</groupId>-->
-<!--                <artifactId>jasypt-maven-plugin</artifactId>-->
-<!--                <version>${jasypt.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>io.projectreactor</groupId>-->
-<!--                <artifactId>reactor-bom</artifactId>-->
-<!--                <version>2023.0.4</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.openjdk.jmh</groupId>-->
-<!--                <artifactId>jmh-core</artifactId>-->
-<!--                <version>${jmh.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.openjdk.jmh</groupId>-->
-<!--                <artifactId>jmh-generator-annprocess</artifactId>-->
-<!--                <version>${jmh.version}</version>-->
-<!--            </dependency>-->
 
         </dependencies>
     </dependencyManagement>

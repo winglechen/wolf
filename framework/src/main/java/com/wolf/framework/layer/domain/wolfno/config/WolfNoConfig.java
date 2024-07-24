@@ -1,7 +1,7 @@
 package com.wolf.framework.layer.domain.wolfno.config;
 
 import com.wolf.framework.layer.domain.wolfno.WolfNo;
-import com.wolf.framework.layer.domain.wolfno.wolfid.IDObject;
+import com.wolf.framework.layer.domain.wolfno.wolfid.WolfID;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class WolfNoConfig implements Serializable {
     private boolean enabled = false;
 
-    private List<IDObject> noList = new ArrayList<>();
+    private List<WolfID> noList = new ArrayList<>();
 
 
     @Bean

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.wolf</groupId>
-        <artifactId>framework-boot</artifactId>
+        <artifactId>wolf-boot-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../boot/pom.xml</relativePath>
     </parent>
@@ -22,7 +22,7 @@
         </dependency>
 
         <dependency>
-            <artifactId>mq-starter</artifactId>
+            <artifactId>wolf-starter-mq</artifactId>
             <groupId>com.wolf.starter</groupId>
         </dependency>
 

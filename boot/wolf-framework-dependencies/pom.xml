@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wolf</groupId>
-    <artifactId>wolf-dependencies</artifactId>
+    <artifactId>wolf-framework-dependencies</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -52,27 +52,27 @@
             </dependency>
 
             <dependency>
-                <artifactId>rest-starter</artifactId>
+                <artifactId>wolf-starter-web</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>
             <dependency>
-                <artifactId>dubbo-starter</artifactId>
+                <artifactId>wolf-starter-dubbo</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>
             <dependency>
-                <artifactId>mybatis-starter</artifactId>
+                <artifactId>wolf-starter-mybatis</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>
             <dependency>
-                <artifactId>cache-starter</artifactId>
+                <artifactId>wolf-starter-cache</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>
             <dependency>
-                <artifactId>mq-starter</artifactId>
+                <artifactId>wolf-starter-mq</artifactId>
                 <groupId>com.wolf.starter</groupId>
                 <version>${version.snapshot}</version>
             </dependency>

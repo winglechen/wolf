@@ -1,6 +1,6 @@
 package com.wolf.framework.config;
 
-import com.wolf.framework.layer.domain.wolfno.wolfid.WolfID;
+import com.wolf.framework.layer.domain.wolfno.wolfid.WolfIDFetcher;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
@@ -22,8 +22,8 @@ public class WolfAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(JdbcTemplate.class)
-    public WolfID wolfID(JdbcTemplate jdbcTemplate) {
-        return new WolfID(jdbcTemplate);
+    public WolfIDFetcher wolfID(JdbcTemplate jdbcTemplate) {
+        return new WolfIDFetcher(jdbcTemplate);
     }
 
 }
