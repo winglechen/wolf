@@ -1,6 +1,6 @@
 package com.wolf.common.sm.builder;
 
-import com.wolf.common.lang.contract.Context;
+import com.wolf.common.contract.container.Context;
 import com.wolf.common.sm.Action;
 import com.wolf.common.sm.Condition;
 import com.wolf.common.sm.Event;

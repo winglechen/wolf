@@ -1,6 +1,6 @@
 package com.wolf.dts.transformer.aggregator;
 
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 import com.wolf.dts.transformer.Statistics;
 
 /**

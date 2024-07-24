@@ -1,6 +1,6 @@
 package com.wolf.framework.layer.task;
 
-import com.wolf.common.lang.contract.Context;
+import com.wolf.common.contract.container.Context;
 import lombok.Data;
 
 /**

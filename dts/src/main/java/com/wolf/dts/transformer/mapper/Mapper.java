@@ -1,6 +1,6 @@
 package com.wolf.dts.transformer.mapper;
 
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 
 /**
  * com.wolf.dts.transformation.mapper

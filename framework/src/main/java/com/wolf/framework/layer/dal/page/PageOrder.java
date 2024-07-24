@@ -1,6 +1,5 @@
 package com.wolf.framework.layer.dal.page;
 
-import com.wolf.common.io.enums.OrderEnum;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -12,7 +11,6 @@ import lombok.Data;
  **/
 @Data
 public class PageOrder implements Serializable {
-    private OrderEnum order;
     private String orderBy;
     private Long orderValue;
 }

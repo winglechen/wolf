@@ -1,7 +1,7 @@
 package com.wolf.dts.transformer.aggregator;
 
 import lombok.NonNull;
-import com.wolf.common.io.sql.statement.SqlStatement;
+import com.wolf.common.lang.io.sql.statement.SqlStatement;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.StringUtil;
 import com.wolf.dts.transformer.Statistics;

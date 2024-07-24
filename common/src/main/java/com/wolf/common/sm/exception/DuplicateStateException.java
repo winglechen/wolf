@@ -1,7 +1,7 @@
 package com.wolf.common.sm.exception;
 
 import com.wolf.common.lang.exception.SystemException;
-import com.wolf.common.lang.string.Str;
+import com.wolf.common.ds.string.Str;
 
 /**
  * com.wolf.common.sm

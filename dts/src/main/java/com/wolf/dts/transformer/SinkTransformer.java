@@ -2,8 +2,8 @@ package com.wolf.dts.transformer;
 
 import lombok.Getter;
 import lombok.NonNull;
-import com.wolf.common.io.db.Row;
-import com.wolf.common.io.db.Table;
+import com.wolf.common.lang.io.db.Row;
+import com.wolf.common.lang.io.db.Table;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.dts.sink.Sink;
 import com.wolf.dts.source.offset.Offset;

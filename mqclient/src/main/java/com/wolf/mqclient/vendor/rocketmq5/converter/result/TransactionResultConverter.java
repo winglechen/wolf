@@ -1,6 +1,6 @@
 package com.wolf.mqclient.vendor.rocketmq5.converter.result;
 
-import com.wolf.common.lang.contract.worker.Converter;
+import com.wolf.common.contract.worker.Converter;
 import com.wolf.mqclient.core.transaction.TransactionResult;
 import com.wolf.mqclient.vendor.rocketmq5.converter.state.TransactionStateConverter;
 import org.apache.rocketmq.client.apis.producer.TransactionResolution;

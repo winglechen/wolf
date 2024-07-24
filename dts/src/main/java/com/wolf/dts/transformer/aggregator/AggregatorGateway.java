@@ -2,8 +2,8 @@ package com.wolf.dts.transformer.aggregator;
 
 
 import lombok.NonNull;
-import com.wolf.common.io.db.Row;
-import com.wolf.common.io.db.Table;
+import com.wolf.common.lang.io.db.Row;
+import com.wolf.common.lang.io.db.Table;
 import com.wolf.dts.transformer.Statistics;
 
 import java.util.ArrayList;

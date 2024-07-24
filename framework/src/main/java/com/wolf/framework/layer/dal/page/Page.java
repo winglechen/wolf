@@ -1,7 +1,6 @@
 package com.wolf.framework.layer.dal.page;
 
 import com.github.pagehelper.PageHelper;
-import com.wolf.common.io.enums.OrderEnum;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.framework.layer.api.PageRequest;
 import com.wolf.framework.layer.api.Response;
@@ -37,7 +36,6 @@ public class Page<T> implements Response {
     private Boolean hasNextPage;
     private Boolean hasPrePage;
 
-    private OrderEnum order;
     private String orderBy;
 
     public static void nextPage(@NonNull PageOrder order, int pageSize) {

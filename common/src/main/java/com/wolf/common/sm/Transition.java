@@ -1,6 +1,6 @@
 package com.wolf.common.sm;
 
-import com.wolf.common.lang.contract.Context;
+import com.wolf.common.contract.container.Context;
 
 /**
  * com.wolf.common.sm

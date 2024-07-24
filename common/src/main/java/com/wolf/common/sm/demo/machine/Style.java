@@ -1,6 +1,6 @@
 package com.wolf.common.sm.demo.machine;
 
-import com.wolf.common.lang.contract.Context;
+import com.wolf.common.contract.container.Context;
 import com.wolf.common.sm.Event;
 import com.wolf.common.sm.State;
 import com.wolf.common.sm.StateMachine;

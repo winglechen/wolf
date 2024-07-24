@@ -1,6 +1,6 @@
 package com.wolf.framework.layer.app.query;
 
-import com.wolf.common.lang.contract.Context;
+import com.wolf.common.contract.container.Context;
 import com.wolf.framework.layer.api.Request;
 import com.wolf.framework.layer.api.Response;
 import lombok.NonNull;

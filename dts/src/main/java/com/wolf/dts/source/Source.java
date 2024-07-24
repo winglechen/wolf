@@ -2,8 +2,8 @@ package com.wolf.dts.source;
 
 import lombok.Builder;
 import lombok.Data;
-import com.wolf.common.io.db.Table;
-import com.wolf.common.io.enums.OrderEnum;
+import com.wolf.common.lang.io.db.Table;
+import com.wolf.common.lang.io.enums.OrderEnum;
 import com.wolf.dts.source.offset.Offset;
 
 /**

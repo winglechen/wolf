@@ -1,6 +1,6 @@
 package com.wolf.mqclient.vendor.rocketmq.converter.state;
 
-import com.wolf.common.lang.contract.worker.Converter;
+import com.wolf.common.contract.worker.Converter;
 import com.wolf.mqclient.core.transaction.TransactionStateEnum;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 

@@ -1,6 +1,6 @@
 package com.wolf.framework.config;
 
-import com.wolf.framework.layer.domain.uid.WolfID;
+import com.wolf.framework.layer.domain.wolfno.wolfid.WolfID;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;

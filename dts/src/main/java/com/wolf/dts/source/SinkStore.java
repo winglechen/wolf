@@ -1,8 +1,8 @@
 package com.wolf.dts.source;
 
-import com.wolf.common.io.db.Table;
-import com.wolf.common.io.enums.OrderEnum;
-import com.wolf.common.io.sql.builder.SqlBuilder;
+import com.wolf.common.lang.io.db.Table;
+import com.wolf.common.lang.io.enums.OrderEnum;
+import com.wolf.common.lang.io.sql.builder.SqlBuilder;
 
 /**
  *

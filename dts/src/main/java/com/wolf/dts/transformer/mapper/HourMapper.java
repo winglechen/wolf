@@ -1,6 +1,6 @@
 package com.wolf.dts.transformer.mapper;
 
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 import com.wolf.common.util.time.DateUtil;
 
 import java.sql.Timestamp;

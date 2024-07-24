@@ -1,7 +1,7 @@
 package com.wolf.dts.source;
 
 import lombok.NonNull;
-import com.wolf.common.io.db.Table;
+import com.wolf.common.lang.io.db.Table;
 
 /**
  *

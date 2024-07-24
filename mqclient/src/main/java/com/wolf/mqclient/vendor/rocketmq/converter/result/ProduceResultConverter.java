@@ -1,6 +1,6 @@
 package com.wolf.mqclient.vendor.rocketmq.converter.result;
 
-import com.wolf.common.lang.contract.worker.Converter;
+import com.wolf.common.contract.worker.Converter;
 import com.wolf.mqclient.core.producer.ProduceResult;
 import com.wolf.mqclient.core.producer.ProduceStateEnum;
 import com.wolf.mqclient.vendor.rocketmq.converter.state.ProduceStateConverter;

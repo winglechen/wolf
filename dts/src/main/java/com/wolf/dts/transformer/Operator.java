@@ -1,6 +1,6 @@
 package com.wolf.dts.transformer;
 
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 import com.wolf.common.util.collection.MapUtil;
 import com.wolf.dts.transformer.aggregator.AggregatorGateway;
 import com.wolf.dts.transformer.mapper.MapperGateway;

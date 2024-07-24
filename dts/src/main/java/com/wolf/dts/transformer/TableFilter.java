@@ -1,8 +1,8 @@
 package com.wolf.dts.transformer;
 
 import lombok.Getter;
-import com.wolf.common.io.db.Row;
-import com.wolf.common.io.db.Table;
+import com.wolf.common.lang.io.db.Row;
+import com.wolf.common.lang.io.db.Table;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.dts.transformer.matcher.MatcherGateway;
 

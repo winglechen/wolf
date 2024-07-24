@@ -1,8 +1,8 @@
 package com.wolf.dts.transformer.mapper;
 
 import lombok.NonNull;
-import com.wolf.common.io.db.Row;
-import com.wolf.common.io.db.Table;
+import com.wolf.common.lang.io.db.Row;
+import com.wolf.common.lang.io.db.Table;
 
 import java.util.ArrayList;
 import java.util.List;

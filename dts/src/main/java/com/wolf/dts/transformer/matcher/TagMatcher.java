@@ -1,8 +1,8 @@
 package com.wolf.dts.transformer.matcher;
 
-import com.wolf.common.lang.ds.Tag;
+import com.wolf.common.ds.string.Tag;
 import lombok.NonNull;
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 
 /**
  * com.wolf.dts.transformation.matcher

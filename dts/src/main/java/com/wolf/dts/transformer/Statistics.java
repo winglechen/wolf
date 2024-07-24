@@ -2,7 +2,7 @@ package com.wolf.dts.transformer;
 
 import lombok.Data;
 import lombok.NonNull;
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 import com.wolf.common.util.collection.CollectionUtil;
 
 import java.util.ArrayList;

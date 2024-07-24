@@ -1,6 +1,6 @@
 package com.wolf.mqclient.vendor.rocketmq5.converter.state;
 
-import com.wolf.common.lang.contract.worker.Converter;
+import com.wolf.common.contract.worker.Converter;
 import com.wolf.mqclient.core.consumer.ConsumeStateEnum;
 import org.apache.rocketmq.client.apis.consumer.ConsumeResult;
 

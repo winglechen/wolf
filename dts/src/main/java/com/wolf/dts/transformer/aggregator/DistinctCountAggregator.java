@@ -3,7 +3,7 @@ package com.wolf.dts.transformer.aggregator;
 import lombok.NonNull;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import com.wolf.common.io.db.Row;
+import com.wolf.common.lang.io.db.Row;
 import com.wolf.common.util.lang.StringUtil;
 import com.wolf.common.util.time.DateUtil;
 import com.wolf.dts.transformer.Statistics;

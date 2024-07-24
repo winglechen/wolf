@@ -1,5 +1,6 @@
 package com.wolf.common.lang.string;
 
+import com.wolf.common.ds.string.WordDistance;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

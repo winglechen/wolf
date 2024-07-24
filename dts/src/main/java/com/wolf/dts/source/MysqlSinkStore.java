@@ -2,8 +2,8 @@ package com.wolf.dts.source;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import com.wolf.common.io.db.Table;
-import com.wolf.common.io.sql.builder.SqlBuilder;
+import com.wolf.common.lang.io.db.Table;
+import com.wolf.common.lang.io.sql.builder.SqlBuilder;
 import com.wolf.common.util.collection.ArrayUtil;
 import com.wolf.dts.source.offset.Offset;
 import com.wolf.dts.source.offset.OffsetGateway;
