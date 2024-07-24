@@ -18,11 +18,9 @@
         <module>boot</module>
         <module>starter</module>
         <module>common</module>
-        <module>dts</module>
         <module>principle</module>
         <module>framework</module>
         <module>mqclient</module>
-        <module>sql</module>
         <module>starter/wolf-boot-starter</module>
     </modules>
 

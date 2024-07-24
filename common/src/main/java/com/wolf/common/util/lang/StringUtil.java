@@ -10,7 +10,6 @@ import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.collection.MapUtil;
 
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -546,7 +545,7 @@ public class StringUtil {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    public static String remove(@NotNull String s, Collection<String> subs) {
+    public static String remove(String s, Collection<String> subs) {
         if (CollectionUtil.isEmpty(subs)) {
             throw new IllegalArgumentException("StringUtil.remove subs can't be empty");
         }
@@ -566,7 +565,7 @@ public class StringUtil {
         return remove(s, Arrays.asList(subs));
     }
 
-    public static String replace(@NotNull String s, @NotNull Map<String, String> map) {
+    public static String replace(String s, Map<String, String> map) {
         if (MapUtil.isEmpty(map)) {
             return s;
         }

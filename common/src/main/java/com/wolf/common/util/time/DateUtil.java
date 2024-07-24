@@ -3,7 +3,6 @@ package com.wolf.common.util.time;
 import lombok.NonNull;
 import com.wolf.common.util.lang.StringUtil;
 
-import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -107,7 +106,7 @@ public class DateUtil {
         return result;
     }
 
-    public static int asEpochSecond(@NotNull LocalDateTime localDateTime) {
+    public static int asEpochSecond(LocalDateTime localDateTime) {
         long milli = asEpochMilli(localDateTime);
         milli = milli / 1000;
         return (int) milli;

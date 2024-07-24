@@ -9,8 +9,8 @@ import com.wolf.mqclient.core.transaction.TransactionProducerManager;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationListener;
@@ -73,7 +73,7 @@ public class MQStarter implements InitializingBean, ApplicationListener<Applicat
      * @param event the event to respond to
      */
     @Override
-    public void onApplicationEvent(@NotNull ApplicationContextEvent event) {
+    public void onApplicationEvent(@NonNull ApplicationContextEvent event) {
         if (event instanceof ContextRefreshedEvent) {
             if (event.getApplicationContext().getParent() != null) {
                 return;
