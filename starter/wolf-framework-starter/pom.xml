@@ -25,6 +25,16 @@
             <artifactId>wolfno</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.wolf.starter</groupId>
+            <artifactId>wolf-starter-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wolf.starter</groupId>
+            <artifactId>wolf-starter-web</artifactId>
+        </dependency>
+
     </dependencies>
 
 
