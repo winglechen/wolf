@@ -4,10 +4,12 @@ import com.wolf.common.ds.map.LockMap;
 import com.wolf.common.lang.exception.SystemException;
 import com.wolf.wolfno.config.WolfNoConfig;
 import com.wolf.wolfno.model.WolfNoContext;
+import java.util.IllegalFormatCodePointException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class WolfIDContainer {
@@ -58,7 +60,10 @@ public class WolfIDContainer {
     }
 
     public String getWolfID(WolfNoContext context) {
-        return "";
+        WolfID wolfID = getAndIncrease(context);
+
+        return String.format("%02d", wolfID.getIdShard())
+                + wolfID.getCurrentID().intValue();
     }
 
     public WolfID getAndIncrease(WolfNoContext context) {
@@ -70,7 +75,7 @@ public class WolfIDContainer {
 
         int id = wolfID.getCurrentID().getAndIncrement();
         if (id < wolfID.getMaxID()) {
-            this.tryAsyncFetch(context);
+            this.tryAsyncFetch(context, wolfID);
             return wolfID;
         }
 
@@ -93,15 +98,43 @@ public class WolfIDContainer {
             throw new SystemException("failed to lock id " + name);
         }
 
-        IDResult result = this.fetcher.getID(context, DEFAULT_STEP);
+        if (context.getStep() < 1) {
+            context.setStep(DEFAULT_STEP);
+        }
+        IDResult result = this.fetcher.getID(context);
+        WolfID wolfID = fromResult(result, context);
 
         this.lockMap.unlock(name);
-        return null;
+        return wolfID;
     }
 
-    private void tryAsyncFetch(WolfNoContext context) {
+    private WolfID fromResult(IDResult result, WolfNoContext context) {
+        WolfID wolfID = WolfID.fromContext(context);
+        wolfID.setMaxID(result.getMaxID());
 
+        int minId = result.getMaxID() - result.getStep();
+        wolfID.setCurrentID(new AtomicInteger(minId));
+        wolfID.setIdShard(result.getShard());
 
+        addWolfID(wolfID);
+
+        return wolfID;
+    }
+
+    private void tryAsyncFetch(WolfNoContext context, WolfID wolfID) {
+        int maxID = wolfID.getMaxID();
+        int currentID = wolfID.getCurrentID().intValue();
+        double rate = (double) (maxID - currentID) / DEFAULT_STEP;
+        if (rate < DEFAULT_RATE) {
+            return;
+        }
+
+        WolfID standby = this.idStandby.get(context.getName());
+        if (null != standby) {
+            return;
+        }
+
+        asyncFetch(context);
     }
 
     private void asyncFetch(WolfNoContext context) {
@@ -113,7 +146,18 @@ public class WolfIDContainer {
 
         WolfIDContainer that = this;
         this.executor.submit(() -> {
-            IDResult result = that.fetcher.getID(context, DEFAULT_STEP);
+
+            if (context.getStep() < 1) {
+                context.setStep(DEFAULT_STEP);
+            }
+            IDResult result = that.fetcher.getID(context);
+            WolfID wolfID = fromResult(result, context);
+
+            if (!that.idMap.containsKey(wolfID.getName())) {
+                addWolfID(wolfID);
+            } else {
+                addStandbyID(wolfID);
+            }
 
             that.lockMap.unlock(name);
         });

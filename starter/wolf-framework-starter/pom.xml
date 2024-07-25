@@ -16,13 +16,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wolf</groupId>
-            <artifactId>common</artifactId>
+            <groupId>com.wolf.starter</groupId>
+            <artifactId>wolf-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.wolf</groupId>
-            <artifactId>framework</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.wolf</groupId>
             <artifactId>wolfno</artifactId>

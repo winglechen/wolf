@@ -164,11 +164,44 @@ public class BeanUtil {
                 .toArray(String[]::new);
     }
 
-    public static void copyPropertiesDeep(@NonNull Object source, Object target) {
-        copyPropertiesDeep(source, target, true);
+    public static void copyProperties(@NonNull Object source, Object target) {
+        copyProperties(source, target, true);
     }
 
-    public static void copyPropertiesDeep(@NonNull Object source, Object target, boolean filterNulls) {
+    public static void copyProperties(@NonNull Object source, Object target, Collection<String> ignoreKeys) {
+        if (CollectionUtil.isEmpty(ignoreKeys)) {
+            copyProperties(source, target);
+            return;
+        }
+
+        String[] keys = new String[ignoreKeys.size()];
+        ignoreKeys.toArray(keys);
+        BeanUtils.copyProperties(source, target, keys);
+    }
+
+    public static void copyProperties(@NonNull Object source, Object target, boolean filterNulls, Collection<String> ignoreKeys) {
+        if (!filterNulls) {
+            copyProperties(source, target, ignoreKeys);
+            return;
+        }
+
+        if (CollectionUtil.isEmpty(ignoreKeys)) {
+            copyProperties(source, target, true);
+            return;
+        }
+
+        String[] nullKeys = getNullPropertyNames(source);
+        String[] iKeys = new String[ignoreKeys.size()];
+        ignoreKeys.toArray(iKeys);
+
+        String[] keys = new String[ignoreKeys.size() + ignoreKeys.size()];
+        System.arraycopy(nullKeys, 0, keys, 0, nullKeys.length);
+        System.arraycopy(iKeys, 0, keys, 0, iKeys.length);
+
+        BeanUtils.copyProperties(source, target, keys);
+    }
+
+    public static void copyProperties(@NonNull Object source, Object target, boolean filterNulls) {
         if (filterNulls) {
             BeanUtils.copyProperties(source, target, getNullPropertyNames(source));
         } else {
@@ -176,14 +209,13 @@ public class BeanUtil {
         }
     }
 
-    public static void copyProperties(Object source, Object target) {
-        copyProperties(source, target, false, null);
+    public static void copyPropertiesBak(Object source, Object target) {
+        copyPropertiesBak(source, target, false, null);
     }
 
-    public static void copyProperties(@NonNull Object source, Object target, boolean filterNulls) {
-        copyProperties(source, target, filterNulls, null);
+    public static void copyPropertiesBak(@NonNull Object source, Object target, boolean filterNulls) {
+        copyPropertiesBak(source, target, filterNulls, null);
     }
-
     /**
      * simple bean copy method
      * not support collection or map object
@@ -192,7 +224,7 @@ public class BeanUtil {
      * @param target      target
      * @param filterNulls filterNull
      */
-    public static void copyProperties(@NonNull Object source, Object target, boolean filterNulls, Collection<String> ignoreKeys) {
+    public static void copyPropertiesBak(@NonNull Object source, Object target, boolean filterNulls, Collection<String> ignoreKeys) {
         Map<String, Object> sourceMap = toMap(source);
 
         Field[] fields = target.getClass().getDeclaredFields();
