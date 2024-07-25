@@ -4,7 +4,6 @@ import com.wolf.common.ds.map.LockMap;
 import com.wolf.common.lang.exception.SystemException;
 import com.wolf.wolfno.config.WolfNoConfig;
 import com.wolf.wolfno.model.WolfNoContext;
-import java.util.IllegalFormatCodePointException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -62,8 +61,8 @@ public class WolfIDContainer {
     public String getWolfID(WolfNoContext context) {
         WolfID wolfID = getAndIncrease(context);
 
-        return String.format("%02d", wolfID.getIdShard())
-                + wolfID.getCurrentID().intValue();
+        return wolfID.getCurrentID().intValue()
+            + String.format("%02d", wolfID.getIdShard());
     }
 
     public WolfID getAndIncrease(WolfNoContext context) {

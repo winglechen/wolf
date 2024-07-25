@@ -19,9 +19,9 @@ public class EveryDay24 extends AbstractWolfNoCreator implements WolfNoCreator {
         sb.append(year);
         sb.append(DAY_FORMATTER.format(context.getCreateTime()));
         sb.append(String.format("%03d", context.getType()));
+        sb.append(getWolfID());
         sb.append(formatDatacenter());
         sb.append(formatShard());
-        sb.append(getWolfID());
 
         return sb.toString();
     }
