@@ -1,15 +1,13 @@
-package com.wolf.framework.layer.domain.wolfno.factory;
+package com.wolf.wolfno.factory;
 
-import com.wolf.framework.layer.domain.wolfno.config.WolfNoConfig;
-import com.wolf.framework.layer.domain.wolfno.model.WolfNoStyleEnum;
-import com.wolf.framework.layer.domain.wolfno.model.WolfNoContext;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.wolf.wolfno.model.WolfNoStyleEnum;
+import com.wolf.wolfno.model.WolfNoContext;
 
 public class WolfNoBuilder {
     private final WolfNoContext context;
 
-    public WolfNoBuilder(WolfNoConfig config, JdbcTemplate jdbcTemplate) {
-        this.context = new WolfNoContext(config, jdbcTemplate);
+    public WolfNoBuilder() {
+        this.context = new WolfNoContext();
     }
 
     public WolfNoBuilder style(WolfNoStyleEnum style) {

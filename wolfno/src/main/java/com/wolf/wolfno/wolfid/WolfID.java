@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.domain.wolfno.wolfid;
+package com.wolf.wolfno.wolfid;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,6 +9,7 @@ public class WolfID implements Serializable {
     private boolean hasStandBy = false;
 
     private String name;
+    private int shard;
     private int step;
 
     private AtomicInteger currentID;
@@ -16,4 +17,8 @@ public class WolfID implements Serializable {
     private double rate;
 
     private long createTime;
+
+    public boolean isValid() {
+        return maxID > currentID.intValue();
+    }
 }

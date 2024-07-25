@@ -15,7 +15,6 @@
         <module>wolf-starter-dubbo</module>
         <module>wolf-starter-mq</module>
         <module>wolf-starter-cache</module>
-<!--        <module>wolf-boot-starter</module>-->
     </modules>
 
 

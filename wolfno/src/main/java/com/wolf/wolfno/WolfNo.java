@@ -1,18 +1,18 @@
-package com.wolf.framework.layer.domain.wolfno;
+package com.wolf.wolfno;
 
 import com.wolf.common.util.collection.CollectionUtil;
-import com.wolf.framework.layer.domain.wolfno.config.WolfNoConfig;
-import com.wolf.framework.layer.domain.wolfno.wolfid.WolfID;
+import com.wolf.wolfno.config.WolfNoConfig;
+import com.wolf.wolfno.factory.WolfNoBuilder;
+import com.wolf.wolfno.wolfid.WolfIDContainer;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class WolfNo {
     private final WolfNoConfig config;
-    private final JdbcTemplate jdbcTemplate;
 
     public WolfNo(WolfNoConfig config, JdbcTemplate jdbcTemplate) {
         this.config = config;
-        this.jdbcTemplate = jdbcTemplate;
 
+        WolfIDContainer.singleton().init(config, jdbcTemplate);
     }
 
     public void init() {
@@ -24,13 +24,13 @@ public class WolfNo {
 
     /**
      * WolfNo builder api
-     *  -> create NoBuilder
-     *  -> NoBuilder.create()
-     *  -> NoCreator.create()
+     *  -> create WolfNoBuilder
+     *  -> WolfNoBuilder.build()
+     *  -> WolfNoFactory.create()
      *
-     * @return NoBuilder
+     * @return WolfNoBuilder
      */
-    public WolfID builder() {
-        return new WolfID();
+    public WolfNoBuilder builder() {
+        return new WolfNoBuilder();
     }
 }

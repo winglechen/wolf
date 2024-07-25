@@ -1,7 +1,7 @@
-package com.wolf.framework.layer.domain.wolfno.strategy;
+package com.wolf.wolfno.strategy;
 
-import com.wolf.framework.layer.domain.wolfno.factory.AbstractWolfNoCreator;
-import com.wolf.framework.layer.domain.wolfno.factory.WolfNoCreator;
+import com.wolf.wolfno.factory.AbstractWolfNoCreator;
+import com.wolf.wolfno.factory.WolfNoCreator;
 import java.time.format.DateTimeFormatter;
 
 public class EveryDay24 extends AbstractWolfNoCreator implements WolfNoCreator {
@@ -11,9 +11,13 @@ public class EveryDay24 extends AbstractWolfNoCreator implements WolfNoCreator {
     public String create() {
         StringBuilder sb = new StringBuilder();
 
-        int year = getCreateTime().getYear() % 1000;
+        int year = context.getCreateTime().getYear() % 1000;
+        if (year < 10) {
+            year = 50 + year;
+        }
+
         sb.append(year);
-        sb.append(DAY_FORMATTER.format(getCreateTime()));
+        sb.append(DAY_FORMATTER.format(context.getCreateTime()));
         sb.append(String.format("%03d", context.getType()));
         sb.append(context.getDatacenter());
         sb.append(context.getShard());

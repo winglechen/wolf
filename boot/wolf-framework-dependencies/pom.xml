@@ -12,22 +12,21 @@
 
     <properties>
         <version.snapshot>1.0.0-SNAPSHOT</version.snapshot>
+        <wolf-boot.version>1.0.0-SNAPSHOT</wolf-boot.version>
         <wolf-framework-boot.version>1.0.0-SNAPSHOT</wolf-framework-boot.version>
         <wolf-principle.version>1.0.0-SNAPSHOT</wolf-principle.version>
         <wolf-common.version>1.0.0-SNAPSHOT</wolf-common.version>
+        <wolf-wolfno.version>1.0.0-SNAPSHOT</wolf-wolfno.version>
         <wolf-framework.version>1.0.0-SNAPSHOT</wolf-framework.version>
+
+        <wolf-dbclient.version>1.0.0-SNAPSHOT</wolf-dbclient.version>
+        <wolf-mqclient.version>1.0.0-SNAPSHOT</wolf-mqclient.version>
+        <wolf-httpclient.version>1.0.0-SNAPSHOT</wolf-httpclient.version>
         <wolf-dts.version>1.0.0-SNAPSHOT</wolf-dts.version>
-        <wolf-mock.version>1.0.0-SNAPSHOT</wolf-mock.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
-            <dependency>
-                <groupId>com.wolf.starter</groupId>
-                <artifactId>wolf-boot-starter</artifactId>
-                <version>${wolf-framework-boot.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.wolf</groupId>
@@ -47,8 +46,45 @@
             </dependency>
             <dependency>
                 <groupId>com.wolf</groupId>
+                <artifactId>wolfno</artifactId>
+                <version>${wolf-wolfno.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wolf</groupId>
                 <artifactId>dts</artifactId>
                 <version>${wolf-dts.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.wolf</groupId>
+                <artifactId>mqclient</artifactId>
+                <version>${wolf-mqclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wolf</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${wolf-httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wolf</groupId>
+                <artifactId>dbclient</artifactId>
+                <version>${wolf-dbclient.version}</version>
+            </dependency>
+
+
+
+
+            <dependency>
+                <groupId>com.wolf.starter</groupId>
+                <artifactId>wolf-boot-starter</artifactId>
+                <version>${wolf-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.wolf.starter</groupId>
+                <artifactId>wolf-framework-starter</artifactId>
+                <version>${wolf-framework-boot.version}</version>
             </dependency>
 
             <dependency>

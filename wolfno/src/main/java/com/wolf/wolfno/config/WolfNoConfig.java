@@ -1,12 +1,14 @@
-package com.wolf.framework.layer.domain.wolfno.config;
+package com.wolf.wolfno.config;
 
-import com.wolf.framework.layer.domain.wolfno.WolfNo;
-import com.wolf.framework.layer.domain.wolfno.wolfid.WolfID;
+import com.wolf.wolfno.WolfNo;
+import com.wolf.wolfno.wolfid.WolfID;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -16,6 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "wolf.no", ignoreInvalidFields = true)
+@AutoConfigureAfter(JdbcTemplateAutoConfiguration.class)
 public class WolfNoConfig implements Serializable {
     private boolean enabled = false;
 

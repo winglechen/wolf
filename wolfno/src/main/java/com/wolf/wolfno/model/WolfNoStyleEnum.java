@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.domain.wolfno.model;
+package com.wolf.wolfno.model;
 
 import lombok.Getter;
 import com.wolf.common.lang.enums.CodeBasedEnum;

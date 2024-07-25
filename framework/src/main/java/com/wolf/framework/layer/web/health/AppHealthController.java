@@ -29,7 +29,7 @@ public class AppHealthController implements Controller {
         String fromIp = IPUtil.getIP(request);
         log.info("try to set app up. from ip: {}", fromIp);
 
-        if (!IPUtil.innerIP(fromIp)) {
+        if (!IPUtil.isLocalIP(fromIp)) {
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
         } else {
             status = AppHealthStatusEnum.UP;
@@ -42,7 +42,7 @@ public class AppHealthController implements Controller {
         String fromIp = IPUtil.getIP(request);
         log.info("try to set app down. from ip: {}", fromIp);
 
-        if (!IPUtil.innerIP(fromIp)) {
+        if (!IPUtil.isLocalIP(fromIp)) {
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
         } else {
             status = AppHealthStatusEnum.DOWN;

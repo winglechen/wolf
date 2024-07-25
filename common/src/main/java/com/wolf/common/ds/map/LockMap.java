@@ -41,7 +41,10 @@ public class LockMap {
     public boolean tryLock(String key) {
         ReentrantLock lock = map.get(key);
         if (lock == null) {
-            throw new SystemException("Can't find lock for key:" + key);
+            lock = new ReentrantLock();
+            if (!addLock(key, lock)) {
+                return false;
+            }
         }
 
         return lock.tryLock();

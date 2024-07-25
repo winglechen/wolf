@@ -1,6 +1,9 @@
-package com.wolf.framework.layer.domain.wolfno.wolfid;
+package com.wolf.wolfno.wolfid;
 
 import com.wolf.common.lang.exception.SystemException;
+import com.wolf.wolfno.config.WolfNoConfig;
+import com.wolf.wolfno.model.WolfNoContext;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -8,16 +11,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Slf4j
 public class WolfIDFetcher {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
     private final static String SCHEMA_TABLE = "information_schema.tables ";
     private final static String UID_TABLE = "wolf_id";
     private final static int DEFAULT_ID = 11111111;
 
+    private final WolfNoConfig config;
     private final JdbcTemplate jdbcTemplate;
-    private boolean enable = false;
 
-    public WolfIDFetcher(JdbcTemplate jdbcTemplate) {
+    public WolfIDFetcher(WolfNoConfig config, JdbcTemplate jdbcTemplate) {
+        this.config = config;
         this.jdbcTemplate = jdbcTemplate;
-        this.enable = checkTableExists();
     }
 
     private boolean checkTableExists() {
@@ -31,10 +35,9 @@ public class WolfIDFetcher {
         return !result.isEmpty();
     }
 
-    public int getID(String name, int step) {
-        if (!this.enable) {
-            throw new SystemException("WolfID table was not found!");
-        }
+    public IDResult getID(WolfNoContext context, int step) {
+        String name = context.getName();
+        name += FORMATTER.format(context.getCreateTime());
 
         String sql = """
             INSERT INTO %s (name, uid) values ('%s', %d)
@@ -48,7 +51,7 @@ public class WolfIDFetcher {
             throw new SystemException("get wolfID failed");
         }
 
-        return id;
+        return null;
     }
 
 }

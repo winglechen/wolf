@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.domain.wolfno.config;
+package com.wolf.wolfno.config;
 
 import com.wolf.common.util.lang.StringUtil;
 import org.springframework.context.annotation.Condition;

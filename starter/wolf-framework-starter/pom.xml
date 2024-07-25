@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wolf.starter</groupId>
-    <artifactId>wolf-boot-starter</artifactId>
+    <artifactId>wolf-framework-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
@@ -19,10 +19,14 @@
             <groupId>com.wolf</groupId>
             <artifactId>common</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.wolf</groupId>-->
-<!--            <artifactId>framework</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.wolf</groupId>
+            <artifactId>framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wolf</groupId>
+            <artifactId>wolfno</artifactId>
+        </dependency>
 
     </dependencies>
 
