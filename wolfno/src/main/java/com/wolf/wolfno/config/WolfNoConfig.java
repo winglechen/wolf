@@ -17,17 +17,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "wolf.no", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "wolf.wolfno", ignoreInvalidFields = true)
 @AutoConfigureAfter(JdbcTemplateAutoConfiguration.class)
 public class WolfNoConfig implements Serializable {
-    private boolean enabled = false;
+    private boolean enable = false;
 
     private List<WolfID> noList = new ArrayList<>();
 
 
     @Bean
     @Conditional(WolfNoCondition.class)
-    @ConditionalOnBean(JdbcTemplate.class)
+//    @ConditionalOnBean(JdbcTemplate.class)
     public WolfNo wolfNo(JdbcTemplate jdbcTemplate) {
         WolfNo wolfNo = new WolfNo(this, jdbcTemplate);
         wolfNo.init();

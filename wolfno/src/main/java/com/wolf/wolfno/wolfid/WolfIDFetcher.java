@@ -53,7 +53,7 @@ public class WolfIDFetcher {
             INSERT INTO %s (name, shard, uid, step) values ('%s', %d, %d, %d)
             ON CONFLICT(name)
             DO UPDATE set
-                uid = %s.uid + %d
+                uid = %s.uid + %d,
                 updated_at = '%s'
             RETURNING uid
         """.formatted(UID_TABLE, name, DEFAULT_SHARD, initID, context.getStep(),

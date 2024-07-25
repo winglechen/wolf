@@ -8,9 +8,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 public class WolfNoCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        String enable = context.getEnvironment().getProperty("wolf.no.enable");
+        String enable = context.getEnvironment().getProperty("wolf.wolfno.enable");
 
-        if (StringUtil.isAllBlank(enable)) {
+        if (StringUtil.isBlank(enable)) {
             return false;
         }
         return Boolean.parseBoolean(enable);

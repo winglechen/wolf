@@ -3,6 +3,7 @@ package com.wolf.framework.layer.context;
 import com.wolf.framework.exception.WolfException;
 import java.lang.annotation.Annotation;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -18,6 +19,7 @@ import org.springframework.util.Assert;
  * @author Wingle
  * @since 2020/2/18 10:58 下午
  **/
+@Slf4j
 @Component
 public class WolfContext implements ApplicationContextAware, DisposableBean {
 
