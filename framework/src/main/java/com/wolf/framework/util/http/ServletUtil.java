@@ -1,13 +1,13 @@
 package com.wolf.framework.util.http;
 
 import com.wolf.common.util.lang.StringUtil;
-import com.wolf.framework.layer.web.TradeEnv;
+import com.wolf.framework.layer.web.HttpEnv;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -76,8 +76,8 @@ public class ServletUtil {
         return httpServletRequest.getRemoteAddr();
     }
 
-    public static TradeEnv toTradeEnv(HttpServletRequest httpServletRequest) {
-        return TradeEnv.builder()
+    public static HttpEnv toTradeEnv(HttpServletRequest httpServletRequest) {
+        return HttpEnv.builder()
                 .ip(getClientIP(httpServletRequest))
                 .build();
     }

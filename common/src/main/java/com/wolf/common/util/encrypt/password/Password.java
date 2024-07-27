@@ -1,8 +1,8 @@
 package com.wolf.common.util.encrypt.password;
 
+import com.wolf.common.lang.exception.SystemException;
+import com.wolf.common.util.encrypt.HashUtil;
 import lombok.Data;
-import com.wolf.common.util.encrypt.ShaEncrypt;
-import com.wolf.common.util.encrypt.exception.ShaEncryptFailedException;
 
 /**
  * com.wolf.common.util.encrypt
@@ -24,9 +24,9 @@ public class Password {
 
         String encryptedPassword = userPassword + salt;
         try {
-            encryptedPassword = ShaEncrypt.sha512(encryptedPassword).substring(0, 32);
+            encryptedPassword = HashUtil.sha512(encryptedPassword).substring(0, 32);
         } catch (Exception e) {
-            throw new ShaEncryptFailedException("password encrypt failed");
+            throw new SystemException("password encrypt failed");
         }
 
         return encryptedPassword;

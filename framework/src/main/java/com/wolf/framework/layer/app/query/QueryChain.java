@@ -1,8 +1,8 @@
 package com.wolf.framework.layer.app.query;
 
 import com.wolf.common.contract.container.Context;
-import com.wolf.framework.layer.api.Request;
-import com.wolf.framework.layer.api.Response;
+import com.wolf.framework.layer.api.dto.Request;
+import com.wolf.framework.layer.api.dto.Response;
 import lombok.NonNull;
 
 public interface QueryChain<T extends Response, R extends Request, C extends Context> {

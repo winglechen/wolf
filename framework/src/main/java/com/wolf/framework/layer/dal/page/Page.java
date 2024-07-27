@@ -2,8 +2,8 @@ package com.wolf.framework.layer.dal.page;
 
 import com.github.pagehelper.PageHelper;
 import com.wolf.common.util.collection.CollectionUtil;
-import com.wolf.framework.layer.api.PageRequest;
-import com.wolf.framework.layer.api.Response;
+import com.wolf.framework.layer.api.dto.PageRequest;
+import com.wolf.framework.layer.api.dto.Response;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;

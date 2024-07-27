@@ -16,8 +16,7 @@ public enum CurrencyEnum implements CodeBasedEnum {
     IDR(360, "IDR"),
     NGN(566, "NGN"),
     BRL(986, "BRL"),
-    //iso 356 历史原因使用1009101
-    INR(1009101, "INR"),
+    INR(356, "INR"),
     CNY(156, "CNY"),
     USD(840,"USD"),
     EUR(978, "EUR"),

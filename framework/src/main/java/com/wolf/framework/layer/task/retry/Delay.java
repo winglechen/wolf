@@ -1,6 +1,6 @@
 package com.wolf.framework.layer.task.retry;
 
-import com.wolf.framework.layer.api.DTO;
+import com.wolf.framework.layer.api.dto.DTO;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NonNull;

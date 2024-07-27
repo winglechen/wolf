@@ -1,10 +1,10 @@
 package com.wolf.framework.util.http;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author weixing

@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.dal;
+package com.wolf.framework.layer.dal.model;
 
 
 /**

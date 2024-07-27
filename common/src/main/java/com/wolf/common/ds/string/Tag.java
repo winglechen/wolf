@@ -12,7 +12,7 @@ import java.util.TreeSet;
  **/
 public class Tag  {
     private String delimiter = ",";
-    private Set<String> tags;
+    private final Set<String> tags;
 
     public Tag() {
         this(null, null);
@@ -100,9 +100,6 @@ public class Tag  {
         }
 
         String[] tagArray = tagString.split(delimiter);
-        if (0 == tagArray.length) {
-            return;
-        }
 
         for (String tag : tagArray ) {
             add(tag);
@@ -115,9 +112,6 @@ public class Tag  {
         }
 
         String[] tagArray = tagString.split(delimiter);
-        if (0 == tagArray.length) {
-            return;
-        }
 
         for (String tag : tagArray ) {
             remove(tag);

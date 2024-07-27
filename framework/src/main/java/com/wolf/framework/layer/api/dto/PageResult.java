@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.api;
+package com.wolf.framework.layer.api.dto;
 
 import java.io.Serializable;
 import java.util.List;

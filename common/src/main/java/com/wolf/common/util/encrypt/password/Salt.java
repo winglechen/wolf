@@ -1,7 +1,6 @@
 package com.wolf.common.util.encrypt.password;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Base64;
 
 /**
@@ -22,6 +21,5 @@ public class Salt {
         random.nextBytes(salt);
 
         return Base64.getUrlEncoder().withoutPadding().encodeToString(salt).substring(0, 12);
-//        return Arrays.toString(salt);
     }
 }

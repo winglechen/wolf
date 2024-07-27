@@ -2,7 +2,7 @@ package com.wolf.framework.layer.web.health;
 
 import com.wolf.framework.layer.web.Controller;
 import com.wolf.framework.util.http.IPUtil;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

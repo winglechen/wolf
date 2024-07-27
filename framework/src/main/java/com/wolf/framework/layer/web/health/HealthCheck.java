@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.web;
+package com.wolf.framework.layer.web.health;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

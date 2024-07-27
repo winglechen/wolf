@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.api;
+package com.wolf.framework.layer.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

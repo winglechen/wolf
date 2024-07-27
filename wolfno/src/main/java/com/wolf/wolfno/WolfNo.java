@@ -40,8 +40,8 @@ public class WolfNo {
             .name(name)
             .style(WolfNoStyleEnum.DAY_ID_24)
             .type(type)
-            .datacenter(0)
-            .shard(123)
+//            .datacenter(0)
+//            .shard(123)
             .build();
     }
 
