@@ -32,7 +32,7 @@ public class ObjectTree {
     }
 
     public Object get(@NonNull String... keys) {
-        if (keys.length <= 0) {
+        if (keys.length == 0) {
             throw new IllegalArgumentException("keys can't be empty");
         }
 
@@ -57,10 +57,6 @@ public class ObjectTree {
     }
 
     public ObjectTree children(String... keys) {
-        if (keys.length <= 0) {
-            return this;
-        }
-
         for (String k : keys) {
             findNode(k);
         }
@@ -74,7 +70,7 @@ public class ObjectTree {
     }
 
     public ObjectTree parent(String... keys) {
-        if (keys.length <= 0) {
+        if (keys.length == 0) {
             throw new IllegalArgumentException("parent can't be empty");
         }
 
