@@ -1,4 +1,4 @@
-package com.wolf.framework.util.http;
+package com.wolf.framework.layer.web.util;
 
 import com.wolf.common.util.lang.StringUtil;
 import com.wolf.framework.layer.web.HttpEnv;

@@ -1,6 +1,7 @@
 package com.wolf.common.util.collection;
 
 import com.wolf.common.util.lang.BeanUtil;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * com.wolf.common.util.collection
@@ -9,8 +10,37 @@ import com.wolf.common.util.lang.BeanUtil;
  * @since 2020/2/18 7:31 上午
  **/
 public class ArrayUtil {
-    public static <T> boolean isEmpty(T[] tArray) {
-        return null == tArray || 0 == tArray.length;
+
+    public static boolean isEmpty(boolean[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(byte[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(char[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(double[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(float[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(int[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(Object[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
+    }
+
+    public static boolean isEmpty(short[] tArray) {
+        return ArrayUtils.isEmpty(tArray);
     }
 
     public static <T> boolean notEmpty(T[] tArray) {

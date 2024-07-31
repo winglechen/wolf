@@ -1,12 +1,15 @@
 package com.wolf.framework.layer.web.session;
 
 import com.wolf.common.ds.map.ObjectMap;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 
 public class Session {
     private static final String DEFAULT_NAMESPACE = "default";
@@ -16,6 +19,14 @@ public class Session {
 
     private Map<String, ObjectMap> sessionData;
     private Set<String> changedNamespaces;
+
+    private final RedisTemplate<String, ObjectMap> redisTemplate;
+    private final HashOperations<String, String, ObjectMap> hashOperations;
+
+    public Session(RedisTemplate<String, ObjectMap> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+        this.hashOperations = redisTemplate.opsForHash();
+    }
 
     public void start(HttpServletRequest request, HttpServletResponse response) {
         this.cookie = new Cookie(request, response);
@@ -37,6 +48,10 @@ public class Session {
         }
 
         return data.getObject(key, clazz);
+    }
+
+    public ObjectMap getNamespaces(String namespace) {
+        return this.sessionData.get(namespace);
     }
 
     public Session setNamespace(String namespace, ObjectMap map) {

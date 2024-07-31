@@ -1,4 +1,4 @@
-package com.wolf.framework.util.http;
+package com.wolf.framework.layer.web.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
