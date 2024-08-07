@@ -21,12 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ComponentScan("com.wolf.framework")
 public class WolfAutoConfiguration {
 
-    @Bean
-    @ConditionalOnBean(RedisTemplate.class)
-    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public Session session(RedisTemplate<String, ObjectMap> redisTemplate) {
-        return new Session(redisTemplate);
-    }
+
 
 
 }

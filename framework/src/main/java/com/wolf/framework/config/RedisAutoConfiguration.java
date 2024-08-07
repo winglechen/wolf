@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
 import com.alibaba.fastjson2.JSONWriter;
 import com.alibaba.fastjson2.filter.Filter;
-import com.alibaba.fastjson2.support.config.FastJsonConfig;
 import com.wolf.common.util.collection.ArrayUtil;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +25,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  **/
 @Slf4j
 @Configuration
+@ConditionalOnProperty("spring.redis")
 public class RedisAutoConfiguration {
 
     @Bean
@@ -50,7 +50,7 @@ public class RedisAutoConfiguration {
         return redisTemplate;
     }
 
-    public class FastJson2RedisSerializer<T> implements RedisSerializer<T> {
+     public static class FastJson2RedisSerializer<T> implements RedisSerializer<T> {
         //TODO: use config
         static final Filter AUTO_TYPE_FILTER = JSONReader.autoTypeFilter(
             "com.wolf", "com.one"

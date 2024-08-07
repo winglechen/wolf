@@ -1,6 +1,5 @@
 package com.wolf.framework.layer.api.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,8 +12,7 @@ import lombok.experimental.SuperBuilder;
  * @since 2020/1/4 5:09 下午
  **/
 @Data
-@SuperBuilder(toBuilder = true)
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class PageRequest implements Request {
     private static final int DEFAULT_PAGE_SIZE = 20;
@@ -22,16 +20,13 @@ public class PageRequest implements Request {
     private static final int DEFAULT_PAGE_NUM = 1;
 
     private Integer pageSize;
-    // prePage: -1; nextPage: 1;
-    private Integer pageNum;
+    private Integer current;
 
-    private Integer order;
     private String orderBy;
-    private Long orderValue;
 
     public void init() {
-        if (pageNum == null) {
-            pageNum = DEFAULT_PAGE_NUM;
+        if (current == null) {
+            current = DEFAULT_PAGE_NUM;
         }
 
         if (pageSize == null) {
@@ -39,9 +34,9 @@ public class PageRequest implements Request {
         }
     }
 
-    public Integer getPageNum() {
-        if (pageNum != null) {
-            return pageNum;
+    public Integer getCurrent() {
+        if (current != null) {
+            return current;
         }
 
         return DEFAULT_PAGE_NUM;
@@ -56,6 +51,6 @@ public class PageRequest implements Request {
     }
 
     public Long getOffset() {
-        return (getPageNum() - 1) * getPageSize().longValue();
+        return (getCurrent() - 1) * getPageSize().longValue();
     }
 }

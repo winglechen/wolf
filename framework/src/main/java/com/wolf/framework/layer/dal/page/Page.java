@@ -88,7 +88,7 @@ public class Page<T> implements Response {
     }
 
     public static <T> Page<T> of(PageRequest pageRequest, Long total, List<T> data) {
-        return of(pageRequest.getPageNum(), pageRequest.getPageSize(), total, data);
+        return of(pageRequest.getCurrent(), pageRequest.getPageSize(), total, data);
     }
 
     public static <T> Page<T> of(Integer pageNum, Integer pageSize, Long total, List<T> data) {

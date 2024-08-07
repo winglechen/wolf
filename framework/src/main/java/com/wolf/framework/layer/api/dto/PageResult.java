@@ -12,9 +12,9 @@ public class PageResult<T> extends Result<T> implements Serializable {
 
     private Integer total;
     private Integer pageSize;
-    private Integer pages;
-    private Integer pageNum;
+    private Integer current;
 
+    private Integer pages;
     private Boolean hasNextPage;
     private Boolean hasPrePage;
     private String lastId;
