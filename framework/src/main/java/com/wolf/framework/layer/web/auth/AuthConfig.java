@@ -14,5 +14,9 @@ public class AuthConfig {
     private String spaceKey = "orgId";
     private String spaceListKey = "spaceList";
 
+    private List<String> authPath = new ArrayList<>();
     private List<String> excludePath = new ArrayList<>();
+
+    private String denyCode = "";
+    private String denyMessage = "";
 }
