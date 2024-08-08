@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.api.dto;
+package com.wolf.framework.layer.api.result;
 
 import com.github.pagehelper.Page;
 import java.io.Serializable;

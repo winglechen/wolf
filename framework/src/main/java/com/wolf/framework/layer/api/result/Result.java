@@ -1,7 +1,6 @@
-package com.wolf.framework.layer.api.dto;
+package com.wolf.framework.layer.api.result;
 
 import lombok.Data;
-import com.wolf.common.lang.exception.BusinessException;
 import com.wolf.common.lang.exception.api.NullReturnedException;
 
 import java.io.Serializable;
