@@ -1,6 +1,6 @@
-package com.wolf.framework.layer.task.retry.strategy;
+package com.wolf.framework.layer.service.task.retry.strategy;
 
-import com.wolf.framework.layer.task.retry.RetryStrategyConst;
+import com.wolf.framework.layer.service.task.retry.RetryStrategyConst;
 import java.util.Arrays;
 import java.util.List;
 import lombok.Data;

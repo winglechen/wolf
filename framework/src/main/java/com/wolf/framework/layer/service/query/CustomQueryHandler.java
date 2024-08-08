@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.app.query;
+package com.wolf.framework.layer.service.query;
 
 import com.wolf.common.contract.container.Context;
 import com.wolf.framework.layer.api.dto.Request;

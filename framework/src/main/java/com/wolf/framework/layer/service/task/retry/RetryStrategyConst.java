@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.task.retry;
+package com.wolf.framework.layer.service.task.retry;
 
 public class RetryStrategyConst {
     public static final String DEFAULT_RETRY_STRATEGY = "DefaultRetryStrategy";

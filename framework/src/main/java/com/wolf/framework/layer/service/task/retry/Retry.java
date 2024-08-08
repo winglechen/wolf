@@ -1,8 +1,8 @@
-package com.wolf.framework.layer.task.retry;
+package com.wolf.framework.layer.service.task.retry;
 
 import com.wolf.common.contract.ability.Retryable;
-import com.wolf.framework.layer.task.retry.strategy.RetryStrategy;
-import com.wolf.framework.layer.task.retry.strategy.StrategyBuilder;
+import com.wolf.framework.layer.service.task.retry.strategy.RetryStrategy;
+import com.wolf.framework.layer.service.task.retry.strategy.StrategyBuilder;
 import java.time.LocalDateTime;
 import lombok.NonNull;
 

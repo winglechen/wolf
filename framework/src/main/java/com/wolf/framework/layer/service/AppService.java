@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.app;
+package com.wolf.framework.layer.service;
 
 /**
  * @author weixing

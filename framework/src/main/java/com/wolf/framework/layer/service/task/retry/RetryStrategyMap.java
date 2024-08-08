@@ -1,9 +1,9 @@
-package com.wolf.framework.layer.task.retry;
+package com.wolf.framework.layer.service.task.retry;
 
 import com.wolf.common.util.lang.StringUtil;
-import com.wolf.framework.layer.task.retry.strategy.Daily7RetryStrategy;
-import com.wolf.framework.layer.task.retry.strategy.DefaultRetryStrategy;
-import com.wolf.framework.layer.task.retry.strategy.RetryStrategy;
+import com.wolf.framework.layer.service.task.retry.strategy.Daily7RetryStrategy;
+import com.wolf.framework.layer.service.task.retry.strategy.DefaultRetryStrategy;
+import com.wolf.framework.layer.service.task.retry.strategy.RetryStrategy;
 import java.util.HashMap;
 import lombok.NonNull;
 

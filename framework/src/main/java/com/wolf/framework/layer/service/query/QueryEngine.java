@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.app.query;
+package com.wolf.framework.layer.service.query;
 
 import com.wolf.common.contract.container.Context;
 import com.wolf.common.lang.exception.lang.IllegalArgumentException;
@@ -9,7 +9,7 @@ import com.wolf.common.util.lang.StringUtil;
 import com.wolf.framework.layer.api.dto.PageRequest;
 import com.wolf.framework.layer.api.dto.Request;
 import com.wolf.framework.layer.api.dto.Response;
-import com.wolf.framework.layer.context.WolfContext;
+import com.wolf.framework.context.WolfContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

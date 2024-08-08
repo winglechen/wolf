@@ -1,6 +1,6 @@
-package com.wolf.framework.layer.context;
+package com.wolf.framework.context;
 
-import com.wolf.framework.exception.WolfException;
+import com.wolf.common.lang.exception.SystemException;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class WolfContext implements ApplicationContextAware, DisposableBean {
 
     public static <T> T getBean(Class<T> c) {
         if (!isInit) {
-            throw new WolfException("BeanUtil does not init");
+            throw new SystemException("BeanUtil does not init");
         }
 
         return applicationContext.getBean(c);
@@ -56,7 +56,7 @@ public class WolfContext implements ApplicationContextAware, DisposableBean {
 
     public static <T> T getBean(String className, Class<T> t) {
         if (!isInit) {
-            throw new WolfException("BeanUtil does not init");
+            throw new SystemException("BeanUtil does not init");
         }
 
         return applicationContext.getBean(className, t);
@@ -72,7 +72,7 @@ public class WolfContext implements ApplicationContextAware, DisposableBean {
 
     public static Object getBean(String name) {
         if (!isInit) {
-            throw new WolfException("BeanUtil does not init");
+            throw new SystemException("BeanUtil does not init");
         }
         return applicationContext.getBean(name);
     }

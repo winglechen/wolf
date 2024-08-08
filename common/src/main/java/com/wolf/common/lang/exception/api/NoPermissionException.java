@@ -1,4 +1,4 @@
-package com.wolf.framework.exception;
+package com.wolf.common.lang.exception.api;
 
 import com.wolf.common.lang.exception.BusinessException;
 

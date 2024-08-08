@@ -1,9 +1,9 @@
-package com.wolf.framework.layer.task.retry.strategy;
+package com.wolf.framework.layer.service.task.retry.strategy;
 
 import com.wolf.common.lang.exception.lang.IllegalArgumentException;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.StringUtil;
-import com.wolf.framework.layer.task.retry.RetryStrategyMap;
+import com.wolf.framework.layer.service.task.retry.RetryStrategyMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
