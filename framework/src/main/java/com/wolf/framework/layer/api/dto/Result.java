@@ -5,7 +5,7 @@ import com.wolf.common.lang.exception.BusinessException;
 import com.wolf.common.lang.exception.api.NullReturnedException;
 
 import java.io.Serializable;
-import java.util.Optional;
+import lombok.experimental.SuperBuilder;
 
 /**
  * com.wolf.framework.rpc
@@ -14,13 +14,37 @@ import java.util.Optional;
  * @since 2019/11/6 4:18 下午
  **/
 @Data
+@SuperBuilder
 public class Result<T> implements Serializable {
-    protected boolean success = false;
+    public static final String DEFAULT_SUCCESS_CODE = "SUCCESS";
+    public static final String DEFAULT_FAILURE_CODE = "FAILURE";
+    public static final String DEFAULT_MESSAGE = "";
+    public static final String DEFAULT_SUCCESS_MESSAGE = "";
+    public static final String DEFAULT_FAILURE_MESSAGE = "";
+    public static final int SUCCESS_CODE_TYPE = 0;
+
+
+    protected boolean success;
     /**
-     * 0 is ok
-     * non-0 is failed
+     * code: explicit result sign
+     *  - maybe the business exception
+     *      - NoSuchProduct
+     *      - OrderNotFound
+     *      - ...
+     *  - maybe just mark success or failure
+     *      - SUCCESS
+     *      - FAILURE
      */
     protected String code;
+
+    /**
+     * errorType:
+     *  - 0: success response
+     *  - 10: system error
+     *  - 20: business error
+     *  - 30: needLogin error
+     */
+    protected int codeType = 0;
 
     /**
      * message
@@ -32,62 +56,49 @@ public class Result<T> implements Serializable {
      */
     protected T data;
 
-    public static Result<Object> ok(){
-        return ok("");
-    }
-
-    public static <T> Result<T> ok(T t){
-        return new Result<>("OK", "ok", t);
-    }
-
     public static Result<Object> success(){
-        return ok("");
+        return success("");
     }
 
     public static <T> Result<T> success(T t){
-        return new Result<>("OK", "ok", t);
+        return new Result<>(true, DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, t);
     }
 
-    public static <T> Result<T> fail(String code, String message) {
-        return fail(code, message, null);
+    public static <T> Result<T> failure(String code, String message) {
+        return failure(code, message, null);
     }
 
-    public static <T> Result<T> fail(String code, String message, T t) {
-        return new Result<>(code, message, t);
+    public static <T> Result<T> failure(String code, String message, T t) {
+        return new Result<>(false, code, message, t);
     }
 
-    public static <T> Result<T> create(String code, String message) {
-        return create(code, message, null);
+    public static <T> Result<T> create(boolean success, String code, String message) {
+        return create(success, code, message, null);
     }
 
-    public static <T> Result<T> create(String code, String message, T t) {
-        return new Result<>(code, message, t);
+    public static <T> Result<T> create(boolean success, String code, String message, T t) {
+        return new Result<>(success, code, message, t);
     }
 
-    public static <T> T getSuccessDataOrNull(Result<T> result) {
-        return Optional.ofNullable(result).filter(Result::wasSuccess).map(Result::getData).orElse(null);
+    public Result() {}
+
+    public Result(boolean success) {
+        this(success, DEFAULT_SUCCESS_CODE, DEFAULT_MESSAGE, null);
     }
 
-    Result() {
-        this("OK", "", null);
+    public Result(boolean success, T data) {
+        this(success, DEFAULT_SUCCESS_CODE, DEFAULT_MESSAGE, data);
     }
 
-    Result(T data) {
-        this("OK", "", data);
+    public Result(boolean success, String code, String message) {
+        this(success, code, message, null);
     }
 
-    Result(String code, String message) {
-        this(code, message, null);
-    }
-
-    Result(String code, String message, T data) {
+    public Result(boolean success, String code, String message, T data) {
+        this.success = success;
         this.code = code;
         this.message = message;
         this.data = data;
-    }
-
-    public boolean wasSuccess() {
-        return success && null != data;
     }
 
     public T notNullData() {
@@ -103,9 +114,5 @@ public class Result<T> implements Serializable {
         }
 
         return data;
-    }
-
-    public void toBusinessException() {
-        throw new BusinessException(message);
     }
 }
