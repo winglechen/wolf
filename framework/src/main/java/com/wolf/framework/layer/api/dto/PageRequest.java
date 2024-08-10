@@ -21,6 +21,17 @@ public class PageRequest implements Request {
     private Integer pageSize = DEFAULT_PAGE_SIZE;
     private Integer current;
 
+    /**
+     * sort order:
+     * 0: default value 0 | null
+     * 1: asc
+     * 2: desc
+     */
+    private Integer order;
+
+    /**
+     * it is not safe to
+     */
     private String orderBy;
 
     public void init() {
