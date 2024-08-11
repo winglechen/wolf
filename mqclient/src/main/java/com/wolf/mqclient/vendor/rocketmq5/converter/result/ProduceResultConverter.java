@@ -1,6 +1,6 @@
 package com.wolf.mqclient.vendor.rocketmq5.converter.result;
 
-import com.wolf.common.contract.worker.Converter;
+import com.wolf.common.convention.worker.Converter;
 import com.wolf.mqclient.core.producer.ProduceResult;
 import com.wolf.mqclient.core.producer.ProduceStateEnum;
 import org.apache.rocketmq.client.apis.producer.SendReceipt;

@@ -1,6 +1,6 @@
 package com.wolf.mqclient.core.message;
 
-import com.wolf.common.contract.container.Context;
+import com.wolf.common.convention.container.Context;
 import java.io.Serializable;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.wolf.wolfno.model;
 
-import com.wolf.common.contract.container.Context;
+import com.wolf.common.convention.container.Context;
 import java.time.LocalDateTime;
 import lombok.Data;
 

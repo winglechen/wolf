@@ -1,6 +1,6 @@
 package com.wolf.mqclient.core.consumer;
 
-import com.wolf.common.contract.container.Context;
+import com.wolf.common.convention.container.Context;
 import com.wolf.mqclient.config.MQConsumerConfig;
 import com.wolf.mqclient.config.MQVendorConfig;
 import lombok.Data;

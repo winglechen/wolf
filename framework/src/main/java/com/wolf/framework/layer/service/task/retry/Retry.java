@@ -1,6 +1,6 @@
 package com.wolf.framework.layer.service.task.retry;
 
-import com.wolf.common.contract.ability.Retryable;
+import com.wolf.common.convention.ability.Retryable;
 import com.wolf.framework.layer.service.task.retry.strategy.RetryStrategy;
 import com.wolf.framework.layer.service.task.retry.strategy.StrategyBuilder;
 import java.time.LocalDateTime;

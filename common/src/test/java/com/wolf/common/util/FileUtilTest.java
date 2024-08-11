@@ -1,6 +1,6 @@
 package com.wolf.common.util;
 
-import com.wolf.common.util.file.FileUtil;
+import com.wolf.common.util.io.FileUtil;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
 

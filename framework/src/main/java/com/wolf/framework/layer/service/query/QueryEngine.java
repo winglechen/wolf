@@ -1,6 +1,6 @@
 package com.wolf.framework.layer.service.query;
 
-import com.wolf.common.contract.container.Context;
+import com.wolf.common.convention.container.Context;
 import com.wolf.common.lang.exception.lang.IllegalArgumentException;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.collection.MapUtil;
