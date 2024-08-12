@@ -45,4 +45,13 @@ public class WolfNo {
             .build();
     }
 
+    public String create(String name, int type, int shard) {
+        return new WolfNoBuilder()
+            .name(name)
+            .style(WolfNoStyleEnum.DAY_ID_24)
+            .type(type)
+            .shard(shard)
+            .build();
+    }
+
 }
