@@ -20,6 +20,14 @@ public class HashUtil {
         return Hashing.crc32().hashBytes(str.getBytes(StandardCharsets.UTF_8)).toString();
     }
 
+    public static String murmur3(@NonNull String str) {
+        return Hashing.murmur3_128().hashString(str, StandardCharsets.UTF_8).toString();
+    }
+
+    public static String murmur3_32(@NonNull String str) {
+        return Hashing.murmur3_32_fixed().hashString(str, StandardCharsets.UTF_8).toString();
+    }
+
     public static String sha512(@NonNull String str) {
         return Hashing.sha512().hashBytes(str.getBytes(StandardCharsets.UTF_8)).toString();
     }
