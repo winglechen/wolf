@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "wolf.session", ignoreInvalidFields = true)
 public class SessionConfig {
-
+    private Boolean enable = false;
     private String cookieKey = "WOLF_SESSION_ID";
     private long sessionMaxAge = 60 * 60 * 24 * 7;
 

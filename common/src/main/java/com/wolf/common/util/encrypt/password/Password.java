@@ -3,6 +3,7 @@ package com.wolf.common.util.encrypt.password;
 import com.wolf.common.lang.exception.SystemException;
 import com.wolf.common.util.encrypt.HashUtil;
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * com.wolf.common.util.encrypt
@@ -15,6 +16,10 @@ public class Password {
 
     public static String createSalt() {
         return Salt.create();
+    }
+
+    public static boolean match(@NonNull String requestPassword, @NonNull String salt, @NonNull String password) {
+        return password.equals(encrypt(requestPassword, salt));
     }
 
     public static String encrypt(String userPassword, String salt) {

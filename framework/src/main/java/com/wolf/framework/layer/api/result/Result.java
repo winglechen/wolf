@@ -16,9 +16,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Result<T> implements Serializable {
     public static final String DEFAULT_SUCCESS_CODE = "SUCCESS";
+    public static final String DEFAULT_SUCCESS_MESSAGE = "";
+
     public static final String DEFAULT_FAILURE_CODE = "FAILURE";
     public static final String DEFAULT_MESSAGE = "";
-    public static final String DEFAULT_SUCCESS_MESSAGE = "";
     public static final String DEFAULT_FAILURE_MESSAGE = "";
     public static final int SUCCESS_CODE_TYPE = 0;
 
@@ -56,11 +57,23 @@ public class Result<T> implements Serializable {
     protected T data;
 
     public static Result<Object> success(){
-        return success("");
+        return success(null);
+    }
+
+    public static <T> Result<T> success(String code, String message, T t){
+        return new Result<>(true, code, message, t);
+    }
+
+    public static <T> Result<T> success(String message, T t){
+        return new Result<>(true, DEFAULT_SUCCESS_CODE, message, t);
     }
 
     public static <T> Result<T> success(T t){
         return new Result<>(true, DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MESSAGE, t);
+    }
+
+    public static <T> Result<T> failure(String message) {
+        return failure(DEFAULT_FAILURE_CODE, message);
     }
 
     public static <T> Result<T> failure(String code, String message) {
