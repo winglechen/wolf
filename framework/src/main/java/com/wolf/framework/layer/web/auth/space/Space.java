@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.web.auth;
+package com.wolf.framework.layer.web.auth.space;
 
 import com.wolf.common.ds.map.ObjectMap;
 import java.io.Serializable;

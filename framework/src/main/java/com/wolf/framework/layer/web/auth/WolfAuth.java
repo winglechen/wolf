@@ -1,5 +1,6 @@
 package com.wolf.framework.layer.web.auth;
 
+import com.wolf.framework.layer.web.auth.session.Session;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

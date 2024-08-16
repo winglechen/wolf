@@ -1,7 +1,6 @@
 package com.wolf.framework.config;
 
-import com.wolf.framework.layer.web.auth.Session;
-import com.wolf.framework.layer.web.auth.SessionSaver;
+import com.wolf.framework.layer.web.auth.session.SessionSaver;
 import com.wolf.framework.layer.web.auth.WolfAuth;
 import com.wolf.framework.layer.web.auth.AuthConfig;
 import jakarta.annotation.Resource;

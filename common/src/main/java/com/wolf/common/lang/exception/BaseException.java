@@ -1,14 +1,16 @@
 package com.wolf.common.lang.exception;
 
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Setter;
 
 /**
  * Non-thread-safe
  */
-@Getter
+@Data
 public abstract class BaseException extends RuntimeException {
     protected long code;
     protected Map<String, String> data = new HashMap<>();
@@ -20,18 +22,6 @@ public abstract class BaseException extends RuntimeException {
     public BaseException(long code, String message) {
         super(message);
         this.code = code;
-    }
-
-    public long getCode() {
-        return code;
-    }
-
-    public void setCode(long code) {
-        this.code = code;
-    }
-
-    public void setData(Map<String, String> data) {
-        this.data = data;
     }
 
     public void setDataRow(String key, String value) {
