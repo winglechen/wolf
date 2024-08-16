@@ -47,16 +47,24 @@ public class Auth {
 
     public void login(Long accountId) {
         session.set(config.getAccountKey(), accountId);
+        session.save();
+    }
+
+    public void space(Long spaceId) {
+        session.set(config.getSpaceKey(), spaceId);
+        session.save();
     }
 
     public void login(Long spaceId, Long accountId) {
         login(accountId);
         session.set(config.getSpaceKey(), spaceId);
+        session.save();
     }
 
     public void logout() {
         session.set(config.getAccountKey(), null);
         session.set(config.getSpaceKey(), null);
+        session.save();
     }
 
     public void logout(Long spaceId) {
@@ -70,6 +78,7 @@ public class Auth {
         }
 
         session.set(config.getSpaceKey(), null);
+        session.save();
     }
 
     public boolean isNeedAuth(String path) {
@@ -111,6 +120,8 @@ public class Auth {
 
         String data = """
             {
+                "success": true,
+                "codeType": 30,
                 "code" : "%s",
                 "message" : "%s",
                 "data"  : "",

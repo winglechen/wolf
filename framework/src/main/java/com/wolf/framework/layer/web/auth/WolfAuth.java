@@ -41,12 +41,12 @@ public class WolfAuth extends OncePerRequestFilter {
 
     @Override
     public void destroy() {
+        log.error("session saved by WolfAuth");
         session.save();
     }
 
 
     /********************** proxy methods start *************************/
-
     public <T> T get(String key, Class<T> clazz) {
         return session.get(key, clazz);
     }
@@ -73,6 +73,10 @@ public class WolfAuth extends OncePerRequestFilter {
 
     public void login(Long accountId) {
         auth.login(accountId);
+    }
+
+    public void space(Long spaceId) {
+        auth.space(spaceId);
     }
 
     public void login(Long spaceId, Long accountId) {

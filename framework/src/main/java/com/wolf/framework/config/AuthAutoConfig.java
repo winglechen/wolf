@@ -1,5 +1,7 @@
 package com.wolf.framework.config;
 
+import com.wolf.framework.layer.web.auth.Session;
+import com.wolf.framework.layer.web.auth.SessionSaver;
 import com.wolf.framework.layer.web.auth.WolfAuth;
 import com.wolf.framework.layer.web.auth.AuthConfig;
 import jakarta.annotation.Resource;
@@ -20,6 +22,11 @@ public class AuthAutoConfig {
     @Bean
     public WolfAuth session(AuthConfig authConfig) {
         return new WolfAuth(redisTemplate(), authConfig);
+    }
+
+    @Bean
+    public SessionSaver sessionSaver(WolfAuth wolfAuth) {
+        return new SessionSaver(wolfAuth.getSession());
     }
 
     public RedisTemplate<String, Object> redisTemplate() {

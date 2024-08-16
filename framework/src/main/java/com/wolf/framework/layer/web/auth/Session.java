@@ -10,9 +10,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
+@Slf4j
 public class Session {
     private static final String DEFAULT_NAMESPACE = "default";
 
@@ -117,6 +119,7 @@ public class Session {
         }
 
         result = redisHash.get(this.sessionId, namespace);
+        log.info("load session, namespace: {}, sessionId: {}, data: {}", namespace, sessionId, result);
         if (result == null) {
             result = new ObjectMap();
         }
