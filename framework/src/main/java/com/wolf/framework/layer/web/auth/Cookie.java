@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.web.session;
+package com.wolf.framework.layer.web.auth;
 
 import com.wolf.common.util.lang.StringUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,10 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Cookie {
     private final HttpServletRequest servletRequest;
     private final HttpServletResponse servletResponse;
-    private final SessionConfig sessionConfig;
+    private final AuthConfig authConfig;
 
-    public Cookie(HttpServletRequest servletRequest, HttpServletResponse servletResponse, SessionConfig sessionConfig) {
-        this.sessionConfig = sessionConfig;
+    public Cookie(HttpServletRequest servletRequest, HttpServletResponse servletResponse, AuthConfig authConfig) {
+        this.authConfig = authConfig;
         this.servletRequest = servletRequest;
         this.servletResponse = servletResponse;
     }
@@ -23,12 +23,12 @@ public class Cookie {
         jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie(key, value);
         cookie.setSecure(isSecure);
 
-        if (StringUtil.isNoneBlank(sessionConfig.getDomain())) {
-            cookie.setDomain(sessionConfig.getDomain());
+        if (StringUtil.isNoneBlank(authConfig.getDomain())) {
+            cookie.setDomain(authConfig.getDomain());
         }
-        cookie.setPath(sessionConfig.getPath());
-        cookie.setMaxAge(sessionConfig.getCookieMaxAge());
-        cookie.setHttpOnly(sessionConfig.isHttpOnly());
+        cookie.setPath(authConfig.getPath());
+        cookie.setMaxAge(authConfig.getCookieMaxAge());
+        cookie.setHttpOnly(authConfig.isHttpOnly());
 
         this.servletResponse.addCookie(cookie);
     }

@@ -10,6 +10,10 @@ import com.wolf.common.lang.exception.BusinessException;
  */
 public class NoPermissionException extends BusinessException {
 
+    public NoPermissionException() {
+        super(110403, "No permission");
+    }
+
     public NoPermissionException(String message) {
         super(110403, message);
     }

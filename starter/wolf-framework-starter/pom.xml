@@ -32,6 +32,11 @@
 
         <dependency>
             <groupId>com.wolf.starter</groupId>
+            <artifactId>wolf-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wolf.starter</groupId>
             <artifactId>wolf-starter-web</artifactId>
         </dependency>
 

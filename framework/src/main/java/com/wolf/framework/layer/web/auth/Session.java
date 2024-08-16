@@ -1,9 +1,8 @@
-package com.wolf.framework.layer.web.session;
+package com.wolf.framework.layer.web.auth;
 
 import com.wolf.common.ds.map.ObjectMap;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.StringUtil;
-import jakarta.servlet.ServletRequestEvent;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -13,14 +12,14 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.context.request.RequestContextListener;
 
-public class Session extends RequestContextListener {
+public class Session {
     private static final String DEFAULT_NAMESPACE = "default";
 
-    private final SessionConfig sessionConfig;
-    private final RedisTemplate<String, ObjectMap> redisTemplate;
+    private final AuthConfig authConfig;
+    private final RedisTemplate<String, Object> redisTemplate;
     private final HashOperations<String, String, ObjectMap> redisHash;
+
 
     private Cookie cookie;
     private String sessionId;
@@ -28,21 +27,14 @@ public class Session extends RequestContextListener {
     private Map<String, ObjectMap> sessionData;
     private Set<String> changedNamespaces;
 
-
-    public Session(RedisTemplate<String, ObjectMap> redisTemplate, SessionConfig sessionConfig) {
+    public Session(RedisTemplate<String, Object> redisTemplate, AuthConfig authConfig) {
         this.redisTemplate = redisTemplate;
-        this.sessionConfig = sessionConfig;
+        this.authConfig = authConfig;
         this.redisHash = redisTemplate.opsForHash();
     }
 
-    @Override
-    public void requestDestroyed(ServletRequestEvent requestEvent) {
-        super.requestDestroyed(requestEvent);
-        this.save();
-    }
-
     public void start(HttpServletRequest request, HttpServletResponse response) {
-        this.cookie = new Cookie(request, response, this.sessionConfig);
+        this.cookie = new Cookie(request, response, this.authConfig);
         this.sessionData = new HashMap<>();
 
         this.getOrCreateSessionId();
@@ -106,14 +98,14 @@ public class Session extends RequestContextListener {
         }
 
         redisHash.putAll(sessionId, data);
-        redisTemplate.expire(sessionId, sessionConfig.getSessionMaxAge(), TimeUnit.SECONDS);
+        redisTemplate.expire(sessionId, authConfig.getSessionMaxAge(), TimeUnit.SECONDS);
     }
 
     private void getOrCreateSessionId() {
-        String cookieKey = cookie.get(sessionConfig.getCookieKey());
+        String cookieKey = cookie.get(authConfig.getCookieKey());
         if (StringUtil.isBlank(cookieKey)) {
             cookieKey = StringUtil.uuid();
-            cookie.set(sessionConfig.getCookieKey(), cookieKey, true);
+            cookie.set(authConfig.getCookieKey(), cookieKey, true);
         }
         this.sessionId = cookieKey;
     }
@@ -132,5 +124,4 @@ public class Session extends RequestContextListener {
         sessionData.put(namespace, result);
         return result;
     }
-
 }

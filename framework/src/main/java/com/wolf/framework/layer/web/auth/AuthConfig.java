@@ -15,6 +15,14 @@ public class AuthConfig {
     private String spaceListKey = "spaceList";
 
     private Boolean enable = false;
+    private String cookieKey = "WOLF_SESSION_ID";
+    private long sessionMaxAge = 60 * 60 * 24 * 7;
+
+    private int cookieMaxAge = 60 * 60 * 24 * 7;
+    private String domain;
+    private String path = "/";
+    private boolean isHttpOnly = true;
+    private boolean isSecure = true;
 
     private List<String> authPath = new ArrayList<>();
     private List<String> excludePath = new ArrayList<>();

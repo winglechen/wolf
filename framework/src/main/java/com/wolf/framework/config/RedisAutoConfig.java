@@ -25,11 +25,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  **/
 @Slf4j
 @Configuration
-@ConditionalOnProperty("spring.redis")
-public class RedisAutoConfiguration {
+@ConditionalOnProperty(value = {"spring.data.redis"})
+public class RedisAutoConfig {
 
-    @Bean
-    @ConditionalOnProperty("spring.redis")
+    @Bean(name = "redisTemplate" )
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
@@ -50,44 +49,7 @@ public class RedisAutoConfiguration {
         return redisTemplate;
     }
 
-     public static class FastJson2RedisSerializer<T> implements RedisSerializer<T> {
-        //TODO: use config
-        static final Filter AUTO_TYPE_FILTER = JSONReader.autoTypeFilter(
-            "com.wolf", "com.one"
-        );
-        private final Class<T> clazz;
 
-        public FastJson2RedisSerializer(Class<T> clazz) {
-            super();
-            this.clazz = clazz;
-        }
-
-        @Override
-        public byte[] serialize(T t) throws SerializationException {
-            if (Objects.isNull(t)) {
-                return new byte[0];
-            }
-            try {
-                return JSON.toJSONBytes(t, JSONWriter.Feature.WriteClassName);
-            } catch (Exception e) {
-                log.error("Fastjson2 serialize error：{}", e.getMessage());
-                throw new SerializationException("Can't serialize : " + e.getMessage(), e);
-            }
-        }
-
-        @Override
-        public T deserialize(byte[] bytes) throws SerializationException {
-            if (ArrayUtil.isEmpty(bytes)) {
-                return null;
-            }
-            try {
-                return JSON.parseObject(bytes, clazz, AUTO_TYPE_FILTER);
-            } catch (Exception e) {
-                log.error("Fastjson2 deserialize error ：{}", e.getMessage());
-                throw new SerializationException("Can't deserialize :" + e.getMessage(), e);
-            }
-        }
-    }
 
 
 

@@ -1,78 +1,91 @@
 package com.wolf.framework.layer.web.auth;
 
-import com.alibaba.fastjson2.JSON;
-import com.wolf.common.util.collection.CollectionUtil;
-import com.wolf.framework.layer.web.session.Session;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.io.IOException;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
+import com.wolf.framework.layer.web.filter.OncePerRequestFilter;
 
-public class WolfAuth {
+@Slf4j
+@Getter
+public class WolfAuth extends OncePerRequestFilter {
     private final Session session;
-    private final AuthConfig config;
+    private final Auth auth;
 
-    private List<Space> spaceList;
+    public WolfAuth(RedisTemplate<String, Object> redisTemplate, AuthConfig authConfig) {
+        this.session = new Session(redisTemplate, authConfig);
+        this.auth = new Auth(session, authConfig);
+    }
 
-    public WolfAuth(Session session, AuthConfig config, HttpServletResponse servletResponse) {
-        this.session = session;
-        this.config = config;
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        session.start(request, response);
+
+        String path = request.getServletPath();
+        if (!auth.isNeedAuth(path)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (!auth.isLogin()) {
+            auth.accessDeny(response);
+            return;
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        session.save();
+    }
+
+
+    /********************** proxy methods start *************************/
+
+    public <T> T get(String key, Class<T> clazz) {
+        return session.get(key, clazz);
+    }
+
+    public Session set(String key, Object value) {
+        return session.set(key, value);
+    }
+
+    public Long getAccountId() {
+        return auth.getAccountId();
+    }
+
+    public Long getSpaceId() {
+        return auth.getSpaceId();
     }
 
     public boolean isLogin() {
-        Long accountId = session.get(config.getAccountKey(), Long.class);
-        return null != accountId && accountId > 0;
+        return auth.isLogin();
     }
 
     public boolean isLogin(Long spaceId) {
-        if (!isLogin()) {
-            return false;
-        }
-        Long sessionSpaceId = session.get(config.getSpaceKey(), Long.class);
-        return spaceId != null && spaceId.equals(sessionSpaceId);
+        return auth.isLogin(spaceId);
     }
 
     public void login(Long accountId) {
-        session.set(config.getAccountKey(), accountId);
+        auth.login(accountId);
     }
 
     public void login(Long spaceId, Long accountId) {
-        login(accountId);
-        session.set(config.getSpaceKey(), spaceId);
+        auth.login(spaceId, accountId);
     }
 
     public void logout() {
-        session.set(config.getAccountKey(), null);
-        session.set(config.getSpaceKey(), null);
+        auth.logout();
     }
 
     public void logout(Long spaceId) {
-        if (null == spaceId) {
-            return;
-        }
-
-        Long sessionSpaceId = session.get(config.getSpaceKey(), Long.class);
-        if (!spaceId.equals(sessionSpaceId)) {
-            return;
-        }
-
-        session.set(config.getSpaceKey(), null);
+        auth.logout(spaceId);
     }
 
-    public void setSpaceList(List<Space> spaces) {
-        if (CollectionUtil.isEmpty(spaces)) {
-            return;
-        }
-        this.spaceList = spaces;
-        session.set(config.getSpaceListKey(), JSON.toJSONString(spaces));
-    }
 
-    public List<Space> getSpaceList() {
-        if (!CollectionUtil.isEmpty(spaceList)) {
-            return spaceList;
-        }
-
-        String spaceListJson = session.get(config.getSpaceListKey(), String.class);
-        this.spaceList = JSON.parseArray(spaceListJson, Space.class);
-
-        return this.spaceList;
-    }
 }
