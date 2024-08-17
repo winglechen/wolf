@@ -43,6 +43,8 @@ public class Result<T> implements Serializable {
      *  - 10: system error
      *  - 20: business error
      *  - 30: needLogin error
+     *  - 40: noPermission error
+     *  - 50: illegalArgument error
      */
     protected int codeType = 0;
 

@@ -27,6 +27,6 @@ public class AuthConfig {
     private List<String> authPath = new ArrayList<>();
     private List<String> excludePath = new ArrayList<>();
 
-    private String denyCode = "ACCESS_DENY";
+    private String denyCode = "NEED_LOGIN";
     private String denyMessage = "Please Login, then retry.";
 }
