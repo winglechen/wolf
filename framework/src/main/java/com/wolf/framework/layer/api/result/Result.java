@@ -46,7 +46,7 @@ public class Result<T> implements Serializable {
      *  - 40: noPermission error
      *  - 50: illegalArgument error
      */
-    protected int codeType = 0;
+    protected int codeType = CodeTypeEnum.SUCCESS.getCode();
 
     /**
      * message

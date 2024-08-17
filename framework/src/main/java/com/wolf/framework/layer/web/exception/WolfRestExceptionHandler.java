@@ -6,11 +6,14 @@ import com.wolf.common.lang.exception.SystemException;
 import com.wolf.common.lang.exception.api.NoPermissionException;
 import com.wolf.common.lang.exception.api.NotLoggedInException;
 import com.wolf.common.lang.exception.lang.IllegalArgumentException;
+import com.wolf.framework.layer.api.result.CodeTypeEnum;
 import com.wolf.framework.layer.api.result.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Slf4j
 @RestControllerAdvice
 @ConditionalOnProperty(value = {"wolf.exception.enableRestHandler"}, havingValue = "true")
 public class WolfRestExceptionHandler {
@@ -20,7 +23,7 @@ public class WolfRestExceptionHandler {
         String code = "NO_PERMISSION";
 
         Result<String> result = Result.failure(code, ex.getMessage());
-        result.setCodeType(40);
+        result.setCodeType(CodeTypeEnum.NO_PERMISSION.getCode());
 
         return result;
     }
@@ -30,7 +33,7 @@ public class WolfRestExceptionHandler {
         String code = "NEED_LOGIN";
 
         Result<String> result = Result.failure(code, ex.getMessage());
-        result.setCodeType(30);
+        result.setCodeType(CodeTypeEnum.NEED_LOGIN.getCode());
 
         return result;
     }
@@ -40,7 +43,7 @@ public class WolfRestExceptionHandler {
         String code = "ILLEGAL_ARGUMENT";
 
         Result<String> result = Result.failure(code, ex.getMessage());
-        result.setCodeType(50);
+        result.setCodeType(CodeTypeEnum.ILLEGAL_ARGUMENT.getCode());
 
         return result;
     }
@@ -50,7 +53,7 @@ public class WolfRestExceptionHandler {
         String code = ExceptionUtil.getName(ex);
 
         Result<String> result = Result.failure(code, ex.getMessage());
-        result.setCodeType(20);
+        result.setCodeType(CodeTypeEnum.BUSINESS_ERROR.getCode());
 
         return result;
     }
@@ -58,9 +61,11 @@ public class WolfRestExceptionHandler {
     @ExceptionHandler(value = {SystemException.class, Exception.class})
     public Result<String> handleSystemException(Exception ex) {
         String code = "NETWORK_ERROR";
+        String message = "Network Error, Please retry later.";
 
-        Result<String> result = Result.failure(code, ex.getMessage());
-        result.setCodeType(10);
+        log.error("system exception", ex);
+        Result<String> result = Result.failure(code, message);
+        result.setCodeType(CodeTypeEnum.SYSTEM_ERROR.getCode());
 
         return result;
     }
