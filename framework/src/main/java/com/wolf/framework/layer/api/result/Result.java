@@ -83,7 +83,9 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> failure(String code, String message, T t) {
-        return new Result<>(false, code, message, t);
+        Result<T> result = new Result<>(false, code, message, t);
+        result.setCodeType(CodeTypeEnum.BUSINESS_ERROR.getCode());
+        return result;
     }
 
     public static <T> Result<T> create(boolean success, String code, String message) {
@@ -120,7 +122,7 @@ public class Result<T> implements Serializable {
     }
 
     public T notNullData(String msg) {
-        if (success || null == data) {
+        if (!success || null == data) {
             if (msg != null) {
                 throw new NullReturnedException(msg);
             }
