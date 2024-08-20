@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.web.auth;
+package com.wolf.framework.layer.web.auth.auth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +10,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "wolf.auth", ignoreInvalidFields = true)
 public class AuthConfig {
-    private String accountKey = "accountId";
-    private String spaceKey = "orgId";
-    private String spaceListKey = "spaceList";
+    private String accountIdKey = "accountId";
+    private String accountKey = "account";
+    private String spaceIdKey = "spaceId";
+    private String spaceKey = "space";
 
     private Boolean enable = false;
     private String cookieKey = "WOLF_SESSION_ID";
     private long sessionMaxAge = 60 * 60 * 24 * 7;
 
-    private int cookieMaxAge = 60 * 60 * 24 * 7;
+    private int cookieMaxAge = 60 * 60 * 24 * 100;
     private String domain;
     private String path = "/";
     private boolean isHttpOnly = true;

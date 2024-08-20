@@ -1,7 +1,7 @@
 package com.wolf.framework.layer.web.auth.session;
 
 import com.wolf.common.util.lang.StringUtil;
-import com.wolf.framework.layer.web.auth.AuthConfig;
+import com.wolf.framework.layer.web.auth.auth.AuthConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

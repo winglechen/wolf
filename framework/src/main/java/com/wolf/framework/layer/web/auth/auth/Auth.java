@@ -1,12 +1,15 @@
-package com.wolf.framework.layer.web.auth;
+package com.wolf.framework.layer.web.auth.auth;
 
 import com.wolf.common.lang.exception.api.NoPermissionException;
 import com.wolf.common.lang.exception.api.NotLoggedInException;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.net.AntPathUtil;
+import com.wolf.framework.layer.web.auth.model.Space;
+import com.wolf.framework.layer.web.auth.model.User;
 import com.wolf.framework.layer.web.auth.session.Session;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import lombok.NonNull;
 
 public class Auth {
     private final Session session;
@@ -22,7 +25,23 @@ public class Auth {
             throw new NotLoggedInException();
         }
 
-        return session.get(config.getAccountKey(), Long.class);
+        return session.get(config.getAccountIdKey(), Long.class);
+    }
+
+    public User getUser() {
+        if (!isLogin()) {
+            throw new NotLoggedInException();
+        }
+
+        return session.get(config.getAccountKey(), User.class);
+    }
+
+    public Space getSpace() {
+        if (!isLogin()) {
+            throw new NoPermissionException();
+        }
+
+        return session.get(config.getSpaceKey(), Space.class);
     }
 
     public Long getSpaceId() {
@@ -30,11 +49,11 @@ public class Auth {
             throw new NoPermissionException();
         }
 
-        return session.get(config.getSpaceKey(), Long.class);
+        return session.get(config.getSpaceIdKey(), Long.class);
     }
 
     public boolean isLogin() {
-        Long accountId = session.get(config.getAccountKey(), Long.class);
+        Long accountId = session.get(config.getAccountIdKey(), Long.class);
         return null != accountId && accountId > 0;
     }
 
@@ -42,29 +61,25 @@ public class Auth {
         if (!isLogin()) {
             return false;
         }
-        Long sessionSpaceId = session.get(config.getSpaceKey(), Long.class);
+        Long sessionSpaceId = session.get(config.getSpaceIdKey(), Long.class);
         return spaceId != null && spaceId.equals(sessionSpaceId);
     }
 
-    public void login(Long accountId) {
-        session.set(config.getAccountKey(), accountId);
+    public void login(@NonNull User user) {
+        session.set(config.getAccountIdKey(), user.getAccountId());
+        session.set(config.getAccountKey(), user);
         session.save();
     }
 
-    public void space(Long spaceId) {
-        session.set(config.getSpaceKey(), spaceId);
-        session.save();
-    }
-
-    public void login(Long spaceId, Long accountId) {
-        login(accountId);
-        session.set(config.getSpaceKey(), spaceId);
+    public void login(@NonNull Space space) {
+        session.set(config.getSpaceIdKey(), space.getSpaceId());
+        session.set(config.getSpaceKey(), space);
         session.save();
     }
 
     public void logout() {
-        session.set(config.getAccountKey(), null);
-        session.set(config.getSpaceKey(), null);
+        session.set(config.getAccountIdKey(), null);
+        session.set(config.getSpaceIdKey(), null);
         session.save();
     }
 
@@ -73,11 +88,12 @@ public class Auth {
             return;
         }
 
-        Long sessionSpaceId = session.get(config.getSpaceKey(), Long.class);
+        Long sessionSpaceId = session.get(config.getSpaceIdKey(), Long.class);
         if (!spaceId.equals(sessionSpaceId)) {
             return;
         }
 
+        session.set(config.getSpaceIdKey(), null);
         session.set(config.getSpaceKey(), null);
         session.save();
     }

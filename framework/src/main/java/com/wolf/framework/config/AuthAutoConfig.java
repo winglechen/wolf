@@ -2,7 +2,7 @@ package com.wolf.framework.config;
 
 import com.wolf.framework.layer.web.auth.session.SessionSaver;
 import com.wolf.framework.layer.web.auth.WolfAuth;
-import com.wolf.framework.layer.web.auth.AuthConfig;
+import com.wolf.framework.layer.web.auth.auth.AuthConfig;
 import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

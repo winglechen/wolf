@@ -1,4 +1,4 @@
-package com.wolf.framework.layer.web.auth.space;
+package com.wolf.framework.layer.web.auth.model;
 
 import com.wolf.common.lang.enums.CodeBasedEnum;
 import lombok.Getter;

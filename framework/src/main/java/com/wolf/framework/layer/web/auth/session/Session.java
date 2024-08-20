@@ -3,7 +3,7 @@ package com.wolf.framework.layer.web.auth.session;
 import com.wolf.common.ds.map.ObjectMap;
 import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.StringUtil;
-import com.wolf.framework.layer.web.auth.AuthConfig;
+import com.wolf.framework.layer.web.auth.auth.AuthConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -88,6 +88,10 @@ public class Session {
         changedNamespaces.add(namespace);
 
         return this;
+    }
+
+    public void destroy() {
+        redisTemplate.delete(this.sessionId);
     }
 
     public void save() {

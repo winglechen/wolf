@@ -1,5 +1,9 @@
 package com.wolf.framework.layer.web.auth;
 
+import com.wolf.framework.layer.web.auth.auth.Auth;
+import com.wolf.framework.layer.web.auth.auth.AuthConfig;
+import com.wolf.framework.layer.web.auth.model.Space;
+import com.wolf.framework.layer.web.auth.model.User;
 import com.wolf.framework.layer.web.auth.session.Session;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import com.wolf.framework.layer.web.filter.OncePerRequestFilter;
@@ -64,6 +69,14 @@ public class WolfAuth extends OncePerRequestFilter {
         return auth.getSpaceId();
     }
 
+    public User getUser() {
+        return auth.getUser();
+    }
+
+    public Space getSpace() {
+        return auth.getSpace();
+    }
+
     public boolean isLogin() {
         return auth.isLogin();
     }
@@ -72,16 +85,12 @@ public class WolfAuth extends OncePerRequestFilter {
         return auth.isLogin(spaceId);
     }
 
-    public void login(Long accountId) {
-        auth.login(accountId);
+    public void login(@NonNull User user) {
+        auth.login(user);
     }
 
-    public void space(Long spaceId) {
-        auth.space(spaceId);
-    }
-
-    public void login(Long spaceId, Long accountId) {
-        auth.login(spaceId, accountId);
+    public void login(@NonNull Space space) {
+        auth.login(space);
     }
 
     public void logout() {
@@ -91,6 +100,5 @@ public class WolfAuth extends OncePerRequestFilter {
     public void logout(Long spaceId) {
         auth.logout(spaceId);
     }
-
 
 }
