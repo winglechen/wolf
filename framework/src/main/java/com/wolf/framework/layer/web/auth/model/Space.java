@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Space implements Serializable {
     private Long accountId;
     private Long spaceId;
-    private Integer role;
+    private Integer spaceType;
 
     private String name;
     private String icon;
