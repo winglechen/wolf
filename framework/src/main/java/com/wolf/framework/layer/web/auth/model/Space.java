@@ -23,4 +23,15 @@ public class Space implements Serializable {
 
     private ObjectMap property;
     private ObjectMap permission;
+
+    public static Space of(User user) {
+        return Space.builder()
+            .accountId(user.getAccountId())
+            .spaceId(user.getAccountId())
+            .name(user.getName())
+            .icon(user.getAvatar())
+            .cover(user.getPhoto())
+            .introduction(user.getIntroduction())
+            .build();
+    }
 }
