@@ -139,9 +139,9 @@ public class Auth {
             {
                 "success": true,
                 "codeType": 30,
-                "code" : "%s",
-                "message" : "%s",
-                "data"  : "",
+                "code": "%s",
+                "message": "%s",
+                "data": ""
             }
             """.formatted(config.getDenyCode(), config.getDenyMessage());
 

@@ -4,6 +4,7 @@ import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterators;
+import com.google.common.html.HtmlEscapers;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import com.wolf.common.util.collection.CollectionUtil;
@@ -678,6 +679,13 @@ public class StringUtil {
 
         String maskedAccount = mask(arr[0]);
         return StringUtil.joinWith("@", maskedAccount, arr[1]);
+    }
+
+    public static String escapeHtml(String html) {
+        if (isBlank(html)) {
+            return html;
+        }
+        return HtmlEscapers.htmlEscaper().escape(html);
     }
 
     public static String escapeCsvSpecialCharacters(String data) {
