@@ -4,10 +4,11 @@
 MIN_BASH_VERSION=4.4.20
 
 # 获取当前系统 Bash 版本号
+# shellcheck disable=SC2016
 CURRENT_BASH_VERSION=$(/usr/bin/env bash -c 'echo $BASH_VERSION' | cut -d' ' -f1 | cut -d'-' -f1)
 
 # 比较 Bash 版本号与最小版本号
-if awk 'BEGIN{exit !('$CURRENT_BASH_VERSION' < '$MIN_BASH_VERSION')};'; then
+if awk 'BEGIN{exit !('"$CURRENT_BASH_VERSION"' < '$MIN_BASH_VERSION')};'; then
     echo "Bash version $MIN_BASH_VERSION or later is required. Please run [brew install bash] to update."
     exit 1
 fi
@@ -74,23 +75,23 @@ function load_project_config() {
 
         config_file="$dir/$WOLF_PROJECT_CONFIG_RELATIVE_PATH"
         if [ -e "$config_file" ]; then
-            #echo "config file: $config_file";
-            source "$config_file"
+            # shellcheck source="$config_file"
+            source "${config_file}"
         fi
 
         # This is may not necessary.
         install_file="$dir/bin/install.sh"
         if [ -e "$install_file" ]; then
-            #echo "install_file: $install_file";
+            # shellcheck source="$install_file"
             source "$install_file"
         fi
 
         # This is may not necessary.
-        test_file="$dir/bin/test.sh"
-        if [ -e "$install_file" ]; then
-            #echo "test_file: $test_file";
-            source "$test_file"
-        fi
+#        test_file="$dir/bin/test.sh"
+#        if [ -e "$install_file" ]; then
+#            echo "test_file: $test_file";
+#            source "$test_file"
+#        fi
     done
 }
 
@@ -187,12 +188,15 @@ function main() {
 
     case "$command" in
     install)
+        # shellcheck disable=SC1090
         source "$LIB_INSTALL_PATH"
         ;;
     test)
+        # shellcheck disable=SC1090
         source "$LIB_TEST_PATH"
         ;;
     scp)
+        # shellcheck disable=SC1090
         source "$LIB_SCP_PATH"
         ;;
     clean)

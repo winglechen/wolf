@@ -8,13 +8,6 @@ function install_framework() {
     cd $dir && mvn -T 1C clean install
 
     return
-    #原编译逻辑不执行，暂时不删除
-    local modules=(boot principle common framework mock dts starter)
-    for module in "${modules[@]}"; do
-        echo "install wolf framework: [$module] ..."
-        local dir="${WOLF_FRAMEWORK_DIR}/$module/"
-        cd $dir && mvn -T 1C clean install
-    done
 }
 
 function install_app() {
@@ -30,11 +23,16 @@ function install_app() {
         module=""
     fi
 
+    # shellcheck disable=SC2154
     local app_dir="${wolf_app_dir[$app]}"
+    echo "install_app module:${module}, app:${app}, dir:${app_dir}"
     # Compatible with win monolithic app
     if [ -z "$app_dir" ]; then
+        # shellcheck disable=SC2154
         app_dir="${wolf_app_deploy_dir[$app]}"
     fi
+
+    echo "install app: ${app_dir}/$module";
 
     cd "${app_dir}/$module" || exit
     mvn -T 1C -DskipTests clean install
