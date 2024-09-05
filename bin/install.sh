@@ -25,11 +25,12 @@ function install_app() {
 
     # shellcheck disable=SC2154
     local app_dir="${wolf_app_dir[$app]}"
-    echo "install_app module:${module}, app:${app}, dir:${app_dir}"
+    # echo "install_app module:${module}, app:${app}, dir:${app_dir}"
+
     # Compatible with win monolithic app
     if [ -z "$app_dir" ]; then
         # shellcheck disable=SC2154
-        app_dir="${wolf_app_deploy_dir[$app]}"
+        app_dir="${wolf_app_package_dir[$app]}"
     fi
 
     echo "install app: ${app_dir}/$module";

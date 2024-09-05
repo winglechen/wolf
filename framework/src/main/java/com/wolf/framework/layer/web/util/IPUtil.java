@@ -1,10 +1,16 @@
 package com.wolf.framework.layer.web.util;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.validator.routines.InetAddressValidator;
 
 /**
  * @author weixing
@@ -17,6 +23,31 @@ public class IPUtil {
     private static final String LOCALHOST_IPV6 = "0:0:0:0:0:0:0:1";
     private static final String SEPARATOR = ",";
     private static final Pattern INNER_IP_PATTERN = Pattern.compile("^(127\\.0\\.0\\.1)|(localhost)|(10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})|(172\\.((1[6-9])|(2\\d)|(3[01]))\\.\\d{1,3}\\.\\d{1,3})|(192\\.168\\.\\d{1,3}\\.\\d{1,3})$");
+
+    private static final InetAddressValidator VALIDATOR = InetAddressValidator.getInstance();
+
+    public static boolean isIPV4(String ip) {
+        return VALIDATOR.isValidInet4Address(ip);
+    }
+
+    public static String getLocalIP() {
+        try {
+            for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements(); ) {
+                NetworkInterface item = e.nextElement();
+                for (InterfaceAddress address : item.getInterfaceAddresses()) {
+                    if (item.isLoopback() || !item.isUp()) {
+                        continue;
+                    }
+                    if (address.getAddress() instanceof Inet4Address inet4Address) {
+                        return inet4Address.getHostAddress();
+                    }
+                }
+            }
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (SocketException | UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // 根据 HttpServletRequest 获取 IP
     public static String getIP(HttpServletRequest request) {

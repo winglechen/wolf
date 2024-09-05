@@ -1,14 +1,35 @@
 #!/usr/bin/env bash
 
+function get_app_final_name() {
+    local app=$1
+    local env=$2
+
+    local key="$app-$env"
+
+    # shellcheck disable=SC2154
+    local final_name="${wolf_app_final_name[$key]}"
+
+    if [ -z "$final_name" ]; then
+        final_name="${wolf_app_final_name[$app]}"
+    fi
+
+    if [ -z "$final_name" ]; then
+        final_name="$app"
+    fi
+
+    echo "$final_name"
+}
+
 function scp_app() {
     local app=$1
     local env=$2
 
     local final_name
+    get_app_final_name "$app" "$env"
     final_name=$(get_app_final_name "$app" "$env")
 
     do_scp "$app" "$env" "$final_name"
-    sync_app "$app" "$env"
+    # sync_app "$app" "$env"
 }
 
 function sync_app() {
@@ -37,13 +58,15 @@ function do_scp() {
         exit 1
     fi
 
-    #dir="${PROJECT_DIR}/app/estar/$app_name/"
-    local app_deploy_dir="${wolf_app_deploy_dir[$app_alias]}"
-#    if [ -z "app_deploy_dir" ]; then
-#        app_deploy_dir="${wolf_app_dir[$app_alias]}"
-#    fi
+    # shellcheck disable=SC2154
+    local app_package_dir="${wolf_app_package_dir[$app_alias]}"
+    if [ -z "$app_package_dir" ]; then
+        # shellcheck disable=SC2154
+        app_package_dir="${wolf_app_dir[$app_alias]}"
+    fi
 
-    cd "${app_deploy_dir}"
+    cd "${app_package_dir}" || exit
+    # shellcheck disable=SC2154
     if ! $debug_mode && ! $dry_run; then
         mvn -T 1C -DskipTests clean package -P"$env"
     fi
@@ -71,12 +94,12 @@ function do_scp() {
 
     if $dry_run; then
         _info "will execute: ssh -A app@$host echo -e $(date '+%Y-%m-%d %H:%M:%S') $USER  scp  $final_name...  prepare    $file_name>>/home/app/target/deploy.log"
-        _info "will execute: scp ${app_deploy_dir}/target/$final_name.tar.gz app@$host:/home/app/target/$final_name/$file_name_tmp"
+        _info "will execute: scp ${app_package_dir}/target/$final_name.tar.gz app@$host:/home/app/target/$final_name/$file_name_tmp"
         _info "scp log: rename the tmp file to $file_name..."
         _info "will execute: ssh -A app@$host mv /home/app/target/$final_name/$file_name_tmp /home/app/target/$final_name/$file_name && echo -e $(date '+%Y-%m-%d %H:%M:%S') $USER  scp  $final_name...  finished   $file_name>>/home/app/target/deploy.log"
     else
         ssh -A app@"$host" "echo -e $(date '+%Y-%m-%d %H:%M:%S') $USER  scp  $final_name...  prepare    $file_name>>/home/app/target/deploy.log"
-        scp "${app_deploy_dir}/target/$final_name.tar.gz" \
+        scp "${app_package_dir}/target/$final_name.tar.gz" \
             app@"$host":/home/app/target/"$final_name"/"$file_name_tmp"
 
         _info "scp log: rename the tmp file to $file_name..."
@@ -111,6 +134,7 @@ function check_need_sync() {
     local current_env=$2
 
     local env_list
+    # shellcheck disable=SC2154
     env_list="${wolf_app_sync_env[$app]}"
     if [ -z "$env_list" ]; then
         exit 1
@@ -134,48 +158,38 @@ function check_need_sync() {
 function get_sync_command() {
     local app=$1
     local env=$2
+    # shellcheck disable=SC2154
     local cmd="${wolf_app_sync_command[${app}-$env]}"
     echo "$cmd"
 }
 
 function get_scp_host() {
     local env=$1
+    # shellcheck disable=SC2154
     local host="${wolf_app_scp_host[$env]}"
     echo "$host"
 }
 
-function get_app_final_name() {
-    local app=$1
-    local env=$2
 
-    local key="$app-$env"
-    local final_name="${wolf_app_final_name[$key]}"
-
-    if [ -z "$final_name" ]; then
-        final_name="${wolf_app_final_name[$app]}"
-    fi
-
-    echo "$final_name"
-}
 
 function main() {
-    if [ -z "$1" ] || { [ "$1" != "scp" ] && [ "$1" != "sync" ]; }; then
-        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
+    if [ -z "$1" ] || { [ "$1" != "release" ] && [ "$1" != "sync" ] && [ "$1" != "scp" ]; }; then
+        _error "Error: Invalid argument. Usage: win release {app_name} {env}"
         exit 1
     fi
 
     if [ -z "$2" ]; then
-        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
+        _error "Error: Invalid argument. Usage: win release {app_name} {env}"
         exit
     fi
 
     if [ -z "$3" ]; then
-        _error "Error: Invalid argument. Usage: win scp {app_name} {env}"
+        _error "Error: Invalid argument. Usage: win release {app_name} {env}"
         exit
     fi
 
     case "$1" in
-    scp)
+    release)
         scp_app "$2" "$3"
         ;;
     esac

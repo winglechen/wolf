@@ -17,7 +17,7 @@ fi
 # define global wolf app config
 declare -A wolf_app_final_name
 declare -A wolf_app_dir
-declare -A wolf_app_deploy_dir
+declare -A wolf_app_package_dir
 declare -A wolf_app_test_dir
 declare -A wolf_app_scp_host
 declare -A wolf_app_sync_env
@@ -25,7 +25,7 @@ declare -A wolf_app_sync_command
 
 export wolf_app_final_name
 export wolf_app_dir
-export wolf_app_deploy_dir
+export wolf_app_package_dir
 export wolf_app_test_dir
 export wolf_app_scp_host
 export wolf_app_sync_command
@@ -151,19 +151,24 @@ function parse_opts() {
 function clean() {
   echo "rm -rf ~/.m2/repository/com/wolf"
   rm -rf ~/.m2/repository/com/wolf
-  echo "rm -rf ~/.m2/repository/com/onedot"
+  echo "rm -rf ~/.m2/repository/com/one"
   rm -rf ~/.m2/repository/com/onedot/
   echo "Done."
 }
 
 function help() {
-    echo "Usage:"
+    echo "Usages:"
+    echo ""
+    echo "1) install (clean and install):"
     echo "  win install {app_name}"
     echo "  win install {app_name/module_name}"
     echo ""
-    echo "  win scp|sync {app_name}"
+    echo "2) release (package and sync to remote servers):"
+    echo "  win release {app_name} {env}"
     echo ""
+    echo "3) clean:"
     echo "  win clean"
+    echo ""
 }
 
 function debug {
@@ -195,7 +200,7 @@ function main() {
         # shellcheck disable=SC1090
         source "$LIB_TEST_PATH"
         ;;
-    scp)
+    scp | sync | release)
         # shellcheck disable=SC1090
         source "$LIB_SCP_PATH"
         ;;
