@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.validator.routines.InetAddressValidator;
 
 /**
  * @author weixing
@@ -22,12 +21,11 @@ public class IPUtil {
     // 客户端与服务器同为一台机器，获取的 ip 有时候是 ipv6 格式
     private static final String LOCALHOST_IPV6 = "0:0:0:0:0:0:0:1";
     private static final String SEPARATOR = ",";
+    private static final Pattern IPV4_PATTERN = Pattern.compile("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
     private static final Pattern INNER_IP_PATTERN = Pattern.compile("^(127\\.0\\.0\\.1)|(localhost)|(10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})|(172\\.((1[6-9])|(2\\d)|(3[01]))\\.\\d{1,3}\\.\\d{1,3})|(192\\.168\\.\\d{1,3}\\.\\d{1,3})$");
 
-    private static final InetAddressValidator VALIDATOR = InetAddressValidator.getInstance();
-
     public static boolean isIPV4(String ip) {
-        return VALIDATOR.isValidInet4Address(ip);
+        return IPV4_PATTERN.matcher(ip).find();
     }
 
     public static String getLocalIP() {

@@ -1,6 +1,7 @@
 package com.wolf.common.lang.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import lombok.Setter;
  * Non-thread-safe
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public abstract class BaseException extends RuntimeException {
     protected long code;
     protected Map<String, String> data = new HashMap<>();
