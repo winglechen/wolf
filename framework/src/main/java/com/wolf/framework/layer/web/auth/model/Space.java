@@ -16,6 +16,8 @@ public class Space implements Serializable {
     private Long spaceId;
     private Integer spaceType;
 
+    private String accountName;
+
     private String name;
     private String icon;
     private String cover;

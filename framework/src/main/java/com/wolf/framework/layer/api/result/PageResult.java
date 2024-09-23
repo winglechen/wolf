@@ -1,6 +1,7 @@
 package com.wolf.framework.layer.api.result;
 
 import com.github.pagehelper.Page;
+import com.wolf.common.util.lang.BeanUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,14 @@ public class PageResult<T> extends Result<T> implements Serializable {
     private long minId;
     private long maxId;
 
+    public PageResult() {}
+
     public void initMinAndMaxId() {
 
+    }
+
+    public void list(List<T> list) {
+        this.list = list;
     }
 
     public static <T> PageResult<T> empty() {
@@ -54,7 +61,7 @@ public class PageResult<T> extends Result<T> implements Serializable {
             .message(Result.DEFAULT_SUCCESS_MESSAGE)
 
             .list(list)
-            .total((long) total)
+            .total(total)
             .pageSize(total)
             .pages(1)
             .current(1)
@@ -78,5 +85,13 @@ public class PageResult<T> extends Result<T> implements Serializable {
             .hasPrePage(page.getPages() > 0 && page.getPageNum() > 1)
             .list(page)
             .build() ;
+    }
+
+    public <M> PageResult<M> to(List<M> list) {
+        PageResult<M> newPage = new PageResult<>();
+        BeanUtil.copyProperties(this, newPage);
+
+        newPage.setList(list);
+        return newPage;
     }
 }

@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class PageRequest implements Request {
     private static final int DEFAULT_PAGE_SIZE = 10;
-    private static final int MAX_PAGE_SIZE = 1000;
+    private static final int MAX_PAGE_SIZE = 100;
     private static final int DEFAULT_PAGE_NUM = 1;
 
     private Integer pageSize = DEFAULT_PAGE_SIZE;
