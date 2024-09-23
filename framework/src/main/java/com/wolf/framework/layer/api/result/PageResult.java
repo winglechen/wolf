@@ -1,6 +1,7 @@
 package com.wolf.framework.layer.api.result;
 
 import com.github.pagehelper.Page;
+import com.wolf.common.util.collection.CollectionUtil;
 import com.wolf.common.util.lang.BeanUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +28,14 @@ public class PageResult<T> extends Result<T> implements Serializable {
     private long maxId;
 
     public PageResult() {}
+
+    public boolean isEmpty() {
+        if (!this.success) {
+            return true;
+        }
+
+        return CollectionUtil.isEmpty(this.list);
+    }
 
     public void initMinAndMaxId() {
 

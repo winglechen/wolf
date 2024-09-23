@@ -1,5 +1,6 @@
 package com.wolf.common.util.time;
 
+import java.time.temporal.ChronoUnit;
 import lombok.NonNull;
 import com.wolf.common.util.lang.StringUtil;
 
@@ -346,5 +347,9 @@ public class DateUtil {
     public static boolean isAtWeekend(LocalDateTime dateTime) {
         DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
         return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
+    }
+
+    public static long daysBetween(@NonNull LocalDate start, @NonNull LocalDate end) {
+        return ChronoUnit.DAYS.between(start, end);
     }
 }

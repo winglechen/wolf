@@ -387,4 +387,18 @@ public class DateUtilTest {
         assertTrue("test DateUtil.isWeekDay failed", DateUtil.isAtWeekend(t2));
         assertTrue("test DateUtil.isWeekDay failed", DateUtil.isAtWeekend(t3));
     }
+
+    @Test
+    public void asLocalDateTimeCompatibleMode() {
+    }
+
+    @Test
+    public void daysBetween() {
+        LocalDate start, end;
+
+        start = LocalDate.of(2024, 1, 1);
+        end = LocalDate.of(2024, 1, 2);
+        assertEquals("test DateUtil.daysBetween failed", 1, DateUtil.daysBetween(start, end));
+        assertEquals("test DateUtil.daysBetween failed", -1, DateUtil.daysBetween(end, start));
+    }
 }
