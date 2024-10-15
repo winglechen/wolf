@@ -22,6 +22,7 @@
         <module>wolf-db-dependencies</module>
         <module>wolf-dubbo-dependencies</module>
         <module>wolf-sdk-dependencies</module>
+        <module>wolf-net-dependencies</module>
     </modules>
 
     <properties>
@@ -40,6 +41,7 @@
         <wolf-db-dependencies.version>1.0.0-SNAPSHOT</wolf-db-dependencies.version>
         <wolf-dubbo-dependencies.version>1.0.0-SNAPSHOT</wolf-dubbo-dependencies.version>
         <wolf-sdk-dependencies.version>1.0.0-SNAPSHOT</wolf-sdk-dependencies.version>
+        <wolf-net-dependencies.version>1.0.0-SNAPSHOT</wolf-net-dependencies.version>
 
     </properties>
 
@@ -58,6 +60,14 @@
                 <artifactId>wolf-utils-dependencies</artifactId>
                 <type>pom</type>
                 <version>${wolf-utils-dependencies.version}</version>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.wolf</groupId>
+                <artifactId>wolf-net-dependencies</artifactId>
+                <type>pom</type>
+                <version>${wolf-net-dependencies.version}</version>
                 <scope>import</scope>
             </dependency>
 

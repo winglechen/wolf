@@ -26,6 +26,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.wolf</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.wolf.starter</groupId>
             <artifactId>wolf-starter-mybatis</artifactId>
         </dependency>

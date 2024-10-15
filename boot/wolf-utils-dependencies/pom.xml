@@ -26,8 +26,6 @@
         <javax-el.version>3.0.0</javax-el.version>
         <servlet-api.version>4.0.1</servlet-api.version>
 
-        <asynchttpclient.version>2.12.3</asynchttpclient.version>
-
     </properties>
 
     <dependencyManagement>
@@ -37,14 +35,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.asynchttpclient</groupId>
-                <artifactId>async-http-client-bom</artifactId>
-                <version>${asynchttpclient.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -86,18 +76,6 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp-tls</artifactId>
-                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
