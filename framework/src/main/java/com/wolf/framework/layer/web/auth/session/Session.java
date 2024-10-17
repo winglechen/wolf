@@ -40,7 +40,7 @@ public class Session {
         this.cookie = new Cookie(request, response, this.authConfig);
         this.sessionData = new HashMap<>();
 
-        this.getOrCreateSessionId();
+        this.getOrCreateSessionId(request);
         this.loadSession(DEFAULT_NAMESPACE);
 
         this.changedNamespaces = new HashSet<>();
@@ -108,13 +108,41 @@ public class Session {
         redisTemplate.expire(sessionId, authConfig.getSessionMaxAge(), TimeUnit.SECONDS);
     }
 
-    private void getOrCreateSessionId() {
+    private void getOrCreateSessionId(HttpServletRequest request) {
+        String bearer = getBearer(request);
+        if (StringUtil.notBlank(bearer)) {
+            this.sessionId = bearer;
+            return;
+        }
+
+        this.initSessionIdByCookie();
+    }
+
+    private void initSessionIdByCookie() {
         String cookieKey = cookie.get(authConfig.getCookieKey());
         if (StringUtil.isBlank(cookieKey)) {
             cookieKey = StringUtil.uuid();
             cookie.set(authConfig.getCookieKey(), cookieKey, true);
         }
         this.sessionId = cookieKey;
+    }
+
+    private String getBearer(HttpServletRequest request) {
+        String auth = request.getHeader("Authorization");
+        if (StringUtil.isEmpty(auth)) {
+            return null;
+        }
+
+        String[] authArr = auth.split(" ");
+        if (auth.length() != 2 || !"Bearer".equals(authArr[0])) {
+            return null;
+        }
+
+        if (StringUtil.isEmpty(authArr[1])) {
+            return null;
+        }
+
+        return authArr[1].trim();
     }
 
     private ObjectMap loadSession(String namespace) {

@@ -62,7 +62,7 @@ public class XMLParseToObjectTest {
         XmlSamplePOJO mobiKwikWallet = null;
         try {
             mobiKwikWallet = XMLUtil.toObject(happyXML, XmlSamplePOJO.class);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         } finally {
             assertNull("xml parse to mobiKwikWallet should occur error", mobiKwikWallet);

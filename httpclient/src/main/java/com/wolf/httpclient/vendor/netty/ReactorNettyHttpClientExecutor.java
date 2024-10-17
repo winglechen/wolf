@@ -52,7 +52,7 @@ import java.util.Map;
 @Slf4j
 public class ReactorNettyHttpClientExecutor {
     static reactor.netty.http.client.HttpClient commonClient;
-    static reactor.netty.http.client.HttpClient yesBankClient;
+    static reactor.netty.http.client.HttpClient secureClient;
     static HttpClientConfig clientConfig;
     static CookieManager cookieManager;
 
@@ -83,7 +83,6 @@ public class ReactorNettyHttpClientExecutor {
         commonClient.warmup().block();
 
         if (isKeyStoreConfig()) {
-            log.info("setup httpclient for yesbank by keyStore: {}, password: *****", clientConfig.getKeyStore());
             TrustManager trustManager = SSLConfiguration.getTrustManager(clientConfig.getKeyStore(), clientConfig.getKeyStorePassword());
             KeyManagerFactory keyManagerFactory = SSLConfiguration.getKeyManagerFactory(clientConfig.getKeyStore(), clientConfig.getKeyStorePassword());
             Http11SslContextSpec yesBankHttp11SslContextSpec = Http11SslContextSpec.forClient()
@@ -91,13 +90,11 @@ public class ReactorNettyHttpClientExecutor {
                     .trustManager(trustManager)
                     .keyManager(keyManagerFactory)
                 );
-            yesBankClient = commonClient.secure(spec -> spec.sslContext(yesBankHttp11SslContextSpec)
+            secureClient = commonClient.secure(spec -> spec.sslContext(yesBankHttp11SslContextSpec)
                     .handshakeTimeout(Duration.ofSeconds(30))
                     .closeNotifyFlushTimeout(Duration.ofSeconds(10))
                     .closeNotifyReadTimeout(Duration.ofSeconds(10)))
                 .responseTimeout(Duration.ofSeconds(30));
-        } else {
-            log.warn("missing yesbank ssl configuration file, you may not be able to access yesbank via ssl");
         }
 
     }
@@ -342,26 +339,22 @@ public class ReactorNettyHttpClientExecutor {
     }
 
     private static reactor.netty.http.client.HttpClient chooseClient(HttpRequestBuilder requestBuilder) {
-        URL url = null;
-        try {
-            url = new URL(requestBuilder.getUrl());
-        } catch (MalformedURLException e) {
-            log.error(e.getMessage(), e);
-        }
-        final String host = url.getHost();
         reactor.netty.http.client.HttpClient client = commonClient;
-        if (ArrayUtil.inArray(host
-            , "sky.yesbank.in"
-            , "uatsky.yesbank.in"
-            , "skyway.yesbank.in"
-            , "uatskyway.yesbank.in"
-        )) {
-            if (yesBankClient != null) {
-                client = yesBankClient;
-            } else {
-                throw new RuntimeException("yesbank client is not initialized, but is called");
-            }
-        }
+
+//        URL url = null;
+//        try {
+//            url = new URL(requestBuilder.getUrl());
+//        } catch (MalformedURLException e) {
+//            log.error(e.getMessage(), e);
+//        }
+//        final String host = url.getHost();
+//        if (ArrayUtil.inArray(host , "xxxbank.in" )) {
+//            if (secureClient != null) {
+//                client = secureClient;
+//            } else {
+//                throw new RuntimeException("secure client is not initialized, but is called");
+//            }
+//        }
 
         return client;
     }
