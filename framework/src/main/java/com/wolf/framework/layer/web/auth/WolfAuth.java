@@ -53,6 +53,9 @@ public class WolfAuth extends OncePerRequestFilter {
 
 
     /********************** proxy methods start *************************/
+    public void setSessionId(String sessionId) {
+        session.setSessionId(sessionId);
+    }
     public <T> T get(String key, Class<T> clazz) {
         return session.get(key, clazz);
     }

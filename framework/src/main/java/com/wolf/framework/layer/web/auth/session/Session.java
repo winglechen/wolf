@@ -46,6 +46,10 @@ public class Session {
         this.changedNamespaces = new HashSet<>();
     }
 
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
     public <T> T get(String key, Class<T> clazz) {
         return get(DEFAULT_NAMESPACE, key, clazz);
     }
@@ -134,7 +138,7 @@ public class Session {
         }
 
         String[] authArr = auth.split(" ");
-        if (auth.length() != 2 || !"Bearer".equals(authArr[0])) {
+        if (authArr.length != 2 || !"Bearer".equals(authArr[0])) {
             return null;
         }
 
