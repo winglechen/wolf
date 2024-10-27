@@ -25,8 +25,10 @@ public class MQVendorConfig {
     private String password;
     private Set<String> topics;
     private String defaultProducerGroup;
+    @Builder.Default
     private int producerNum = 1;
     // todolist@mq default transaction producer num for each topic
+    @Builder.Default
     private int transactionProducerNum = 1;
     private boolean enabled;
 }
