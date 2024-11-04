@@ -24,7 +24,7 @@ public class Cookie {
         jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie(key, value);
         cookie.setSecure(isSecure);
 
-        if (StringUtil.isNoneBlank(authConfig.getDomain())) {
+        if (StringUtil.notBlank(authConfig.getDomain())) {
             cookie.setDomain(authConfig.getDomain());
         }
         cookie.setPath(authConfig.getPath());

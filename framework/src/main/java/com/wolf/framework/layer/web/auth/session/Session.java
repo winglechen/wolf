@@ -125,7 +125,6 @@ public class Session {
     private void initSessionIdByCookie() {
         String cookieKey = cookie.get(authConfig.getCookieKey());
         if (StringUtil.isBlank(cookieKey)) {
-            log.info("cookie expired: {}", cookieKey);
             cookieKey = StringUtil.uuid();
             cookie.set(authConfig.getCookieKey(), cookieKey, true);
         }
