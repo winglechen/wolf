@@ -5,6 +5,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterators;
 import com.google.common.html.HtmlEscapers;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import com.wolf.common.util.collection.CollectionUtil;
@@ -534,12 +536,24 @@ public class StringUtil {
     }
 
     public static String[] split(String s, String separator) {
+        return split(s, separator, false);
+    }
+
+    public static String[] split(String s, String separator, boolean trim) {
         if (isEmpty(separator)) {
             return new String[]{s};
         }
 
         Iterable<String> i = Splitter.on(separator).split(s);
-        return Iterators.toArray(i.iterator(), String.class);
+        List<String> list = new ArrayList<String>();
+        for (String item : i) {
+            if (trim && StringUtil.notBlank(item)) {
+                list.add(item.trim());
+            } else {
+                list.add(item);
+            }
+        }
+        return list.toArray(new String[0]);
     }
 
     public static String uuid() {
