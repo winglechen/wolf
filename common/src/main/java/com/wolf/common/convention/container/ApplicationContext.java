@@ -1,17 +1,20 @@
 package com.wolf.common.convention.container;
 
 import com.wolf.common.lang.exception.lang.ClassNotFoundException;
+import com.wolf.common.util.collection.CollectionUtil;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ApplicationContext implements Context {
-    private final ConcurrentHashMap<String, Object> objectMap = new ConcurrentHashMap<String, Object>();
+    private final ConcurrentHashMap<String, List<Object>> objectMap = new ConcurrentHashMap<>();
 
     public void register(Object o) {
-        objectMap.put(o.getClass().getName(), o);
+        addBean(o.getClass().getName(), o);
     }
 
     public void register(Object o, Class<?> clazz) {
-        objectMap.put(clazz.getName(), o);
+        addBean(clazz.getName(), o);
     }
 
     public <T> T getBean(Class<T> clazz) {
@@ -19,12 +22,13 @@ public class ApplicationContext implements Context {
     }
 
     public <T> T getBean(Class<T> clazz, boolean throwNotFoundException) {
-        Object bean = objectMap.get(clazz.getName());
+        List<Object> list = objectMap.get(clazz.getName());
 
-        if (bean == null) {
+        if (CollectionUtil.isEmpty(list)) {
             return null;
         }
 
+        Object bean = list.getFirst();
         if (clazz.isInstance(bean)) {
             return clazz.cast(bean);
         }
@@ -34,6 +38,20 @@ public class ApplicationContext implements Context {
         }
 
         throw new ClassNotFoundException(clazz.getName());
+    }
+
+    private void addBean(String className, Object bean) {
+        initBeanList(className);
+        List<Object> list = objectMap.get(className);
+        list.add(bean);
+    }
+
+    private void initBeanList(String className) {
+        if (objectMap.containsKey(className)) {
+            return;
+        }
+
+        objectMap.put(className, new ArrayList<Object>());
     }
 
 //    public static void main(String[] args) {
