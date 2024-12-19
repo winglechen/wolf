@@ -3,7 +3,7 @@ package com.wolf.common.convention.service;
 public interface Lifecycle {
     void start();
 
-    void stop();
+    void shutdown();
 
     boolean isRunning();
 }
