@@ -2,12 +2,24 @@ package com.wolf.common.convention.container;
 
 import com.wolf.common.lang.exception.lang.ClassNotFoundException;
 import com.wolf.common.util.collection.CollectionUtil;
+import com.wolf.common.util.collection.MapUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.Getter;
 
+@Getter
 public class ApplicationContext implements Context {
     private final ConcurrentHashMap<String, List<Object>> objectMap = new ConcurrentHashMap<>();
+
+    public void registerContext(ApplicationContext subContext) {
+        ConcurrentHashMap<String, List<Object>> subMap = subContext.getObjectMap();
+        if (MapUtil.isEmpty(subMap)) {
+            return;
+        }
+
+        this.objectMap.putAll(subMap);
+    }
 
     public void register(Object o) {
         addBean(o.getClass().getName(), o);
