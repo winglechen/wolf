@@ -16,6 +16,10 @@ public class HashUtil {
         return Hashing.md5().hashUnencodedChars(str).toString();
     }
 
+    public static String crc32(@NonNull byte[] bytes) {
+        return Hashing.crc32().hashBytes(bytes).toString();
+    }
+
     public static String crc32(@NonNull String str) {
         return Hashing.crc32().hashBytes(str.getBytes(StandardCharsets.UTF_8)).toString();
     }
