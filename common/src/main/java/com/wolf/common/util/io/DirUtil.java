@@ -18,6 +18,8 @@ import java.util.stream.Stream;
  * @since 2022/1/19 上午8:33
  **/
 public class DirUtil {
+    public static final String MULTI_PATH_SEPARATOR = ",";
+
     public static Set<String> listFiles(String dir) {
         return listFiles(dir, 1);
     }
@@ -37,4 +39,21 @@ public class DirUtil {
             throw new com.wolf.common.lang.exception.io.IOException(e.getMessage());
         }
     }
+
+    public static void createIfNotExists(String dir) {
+        if (StringUtil.isBlank(dir)) {
+            return;
+        }
+
+        if (!dir.contains(MULTI_PATH_SEPARATOR)) {
+            createIfNotExists(dir);
+            return;
+        }
+
+        String[] dirs = dir.trim().split(MULTI_PATH_SEPARATOR);
+        for (String aDir : dirs) {
+            createIfNotExists(aDir);
+        }
+    }
+
 }
