@@ -3,6 +3,8 @@ package com.wolf.common.util.io;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -43,6 +45,14 @@ public class FileUtil {
             return new FileReader(url.getFile());
         } catch (java.io.FileNotFoundException e) {
             throw new FileNotFoundException(path);
+        }
+    }
+
+    public static void writeToFile(String content, File file) {
+        try (OutputStream os = Files.newOutputStream(Path.of(file.getAbsolutePath()))) {
+            os.write(content.getBytes(UTF_8));
+        } catch (IOException e) {
+            throw new com.wolf.common.lang.exception.io.IOException(e.getMessage());
         }
     }
 
