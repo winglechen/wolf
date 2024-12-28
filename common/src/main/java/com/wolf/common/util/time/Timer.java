@@ -52,7 +52,7 @@ public class Timer {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("/*").append("*".repeat(20)).append("*/");
+        sb.append("\n\n/*").append("*".repeat(20)).append("*/\n");
 
         for (Map.Entry<String, Long> entry : recordMap.entrySet()) {
             sb.append(entry.getKey())
@@ -61,7 +61,7 @@ public class Timer {
                 .append("\n");
         }
 
-        sb.append("/*").append("*".repeat(20)).append("*/");
+        sb.append("/*").append("*".repeat(20)).append("*/\n\n");
         return sb.toString();
     }
 
