@@ -1,5 +1,6 @@
 package com.wolf.common.util.time;
 
+import java.util.LinkedHashMap;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -22,7 +23,7 @@ public class Timer {
 
     public Timer() {
         unit = TimeUnit.MILLISECONDS;
-        recordMap = new HashMap<>();
+        recordMap = new LinkedHashMap<>();
     }
 
     public void begin() {
@@ -52,16 +53,25 @@ public class Timer {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\n/*").append("*".repeat(20)).append("*/\n");
+        sb.append("\n\n/*")
+            .append("*".repeat(20))
+            .append(" Timer Start ")
+            .append("*".repeat(20))
+            .append("*/\n");
 
         for (Map.Entry<String, Long> entry : recordMap.entrySet()) {
             sb.append(entry.getKey())
                 .append(" elapse: ")
                 .append(entry.getValue())
-                .append("\n");
+                .append("ms; \n");
         }
 
-        sb.append("/*").append("*".repeat(20)).append("*/\n\n");
+        sb.append("/*")
+            .append("*".repeat(20))
+            .append(" Timer End   ")
+            .append("*".repeat(20))
+            .append("*/\n\n");
+
         return sb.toString();
     }
 
