@@ -1,5 +1,6 @@
 package com.wolf.common.util.lang;
 
+import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -11,5 +12,19 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class RandomUtil {
     public static String randomNumeric(int length) {
         return RandomStringUtils.randomNumeric(length);
+    }
+
+    public static long randomLong(long max) {
+        return randomLong(0, max);
+    }
+    public static long randomLong(long min, long max) {
+        return ThreadLocalRandom.current().nextLong(min, max);
+    }
+
+    public static int randomInt(int max) {
+        return randomInt(0, max);
+    }
+    public static int randomInt(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, max);
     }
 }
