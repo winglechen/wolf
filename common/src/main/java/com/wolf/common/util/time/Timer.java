@@ -20,13 +20,6 @@ public class Timer {
     private final Map<String, Long> recordMap;
     private Long start;
 
-
-    public static Timer start() {
-        Timer timer = new Timer();
-        timer.begin();
-        return timer;
-    }
-
     public Timer() {
         unit = TimeUnit.MILLISECONDS;
         recordMap = new HashMap<>();
@@ -39,6 +32,8 @@ public class Timer {
     public void record(@NonNull String name) {
         Long end = System.currentTimeMillis();
         recordMap.put(name, (end-start));
+
+        start = end;
     }
 
     public Long getRecord(@NonNull String name) {
@@ -48,6 +43,26 @@ public class Timer {
     public Long elapse() {
         Long end = System.currentTimeMillis();
         return (end - start);
+    }
+
+    public void clear() {
+        recordMap.clear();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("/*").append("*".repeat(20)).append("*/");
+
+        for (Map.Entry<String, Long> entry : recordMap.entrySet()) {
+            sb.append(entry.getKey())
+                .append(" elapse: ")
+                .append(entry.getValue())
+                .append("\n");
+        }
+
+        sb.append("/*").append("*".repeat(20)).append("*/");
+        return sb.toString();
     }
 
 }
