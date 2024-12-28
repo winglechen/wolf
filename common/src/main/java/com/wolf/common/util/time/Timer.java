@@ -22,16 +22,20 @@ public class Timer {
     private Long start;
 
     public Timer() {
-        unit = TimeUnit.MILLISECONDS;
+        this(TimeUnit.MILLISECONDS);
+    }
+
+    public Timer(TimeUnit unit) {
+        this.unit = unit;
         recordMap = new LinkedHashMap<>();
     }
 
     public void begin() {
-        start = System.currentTimeMillis();
+        start = getTime();
     }
 
     public void record(@NonNull String name) {
-        Long end = System.currentTimeMillis();
+        Long end = getTime();
         recordMap.put(name, (end-start));
 
         start = end;
@@ -42,7 +46,7 @@ public class Timer {
     }
 
     public Long elapse() {
-        Long end = System.currentTimeMillis();
+        Long end = getTime();
         return (end - start);
     }
 
@@ -63,7 +67,8 @@ public class Timer {
             sb.append(entry.getKey())
                 .append(" elapse: ")
                 .append(entry.getValue())
-                .append("ms; \n");
+                .append(getUnitName())
+                .append("; \n");
         }
 
         sb.append("/*")
@@ -73,6 +78,38 @@ public class Timer {
             .append("*/\n\n");
 
         return sb.toString();
+    }
+
+    private long getTime() {
+        switch (unit) {
+            case SECONDS -> {
+                return System.currentTimeMillis() / 1000;
+            }
+            case MILLISECONDS -> {
+                return System.currentTimeMillis();
+            }
+            case NANOSECONDS -> {
+                return System.nanoTime();
+            }
+        }
+
+        throw new IllegalArgumentException("not support unit: " + unit);
+    }
+
+    private String getUnitName() {
+        switch (unit) {
+            case SECONDS -> {
+                return "s";
+            }
+            case MILLISECONDS -> {
+                return "ms";
+            }
+            case NANOSECONDS -> {
+                return "ns";
+            }
+        }
+
+        throw new IllegalArgumentException("not support unit: " + unit);
     }
 
 }
