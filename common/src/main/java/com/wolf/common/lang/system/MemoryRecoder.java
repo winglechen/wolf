@@ -54,7 +54,7 @@ public class MemoryRecoder {
         for (Map.Entry<String, Double> entry : recordMap.entrySet()) {
             sb.append(entry.getKey())
                 .append(" memory usage: ")
-                .append(entry.getValue())
+                .append(String.format("%.2f", entry.getValue()))
                 .append(unit.getName())
                 .append("; \n");
         }

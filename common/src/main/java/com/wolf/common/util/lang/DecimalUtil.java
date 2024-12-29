@@ -44,8 +44,8 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &gt; bigDecimal2 return true
      *
-     * @param bigDecimal1 l1
-     * @param bigDecimal2 l2
+     * @param bigDecimal1 num1 l1
+     * @param bigDecimal2 num2 l2
      * @return bool
      */
     public static boolean isGreater(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
@@ -57,8 +57,8 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &gt;= bigDecimal2 return true
      *
-     * @param bigDecimal1 l1
-     * @param bigDecimal2 l2
+     * @param bigDecimal1 num1 l1
+     * @param bigDecimal2 num2 l2
      * @return bool
      */
     public static boolean isGreaterOrEqual(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
@@ -70,9 +70,9 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &lt; bigDecimal2 return true
      *
-     * @param bigDecimal1
-     * @param bigDecimal2
-     * @return
+     * @param bigDecimal1 num1
+     * @param bigDecimal2 num2
+     * @return bool
      */
     public static boolean isLess(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
         Assert.notNull(bigDecimal1);
@@ -83,9 +83,9 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 &lt;= bigDecimal2 return true
      *
-     * @param bigDecimal1
-     * @param bigDecimal2
-     * @return
+     * @param bigDecimal1 num1
+     * @param bigDecimal2 num2
+     * @return bool
      */
     public static boolean isLessOrEqual(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
         Assert.notNull(bigDecimal1);
@@ -96,9 +96,9 @@ public class DecimalUtil {
     /**
      * if bigDecimal1 equal to bigDecimal2 return true
      *
-     * @param bigDecimal1
-     * @param bigDecimal2
-     * @return
+     * @param bigDecimal1 num1
+     * @param bigDecimal2 num2
+     * @return bool
      */
     public static boolean isEqual(BigDecimal bigDecimal1, BigDecimal bigDecimal2) {
         if (bigDecimal1 == bigDecimal2) {
