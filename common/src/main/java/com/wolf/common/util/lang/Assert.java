@@ -8,8 +8,8 @@ import java.util.Collection;
 /**
  * Assert util
  *
- * @author: YIK
- * @since: 2022/7/8 3:26 PM
+ * @author YIK
+ * @since 2022/7/8 3:26 PM
  */
 public abstract class Assert {
 

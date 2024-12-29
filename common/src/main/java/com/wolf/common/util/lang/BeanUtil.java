@@ -123,7 +123,7 @@ public class BeanUtil {
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(String className) {
         try {
-            Class c = Class.forName(className);
+            Class<?> c = Class.forName(className);
             return (T) c;
         } catch (java.lang.ClassNotFoundException e) {
             throw new ClassNotFoundException(className);

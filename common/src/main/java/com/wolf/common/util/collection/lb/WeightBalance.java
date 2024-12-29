@@ -1,4 +1,4 @@
-package com.wolf.common.util.lb.weight;
+package com.wolf.common.util.collection.lb;
 
 import lombok.NonNull;
 import com.wolf.common.lang.exception.BusinessException;
@@ -40,7 +40,7 @@ public class WeightBalance {
         init();
 
         if (1 == nodeList.size()) {
-            return nodeList.get(0).getKey();
+            return nodeList.getFirst().getKey();
         }
 
         int weight = ThreadLocalRandom.current().nextInt(0, totalWeight);

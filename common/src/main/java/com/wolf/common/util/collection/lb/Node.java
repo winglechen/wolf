@@ -1,4 +1,4 @@
-package com.wolf.common.util.lb.weight;
+package com.wolf.common.util.collection.lb;
 
 import lombok.Data;
 import lombok.NonNull;
