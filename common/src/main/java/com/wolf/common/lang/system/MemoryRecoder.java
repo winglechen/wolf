@@ -78,7 +78,6 @@ public class MemoryRecoder {
             case GB -> usage / 1024 / 1024 / 1024;
             case TB -> usage / 1024 / 1024 / 1024 / 1024;
             case PB -> usage / 1024 / 1024 / 1024 / 1024 / 1024;
-            default -> throw new IllegalArgumentException("Invalid unit: " + unit);
         };
     }
 }
