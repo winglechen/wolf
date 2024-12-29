@@ -11,4 +11,8 @@ public class BufferUtil {
 
         PlatformDependent.freeDirectBuffer(buffer);
     }
+
+    private static long directBufferAddress(ByteBuffer buffer) {
+        return PlatformDependent.directBufferAddress(buffer);
+    }
 }
