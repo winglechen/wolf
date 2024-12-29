@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +18,7 @@ public class Timer {
     private final TimeUnit unit;
     @Getter
     private final Map<String, Long> recordMap;
-    private Long start;
+    private Long startAt;
 
     public Timer() {
         this(TimeUnit.MILLISECONDS);
@@ -30,15 +29,15 @@ public class Timer {
         recordMap = new LinkedHashMap<>();
     }
 
-    public void begin() {
-        start = getTime();
+    public void start() {
+        startAt = getTime();
     }
 
     public void record(@NonNull String name) {
         Long end = getTime();
-        recordMap.put(name, (end-start));
+        recordMap.put(name, (end- startAt));
 
-        start = end;
+        startAt = end;
     }
 
     public Long getRecord(@NonNull String name) {
@@ -47,7 +46,7 @@ public class Timer {
 
     public Long elapse() {
         Long end = getTime();
-        return (end - start);
+        return (end - startAt);
     }
 
     public void clear() {
