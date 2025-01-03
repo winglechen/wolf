@@ -99,6 +99,10 @@ public class BeanUtil {
         return false;
     }
 
+    public static int hashCode(Object... objects) {
+        return Arrays.hashCode(objects);
+    }
+
     public static boolean isEmpty(Object object) {
         if (null == object) {
             return true;
@@ -206,52 +210,6 @@ public class BeanUtil {
             BeanUtils.copyProperties(source, target, getNullPropertyNames(source));
         } else {
             BeanUtils.copyProperties(source, target);
-        }
-    }
-
-    public static void copyPropertiesBak(Object source, Object target) {
-        copyPropertiesBak(source, target, false, null);
-    }
-
-    public static void copyPropertiesBak(@NonNull Object source, Object target, boolean filterNulls) {
-        copyPropertiesBak(source, target, filterNulls, null);
-    }
-    /**
-     * simple bean copy method
-     * not support collection or map object
-     *
-     * @param source      source
-     * @param target      target
-     * @param filterNulls filterNull
-     */
-    public static void copyPropertiesBak(@NonNull Object source, Object target, boolean filterNulls, Collection<String> ignoreKeys) {
-        Map<String, Object> sourceMap = toMap(source);
-
-        Field[] fields = target.getClass().getDeclaredFields();
-        String key;
-        Object value;
-        for (Field field : fields) {
-            int mod = field.getModifiers();
-            if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
-                continue;
-            }
-            field.setAccessible(true);
-            key = field.getName();
-            value = sourceMap.get(key);
-
-            if (filterNulls && null == value) {
-                continue;
-            }
-
-            if (CollectionUtil.notEmpty(ignoreKeys) && ignoreKeys.contains(key)) {
-                continue;
-            }
-
-            try {
-                field.set(target, value);
-            } catch (IllegalAccessException e) {
-                log.error(e.getMessage(), e);
-            }
         }
     }
 
