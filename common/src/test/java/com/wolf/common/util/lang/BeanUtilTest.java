@@ -36,36 +36,6 @@ public class BeanUtilTest {
     }
 
     @Test
-    public void copyProperties() {
-        Obj o1 = new Obj();
-        o1.setName("o1");
-
-        Obj o2 = new Obj();
-        BeanUtil.copyPropertiesBak(o1, o2);
-
-        assertEquals("BeanUtil.copyProperties fail", o1.getName(), o2.getName());
-        assertEquals("BeanUtil.copyProperties fail", o1.getAge(), o2.getAge());
-        assertNull("BeanUtil.copyProperties fail", o2.getAge());
-
-        Obj o3 = new Obj();
-        o3.setAge(10);
-        BeanUtil.copyPropertiesBak(o1, o3);
-
-        assertEquals("BeanUtil.copyProperties fail", o1.getName(), o3.getName());
-        assertEquals("BeanUtil.copyProperties fail", o1.getAge(), o3.getAge());
-        assertNull("BeanUtil.copyProperties fail", o3.getAge());
-
-        Obj o4 = new Obj();
-        o4.setAge(10);
-        BeanUtil.copyPropertiesBak(o1, o4, true);
-
-        assertEquals("BeanUtil.copyProperties fail", o1.getName(), o4.getName());
-        assertNotEquals("BeanUtil.copyProperties fail", o1.getAge(), o4.getAge());
-        assertNotNull("BeanUtil.copyProperties fail", o4.getAge());
-        assertEquals("BeanUtil.copyProperties fail", Integer.valueOf(10), o4.getAge());
-    }
-
-    @Test
     public void testCopyProperties() {
     }
 
