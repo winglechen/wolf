@@ -48,8 +48,16 @@ public class FileUtil {
         }
     }
 
-    public static void writeToFile(String content, File file) {
+    public static void writeString(String content, File file) {
         try (OutputStream os = Files.newOutputStream(Path.of(file.getAbsolutePath()))) {
+            os.write(content.getBytes(UTF_8));
+        } catch (IOException e) {
+            throw new com.wolf.common.lang.exception.io.IOException(e.getMessage());
+        }
+    }
+
+    public static void writeString(String content, String path) {
+        try (OutputStream os = Files.newOutputStream(Path.of(path))) {
             os.write(content.getBytes(UTF_8));
         } catch (IOException e) {
             throw new com.wolf.common.lang.exception.io.IOException(e.getMessage());
@@ -81,7 +89,7 @@ public class FileUtil {
         return result.orElse("");
     }
 
-    public static JSONObject loadJson(String path) {
+    public static JSONObject readJSON(String path) {
         InputStream inputStream = getResourceStream(path);
         try {
             return JSON.parseObject(inputStream, JSONObject.class, JSONReader.Feature.ErrorOnEnumNotMatch);
@@ -91,7 +99,15 @@ public class FileUtil {
         }
     }
 
-    public static String loadString(String path) {
+    public static String readString(Resource resource) {
+        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
+            return FileCopyUtils.copyToString(reader);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static String readString(String path) {
         InputStream inputStream = getResourceStream(path);
         StringBuilder sb = new StringBuilder();
 
@@ -120,14 +136,6 @@ public class FileUtil {
         return is;
     }
 
-    public static String loadString(Resource resource) {
-        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
-            return FileCopyUtils.copyToString(reader);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
     public static InputStream getFileStream(String path) {
         File file = new File(path);
 
@@ -138,7 +146,7 @@ public class FileUtil {
         }
     }
 
-    public static byte[] getResourceBytes(String path) {
+    public static byte[] readAsBytes(String path) {
         InputStream inputStream = getResourceStream(path);
         try {
             return IOUtils.toByteArray(inputStream);
