@@ -156,7 +156,7 @@ public class FileUtil {
         }
     }
 
-    public static boolean isFileExists(String path) {
+    public static boolean exists(String path) {
         if (StringUtil.isBlank(path)) {
             return false;
         }
