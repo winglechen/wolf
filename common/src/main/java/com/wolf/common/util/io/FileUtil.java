@@ -174,6 +174,20 @@ public class FileUtil {
         return file.getName();
     }
 
+    public static void rename(String from, String to) {
+        File fromFile = new File(from);
+        File toFile = new File(to);
+
+        if (!fromFile.exists() || toFile.exists()) {
+            throw new com.wolf.common.lang.exception.io.IOException("Can't rename file: " + from + " to " + to);
+        }
+
+        boolean result = fromFile.renameTo(toFile);
+        if (!result) {
+            throw new com.wolf.common.lang.exception.io.IOException("Can't rename file: " + from + " to " + to);
+        }
+    }
+
     public static void delete(String path) {
         File file = new File(path);
         delete(file);
