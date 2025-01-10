@@ -200,7 +200,7 @@ public class FileUtil {
 
         boolean result = file.delete();
         if (!result) {
-            throw new com.wolf.common.lang.exception.io.IOException("Can't delete file: " + path);
+            throw new com.wolf.common.lang.exception.io.IOException("Can't delete file: " + file.getName());
         }
     }
 
