@@ -146,7 +146,7 @@ public class FileUtil {
         }
     }
 
-    public static byte[] readAsBytes(String path) {
+    public static byte[] readBytes(String path) {
         InputStream inputStream = getResourceStream(path);
         try {
             return IOUtils.toByteArray(inputStream);
@@ -172,6 +172,22 @@ public class FileUtil {
 
         File file = new File(path);
         return file.getName();
+    }
+
+    public static void delete(String path) {
+        File file = new File(path);
+        delete(file);
+    }
+
+    public static void delete(File file) {
+        if (!file.exists()) {
+            return;
+        }
+
+        boolean result = file.delete();
+        if (!result) {
+            throw new com.wolf.common.lang.exception.io.IOException("Can't delete file: " + path);
+        }
     }
 
     public static boolean deleteQuietly(String path) {
