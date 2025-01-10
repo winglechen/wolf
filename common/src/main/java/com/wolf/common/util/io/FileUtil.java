@@ -50,6 +50,10 @@ public class FileUtil {
      * @param path filePath
      */
     public static void stringToFile(String content, String path) {
+        if (exists(path + BAK_SUFFIX)) {
+            delete(path + BAK_SUFFIX);
+        }
+
         if (exists(path)) {
             rename(path, path + BAK_SUFFIX);
         }
