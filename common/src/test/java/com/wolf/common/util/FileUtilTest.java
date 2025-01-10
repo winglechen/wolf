@@ -13,12 +13,12 @@ public class FileUtilTest extends TestCase {
 
 
     public void testGetFileName() {
-        String path = "/User/nino/code/test.txt";
+        String path = "/User/xxx/code/test.txt";
         assertEquals("File.getFileName Failed", FileUtil.getFileName(path), "test.txt");
     }
 
     public void testGetFileNameWithoutExtension() {
-        String path = "/User/nino/code/test";
+        String path = "/User/xxx/code/test";
         assertEquals("File.getFileName Failed", FileUtil.getFileName(path), "test");
     }
 

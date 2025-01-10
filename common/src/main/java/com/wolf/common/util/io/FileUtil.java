@@ -30,22 +30,31 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  **/
 @Slf4j
 public class FileUtil {
+    private static final String BAK_SUFFIX = ".bak";
 
-    public static InputStream getResourceInputStream(String path) {
-        return Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+    public static String fileToString(String path) {
+        boolean pathExists = exists(path);
+        boolean bakExists = exists(path + BAK_SUFFIX);
+
+        if (!pathExists && !bakExists) {
+            return null;
+        }
+
+        String realPath = pathExists ? path : path + BAK_SUFFIX;
+        return readString(realPath);
     }
 
-    public static FileReader getResourceFileReader(String path) {
-        URL url = Thread.currentThread().getContextClassLoader().getResource(path);
-        if (url == null) {
-            throw new FileNotFoundException(path);
+    /**
+     * It's not thread safe
+     * @param content content
+     * @param path filePath
+     */
+    public static void stringToFile(String content, String path) {
+        if (exists(path)) {
+            rename(path, path + BAK_SUFFIX);
         }
 
-        try {
-            return new FileReader(url.getFile());
-        } catch (java.io.FileNotFoundException e) {
-            throw new FileNotFoundException(path);
-        }
+        writeString(content, path);
     }
 
     public static void writeString(String content, File file) {
@@ -64,18 +73,6 @@ public class FileUtil {
         }
     }
 
-    public static boolean isFilePath(String path) {
-        if (StringUtil.isBlank(path)) {
-            return false;
-        }
-
-        String pattern = "^.*\\.[a-zA-Z0-9]+$";
-        Pattern regex = Pattern.compile(pattern);
-        Matcher matcher = regex.matcher(path);
-        return matcher.find();
-
-    }
-
     public static String getExtension(String filename) {
         return getExtension(filename, false);
     }
@@ -90,8 +87,8 @@ public class FileUtil {
     }
 
     public static JSONObject readJSON(String path) {
-        InputStream inputStream = getResourceStream(path);
         try {
+            InputStream inputStream = Files.newInputStream(Path.of(path));
             return JSON.parseObject(inputStream, JSONObject.class, JSONReader.Feature.ErrorOnEnumNotMatch);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -108,47 +105,16 @@ public class FileUtil {
     }
 
     public static String readString(String path) {
-        InputStream inputStream = getResourceStream(path);
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        try {
-            while ((line = br.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-            return sb.toString();
+        try (Reader reader = new InputStreamReader(Files.newInputStream(Path.of(path)))) {
+            return FileCopyUtils.copyToString(reader);
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
-            throw new MethodExecuteFailException("read file failed : " + path);
-        }
-    }
-
-    public static InputStream getResourceStream(String path) {
-        if (StringUtil.isBlank(path)) {
-            throw new IllegalArgumentException("path can't be blank");
-        }
-
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
-        if (is == null) {
-            throw new IllegalArgumentException("path not found");
-        }
-        return is;
-    }
-
-    public static InputStream getFileStream(String path) {
-        File file = new File(path);
-
-        try {
-            return new FileInputStream(file);
-        } catch (Exception e) {
-            throw new FileNotFoundException(path);
+            throw new com.wolf.common.lang.exception.io.IOException(e.getMessage());
         }
     }
 
     public static byte[] readBytes(String path) {
-        InputStream inputStream = getResourceStream(path);
         try {
+            InputStream inputStream = Files.newInputStream(Path.of(path));
             return IOUtils.toByteArray(inputStream);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
@@ -217,26 +183,17 @@ public class FileUtil {
         }
     }
 
-    public static List<String> listFolderFiles(String dirPath, boolean includeSubDir, boolean sortByLastModified) {
-        List<String> files = new ArrayList<>();
-        File file = new File(dirPath);
-        File[] fs = file.listFiles();
-        if (null == fs || fs.length == 0) {
-            return files;
+    public static FileReader getResourceFileReader(String path) {
+        URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+        if (url == null) {
+            throw new FileNotFoundException(path);
         }
 
-        if (sortByLastModified) {
-            Arrays.sort(fs, Comparator.comparingLong(File::lastModified).reversed());
+        try {
+            return new FileReader(url.getFile());
+        } catch (java.io.FileNotFoundException e) {
+            throw new FileNotFoundException(path);
         }
-
-        for (File f : fs) {
-            if (f.isDirectory() && includeSubDir) {
-                files.addAll(listFolderFiles(f.getAbsolutePath(), true, sortByLastModified));
-            } else if (f.isFile()) {
-                files.add(f.getAbsolutePath());
-            }
-        }
-
-        return files;
     }
+
 }
