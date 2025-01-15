@@ -80,7 +80,7 @@ public abstract class ServiceThread implements Runnable {
 
             long beginTime = System.currentTimeMillis();
             if (!this.thread.isDaemon()) {
-                this.thread.join(JOIN_TIME);
+                this.thread.join(getJoinTime());
             }
             long elapsedTime = System.currentTimeMillis() - beginTime;
             log.info("join thread[{}], elapsed time: {}ms, join time:{}ms", getServiceName(), elapsedTime, JOIN_TIME);
@@ -123,5 +123,9 @@ public abstract class ServiceThread implements Runnable {
     }
 
     protected void afterAwait() {
+    }
+
+    public long getJoinTime() {
+        return JOIN_TIME;
     }
 }
