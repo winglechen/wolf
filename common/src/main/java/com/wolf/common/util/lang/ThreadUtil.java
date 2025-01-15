@@ -11,11 +11,19 @@ import com.wolf.common.lang.exception.lang.InterruptedException;
  **/
 @Slf4j
 public class ThreadUtil {
-    public static void sleep(long millis) {
-        ThreadUtil.sleep(millis, null);
+    public static boolean sleep(long millis) {
+        return ThreadUtil.sleep(millis, null, null);
     }
 
-    public static void sleep(long millis, Integer nanos) {
+    public static boolean sleep(long millis, String msg) {
+        return sleep(millis, null, msg);
+    }
+
+    public static boolean sleep(long millis, Integer nanos, String msg) {
+        if (StringUtil.isBlank(msg)) {
+            msg = "thread.sleep interrupted";
+        }
+
         try {
             if (nanos != null) {
                 Thread.sleep(millis, nanos);
@@ -23,8 +31,10 @@ public class ThreadUtil {
                 Thread.sleep(millis);
             }
         } catch (Exception e) {
-            log.error("thread.sleep interrupted", e);
-            throw new InterruptedException();
+            log.error(msg, e);
+            return false;
         }
+
+        return true;
     }
 }
