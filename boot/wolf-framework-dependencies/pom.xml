@@ -113,6 +113,12 @@
                 <version>${version.snapshot}</version>
             </dependency>
 
+            <dependency>
+                <artifactId>wolf-starter-grpc</artifactId>
+                <groupId>com.wolf.starter</groupId>
+                <version>${version.snapshot}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
