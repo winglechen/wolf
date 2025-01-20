@@ -5,12 +5,12 @@ public interface Lifecycle {
     void shutdown();
 
     /**
-     * Initialization
+     * Initialization, it will be called before start
      */
     void initialize();
 
     /**
-     * cleanup
+     * cleanup, it will be called before shutdown
      */
     void cleanup();
 
@@ -24,8 +24,6 @@ public interface Lifecycle {
         INITIALIZING,
         STARTING,
         RUNNING,
-        STOPPING,
-        STOPPED,
         SHUTTING_DOWN,
         TERMINATED
     }
