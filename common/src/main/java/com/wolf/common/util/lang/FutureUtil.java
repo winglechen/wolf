@@ -19,7 +19,9 @@ package com.wolf.common.util.lang;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class FutureUtil {
     public static <T> CompletableFuture<T> append(
         CompletableFuture<T> future,
