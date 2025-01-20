@@ -2,6 +2,7 @@ package com.wolf.common.util.lang;
 
 import com.wolf.common.lang.concurrent.DefaultThreadFactory;
 import com.wolf.common.lang.concurrent.FutureThreadPoolExecutor;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -219,5 +220,33 @@ public class ThreadUtil {
         }
 
         return true;
+    }
+
+    public static String jstack() {
+        return jstack(Thread.getAllStackTraces());
+    }
+
+    public static String jstack(Map<Thread, StackTraceElement[]> map) {
+        StringBuilder result = new StringBuilder();
+        try {
+            for (Map.Entry<Thread, StackTraceElement[]> entry : map.entrySet()) {
+                StackTraceElement[] elements = entry.getValue();
+                Thread thread = entry.getKey();
+                if (elements == null || elements.length <= 0) {
+                    continue;
+                }
+
+                String threadName = entry.getKey().getName();
+                result.append(String.format("%-40sTID: %d STATE: %s%n", threadName, thread.threadId(), thread.getState()));
+                for (StackTraceElement el : elements) {
+                    result.append(String.format("%-40s%s%n", threadName, el.toString()));
+                }
+                result.append("\n");
+            }
+        } catch (Throwable e) {
+            result.append(StringUtil.exceptionToString(e));
+        }
+
+        return result.toString();
     }
 }

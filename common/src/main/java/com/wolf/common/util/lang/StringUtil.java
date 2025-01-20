@@ -720,15 +720,25 @@ public class StringUtil {
             return base;
         }
 
-        StringBuilder sb = new StringBuilder(base);
-        for (int i = 0; i < n - 1; i++) {
-            sb.append(base);
-        }
-
-        return sb.toString();
+        return base + base.repeat(n - 1);
     }
 
     public static int countMatches(CharSequence str, CharSequence sub) {
         return StringUtils.countMatches(str, sub);
+    }
+
+    public static String exceptionToString(final Throwable e) {
+        StringBuilder sb = new StringBuilder();
+        if (e != null) {
+            sb.append(e);
+
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            if (stackTrace != null && stackTrace.length > 0) {
+                StackTraceElement element = stackTrace[0];
+                sb.append(", ");
+                sb.append(element.toString());
+            }
+        }
+        return sb.toString();
     }
 }
