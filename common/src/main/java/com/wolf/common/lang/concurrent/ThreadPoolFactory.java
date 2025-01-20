@@ -17,14 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ThreadPoolFactory {
     private static final List<ThreadPoolWrapper> MONITOR_EXECUTOR = new CopyOnWriteArrayList<>();
-    private static final ScheduledExecutorService MONITOR_SCHEDULED = ThreadUtil.newSingleScheduledThreadExecutor(
-        new ThreadFactoryBuilder().setNameFormat("ThreadPoolFactory-%d").build()
-    );
+    private static final ScheduledExecutorService MONITOR_SCHEDULED =
+        ThreadUtil.newSingleScheduledThreadExecutor(
+            new ThreadFactoryBuilder().setNameFormat("ThreadPoolFactory-%d").build()
+        );
 
-    private static volatile long threadPoolStatusPeriodTime = TimeUnit.SECONDS.toMillis(3);
-    private static volatile boolean enablePrintJstack = true;
-    private static volatile long jstackPeriodTime = 60000;
-    private static volatile long jstackTime = System.currentTimeMillis();
+    private static volatile long monitorInterval = TimeUnit.SECONDS.toMillis(3);
+    private static volatile boolean enableLogJstack = true;
+    private static volatile long logInterval = 60000;
+    private static volatile long lastLogTime = System.currentTimeMillis();
 
     public static ThreadPoolExecutor create(int corePoolSize,
         int maximumPoolSize,
@@ -84,13 +85,13 @@ public class ThreadPoolFactory {
             double value = monitor.calculateMetric(threadPoolWrapper.getExecutor());
             log.info("\t{}\t{}\t{}", threadPoolWrapper.getName(), monitor.getDescription(), value);
 
-            if (!enablePrintJstack) {
+            if (!enableLogJstack) {
                 continue;
             }
 
             if (monitor.shouldLogJstack(threadPoolWrapper.getExecutor(), value)
-                && System.currentTimeMillis() - jstackTime > jstackPeriodTime) {
-                jstackTime = System.currentTimeMillis();
+                && System.currentTimeMillis() - lastLogTime > logInterval) {
+                lastLogTime = System.currentTimeMillis();
                 log.warn("jstack start\n{}", ThreadUtil.jstack());
             }
         }
@@ -100,7 +101,7 @@ public class ThreadPoolFactory {
         MONITOR_SCHEDULED.scheduleAtFixedRate(
             ThreadPoolFactory::logStatus,
             20,
-            threadPoolStatusPeriodTime,
+            monitorInterval,
             TimeUnit.MILLISECONDS
         );
     }
